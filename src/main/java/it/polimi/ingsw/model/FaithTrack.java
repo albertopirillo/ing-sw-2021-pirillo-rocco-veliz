@@ -7,14 +7,14 @@ public class FaithTrack {
     public FaithTrack() {
     }
 
-    private int[] markerPosition;
+    private int markerPosition;
 
     private int blackCrossPosition;
 
-    private boolean[] hasReportHappened;
+    private PopeFavor[] popeCards;
 
 
-    public void setPosition(int[] pos, int player) {
+    public void setPosition(int pos) {
         // TODO implement here
     }
 
@@ -22,7 +22,7 @@ public class FaithTrack {
         // TODO implement here
     }
 
-    public void vaticanReport(Player[] players) {
+    public void vaticanReport() {
         // TODO implement here
     }
 

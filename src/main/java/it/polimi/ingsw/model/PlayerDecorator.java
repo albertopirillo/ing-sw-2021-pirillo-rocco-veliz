@@ -2,22 +2,12 @@ package it.polimi.ingsw.model;
 
 import java.util.*;
 
-public abstract class Player {
+public abstract class PlayerDecorator extends Player {
 
-    public Player() {
+    public PlayerDecorator() {
     }
 
-    private boolean hasInkwell;
-
-    private String nickname;
-
-    private boolean isHisTurn;
-
-    private LeaderCard[] leaderCards;
-
-
-
-
+    protected Player player;
 
 
     public void takeResources(Resource[] resources) {

@@ -2,20 +2,12 @@ package it.polimi.ingsw.model;
 
 import java.util.*;
 
-public class Depots {
+public abstract class DepotDecorator extends Depot {
 
-    public Depots() {
+    public DepotDecorator() {
     }
 
-    private Resource firstLayer;
-
-    private Resource secondLayer;
-
-    private Resource thirdLayer;
-
-    private Resource extraLayer;
-
-    private Resource extraLayer2;
+    protected Depot depot;
 
 
     public Resource getFirstLayer() {
@@ -33,16 +25,6 @@ public class Depots {
         return null;
     }
 
-    public Resource getExtraLayer() {
-        // TODO implement here
-        return null;
-    }
-
-    public Resource getExtraLayer2() {
-        // TODO implement here
-        return null;
-    }
-
     public void setFirstLayer(Resource resource) {
         // TODO implement here
     }
@@ -52,14 +34,6 @@ public class Depots {
     }
 
     public void setThirdLayer(Resource resource) {
-        // TODO implement here
-    }
-
-    public void setExtraLayer(Resource resource) {
-        // TODO implement here
-    }
-
-    public void setExtraLayer2(Resource resource) {
         // TODO implement here
     }
 

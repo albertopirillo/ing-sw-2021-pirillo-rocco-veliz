@@ -13,6 +13,8 @@ public class Game {
 
     private boolean lastTurn;
 
+    private boolean[] hasReportHappened;
+
     public void startGame() {
         // TODO implement here
     }

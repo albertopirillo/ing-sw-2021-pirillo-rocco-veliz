@@ -6,8 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Master_of_Reinassance" />
+        <module name="Progetto_ING_SOFT" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Progetto_ING_SOFT" target="1.7" />
+    </bytecodeTargetLevel>
   </component>
 </project>

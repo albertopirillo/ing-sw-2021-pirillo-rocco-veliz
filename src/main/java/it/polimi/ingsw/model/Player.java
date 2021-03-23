@@ -25,7 +25,7 @@ public class Player {
 
 
 
-    public void takeResources(Resource[] resource) {
+    public void takeResources(Resource[] resources) {
         // TODO implement here
     }
 

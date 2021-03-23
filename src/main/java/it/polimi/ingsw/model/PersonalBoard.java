@@ -15,7 +15,7 @@ public class PersonalBoard {
 
 
 
-    public void basicProduction(Resource input, ResourceType output) {
+    public void basicProduction(ResourceType input, ResourceType output) {
         // TODO implement here
     }
 

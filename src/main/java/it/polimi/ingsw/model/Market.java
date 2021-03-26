@@ -7,8 +7,7 @@ public class Market {
     public Market() {
     }
 
-    private DevelopmentCard[][][] cards;
-
+    private CardDeck[][] cards;
 
     public void buyCards(int level, CardColor color) {
         // TODO implement here

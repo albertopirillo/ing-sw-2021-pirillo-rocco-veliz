@@ -7,7 +7,7 @@ public class DevelopmentCard extends Card {
     public DevelopmentCard() {
     }
 
-    private Resource[] cost;
+    private Resource cost;
 
     private CardColor type;
 

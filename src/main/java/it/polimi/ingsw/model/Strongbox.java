@@ -7,10 +7,10 @@ public class Strongbox {
     public Strongbox() {
     }
 
-    private Resource[] resource;
+    private Resource resource;
 
 
-    public Resource[] getResource() {
+    public Resource getResource() {
         // TODO implement here
         return null;
     }

@@ -7,9 +7,7 @@ public class Resource {
     public Resource() {
     }
 
-    private ResourceType type;
-
-    private int amount;
+    private Map<ResourceType, Integer> resources;
 
 
 

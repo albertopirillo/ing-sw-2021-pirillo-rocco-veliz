@@ -7,8 +7,8 @@ public class ProductionPower {
     public ProductionPower() {
     }
 
-    public Resource[] input;
+    private Resource input;
 
-    public Resource[] output;
+    private Resource output;
 
 }

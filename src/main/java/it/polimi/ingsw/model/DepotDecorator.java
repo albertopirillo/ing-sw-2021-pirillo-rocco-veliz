@@ -10,6 +10,7 @@ public abstract class DepotDecorator extends Depot {
     protected Depot depot;
 
 
+
     public Resource getFirstLayer() {
         // TODO implement here
         return null;

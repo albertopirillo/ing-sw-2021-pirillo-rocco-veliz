@@ -2,7 +2,7 @@ package it.polimi.ingsw.model;
 
 import java.util.*;
 
-public abstract class Player {
+public class Player {
 
     public Player() {
     }
@@ -15,17 +15,27 @@ public abstract class Player {
 
     private LeaderCard[] leaderCards;
 
+    private Strategy[] strategies;
 
 
 
 
 
-    public void takeResources(Resource[] resources) {
+
+
+
+
+    public void takeResources(Resource resources) {
         // TODO implement here
     }
 
     public void buyDevCard(DevelopmentCard devCard) {
         // TODO implement here
+    }
+
+    public ResourceType extraProduction() {
+        // TODO implement here
+        return null;
     }
 
     public void activateProduction(DevelopmentCard[] cards) {

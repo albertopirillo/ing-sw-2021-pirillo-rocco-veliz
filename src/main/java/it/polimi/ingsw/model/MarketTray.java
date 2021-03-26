@@ -21,7 +21,7 @@ public class MarketTray {
         // TODO implement here
     }
 
-    private void giveResources(Resource[] resource) {
+    private void giveResources(Resource resource) {
         // TODO implement here
     }
 

@@ -1,7 +1,7 @@
 package it.polimi.ingsw;
 
 import it.polimi.ingsw.exceptions.IllegalKeyException;
-import it.polimi.ingsw.exceptions.NegativeResourceAmountException;
+import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.ResourceType;
 import org.junit.Test;
@@ -10,44 +10,54 @@ import static org.junit.Assert.*;
 
 public class ResourceTest
 {
-    Resource res = new Resource();
-    ResourceType resType = ResourceType.STONE;
-
     @Test
-    public void getTest() throws IllegalKeyException {
-        for (ResourceType current : ResourceType.values()) {
-            int value = res.getValue(current);
-            assertEquals(0, value);
+    public void emptyMapTest() {
+        Resource res = new Resource();
+        for (final ResourceType resType: ResourceType.values()) {
+            assertThrows(IllegalKeyException.class, () -> res.getValue(resType));
         }
     }
 
     @Test
-    public void setTest() throws IllegalKeyException, NegativeResourceAmountException {
-        int newValue = 5;
-
-        res.setValue(resType, newValue);
-        assertEquals(newValue, res.getValue(resType));
+    public void fourElemMapTest() throws IllegalKeyException {
+        int stone = 5;
+        int coin = 2;
+        int shield = 4;
+        int servant = 1;
+        Resource res = new Resource(stone, coin, shield, servant);
+        assertEquals(res.getValue(ResourceType.STONE), stone);
+        assertEquals(res.getValue(ResourceType.COIN), coin);
+        assertEquals(res.getValue(ResourceType.SHIELD), shield);
+        assertEquals(res.getValue(ResourceType.SERVANT), servant);
+        assertThrows(IllegalKeyException.class, () -> res.getValue(ResourceType.FAITH));
     }
 
     @Test
-    public void setNegativeTest() throws IllegalKeyException {
-        boolean exception = false;
-
-        try {
-            res.setValue(resType, -1);
-        } catch (NegativeResourceAmountException e) {
-           exception = true;
-        }
-        assertTrue(exception);
+    public void setTest() throws NegativeResAmountException, IllegalKeyException {
+        Resource res = new Resource();
+        res.setValue(ResourceType.COIN, 5);
+        assertEquals(5, res.getValue(ResourceType.COIN));
+        assertThrows(NegativeResAmountException.class, () -> res.setValue(ResourceType.STONE, -3));
     }
 
     @Test
-    public void increaseTest() throws NegativeResourceAmountException, IllegalKeyException {
+    public void increaseTest() throws IllegalKeyException {
+        Resource res = new Resource(0, 3, 5, 6);
         int addend = 3;
-
-        int oldValue = res.getValue(resType);
-        res.increaseValue(resType, addend);
-        assertEquals(oldValue + addend, res.getValue(resType));
+        int oldValue = res.getValue(ResourceType.SHIELD);
+        res.increaseValue(ResourceType.SHIELD, addend);
+        assertEquals(oldValue + addend, res.getValue(ResourceType.SHIELD));
+        assertThrows(IllegalKeyException.class, () -> res.increaseValue(ResourceType.FAITH, 5));
     }
 
+    @Test
+    public void decreaseTest() throws NegativeResAmountException, IllegalKeyException {
+        Resource res = new Resource(0, 3, 5, 6);
+        int sub = 3;
+        int oldValue = res.getValue(ResourceType.SHIELD);
+        res.decreaseValue(ResourceType.SHIELD, sub);
+        assertEquals(oldValue - sub, res.getValue(ResourceType.SHIELD));
+        assertThrows(IllegalKeyException.class, () -> res.decreaseValue(ResourceType.FAITH, 5));
+        assertThrows(NegativeResAmountException.class, () -> res.decreaseValue(ResourceType.STONE, 5));
+    }
 }

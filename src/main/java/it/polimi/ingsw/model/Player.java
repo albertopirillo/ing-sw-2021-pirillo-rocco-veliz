@@ -1,7 +1,5 @@
 package it.polimi.ingsw.model;
 
-import java.util.*;
-
 public class Player {
 
     public Player() {
@@ -16,13 +14,6 @@ public class Player {
     private LeaderCard[] leaderCards;
 
     private Strategy[] strategies;
-
-
-
-
-
-
-
 
 
     public void takeResources(Resource resources) {

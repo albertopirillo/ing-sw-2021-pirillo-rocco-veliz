@@ -6,6 +6,8 @@ import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.ResourceType;
 import org.junit.Test;
 
+import javax.management.openmbean.KeyAlreadyExistsException;
+
 import static org.junit.Assert.*;
 
 public class ResourceTest
@@ -35,29 +37,22 @@ public class ResourceTest
     @Test
     public void setTest() throws NegativeResAmountException, IllegalKeyException {
         Resource res = new Resource();
-        res.setValue(ResourceType.COIN, 5);
+        res.addResource(ResourceType.COIN, 5);
         assertEquals(5, res.getValue(ResourceType.COIN));
-        assertThrows(NegativeResAmountException.class, () -> res.setValue(ResourceType.STONE, -3));
+        assertThrows(KeyAlreadyExistsException.class, () -> res.addResource(ResourceType.COIN, 2));
+        assertThrows(NegativeResAmountException.class, () -> res.addResource(ResourceType.COIN, -3));
     }
 
     @Test
-    public void increaseTest() throws IllegalKeyException {
+    public void modifyTest() throws IllegalKeyException, NegativeResAmountException {
         Resource res = new Resource(0, 3, 5, 6);
         int addend = 3;
         int oldValue = res.getValue(ResourceType.SHIELD);
-        res.increaseValue(ResourceType.SHIELD, addend);
+        res.modifyValue(ResourceType.SHIELD, addend);
         assertEquals(oldValue + addend, res.getValue(ResourceType.SHIELD));
-        assertThrows(IllegalKeyException.class, () -> res.increaseValue(ResourceType.FAITH, 5));
-    }
-
-    @Test
-    public void decreaseTest() throws NegativeResAmountException, IllegalKeyException {
-        Resource res = new Resource(0, 3, 5, 6);
-        int sub = 3;
-        int oldValue = res.getValue(ResourceType.SHIELD);
-        res.decreaseValue(ResourceType.SHIELD, sub);
-        assertEquals(oldValue - sub, res.getValue(ResourceType.SHIELD));
-        assertThrows(IllegalKeyException.class, () -> res.decreaseValue(ResourceType.FAITH, 5));
-        assertThrows(NegativeResAmountException.class, () -> res.decreaseValue(ResourceType.STONE, 5));
+        res.modifyValue(ResourceType.SERVANT, -4);
+        assertEquals(2, res.getValue(ResourceType.SERVANT));
+        assertThrows(IllegalKeyException.class, () -> res.modifyValue(ResourceType.FAITH, 5));
+        assertThrows(NegativeResAmountException.class, () -> res.modifyValue(ResourceType.COIN, -7));
     }
 }

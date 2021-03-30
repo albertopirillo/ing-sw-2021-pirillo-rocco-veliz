@@ -1,41 +1,10 @@
 package it.polimi.ingsw.model;
 
-import java.util.*;
-
+//Basic depot, with no extra layers
+//Does not override anything from the superclass
 public class ConcreteDepot extends Depot {
 
     public ConcreteDepot() {
+        super();
     }
-
-    public Resource getFirstLayer() {
-        // TODO implement here
-        return null;
-    }
-
-    public Resource getSecondLayer() {
-        // TODO implement here
-        return null;
-    }
-
-    public Resource getThirdLayer() {
-        // TODO implement here
-        return null;
-    }
-
-    public void setFirstLayer(Resource resource) {
-        // TODO implement here
-    }
-
-    public void setSecondLayer(Resource resource) {
-        // TODO implement here
-    }
-
-    public void setThirdLayer(Resource resource) {
-        // TODO implement here
-    }
-
-    public void rearrangeResources() {
-        // TODO implement here
-    }
-
 }

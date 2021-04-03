@@ -29,16 +29,10 @@ public class DepotLayer {
         return amount;
     }
 
-    //To change the ResourceType a layer is holding, it has to be empty
-    public void setResource(ResourceType resource) throws LayerNotEmptyException, CannotContainFaithException {
-        if (resource == ResourceType.FAITH) throw new CannotContainFaithException();
-        if (this.resource != null && this.resource != resource) throw new LayerNotEmptyException();
-        this.resource = resource;
-    }
-
     public void setAmount(int amount) throws NotEnoughSpaceException, NegativeResAmountException {
         if (amount < 0) throw new NegativeResAmountException();
         if (amount > MAX) throw new NotEnoughSpaceException();
+
         this.amount = amount;
         if (amount == 0) this.resource = null;
     }
@@ -46,5 +40,17 @@ public class DepotLayer {
     public void resetLayer() {
         this.resource = null;
         this.amount = 0;
+    }
+
+    //This method should be the only one used to modify a layer's ResourceType, because it checks every exception
+    public void setResAndAmount(ResourceType resource, int amount) throws CannotContainFaithException, LayerNotEmptyException, NegativeResAmountException, NotEnoughSpaceException {
+        if (resource == ResourceType.FAITH) throw new CannotContainFaithException();
+        if (amount < 0) throw new NegativeResAmountException();
+        if (amount > MAX) throw new NotEnoughSpaceException();
+        if (this.resource != null && this.resource != resource) throw new LayerNotEmptyException();
+
+        this.amount = amount;
+        if (amount == 0) this.resource = null;
+        else this.resource = resource;
     }
 }

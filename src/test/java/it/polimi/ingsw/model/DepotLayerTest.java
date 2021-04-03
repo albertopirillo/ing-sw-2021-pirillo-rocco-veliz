@@ -1,15 +1,12 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.CannotContainFaithException;
 import it.polimi.ingsw.exceptions.LayerNotEmptyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import it.polimi.ingsw.exceptions.NotEnoughSpaceException;
-import it.polimi.ingsw.model.DepotLayer;
-import it.polimi.ingsw.model.ResourceType;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class DepotLayerTest {
 
@@ -24,13 +21,13 @@ public class DepotLayerTest {
     public void faithTest() {
         DepotLayer layer = new DepotLayer(3);
         assertThrows(CannotContainFaithException.class,
-                () -> layer.setResource(ResourceType.FAITH));
+                () -> layer.setResAndAmount(ResourceType.FAITH, 2));
     }
 
     @Test
     public void resourceTest() throws LayerNotEmptyException, NotEnoughSpaceException, NegativeResAmountException, CannotContainFaithException {
         DepotLayer layer = new DepotLayer(3);
-        layer.setResource(ResourceType.COIN);
+        layer.setResAndAmount(ResourceType.COIN, 1);
         assertEquals(ResourceType.COIN, layer.getResource());
         assertThrows(NotEnoughSpaceException.class, () -> layer.setAmount(5));
         layer.setAmount(2);
@@ -41,12 +38,11 @@ public class DepotLayerTest {
     @Test
     public void moveTest() throws NotEnoughSpaceException, NegativeResAmountException, LayerNotEmptyException, CannotContainFaithException {
         DepotLayer layer = new DepotLayer(3);
-        layer.setResource(ResourceType.SHIELD);
-        layer.setAmount(3);
+        layer.setResAndAmount(ResourceType.SHIELD, 3);
         assertThrows(LayerNotEmptyException.class,
-                () -> layer.setResource(ResourceType.COIN));
-        layer.setAmount(0);
-        layer.setResource(ResourceType.COIN);
+                () -> layer.setResAndAmount(ResourceType.COIN, 2));
+        layer.resetLayer();
+        layer.setResAndAmount(ResourceType.COIN, 2);
         assertEquals(ResourceType.COIN, layer.getResource());
     }
 

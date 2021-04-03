@@ -1,6 +1,6 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.exceptions.IllegalKeyException;
+import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 
 import java.util.*;
@@ -12,8 +12,8 @@ public class Marbles {
         marbles = new HashMap<>();
     }
 
-    public int getValue(MarblesColor key) throws IllegalKeyException {
-        if (!marbles.containsKey(key)) throw new IllegalKeyException();
+    public int getValue(MarblesColor key) throws InvalidKeyException {
+        if (!marbles.containsKey(key)) throw new InvalidKeyException();
         return marbles.get(key);
     }
 
@@ -21,8 +21,8 @@ public class Marbles {
         marbles.putAll(marbleMap);
     }
 
-    public void add(MarblesColor key) throws IllegalKeyException {
-        if (!MarblesColor.contains(key)) throw new IllegalKeyException();
+    public void add(MarblesColor key) throws InvalidKeyException {
+        if (!MarblesColor.contains(key)) throw new InvalidKeyException();
         if (!marbles.containsKey(key)) {
             marbles.put(key, 1);
         } else {
@@ -31,7 +31,7 @@ public class Marbles {
         }
     }
 
-    public Resource getResources() throws NegativeResAmountException, IllegalKeyException {
+    public Resource getResources() throws NegativeResAmountException, InvalidKeyException {
         Resource res = new Resource();
         Iterator iterator = marbles.keySet().iterator();
         while (iterator.hasNext()){

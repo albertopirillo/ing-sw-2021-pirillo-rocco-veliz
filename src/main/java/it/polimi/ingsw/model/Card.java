@@ -4,9 +4,9 @@ import java.util.*;
 
 public abstract class Card {
 
+    private int victoryPoints;
+
     public Card() {
     }
-
-    private int victoryPoints;
 
 }

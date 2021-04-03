@@ -1,6 +1,6 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.exceptions.IllegalKeyException;
+import it.polimi.ingsw.exceptions.InvalidKeyException;
 
 import java.util.*;
 
@@ -47,7 +47,7 @@ public class MarketTray {
 
     //position  from 0 to 3 for columns and 4 to 6 for rows
     //return Marbles Object, similar to Resource
-    public Marbles insertMarble(int position) throws IllegalArgumentException, IllegalKeyException {
+    public Marbles insertMarble(int position) throws IllegalArgumentException, InvalidKeyException {
         Marbles res = new Marbles();
         if(position < 0 || position > 6) throw new IllegalArgumentException();
         if(position < 4){
@@ -83,7 +83,7 @@ public class MarketTray {
         }
     }
     //only for testing
-    public Marbles getMarblesMap() throws IllegalKeyException {
+    public Marbles getMarblesMap() throws InvalidKeyException {
         Marbles mar = new Marbles();
         for (int i=0; i<3; i++){
             for (int j=0; j<4; j++){

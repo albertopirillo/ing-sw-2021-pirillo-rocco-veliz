@@ -12,5 +12,4 @@ public abstract class LeaderCard extends Card {
     private LeaderAbility specialAbility;
 
 
-
 }

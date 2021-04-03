@@ -13,6 +13,4 @@ public class DevelopmentCard extends Card {
 
     private int level;
 
-
-
 }

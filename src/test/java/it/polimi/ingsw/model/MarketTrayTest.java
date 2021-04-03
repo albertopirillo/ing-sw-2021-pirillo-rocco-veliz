@@ -1,14 +1,11 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.exceptions.IllegalKeyException;
+import it.polimi.ingsw.exceptions.InvalidKeyException;
 //import org.junit.Test;
 
 //import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-import it.polimi.ingsw.model.Marbles;
-import it.polimi.ingsw.model.MarblesColor;
-import it.polimi.ingsw.model.MarketTray;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
@@ -16,7 +13,7 @@ import org.junit.jupiter.api.Test;
 public class MarketTrayTest {
 
     @Test
-    public void initMarketTray() throws IllegalKeyException {
+    public void initMarketTray() throws InvalidKeyException {
         MarketTray marketTray = new MarketTray();
         Marbles initMap = new Marbles();
         initMap.addAll(marketTray.getInitMarket());
@@ -31,7 +28,7 @@ public class MarketTrayTest {
     }
 
     @Test
-    public void insertMarble() throws IllegalKeyException {
+    public void insertMarble() throws InvalidKeyException {
         MarketTray marketTray = new MarketTray();
         Marbles mar = new Marbles();
         mar.add(marketTray.getMarble(0, 1));
@@ -53,7 +50,7 @@ public class MarketTrayTest {
     }
 
     @RepeatedTest(10)
-    public void getMarblesMap() throws IllegalKeyException {
+    public void getMarblesMap() throws InvalidKeyException {
         MarketTray marketTray = new MarketTray();
         Marbles mar = new Marbles();
         mar.addAll(marketTray.getInitMarket());

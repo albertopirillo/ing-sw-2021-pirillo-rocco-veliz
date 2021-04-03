@@ -1,6 +1,6 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.exceptions.IllegalKeyException;
+import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 
 import javax.management.openmbean.KeyAlreadyExistsException;
@@ -15,6 +15,11 @@ public class Resource {
         map = new HashMap<>();
     }
 
+    //creates a Resource object from a given map
+    public Resource(Map<ResourceType, Integer> map) {
+        this.map = new HashMap<>(map);
+    }
+
     //creates a map with the basic resources, useful e.g. for depot
     public Resource(int stoneAmount, int coinAmount, int shieldAmount, int servantAmount) {
         map = new HashMap<>();
@@ -24,46 +29,37 @@ public class Resource {
         map.put(ResourceType.SERVANT, servantAmount);
     }
 
-    public int getValue(ResourceType key) throws IllegalKeyException {
-        if (!map.containsKey(key)) throw new IllegalKeyException();
+    public int getValue(ResourceType key) throws InvalidKeyException {
+        if (!map.containsKey(key)) throw new InvalidKeyException();
         return map.get(key);
     }
 
     //Use this method only to add a new key (ResourceType)
-    public void addResource(ResourceType key, int value) throws IllegalKeyException, NegativeResAmountException {
+    public void addResource(ResourceType key, int value) throws InvalidKeyException, NegativeResAmountException {
         if (value < 0) throw new NegativeResAmountException();
-        if (!ResourceType.contains(key)) throw new IllegalKeyException();
+        if (!ResourceType.contains(key)) throw new InvalidKeyException();
         if (map.containsKey(key)) throw new KeyAlreadyExistsException();
         map.put(key, value);
     }
 
-    @Deprecated
-    public void setValue(ResourceType key, int value) throws IllegalKeyException, NegativeResAmountException {
-        if (value < 0) throw new NegativeResAmountException();
-        if (!ResourceType.contains(key)) throw new IllegalKeyException();
-        map.put(key, value);
-    }
-
-    @Deprecated
-    public void increaseValue(ResourceType key, int addend) throws IllegalKeyException{
-        if (!map.containsKey(key)) throw new IllegalKeyException();
-        int newValue = map.get(key) + addend;
-        map.put(key, newValue);
-    }
-
-    @Deprecated
-    public void decreaseValue(ResourceType key, int sub) throws IllegalKeyException, NegativeResAmountException {
-        if (!map.containsKey(key)) throw new IllegalKeyException();
-        int newValue = map.get(key) - sub;
-        if (newValue < 0) throw new NegativeResAmountException();
-        map.put(key, newValue);
-    }
-
     //Use this method both to add or subtract to an already existing resource
-    public void modifyValue(ResourceType key, int value) throws IllegalKeyException, NegativeResAmountException {
-        if (!map.containsKey(key)) throw new IllegalKeyException();
+    public void modifyValue(ResourceType key, int value) throws InvalidKeyException, NegativeResAmountException {
+        if (!map.containsKey(key)) throw new InvalidKeyException();
         int newValue = map.get(key) + value;
         if (newValue < 0) throw new NegativeResAmountException();
         map.put(key, newValue);
+    }
+
+    //Returns a copy of this.map field (it's a new object and not a reference)
+    public Map<ResourceType, Integer> getAllRes() {
+        return new HashMap<>(map);
+    }
+
+    //Returns true if this has more resources than that
+    public boolean compare (Resource that) {
+        for (ResourceType key: that.map.keySet()) {
+            if ((this.map.get(key) == null) || (this.map.get(key) < that.map.get(key))) return false;
+        }
+        return true;
     }
 }

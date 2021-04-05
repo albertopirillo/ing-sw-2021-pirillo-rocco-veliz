@@ -8,13 +8,10 @@ public class MarketTray {
 
     private MarblesColor[][] marketMarbles;
     private MarblesColor remainingMarble;
-    private Map<MarblesColor, Integer> initMarket;
-
 
     public MarketTray() {
         marketMarbles = new MarblesColor[3][4];
-        initMarket = new HashMap<>();
-        initMarketTray();
+        Map<MarblesColor, Integer> initMarket = Marbles.getAllMarblesMap();
         Random randomNum = new Random();
         int len = MarblesColor.values().length;
         int pick = randomNum.nextInt(len);
@@ -31,18 +28,6 @@ public class MarketTray {
                 initMarket.put(init[pick], initMarket.get(init[pick]) - 1);
             }
         }
-        initMarketTray();
-    }
-
-    //create a hash map with the inital numbers of marbles
-    private void initMarketTray(){
-        initMarket.put(MarblesColor.WHITE, 4);
-        initMarket.put(MarblesColor.BLUE, 2);
-        initMarket.put(MarblesColor.GREY, 2);
-        initMarket.put(MarblesColor.YELLOW, 2);
-        initMarket.put(MarblesColor.PURPLE, 2);
-        initMarket.put(MarblesColor.RED, 1);
-
     }
 
     //position  from 0 to 3 for columns and 4 to 6 for rows
@@ -92,10 +77,6 @@ public class MarketTray {
         }
         mar.add(remainingMarble);
         return mar;
-    }
-    //only for testing
-    public Map<MarblesColor, Integer> getInitMarket() {
-        return initMarket;
     }
 
     //only for testing

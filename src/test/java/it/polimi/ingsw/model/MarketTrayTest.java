@@ -15,13 +15,12 @@ public class MarketTrayTest {
     @Test
     public void initMarketTray() throws InvalidKeyException {
         MarketTray marketTray = new MarketTray();
-        Marbles initMap = new Marbles();
-        initMap.addAll(marketTray.getInitMarket());
+        Marbles initMap = new Marbles(Marbles.getAllMarblesMap());
         Marbles actualMap = marketTray.getMarblesMap();
         assertTrue(actualMap.equals(initMap));
         for(int i=0; i<3; i++){
             for (int j=0; j<4; j++){
-                Assertions.assertTrue(MarblesColor.contains(marketTray.getMarble(i,j)));
+                assertTrue(MarblesColor.contains(marketTray.getMarble(i,j)));
             }
         }
         assertTrue(MarblesColor.contains(marketTray.getRemainingMarble()));
@@ -37,8 +36,7 @@ public class MarketTrayTest {
         Marbles mar1 = marketTray.insertMarble(1);
         assertTrue(mar1.equals(mar));
         //testing method private update
-        Marbles initMap = new Marbles();
-        initMap.addAll(marketTray.getInitMarket());
+        Marbles initMap = new Marbles(Marbles.getAllMarblesMap());
         mar = marketTray.getMarblesMap();
         assertTrue(initMap.equals(mar));
         for(int i=0; i<3; i++){
@@ -52,8 +50,8 @@ public class MarketTrayTest {
     @RepeatedTest(10)
     public void getMarblesMap() throws InvalidKeyException {
         MarketTray marketTray = new MarketTray();
-        Marbles mar = new Marbles();
-        mar.addAll(marketTray.getInitMarket());
-        assertTrue(mar.equals(marketTray.getMarblesMap()));
+        Marbles initMap = new Marbles(Marbles.getAllMarblesMap());
+        assertTrue(initMap.equals(marketTray.getMarblesMap()));
     }
+
 }

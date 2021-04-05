@@ -12,13 +12,25 @@ public class Marbles {
         marbles = new HashMap<>();
     }
 
+    //create a Marbles from a map
+    public Marbles(Map<MarblesColor, Integer> map) {
+        marbles = new HashMap<>(map);
+    }
+
     public int getValue(MarblesColor key) throws InvalidKeyException {
         if (!marbles.containsKey(key)) throw new InvalidKeyException();
         return marbles.get(key);
     }
 
-    public void addAll(Map<MarblesColor, Integer> marbleMap){
-        marbles.putAll(marbleMap);
+    public static Map<MarblesColor, Integer> getAllMarblesMap(){
+        Map<MarblesColor, Integer> allMarbles = new HashMap<>();
+        allMarbles.put(MarblesColor.WHITE, 4);
+        allMarbles.put(MarblesColor.BLUE, 2);
+        allMarbles.put(MarblesColor.GREY, 2);
+        allMarbles.put(MarblesColor.YELLOW, 2);
+        allMarbles.put(MarblesColor.PURPLE, 2);
+        allMarbles.put(MarblesColor.RED, 1);
+        return allMarbles;
     }
 
     public void add(MarblesColor key) throws InvalidKeyException {
@@ -44,6 +56,10 @@ public class Marbles {
     public boolean equals(Marbles other){
         return marbles.equals(other.marbles);
 
+    }
+
+    public boolean containFaith(){
+        return marbles.containsKey(MarblesColor.RED);
     }
 
 }

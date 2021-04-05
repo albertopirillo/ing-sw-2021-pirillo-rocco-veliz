@@ -6,6 +6,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class MarblesTest {
 
     @Test
@@ -17,6 +20,19 @@ public class MarblesTest {
         assertTrue(mar1.equals(mar));
         mar.add(MarblesColor.WHITE);
         assertFalse(mar1.equals(mar));
+    }
+
+    @Test
+    public void MapOfMables() throws InvalidKeyException {
+        Map<MarblesColor, Integer> basicMap = new HashMap<>();
+        basicMap.put(MarblesColor.WHITE, 4);
+        basicMap.put(MarblesColor.BLUE, 2);
+        basicMap.put(MarblesColor.GREY, 2);
+        basicMap.put(MarblesColor.YELLOW, 2);
+        basicMap.put(MarblesColor.PURPLE, 2);
+        basicMap.put(MarblesColor.RED, 1);
+        Map<MarblesColor, Integer> allMarbles = Marbles.getAllMarblesMap();
+        assertTrue(basicMap.equals(allMarbles));
     }
 
     @Test
@@ -55,5 +71,15 @@ public class MarblesTest {
         assertThrows(InvalidKeyException.class, () -> res.getValue(MarblesColor.GREY.getResourceType()));
         assertThrows(InvalidKeyException.class, () -> res.getValue(MarblesColor.YELLOW.getResourceType()));
         assertThrows(InvalidKeyException.class, () -> res.getValue(MarblesColor.PURPLE.getResourceType()));
+    }
+
+    @Test
+    public void containFaith() throws InvalidKeyException {
+        Marbles mar = new Marbles();
+        mar.add(MarblesColor.RED);
+        assertTrue(mar.containFaith());
+        Marbles mar1 = new Marbles();
+        mar1.add(MarblesColor.WHITE);
+        assertFalse(mar1.containFaith());
     }
 }

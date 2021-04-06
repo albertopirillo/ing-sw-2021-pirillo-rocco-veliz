@@ -42,8 +42,8 @@ public class DevelopmentCard extends Card {
         return getLevel() == that.getLevel() && that.cost.getAllRes().equals(this.cost.getAllRes()) && getType().equals(that.getType());
     }
 
-    @Override
+   /* @Override
     public int hashCode() {
         return Objects.hash(cost, getType(), getLevel());
-    }
+    }*/
 }

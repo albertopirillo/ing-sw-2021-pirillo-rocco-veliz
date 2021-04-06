@@ -1,9 +1,15 @@
 package it.polimi.ingsw.model;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
 import it.polimi.ingsw.exceptions.DeckEmptyException;
 import it.polimi.ingsw.exceptions.FullCardDeckException;
 import it.polimi.ingsw.exceptions.NotEnoughResException;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.lang.reflect.Type;
 import java.util.*;
 
 public class Market {
@@ -11,14 +17,14 @@ public class Market {
     private CardDeck[][] cards;
     private final MarketTray marketTray;
 
-    public Market(List<DevelopmentCard> devCards) throws FullCardDeckException {
+    public Market() throws FullCardDeckException {
         cards = new CardDeck[3][4];
         for(int i=0; i<3; i++){
             for (int j=0; j<4; j++){
                 this.cards[i][j] = new CardDeck();
             }
         }
-        initCards(devCards);
+        initCards();
         marketTray = new MarketTray();
     }
 
@@ -27,9 +33,16 @@ public class Market {
     }
     
     //initialize cards
-    private void initCards(List<DevelopmentCard> devCards) throws FullCardDeckException {
-        //List<DevelopmentCard> devCards = new ArrayList<>();
+    private void initCards() throws FullCardDeckException {
         //parserJSON... devCards contain all DevCards
+        JsonReader reader = null;
+        try {
+            reader = new JsonReader(new FileReader("src/main/resources/devCardsConfig.json"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        Type listType = new TypeToken<ArrayList<DevelopmentCard>>(){}.getType();
+        List<DevelopmentCard> devCards = new Gson().fromJson(reader, listType);
         for (DevelopmentCard devCard : devCards) {
             this.cards[3-devCard.getLevel()][devCard.getType().getNumberColumn()].addCard(devCard);
         }

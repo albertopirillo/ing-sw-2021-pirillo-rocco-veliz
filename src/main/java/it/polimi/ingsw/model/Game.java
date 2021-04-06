@@ -15,8 +15,14 @@ public class Game {
 
     private boolean[] hasReportHappened;
 
+    private Market market;
+
     public void startGame() {
         // TODO implement here
+    }
+
+    public Market getMarket() {
+        return this.market;
     }
 
     public void game() {

@@ -1,12 +1,15 @@
 package it.polimi.ingsw.model;
 
-import java.util.*;
-
 public class ChangeWhiteMarbles extends LeaderAbility {
 
-    public ChangeWhiteMarbles() {
+    private final ResourceType resourceType;
+
+    public ChangeWhiteMarbles(ResourceType resType) {
+        this.resourceType = resType;
     }
 
-    private ResourceType resource;
+    public ResourceType getResourceType() {
+        return this.resourceType;
+    }
 
 }

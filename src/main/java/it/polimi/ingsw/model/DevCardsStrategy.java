@@ -1,14 +1,11 @@
 package it.polimi.ingsw.model;
 
-import java.util.*;
-
-public class DevCardsStrategy extends Strategy {
-
-    public DevCardsStrategy() {
-    }
+public class DevCardsStrategy extends BaseDevCardsStrategy {
 
     private Discount[] discount;
 
+    public DevCardsStrategy() {
+    }
 
     public void buyDevCard(DevelopmentCard devCard) {
         // TODO implement here

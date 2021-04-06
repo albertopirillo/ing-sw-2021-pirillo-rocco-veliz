@@ -1,13 +1,12 @@
 package it.polimi.ingsw.model;
 
-import java.util.*;
+public class ProductionStrategy extends BaseProductionStrategy {
 
-public class ProductionStrategy extends Strategy {
+    private ExtraProduction[] production;
 
     public ProductionStrategy() {
     }
 
-    private ExtraProduction[] production;
 
     public ResourceType extraProduction() {
         // TODO implement here

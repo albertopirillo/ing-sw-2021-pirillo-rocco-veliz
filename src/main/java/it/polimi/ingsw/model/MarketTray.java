@@ -57,15 +57,14 @@ public class MarketTray {
                 marketMarbles[i][position] = marketMarbles[i+1][position];
             }
             marketMarbles[2][position] = remainingMarble;
-            remainingMarble = tmp;
         }else{
             tmp = marketMarbles[6-position][0];
             for(int i=0; i<3; i++) {
                 marketMarbles[6-position][i] = marketMarbles[6-position][i+1];
             }
             marketMarbles[6-position][3] = remainingMarble;
-            remainingMarble = tmp;
         }
+        remainingMarble = tmp;
     }
     //only for testing
     public Marbles getMarblesMap() throws InvalidKeyException {

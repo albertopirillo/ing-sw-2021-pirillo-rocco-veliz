@@ -9,7 +9,7 @@ import java.util.*;
 public class Market {
 
     private CardDeck[][] cards;
-    private MarketTray marketTray;
+    private final MarketTray marketTray;
 
     public Market(List<DevelopmentCard> devCards) throws FullCardDeckException {
         cards = new CardDeck[3][4];
@@ -20,6 +20,10 @@ public class Market {
         }
         initCards(devCards);
         marketTray = new MarketTray();
+    }
+
+    public MarketTray getMarketTray() {
+        return this.marketTray;
     }
     
     //initialize cards

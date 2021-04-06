@@ -47,7 +47,11 @@ public class CardDeck {
     }
 
     //pop card from the deck
-    public DevelopmentCard getCard(){
+    public DevelopmentCard removeCard(){
         return this.cards.poll();
+    }
+
+    public DevelopmentCard getCard() {
+        return this.cards.peek();
     }
 }

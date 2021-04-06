@@ -5,7 +5,6 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import it.polimi.ingsw.exceptions.DeckEmptyException;
 import it.polimi.ingsw.exceptions.FullCardDeckException;
-import it.polimi.ingsw.exceptions.NotEnoughResException;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -58,9 +57,17 @@ public class Market {
         }
         return availableCards;
     }
+
+    //returns the requested card, without removing it from the market
+    public DevelopmentCard getCard(int level, CardColor color) throws DeckEmptyException {
+        DevelopmentCard devCard =  cards[3-level][color.getNumberColumn()].getCard();
+        if(devCard!=null) return devCard;
+        throw new DeckEmptyException();
+    }
+
     //card can be bought check is handled by the player
     public DevelopmentCard buyCards(int level, CardColor color) throws DeckEmptyException {
-        DevelopmentCard devCard =  cards[3-level][color.getNumberColumn()].getCard();
+        DevelopmentCard devCard =  cards[3-level][color.getNumberColumn()].removeCard();
         if(devCard!=null) return devCard;
         throw new DeckEmptyException();
     }

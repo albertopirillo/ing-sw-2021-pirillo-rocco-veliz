@@ -38,9 +38,9 @@ class CardDeckTest {
         deck.addCard(dev2);
         deck.addCard(dev3);
         assertEquals(deck.getNumbersOfCards(), 3);
-        DevelopmentCard devCard = deck.getCard();
+        DevelopmentCard devCard = deck.removeCard();
         assertEquals(deck.getNumbersOfCards(), 2);
-        DevelopmentCard devCard1 = deck.getCard();
+        DevelopmentCard devCard1 = deck.removeCard();
         assertEquals(deck.getNumbersOfCards(), 1);
         boolean bool = devCard.equals(dev2) || devCard.equals(dev3) || devCard1.equals(dev3);
         assertTrue(bool);
@@ -61,17 +61,17 @@ class CardDeckTest {
         assertNull(deck.getCard());
         Resource res = new Resource(1,2,3,4);
         deck.addCard(new DevelopmentCard( res, CardColor.BLUE, 1));
-        DevelopmentCard card = deck.getCard();
+        DevelopmentCard card = deck.removeCard();
         //return the card
         assertEquals(card.getType(), CardColor.BLUE);
         assertEquals(card.getLevel(), 1);
-        assertTrue(card.getResource().equals(res.getAllRes()));
+        assertEquals(res.getAllRes(), card.getResource());
         //remove the card
         assertEquals(deck.getNumbersOfCards(),0);
     }
 
     @Test
-    public void emptyTest() throws DeckEmptyException, FullCardDeckException {
+    public void emptyTest() throws FullCardDeckException {
         CardDeck deck = new CardDeck();
         assertNull(deck.getCard());//return null
         Resource res1 = new Resource(1,2,3,4);
@@ -83,9 +83,9 @@ class CardDeckTest {
         deck.addCard(dev1);
         deck.addCard(dev2);
         deck.addCard(dev3);
-        deck.getCard();
-        deck.getCard();
-        deck.getCard();
+        deck.removeCard();
+        deck.removeCard();
+        deck.removeCard();
         assertNull(deck.getCard());//return null
     }
 

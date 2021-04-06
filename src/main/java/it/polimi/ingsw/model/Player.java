@@ -4,7 +4,6 @@ import it.polimi.ingsw.exceptions.InvalidChoiceException;
 import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 
-import java.util.List;
 import java.util.Map;
 
 public class Player {

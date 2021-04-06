@@ -4,11 +4,20 @@ import java.util.*;
 
 public class Discount extends LeaderAbility {
 
-    public Discount() {
+    private final ResourceType resource;
+
+    private final int amount;
+
+    public Discount(ResourceType resource, int amount) {
+        this.resource = resource;
+        this.amount = amount;
     }
 
-    private ResourceType resource;
+    public ResourceType getResource() {
+        return resource;
+    }
 
-    private int amount;
-
+    public int getAmount() {
+        return amount;
+    }
 }

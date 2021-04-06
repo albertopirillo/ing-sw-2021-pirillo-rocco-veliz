@@ -45,8 +45,7 @@ public class PersonalBoard {
         this.strongbox = strongbox;
     }
 
-    public void addDevCard(DevelopmentCard devCard, int slotNumber) throws InvalidSlotException {
-        if (slotNumber < 1 || slotNumber > 3) throw new InvalidSlotException();
+    public void addDevCard(DevelopmentCard devCard) {
         //TODO: this.devSlots[slotNumber].addCard();
     }
 

@@ -1,12 +1,15 @@
 package it.polimi.ingsw.model;
 
-import java.util.*;
 
 public class ExtraProduction extends LeaderAbility {
 
-    public ExtraProduction() {
+    private final ProductionPower production;
+
+    public ExtraProduction(ProductionPower production) {
+        this.production = production;
     }
 
-    private ProductionPower production;
-
+    public ProductionPower getProduction() {
+        return production;
+    }
 }

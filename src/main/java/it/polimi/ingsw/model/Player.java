@@ -27,12 +27,15 @@ public class Player {
 
     private BaseProductionStrategy prodStrategy;
 
+    private int playerFaith;
 
-    public Player(boolean hasInkwell, String nickname, Game game) {
+
+    public Player(boolean hasInkwell, String nickname, Game game, int playerFaith) {
         this.hasInkwell = hasInkwell;
         this.nickname = nickname;
         this.isHisTurn = false;
         this.game = game;
+        this.playerFaith = playerFaith;
         personalBoard = new PersonalBoard();
         leaderCards = new LeaderCard[2];
         resStrategy = new BaseResourceStrategy();
@@ -43,6 +46,8 @@ public class Player {
     public boolean getInkwell() {
         return hasInkwell;
     }
+
+    public int getPlayerFaith() { return playerFaith; }
 
     public void setInkwell(boolean bool) {
         hasInkwell = bool;

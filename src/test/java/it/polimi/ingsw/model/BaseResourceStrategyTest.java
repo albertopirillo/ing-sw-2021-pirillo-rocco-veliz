@@ -9,7 +9,7 @@ class BaseResourceStrategyTest {
     @Test
     public void standardTest() {
         Game game = new Game();
-        Player player = new Player(false, "abc", game, 0);
+        Player player = new Player(false, "abc", game, 0, 0);
     }
 
 }

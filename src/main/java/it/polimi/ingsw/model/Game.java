@@ -1,7 +1,5 @@
 package it.polimi.ingsw.model;
 
-import java.util.*;
-
 public class Game {
 
     public Game() {
@@ -13,7 +11,7 @@ public class Game {
 
     private boolean lastTurn;
 
-    private boolean[] hasReportHappened;
+    private static boolean[] hasReportHappened;
 
     private Market market;
 
@@ -69,4 +67,18 @@ public class Game {
         // TODO implement here
     }
 
-}
+    //checks if report is already occured in that group
+    public static boolean checkReport(int group) {return hasReportHappened[group];}
+
+    public static void setReport(int group) {
+        if (group == 1) {
+            hasReportHappened[1] = true;
+        }
+        if (group == 2) {
+            hasReportHappened[2] = true;
+        }
+        if (group == 2) {
+            hasReportHappened[3] = true;
+        }
+    }
+    }

@@ -10,7 +10,7 @@ class PlayerTest {
     @Test
     public void strategiesTest(){
         Game game = new Game(); //Stub
-        Player player = new Player(false, "abc", game);
+        Player player = new Player(false, "abc", game, 1, 1);
         //testing set dev strategy
         Resource resource1 = new Resource(1,2,3,4);
         LeaderAbility ability = new Discount(ResourceType.COIN, 2);

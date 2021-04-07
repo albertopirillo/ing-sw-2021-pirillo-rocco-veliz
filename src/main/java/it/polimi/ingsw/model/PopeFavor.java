@@ -12,8 +12,11 @@ public class PopeFavor extends Card {
         this.reported = false;
         this.section = assignSection(i);
     }
-    public boolean isFaceUp() {
-        return faceUp;
+    public PopeFavor( int i) {
+        super(0);
+        this.faceUp = false;
+        this.reported = false;
+        this.section = assignSection(i);
     }
 
     private VaticanReportSection assignSection(int i) {

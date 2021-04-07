@@ -1,7 +1,5 @@
 package it.polimi.ingsw.model;
 
-import java.util.*;
-
 public class Game {
 
     public Game() {
@@ -12,8 +10,6 @@ public class Game {
     private int playerAmount;
 
     private boolean lastTurn;
-
-    private boolean[] hasReportHappened;
 
     private Market market;
 
@@ -69,4 +65,4 @@ public class Game {
         // TODO implement here
     }
 
-}
+    }

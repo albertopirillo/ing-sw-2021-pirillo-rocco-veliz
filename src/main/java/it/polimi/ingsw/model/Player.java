@@ -8,6 +8,8 @@ import java.util.Map;
 
 public class Player {
 
+    private static int victoryPoints;
+
     private boolean hasInkwell;
 
     private final String nickname;
@@ -26,12 +28,16 @@ public class Player {
 
     private BaseProductionStrategy prodStrategy;
 
+    private static int playerFaith;
 
-    public Player(boolean hasInkwell, String nickname, Game game) {
+
+    public Player(boolean hasInkwell, String nickname, Game game, int playerFaith, int victoryPoints) {
         this.hasInkwell = hasInkwell;
         this.nickname = nickname;
         this.isHisTurn = false;
         this.game = game;
+        Player.playerFaith = playerFaith;
+        Player.victoryPoints = victoryPoints;
         personalBoard = new PersonalBoard();
         leaderCards = new LeaderCard[2];
         resStrategy = new BaseResourceStrategy();
@@ -41,6 +47,13 @@ public class Player {
 
     public boolean getInkwell() {
         return hasInkwell;
+    }
+
+    public static int getPlayerFaith() { return playerFaith; }
+
+    public int getVictoryPoints() {return victoryPoints;}
+    public static void setVictoryPoints(int faithTrackPoints){
+        victoryPoints = victoryPoints + faithTrackPoints;
     }
 
     public void setInkwell(boolean bool) {

@@ -1,14 +1,20 @@
 package it.polimi.ingsw.model;
 
-import java.util.*;
-
 public class ProductionPower {
 
-    public ProductionPower() {
-    }
-
     private Resource input;
-
     private Resource output;
 
+    public ProductionPower(Resource input, Resource output) {
+        this.input = input;
+        this.output = output;
+    }
+
+    public Resource getInput(){
+        return input;
+    }
+
+    public Resource getOutput(){
+        return output;
+    }
 }

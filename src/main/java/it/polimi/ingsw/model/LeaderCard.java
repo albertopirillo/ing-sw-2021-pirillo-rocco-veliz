@@ -4,12 +4,16 @@ import java.util.*;
 
 public abstract class LeaderCard extends Card {
 
-    public LeaderCard() {
-    }
-
-    private Resource resCost;
-
     private LeaderAbility specialAbility;
 
+    //json initialization
+    public LeaderCard(int victoryPoints, LeaderAbility specialAbility) {
+        super(victoryPoints);
+        this.specialAbility = specialAbility;
+    }
+
+    public LeaderAbility getSpecialAbility() {
+        return specialAbility;
+    }
 
 }

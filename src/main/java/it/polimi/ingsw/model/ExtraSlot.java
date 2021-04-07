@@ -4,9 +4,17 @@ import java.util.*;
 
 public class ExtraSlot extends LeaderAbility {
 
-    public ExtraSlot() {
-    }
-
     private ResourceType resource;
 
+    public ExtraSlot(ResourceType resource) {
+        this.resource = resource;
+    }
+
+    public ExtraSlot activate() {
+        return this;
+    }
+
+    public ResourceType getResource() {
+        return resource;
+    }
 }

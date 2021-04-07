@@ -47,7 +47,7 @@ class PlayerTest {
     @Test
     public void allResTest() throws AlreadyInAnotherLayerException, CannotContainFaithException, NotEnoughSpaceException, NegativeResAmountException, LayerNotEmptyException, InvalidLayerNumberException, InvalidKeyException {
         Game game = new Game(); //Stub
-        Player player = new Player(false, "abc", game);
+        Player player = new Player(false, "abc", game, 0, 0);
         PersonalBoard personalBoard = player.getPersonalBoard();
         Depot depot = personalBoard.getDepot();
         Strongbox strongbox = personalBoard.getStrongbox();

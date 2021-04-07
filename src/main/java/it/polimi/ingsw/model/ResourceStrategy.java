@@ -8,8 +8,17 @@ public class ResourceStrategy extends BaseResourceStrategy {
 
     private ChangeWhiteMarbles[] resType;
 
-    public ResourceStrategy() {
-        resType = new ChangeWhiteMarbles[2];
+    public ResourceStrategy(ChangeWhiteMarbles resType) {
+        this.resType = new ChangeWhiteMarbles[2];
+        this.resType[0] = resType;
+    }
+
+    public ChangeWhiteMarbles[] getResType() {
+        return resType;
+    }
+
+    public void addAbility(ResourceStrategy ability){
+        this.resType[1] = ability.resType[0];
     }
 
     @Override

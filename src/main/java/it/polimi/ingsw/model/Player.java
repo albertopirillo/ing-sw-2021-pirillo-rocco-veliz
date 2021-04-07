@@ -35,9 +35,9 @@ public class Player {
         this.game = game;
         personalBoard = new PersonalBoard();
         leaderCards = new LeaderCard[2];
-        resStrategy = new BaseResourceStrategy();
-        devStrategy = new BaseDevCardsStrategy();
-        prodStrategy = new BaseProductionStrategy();
+        //resStrategy = new BaseResourceStrategy();
+        //devStrategy = new BaseDevCardsStrategy();
+        //prodStrategy = new BaseProductionStrategy();
     }
 
     public boolean getInkwell() {
@@ -65,11 +65,32 @@ public class Player {
     }
 
     public void changeDevCardsStrategy (DevCardsStrategy newStrategy) {
-        this.devStrategy = newStrategy;
+        if(this.devStrategy!=null){
+            this.devStrategy.addAbility(newStrategy);
+        }
+        else {
+            this.devStrategy = newStrategy;
+        }
     }
-
     public void changeProductionStrategy (ProductionStrategy newStrategy) {
-        this.prodStrategy = newStrategy;
+        if(this.prodStrategy!=null){
+            this.prodStrategy.addAbility(newStrategy);
+        }
+        else {
+            this.prodStrategy = newStrategy;
+        }
+    }
+    //testing
+    public BaseDevCardsStrategy getDevStrategy(){
+        return this.devStrategy;
+    }
+    //testing
+    public BaseResourceStrategy getResStrategy() {
+        return resStrategy;
+    }
+    //testing
+    public BaseProductionStrategy getProdStrategy() {
+        return prodStrategy;
     }
 
     public Resource getAllResources() throws NegativeResAmountException, InvalidKeyException {

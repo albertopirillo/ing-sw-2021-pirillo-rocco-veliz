@@ -8,4 +8,10 @@ public class BaseDevCardsStrategy {
         DevelopmentCard card = market.buyCards(level, color);
 
     }*/
+    public void addAbility(DevCardsStrategy ability) {
+    }
+
+    public Discount[] getDiscount(){
+        return null;
+    }
 }

@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.exceptions.InvalidLayerNumberException;
+
 import java.util.*;
 
 public class ExtraSlot extends LeaderAbility {
@@ -10,8 +12,13 @@ public class ExtraSlot extends LeaderAbility {
         this.resource = resource;
     }
 
-    public ExtraSlot activate() {
-        return this;
+    public void activate(Player player) {
+        try {
+            //to pass the resource type al depotDecorator
+            new ConcreteDepotDecorator(player.getPersonalBoard().getDepot());
+        } catch (InvalidLayerNumberException e) {
+            e.printStackTrace();
+        }
     }
 
     public ResourceType getResource() {

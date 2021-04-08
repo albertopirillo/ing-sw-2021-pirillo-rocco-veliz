@@ -45,9 +45,12 @@ public class DevelopmentCard extends Card {
         if (this == o) return true;
         if (!(o instanceof DevelopmentCard)) return false;
         DevelopmentCard that = (DevelopmentCard) o;
-        return getLevel() == that.getLevel() && that.cost.getAllRes().equals(this.cost.getAllRes()) && getType().equals(that.getType())
-                && prodPower.getInput().getAllRes().equals(that.prodPower.getInput().getAllRes()) &&
-                prodPower.getOutput().getAllRes().equals(that.prodPower.getOutput().getAllRes());
+        return this.getVictoryPoints() == that.getVictoryPoints()
+                && this.level == that.level
+                && that.cost.getAllRes().equals(this.cost.getAllRes())
+                && getType().equals(that.getType())
+                && prodPower.getInput().getAllRes().equals(that.prodPower.getInput().getAllRes())
+                && prodPower.getOutput().getAllRes().equals(that.prodPower.getOutput().getAllRes());
     }
 
    /* @Override

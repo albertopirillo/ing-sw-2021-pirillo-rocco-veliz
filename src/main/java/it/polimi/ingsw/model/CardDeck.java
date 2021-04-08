@@ -27,9 +27,9 @@ public class CardDeck {
 
     //add card to deck
     public void addCard(DevelopmentCard card) throws FullCardDeckException {
-        if(getNumbersOfCards()>=3) throw new FullCardDeckException();
+        if(getNumbersOfCards()>=4) throw new FullCardDeckException();
         cards.add(card);
-        if(getNumbersOfCards()==3) shuffle();
+        if(getNumbersOfCards()==4) shuffle();
     }
 
     //shuffle when the deck is full

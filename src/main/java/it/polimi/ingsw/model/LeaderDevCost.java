@@ -8,9 +8,7 @@ public class LeaderDevCost {
     }
 
     private CardColor color;
-
     private int level;
-
     private int amount;
 
 }

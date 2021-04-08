@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.exceptions.NotEnoughResException;
+
 import java.util.*;
 
 public class DevLeaderCard extends LeaderCard {
@@ -13,6 +15,11 @@ public class DevLeaderCard extends LeaderCard {
         this.color = color;
         this.level = level;
         this.amount = amount;
+    }
+
+    public boolean canBeActivated(List<DevelopmentCard> playerCards) {
+        return playerCards.stream().filter(e -> e.getType() == color && e.getLevel() == level).count() >= amount;
+
     }
 
     public CardColor getColor() {

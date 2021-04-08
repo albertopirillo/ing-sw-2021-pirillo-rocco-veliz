@@ -10,6 +10,10 @@ public class BaseResourceStrategy {
         return null;
     }
 
+    public void addAbility(ResourceStrategy ability){
+
+    }
+
     public Resource takeResources(int position, Market market, boolean standard, int choice) throws InvalidKeyException, NegativeResAmountException, InvalidChoiceException {
         Marbles marbles = market.getMarketTray().insertMarble(position);
         return marbles.getResources();

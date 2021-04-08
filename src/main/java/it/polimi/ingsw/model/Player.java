@@ -73,7 +73,12 @@ public class Player {
     }
 
     public void changeResourceStrategy (ResourceStrategy newStrategy) {
-        this.resStrategy = newStrategy;
+        if(this.resStrategy!=null){
+            this.resStrategy.addAbility(newStrategy);
+        }
+        else {
+            this.resStrategy = newStrategy;
+        }
     }
 
     public void changeDevCardsStrategy (DevCardsStrategy newStrategy) {

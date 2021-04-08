@@ -1,34 +1,28 @@
 package it.polimi.ingsw.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DevLeaderCard extends LeaderCard {
 
-    private CardColor color;
-    private int level;
-    private int amount;
+    private List<LeaderDevCost> requires = new ArrayList<>();
 
-    public DevLeaderCard(int victoryPoints, LeaderAbility specialAbility, CardColor color, int level, int amount) {
+    public DevLeaderCard(int victoryPoints, LeaderAbility specialAbility, ArrayList<LeaderDevCost> requires) {
         super(victoryPoints, specialAbility);
-        this.color = color;
-        this.level = level;
-        this.amount = amount;
+        this.requires = requires;
     }
 
     public boolean canBeActivated(List<DevelopmentCard> playerCards) {
-        return playerCards.stream().filter(e -> e.getType() == color && e.getLevel() == level).count() >= amount;
+        boolean check;
+        for (LeaderDevCost require : requires){
+            if(require.getLevel()==0) {
+                check = playerCards.stream().filter(e -> e.getType() == require.getColor()).count() >= require.getAmount();
+            }else {
+                check = playerCards.stream().filter(e -> e.getType() == require.getColor() && e.getLevel() == require.getLevel()).count() >= require.getAmount();
+            }
+            if (!check) return false;
+        }
+        return true;
 
-    }
-
-    public CardColor getColor() {
-        return color;
-    }
-
-    public int getLevel() {
-        return level;
-    }
-
-    public int getAmount() {
-        return amount;
     }
 }

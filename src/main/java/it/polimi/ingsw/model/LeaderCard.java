@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.exceptions.NotEnoughResException;
+
 import java.util.*;
 
 public abstract class LeaderCard extends Card {
@@ -20,4 +22,11 @@ public abstract class LeaderCard extends Card {
     public int getVictoryPoints() {
         return super.getVictoryPoints();
     }*/
+
+    public boolean canBeActivated(List<DevelopmentCard> playerCards) {
+        return false;
+    }
+    public boolean canBeActivated(Resource playerResource) throws NotEnoughResException {
+        return true;
+    }
 }

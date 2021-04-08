@@ -1,8 +1,6 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.exceptions.NotEnoughResException;
-
-import java.util.*;
+import java.util.List;
 
 public class DevLeaderCard extends LeaderCard {
 

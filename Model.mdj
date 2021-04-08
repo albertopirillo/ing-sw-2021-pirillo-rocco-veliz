@@ -1867,9 +1867,6 @@
 									},
 									"name": "strategies",
 									"visibility": "private",
-									"type": {
-										"$ref": "AAAAAAF4bcpNPHHmpLw="
-									},
 									"multiplicity": "3"
 								},
 								{
@@ -12420,7 +12417,7 @@
 											"top": 793,
 											"width": 422.9296875,
 											"height": 16,
-											"text": "-strategies: Strategy[3]",
+											"text": "-strategies[3]",
 											"horizontalAlignment": 0
 										},
 										{

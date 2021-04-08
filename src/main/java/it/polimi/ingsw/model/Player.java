@@ -40,9 +40,6 @@ public class Player {
         Player.victoryPoints = victoryPoints;
         personalBoard = new PersonalBoard();
         leaderCards = new LeaderCard[2];
-        //resStrategy = new BaseResourceStrategy();
-        //devStrategy = new BaseDevCardsStrategy();
-        //prodStrategy = new BaseProductionStrategy();
     }
 
     public boolean getInkwell() {
@@ -52,6 +49,7 @@ public class Player {
     public static int getPlayerFaith() { return playerFaith; }
 
     public int getVictoryPoints() {return victoryPoints;}
+
     public static void setVictoryPoints(int faithTrackPoints){
         victoryPoints = victoryPoints + faithTrackPoints;
     }
@@ -97,6 +95,7 @@ public class Player {
             this.prodStrategy = newStrategy;
         }
     }
+
     //testing
     public BaseDevCardsStrategy getDevStrategy(){
         return this.devStrategy;
@@ -144,8 +143,9 @@ public class Player {
         //if (choice == LeaderAction.DISCARD) personalBoard.getFaithTrack().setPosition( + 1):
         // Deletes used LeaderCard
         //TODO: activate ability
-        else card.getLeaderAbility().activate();
-        */
+        /*else*/
+        LeaderAbility ability = card.getSpecialAbility();
+        //ability.activate();
     }
 
     public LeaderCard[] chooseLeaderCard(LeaderCard[] leader) {

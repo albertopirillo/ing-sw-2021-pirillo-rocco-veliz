@@ -4,7 +4,7 @@ import java.util.*;
 
 public abstract class LeaderCard extends Card {
 
-    private LeaderAbility specialAbility;
+    private final LeaderAbility specialAbility;
 
     //json initialization
     public LeaderCard(int victoryPoints, LeaderAbility specialAbility) {
@@ -16,4 +16,8 @@ public abstract class LeaderCard extends Card {
         return specialAbility;
     }
 
+    /*Inherited from superclass
+    public int getVictoryPoints() {
+        return super.getVictoryPoints();
+    }*/
 }

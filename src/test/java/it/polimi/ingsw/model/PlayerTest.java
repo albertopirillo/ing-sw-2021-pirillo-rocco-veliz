@@ -20,8 +20,8 @@ class PlayerTest {
         res.getSpecialAbility().activate(player);
         assertNotNull(player.getDevStrategy());
         //correct ability
-        assertEquals(player.getDevStrategy().getDiscount()[0].getResource(), ResourceType.COIN);
-        assertEquals(player.getDevStrategy().getDiscount()[0].getAmount(), 2);
+        assertEquals(player.getDevStrategy().getDiscounts()[0].getResource(), ResourceType.COIN);
+        assertEquals(player.getDevStrategy().getDiscounts()[0].getAmount(), 2);
 
         //testing set production strategy
         Resource resource2 = new Resource(4,3,2,1);

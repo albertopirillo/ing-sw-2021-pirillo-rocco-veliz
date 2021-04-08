@@ -5,18 +5,16 @@ import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import it.polimi.ingsw.exceptions.NotEnoughResException;
 
-import java.util.Map;
-
 public class BaseDevCardsStrategy {
 
     /*public DevelopmentCard buyDevCard(int level, CardColor color, Market market, boolean choice) throws DeckEmptyException {
         DevelopmentCard card = market.buyCards(level, color);
-
     }*/
+
     public void addAbility(DevCardsStrategy ability) {
     }
 
-    public Discount[] getDiscount(){
+    public Discount[] getDiscounts(){
         return null;
     }
 
@@ -25,7 +23,7 @@ public class BaseDevCardsStrategy {
         if (card.canBeBought(player.getAllResources())) {
             market.buyCards(level, color);
             player.getPersonalBoard().addDevCard(card);
-            Map<ResourceType, Integer> cost = card.getResource();
+            Resource cost = card.getResource();
             //TODO: removes those resources from player
         }
         else throw new NotEnoughResException();

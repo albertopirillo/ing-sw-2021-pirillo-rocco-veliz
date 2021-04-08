@@ -6,7 +6,7 @@ import it.polimi.ingsw.exceptions.NegativeResAmountException;
 
 public class ResourceStrategy extends BaseResourceStrategy {
 
-    private ChangeWhiteMarbles[] resType;
+    private final ChangeWhiteMarbles[] resType;
 
     public ResourceStrategy(ChangeWhiteMarbles resType) {
         this.resType = new ChangeWhiteMarbles[2];

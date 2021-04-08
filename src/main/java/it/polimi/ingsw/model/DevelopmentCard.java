@@ -1,13 +1,11 @@
 package it.polimi.ingsw.model;
 
-import java.util.*;
-
 public class DevelopmentCard extends Card {
 
-    private Resource cost;
-    private CardColor type;
-    private int level;
-    private ProductionPower prodPower;
+    private final Resource cost;
+    private final CardColor type;
+    private final int level;
+    private final ProductionPower prodPower;
 
     public DevelopmentCard(int victoryPoints, Resource cost, CardColor type, int level, ProductionPower prodPower) {
         super(victoryPoints);

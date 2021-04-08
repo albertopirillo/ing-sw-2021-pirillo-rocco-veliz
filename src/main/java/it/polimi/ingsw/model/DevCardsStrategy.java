@@ -9,19 +9,23 @@ import java.util.Map;
 
 public class DevCardsStrategy extends BaseDevCardsStrategy {
 
-    private final Discount[] discount;
+    private final Discount[] discounts;
 
     public DevCardsStrategy(Discount discount) {
-        this.discount = new Discount[2];
-        this.discount[0] = discount;
+        this.discounts = new Discount[2];
+        this.discounts[0] = discount;
     }
 
-    public Discount[] getDiscount() {
-        return discount;
+    public Discount[] getDiscounts() {
+        return discounts;
     }
 
     public void addAbility(DevCardsStrategy ability){
-        this.discount[1] = ability.discount[0];
+        this.discounts[1] = ability.discounts[0];
+    }
+
+    public void buyDevCard(DevelopmentCard devCard) {
+        // TODO implement here
     }
 
     @Override
@@ -30,14 +34,14 @@ public class DevCardsStrategy extends BaseDevCardsStrategy {
         else {
             Resource playerRes = player.getAllResources();
             DevelopmentCard card = market.getCard(level, color);
-            Map<ResourceType, Integer> cost = card.getResource();
+            Resource cost = card.getResource();
 
-            for (Discount element : discount) {
+            for (Discount element : discounts) {
                 //TODO: if the player wants
                 ResourceType resType = element.getResource();
-                cost.put(resType, Math.max(cost.get(resType) - element.getAmount(), 0));
+                cost.modifyValue(resType, - Math.max(cost.getValue(resType) - element.getAmount(), 0));
             }
-            if (playerRes.compare(new Resource(cost))) {
+            if (playerRes.compare(cost)) {
                 market.buyCards(level, color);
                 player.getPersonalBoard().addDevCard(card);
                 //TODO: removes those resources from player
@@ -45,5 +49,4 @@ public class DevCardsStrategy extends BaseDevCardsStrategy {
             else throw new NotEnoughResException();
         }
     }
-
 }

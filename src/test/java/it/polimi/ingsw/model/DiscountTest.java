@@ -19,14 +19,14 @@ class DiscountTest {
         assertNull(player.getDevStrategy());
         res.getSpecialAbility().activate(player);
         assertNotNull(player.getDevStrategy());
-        assertEquals(player.getDevStrategy().getDiscount()[0].getResource(), ResourceType.COIN);
-        assertEquals(player.getDevStrategy().getDiscount()[0].getAmount(), 2);
+        assertEquals(player.getDevStrategy().getDiscounts()[0].getResource(), ResourceType.COIN);
+        assertEquals(player.getDevStrategy().getDiscounts()[0].getAmount(), 2);
 
         new ResLeaderCard(2, new Discount(ResourceType.FAITH, 1) ,resource1).getSpecialAbility().activate(player);
         //correct add to player
-        assertEquals(player.getDevStrategy().getDiscount()[0].getResource(), ResourceType.COIN);
-        assertEquals(player.getDevStrategy().getDiscount()[0].getAmount(), 2);
-        assertEquals(player.getDevStrategy().getDiscount()[1].getResource(), ResourceType.FAITH);
-        assertEquals(player.getDevStrategy().getDiscount()[1].getAmount(), 1);
+        assertEquals(player.getDevStrategy().getDiscounts()[0].getResource(), ResourceType.COIN);
+        assertEquals(player.getDevStrategy().getDiscounts()[0].getAmount(), 2);
+        assertEquals(player.getDevStrategy().getDiscounts()[1].getResource(), ResourceType.FAITH);
+        assertEquals(player.getDevStrategy().getDiscounts()[1].getAmount(), 1);
     }
 }

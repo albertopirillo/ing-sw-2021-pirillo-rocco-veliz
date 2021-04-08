@@ -1,9 +1,5 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.exceptions.InvalidSlotException;
-
-import java.util.*;
-
 public class PersonalBoard {
 
     private SoloActionTokens[] soloActionTokens;

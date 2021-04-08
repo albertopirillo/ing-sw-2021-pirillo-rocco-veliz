@@ -11,4 +11,11 @@ public class BaseProductionStrategy {
     public void extraProduction(int choice, Player player) throws NoExtraProductionsException, NegativeResAmountException, InvalidKeyException, CannotContainFaithException {
         throw new NoExtraProductionsException();
     }
+
+    public void addAbility(ProductionStrategy ability) {
+    }
+
+    public ExtraProduction[] getProduction() {
+        return null;
+    }
 }

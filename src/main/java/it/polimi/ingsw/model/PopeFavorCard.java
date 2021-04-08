@@ -1,18 +1,18 @@
 package it.polimi.ingsw.model;
 
-public class PopeFavor extends Card {
+public class PopeFavorCard extends Card {
 
     private boolean faceUp;
     private boolean reported;
     private VaticanReportSection section;
 
-    public PopeFavor(int victoryPoints, boolean faceUp, int i) {
+    public PopeFavorCard(int victoryPoints, int i) {
         super(victoryPoints);
         this.faceUp = false;
         this.reported = false;
         this.section = assignSection(i);
     }
-    public PopeFavor( int i) {
+    public PopeFavorCard(int i) {
         super(0);
         this.faceUp = false;
         this.reported = false;

@@ -13,11 +13,11 @@ public class FaithTrack {
 
     private int blackCrossPosition;
 
-    private ArrayList<PopeFavor> popeCards;
+    private ArrayList<PopeFavorCard> popeCards;
 
     private void initPopeCards(){
         for(int i=0; i<3; i++){
-            this.popeCards.add(new PopeFavor(++i));
+            this.popeCards.add(new PopeFavorCard(++i));
         }
     }
 
@@ -41,7 +41,7 @@ public class FaithTrack {
     private void vaticanReport() {
         // Triggered by checkPopeTile
         // gives points according to group value and changes hasReportHappened
-        PopeFavor popeFavor;
+        PopeFavorCard popeFavor;
         switch(markerPosition){
             case 8:
                 popeFavor = getPopeFavorBySection(VaticanReportSection.GROUP_ONE);
@@ -64,8 +64,12 @@ public class FaithTrack {
         }
     }
 
-    private PopeFavor getPopeFavorBySection(VaticanReportSection section) {
-        for (PopeFavor popeFavor: popeCards){
+    private void flipPopeCard(PopeFavorCard[] popeCards) {
+        // TODO implement here
+    }
+
+    private PopeFavorCard getPopeFavorBySection(VaticanReportSection section) {
+        for (PopeFavorCard popeFavor: popeCards){
             if( popeFavor.getSection() == section){
                 return popeFavor;
             }
@@ -77,7 +81,7 @@ public class FaithTrack {
     private void endgame() {
         // checks if player is on tile n° 24
         if(markerPosition==24){
-            //TO IMPLEMENT
+            //TODO IMPLEMENT
         }
     }
 

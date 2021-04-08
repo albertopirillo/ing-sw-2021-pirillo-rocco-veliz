@@ -1,0 +1,322 @@
+[
+  {
+    "type": "res",
+    "cost": {
+      "map": {
+        "COIN": 5
+      }
+    },
+    "specialAbility": {
+      "type": "extra",
+      "resource": "STONE"
+    },
+    "victoryPoints": 3
+  },
+  {
+    "type": "res",
+    "cost": {
+      "map": {
+        "STONE": 5
+      }
+    },
+    "specialAbility": {
+      "type": "extra",
+      "resource": "SERVANT"
+    },
+    "victoryPoints": 3
+  },
+  {
+    "type": "res",
+    "cost": {
+      "map": {
+        "SERVANT": 5
+      }
+    },
+    "specialAbility": {
+      "type": "extra",
+      "resource": "SHIELD"
+    },
+    "victoryPoints": 3
+  },
+  {
+    "type": "res",
+    "cost": {
+      "map": {
+        "SHIELD": 5
+      }
+    },
+    "specialAbility": {
+      "type": "extra",
+      "resource": "COIN"
+    },
+    "victoryPoints": 3
+  },
+  {
+    "type": "dev",
+    "requires": [
+      {
+        "color": "YELLOW",
+        "level": 1,
+        "amount": 0
+      },
+      {
+        "color": "GREEN",
+        "level": 1,
+        "amount": 0
+      }
+    ],
+    "specialAbility": {
+      "type": "dis",
+      "resource": "SERVANT",
+      "amount": 1
+    },
+    "victoryPoints": 2
+  },
+  {
+    "type": "dev",
+    "requires": [
+      {
+        "color": "BLUE",
+        "level": 1,
+        "amount": 0
+      },
+      {
+        "color": "PURPLE",
+        "level": 1,
+        "amount": 0
+      }
+    ],
+    "specialAbility": {
+      "type": "dis",
+      "resource": "SHIELD",
+      "amount": 1
+    },
+    "victoryPoints": 2
+  },
+  {
+    "type": "dev",
+    "requires": [
+      {
+        "color": "GREEN",
+        "level": 1,
+        "amount": 0
+      },
+      {
+        "color": "BLUE",
+        "level": 1,
+        "amount": 0
+      }
+    ],
+    "specialAbility": {
+      "type": "dis",
+      "resource": "STONE",
+      "amount": 1
+    },
+    "victoryPoints": 2
+  },
+  {
+    "type": "dev",
+    "requires": [
+      {
+        "color": "YELLOW",
+        "level": 1,
+        "amount": 0
+      },
+      {
+        "color": "PURPLE",
+        "level": 1,
+        "amount": 0
+      }
+    ],
+    "specialAbility": {
+      "type": "dis",
+      "resource": "COIN",
+      "amount": 1
+    },
+    "victoryPoints": 2
+  },
+  {
+    "type": "dev",
+    "requires": [
+      {
+        "color": "YELLOW",
+        "level": 2,
+        "amount": 0
+      },
+      {
+        "color": "BLUE",
+        "level": 1,
+        "amount": 0
+      }
+    ],
+    "specialAbility": {
+      "type": "change",
+      "resourceType": "SERVANT"
+    },
+    "victoryPoints": 5
+  },
+  {
+    "type": "dev",
+    "requires": [
+      {
+        "color": "GREEN",
+        "level": 2,
+        "amount": 0
+      },
+      {
+        "color": "PURPLE",
+        "level": 1,
+        "amount": 0
+      }
+    ],
+    "specialAbility": {
+      "type": "change",
+      "resourceType": "SHIELD"
+    },
+    "victoryPoints": 5
+  },
+  {
+    "type": "dev",
+    "requires": [
+      {
+        "color": "BLUE",
+        "level": 2,
+        "amount": 0
+      },
+      {
+        "color": "YELLOW",
+        "level": 1,
+        "amount": 0
+      }
+    ],
+    "specialAbility": {
+      "type": "change",
+      "resourceType": "STONE"
+    },
+    "victoryPoints": 5
+  },
+  {
+    "type": "dev",
+    "requires": [
+      {
+        "color": "PURPLE",
+        "level": 2,
+        "amount": 0
+      },
+      {
+        "color": "GREEN",
+        "level": 1,
+        "amount": 0
+      }
+    ],
+    "specialAbility": {
+      "type": "change",
+      "resourceType": "COIN"
+    },
+    "victoryPoints": 5
+  },
+  {
+    "type": "dev",
+    "requires": [
+      {
+        "color": "YELLOW",
+        "level": 2,
+        "amount": 1
+      }
+    ],
+    "specialAbility": {
+      "type": "prod",
+      "production": {
+        "input": {
+          "map": {
+            "SHIELD": 1
+          }
+        },
+        "output": {
+          "map": {
+            "FAITH": 2
+          }
+        }
+      }
+    },
+    "victoryPoints": 4
+  },
+  {
+    "type": "dev",
+    "requires": [
+      {
+        "color": "BLUE",
+        "level": 2,
+        "amount": 1
+      }
+    ],
+    "specialAbility": {
+      "type": "prod",
+      "production": {
+        "input": {
+          "map": {
+            "SERVANT": 1
+          }
+        },
+        "output": {
+          "map": {
+            "FAITH": 2
+          }
+        }
+      }
+    },
+    "victoryPoints": 4
+  },
+  {
+    "type": "dev",
+    "requires": [
+      {
+        "color": "PURPLE",
+        "level": 2,
+        "amount": 1
+      }
+    ],
+    "specialAbility": {
+      "type": "prod",
+      "production": {
+        "input": {
+          "map": {
+            "STONE": 1
+          }
+        },
+        "output": {
+          "map": {
+            "FAITH": 2
+          }
+        }
+      }
+    },
+    "victoryPoints": 4
+  },
+  {
+    "type": "dev",
+    "requires": [
+      {
+        "color": "GREEN",
+        "level": 2,
+        "amount": 1
+      }
+    ],
+    "specialAbility": {
+      "type": "prod",
+      "production": {
+        "input": {
+          "map": {
+            "COIN": 1
+          }
+        },
+        "output": {
+          "map": {
+            "FAITH": 2
+          }
+        }
+      }
+    },
+    "victoryPoints": 4
+  }
+]

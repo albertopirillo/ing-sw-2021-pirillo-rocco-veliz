@@ -1,12 +1,26 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.exceptions.NotEnoughResException;
+
 import java.util.*;
 
 public class ResLeaderCard extends LeaderCard {
 
-    public ResLeaderCard() {
+    private Resource cost;
+
+    //json initialization
+    public ResLeaderCard(int victoryPoints, LeaderAbility specialAbility, Resource cost) {
+        super(victoryPoints, specialAbility);
+        this.cost = cost;
     }
 
-    private Resource cost;
+    public boolean canBeActivated(Resource playerResource) throws NotEnoughResException {
+        if(playerResource == null)  throw new NotEnoughResException();
+        return playerResource.compare(this.cost);
+    }
+
+    public Resource getCost() {
+        return cost;
+    }
 
 }

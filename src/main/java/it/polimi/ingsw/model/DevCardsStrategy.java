@@ -11,8 +11,17 @@ public class DevCardsStrategy extends BaseDevCardsStrategy {
 
     private final Discount[] discount;
 
-    public DevCardsStrategy() {
+    public DevCardsStrategy(Discount discount) {
         this.discount = new Discount[2];
+        this.discount[0] = discount;
+    }
+
+    public Discount[] getDiscount() {
+        return discount;
+    }
+
+    public void addAbility(DevCardsStrategy ability){
+        this.discount[1] = ability.discount[0];
     }
 
     @Override
@@ -36,4 +45,5 @@ public class DevCardsStrategy extends BaseDevCardsStrategy {
             else throw new NotEnoughResException();
         }
     }
+
 }

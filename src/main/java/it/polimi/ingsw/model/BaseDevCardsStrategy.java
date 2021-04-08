@@ -9,6 +9,17 @@ import java.util.Map;
 
 public class BaseDevCardsStrategy {
 
+    /*public DevelopmentCard buyDevCard(int level, CardColor color, Market market, boolean choice) throws DeckEmptyException {
+        DevelopmentCard card = market.buyCards(level, color);
+
+    }*/
+    public void addAbility(DevCardsStrategy ability) {
+    }
+
+    public Discount[] getDiscount(){
+        return null;
+    }
+
     public void buyDevCard(int level, CardColor color, Market market, boolean standard, Player player) throws DeckEmptyException, NegativeResAmountException, InvalidKeyException, NotEnoughResException {
         DevelopmentCard card = market.getCard(level, color);
         if (card.canBeBought(player.getAllResources())) {

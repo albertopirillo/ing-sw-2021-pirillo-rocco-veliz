@@ -7,4 +7,5 @@ public abstract class LeaderAbility {
     public LeaderAbility() {
     }
 
+    public void activate(Player player){ }
 }

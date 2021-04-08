@@ -6,7 +6,14 @@ public class PopeFavor extends Card {
     private boolean reported;
     private VaticanReportSection section;
 
-    public PopeFavor(int i) {
+    public PopeFavor(int victoryPoints, boolean faceUp, int i) {
+        super(victoryPoints);
+        this.faceUp = false;
+        this.reported = false;
+        this.section = assignSection(i);
+    }
+    public PopeFavor( int i) {
+        super(0);
         this.faceUp = false;
         this.reported = false;
         this.section = assignSection(i);

@@ -3,7 +3,6 @@ package it.polimi.ingsw.model;
 public class ProductionPower {
 
     private final Resource input;
-
     private final Resource output;
 
     public ProductionPower(Resource input, Resource output) {
@@ -11,11 +10,11 @@ public class ProductionPower {
         this.output = output;
     }
 
-    public Resource getInput() {
+    public Resource getInput(){
         return input;
     }
 
-    public Resource getOutput() {
+    public Resource getOutput(){
         return output;
     }
 }

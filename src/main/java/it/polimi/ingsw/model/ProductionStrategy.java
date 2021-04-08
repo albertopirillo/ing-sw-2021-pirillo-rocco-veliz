@@ -8,8 +8,17 @@ public class ProductionStrategy extends BaseProductionStrategy {
 
     private final ExtraProduction[] production;
 
-    public ProductionStrategy(ExtraProduction[] production) {
-        this.production = production;
+    public ProductionStrategy(ExtraProduction production) {
+        this.production = new ExtraProduction[2];
+        this.production[0] = production;
+    }
+
+    public void addAbility(ProductionStrategy ability){
+        this.production[1] = ability.production[0];
+    }
+
+    public ExtraProduction[] getProduction() {
+        return production;
     }
 
     //Input resources can be paid from either Depot or Strongbox

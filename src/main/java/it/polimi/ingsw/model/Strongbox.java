@@ -40,7 +40,7 @@ public class Strongbox {
     }
 
     //3x resources can be moved from Strongbox to Depot, at the cost of 1x resource
-    public void moveToDepot(ResourceType resType, Depot depot, int layer) throws NegativeResAmountException, InvalidKeyException, CannotContainFaithException, InvalidLayerNumberException, LayerNotEmptyException, NotEnoughSpaceException, NotEnoughResException, AlreadyInAnotherLayerException {
+    public void moveToDepot(ResourceType resType, Depot depot, int layer) throws NegativeResAmountException, InvalidKeyException, CannotContainFaithException, InvalidLayerNumberException, LayerNotEmptyException, NotEnoughSpaceException, NotEnoughResException, AlreadyInAnotherLayerException, InvalidResourceException {
         if (this.resource.getValue(resType) < 3) throw new NotEnoughResException();
         depot.modifyLayer(layer, resType, 2);
         this.resource.modifyValue(resType, -3);

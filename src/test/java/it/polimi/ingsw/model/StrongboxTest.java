@@ -50,7 +50,7 @@ class StrongboxTest {
     }
 
     @Test
-    public void moveToDepot() throws CannotContainFaithException, NegativeResAmountException, InvalidKeyException, NotEnoughSpaceException, InvalidLayerNumberException, LayerNotEmptyException, NotEnoughResException, AlreadyInAnotherLayerException {
+    public void moveToDepot() throws CannotContainFaithException, NegativeResAmountException, InvalidKeyException, NotEnoughSpaceException, InvalidLayerNumberException, LayerNotEmptyException, NotEnoughResException, AlreadyInAnotherLayerException, InvalidResourceException {
         Strongbox strongbox = new Strongbox();
         strongbox.addResources(new Resource(2, 3, 4, 0));
         Strongbox strongbox2 = new Strongbox();

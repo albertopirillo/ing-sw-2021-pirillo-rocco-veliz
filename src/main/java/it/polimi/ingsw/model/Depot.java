@@ -10,35 +10,35 @@ import java.util.Map;
 //This way only one getter and one setter are needed
 public abstract class Depot {
 
-    private final Map<Integer, DepotLayer> mapping = new HashMap<>();
+    private final Map<Integer, Layer> mapping = new HashMap<>();
 
     public Depot() {
-        DepotLayer firstLayer = new DepotLayer(1);
-        DepotLayer secondLayer = new DepotLayer(2);
-        DepotLayer thirdLayer = new DepotLayer(3);
+        Layer firstLayer = new DepotLayer(1);
+        Layer secondLayer =new DepotLayer(2);
+        Layer thirdLayer = new DepotLayer(3);
         mapping.put(1, firstLayer);
         mapping.put(2, secondLayer);
         mapping.put(3, thirdLayer);
     }
 
     //Returns a copy of mapping field
-    protected Map<Integer, DepotLayer> getMapCopy() {
+    protected Map<Integer, Layer> getMapCopy() {
         return new HashMap<>(mapping);
     }
 
-    protected void addToMap(int key, DepotLayer depotLayer) throws InvalidLayerNumberException {
+    protected void addToMap(int key, Layer depotLayer) throws InvalidLayerNumberException {
         if (this.mapping.size() >= 5) throw new InvalidLayerNumberException();
         else this.mapping.put(key, depotLayer);
     }
 
-    public DepotLayer getLayer(int layerNumber) throws InvalidLayerNumberException {
+    public Layer getLayer(int layerNumber) throws InvalidLayerNumberException {
         //cannot create a Depot with more than 5 layers
         if (layerNumber < 0 || layerNumber > this.mapping.size()) throw new InvalidLayerNumberException();
         return mapping.get(layerNumber);
     }
 
     public void modifyLayer(int layerNumber, ResourceType resType, int addend) throws
-            NegativeResAmountException, CannotContainFaithException, LayerNotEmptyException, NotEnoughSpaceException, InvalidLayerNumberException, AlreadyInAnotherLayerException {
+            NegativeResAmountException, CannotContainFaithException, LayerNotEmptyException, NotEnoughSpaceException, InvalidLayerNumberException, AlreadyInAnotherLayerException, InvalidResourceException {
         if (addend == 0 ) return;
 
         //need to check that no other layers already contain that ResourceType
@@ -48,30 +48,30 @@ public abstract class Depot {
                     if (this.getLayer(i).getResource() == resType) throw new AlreadyInAnotherLayerException();
             }
         }
-        DepotLayer layer = this.getLayer(layerNumber);
+        Layer layer = this.getLayer(layerNumber);
         layer.setResAndAmount(resType, layer.getAmount() + addend);
     }
 
     public void moveResources(int amount, int fromLayerNumber, int toLayerNumber) throws
-            NegativeResAmountException, NotEnoughResException, NotEnoughSpaceException, LayerNotEmptyException, CannotContainFaithException, InvalidLayerNumberException {
+            NegativeResAmountException, NotEnoughResException, NotEnoughSpaceException, LayerNotEmptyException, CannotContainFaithException, InvalidLayerNumberException, InvalidResourceException {
         if (amount == 0) return;
-        DepotLayer fromLayer = this.getLayer(fromLayerNumber);
+        Layer fromLayer = this.getLayer(fromLayerNumber);
         if (amount > fromLayer.getAmount()) throw new NotEnoughResException();
-        DepotLayer toLayer = this.getLayer(toLayerNumber);
+        Layer toLayer = this.getLayer(toLayerNumber);
 
         if (toLayer.isEmpty() || fromLayer.getResource() == toLayer.getResource())
             this.moveToLayer(amount, fromLayer, toLayer);
         else this.swapLayers(fromLayer, toLayer);
     }
 
-    private void moveToLayer(int amount, DepotLayer fromLayer, DepotLayer toLayer) throws
-            LayerNotEmptyException, CannotContainFaithException, NotEnoughSpaceException, NegativeResAmountException {
+    private void moveToLayer(int amount, Layer fromLayer, Layer toLayer) throws
+            LayerNotEmptyException, CannotContainFaithException, NotEnoughSpaceException, NegativeResAmountException, InvalidResourceException {
         toLayer.setResAndAmount(fromLayer.getResource(), toLayer.getAmount() + amount);
         fromLayer.setAmount(fromLayer.getAmount() - amount);
     }
 
-    private void swapLayers(DepotLayer fromLayer, DepotLayer toLayer) throws
-            NegativeResAmountException, CannotContainFaithException, LayerNotEmptyException, NotEnoughSpaceException {
+    private void swapLayers(Layer fromLayer, Layer toLayer) throws
+            NegativeResAmountException, CannotContainFaithException, LayerNotEmptyException, NotEnoughSpaceException, InvalidResourceException {
 
         //builds a new temporary DepotLayer object, identical to toLayer
         DepotLayer tempLayer = new DepotLayer(3);
@@ -89,7 +89,7 @@ public abstract class Depot {
     //Returns a map with all the resources stored in the depot
     public Resource queryAllRes() throws NegativeResAmountException, InvalidKeyException {
         Resource res = new Resource(0, 0, 0, 0);
-        for (DepotLayer layer: mapping.values()) {
+        for (Layer layer: mapping.values()) {
             ResourceType resType = layer.getResource();
             if (resType != null) res.modifyValue(resType, layer.getAmount());
         }
@@ -101,7 +101,7 @@ public abstract class Depot {
         Map<ResourceType, Integer> toTake = res.getAllRes();
 
         //retrieves that resources
-        for (DepotLayer layer : this.mapping.values()) {
+        for (Layer layer : this.mapping.values()) {
             for (ResourceType resType : toTake.keySet()) {
                 if ((toTake.get(resType) != 0) && (layer.getResource() == resType)) {
                     int available = layer.getAmount();

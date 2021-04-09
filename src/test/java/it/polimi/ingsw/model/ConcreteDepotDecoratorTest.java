@@ -9,78 +9,88 @@ import static org.junit.jupiter.api.Assertions.*;
 class ConcreteDepotDecoratorTest {
 
     @Test
-    public void buildTest() throws InvalidLayerNumberException, CannotContainFaithException, LayerNotEmptyException, NegativeResAmountException, NotEnoughSpaceException, AlreadyInAnotherLayerException {
+    public void buildTest() throws InvalidLayerNumberException, CannotContainFaithException, LayerNotEmptyException, NegativeResAmountException, NotEnoughSpaceException, AlreadyInAnotherLayerException, InvalidResourceException {
         Depot depot = new ConcreteDepot();
         depot.modifyLayer(1, ResourceType.COIN, 1);
         depot.modifyLayer(2, ResourceType.SERVANT, 1);
         depot.modifyLayer(3, ResourceType.SHIELD, 3);
 
-        DepotDecorator extendedDepot = new ConcreteDepotDecorator(depot);
+        ExtraSlot extraSlot = new ExtraSlot(ResourceType.COIN);
+        DepotDecorator extendedDepot = new ConcreteDepotDecorator(depot, extraSlot);
         extendedDepot.modifyLayer(4, ResourceType.COIN, 2);
-        DepotDecorator doubleExtendedDepot = new ConcreteDepotDecorator(extendedDepot);
+        ExtraSlot extraSlot2 = new ExtraSlot(ResourceType.SERVANT);
+        DepotDecorator doubleExtendedDepot = new ConcreteDepotDecorator(extendedDepot, extraSlot2);
 
         for (int i = 1; i <= 3; i++) {
             assertEquals(depot.getLayer(i), doubleExtendedDepot.getLayer(i));
         }
         assertEquals(extendedDepot.getLayer(4), doubleExtendedDepot.getLayer(4));
         assertEquals(0, doubleExtendedDepot.getLayer(5).getAmount());
-        assertNull(doubleExtendedDepot.getLayer(5).getResource());
+        assertEquals(ResourceType.SERVANT, doubleExtendedDepot.getLayer(5).getResource());
     }
 
     @Test
     public void invalidBuildTest() throws InvalidLayerNumberException {
         Depot depot = new ConcreteDepot();
-        DepotDecorator extendedDepot = new ConcreteDepotDecorator(depot);
-        DepotDecorator doubleExtendedDepot = new ConcreteDepotDecorator(extendedDepot);
+        ExtraSlot extraSlot = new ExtraSlot(ResourceType.SERVANT);
+        DepotDecorator extendedDepot = new ConcreteDepotDecorator(depot, extraSlot);
+        ExtraSlot extraSlot2 = new ExtraSlot(ResourceType.COIN);
+        DepotDecorator doubleExtendedDepot = new ConcreteDepotDecorator(extendedDepot, extraSlot2);
         assertThrows(InvalidLayerNumberException.class,
-                () -> new ConcreteDepotDecorator(doubleExtendedDepot));
+                () -> new ConcreteDepotDecorator(doubleExtendedDepot, extraSlot));
     }
 
 
     @Test
-    public void modifyAndGetTest() throws CannotContainFaithException, InvalidLayerNumberException, LayerNotEmptyException, NegativeResAmountException, NotEnoughSpaceException, AlreadyInAnotherLayerException {
+    public void modifyAndGetTest() throws InvalidLayerNumberException, LayerNotEmptyException, NegativeResAmountException, NotEnoughSpaceException, AlreadyInAnotherLayerException, InvalidResourceException, CannotContainFaithException {
         Depot depot = new ConcreteDepot();
         depot.modifyLayer(1, ResourceType.COIN, 1);
-        DepotDecorator extendedDepot = new ConcreteDepotDecorator(depot);
+        ExtraSlot extraSlot = new ExtraSlot(ResourceType.COIN);
+        DepotDecorator extendedDepot = new ConcreteDepotDecorator(depot, extraSlot);
         extendedDepot.modifyLayer(4, ResourceType.COIN, 2);
-        DepotDecorator doubleExtendedDepot = new ConcreteDepotDecorator(extendedDepot);
+        ExtraSlot extraSlot2 = new ExtraSlot(ResourceType.COIN);
+        DepotDecorator doubleExtendedDepot = new ConcreteDepotDecorator(extendedDepot, extraSlot2);
 
         assertThrows(InvalidLayerNumberException.class,
                 () -> extendedDepot.modifyLayer(5, ResourceType.COIN, 2));
 
-        assertThrows(CannotContainFaithException.class,
+        assertThrows(InvalidResourceException.class,
                 () -> doubleExtendedDepot.modifyLayer(5, ResourceType.FAITH, 2));
 
         assertThrows(NotEnoughSpaceException.class,
                 () -> doubleExtendedDepot.modifyLayer(5, ResourceType.COIN, 3));
 
         assertThrows(NegativeResAmountException.class,
-                () -> doubleExtendedDepot.modifyLayer(5, ResourceType.SERVANT, -1));
+                () -> doubleExtendedDepot.modifyLayer(5, ResourceType.COIN, -1));
     }
 
     @Test
-    void moveResources() throws CannotContainFaithException, InvalidLayerNumberException, LayerNotEmptyException, NegativeResAmountException, NotEnoughSpaceException, NotEnoughResException, AlreadyInAnotherLayerException {
+    void moveResources() throws CannotContainFaithException, InvalidLayerNumberException, LayerNotEmptyException, NegativeResAmountException, NotEnoughSpaceException, NotEnoughResException, AlreadyInAnotherLayerException, InvalidResourceException {
         Depot depot = new ConcreteDepot();
         depot.modifyLayer(1, ResourceType.SHIELD, 1);
-        DepotDecorator extendedDepot = new ConcreteDepotDecorator(depot);
+        ExtraSlot extraSlot = new ExtraSlot(ResourceType.COIN);
+        DepotDecorator extendedDepot = new ConcreteDepotDecorator(depot, extraSlot);
         extendedDepot.modifyLayer(4, ResourceType.COIN, 2);
-        DepotDecorator doubleExtendedDepot = new ConcreteDepotDecorator(extendedDepot);
+        ExtraSlot extraSlot2 = new ExtraSlot(ResourceType.SERVANT);
+        DepotDecorator doubleExtendedDepot = new ConcreteDepotDecorator(extendedDepot, extraSlot2);
 
-        doubleExtendedDepot.moveResources(1, 4, 5);
-        assertEquals(1, doubleExtendedDepot.getLayer(5).getAmount());
+        doubleExtendedDepot.moveResources(1, 4, 2);
+        assertEquals(1, doubleExtendedDepot.getLayer(2).getAmount());
         assertEquals(1, doubleExtendedDepot.getLayer(4).getAmount());
-        assertEquals(ResourceType.COIN, doubleExtendedDepot.getLayer(5).getResource());
-        assertEquals(ResourceType.COIN, doubleExtendedDepot.getLayer(5).getResource());
+        assertEquals(ResourceType.COIN, doubleExtendedDepot.getLayer(2).getResource());
+        assertEquals(ResourceType.COIN, doubleExtendedDepot.getLayer(4).getResource());
     }
 
     @Test
-    public void getAllResTest() throws CannotContainFaithException, LayerNotEmptyException, NegativeResAmountException, NotEnoughSpaceException, InvalidKeyException, InvalidLayerNumberException, AlreadyInAnotherLayerException {
+    public void getAllResTest() throws CannotContainFaithException, LayerNotEmptyException, NegativeResAmountException, NotEnoughSpaceException, InvalidKeyException, InvalidLayerNumberException, AlreadyInAnotherLayerException, InvalidResourceException {
         Depot depot = new ConcreteDepot();
         depot.modifyLayer(1, ResourceType.SERVANT, 1);
         depot.modifyLayer(2, ResourceType.COIN, 2);
         depot.modifyLayer(3, ResourceType.STONE, 3);
-        DepotDecorator extendedDepot = new ConcreteDepotDecorator(depot);
-        DepotDecorator doubleExtendedDepot = new ConcreteDepotDecorator(extendedDepot);
+        ExtraSlot extraSlot = new ExtraSlot(ResourceType.SHIELD);
+        DepotDecorator extendedDepot = new ConcreteDepotDecorator(depot, extraSlot);
+        ExtraSlot extraSlot2 = new ExtraSlot(ResourceType.STONE);
+        DepotDecorator doubleExtendedDepot = new ConcreteDepotDecorator(extendedDepot, extraSlot2);
         doubleExtendedDepot.modifyLayer(5, ResourceType.STONE, 1);
         Resource actual = doubleExtendedDepot.queryAllRes();
 
@@ -94,7 +104,7 @@ class ConcreteDepotDecoratorTest {
     }
 
     @Test
-    public void realTest() throws AlreadyInAnotherLayerException, CannotContainFaithException, NotEnoughSpaceException, NegativeResAmountException, LayerNotEmptyException, InvalidLayerNumberException, NotEnoughResException, InvalidKeyException {
+    public void realTest() throws AlreadyInAnotherLayerException, CannotContainFaithException, NotEnoughSpaceException, NegativeResAmountException, LayerNotEmptyException, InvalidLayerNumberException, NotEnoughResException, InvalidKeyException, InvalidResourceException {
         Depot depot = new ConcreteDepot();
         depot.modifyLayer(2, ResourceType.COIN, 1);
         depot.moveResources(1, 2, 1);
@@ -109,14 +119,16 @@ class ConcreteDepotDecoratorTest {
         depot.retrieveRes(new Resource(0, 1, 0, 0));
         assertNull(depot.getLayer(3).getResource());
 
-        DepotDecorator extendedDepot = new ConcreteDepotDecorator(depot);
+        ExtraSlot extraSlot = new ExtraSlot(ResourceType.SERVANT);
+        DepotDecorator extendedDepot = new ConcreteDepotDecorator(depot, extraSlot);
         assertEquals(ResourceType.SHIELD, extendedDepot.getLayer(1).getResource());
         extendedDepot.modifyLayer(4, ResourceType.SERVANT, 2);
         extendedDepot.retrieveRes(new Resource(0, 0, 0, 2));
-        assertNull(extendedDepot.getLayer(4).getResource());
+        assertEquals(ResourceType.SERVANT, extendedDepot.getLayer(4).getResource());
 
         extendedDepot.modifyLayer(3, ResourceType.SERVANT, 2);
-        DepotDecorator doubleExtendedDepot = new ConcreteDepotDecorator(extendedDepot);
+        ExtraSlot extraSlot2 = new ExtraSlot(ResourceType.SERVANT);
+        DepotDecorator doubleExtendedDepot = new ConcreteDepotDecorator(extendedDepot, extraSlot2);
         assertEquals(2, doubleExtendedDepot.getLayer(3).getAmount());
         doubleExtendedDepot.moveResources(2, 3, 5);
         assertEquals(ResourceType.SERVANT, doubleExtendedDepot.getLayer(5).getResource());

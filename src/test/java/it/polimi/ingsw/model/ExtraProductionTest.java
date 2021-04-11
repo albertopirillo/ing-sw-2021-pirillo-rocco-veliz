@@ -19,14 +19,14 @@ class ExtraProductionTest {
         assertNull(player.getProdStrategy());
         res.getSpecialAbility().activate(player);
         assertNotNull(player.getProdStrategy());
-        assertEquals(player.getProdStrategy().getProduction()[0].getProduction().getInput().getAllRes(), resource1.getAllRes());
-        assertEquals(player.getProdStrategy().getProduction()[0].getProduction().getOutput().getAllRes(), resource2.getAllRes());
+        assertEquals(player.getProdStrategy().getProduction()[0].getProduction().getInput().getMap(), resource1.getMap());
+        assertEquals(player.getProdStrategy().getProduction()[0].getProduction().getOutput().getMap(), resource2.getMap());
 
         new ResLeaderCard(2, new ExtraProduction(new ProductionPower(resource2, resource1)), resource1).getSpecialAbility().activate(player);
         //correct add to player
-        assertEquals(player.getProdStrategy().getProduction()[0].getProduction().getInput().getAllRes(), resource1.getAllRes());
-        assertEquals(player.getProdStrategy().getProduction()[0].getProduction().getOutput().getAllRes(), resource2.getAllRes());
-        assertEquals(player.getProdStrategy().getProduction()[1].getProduction().getInput().getAllRes(), resource2.getAllRes());
-        assertEquals(player.getProdStrategy().getProduction()[1].getProduction().getOutput().getAllRes(), resource1.getAllRes());
+        assertEquals(player.getProdStrategy().getProduction()[0].getProduction().getInput().getMap(), resource1.getMap());
+        assertEquals(player.getProdStrategy().getProduction()[0].getProduction().getOutput().getMap(), resource2.getMap());
+        assertEquals(player.getProdStrategy().getProduction()[1].getProduction().getInput().getMap(), resource2.getMap());
+        assertEquals(player.getProdStrategy().getProduction()[1].getProduction().getOutput().getMap(), resource1.getMap());
     }
 }

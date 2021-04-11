@@ -31,8 +31,8 @@ class PlayerTest {
         res2.getSpecialAbility().activate(player);
         //testing strategy setting
         assertNotNull(player.getProdStrategy());
-        assertEquals(player.getProdStrategy().getProduction()[0].getProduction().getInput().getAllRes(), resource1.getAllRes());
-        assertEquals(player.getProdStrategy().getProduction()[0].getProduction().getOutput().getAllRes(), resource2.getAllRes());
+        assertEquals(player.getProdStrategy().getProduction()[0].getProduction().getInput().getMap(), resource1.getMap());
+        assertEquals(player.getProdStrategy().getProduction()[0].getProduction().getOutput().getMap(), resource2.getMap());
 
         //testing set production strategy
         LeaderAbility ability3 = new ChangeWhiteMarbles(ResourceType.SERVANT);

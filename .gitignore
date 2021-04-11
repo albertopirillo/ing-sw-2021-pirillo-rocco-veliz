@@ -126,3 +126,7 @@ fabric.properties
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+# Manually added later
+/target/classes/leaderCardsConfig.json
+/target/classes/devCardsConfig.json

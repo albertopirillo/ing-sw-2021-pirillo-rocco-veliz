@@ -12,7 +12,7 @@ class StrongboxTest {
     @Test
     public void queryAllRes() {
         Strongbox strongbox = new Strongbox();
-        Map<ResourceType, Integer> res = strongbox.queryAllRes();
+        Map<ResourceType, Integer> res = strongbox.queryAllRes().getMap();
         assertEquals(4, res.size());
         for(ResourceType key: res.keySet()) {
             assertEquals(0, res.get(key));
@@ -24,7 +24,7 @@ class StrongboxTest {
         Strongbox strongbox = new Strongbox();
         Resource res = new Resource(2, 3, 4, 5);
         strongbox.addResources(res);
-        Map<ResourceType, Integer> content = strongbox.queryAllRes();
+        Map<ResourceType, Integer> content = strongbox.queryAllRes().getMap();
         for (ResourceType key: content.keySet()) {
             assertEquals(res.getValue(key), content.get(key));
         }
@@ -42,7 +42,7 @@ class StrongboxTest {
         assertThrows(NotEnoughResException.class, () -> strongbox.retrieveResources(resKO));
 
         strongbox.retrieveResources(resOK);
-        Map<ResourceType, Integer> content = strongbox.queryAllRes();
+        Map<ResourceType, Integer> content = strongbox.queryAllRes().getMap();
         Resource checkRes = new Resource(0, 2, 1, 0);
         for (ResourceType key: content.keySet()) {
             assertEquals(checkRes.getValue(key), content.get(key));
@@ -63,7 +63,7 @@ class StrongboxTest {
         strongbox.moveToDepot(ResourceType.SHIELD, depot, 2);
         assertEquals(2, depot.getLayer(2).getAmount());
         assertEquals(ResourceType.SHIELD, depot.getLayer(2).getResource());
-        Map<ResourceType, Integer> content = strongbox.queryAllRes();
+        Map<ResourceType, Integer> content = strongbox.queryAllRes().getMap();
         assertEquals(1, content.get(ResourceType.SHIELD));
     }
 }

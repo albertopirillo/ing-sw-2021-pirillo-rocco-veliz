@@ -14,12 +14,12 @@ public class Strongbox {
     }
 
     //Returns a copy of all the resources stored
-    public Map<ResourceType, Integer> queryAllRes() {
-        return new HashMap<>(resource.getAllRes());
+    public Resource queryAllRes() {
+        return new Resource(new HashMap<>(resource.getMap()));
     }
 
     public void addResources(Resource resource) throws CannotContainFaithException, NegativeResAmountException, InvalidKeyException {
-        Map<ResourceType, Integer> copy = resource.getAllRes();
+        Map<ResourceType, Integer> copy = resource.getMap();
         if ((copy.get(ResourceType.FAITH) != null)) throw new CannotContainFaithException();
 
         for (ResourceType key: copy.keySet()) {
@@ -28,7 +28,7 @@ public class Strongbox {
     }
 
     public void retrieveResources(Resource resource) throws CannotContainFaithException, NotEnoughResException, NegativeResAmountException, InvalidKeyException {
-        Map<ResourceType, Integer> toTake = resource.getAllRes();
+        Map<ResourceType, Integer> toTake = resource.getMap();
         if ((toTake.get(ResourceType.FAITH) != null)) throw new CannotContainFaithException();
 
         if (!this.resource.compare(resource)) throw new NotEnoughResException();

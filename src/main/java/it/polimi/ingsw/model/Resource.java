@@ -51,7 +51,7 @@ public class Resource {
     }
 
     //Returns a copy of this.map field (it's a new object and not a reference)
-    public Map<ResourceType, Integer> getAllRes() {
+    public Map<ResourceType, Integer> getMap() {
         return new HashMap<>(map);
     }
 
@@ -61,5 +61,25 @@ public class Resource {
             if ((this.map.get(key) == null) || (this.map.get(key) < that.map.get(key))) return false;
         }
         return true;
+    }
+
+    //Sums two Resources and returns a new object
+    public Resource sum(Resource that) {
+        Map<ResourceType, Integer> copy = new HashMap<>(that.map);
+        this.map.forEach((k,v) -> copy.merge(k, v, Integer::sum));
+        return new Resource(copy);
+    }
+
+    //Get keySet of the current Map
+    public Set<ResourceType> keySet() {
+        return this.map.keySet();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Resource)) return false;
+        Resource resource = (Resource) o;
+        return Objects.equals(map, resource.map);
     }
 }

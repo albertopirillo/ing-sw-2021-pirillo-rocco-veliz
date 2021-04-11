@@ -98,7 +98,7 @@ public abstract class Depot {
 
     public void retrieveRes(Resource res) throws NegativeResAmountException, InvalidKeyException, NotEnoughResException, NotEnoughSpaceException {
         if (!this.queryAllRes().compare(res)) throw new NotEnoughResException();
-        Map<ResourceType, Integer> toTake = res.getAllRes();
+        Map<ResourceType, Integer> toTake = res.getMap();
 
         //retrieves that resources
         for (Layer layer : this.mapping.values()) {

@@ -11,12 +11,11 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-public class ResourceTest
-{
+public class ResourceTest {
     @Test
     public void emptyMapTest() {
         Resource res = new Resource();
-        for (final ResourceType resType: ResourceType.values()) {
+        for (final ResourceType resType : ResourceType.values()) {
             assertThrows(InvalidKeyException.class, () -> res.getValue(resType));
         }
     }
@@ -60,7 +59,7 @@ public class ResourceTest
     @Test
     public void copyTest() throws NegativeResAmountException, InvalidKeyException {
         Resource res = new Resource(0, 3, 5, 6);
-        Map<ResourceType, Integer> copy = res.getAllRes();
+        Map<ResourceType, Integer> copy = res.getMap();
         assertEquals(0, copy.get(ResourceType.STONE));
         assertEquals(3, copy.get(ResourceType.COIN));
         assertEquals(5, copy.get(ResourceType.SHIELD));
@@ -88,6 +87,33 @@ public class ResourceTest
 
         Resource res4 = new Resource(1, 2, 3, 1);
         assertFalse(res4.compare(res2));
+    }
 
+    @Test
+    public void sumTest() throws NegativeResAmountException, InvalidKeyException {
+        Resource res1 = new Resource(1, 0, 2, 5);
+        Resource res2 = new Resource(2, 2, 1, 0);
+        Resource res3 = new Resource();
+        Resource res4 = new Resource(3, 2, 5, 0);
+        res4.addResource(ResourceType.FAITH, 3);
+
+        //Side-effects test:
+        Resource copy1 = new Resource(res1.getMap());
+        Resource copy2 = new Resource(res2.getMap());
+        res1.sum(res2);
+        assertEquals(copy1, res1);
+        assertEquals(copy2, res2);
+
+        Resource sum1 = res1.sum(res2);
+        Resource check1 = new Resource(3, 2, 3, 5);
+        assertEquals(check1, sum1);
+
+        Resource sum2 = res1.sum(res3);
+        assertEquals(res1, sum2);
+
+        Resource sum3 = res1.sum(res4);
+        Resource check2 = new Resource(4, 2, 7, 5);
+        check2.addResource(ResourceType.FAITH, 3);
+        assertEquals(check2, sum3);
     }
 }

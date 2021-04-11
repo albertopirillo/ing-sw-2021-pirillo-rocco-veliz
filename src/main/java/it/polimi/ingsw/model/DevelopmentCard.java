@@ -45,10 +45,10 @@ public class DevelopmentCard extends Card {
         DevelopmentCard that = (DevelopmentCard) o;
         return this.getVictoryPoints() == that.getVictoryPoints()
                 && this.level == that.level
-                && that.cost.getAllRes().equals(this.cost.getAllRes())
+                && that.cost.getMap().equals(this.cost.getMap())
                 && getType().equals(that.getType())
-                && prodPower.getInput().getAllRes().equals(that.prodPower.getInput().getAllRes())
-                && prodPower.getOutput().getAllRes().equals(that.prodPower.getOutput().getAllRes());
+                && prodPower.getInput().getMap().equals(that.prodPower.getInput().getMap())
+                && prodPower.getOutput().getMap().equals(that.prodPower.getOutput().getMap());
     }
 
    /* @Override

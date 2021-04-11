@@ -82,4 +82,9 @@ public class Resource {
         Resource resource = (Resource) o;
         return Objects.equals(map, resource.map);
     }
+
+    @Override
+    public String toString() {
+        return "{" + map + "}";
+    }
 }

@@ -17,4 +17,12 @@ public class ProductionPower {
     public Resource getOutput(){
         return output;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "input=" + input +
+                ", output=" + output +
+                '}';
+    }
 }

@@ -51,8 +51,13 @@ public class DevelopmentCard extends Card {
                 && prodPower.getOutput().getMap().equals(that.prodPower.getOutput().getMap());
     }
 
-   /* @Override
-    public int hashCode() {
-        return Objects.hash(cost, getType(), getLevel());
-    }*/
+    @Override
+    public String toString() {
+        return "DevelopmentCard{" +
+                "cost=" + cost +
+                ", type=" + type +
+                ", level=" + level +
+                ", prodPower=" + prodPower +
+                '}';
+    }
 }

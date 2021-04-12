@@ -31,8 +31,8 @@ class PlayerTest {
         res2.getSpecialAbility().activate(player);
         //testing strategy setting
         assertNotNull(player.getProdStrategy());
-        assertEquals(player.getProdStrategy().getProduction()[0].getProduction().getInput().getAllRes(), resource1.getAllRes());
-        assertEquals(player.getProdStrategy().getProduction()[0].getProduction().getOutput().getAllRes(), resource2.getAllRes());
+        assertEquals(player.getProdStrategy().getProduction()[0].getProduction().getInput().getMap(), resource1.getMap());
+        assertEquals(player.getProdStrategy().getProduction()[0].getProduction().getOutput().getMap(), resource2.getMap());
 
         //testing set production strategy
         LeaderAbility ability3 = new ChangeWhiteMarbles(ResourceType.SERVANT);
@@ -45,7 +45,7 @@ class PlayerTest {
     }
 
     @Test
-    public void allResTest() throws AlreadyInAnotherLayerException, CannotContainFaithException, NotEnoughSpaceException, NegativeResAmountException, LayerNotEmptyException, InvalidLayerNumberException, InvalidKeyException, FullCardDeckException {
+    public void allResTest() throws AlreadyInAnotherLayerException, CannotContainFaithException, NotEnoughSpaceException, NegativeResAmountException, LayerNotEmptyException, InvalidLayerNumberException, InvalidKeyException, FullCardDeckException, InvalidResourceException {
         Game game = new Game(1, null); //Stub
         Player player = new Player(false, "abc", game, 0, 0);
         PersonalBoard personalBoard = player.getPersonalBoard();

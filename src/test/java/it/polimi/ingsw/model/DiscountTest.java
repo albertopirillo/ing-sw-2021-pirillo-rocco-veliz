@@ -8,10 +8,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class DiscountTest {
 
     @Test
-    void activate() throws FullCardDeckException {
-        //stub
-        Game game = new Game(1, null); //Stub
-        Player player = new Player(false, "abc", game, 1, 1);
+    void activate(){
+        //stub game = null
+        Player player = new Player(false, "abc", null, 1, 1);
         Resource resource1 = new Resource(1,2,3,4);
         LeaderAbility ability = new Discount(ResourceType.COIN, 2);
 

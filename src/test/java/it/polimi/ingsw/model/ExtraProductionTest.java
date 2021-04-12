@@ -8,10 +8,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class ExtraProductionTest {
 
     @Test
-    void activate() throws FullCardDeckException {
-        //stub
-        Game game = new Game(1, null); //Stub
-        Player player = new Player(false, "abc", game, 1, 1);
+    void activate() {
+        //stub game = null
+        Player player = new Player(false, "abc", null, 1, 1);
         Resource resource1 = new Resource(1,2,3,4);
         Resource resource2 = new Resource(4,3,2,1);
         LeaderAbility ability = new ExtraProduction(new ProductionPower(resource1, resource2));

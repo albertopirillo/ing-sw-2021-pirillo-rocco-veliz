@@ -8,8 +8,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class PlayerTest {
 
     @Test
-    public void strategiesTest(){
-        Game game = new Game(); //Stub
+    public void strategiesTest() throws FullCardDeckException {
+        Game game = new Game(1, null); //Stub
         Player player = new Player(false, "abc", game, 1, 1);
         //testing set dev strategy
         Resource resource1 = new Resource(1,2,3,4);
@@ -45,8 +45,8 @@ class PlayerTest {
     }
 
     @Test
-    public void allResTest() throws AlreadyInAnotherLayerException, CannotContainFaithException, NotEnoughSpaceException, NegativeResAmountException, LayerNotEmptyException, InvalidLayerNumberException, InvalidKeyException {
-        Game game = new Game(); //Stub
+    public void allResTest() throws AlreadyInAnotherLayerException, CannotContainFaithException, NotEnoughSpaceException, NegativeResAmountException, LayerNotEmptyException, InvalidLayerNumberException, InvalidKeyException, FullCardDeckException {
+        Game game = new Game(1, null); //Stub
         Player player = new Player(false, "abc", game, 0, 0);
         PersonalBoard personalBoard = player.getPersonalBoard();
         Depot depot = personalBoard.getDepot();

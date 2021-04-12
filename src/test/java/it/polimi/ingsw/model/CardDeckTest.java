@@ -2,12 +2,8 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.DeckEmptyException;
 import it.polimi.ingsw.exceptions.FullCardDeckException;
-import it.polimi.ingsw.exceptions.InvalidKeyException;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
-
-import java.util.Deque;
-import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -71,9 +67,9 @@ class CardDeckTest {
         //return the card
         assertEquals(card.getType(), CardColor.BLUE);
         assertEquals(card.getLevel(), 1);
-        assertEquals(card.getResource().getAllRes(), res.getAllRes());
-        assertEquals(card.getProdPower().getInput().getAllRes(), res.getAllRes());
-        assertEquals(card.getProdPower().getOutput().getAllRes(), res1.getAllRes());
+        assertEquals(card.getResource().getMap(), res.getMap());
+        assertEquals(card.getProdPower().getInput().getMap(), res.getMap());
+        assertEquals(card.getProdPower().getOutput().getMap(), res1.getMap());
         //remove the card
         assertEquals(deck.getNumbersOfCards(),0);
     }

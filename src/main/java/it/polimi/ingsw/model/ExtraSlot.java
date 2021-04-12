@@ -6,7 +6,7 @@ import java.util.*;
 
 public class ExtraSlot extends LeaderAbility {
 
-    private ResourceType resource;
+    private final ResourceType resource;
 
     public ExtraSlot(ResourceType resource) {
         this.resource = resource;
@@ -15,7 +15,7 @@ public class ExtraSlot extends LeaderAbility {
     public void activate(Player player) {
         try {
             //to pass the resource type al depotDecorator
-            new ConcreteDepotDecorator(player.getPersonalBoard().getDepot());
+            new ConcreteDepotDecorator(player.getPersonalBoard().getDepot(), this);
         } catch (InvalidLayerNumberException e) {
             e.printStackTrace();
         }

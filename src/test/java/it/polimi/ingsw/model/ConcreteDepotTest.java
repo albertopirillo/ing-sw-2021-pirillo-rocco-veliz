@@ -20,7 +20,7 @@ public class ConcreteDepotTest {
 
     @Test
     public void getTest() throws
-            CannotContainFaithException, LayerNotEmptyException, NegativeResAmountException, NotEnoughSpaceException, InvalidLayerNumberException, AlreadyInAnotherLayerException {
+            CannotContainFaithException, LayerNotEmptyException, NegativeResAmountException, NotEnoughSpaceException, InvalidLayerNumberException, AlreadyInAnotherLayerException, InvalidResourceException {
         Depot depot = new ConcreteDepot();
         depot.modifyLayer(1, ResourceType.COIN, 1);
         assertEquals(ResourceType.COIN, depot.getLayer(1).getResource());
@@ -32,7 +32,7 @@ public class ConcreteDepotTest {
     }
 
     @Test
-    public void setTest() throws AlreadyInAnotherLayerException, CannotContainFaithException, NotEnoughSpaceException, NegativeResAmountException, LayerNotEmptyException, InvalidLayerNumberException {
+    public void setTest() throws AlreadyInAnotherLayerException, CannotContainFaithException, NotEnoughSpaceException, NegativeResAmountException, LayerNotEmptyException, InvalidLayerNumberException, InvalidResourceException {
         Depot depot = new ConcreteDepot();
         assertThrows(NotEnoughSpaceException.class,
                 () -> depot.modifyLayer(1,ResourceType.COIN, 5));
@@ -46,7 +46,7 @@ public class ConcreteDepotTest {
 
     @Test
     public void overrideTest() throws
-            CannotContainFaithException, LayerNotEmptyException, NegativeResAmountException, NotEnoughSpaceException, InvalidLayerNumberException, AlreadyInAnotherLayerException {
+            CannotContainFaithException, LayerNotEmptyException, NegativeResAmountException, NotEnoughSpaceException, InvalidLayerNumberException, AlreadyInAnotherLayerException, InvalidResourceException {
         Depot depot = new ConcreteDepot();
         depot.modifyLayer(3, ResourceType.SERVANT, 1);
         assertThrows(LayerNotEmptyException.class,
@@ -55,7 +55,7 @@ public class ConcreteDepotTest {
 
     @Test
     public void modifyTest() throws
-            CannotContainFaithException, LayerNotEmptyException, NegativeResAmountException, NotEnoughSpaceException, InvalidLayerNumberException, AlreadyInAnotherLayerException {
+            CannotContainFaithException, LayerNotEmptyException, NegativeResAmountException, NotEnoughSpaceException, InvalidLayerNumberException, AlreadyInAnotherLayerException, InvalidResourceException {
         Depot depot = new ConcreteDepot();
         depot.modifyLayer(2, ResourceType.COIN, 2);
         depot.modifyLayer(2, ResourceType.COIN, -1);
@@ -76,7 +76,7 @@ public class ConcreteDepotTest {
 
     @Test
     public void getAllResTest() throws
-            CannotContainFaithException, LayerNotEmptyException, NegativeResAmountException, NotEnoughSpaceException, InvalidKeyException, InvalidLayerNumberException, AlreadyInAnotherLayerException {
+            CannotContainFaithException, LayerNotEmptyException, NegativeResAmountException, NotEnoughSpaceException, InvalidKeyException, InvalidLayerNumberException, AlreadyInAnotherLayerException, InvalidResourceException {
         Depot depot =  new ConcreteDepot();
         depot.modifyLayer(1, ResourceType.STONE, 1);
         depot.modifyLayer(2, ResourceType.SHIELD, 2);
@@ -92,7 +92,7 @@ public class ConcreteDepotTest {
 
     @Test
     public void moveToEmptyTest() throws
-            CannotContainFaithException, LayerNotEmptyException, NegativeResAmountException, NotEnoughSpaceException, NotEnoughResException, InvalidLayerNumberException, AlreadyInAnotherLayerException {
+            CannotContainFaithException, LayerNotEmptyException, NegativeResAmountException, NotEnoughSpaceException, NotEnoughResException, InvalidLayerNumberException, AlreadyInAnotherLayerException, InvalidResourceException {
         Depot depot = new ConcreteDepot();
         depot.modifyLayer(2, ResourceType.COIN, 2);
         depot.moveResources(2, 2, 3);
@@ -105,7 +105,7 @@ public class ConcreteDepotTest {
 
     @Test
     public void moveExceptionTest() throws
-            CannotContainFaithException, LayerNotEmptyException, NegativeResAmountException, NotEnoughSpaceException, InvalidLayerNumberException, AlreadyInAnotherLayerException {
+            CannotContainFaithException, LayerNotEmptyException, NegativeResAmountException, NotEnoughSpaceException, InvalidLayerNumberException, AlreadyInAnotherLayerException, InvalidResourceException {
         Depot depot = new ConcreteDepot();
         depot.modifyLayer(2, ResourceType.COIN, 2);
 
@@ -117,7 +117,7 @@ public class ConcreteDepotTest {
     }
 
     @Test
-    public void moveNotEnoughTest() throws CannotContainFaithException, LayerNotEmptyException, NegativeResAmountException, NotEnoughSpaceException, InvalidLayerNumberException, AlreadyInAnotherLayerException {
+    public void moveNotEnoughTest() throws CannotContainFaithException, LayerNotEmptyException, NegativeResAmountException, NotEnoughSpaceException, InvalidLayerNumberException, AlreadyInAnotherLayerException, InvalidResourceException {
         Depot depot = new ConcreteDepot();
         depot.modifyLayer(3, ResourceType.SHIELD, 1);
 
@@ -127,7 +127,7 @@ public class ConcreteDepotTest {
 
     @Test
     public void noMoveTest() throws
-            CannotContainFaithException, LayerNotEmptyException, NegativeResAmountException, NotEnoughSpaceException, NotEnoughResException, InvalidLayerNumberException, AlreadyInAnotherLayerException {
+            CannotContainFaithException, LayerNotEmptyException, NegativeResAmountException, NotEnoughSpaceException, NotEnoughResException, InvalidLayerNumberException, AlreadyInAnotherLayerException, InvalidResourceException {
         Depot depot = new ConcreteDepot();
         depot.modifyLayer(2, ResourceType.COIN, 2);
         depot.moveResources(0, 2, 1);
@@ -140,7 +140,7 @@ public class ConcreteDepotTest {
 
     @Test
     public void swapOkTest() throws
-            CannotContainFaithException, LayerNotEmptyException, NegativeResAmountException, NotEnoughSpaceException, NotEnoughResException, InvalidLayerNumberException, AlreadyInAnotherLayerException {
+            CannotContainFaithException, LayerNotEmptyException, NegativeResAmountException, NotEnoughSpaceException, NotEnoughResException, InvalidLayerNumberException, AlreadyInAnotherLayerException, InvalidResourceException {
         Depot depot = new ConcreteDepot();
         depot.modifyLayer(1, ResourceType.COIN, 1);
         depot.modifyLayer(2, ResourceType.SHIELD, 1);
@@ -154,7 +154,7 @@ public class ConcreteDepotTest {
 
     @Test
     public void swapExceptionTest() throws
-            CannotContainFaithException, LayerNotEmptyException, NegativeResAmountException, NotEnoughSpaceException, InvalidLayerNumberException, AlreadyInAnotherLayerException {
+            CannotContainFaithException, LayerNotEmptyException, NegativeResAmountException, NotEnoughSpaceException, InvalidLayerNumberException, AlreadyInAnotherLayerException, InvalidResourceException {
         Depot depot = new ConcreteDepot();
         depot.modifyLayer(3, ResourceType.COIN, 2);
         depot.modifyLayer(2, ResourceType.SHIELD, 1);
@@ -167,7 +167,7 @@ public class ConcreteDepotTest {
     }
 
     @Test
-    public void swapAlreadyPresTest() throws CannotContainFaithException, LayerNotEmptyException, NegativeResAmountException, NotEnoughSpaceException, NotEnoughResException, InvalidLayerNumberException, AlreadyInAnotherLayerException {
+    public void swapAlreadyPresTest() throws CannotContainFaithException, LayerNotEmptyException, NegativeResAmountException, NotEnoughSpaceException, NotEnoughResException, InvalidLayerNumberException, AlreadyInAnotherLayerException, InvalidResourceException {
         Depot depot = new ConcreteDepot();
         depot.modifyLayer(3, ResourceType.COIN, 1);
         depot.modifyLayer(2, ResourceType.SHIELD, 2);
@@ -180,7 +180,7 @@ public class ConcreteDepotTest {
     }
 
      @Test
-     public void retrieveTest() throws AlreadyInAnotherLayerException, CannotContainFaithException, NotEnoughSpaceException, NegativeResAmountException, LayerNotEmptyException, InvalidLayerNumberException, NotEnoughResException, InvalidKeyException {
+     public void retrieveTest() throws AlreadyInAnotherLayerException, CannotContainFaithException, NotEnoughSpaceException, NegativeResAmountException, LayerNotEmptyException, InvalidLayerNumberException, NotEnoughResException, InvalidKeyException, InvalidResourceException {
         Resource res = new Resource(0,1,3,1);
         Depot depot = new ConcreteDepot();
         depot.modifyLayer(1, ResourceType.SERVANT, 1);

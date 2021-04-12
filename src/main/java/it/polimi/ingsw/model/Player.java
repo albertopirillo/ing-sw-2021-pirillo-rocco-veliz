@@ -110,12 +110,9 @@ public class Player {
     }
 
     public Resource getAllResources() throws NegativeResAmountException, InvalidKeyException {
-        Map<ResourceType, Integer> depotRes = personalBoard.getDepot().queryAllRes().getAllRes();
-        Map<ResourceType, Integer> strongboxRes = personalBoard.getStrongbox().queryAllRes();
-        return new Resource(depotRes.get(ResourceType.STONE) + strongboxRes.get(ResourceType.STONE),
-                             depotRes.get(ResourceType.COIN) + strongboxRes.get(ResourceType.COIN),
-                            depotRes.get(ResourceType.SHIELD) + strongboxRes.get(ResourceType.SHIELD),
-                           depotRes.get(ResourceType.SERVANT) + strongboxRes.get(ResourceType.SERVANT));
+        Resource depotRes = personalBoard.getDepot().queryAllRes();
+        Resource strongboxRes = personalBoard.getStrongbox().queryAllRes();
+        return depotRes.sum(strongboxRes);
     }
 
     public void takeResources(int position, boolean standard, int choice) throws NegativeResAmountException, InvalidKeyException, InvalidChoiceException {

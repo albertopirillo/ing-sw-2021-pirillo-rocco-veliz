@@ -12,12 +12,12 @@ public class ConcreteDepotDecorator extends DepotDecorator {
     //protected Depot depot <== inherited from the DepotDecorator, has direct access
 
     //The builder just adds another element to the superclass' mapping
-    public ConcreteDepotDecorator(Depot depot) throws InvalidLayerNumberException {
+    public ConcreteDepotDecorator(Depot depot, ExtraSlot extraSlot) throws InvalidLayerNumberException {
         super(depot);
-        Map<Integer, DepotLayer> copy = this.depot.getMapCopy();
+        Map<Integer, Layer> copy = this.depot.getMapCopy();
         for (int key: copy.keySet()) {
             this.addToMap(key, copy.get(key));
         }
-        this.addToMap(copy.size() + 1, new DepotLayer(2));
+        this.addToMap(copy.size() + 1, new ExtraLayer(extraSlot));
     }
 }

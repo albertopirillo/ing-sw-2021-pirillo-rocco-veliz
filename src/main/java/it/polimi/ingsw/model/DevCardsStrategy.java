@@ -5,8 +5,6 @@ import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import it.polimi.ingsw.exceptions.NotEnoughResException;
 
-import java.util.Map;
-
 public class DevCardsStrategy extends BaseDevCardsStrategy {
 
     private final Discount[] discounts;
@@ -29,9 +27,10 @@ public class DevCardsStrategy extends BaseDevCardsStrategy {
     }
 
     @Override
-    public void buyDevCard(int level, CardColor color, Market market, boolean standard, Player player) throws DeckEmptyException, NegativeResAmountException, InvalidKeyException, NotEnoughResException {
-        if (standard) super.buyDevCard(level, color, market, true, player);
+    public void buyDevCard(Player player, int level, boolean standard, CardColor color, Resource fromDepot, Resource fromStrongbox) throws DeckEmptyException, NegativeResAmountException, InvalidKeyException, NotEnoughResException {
+        if (standard) super.buyDevCard(player, level, true, color, fromDepot, fromStrongbox);
         else {
+            Market market = player.getGame().getMarket();
             Resource playerRes = player.getAllResources();
             DevelopmentCard card = market.getCard(level, color);
             Resource cost = card.getResource();

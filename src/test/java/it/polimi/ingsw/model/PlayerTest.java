@@ -9,8 +9,8 @@ class PlayerTest {
 
     @Test
     public void strategiesTest(){
-        Game game = new Game(); //Stub
-        Player player = new Player(false, "abc", game, 1, 1);
+        //stub game = null
+        Player player = new Player(false, "abc", null, 1, 1);
         //testing set dev strategy
         Resource resource1 = new Resource(1,2,3,4);
         LeaderAbility ability = new Discount(ResourceType.COIN, 2);
@@ -46,8 +46,8 @@ class PlayerTest {
 
     @Test
     public void allResTest() throws AlreadyInAnotherLayerException, CannotContainFaithException, NotEnoughSpaceException, NegativeResAmountException, LayerNotEmptyException, InvalidLayerNumberException, InvalidKeyException, InvalidResourceException {
-        Game game = new Game(); //Stub
-        Player player = new Player(false, "abc", game, 0, 0);
+        //stub game = null
+        Player player = new Player(false, "abc", null, 0, 0);
         PersonalBoard personalBoard = player.getPersonalBoard();
         Depot depot = personalBoard.getDepot();
         Strongbox strongbox = personalBoard.getStrongbox();

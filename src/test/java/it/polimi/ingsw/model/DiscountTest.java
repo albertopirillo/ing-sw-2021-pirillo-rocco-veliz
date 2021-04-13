@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.exceptions.FullCardDeckException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -7,10 +8,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class DiscountTest {
 
     @Test
-    void activate() {
-        //stub
-        Game game = new Game(); //Stub
-        Player player = new Player(false, "abc", game, 1, 1);
+    void activate(){
+        //stub game = null
+        Player player = new Player(false, "abc", null, 1, 1);
         Resource resource1 = new Resource(1,2,3,4);
         LeaderAbility ability = new Discount(ResourceType.COIN, 2);
 

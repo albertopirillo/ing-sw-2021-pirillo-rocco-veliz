@@ -11,21 +11,12 @@ public class MarketTray {
 
     public MarketTray() {
         marketMarbles = new MarblesColor[3][4];
-        Map<MarblesColor, Integer> initMarket = Marbles.getAllMarblesMap();
-        Random randomNum = new Random();
-        int len = MarblesColor.values().length;
-        int pick = randomNum.nextInt(len);
-        MarblesColor[] init = MarblesColor.values();
-        remainingMarble = init[pick];
-        initMarket.put(init[pick], initMarket.get(init[pick]) - 1);
+        Deque<MarblesColor> marbleList = Marbles.getAllMarbleList(Marbles.getAllMarblesMap());
+        Collections.shuffle((List<MarblesColor>) marbleList);
+        remainingMarble = marbleList.poll();
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 4; j++) {
-                pick = randomNum.nextInt(len);
-                while (initMarket.get(init[pick]) <= 0) {
-                    pick = randomNum.nextInt(len);
-                }
-                marketMarbles[i][j] = init[pick];
-                initMarket.put(init[pick], initMarket.get(init[pick]) - 1);
+                marketMarbles[i][j]= marbleList.poll();
             }
         }
     }

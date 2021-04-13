@@ -21,22 +21,23 @@ import static org.junit.jupiter.api.Assertions.*;
 class DevLeaderCardTest {
 
     @Test
-    void parserTest() throws NegativeResAmountException, InvalidKeyException, FileNotFoundException {
+    void parserTest() throws FileNotFoundException{
         //register adapter
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeAdapter(LeaderAbility.class, new LeaderAbilityDeserializer());
         builder.registerTypeAdapter(LeaderCard.class, new LeaderCardJsonDeserializer());
         Gson gson = builder.create();
         Type listType = new TypeToken<List<LeaderCard>>(){}.getType();
-        //ledaderissimi contains the 16 leader cards...
-        List<LeaderCard> leaderissimi = gson.fromJson(new JsonReader(new FileReader("src/main/resources/leaderCardsConfig.json")), listType);
-        System.out.println("ok");
+        //ledaders contains the 16 leader cards...
+        List<LeaderCard> leaders = gson.fromJson(new JsonReader(new FileReader("src/main/resources/leaderCardsConfig.json")), listType);
+
     }
     @Test
-    void canBeActivated() throws NegativeResAmountException, InvalidKeyException, FileNotFoundException {
+    void canBeActivated() throws NegativeResAmountException, InvalidKeyException {
 
         //parse JSon
-        /*ArrayList<LeaderCard> leader = new ArrayList<>();
+        /*
+        ArrayList<LeaderCard> leader = new ArrayList<>();
         ArrayList<LeaderDevCost> requires = new ArrayList<>();
         requires.add(new LeaderDevCost(CardColor.YELLOW,1));
         requires.add(new LeaderDevCost(CardColor.GREEN,1));

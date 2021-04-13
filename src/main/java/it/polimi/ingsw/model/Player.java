@@ -145,9 +145,18 @@ public class Player {
         //ability.activate();
     }
 
-    public LeaderCard[] chooseLeaderCard(LeaderCard[] leader) {
+    public void chooseLeaderCard(int first, int second) {
         // TODO implement here
-        return null;
+        this.leaderCards = new LeaderCard[]{
+            this.leaderCards[first], this.leaderCards[second]
+        };
     }
 
+    public void setLeaderCards(LeaderCard[] leaderCards) {
+        this.leaderCards = leaderCards;
+    }
+
+    public LeaderCard[] getLeaderCards() {
+        return this.leaderCards;
+    }
 }

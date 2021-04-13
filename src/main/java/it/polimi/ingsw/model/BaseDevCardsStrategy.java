@@ -35,7 +35,7 @@ public class BaseDevCardsStrategy {
         if (card.canBeBought(player.getAllResources())) {
             market.buyCards(level, color);
             player.getPersonalBoard().addDevCard(card);
-            Resource cost = card.getResource();
+            Resource cost = card.getCost();
             //TODO: removes those resources from player
         }
         else throw new NotEnoughResException();

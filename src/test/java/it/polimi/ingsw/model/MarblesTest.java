@@ -23,7 +23,7 @@ public class MarblesTest {
     }
 
     @Test
-    public void MapOfMables() throws InvalidKeyException {
+    public void MapOfMables(){
         Map<MarblesColor, Integer> basicMap = new HashMap<>();
         basicMap.put(MarblesColor.WHITE, 4);
         basicMap.put(MarblesColor.BLUE, 2);
@@ -75,6 +75,14 @@ public class MarblesTest {
 
     @Test
     public void containFaith() throws InvalidKeyException {
+        Marbles mar = new Marbles();
+        mar.add(MarblesColor.RED);
+        assertTrue(mar.containFaith());
+        Marbles mar1 = new Marbles();
+        mar1.add(MarblesColor.WHITE);
+        assertFalse(mar1.containFaith());
+    }
+    public void containWhite() throws InvalidKeyException {
         Marbles mar = new Marbles();
         mar.add(MarblesColor.RED);
         assertTrue(mar.containFaith());

@@ -55,9 +55,7 @@ public class Marbles {
 
     public Resource getResources() throws NegativeResAmountException, InvalidKeyException {
         Resource res = new Resource();
-        Iterator iterator = marbles.keySet().iterator();
-        while (iterator.hasNext()){
-            MarblesColor marble = (MarblesColor) iterator.next();
+        for(MarblesColor marble : marbles.keySet()){
             if(marble != MarblesColor.WHITE)  res.addResource(marble.getResourceType() , marbles.get(marble));
         }
         return res;
@@ -68,6 +66,9 @@ public class Marbles {
 
     }
 
+    public boolean containWhiteMarbles(){
+        return marbles.containsKey(MarblesColor.WHITE);
+    }
     public boolean containFaith(){
         return marbles.containsKey(MarblesColor.RED);
     }

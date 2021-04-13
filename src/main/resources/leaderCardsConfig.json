@@ -234,7 +234,8 @@
         },
         "output": {
           "map": {
-            "FAITH": 2
+            "FAITH": 1,
+            "ALL": 1
           }
         }
       }
@@ -260,7 +261,8 @@
         },
         "output": {
           "map": {
-            "FAITH": 2
+            "FAITH": 1,
+            "ALL": 1
           }
         }
       }
@@ -286,7 +288,8 @@
         },
         "output": {
           "map": {
-            "FAITH": 2
+            "FAITH": 1,
+            "ALL": 1
           }
         }
       }
@@ -312,7 +315,8 @@
         },
         "output": {
           "map": {
-            "FAITH": 2
+            "FAITH": 1,
+            "ALL": 1
           }
         }
       }

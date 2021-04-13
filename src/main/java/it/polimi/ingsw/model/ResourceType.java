@@ -5,7 +5,8 @@ public enum ResourceType {
     COIN,
     SHIELD,
     SERVANT,
-    FAITH;
+    FAITH,
+    ALL;
 
     public static boolean contains(ResourceType other) {
         for (ResourceType res: ResourceType.values())

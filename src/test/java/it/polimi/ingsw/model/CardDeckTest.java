@@ -67,7 +67,7 @@ class CardDeckTest {
         //return the card
         assertEquals(card.getType(), CardColor.BLUE);
         assertEquals(card.getLevel(), 1);
-        assertEquals(card.getResource().getMap(), res.getMap());
+        assertEquals(card.getCost().getMap(), res.getMap());
         assertEquals(card.getProdPower().getInput().getMap(), res.getMap());
         assertEquals(card.getProdPower().getOutput().getMap(), res1.getMap());
         //remove the card

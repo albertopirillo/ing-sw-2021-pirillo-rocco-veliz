@@ -59,7 +59,7 @@ class PlayerTest {
         Resource playerRes = player.getAllResources();
         Resource resCheck = new Resource(1, 4, 0, 5);
         for (ResourceType key: ResourceType.values()) {
-            if (key != ResourceType.FAITH) {
+            if (key != ResourceType.FAITH && key != ResourceType.ALL) {
                 assertEquals(resCheck.getValue(key), playerRes.getValue(key));
             }
         }

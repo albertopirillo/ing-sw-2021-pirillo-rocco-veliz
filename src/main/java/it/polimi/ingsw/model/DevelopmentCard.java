@@ -25,7 +25,7 @@ public class DevelopmentCard extends Card {
     }
 
     //get cost
-    public Resource getResource(){
+    public Resource getCost(){
         return cost;
     }
 

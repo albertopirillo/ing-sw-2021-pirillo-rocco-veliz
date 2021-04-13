@@ -33,7 +33,7 @@ public class DevCardsStrategy extends BaseDevCardsStrategy {
             Market market = player.getGame().getMarket();
             Resource playerRes = player.getAllResources();
             DevelopmentCard card = market.getCard(level, color);
-            Resource cost = card.getResource();
+            Resource cost = card.getCost();
 
             for (Discount element : discounts) {
                 //TODO: if the player wants

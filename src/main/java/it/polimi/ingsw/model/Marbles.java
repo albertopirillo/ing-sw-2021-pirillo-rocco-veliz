@@ -33,6 +33,16 @@ public class Marbles {
         return allMarbles;
     }
 
+    public static Deque<MarblesColor> getAllMarbleList(Map<MarblesColor, Integer> map){
+        Deque<MarblesColor> allMarbles = new LinkedList<>();
+        for(MarblesColor mar : map.keySet()){
+            for (int i=0; i<map.get(mar); i++){
+                allMarbles.push(mar);
+            }
+        }
+        return allMarbles;
+    }
+
     public void add(MarblesColor key) throws InvalidKeyException {
         if (!MarblesColor.contains(key)) throw new InvalidKeyException();
         if (!marbles.containsKey(key)) {

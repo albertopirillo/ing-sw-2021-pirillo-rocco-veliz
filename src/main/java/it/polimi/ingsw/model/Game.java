@@ -16,14 +16,24 @@ import java.util.Random;
 
 public class Game {
 
+    private static int gamesCount = 0;
+
+    private final int gameID;
+
     private Player[] players;
-    private int playerAmount;
+
+    private final int playerAmount;
+
     private boolean lastTurn;
+
     private Market market;
 
     public Game(int playerAmount, Player[] players) throws FullCardDeckException {
+        this.lastTurn = false;
         this.playerAmount = playerAmount;
         this.players = players;
+        this.gameID = Game.gamesCount + 1;
+        Game.gamesCount++;
         startGame();
     }
 

@@ -61,7 +61,7 @@ class DepotDecoratorTest {
         Resource expected = new Resource(0, 4, 0, 1);
 
         for (ResourceType key : ResourceType.values()) {
-            if (key != ResourceType.FAITH) {
+            if (key != ResourceType.FAITH && key != ResourceType.ALL) {
                 assertEquals(expected.getValue(key), actual.getValue(key));
             }
         }

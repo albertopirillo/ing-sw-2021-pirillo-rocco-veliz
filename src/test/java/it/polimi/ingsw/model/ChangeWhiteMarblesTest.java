@@ -1,6 +1,8 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.exceptions.FullCardDeckException;
+import it.polimi.ingsw.exceptions.InvalidLayerNumberException;
+import it.polimi.ingsw.exceptions.LeaderAbilityAlreadyActive;
+import it.polimi.ingsw.exceptions.TooManyLeaderAbilitiesException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -8,22 +10,26 @@ import static org.junit.jupiter.api.Assertions.*;
 class ChangeWhiteMarblesTest {
 
     @Test
-    void activate() {
+    void activate() throws TooManyLeaderAbilitiesException, InvalidLayerNumberException, LeaderAbilityAlreadyActive {
         //stub game = null
-        Player player = new Player(false, "abc", null, 1, 1);
+        Player player = new Player(false, "abc");
         Resource resource1 = new Resource(1,2,3,4);
         LeaderAbility ability = new ChangeWhiteMarbles(ResourceType.FAITH);
-        ResLeaderCard res = new ResLeaderCard(1, ability ,resource1);
+        ResLeaderCard res1 = new ResLeaderCard(1, ability ,resource1);
+        ResLeaderCard res2 = new ResLeaderCard(2, ability ,resource1);
 
-        assertNull(player.getResStrategy());
-        res.getSpecialAbility().activate(player);
-        assertNotNull(player.getResStrategy());
-        assertEquals(player.getResStrategy().getResType()[0].getResourceType(), ResourceType.FAITH);
+        player.setLeaderCards(0, res1);
+        player.setLeaderCards(1, res2);
+        assertTrue(player.getActiveLeaderAbilities().isEmpty());
 
-        new ResLeaderCard(2, new ChangeWhiteMarbles(ResourceType.COIN), resource1).getSpecialAbility().activate(player);
-        //correct add to player
-        assertEquals(player.getResStrategy().getResType()[0].getResourceType(), ResourceType.FAITH);
-        assertEquals(player.getResStrategy().getResType()[1].getResourceType(), ResourceType.COIN);
+        player.useLeader(0, LeaderAction.USE_ABILITY);
+        assertEquals(1, player.getActiveLeaderAbilities().size());
+        assertEquals(ability, player.getActiveLeaderAbilities().get(0));
 
+        assertThrows(LeaderAbilityAlreadyActive.class, () -> player.useLeader(0, LeaderAction.USE_ABILITY));
+
+        player.useLeader(1, LeaderAction.USE_ABILITY);
+        assertEquals(2, player.getActiveLeaderAbilities().size());
+        assertEquals(ability, player.getActiveLeaderAbilities().get(1));
     }
 }

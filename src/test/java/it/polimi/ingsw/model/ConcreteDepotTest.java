@@ -84,7 +84,7 @@ public class ConcreteDepotTest {
         Resource expected = new Resource(1, 0, 2 ,0);
 
         for(ResourceType key: ResourceType.values()) {
-            if (key != ResourceType.FAITH) {
+            if (key != ResourceType.FAITH && key != ResourceType.ALL) {
                 assertEquals(expected.getValue(key), actual.getValue(key));
             }
         }

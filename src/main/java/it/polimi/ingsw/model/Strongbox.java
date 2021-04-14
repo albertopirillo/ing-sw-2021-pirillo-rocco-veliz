@@ -27,7 +27,7 @@ public class Strongbox {
         }
     }
 
-    public void retrieveResources(Resource resource) throws CannotContainFaithException, NotEnoughResException, NegativeResAmountException, InvalidKeyException {
+    public void retrieveRes(Resource resource) throws CannotContainFaithException, NotEnoughResException, NegativeResAmountException, InvalidKeyException {
         Map<ResourceType, Integer> toTake = resource.getMap();
         if ((toTake.get(ResourceType.FAITH) != null)) throw new CannotContainFaithException();
 

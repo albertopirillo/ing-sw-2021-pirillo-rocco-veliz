@@ -1,12 +1,10 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.DevSlotEmptyException;
-import it.polimi.ingsw.exceptions.FullCardDeckException;
 import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -33,10 +31,10 @@ class DevelopmentSlotTest {
         devSlot.addCard(dev2);
         devSlot.addCard(dev3);
         List<DevelopmentCard> devCards = devSlot.getCards();
-        assertTrue(dev3.equals(devCards.get(0)));
-        assertTrue(dev2.equals(devCards.get(1)));
-        assertTrue(dev1.equals(devCards.get(2)));
-        assertTrue(test.equals(devCards.get(2)));
+        assertEquals(dev3, devCards.get(0));
+        assertEquals(dev2, devCards.get(1));
+        assertEquals(dev1, devCards.get(2));
+        assertEquals(test, devCards.get(2));
         assertEquals(3, devCards.size());
     }
 
@@ -92,9 +90,9 @@ class DevelopmentSlotTest {
         DevelopmentSlot devSlot = new DevelopmentSlot();
         assertThrows(DevSlotEmptyException.class, () -> devSlot.getLevelSlot());
         devSlot.addCard(dev1);
-        assertTrue(dev1.equals(devSlot.getTopCard()));
-        assertFalse(dev2.equals(devSlot.getTopCard()));
-        assertTrue(test.equals(devSlot.getTopCard()));
+        assertEquals(dev1, devSlot.getTopCard());
+        assertNotEquals(dev2, devSlot.getTopCard());
+        assertEquals(test, devSlot.getTopCard());
         devSlot.addCard(dev2);
         assertEquals(dev2, devSlot.getTopCard());
         devSlot.addCard(dev3);

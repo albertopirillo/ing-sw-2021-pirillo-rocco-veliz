@@ -39,9 +39,9 @@ class StrongboxTest {
         strongbox.addResources(new Resource(2, 3, 4, 0));
         Resource resOK = new Resource(2, 1, 3, 0);
         Resource resKO = new Resource(2, 1, 5, 0);
-        assertThrows(NotEnoughResException.class, () -> strongbox.retrieveResources(resKO));
+        assertThrows(NotEnoughResException.class, () -> strongbox.retrieveRes(resKO));
 
-        strongbox.retrieveResources(resOK);
+        strongbox.retrieveRes(resOK);
         Map<ResourceType, Integer> content = strongbox.queryAllRes().getMap();
         Resource checkRes = new Resource(0, 2, 1, 0);
         for (ResourceType key: content.keySet()) {

@@ -6,7 +6,7 @@ import java.util.*;
 
 public class MarketTray {
 
-    private MarblesColor[][] marketMarbles;
+    private final MarblesColor[][] marketMarbles;
     private MarblesColor remainingMarble;
 
     public MarketTray() {

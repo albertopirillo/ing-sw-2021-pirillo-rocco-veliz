@@ -23,7 +23,7 @@ public class MarblesTest {
     }
 
     @Test
-    public void MapOfMables(){
+    public void MapOfMarbles(){
         Map<MarblesColor, Integer> basicMap = new HashMap<>();
         basicMap.put(MarblesColor.WHITE, 4);
         basicMap.put(MarblesColor.BLUE, 2);
@@ -32,7 +32,7 @@ public class MarblesTest {
         basicMap.put(MarblesColor.PURPLE, 2);
         basicMap.put(MarblesColor.RED, 1);
         Map<MarblesColor, Integer> allMarbles = Marbles.getAllMarblesMap();
-        assertTrue(basicMap.equals(allMarbles));
+        assertEquals(basicMap, allMarbles);
     }
 
     @Test

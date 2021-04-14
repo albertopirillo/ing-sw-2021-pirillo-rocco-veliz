@@ -6,7 +6,7 @@ import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import java.util.*;
 
 public class Marbles {
-    private Map<MarblesColor, Integer> marbles;
+    private final Map<MarblesColor, Integer> marbles;
 
     public Marbles() {
         marbles = new HashMap<>();

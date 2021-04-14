@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.exceptions.TooManyLeaderAbilitiesException;
+
 public class Discount extends LeaderAbility {
 
     private final ResourceType resource;
@@ -10,10 +12,6 @@ public class Discount extends LeaderAbility {
         this.amount = amount;
     }
 
-    public void activate(Player player) {
-        player.changeDevCardsStrategy(new DevCardsStrategy(this));
-    }
-
     public ResourceType getResource() {
         return resource;
     }
@@ -21,4 +19,9 @@ public class Discount extends LeaderAbility {
     public int getAmount() {
         return amount;
     }
+
+    public void activate(Player player) throws TooManyLeaderAbilitiesException {
+        player.addDevCardsStrategy(this);
+    }
+
 }

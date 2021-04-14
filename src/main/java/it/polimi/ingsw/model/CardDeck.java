@@ -7,7 +7,7 @@ import java.util.*;
 
 public class CardDeck {
 
-    private Deque<DevelopmentCard> cards;
+    private final Deque<DevelopmentCard> cards;
 
     public CardDeck() {
         this.cards = new LinkedList<>();

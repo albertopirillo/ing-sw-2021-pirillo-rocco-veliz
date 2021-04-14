@@ -13,7 +13,7 @@ import java.util.*;
 
 public class Market {
 
-    private CardDeck[][] cards;
+    private final CardDeck[][] cards;
     private final MarketTray marketTray;
 
     public Market() throws FullCardDeckException {

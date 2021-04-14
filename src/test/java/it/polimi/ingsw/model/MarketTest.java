@@ -268,13 +268,13 @@ class MarketTest {
         List<DevelopmentCard> devCards = market.getAvailableCards();
         int k=0;
         for(int i=3; i>0; i--){
-            assertTrue(market.getCard(i,CardColor.GREEN).equals(devCards.get(k)));
+            assertEquals(market.getCard(i, CardColor.GREEN), devCards.get(k));
             k++;
-            assertTrue(market.getCard(i,CardColor.BLUE).equals(devCards.get(k)));
+            assertEquals(market.getCard(i, CardColor.BLUE), devCards.get(k));
             k++;
-            assertTrue(market.getCard(i,CardColor.YELLOW).equals(devCards.get(k)));
+            assertEquals(market.getCard(i, CardColor.YELLOW), devCards.get(k));
             k++;
-            assertTrue(market.getCard(i,CardColor.PURPLE).equals(devCards.get(k)));
+            assertEquals(market.getCard(i, CardColor.PURPLE), devCards.get(k));
             k++;
         }
     }
@@ -283,11 +283,11 @@ class MarketTest {
     public void buyCards() throws DeckEmptyException, FullCardDeckException {
         Market market = new Market();
         List<DevelopmentCard> devCards = market.getAvailableCards();
-        assertTrue(devCards.get(0).equals(market.buyCards(3, CardColor.GREEN)));
-        assertFalse(devCards.get(0).equals(market.buyCards(3, CardColor.GREEN)));
+        assertEquals(devCards.get(0), market.buyCards(3, CardColor.GREEN));
+        assertNotEquals(devCards.get(0), market.buyCards(3, CardColor.GREEN));
         devCards = market.getAvailableCards();
-        assertTrue(devCards.get(0).equals(market.buyCards(3, CardColor.GREEN)));
-        assertFalse(devCards.get(0).equals(market.buyCards(3, CardColor.GREEN)));
+        assertEquals(devCards.get(0), market.buyCards(3, CardColor.GREEN));
+        assertNotEquals(devCards.get(0), market.buyCards(3, CardColor.GREEN));
         assertThrows(DeckEmptyException.class, () -> market.buyCards(3, CardColor.GREEN));
         assertThrows(DeckEmptyException.class, () -> market.getCard(3, CardColor.GREEN));
     }

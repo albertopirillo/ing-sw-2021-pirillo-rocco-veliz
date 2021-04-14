@@ -1,7 +1,5 @@
 package it.polimi.ingsw.model;
 
-import java.util.*;
-
 public class MoveAndShuffle extends SoloActionTokens {
 
     public MoveAndShuffle() {

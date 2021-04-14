@@ -37,7 +37,6 @@ public class Resource {
     //Use this method only to add a new key (ResourceType)
     public void addResource(ResourceType key, int value) throws InvalidKeyException, NegativeResAmountException {
         if (value < 0) throw new NegativeResAmountException();
-        if (!ResourceType.contains(key)) throw new InvalidKeyException();
         if (map.containsKey(key)) throw new KeyAlreadyExistsException();
         map.put(key, value);
     }

@@ -8,46 +8,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class PlayerTest {
 
     @Test
-    public void strategiesTest(){
-        //stub game = null
-        Player player = new Player(false, "abc", null, 1, 1);
-        //testing set dev strategy
-        Resource resource1 = new Resource(1,2,3,4);
-        LeaderAbility ability = new Discount(ResourceType.COIN, 2);
-        ResLeaderCard res = new ResLeaderCard(2, ability ,resource1);
-        assertNull(player.getDevStrategy());
-        //test correct strategy setting
-        res.getSpecialAbility().activate(player);
-        assertNotNull(player.getDevStrategy());
-        //correct ability
-        assertEquals(player.getDevStrategy().getDiscounts()[0].getResource(), ResourceType.COIN);
-        assertEquals(player.getDevStrategy().getDiscounts()[0].getAmount(), 2);
-
-        //testing set production strategy
-        Resource resource2 = new Resource(4,3,2,1);
-        LeaderAbility ability2 = new ExtraProduction(new ProductionPower(resource1, resource2));
-        ResLeaderCard res2 = new ResLeaderCard(1, ability2 ,resource1);
-        assertNull(player.getProdStrategy());
-        res2.getSpecialAbility().activate(player);
-        //testing strategy setting
-        assertNotNull(player.getProdStrategy());
-        assertEquals(player.getProdStrategy().getProduction()[0].getProduction().getInput().getMap(), resource1.getMap());
-        assertEquals(player.getProdStrategy().getProduction()[0].getProduction().getOutput().getMap(), resource2.getMap());
-
-        //testing set production strategy
-        LeaderAbility ability3 = new ChangeWhiteMarbles(ResourceType.SERVANT);
-        ResLeaderCard res3 = new ResLeaderCard(1, ability3 ,resource1);
-        assertNull(player.getResStrategy());
-        res3.getSpecialAbility().activate(player);
-        //testing strategy setting
-        assertNotNull(player.getResStrategy());
-        assertEquals(player.getResStrategy().getResType()[0].getResourceType(), ResourceType.SERVANT);
-    }
-
-    @Test
     public void allResTest() throws AlreadyInAnotherLayerException, CannotContainFaithException, NotEnoughSpaceException, NegativeResAmountException, LayerNotEmptyException, InvalidLayerNumberException, InvalidKeyException, InvalidResourceException {
         //stub game = null
-        Player player = new Player(false, "abc", null, 0, 0);
+        Player player = new Player(false, "abc");
         PersonalBoard personalBoard = player.getPersonalBoard();
         Depot depot = personalBoard.getDepot();
         Strongbox strongbox = personalBoard.getStrongbox();

@@ -24,7 +24,7 @@ public class PersonalBoard {
     public Depot getDepot() {
         return depot;
     }
-    public void setDepot(Depot depot) {
+    public void upgradeDepot(Depot depot) {
         this.depot = depot;
     }
     public Strongbox getStrongbox() {
@@ -51,9 +51,6 @@ public class PersonalBoard {
         return devSlots[slotNumber];
     }
 
-    public void basicProduction(ResourceType input, ResourceType output) {
-        // TODO implement here
-    }
     public void endgame() {
         // TODO implement here
     }

@@ -2,8 +2,6 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.NotEnoughResException;
 
-import java.util.*;
-
 public class ResLeaderCard extends LeaderCard {
 
     private Resource cost;

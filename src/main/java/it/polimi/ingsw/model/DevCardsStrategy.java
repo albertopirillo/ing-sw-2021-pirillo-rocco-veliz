@@ -1,51 +1,58 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.exceptions.DeckEmptyException;
-import it.polimi.ingsw.exceptions.InvalidKeyException;
-import it.polimi.ingsw.exceptions.NegativeResAmountException;
-import it.polimi.ingsw.exceptions.NotEnoughResException;
+import it.polimi.ingsw.exceptions.*;
 
-public class DevCardsStrategy extends BaseDevCardsStrategy {
+import java.util.HashMap;
+import java.util.Map;
+
+public class DevCardsStrategy {
 
     private final Discount[] discounts;
+    private int size;
+    public static final int MAX = 2;
 
-    public DevCardsStrategy(Discount discount) {
-        this.discounts = new Discount[2];
-        this.discounts[0] = discount;
+    public DevCardsStrategy() {
+        this.discounts = new Discount[MAX];
+        this.size = 0;
     }
 
-    public Discount[] getDiscounts() {
-        return discounts;
+    public int getSize() {
+        return this.size;
     }
 
-    public void addAbility(DevCardsStrategy ability){
-        this.discounts[1] = ability.discounts[0];
+    public void addAbility(Discount ability) throws TooManyLeaderAbilitiesException {
+        if (size > MAX - 1) throw new TooManyLeaderAbilitiesException();
+        this.discounts[size] = ability;
+        size++;
     }
 
-    public void buyDevCard(DevelopmentCard devCard) {
-        // TODO implement here
-    }
+    public void buyDevCard(Player player, int level, CardColor color, AbilityChoice choice, Resource fromDepot, Resource fromStrongbox) throws DeckEmptyException, NegativeResAmountException, InvalidKeyException, NotEnoughResException, CannotContainFaithException, CostNotMatchingException, NotEnoughSpaceException, NoLeaderAbilitiesException, InvalidAbilityChoiceException {
+        if (this.size == 0) throw new NoLeaderAbilitiesException();
+        if (this.size == 1 && choice.ordinal() > 1) throw new InvalidAbilityChoiceException();
 
-    @Override
-    public void buyDevCard(Player player, int level, boolean standard, CardColor color, Resource fromDepot, Resource fromStrongbox) throws DeckEmptyException, NegativeResAmountException, InvalidKeyException, NotEnoughResException {
-        if (standard) super.buyDevCard(player, level, true, color, fromDepot, fromStrongbox);
-        else {
-            Market market = player.getGame().getMarket();
-            Resource playerRes = player.getAllResources();
-            DevelopmentCard card = market.getCard(level, color);
-            Resource cost = card.getCost();
-
-            for (Discount element : discounts) {
-                //TODO: if the player wants
-                ResourceType resType = element.getResource();
-                cost.modifyValue(resType, - Math.max(cost.getValue(resType) - element.getAmount(), 0));
-            }
-            if (playerRes.compare(cost)) {
-                market.buyCards(level, color);
-                player.getPersonalBoard().addDevCard(card);
-                //TODO: removes those resources from player
-            }
-            else throw new NotEnoughResException();
+        Resource cost = player.getGame().getMarket().getCard(level, color).getCost();
+        Map<ResourceType, Integer> discount = new HashMap<>();
+        //Modify card's cost according to discounts
+        switch (choice) {
+            case FIRST:
+                discount.put(this.discounts[0].getResource(), this.discounts[0].getAmount());
+                break;
+            case SECOND:
+                discount.put(this.discounts[1].getResource(), this.discounts[1].getAmount());
+                break;
+            case BOTH:
+                discount.put(this.discounts[0].getResource(), this.discounts[0].getAmount());
+                discount.put(this.discounts[1].getResource(), this.discounts[1].getAmount());
+                break;
         }
+        for (ResourceType key: cost.keySet()) {
+            if (discount.containsKey(key)){
+                int newValue = Math.max(0, cost.getValue(key) - discount.get(key));
+                cost.modifyValue(key, newValue);
+            }
+        }
+
+        //Now the basic strategy can be used
+        BasicStrategies.buyDevCard(player, level, color, cost, fromDepot, fromStrongbox);
     }
 }

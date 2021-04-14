@@ -1,6 +1,8 @@
 package it.polimi.ingsw.model;
 
 
+import it.polimi.ingsw.exceptions.TooManyLeaderAbilitiesException;
+
 public class ExtraProduction extends LeaderAbility {
 
     private final ProductionPower production;
@@ -9,9 +11,12 @@ public class ExtraProduction extends LeaderAbility {
         this.production = production;
     }
 
-    public void activate(Player player) { player.changeProductionStrategy(new ProductionStrategy(this)); }
-
     public ProductionPower getProduction() {
         return production;
     }
+
+    public void activate(Player player) throws TooManyLeaderAbilitiesException {
+        player.addProductionStrategy(this);
+    }
+
 }

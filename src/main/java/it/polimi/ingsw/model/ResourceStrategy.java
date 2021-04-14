@@ -1,37 +1,60 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.exceptions.InvalidChoiceException;
-import it.polimi.ingsw.exceptions.InvalidKeyException;
-import it.polimi.ingsw.exceptions.NegativeResAmountException;
+import it.polimi.ingsw.exceptions.*;
 
-public class ResourceStrategy extends BaseResourceStrategy {
+import javax.management.openmbean.KeyAlreadyExistsException;
 
-    private final ChangeWhiteMarbles[] resType;
+public class ResourceStrategy {
 
-    public ResourceStrategy(ChangeWhiteMarbles resType) {
-        this.resType = new ChangeWhiteMarbles[2];
-        this.resType[0] = resType;
+    private final ChangeWhiteMarbles[] resTypes;
+    private int size;
+    public static final int MAX = 2;
+
+    public ResourceStrategy() {
+      this.resTypes = new ChangeWhiteMarbles[MAX];
+      this.size = 0;
     }
 
-    public ChangeWhiteMarbles[] getResType() {
-        return resType;
+    public int getSize() {
+        return this.size;
     }
 
-    public void addAbility(ResourceStrategy ability){
-        this.resType[1] = ability.resType[0];
+    public void addAbility(ChangeWhiteMarbles ability) throws TooManyLeaderAbilitiesException {
+        if (size > MAX - 1) throw new TooManyLeaderAbilitiesException();
+        this.resTypes[size] = ability;
+        size++;
     }
 
-    @Override
-    public Resource takeResources(int position, Market market, boolean standard, int choice) throws InvalidKeyException, NegativeResAmountException, InvalidChoiceException {
-        if (choice <= 0 || choice > 2) throw new InvalidChoiceException();
-        Resource resource;
-        if (standard) resource = super.takeResources(position, market, true, choice);
-        else {
-            Marbles marbles = market.getMarketTray().insertMarble(position);
-            resource = marbles.getResources();
-            int whiteMarbles = marbles.getValue(MarblesColor.WHITE);
-            resource.addResource(resType[choice].getResourceType(), whiteMarbles);
+    //The player can decide whether to convert the color of every single marble
+    public Resource takeResources(Player player, int position, AbilityChoice choice, int amount1, int amount2) throws InvalidKeyException, NegativeResAmountException, InvalidChoiceException, NoLeaderAbilitiesException, InvalidAbilityChoiceException {
+        if (this.size == 0) throw new NoLeaderAbilitiesException();
+        if ((this.size == 1 && (choice == AbilityChoice.SECOND || choice == AbilityChoice.BOTH)))
+            throw new InvalidAbilityChoiceException();
+
+        //Check if amount1+amount2 is equal to the number of white marbles
+        Market market = player.getGame().getMarket();
+        Marbles marbles = market.getMarketTray().insertMarble(position);
+        if (amount1 + amount2 != marbles.getValue(MarblesColor.WHITE)) throw new InvalidAbilityChoiceException();
+
+        //Selects the requested abilities and modifies the output resource
+        Resource outputRes = marbles.getResources();
+        if (choice == AbilityChoice.FIRST || choice == AbilityChoice.BOTH) {
+            ResourceType modRes1 = resTypes[0].getResourceType();
+             try {
+                 outputRes.addResource(modRes1, amount1);
+             } catch (KeyAlreadyExistsException e) {
+                 outputRes.modifyValue(modRes1, amount1);
+             }
         }
-        return resource;
+        if (choice == AbilityChoice.SECOND || choice == AbilityChoice.BOTH) {
+            ResourceType modRes2 = resTypes[1].getResourceType();
+            outputRes.modifyValue(modRes2, amount2);
+            try {
+                outputRes.addResource(modRes2, amount2);
+            } catch (KeyAlreadyExistsException e) {
+                outputRes.modifyValue(modRes2, amount2);
+            }
+        }
+        return outputRes;
     }
 }

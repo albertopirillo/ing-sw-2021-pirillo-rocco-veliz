@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.exceptions.DeckEmptyException;
 import it.polimi.ingsw.exceptions.NotEnoughResException;
 import org.junit.jupiter.api.Test;
 

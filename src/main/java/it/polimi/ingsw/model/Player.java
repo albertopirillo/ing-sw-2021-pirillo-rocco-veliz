@@ -1,10 +1,9 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.exceptions.InvalidChoiceException;
-import it.polimi.ingsw.exceptions.InvalidKeyException;
-import it.polimi.ingsw.exceptions.NegativeResAmountException;
+import it.polimi.ingsw.exceptions.*;
 
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Player {
 
@@ -18,28 +17,32 @@ public class Player {
 
     private final PersonalBoard personalBoard;
 
-    private final Game game;
+    private Game game;
 
     private LeaderCard[] leaderCards;
 
-    private BaseResourceStrategy resStrategy;
+    private final List<LeaderAbility> activeLeaderAbilities;
 
-    private BaseDevCardsStrategy devStrategy;
+    private final ResourceStrategy resStrategy;
 
-    private BaseProductionStrategy prodStrategy;
+    private final DevCardsStrategy devStrategy;
+
+    private final ProductionStrategy prodStrategy;
 
     private static int playerFaith;
 
-
-    public Player(boolean hasInkwell, String nickname, Game game, int playerFaith, int victoryPoints) {
+    public Player(boolean hasInkwell, String nickname) {
         this.hasInkwell = hasInkwell;
         this.nickname = nickname;
         this.isHisTurn = false;
-        this.game = game;
-        Player.playerFaith = playerFaith;
-        Player.victoryPoints = victoryPoints;
-        personalBoard = new PersonalBoard();
-        leaderCards = new LeaderCard[2];
+        Player.playerFaith = 0;
+        Player.victoryPoints = 0;
+        this.personalBoard = new PersonalBoard();
+        this.leaderCards = new LeaderCard[2];
+        this.activeLeaderAbilities = new ArrayList<>();
+        this.resStrategy = new ResourceStrategy();
+        this.devStrategy = new DevCardsStrategy();
+        this.prodStrategy = new ProductionStrategy();
     }
 
     public boolean getInkwell() {
@@ -66,47 +69,29 @@ public class Player {
         return this.game;
     }
 
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
     public PersonalBoard getPersonalBoard() {
         return personalBoard;
     }
 
-    public void changeResourceStrategy (ResourceStrategy newStrategy) {
-        if(this.resStrategy!=null){
-            this.resStrategy.addAbility(newStrategy);
-        }
-        else {
-            this.resStrategy = newStrategy;
-        }
+    //TODO: only for testing
+    public void setLeaderCards(int index, LeaderCard card) {
+        this.leaderCards[index] = card;
     }
 
-    public void changeDevCardsStrategy (DevCardsStrategy newStrategy) {
-        if(this.devStrategy!=null){
-            this.devStrategy.addAbility(newStrategy);
-        }
-        else {
-            this.devStrategy = newStrategy;
-        }
-    }
-    public void changeProductionStrategy (ProductionStrategy newStrategy) {
-        if(this.prodStrategy!=null){
-            this.prodStrategy.addAbility(newStrategy);
-        }
-        else {
-            this.prodStrategy = newStrategy;
-        }
+    public void addResourceStrategy(ChangeWhiteMarbles newStrategy) throws TooManyLeaderAbilitiesException {
+        this.resStrategy.addAbility(newStrategy);
     }
 
-    //testing
-    public BaseDevCardsStrategy getDevStrategy(){
-        return this.devStrategy;
+    public void addDevCardsStrategy(Discount newStrategy) throws TooManyLeaderAbilitiesException {
+        this.devStrategy.addAbility(newStrategy);
     }
-    //testing
-    public BaseResourceStrategy getResStrategy() {
-        return resStrategy;
-    }
-    //testing
-    public BaseProductionStrategy getProdStrategy() {
-        return prodStrategy;
+
+    public void addProductionStrategy(ExtraProduction newStrategy) throws TooManyLeaderAbilitiesException {
+        this.prodStrategy.addAbility(newStrategy);
     }
 
     public Resource getAllResources() throws NegativeResAmountException, InvalidKeyException {
@@ -115,38 +100,50 @@ public class Player {
         return depotRes.sum(strongboxRes);
     }
 
-    public void takeResources(int position, boolean standard, int choice) throws NegativeResAmountException, InvalidKeyException, InvalidChoiceException {
-        Resource resources = resStrategy.takeResources(position, game.getMarket(), standard, choice);
-        Depot depot = personalBoard.getDepot();
-        //TODO: Player should now decide where to put the resources by calling depot.modifyLayer()
+    public Resource takeResources(int position, AbilityChoice choice, int amount1, int amount2) throws NegativeResAmountException, InvalidKeyException, InvalidChoiceException, InvalidAbilityChoiceException, NoLeaderAbilitiesException {
+        if (choice == AbilityChoice.STANDARD) return BasicStrategies.takeResources(this, position);
+        else return this.resStrategy.takeResources(this, position, choice, amount1, amount2);
     }
 
-    public void buyDevCard(DevelopmentCard devCard) {
-        //devStrategy.buyDevCard()
-        // TODO implement here
+    public void buyDevCard(int level, CardColor color, AbilityChoice choice, Resource fromDepot, Resource fromStrongbox) throws CannotContainFaithException, NotEnoughSpaceException, NegativeResAmountException, DeckEmptyException, CostNotMatchingException, NotEnoughResException, InvalidKeyException, NoLeaderAbilitiesException, InvalidAbilityChoiceException {
+        DevelopmentCard card = this.getGame().getMarket().getCard(level, color);
+        if (choice == AbilityChoice.STANDARD) BasicStrategies.buyDevCard(this, level, color, card.getCost(), fromDepot, fromStrongbox);
+        else this.devStrategy.buyDevCard(this, level, color, choice, fromDepot, fromStrongbox);
     }
 
-    public ResourceType extraProduction() {
-        // TODO implement here
-        return null;
+    public void basicProduction(ResourceType input1, ResourceType input2, ResourceType output, Resource fromDepot, Resource fromStrongbox) throws CostNotMatchingException, NotEnoughSpaceException, CannotContainFaithException, NotEnoughResException, NegativeResAmountException, InvalidKeyException {
+        BasicStrategies.basicProduction(this, input1, input2, output, fromDepot, fromStrongbox);
+    }
+
+    public void extraProduction(AbilityChoice choice, Resource fromDepot, Resource fromStrongbox) throws NoLeaderAbilitiesException, InvalidAbilityChoiceException, CostNotMatchingException, NotEnoughSpaceException, CannotContainFaithException, NotEnoughResException, NegativeResAmountException, InvalidKeyException {
+        this.prodStrategy.extraProduction(this, choice, fromDepot, fromStrongbox);
     }
 
     public void activateProduction(DevelopmentCard[] cards) {
         // TODO implement here
     }
 
-    public void useLeader(LeaderCard card, LeaderAction choice) {
+    public void useLeader(int index, LeaderAction choice) throws TooManyLeaderAbilitiesException, LeaderAbilityAlreadyActive, InvalidLayerNumberException {
+        LeaderCard leader =  this.leaderCards[index];
+        if (leader.isActive()) throw new LeaderAbilityAlreadyActive();
+
         /*TODO: discard
         //if (choice == LeaderAction.DISCARD) personalBoard.getFaithTrack().setPosition( + 1):
-        // Deletes used LeaderCard
-        //TODO: activate ability
+        // Deletes used LeaderCard, what about victory points??
+        */
         /*else*/
-        LeaderAbility ability = card.getSpecialAbility();
-        //ability.activate();
+
+        LeaderAbility ability = leader.getSpecialAbility();
+        ability.activate(this);
+        leader.activate();
+        this.activeLeaderAbilities.add(ability);
+    }
+
+    public List<LeaderAbility> getActiveLeaderAbilities() {
+        return this.activeLeaderAbilities;
     }
 
     public void chooseLeaderCard(int first, int second) {
-        // TODO implement here
         this.leaderCards = new LeaderCard[]{
             this.leaderCards[first], this.leaderCards[second]
         };

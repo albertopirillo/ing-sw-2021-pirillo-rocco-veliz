@@ -4,13 +4,15 @@ import it.polimi.ingsw.exceptions.*;
 
 import java.util.*;
 
-//Cannot contain Faith
+//Automatically converts faith Resource into playerFaithPoints
 public class Strongbox {
 
     private final Resource resource;
+    private final Player player;
 
-    public Strongbox() {
+    public Strongbox(Player player) {
         this.resource = new Resource(0,0,0,0);
+        this.player = player;
     }
 
     //Returns a copy of all the resources stored
@@ -18,12 +20,12 @@ public class Strongbox {
         return new Resource(new HashMap<>(resource.getMap()));
     }
 
-    public void addResources(Resource resource) throws CannotContainFaithException, NegativeResAmountException, InvalidKeyException {
+    public void addResources(Resource resource) throws NegativeResAmountException, InvalidKeyException {
         Map<ResourceType, Integer> copy = resource.getMap();
-        if ((copy.get(ResourceType.FAITH) != null)) throw new CannotContainFaithException();
 
         for (ResourceType key: copy.keySet()) {
-            this.resource.modifyValue(key, copy.get(key));
+            if (key == ResourceType.FAITH) this.player.addPlayerFaith(copy.get(key));
+            else this.resource.modifyValue(key, copy.get(key));
         }
     }
 

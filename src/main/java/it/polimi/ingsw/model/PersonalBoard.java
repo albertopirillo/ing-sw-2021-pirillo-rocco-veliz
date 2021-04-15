@@ -10,9 +10,9 @@ public class PersonalBoard {
     private Strongbox strongbox;
     private FaithTrack faithTrack;
 
-    public PersonalBoard() {
+    public PersonalBoard(Player player) {
         depot = new ConcreteDepot();
-        strongbox = new Strongbox();
+        strongbox = new Strongbox(player);
     }
 
     public FaithTrack getFaithTrack() {

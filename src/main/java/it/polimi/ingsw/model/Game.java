@@ -22,9 +22,9 @@ public class Game {
 
     private final int gameID;
 
-    private ArrayList<Player> players;
+    private List<Player> players;
 
-    private ArrayList<LeaderCard> finalDeckLeader;
+    private List<LeaderCard> finalDeckLeader;
 
     private Player activePlayer; //to set when updating hisTurn in player
 
@@ -34,7 +34,7 @@ public class Game {
 
     private Market market;
 
-    public Game(int playerAmount, ArrayList<Player> players) throws FullCardDeckException {
+    public Game(int playerAmount, List<Player> players) throws FullCardDeckException {
         this.lastTurn = false;
         this.playerAmount = playerAmount;
         this.players = players;
@@ -52,7 +52,8 @@ public class Game {
         builder.registerTypeAdapter(LeaderAbility.class, new LeaderAbilityDeserializer());
         builder.registerTypeAdapter(LeaderCard.class, new LeaderCardJsonDeserializer());
         Gson gson = builder.create();
-        Type listType = new TypeToken<List<LeaderCard>>(){}.getType();
+        Type listType = new TypeToken<List<LeaderCard>>() {
+        }.getType();
         JsonReader reader = null;
         try {
             reader = new JsonReader(new FileReader("src/main/resources/leaderCardsConfig.json"));
@@ -76,10 +77,10 @@ public class Game {
         }
          */
 
-        finalDeckLeader = new ArrayList<>(List.copyOf(leaderCards));
-        for (Player pl: players){
-            ArrayList<LeaderCard> chosenCards = new ArrayList<>();
-            for (int i=0; i < 4; i++){
+        finalDeckLeader = new ArrayList<>(leaderCards);
+        for (Player pl : players) {
+            List<LeaderCard> chosenCards = new ArrayList<>();
+            for (int i = 0; i < 4; i++) {
                 Random rnd = new Random();
                 int chosenInt = rnd.nextInt(leaderCards.size());
                 LeaderCard chosenCard = leaderCards.get(chosenInt);
@@ -87,7 +88,7 @@ public class Game {
                 chosenCards.add(chosenCard);
             }
             //now player has to choose which cards to keep
-            ArrayList<LeaderCard> returnedCards = (ArrayList<LeaderCard>) giveLeaderCards(pl, chosenCards);
+            List<LeaderCard> returnedCards = giveLeaderCards(pl, chosenCards);
             //insert back not chosen cards (returnedCards)
             leaderCards.addAll(returnedCards);
         }
@@ -95,7 +96,7 @@ public class Game {
 
         // leaderCard arraylist now contains not chosen cards
         // all leader cards are still all in finalDeckLeader with initial order
-        // (since we don't have an id in leadercard json)
+        // (since we don't have an id in leaderCard json)
 
 
         giveInkwell();
@@ -122,10 +123,10 @@ public class Game {
         // TODO implement here
     }
 
-    private List<LeaderCard> giveLeaderCards(Player player, ArrayList<LeaderCard> leaderCards) {
+    private List<LeaderCard> giveLeaderCards(Player player, List<LeaderCard> leaderCards) {
         // leaderCards is made of the two chosen card out of 4 given at startGame
         //TODO the choice of leaderCards
-        ArrayList<LeaderCard> returnedCards = new ArrayList<>(); //put here cards not chosen
+        List<LeaderCard> returnedCards = new ArrayList<>(); //put here cards not chosen
         player.setLeaderCards(leaderCards);
         return returnedCards; //return leaderCards to insert back in deck for other players to choose
     }
@@ -134,7 +135,7 @@ public class Game {
         int numPlayer = new Random().nextInt(playerAmount);
         this.players.get(numPlayer).setInkwell(true);//player is choose random
         //set the first player(that has the inkwell) as the element 0 of player[]
-        if(numPlayer!=0){
+        if (numPlayer != 0) {
             Player[] p = new Player[playerAmount];
             for (int i = 0; i < playerAmount; i++) {
                 p[i] = players.get(numPlayer + i % playerAmount);
@@ -163,12 +164,12 @@ public class Game {
         // TODO implement here
     }
 
-    private void updateFaithTrack(){
+    private void updateFaithTrack() {
 
-        if (activePlayer.getPlayerFaith()>24){
+        if (activePlayer.getPlayerFaith() > 24) {
             //todo implement endgame
         }
 
         this.activePlayer.getPersonalBoard().getFaithTrack().checkPopeTile(activePlayer);
     }
-    }
+}

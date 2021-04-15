@@ -19,8 +19,8 @@ class ExtraProductionTest {
         ResLeaderCard res1 = new ResLeaderCard(1, ability ,resource1);
         ResLeaderCard res2 = new ResLeaderCard(3, ability ,resource1);
 
-        player.setLeaderCards(0, res1);
-        player.setLeaderCards(1, res2);
+        player.addLeaderCards(res1);
+        player.addLeaderCards(res2);
         assertTrue(player.getActiveLeaderAbilities().isEmpty());
 
         player.useLeader(0, LeaderAction.USE_ABILITY);

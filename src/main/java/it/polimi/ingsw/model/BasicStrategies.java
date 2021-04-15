@@ -8,8 +8,15 @@ public class BasicStrategies {
     public static Resource takeResources(Player player, int position) throws InvalidKeyException, NegativeResAmountException {
        Market market = player.getGame().getMarket();
        Marbles marbles = market.getMarketTray().insertMarble(position);
-       //TODO: faith needs to be handled IN MARBLES CLASS
-       return marbles.getResources();
+       Resource temp = marbles.getResources();
+       Resource outputRes = new Resource();
+
+       //Handles faith and returns a map with no faith in it
+       for (ResourceType key: temp.keySet()) {
+           if (key == ResourceType.FAITH) player.addPlayerFaith(temp.getValue(key));
+           else outputRes.addResource(key, temp.getValue(key));
+       }
+       return outputRes;
     }
 
     //Input resources can be paid from either Depot or Strongbox

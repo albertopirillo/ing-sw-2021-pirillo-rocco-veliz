@@ -11,7 +11,7 @@ class StrongboxTest {
 
     @Test
     public void queryAllRes() {
-        Strongbox strongbox = new Strongbox();
+        Strongbox strongbox = new Strongbox(null);
         Map<ResourceType, Integer> res = strongbox.queryAllRes().getMap();
         assertEquals(4, res.size());
         for(ResourceType key: res.keySet()) {
@@ -20,22 +20,31 @@ class StrongboxTest {
     }
 
     @Test
-    public void addResources() throws CannotContainFaithException, NegativeResAmountException, InvalidKeyException {
-        Strongbox strongbox = new Strongbox();
+    public void addResources() throws NegativeResAmountException, InvalidKeyException {
+        Strongbox strongbox = new Strongbox(null);
         Resource res = new Resource(2, 3, 4, 5);
         strongbox.addResources(res);
         Map<ResourceType, Integer> content = strongbox.queryAllRes().getMap();
         for (ResourceType key: content.keySet()) {
             assertEquals(res.getValue(key), content.get(key));
         }
-        Resource res2 = new Resource();
-        res2.addResource(ResourceType.FAITH, 3);
-        assertThrows(CannotContainFaithException.class, () -> strongbox.addResources(res2));
+    }
+
+    @Test
+    public void faithTest() throws InvalidKeyException, NegativeResAmountException {
+        Player player = new Player(false, "abc");
+        Strongbox strongbox = new Strongbox(player);
+        Resource res = new Resource(1,1,1,3);
+        res.addResource(ResourceType.FAITH, 3);
+        strongbox.addResources(res);
+
+        assertEquals(new Resource(1,1,1,3), strongbox.queryAllRes());
+        assertEquals(3, player.getPlayerFaith());
     }
 
     @Test
     public void retrieveResources() throws CannotContainFaithException, NegativeResAmountException, InvalidKeyException, NotEnoughResException {
-        Strongbox strongbox = new Strongbox();
+        Strongbox strongbox = new Strongbox(null);
         strongbox.addResources(new Resource(2, 3, 4, 0));
         Resource resOK = new Resource(2, 1, 3, 0);
         Resource resKO = new Resource(2, 1, 5, 0);
@@ -51,9 +60,9 @@ class StrongboxTest {
 
     @Test
     public void moveToDepot() throws CannotContainFaithException, NegativeResAmountException, InvalidKeyException, NotEnoughSpaceException, InvalidLayerNumberException, LayerNotEmptyException, NotEnoughResException, AlreadyInAnotherLayerException, InvalidResourceException {
-        Strongbox strongbox = new Strongbox();
+        Strongbox strongbox = new Strongbox(null);
         strongbox.addResources(new Resource(2, 3, 4, 0));
-        Strongbox strongbox2 = new Strongbox();
+        Strongbox strongbox2 = new Strongbox(null);
         strongbox2.addResources(new Resource(2, 3, 2, 0));
         Depot depot = new ConcreteDepot();
         depot.modifyLayer(3, ResourceType.SERVANT, 1);

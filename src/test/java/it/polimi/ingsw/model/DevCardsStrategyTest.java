@@ -3,6 +3,9 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.exceptions.*;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class DevCardsStrategyTest {
@@ -12,8 +15,8 @@ class DevCardsStrategyTest {
     @Test
     public void buyTest() throws FullCardDeckException, DeckEmptyException, CannotContainFaithException, NotEnoughSpaceException, NegativeResAmountException, CostNotMatchingException, NotEnoughResException, InvalidKeyException, InvalidLayerNumberException, AlreadyInAnotherLayerException, LayerNotEmptyException, InvalidResourceException, NoLeaderAbilitiesException, InvalidAbilityChoiceException {
         Player player = new Player(false, "abc");
-        Player[] players = new Player[4];
-        players[0] = player;
+        List<Player> players = new ArrayList<>();
+        players.add(player);
         Game game = new Game(1, players);
         player.setGame(game);
 

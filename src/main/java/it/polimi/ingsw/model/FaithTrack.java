@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class FaithTrack {
 
@@ -8,11 +9,10 @@ public class FaithTrack {
         this.popeCards = new ArrayList<>();
     }
 
-
     // SINGLE PLAYER
     // private int blackCrossPosition;
 
-    private ArrayList<PopeFavorCard> popeCards;
+    private final List<PopeFavorCard> popeCards;
 
     private void initPopeCards(){
         for(int i=0; i<3; i++){
@@ -38,19 +38,19 @@ public class FaithTrack {
                 popeFavor = getPopeFavorBySection(VaticanReportSection.GROUP_ONE);
                 if(!popeFavor.isReported()) {
                     popeFavor.setReportedAndFlip();
-                    player.setVictoryPoints(2);
+                    player.addVictoryPoints(2);
                 } break;
             case 16:
                 popeFavor = getPopeFavorBySection(VaticanReportSection.GROUP_TWO);
                 if (!popeFavor.isReported()) {
                     popeFavor.setReportedAndFlip();
-                    player.setVictoryPoints(3);
+                    player.addVictoryPoints(3);
                 } break;
             case 24:
                 popeFavor = getPopeFavorBySection(VaticanReportSection.GROUP_THREE);
                 if(!popeFavor.isReported()) {
                     popeFavor.setReportedAndFlip();
-                    player.setVictoryPoints(4);
+                    player.addVictoryPoints(4);
                 } break;
         }
     }

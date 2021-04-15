@@ -38,6 +38,7 @@ public class ResourceStrategy {
 
         //Selects the requested abilities and modifies the output resource
         Resource outputRes = marbles.getResources();
+        Resource finalRes = new Resource();
         if (choice == AbilityChoice.FIRST || choice == AbilityChoice.BOTH) {
             ResourceType modRes1 = resTypes[0].getResourceType();
              try {
@@ -55,6 +56,11 @@ public class ResourceStrategy {
                 outputRes.modifyValue(modRes2, amount2);
             }
         }
-        return outputRes;
+        //Handles faith and returns a map with no faith in it
+        for (ResourceType key: outputRes.keySet()) {
+            if (key == ResourceType.FAITH) player.addPlayerFaith(outputRes.getValue(key));
+            else finalRes.addResource(key, outputRes.getValue(key));
+        }
+        return finalRes;
     }
 }

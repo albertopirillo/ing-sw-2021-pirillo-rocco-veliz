@@ -19,7 +19,7 @@ public class Player {
 
     private Game game;
 
-    private ArrayList<LeaderCard> leaderCards;
+    private List<LeaderCard> leaderCards;
 
     private final List<LeaderAbility> activeLeaderAbilities;
 
@@ -37,7 +37,7 @@ public class Player {
         this.isHisTurn = false;
         this.playerFaith = 0;
         this.victoryPoints = 0;
-        this.personalBoard = new PersonalBoard();
+        this.personalBoard = new PersonalBoard(this);
         this.leaderCards = new ArrayList<>();
         this.activeLeaderAbilities = new ArrayList<>();
         this.resStrategy = new ResourceStrategy();
@@ -51,12 +51,12 @@ public class Player {
 
     public int getPlayerFaith() { return this.playerFaith; }
 
-    public void setPlayerFaith(int faith) { this.playerFaith = faith; }
+    public void addPlayerFaith(int amount) { this.playerFaith += amount; }
 
     public int getVictoryPoints() {return victoryPoints;}
 
-    public void setVictoryPoints(int faithTrackPoints){
-        this.victoryPoints = this.victoryPoints + faithTrackPoints;
+    public void addVictoryPoints(int amount){
+        this.victoryPoints = this.victoryPoints + amount;
     }
 
     public void setInkwell(boolean bool) {
@@ -77,6 +77,11 @@ public class Player {
 
     public PersonalBoard getPersonalBoard() {
         return personalBoard;
+    }
+
+    //TODO: only for testing
+    public void addLeaderCards(LeaderCard card) {
+        this.leaderCards.add(card);
     }
 
     //TODO: only for testing
@@ -129,31 +134,25 @@ public class Player {
         LeaderCard leader = this.leaderCards.get(index);
         if (leader.isActive()) throw new LeaderAbilityAlreadyActive();
 
-        /*TODO: discard
-        //if (choice == LeaderAction.DISCARD) personalBoard.getFaithTrack().setPosition( + 1):
-        // Deletes used LeaderCard, what about victory points??
-        */
-        /*else*/
-
-        LeaderAbility ability = leader.getSpecialAbility();
-        ability.activate(this);
-        leader.activate();
-        this.activeLeaderAbilities.add(ability);
+        if (choice == LeaderAction.DISCARD) {
+            this.addPlayerFaith(1);
+            //TODO: do its victoryPoints still count?
+            this.leaderCards.remove(leader);
+        }
+        else {
+            LeaderAbility ability = leader.getSpecialAbility();
+            ability.activate(this);
+            leader.activate();
+            this.activeLeaderAbilities.add(ability);
+        }
     }
 
     public List<LeaderAbility> getActiveLeaderAbilities() {
         return this.activeLeaderAbilities;
     }
 
-    /* PROBABLY TO REMOVE BECAUSE WE DO THIS IN GAME CLASS
-    public void chooseLeaderCard(int first, int second) {
-        this.leaderCards = new LeaderCard[]{
-            this.leaderCards.get(first), this.leaderCards.get(second);
-        }
-    }
-     */
-    public void setLeaderCards(ArrayList<LeaderCard> leaderCards) {
-        this.leaderCards = new ArrayList<>(List.copyOf(leaderCards));
+    public void setLeaderCards(List<LeaderCard> leaderCards) {
+        this.leaderCards = new ArrayList<>(leaderCards);
     }
 
     public List<LeaderCard> getLeaderCards() {

@@ -11,6 +11,8 @@ import it.polimi.ingsw.utils.LeaderCardJsonDeserializer;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -20,7 +22,11 @@ public class Game {
 
     private final int gameID;
 
-    private Player[] players;
+    private ArrayList<Player> players;
+
+    private ArrayList<LeaderCard> finalDeckLeader;
+
+    private Player activePlayer; //to set when updating hisTurn in player
 
     private final int playerAmount;
 
@@ -28,7 +34,7 @@ public class Game {
 
     private Market market;
 
-    public Game(int playerAmount, Player[] players) throws FullCardDeckException {
+    public Game(int playerAmount, ArrayList<Player> players) throws FullCardDeckException {
         this.lastTurn = false;
         this.playerAmount = playerAmount;
         this.players = players;
@@ -57,6 +63,8 @@ public class Game {
         List<LeaderCard> leaderCards = gson.fromJson(reader, listType);
         //Collections.shuffle((List<LeaderCard>) this.cards); shuffle leaderCards;
         //give 2 leadersCards to player
+
+        /*
         for (int i = 0; i < playerAmount; i++) {
             //each player choose 2 cards from 4
             giveLeaderCards(players[i], new LeaderCard[]{
@@ -66,6 +74,30 @@ public class Game {
                     leaderCards.get(i+playerAmount*3)
             });
         }
+         */
+
+        finalDeckLeader = new ArrayList<>(List.copyOf(leaderCards));
+        for (Player pl: players){
+            ArrayList<LeaderCard> chosenCards = new ArrayList<>();
+            for (int i=0; i < 4; i++){
+                Random rnd = new Random();
+                int chosenInt = rnd.nextInt(leaderCards.size());
+                LeaderCard chosenCard = leaderCards.get(chosenInt);
+                leaderCards.remove(chosenInt);
+                chosenCards.add(chosenCard);
+            }
+            //now player has to choose which cards to keep
+            ArrayList<LeaderCard> returnedCards = (ArrayList<LeaderCard>) giveLeaderCards(pl, chosenCards);
+            //insert back not chosen cards (returnedCards)
+            leaderCards.addAll(returnedCards);
+        }
+
+
+        // leaderCard arraylist now contains not chosen cards
+        // all leader cards are still all in finalDeckLeader with initial order
+        // (since we don't have an id in leadercard json)
+
+
         giveInkwell();
         game();
     }
@@ -90,21 +122,24 @@ public class Game {
         // TODO implement here
     }
 
-    private void giveLeaderCards(Player player, LeaderCard[] leaderCards) {
-        // TODO implement here
+    private List<LeaderCard> giveLeaderCards(Player player, ArrayList<LeaderCard> leaderCards) {
+        // leaderCards is made of the two chosen card out of 4 given at startGame
+        //TODO the choice of leaderCards
+        ArrayList<LeaderCard> returnedCards = new ArrayList<>(); //put here cards not chosen
         player.setLeaderCards(leaderCards);
+        return returnedCards; //return leaderCards to insert back in deck for other players to choose
     }
 
     private void giveInkwell() {
         int numPlayer = new Random().nextInt(playerAmount);
-        this.players[numPlayer].setInkwell(true);//player is choose random
+        this.players.get(numPlayer).setInkwell(true);//player is choose random
         //set the first player(that has the inkwell) as the element 0 of player[]
         if(numPlayer!=0){
             Player[] p = new Player[playerAmount];
             for (int i = 0; i < playerAmount; i++) {
-                p[i] = players[numPlayer+ i % playerAmount];
+                p[i] = players.get(numPlayer + i % playerAmount);
             }
-            players = p;
+            players = (ArrayList<Player>) Arrays.asList(p);
         }
     }
 
@@ -128,4 +163,12 @@ public class Game {
         // TODO implement here
     }
 
+    private void updateFaithTrack(){
+
+        if (activePlayer.getPlayerFaith()>24){
+            //todo implement endgame
+        }
+
+        this.activePlayer.getPersonalBoard().getFaithTrack().checkPopeTile(activePlayer);
+    }
     }

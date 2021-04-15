@@ -5,13 +5,12 @@ import java.util.ArrayList;
 public class FaithTrack {
 
     public FaithTrack() {
-        this.markerPosition = 0;
         this.popeCards = new ArrayList<>();
     }
 
-    private int markerPosition;
 
-    private int blackCrossPosition;
+    // SINGLE PLAYER
+    // private int blackCrossPosition;
 
     private ArrayList<PopeFavorCard> popeCards;
 
@@ -21,51 +20,39 @@ public class FaithTrack {
         }
     }
 
-    public void setPosition(int pos) {
-        int playerFaith = Player.getPlayerFaith();
-        if (markerPosition + playerFaith < 24){
-            markerPosition = markerPosition + playerFaith;
-            checkPopeTile(markerPosition);
-        }
-        else endgame();
-    }
-
-    public void checkPopeTile(int markerPosition) {
-        switch (markerPosition){
+    //check if vaticanReport condition applies
+    public void checkPopeTile(Player player) {
+        switch (player.getPlayerFaith()){
             case 8: case 16: case 24:
-                vaticanReport();
-            break;
+                vaticanReport(player);
+                break;
         }
     }
 
-    private void vaticanReport() {
+    private void vaticanReport(Player player) {
         // Triggered by checkPopeTile
         // gives points according to group value and changes hasReportHappened
         PopeFavorCard popeFavor;
-        switch(markerPosition){
+        switch(player.getPlayerFaith()){
             case 8:
                 popeFavor = getPopeFavorBySection(VaticanReportSection.GROUP_ONE);
                 if(!popeFavor.isReported()) {
                     popeFavor.setReportedAndFlip();
-                    Player.setVictoryPoints(2);
+                    player.setVictoryPoints(2);
                 } break;
             case 16:
                 popeFavor = getPopeFavorBySection(VaticanReportSection.GROUP_TWO);
                 if (!popeFavor.isReported()) {
                     popeFavor.setReportedAndFlip();
-                    Player.setVictoryPoints(3);
+                    player.setVictoryPoints(3);
                 } break;
             case 24:
                 popeFavor = getPopeFavorBySection(VaticanReportSection.GROUP_THREE);
                 if(!popeFavor.isReported()) {
                     popeFavor.setReportedAndFlip();
-                    Player.setVictoryPoints(4);
+                    player.setVictoryPoints(4);
                 } break;
         }
-    }
-
-    private void flipPopeCard(PopeFavorCard[] popeCards) {
-        // TODO implement here
     }
 
     private PopeFavorCard getPopeFavorBySection(VaticanReportSection section) {
@@ -74,15 +61,7 @@ public class FaithTrack {
                 return popeFavor;
             }
         }
-        //TODO Add exception
         return null;
-    }
-
-    private void endgame() {
-        // checks if player is on tile n° 24
-        if(markerPosition==24){
-            //TODO IMPLEMENT
-        }
     }
 
 }

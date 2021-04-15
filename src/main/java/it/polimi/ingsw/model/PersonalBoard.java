@@ -15,6 +15,10 @@ public class PersonalBoard {
         strongbox = new Strongbox();
     }
 
+    public FaithTrack getFaithTrack() {
+        return this.faithTrack;
+    }
+
     public DevelopmentSlot[] getDevSlots() {
         return devSlots;
     }

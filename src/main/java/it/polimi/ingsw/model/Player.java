@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Player {
 
-    private static int victoryPoints;
+    private int victoryPoints;
 
     private boolean hasInkwell;
 
@@ -19,7 +19,7 @@ public class Player {
 
     private Game game;
 
-    private LeaderCard[] leaderCards;
+    private ArrayList<LeaderCard> leaderCards;
 
     private final List<LeaderAbility> activeLeaderAbilities;
 
@@ -29,16 +29,16 @@ public class Player {
 
     private final ProductionStrategy prodStrategy;
 
-    private static int playerFaith;
+    private int playerFaith;
 
     public Player(boolean hasInkwell, String nickname) {
         this.hasInkwell = hasInkwell;
         this.nickname = nickname;
         this.isHisTurn = false;
-        Player.playerFaith = 0;
-        Player.victoryPoints = 0;
+        this.playerFaith = 0;
+        this.victoryPoints = 0;
         this.personalBoard = new PersonalBoard();
-        this.leaderCards = new LeaderCard[2];
+        this.leaderCards = new ArrayList<>();
         this.activeLeaderAbilities = new ArrayList<>();
         this.resStrategy = new ResourceStrategy();
         this.devStrategy = new DevCardsStrategy();
@@ -49,12 +49,14 @@ public class Player {
         return hasInkwell;
     }
 
-    public static int getPlayerFaith() { return playerFaith; }
+    public int getPlayerFaith() { return this.playerFaith; }
+
+    public void setPlayerFaith(int faith) { this.playerFaith = faith; }
 
     public int getVictoryPoints() {return victoryPoints;}
 
-    public static void setVictoryPoints(int faithTrackPoints){
-        victoryPoints = victoryPoints + faithTrackPoints;
+    public void setVictoryPoints(int faithTrackPoints){
+        this.victoryPoints = this.victoryPoints + faithTrackPoints;
     }
 
     public void setInkwell(boolean bool) {
@@ -79,7 +81,7 @@ public class Player {
 
     //TODO: only for testing
     public void setLeaderCards(int index, LeaderCard card) {
-        this.leaderCards[index] = card;
+        this.leaderCards.set(index, card);
     }
 
     public void addResourceStrategy(ChangeWhiteMarbles newStrategy) throws TooManyLeaderAbilitiesException {
@@ -124,7 +126,7 @@ public class Player {
     }
 
     public void useLeader(int index, LeaderAction choice) throws TooManyLeaderAbilitiesException, LeaderAbilityAlreadyActive, InvalidLayerNumberException {
-        LeaderCard leader =  this.leaderCards[index];
+        LeaderCard leader = this.leaderCards.get(index);
         if (leader.isActive()) throw new LeaderAbilityAlreadyActive();
 
         /*TODO: discard
@@ -143,17 +145,18 @@ public class Player {
         return this.activeLeaderAbilities;
     }
 
+    /* PROBABLY TO REMOVE BECAUSE WE DO THIS IN GAME CLASS
     public void chooseLeaderCard(int first, int second) {
         this.leaderCards = new LeaderCard[]{
-            this.leaderCards[first], this.leaderCards[second]
-        };
+            this.leaderCards.get(first), this.leaderCards.get(second);
+        }
+    }
+     */
+    public void setLeaderCards(ArrayList<LeaderCard> leaderCards) {
+        this.leaderCards = new ArrayList<>(List.copyOf(leaderCards));
     }
 
-    public void setLeaderCards(LeaderCard[] leaderCards) {
-        this.leaderCards = leaderCards;
-    }
-
-    public LeaderCard[] getLeaderCards() {
+    public List<LeaderCard> getLeaderCards() {
         return this.leaderCards;
     }
 }

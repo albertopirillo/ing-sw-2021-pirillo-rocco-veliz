@@ -128,5 +128,5 @@ fabric.properties
 hs_err_pid*
 
 # Manually added later
-/target/classes/leaderCardsConfig.json
-/target/classes/devCardsConfig.json
+/Master_of_Reinassance.iml
+/target/

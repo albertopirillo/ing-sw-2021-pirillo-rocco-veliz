@@ -20,7 +20,7 @@ class CardDeckTest {
         assertEquals(deck.getNumbersOfCards(), 3);
     }
 
-    @RepeatedTest(10)
+    @Test
     public void shuffleTest() throws FullCardDeckException {
         CardDeck deck = new CardDeck();
         //stub
@@ -35,6 +35,7 @@ class CardDeckTest {
         deck.addCard(dev2);
         deck.addCard(dev3);
         deck.addCard(dev4);
+        deck.shuffle();
         assertEquals(deck.getNumbersOfCards(), 4);
         DevelopmentCard devCard = deck.removeCard();
         assertEquals(deck.getNumbersOfCards(), 3);

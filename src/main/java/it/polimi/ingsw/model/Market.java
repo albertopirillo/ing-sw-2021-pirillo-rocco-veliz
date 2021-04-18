@@ -24,16 +24,23 @@ public class Market {
             }
         }
         initCards();
+        shuffleCards();
         marketTray = new MarketTray();
     }
-
-    public MarketTray getMarketTray() {
-        return this.marketTray;
+    public Market(int noRandom) throws FullCardDeckException {
+        cards = new CardDeck[3][4];
+        for(int i=0; i<3; i++){
+            for (int j=0; j<4; j++){
+                this.cards[i][j] = new CardDeck();
+            }
+        }
+        initCards();
+        marketTray = new MarketTray(noRandom);
     }
     
-    //initialize cards
+    //Initialize cards
     private void initCards() throws FullCardDeckException {
-        //parserJSON... devCards contain all DevCards
+        //ParserJSON... devCards contain all DevCards
         JsonReader reader = null;
         try {
             reader = new JsonReader(new FileReader("src/main/resources/devCardsConfig.json"));
@@ -44,6 +51,13 @@ public class Market {
         List<DevelopmentCard> devCards = new Gson().fromJson(reader, listType);
         for (DevelopmentCard devCard : devCards) {
             this.cards[3-devCard.getLevel()][devCard.getType().getNumberColumn()].addCard(devCard);
+        }
+    }
+    private void shuffleCards(){
+        for(int i=0; i<3; i++){
+            for (int j=0; j<4; j++){
+                this.cards[i][j].shuffle();
+            }
         }
     }
 
@@ -70,6 +84,10 @@ public class Market {
         DevelopmentCard devCard =  cards[3-level][color.getNumberColumn()].removeCard();
         if(devCard!=null) return devCard;
         throw new DeckEmptyException();
+    }
+
+    public MarketTray getMarketTray() {
+        return this.marketTray;
     }
 
     public void endgame() {

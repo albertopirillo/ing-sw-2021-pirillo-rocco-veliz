@@ -20,6 +20,17 @@ public class MarketTray {
             }
         }
     }
+    public MarketTray(int noRandom) {
+        marketMarbles = new MarblesColor[3][4];
+        Deque<MarblesColor> marbleList = Marbles.getAllMarbleList(Marbles.getAllMarblesMap());
+        //Collections.shuffle((List<MarblesColor>) marbleList);
+        remainingMarble = marbleList.poll();
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 4; j++) {
+                marketMarbles[i][j]= marbleList.poll();
+            }
+        }
+    }
 
     //position  from 0 to 3 for columns and 4 to 6 for rows
     //return Marbles Object, similar to Resource

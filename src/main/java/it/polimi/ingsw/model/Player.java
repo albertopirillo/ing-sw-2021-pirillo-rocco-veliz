@@ -67,6 +67,10 @@ public class Player {
         return nickname;
     }
 
+    public void setTurn(Player player, boolean isHisTurn) { this.isHisTurn = isHisTurn; }
+
+    public boolean getTurn() { return this.isHisTurn; }
+
     public Game getGame() {
         return this.game;
     }
@@ -107,7 +111,7 @@ public class Player {
         return depotRes.sum(strongboxRes);
     }
 
-    public Resource takeResources(int position, AbilityChoice choice, int amount1, int amount2) throws NegativeResAmountException, InvalidKeyException, InvalidChoiceException, InvalidAbilityChoiceException, NoLeaderAbilitiesException {
+    public Resource takeResources(int position, AbilityChoice choice, int amount1, int amount2) throws NegativeResAmountException, InvalidKeyException, InvalidAbilityChoiceException, NoLeaderAbilitiesException {
         if (choice == AbilityChoice.STANDARD) return BasicStrategies.takeResources(this, position);
         else return this.resStrategy.takeResources(this, position, choice, amount1, amount2);
     }

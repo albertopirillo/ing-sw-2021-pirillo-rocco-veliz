@@ -26,8 +26,6 @@ public class Game {
 
     private List<LeaderCard> finalDeckLeader;
 
-    private Player activePlayer; //to set when updating hisTurn in player
-
     private final int playerAmount;
 
     private boolean lastTurn;
@@ -64,18 +62,6 @@ public class Game {
         List<LeaderCard> leaderCards = gson.fromJson(reader, listType);
         //Collections.shuffle((List<LeaderCard>) this.cards); shuffle leaderCards;
         //give 2 leadersCards to player
-
-        /*
-        for (int i = 0; i < playerAmount; i++) {
-            //each player choose 2 cards from 4
-            giveLeaderCards(players[i], new LeaderCard[]{
-                    leaderCards.get(i),
-                    leaderCards.get(i+playerAmount),
-                    leaderCards.get(i+playerAmount*2),
-                    leaderCards.get(i+playerAmount*3)
-            });
-        }
-         */
 
         finalDeckLeader = new ArrayList<>(leaderCards);
         for (Player pl : players) {
@@ -161,15 +147,6 @@ public class Game {
     }
 
     private void createFaithTrack(Player player) {
-        // TODO implement here
-    }
-
-    private void updateFaithTrack() {
-
-        if (activePlayer.getPlayerFaith() > 24) {
-            //todo implement endgame
-        }
-
-        this.activePlayer.getPersonalBoard().getFaithTrack().checkPopeTile(activePlayer);
+        // TODO CREATED WHEN CREATING PLAYER PERSONAL BOARD
     }
 }

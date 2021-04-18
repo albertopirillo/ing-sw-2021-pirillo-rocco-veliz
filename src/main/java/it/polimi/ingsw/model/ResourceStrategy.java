@@ -26,7 +26,7 @@ public class ResourceStrategy {
     }
 
     //The player can decide whether to convert the color of every single marble
-    public Resource takeResources(Player player, int position, AbilityChoice choice, int amount1, int amount2) throws InvalidKeyException, NegativeResAmountException, InvalidChoiceException, NoLeaderAbilitiesException, InvalidAbilityChoiceException {
+    public Resource takeResources(Player player, int position, AbilityChoice choice, int amount1, int amount2) throws InvalidKeyException, NegativeResAmountException, NoLeaderAbilitiesException, InvalidAbilityChoiceException {
         if (this.size == 0) throw new NoLeaderAbilitiesException();
         if ((this.size == 1 && (choice == AbilityChoice.SECOND || choice == AbilityChoice.BOTH)))
             throw new InvalidAbilityChoiceException();

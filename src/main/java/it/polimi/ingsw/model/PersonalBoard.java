@@ -2,6 +2,8 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.DevSlotEmptyException;
 
+import java.util.List;
+
 public class PersonalBoard {
 
     private SoloActionTokens[] soloActionTokens;
@@ -13,12 +15,16 @@ public class PersonalBoard {
     public PersonalBoard(Player player) {
         depot = new ConcreteDepot();
         strongbox = new Strongbox(player);
+        faithTrack = new FaithTrack();
     }
 
     public FaithTrack getFaithTrack() {
         return this.faithTrack;
     }
 
+    public DevelopmentSlot getSlot(int slotNumber){
+        return devSlots[slotNumber];
+    }
     public DevelopmentSlot[] getDevSlots() {
         return devSlots;
     }
@@ -51,12 +57,17 @@ public class PersonalBoard {
         this.devSlots[slotNumber-1].addCard(devCard);
     }
 
-    public DevelopmentSlot getSlot(int slotNumber){
-        return devSlots[slotNumber];
-    }
+    public void updateFaithTrack(List<Player> players) {
+        for(Player player: players){
+            if(player.getTurn()){
+                if (player.getPlayerFaith() >= 24) {
+                    //TODO ENDGAME
+                }
+                //needed first getPersonalBoard()
+                player.getPersonalBoard().getFaithTrack().checkPopeTile(player, players);
+            }
+        }
 
-    public void endgame() {
-        // TODO implement here
     }
 
 }

@@ -2,7 +2,10 @@
   {
     "cost": {
       "map": {
-        "SHIELD": 2
+        "STONE": 0,
+        "COIN": 0,
+        "SHIELD": 2,
+        "SERVANT": 0
       }
     },
     "type": "GREEN",
@@ -10,11 +13,18 @@
     "prodPower": {
       "input": {
         "map": {
-          "COIN": 1
+          "STONE": 0,
+          "COIN": 1,
+          "SHIELD": 0,
+          "SERVANT": 0
         }
       },
       "output": {
         "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 0,
           "FAITH": 1
         }
       }
@@ -24,6 +34,9 @@
   {
     "cost": {
       "map": {
+        "STONE": 0,
+        "COIN": 0,
+        "SHIELD": 0,
         "SERVANT": 3
       }
     },
@@ -32,12 +45,16 @@
     "prodPower": {
       "input": {
         "map": {
-          "COIN": 1
+          "STONE": 0,
+          "COIN": 1,
+          "SHIELD": 0,
+          "SERVANT": 0
         }
       },
       "output": {
         "map": {
           "STONE": 1,
+          "COIN": 0,
           "SHIELD": 1,
           "SERVANT": 1
         }
@@ -48,7 +65,10 @@
   {
     "cost": {
       "map": {
-        "COIN": 3
+        "STONE": 0,
+        "COIN": 3,
+        "SHIELD": 0,
+        "SERVANT": 0
       }
     },
     "type": "BLUE",
@@ -56,11 +76,15 @@
     "prodPower": {
       "input": {
         "map": {
-          "STONE": 2
+          "STONE": 2,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 0
         }
       },
       "output": {
         "map": {
+          "STONE": 0,
           "SHIELD": 1,
           "COIN": 1,
           "SERVANT": 1
@@ -72,7 +96,10 @@
   {
     "cost": {
       "map": {
-        "STONE": 3
+        "STONE": 3,
+        "COIN": 0,
+        "SHIELD": 0,
+        "SERVANT": 0
       }
     },
     "type": "YELLOW",
@@ -80,13 +107,17 @@
     "prodPower": {
       "input": {
         "map": {
-          "SHIELD": 2
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 2,
+          "SERVANT": 0
         }
       },
       "output": {
         "map": {
           "STONE": 1,
           "COIN": 1,
+          "SHIELD": 0,
           "SERVANT": 1
         }
       }
@@ -96,8 +127,10 @@
   {
     "cost": {
       "map": {
+        "STONE": 0,
+        "COIN": 2,
         "SHIELD": 2,
-        "COIN": 2
+        "SERVANT": 0
       }
     },
     "type": "GREEN",
@@ -106,13 +139,18 @@
       "input": {
         "map": {
           "STONE": 1,
+          "COIN": 0,
+          "SHIELD": 0,
           "SERVANT": 1
         }
       },
       "output": {
         "map": {
-          "FAITH": 1,
-          "COIN": 2
+          "STONE": 0,
+          "COIN": 2,
+          "SHIELD": 0,
+          "SERVANT": 0,
+          "FAITH": 1
         }
       }
     },
@@ -122,6 +160,8 @@
     "cost": {
       "map": {
         "STONE": 2,
+        "COIN": 0,
+        "SHIELD": 0,
         "SERVANT": 2
       }
     },
@@ -130,14 +170,19 @@
     "prodPower": {
       "input": {
         "map": {
+          "STONE": 0,
+          "COIN": 1,
           "SHIELD": 1,
-          "COIN": 1
+          "SERVANT": 0
         }
       },
       "output": {
         "map": {
-          "FAITH": 1,
-          "STONE": 2
+          "STONE": 2,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 0,
+          "FAITH": 1
         }
       }
     },
@@ -146,7 +191,9 @@
   {
     "cost": {
       "map": {
+        "STONE": 0,
         "COIN": 2,
+        "SHIELD": 0,
         "SERVANT": 2
       }
     },
@@ -156,13 +203,18 @@
       "input": {
         "map": {
           "STONE": 1,
-          "SHIELD": 1
+          "COIN": 0,
+          "SHIELD": 1,
+          "SERVANT": 0
         }
       },
       "output": {
         "map": {
-          "FAITH": 1,
-          "SERVANT": 2
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 2,
+          "FAITH": 1
         }
       }
     },
@@ -172,7 +224,9 @@
     "cost": {
       "map": {
         "STONE": 2,
-        "SHIELD": 2
+        "COIN": 0,
+        "SHIELD": 2,
+        "SERVANT": 0
       }
     },
     "type": "YELLOW",
@@ -180,14 +234,19 @@
     "prodPower": {
       "input": {
         "map": {
+          "STONE": 0,
           "COIN": 1,
+          "SHIELD": 0,
           "SERVANT": 1
         }
       },
       "output": {
         "map": {
-          "FAITH": 1,
-          "SHIELD": 2
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 2,
+          "SERVANT": 0,
+          "FAITH": 1
         }
       }
     },
@@ -196,7 +255,10 @@
   {
     "cost": {
       "map": {
-        "SHIELD": 4
+        "STONE": 0,
+        "COIN": 0,
+        "SHIELD": 4,
+        "SERVANT": 0
       }
     },
     "type": "GREEN",
@@ -204,11 +266,18 @@
     "prodPower": {
       "input": {
         "map": {
-          "STONE": 1
+          "STONE": 1,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 0
         }
       },
       "output": {
         "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 0,
           "FAITH": 2
         }
       }
@@ -218,6 +287,9 @@
   {
     "cost": {
       "map": {
+        "STONE": 0,
+        "COIN": 0,
+        "SHIELD": 0,
         "SERVANT": 4
       }
     },
@@ -226,11 +298,18 @@
     "prodPower": {
       "input": {
         "map": {
-          "COIN": 1
+          "STONE": 0,
+          "COIN": 1,
+          "SHIELD": 0,
+          "SERVANT": 0
         }
       },
       "output": {
         "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 0,
           "FAITH": 2
         }
       }
@@ -240,7 +319,10 @@
   {
     "cost": {
       "map": {
-        "COIN": 4
+        "STONE": 0,
+        "COIN": 4,
+        "SHIELD": 0,
+        "SERVANT": 0
       }
     },
     "type": "BLUE",
@@ -248,11 +330,18 @@
     "prodPower": {
       "input": {
         "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 0,
           "SERVANT": 1
         }
       },
       "output": {
         "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 0,
           "FAITH": 2
         }
       }
@@ -262,6 +351,9 @@
   {
     "cost": {
       "map": {
+        "STONE": 0,
+        "COIN": 0,
+        "SHIELD": 0,
         "SERVANT": 2
       }
     },
@@ -270,11 +362,18 @@
     "prodPower": {
       "input": {
         "map": {
-          "STONE": 1
+          "STONE": 1,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 0
         }
       },
       "output": {
         "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 0,
           "FAITH": 1
         }
       }
@@ -284,7 +383,10 @@
   {
     "cost": {
       "map": {
-        "STONE": 4
+        "STONE": 4,
+        "COIN": 0,
+        "SHIELD": 0,
+        "SERVANT": 0
       }
     },
     "type": "YELLOW",
@@ -292,11 +394,18 @@
     "prodPower": {
       "input": {
         "map": {
-          "SHIELD": 1
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 1,
+          "SERVANT": 0
         }
       },
       "output": {
         "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 0,
           "FAITH": 2
         }
       }
@@ -306,6 +415,8 @@
   {
     "cost": {
       "map": {
+        "STONE": 0,
+        "COIN": 0,
         "SHIELD": 3,
         "SERVANT": 2
       }
@@ -315,13 +426,18 @@
     "prodPower": {
       "input": {
         "map": {
+          "STONE": 0,
+          "COIN": 0,
           "SHIELD": 1,
           "SERVANT": 1
         }
       },
       "output": {
         "map": {
-          "STONE": 3
+          "STONE": 3,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 0
         }
       }
     },
@@ -330,7 +446,9 @@
   {
     "cost": {
       "map": {
+        "STONE": 0,
         "COIN": 2,
+        "SHIELD": 0,
         "SERVANT": 3
       }
     },
@@ -339,13 +457,18 @@
     "prodPower": {
       "input": {
         "map": {
+          "STONE": 0,
           "COIN": 1,
+          "SHIELD": 0,
           "SERVANT": 1
         }
       },
       "output": {
         "map": {
-          "SHIELD": 3
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 3,
+          "SERVANT": 0
         }
       }
     },
@@ -355,7 +478,9 @@
     "cost": {
       "map": {
         "STONE": 2,
-        "COIN": 3
+        "COIN": 3,
+        "SHIELD": 0,
+        "SERVANT": 0
       }
     },
     "type": "BLUE",
@@ -364,11 +489,16 @@
       "input": {
         "map": {
           "STONE": 1,
-          "COIN": 1
+          "COIN": 1,
+          "SHIELD": 0,
+          "SERVANT": 0
         }
       },
       "output": {
         "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 0,
           "SERVANT": 3
         }
       }
@@ -379,7 +509,9 @@
     "cost": {
       "map": {
         "STONE": 3,
-        "SHIELD": 2
+        "COIN": 0,
+        "SHIELD": 2,
+        "SERVANT": 0
       }
     },
     "type": "YELLOW",
@@ -388,12 +520,17 @@
       "input": {
         "map": {
           "STONE": 1,
-          "SHIELD": 1
+          "COIN": 0,
+          "SHIELD": 1,
+          "SERVANT": 0
         }
       },
       "output": {
         "map": {
-          "COIN": 3
+          "STONE": 0,
+          "COIN": 3,
+          "SHIELD": 0,
+          "SERVANT": 0
         }
       }
     },
@@ -402,7 +539,10 @@
   {
     "cost": {
       "map": {
-        "SHIELD": 5
+        "STONE": 0,
+        "COIN": 0,
+        "SHIELD": 5,
+        "SERVANT": 0
       }
     },
     "type": "GREEN",
@@ -410,13 +550,19 @@
     "prodPower": {
       "input": {
         "map": {
-          "COIN": 2
+          "STONE": 0,
+          "COIN": 2,
+          "SHIELD": 0,
+          "SERVANT": 0
         }
       },
       "output": {
         "map": {
-          "FAITH": 2,
-          "STONE": 2
+          "STONE": 2,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 0,
+          "FAITH": 2
         }
       }
     },
@@ -425,6 +571,9 @@
   {
     "cost": {
       "map": {
+        "STONE": 0,
+        "COIN": 0,
+        "SHIELD": 0,
         "SERVANT": 5
       }
     },
@@ -433,13 +582,19 @@
     "prodPower": {
       "input": {
         "map": {
-          "STONE": 2
+          "STONE": 2,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 0
         }
       },
       "output": {
         "map": {
-          "FAITH": 2,
-          "COIN": 2
+          "STONE": 0,
+          "COIN": 2,
+          "SHIELD": 0,
+          "SERVANT": 0,
+          "FAITH": 2
         }
       }
     },
@@ -448,7 +603,10 @@
   {
     "cost": {
       "map": {
-        "COIN": 5
+        "STONE": 0,
+        "COIN": 5,
+        "SHIELD": 0,
+        "SERVANT": 0
       }
     },
     "type": "BLUE",
@@ -456,13 +614,19 @@
     "prodPower": {
       "input": {
         "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 0,
           "SERVANT": 2
         }
       },
       "output": {
         "map": {
-          "FAITH": 2,
-          "SHIELD": 2
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 2,
+          "SERVANT": 0,
+          "FAITH": 2
         }
       }
     },
@@ -471,7 +635,10 @@
   {
     "cost": {
       "map": {
-        "STONE": 5
+        "STONE": 5,
+        "COIN": 0,
+        "SHIELD": 0,
+        "SERVANT": 0
       }
     },
     "type": "YELLOW",
@@ -479,13 +646,19 @@
     "prodPower": {
       "input": {
         "map": {
-          "SHIELD": 2
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 2,
+          "SERVANT": 0
         }
       },
       "output": {
         "map": {
-          "FAITH": 2,
-          "SERVANT": 2
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 2,
+          "FAITH": 2
         }
       }
     },
@@ -494,8 +667,10 @@
   {
     "cost": {
       "map": {
+        "STONE": 0,
+        "COIN": 3,
         "SHIELD": 3,
-        "COIN": 3
+        "SERVANT": 0
       }
     },
     "type": "GREEN",
@@ -503,13 +678,19 @@
     "prodPower": {
       "input": {
         "map": {
-          "COIN": 1
+          "STONE": 0,
+          "COIN": 1,
+          "SHIELD": 0,
+          "SERVANT": 0
         }
       },
       "output": {
         "map": {
-          "FAITH": 1,
-          "SHIELD": 2
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 2,
+          "SERVANT": 0,
+          "FAITH": 1
         }
       }
     },
@@ -518,7 +699,10 @@
   {
     "cost": {
       "map": {
-        "COIN": 2
+        "STONE": 0,
+        "COIN": 2,
+        "SHIELD": 0,
+        "SERVANT": 0
       }
     },
     "type": "BLUE",
@@ -526,11 +710,18 @@
     "prodPower": {
       "input": {
         "map": {
-          "SHIELD": 1
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 1,
+          "SERVANT": 0
         }
       },
       "output": {
         "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 0,
           "FAITH": 1
         }
       }

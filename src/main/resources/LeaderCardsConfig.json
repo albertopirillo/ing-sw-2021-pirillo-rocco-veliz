@@ -3,7 +3,10 @@
     "type": "res",
     "cost": {
       "map": {
-        "COIN": 5
+        "STONE": 0,
+        "COIN": 5,
+        "SHIELD": 0,
+        "SERVANT": 0
       }
     },
     "specialAbility": {
@@ -16,7 +19,10 @@
     "type": "res",
     "cost": {
       "map": {
-        "STONE": 5
+        "STONE": 5,
+        "COIN": 0,
+        "SHIELD": 0,
+        "SERVANT": 0
       }
     },
     "specialAbility": {
@@ -29,6 +35,9 @@
     "type": "res",
     "cost": {
       "map": {
+        "STONE": 0,
+        "COIN": 0,
+        "SHIELD": 0,
         "SERVANT": 5
       }
     },
@@ -42,7 +51,10 @@
     "type": "res",
     "cost": {
       "map": {
-        "SHIELD": 5
+        "STONE": 0,
+        "COIN": 0,
+        "SHIELD": 5,
+        "SERVANT": 0
       }
     },
     "specialAbility": {
@@ -229,11 +241,18 @@
       "production": {
         "input": {
           "map": {
-            "SHIELD": 1
+            "STONE": 0,
+            "COIN": 0,
+            "SHIELD": 1,
+            "SERVANT": 0
           }
         },
         "output": {
           "map": {
+            "STONE": 0,
+            "COIN": 0,
+            "SHIELD": 0,
+            "SERVANT": 0,
             "FAITH": 1,
             "ALL": 1
           }
@@ -256,11 +275,18 @@
       "production": {
         "input": {
           "map": {
+            "STONE": 0,
+            "COIN": 0,
+            "SHIELD": 0,
             "SERVANT": 1
           }
         },
         "output": {
           "map": {
+            "STONE": 0,
+            "COIN": 0,
+            "SHIELD": 0,
+            "SERVANT": 0,
             "FAITH": 1,
             "ALL": 1
           }
@@ -283,11 +309,18 @@
       "production": {
         "input": {
           "map": {
-            "STONE": 1
+            "STONE": 1,
+            "COIN": 0,
+            "SHIELD": 0,
+            "SERVANT": 0
           }
         },
         "output": {
           "map": {
+            "STONE": 0,
+            "COIN": 0,
+            "SHIELD": 0,
+            "SERVANT": 0,
             "FAITH": 1,
             "ALL": 1
           }
@@ -310,11 +343,18 @@
       "production": {
         "input": {
           "map": {
-            "COIN": 1
+            "STONE": 0,
+            "COIN": 1,
+            "SHIELD": 0,
+            "SERVANT": 0
           }
         },
         "output": {
           "map": {
+            "STONE": 0,
+            "COIN": 0,
+            "SHIELD": 0,
+            "SERVANT": 0,
             "FAITH": 1,
             "ALL": 1
           }

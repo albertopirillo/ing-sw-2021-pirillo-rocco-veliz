@@ -34,7 +34,7 @@ public class PlayerController {
         try {
             Resource output = player.takeResources(position, choice, amount1, amount2);
             controller.getDepotController().handleDepot(player, output, settings);
-        } catch (NegativeResAmountException | InvalidKeyException | InvalidAbilityChoiceException | NoLeaderAbilitiesException | WrongDepotInstructionsException e) {
+        } catch (NegativeResAmountException | InvalidKeyException | InvalidAbilityChoiceException | NoLeaderAbilitiesException | WrongDepotInstructionsException | CostNotMatchingException e) {
             controller.setException(e);
         }
     }

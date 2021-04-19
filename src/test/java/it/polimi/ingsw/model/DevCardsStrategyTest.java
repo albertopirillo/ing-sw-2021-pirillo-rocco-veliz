@@ -3,64 +3,82 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.exceptions.*;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class DevCardsStrategyTest {
 
-    //TODO: testing
-
     @Test
     public void buyTest() throws FullCardDeckException, DeckEmptyException, CannotContainFaithException, NotEnoughSpaceException, NegativeResAmountException, CostNotMatchingException, NotEnoughResException, InvalidKeyException, InvalidLayerNumberException, AlreadyInAnotherLayerException, LayerNotEmptyException, InvalidResourceException, NoLeaderAbilitiesException, InvalidAbilityChoiceException {
-        Player player = new Player(false, "abc");
-        List<Player> players = new ArrayList<>();
-        players.add(player);
-        Game game = new Game(1, players);
+        Player player = new Player(true, "abc");
+        Game game = new Game(true);
+        player.setGame(game);
+
+        Depot depot = player.getPersonalBoard().getDepot();
+        Strongbox strongbox = player.getPersonalBoard().getStrongbox();
+        depot.modifyLayer(3, ResourceType.COIN, 3);
+        strongbox.addResources(new Resource(2,1,0,3));
+
+        Card card = player.getGame().getMarket().getCard(2, CardColor.BLUE);
+        //DevelopmentCard{cost={{STONE=0, SHIELD=0, COIN=4, SERVANT=0}}, type=BLUE, level=2, prodPower={input={{STONE=0, SHIELD=0, COIN=0, SERVANT=1}}, output={{FAITH=2}}}}
+
+
+        player.buyDevCard(2, CardColor.BLUE, AbilityChoice.STANDARD,
+                new Resource(0,3,0,0),
+                new Resource(0,1,0,0));
+
+        assertEquals(card, player.getPersonalBoard().getSlot(0).getTopCard());
+        assertEquals(new Resource(0,0,0,0), depot.queryAllRes());
+        assertEquals(new Resource(2,0,0,3), strongbox.queryAllRes());
+    }
+
+    @Test
+    public void CostNotMatchingTest() throws FullCardDeckException, AlreadyInAnotherLayerException, InvalidResourceException, CannotContainFaithException, NotEnoughSpaceException, NegativeResAmountException, LayerNotEmptyException, InvalidLayerNumberException {
+        Player player = new Player(true, "abc");
+        Game game = new Game(true);
+        player.setGame(game);
+
+        Depot depot = player.getPersonalBoard().getDepot();
+        //DevelopmentCard{cost={{SHIELD=2}}, type=GREEN, level=1, prodPower={input={{COIN=1}}, output={{FAITH=1}}}}
+
+        //Player hasn't got the needed resources
+        assertThrows(NotEnoughResException.class, () -> player.buyDevCard(1, CardColor.GREEN, AbilityChoice.STANDARD,
+                new Resource(0,0,2,0),
+                new Resource(0,0,0,0)));
+
+        depot.modifyLayer(3, ResourceType.SHIELD, 3);
+        //Player has enough resources but it is not proving enough to buy the card
+        assertThrows(CostNotMatchingException.class, () -> player.buyDevCard(1, CardColor.BLUE, AbilityChoice.STANDARD,
+                new Resource(0,0,1,0),
+                new Resource(0,0,0,0)));
+
+        //Player has provided more resources than needed to buy the card
+        assertThrows(CostNotMatchingException.class, () -> player.buyDevCard(1, CardColor.BLUE, AbilityChoice.STANDARD,
+                new Resource(0,0,3,0),
+                new Resource(0,0,0,0)));
+   }
+
+    @Test
+    public void abilityTest() throws FullCardDeckException, DeckEmptyException, TooManyLeaderAbilitiesException, CostNotMatchingException, InvalidAbilityChoiceException, NotEnoughSpaceException, NoLeaderAbilitiesException, CannotContainFaithException, NotEnoughResException, NegativeResAmountException, InvalidKeyException {
+        Player player = new Player(true, "abc");
+        Game game = new Game(true);
         player.setGame(game);
 
         Depot depot = player.getPersonalBoard().getDepot();
         Strongbox strongbox = player.getPersonalBoard().getStrongbox();
 
-        Resource cost1 = new Resource(1, 0, 1, 1);
-        DevelopmentCard card1 = new DevelopmentCard(3, cost1, CardColor.GREEN, 1, null);
+        Card card = player.getGame().getMarket().getCard(1, CardColor.PURPLE);
+        //DevelopmentCard{cost={{SERVANT=3}}, type=PURPLE, level=1, prodPower={input={{COIN=1}}, output={{STONE=1, SHIELD=1, COIN=0, SERVANT=1}}}}
 
-        Resource fromDepot = new Resource(1, 0, 1, 0);
-        Resource fromStrongbox = new Resource(0, 0, 0, 1);
+        Discount discount = new Discount(ResourceType.SERVANT, 2);
+        discount.activate(player);
+        strongbox.addResources(new Resource(0,0,0,2));
+        player.buyDevCard(1, CardColor.PURPLE, AbilityChoice.FIRST,
+                new Resource(0,0,0,0),
+                new Resource(0,0,0,1));
 
-        depot.modifyLayer(1, ResourceType.STONE, 1);
-        depot.modifyLayer(2, ResourceType.COIN, 2);
-        depot.modifyLayer(3, ResourceType.SHIELD, 2);
-        strongbox.addResources(new Resource(0,0,0,1));
-
-    }
-
-    @Test
-    public void CostNotMatchingTest() throws FullCardDeckException, AlreadyInAnotherLayerException, InvalidResourceException, CannotContainFaithException, NotEnoughSpaceException, NegativeResAmountException, LayerNotEmptyException, InvalidLayerNumberException, InvalidKeyException {
-        Player player = new Player(false, "abc");
-        Depot depot = player.getPersonalBoard().getDepot();
-        Strongbox strongbox = player.getPersonalBoard().getStrongbox();
-
-        Resource cost1 = new Resource(2, 0, 1, 1);
-        DevelopmentCard card1 = new DevelopmentCard(3, cost1, CardColor.BLUE, 2, null);
-
-        Resource fromDepot = new Resource(1, 0, 1, 0);
-        Resource fromStrongbox = new Resource(1, 0, 0, 1);
-
-       /* //Player hasn't got the needed resources
-        assertThrows(NotEnoughResException.class, () -> player.buyDevCard(card1, AbilityChoice.STANDARD, fromDepot, fromStrongbox));
-
-        depot.modifyLayer(2, ResourceType.STONE, 1);
-        depot.modifyLayer(3, ResourceType.SHIELD, 3);
-        strongbox.addResources(new Resource(1, 0, 0, 1));
-
-        //Player has enough resources but it is not proving enough to buy the card
-        Resource fromDepot2 = new Resource(0, 0, 1, 0);
-        assertThrows(CostNotMatchingException.class, () -> player.buyDevCard(card1, AbilityChoice.STANDARD, fromDepot2, fromStrongbox));
-
-        //Player has provided more resources than needed to buy the card
-        Resource fromDepot3 = new Resource(1, 0, 3, 0);
-        assertThrows(CostNotMatchingException.class, () -> player.buyDevCard(card1, AbilityChoice.STANDARD, fromDepot3, fromStrongbox));
-   */}
+        assertEquals(card, player.getPersonalBoard().getSlot(0).getTopCard());
+        assertEquals(new Resource(0,0,0,0), depot.queryAllRes());
+        assertEquals(new Resource(0,0,0,1), strongbox.queryAllRes());
+   }
 }

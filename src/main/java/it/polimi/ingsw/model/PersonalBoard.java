@@ -13,9 +13,13 @@ public class PersonalBoard {
     private FaithTrack faithTrack;
 
     public PersonalBoard(Player player) {
-        depot = new ConcreteDepot();
-        strongbox = new Strongbox(player);
-        faithTrack = new FaithTrack();
+        this.depot = new ConcreteDepot();
+        this.strongbox = new Strongbox(player);
+        this.faithTrack = new FaithTrack();
+        this.devSlots = new DevelopmentSlot[3];
+        this.devSlots[0] = new DevelopmentSlot();
+        this.devSlots[1] = new DevelopmentSlot();
+        this.devSlots[2] = new DevelopmentSlot();
     }
 
     public FaithTrack getFaithTrack() {
@@ -25,21 +29,27 @@ public class PersonalBoard {
     public DevelopmentSlot getSlot(int slotNumber){
         return devSlots[slotNumber];
     }
+
     public DevelopmentSlot[] getDevSlots() {
         return devSlots;
     }
+
     public void setDevSlots(DevelopmentSlot[] devSlots) {
         this.devSlots = devSlots;
     }
+
     public Depot getDepot() {
         return depot;
     }
+
     public void upgradeDepot(Depot depot) {
         this.depot = depot;
     }
+
     public Strongbox getStrongbox() {
         return strongbox;
     }
+
     public void setStrongbox(Strongbox strongbox) {
         this.strongbox = strongbox;
     }
@@ -67,7 +77,5 @@ public class PersonalBoard {
                 player.getPersonalBoard().getFaithTrack().checkPopeTile(player, players);
             }
         }
-
     }
-
 }

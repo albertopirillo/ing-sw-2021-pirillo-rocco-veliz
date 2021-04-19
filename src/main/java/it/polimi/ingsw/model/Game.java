@@ -54,7 +54,7 @@ public class Game {
         }.getType();
         JsonReader reader = null;
         try {
-            reader = new JsonReader(new FileReader("src/main/resources/leaderCardsConfig.json"));
+            reader = new JsonReader(new FileReader("src/main/resources/LeaderCardsConfig.json"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

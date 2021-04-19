@@ -29,7 +29,7 @@ class DevLeaderCardTest {
         Gson gson = builder.create();
         Type listType = new TypeToken<List<LeaderCard>>(){}.getType();
         //ledaders contains the 16 leader cards...
-        List<LeaderCard> leaders = gson.fromJson(new JsonReader(new FileReader("src/main/resources/leaderCardsConfig.json")), listType);
+        List<LeaderCard> leaders = gson.fromJson(new JsonReader(new FileReader("src/main/resources/LeaderCardsConfig.json")), listType);
 
     }
     @Test

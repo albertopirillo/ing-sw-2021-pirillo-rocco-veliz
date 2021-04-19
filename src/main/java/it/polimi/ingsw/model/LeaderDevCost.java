@@ -13,7 +13,7 @@ public class LeaderDevCost {
     }
     public LeaderDevCost(CardColor color, int amount) {
         this.color = color;
-        this.level = amount;
+        this.amount = amount;
     }
 
     public CardColor getColor() {

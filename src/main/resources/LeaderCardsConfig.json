@@ -56,17 +56,17 @@
     "requires": [
       {
         "color": "YELLOW",
-        "level": 1,
-        "amount": 0
+        "level": 0,
+        "amount": 1
       },
       {
         "color": "GREEN",
-        "level": 1,
-        "amount": 0
+        "level": 0,
+        "amount": 1
       }
     ],
     "specialAbility": {
-      "type": "dis",
+        "type": "dis",
       "resource": "SERVANT",
       "amount": 1
     },
@@ -77,13 +77,13 @@
     "requires": [
       {
         "color": "BLUE",
-        "level": 1,
-        "amount": 0
+        "level": 0,
+        "amount": 1
       },
       {
         "color": "PURPLE",
-        "level": 1,
-        "amount": 0
+        "level": 0,
+        "amount": 1
       }
     ],
     "specialAbility": {
@@ -98,13 +98,13 @@
     "requires": [
       {
         "color": "GREEN",
-        "level": 1,
-        "amount": 0
+        "level": 0,
+        "amount": 1
       },
       {
         "color": "BLUE",
-        "level": 1,
-        "amount": 0
+        "level": 0,
+        "amount": 1
       }
     ],
     "specialAbility": {
@@ -119,13 +119,13 @@
     "requires": [
       {
         "color": "YELLOW",
-        "level": 1,
-        "amount": 0
+        "level": 0,
+        "amount": 1
       },
       {
         "color": "PURPLE",
-        "level": 1,
-        "amount": 0
+        "level": 0,
+        "amount": 1
       }
     ],
     "specialAbility": {
@@ -140,13 +140,13 @@
     "requires": [
       {
         "color": "YELLOW",
-        "level": 2,
-        "amount": 0
+        "level": 0,
+        "amount": 2
       },
       {
         "color": "BLUE",
-        "level": 1,
-        "amount": 0
+        "level": 0,
+        "amount": 1
       }
     ],
     "specialAbility": {
@@ -160,13 +160,13 @@
     "requires": [
       {
         "color": "GREEN",
-        "level": 2,
-        "amount": 0
+        "level": 0,
+        "amount": 2
       },
       {
         "color": "PURPLE",
-        "level": 1,
-        "amount": 0
+        "level": 0,
+        "amount": 1
       }
     ],
     "specialAbility": {
@@ -180,13 +180,13 @@
     "requires": [
       {
         "color": "BLUE",
-        "level": 2,
-        "amount": 0
+        "level": 0,
+        "amount": 2
       },
       {
         "color": "YELLOW",
-        "level": 1,
-        "amount": 0
+        "level": 0,
+        "amount": 1
       }
     ],
     "specialAbility": {
@@ -200,13 +200,13 @@
     "requires": [
       {
         "color": "PURPLE",
-        "level": 2,
-        "amount": 0
+        "level": 0,
+        "amount": 2
       },
       {
         "color": "GREEN",
-        "level": 1,
-        "amount": 0
+        "level": 0,
+        "amount": 1
       }
     ],
     "specialAbility": {

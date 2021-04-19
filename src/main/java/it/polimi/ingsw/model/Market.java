@@ -43,7 +43,7 @@ public class Market {
         //ParserJSON... devCards contain all DevCards
         JsonReader reader = null;
         try {
-            reader = new JsonReader(new FileReader("src/main/resources/devCardsConfig.json"));
+            reader = new JsonReader(new FileReader("src/main/resources/DevCardsConfig.json"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

@@ -22,7 +22,7 @@ class MarketTest {
     public void parserTest() throws FullCardDeckException, NegativeResAmountException, InvalidKeyException, FileNotFoundException {
 
         Type listType = new TypeToken<ArrayList<DevelopmentCard>>(){}.getType();
-        List<DevelopmentCard> devs = new Gson().fromJson(new JsonReader(new FileReader("src/main/resources/devCardsConfig.json")), listType);
+        List<DevelopmentCard> devs = new Gson().fromJson(new JsonReader(new FileReader("src/main/resources/DevCardsConfig.json")), listType);
         //parser JSON
         /*devs.add(new DevelopmentCard(1, new Resource().addResource(ResourceType.SHIELD, 2),
                 CardColor.GREEN, 1, new ProductionPower(

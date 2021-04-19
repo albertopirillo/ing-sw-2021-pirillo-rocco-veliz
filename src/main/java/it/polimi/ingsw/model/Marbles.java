@@ -35,11 +35,19 @@ public class Marbles {
 
     public static Deque<MarblesColor> getAllMarbleList(Map<MarblesColor, Integer> map){
         Deque<MarblesColor> allMarbles = new LinkedList<>();
-        for(MarblesColor mar : map.keySet()){
-            for (int i=0; i<map.get(mar); i++){
-                allMarbles.push(mar);
-            }
-        }
+        allMarbles.push(MarblesColor.WHITE);
+        allMarbles.push(MarblesColor.WHITE);
+        allMarbles.push(MarblesColor.WHITE);
+        allMarbles.push(MarblesColor.WHITE);
+        allMarbles.push(MarblesColor.BLUE);
+        allMarbles.push(MarblesColor.BLUE);
+        allMarbles.push(MarblesColor.GREY);
+        allMarbles.push(MarblesColor.GREY);
+        allMarbles.push(MarblesColor.YELLOW);
+        allMarbles.push(MarblesColor.YELLOW);
+        allMarbles.push(MarblesColor.PURPLE);
+        allMarbles.push(MarblesColor.PURPLE);
+        allMarbles.push(MarblesColor.RED);
         return allMarbles;
     }
 

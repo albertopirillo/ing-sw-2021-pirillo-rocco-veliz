@@ -1,0 +1,33 @@
+Setup della connessione:
+-	start connection
+-	login:
+	- set nickname
+	- set player count (if first)
+-	close connection
+
+
+Setup del gioco:
+-	chooseLeaderCards
+-	chooseInitialResources
+
+
+Azioni di gioco:
+-	takeResources => return Resource
+-	buyDevCard
+-	activateLeaderAbility (and discard)
+-	activateBasicProduction
+-	activateExtraProduction
+-	activateDevProduction
+-	placeResource
+-	reorderDepot
+-	discardResource
+- 	endTurn
+
+
+Note:
+-	Metodo nel Game per restituire il Player di turno
+-	Controller: attributo di tipo Game
+-	Modificare UML Controller
+- 	Aggiornare metodo
+-	Aggiungere metodi al player controller
+-	Depot.discard

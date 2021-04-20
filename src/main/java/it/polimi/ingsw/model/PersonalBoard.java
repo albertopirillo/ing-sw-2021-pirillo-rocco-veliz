@@ -57,8 +57,8 @@ public class PersonalBoard {
     }
 
     public void addDevCard(DevelopmentCard devCard, int slotNumber) throws DevSlotEmptyException, InvalidNumSlotException {
-        if(this.devSlots[slotNumber-1].canBeAdded(devCard))
-            this.devSlots[slotNumber-1].addCard(devCard);
+        if(this.devSlots[slotNumber].canBeAdded(devCard))
+            this.devSlots[slotNumber].addCard(devCard);
         else throw new InvalidNumSlotException();
     }
 

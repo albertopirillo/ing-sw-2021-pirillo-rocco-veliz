@@ -9,11 +9,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class PlayerControllerTest {
+class PlayerMasterControllerTest {
 
     @Test
     public void basicProduction() throws NegativeResAmountException, InvalidKeyException {
-        Controller controller = new Controller();
+        MasterController controller = new MasterController(null);
         PlayerController playerController = controller.getPlayerController();
         Player player = new Player(false, "John");
         Resource fromDepot = new Resource();
@@ -32,7 +32,7 @@ class PlayerControllerTest {
 
     @Test
     public void extraProduction() throws TooManyLeaderAbilitiesException, NegativeResAmountException, InvalidKeyException {
-        Controller controller = new Controller();
+        MasterController controller = new MasterController(null);
         PlayerController playerController = controller.getPlayerController();
         Player player = new Player(false, "John");
         playerController.extraProduction(player, AbilityChoice.FIRST, new Resource(), new Resource());
@@ -55,7 +55,7 @@ class PlayerControllerTest {
 
     @Test
     public void takeResources() throws FullCardDeckException {
-        Controller controller = new Controller();
+        MasterController controller = new MasterController(null);
         PlayerController playerController = controller.getPlayerController();
         Player player = new Player(false, "John");
         Game game = new Game(true);
@@ -78,7 +78,7 @@ class PlayerControllerTest {
 
     @Test
     public void buyDevCard() throws FullCardDeckException, TooManyLeaderAbilitiesException, NegativeResAmountException, InvalidKeyException {
-        Controller controller = new Controller();
+        MasterController controller = new MasterController(null);
         PlayerController playerController = controller.getPlayerController();
         Player player = new Player(false, "John");
         Game game = new Game(true);

@@ -3,14 +3,27 @@ package it.polimi.ingsw.network;
 import it.polimi.ingsw.model.ResourceType;
 
 public class DepotSetting {
+    private final int layerNumber;
 
-    public DepotSetting() {
+    private final ResourceType resType;
+
+    private final int amount;
+
+    public DepotSetting(int layerNumber, ResourceType resType, int amount) {
+        this.layerNumber = layerNumber;
+        this.resType = resType;
+        this.amount = amount;
     }
 
-    private int layerNumber;
+    public int getLayerNumber() {
+        return layerNumber;
+    }
 
-    private ResourceType resType;
+    public ResourceType getResType() {
+        return resType;
+    }
 
-    private int amount;
-
+    public int getAmount() {
+        return amount;
+    }
 }

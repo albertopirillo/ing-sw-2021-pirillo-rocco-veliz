@@ -33,7 +33,9 @@ public class DevelopmentSlot {
         return cards.peek().getLevel();
     }
 
-    public DevelopmentCard getTopCard(){
+    public DevelopmentCard getTopCard() throws DevSlotEmptyException {
+        if(cards.isEmpty())
+            throw new DevSlotEmptyException();
         return cards.peek();
     }
 
@@ -46,6 +48,6 @@ public class DevelopmentSlot {
     }
 
     public boolean canBeAdded(DevelopmentCard card) throws DevSlotEmptyException {
-        return cards.isEmpty() || cards.size()<3 && getLevelSlot() == card.getLevel() + 1;
+        return cards.isEmpty() && card.getLevel()==1 || cards.size()<3 && getLevelSlot() + 1 == card.getLevel();
     }
 }

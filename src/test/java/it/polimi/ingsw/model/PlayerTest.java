@@ -3,6 +3,9 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.exceptions.*;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class PlayerTest {
@@ -26,5 +29,27 @@ class PlayerTest {
                 assertEquals(resCheck.getValue(key), playerRes.getValue(key));
             }
         }
+    }
+
+    @Test
+    public void activateProductionTest() throws NegativeResAmountException, InvalidKeyException, NotEnoughResException {
+        Player player = new Player(false, "abc");
+        //Depot and StrongBox empty
+        assertTrue(player.getAllResources().equals(new Resource(0,0,0,0)));
+        //Stub DevelopmentCards
+        Resource res1 = new Resource(1,2,3,4);
+        Resource res2 = new Resource(1,2,3,1);
+        DevelopmentCard dev1 = new DevelopmentCard(10, res1, CardColor.BLUE, 2, new ProductionPower(res1, res2));
+        DevelopmentCard dev2 = new DevelopmentCard(10, res1, CardColor.BLUE, 2, new ProductionPower(res1, res2));
+        DevelopmentCard dev3 = new DevelopmentCard(11, res2, CardColor.BLUE, 2, new ProductionPower(res2, res1));
+        ArrayList<DevelopmentCard> devs = new ArrayList<>();
+        devs.add(dev1);
+        devs.add(dev2);
+        player.activateProduction(devs);
+        assertTrue(player.getAllResources().equals(new Resource(2,4,6,2)));
+        ArrayList<DevelopmentCard> devs1 = new ArrayList<>();
+        devs1.add(dev3);
+        player.activateProduction(devs1);
+        assertTrue(player.getAllResources().equals(new Resource(3,6,9,6)));
     }
 }

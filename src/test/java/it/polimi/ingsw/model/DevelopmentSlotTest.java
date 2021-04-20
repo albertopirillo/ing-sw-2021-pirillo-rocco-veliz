@@ -77,7 +77,7 @@ class DevelopmentSlotTest {
     }
 
     @Test
-    void getTopCard() throws InvalidKeyException, NegativeResAmountException{
+    void getTopCard() throws InvalidKeyException, NegativeResAmountException, DevSlotEmptyException {
         res1.addResource(ResourceType.SHIELD,2);
         res2.addResource(ResourceType.FAITH, 1);
         res3.addResource(ResourceType.COIN,1);
@@ -89,6 +89,7 @@ class DevelopmentSlotTest {
         DevelopmentCard dev3 = new DevelopmentCard(1, res1, CardColor.GREEN, 1, new ProductionPower(res2, res3));
         DevelopmentSlot devSlot = new DevelopmentSlot();
         assertThrows(DevSlotEmptyException.class, () -> devSlot.getLevelSlot());
+        assertThrows(DevSlotEmptyException.class, () -> devSlot.getTopCard());
         devSlot.addCard(dev1);
         assertEquals(dev1, devSlot.getTopCard());
         assertNotEquals(dev2, devSlot.getTopCard());
@@ -109,16 +110,15 @@ class DevelopmentSlotTest {
         DevelopmentCard dev3 = new DevelopmentCard(1, res1, CardColor.GREEN, 1, new ProductionPower(res2, res3));
         DevelopmentSlot devSlot = new DevelopmentSlot();
 
-        assertTrue(devSlot.canBeAdded(dev1));
-        devSlot.addCard(dev1);
-        assertFalse(devSlot.canBeAdded(dev1));
-        assertFalse(devSlot.canBeAdded(dev3));
-        assertTrue(devSlot.canBeAdded(dev2));
-        devSlot.addCard(dev2);
-        assertFalse(devSlot.canBeAdded(dev1));
-        assertFalse(devSlot.canBeAdded(dev2));
+        assertThrows(DevSlotEmptyException.class, () -> devSlot.canBeAdded(dev1));
         assertTrue(devSlot.canBeAdded(dev3));
         devSlot.addCard(dev3);
+        assertTrue(devSlot.canBeAdded(dev2));
+        devSlot.addCard(dev2);
+        assertFalse(devSlot.canBeAdded(dev3));
+        assertFalse(devSlot.canBeAdded(dev2));
+        assertTrue(devSlot.canBeAdded(dev1));
+        devSlot.addCard(dev1);
         assertFalse(devSlot.canBeAdded(dev1));
         assertFalse(devSlot.canBeAdded(dev2));
         assertFalse(devSlot.canBeAdded(dev3));

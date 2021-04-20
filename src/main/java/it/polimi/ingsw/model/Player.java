@@ -118,6 +118,7 @@ public class Player {
 
     public void buyDevCard(int level, CardColor color, int numSlot, AbilityChoice choice, Resource fromDepot, Resource fromStrongbox) throws CannotContainFaithException, NotEnoughSpaceException, NegativeResAmountException, DeckEmptyException, CostNotMatchingException, NotEnoughResException, InvalidKeyException, NoLeaderAbilitiesException, InvalidAbilityChoiceException, DevSlotEmptyException, InvalidNumSlotException {
         DevelopmentCard card = this.getGame().getMarket().getCard(level, color);
+        if(!getPersonalBoard().getSlot(numSlot).canBeAdded(card)) throw new InvalidNumSlotException();
         if (choice == AbilityChoice.STANDARD) BasicStrategies.buyDevCard(this, level, color, numSlot, card.getCost(), fromDepot, fromStrongbox);
         else this.devStrategy.buyDevCard(this, level, color, numSlot, choice, fromDepot, fromStrongbox);
     }
@@ -130,8 +131,10 @@ public class Player {
         this.prodStrategy.extraProduction(this, choice, fromDepot, fromStrongbox);
     }
 
-    public void activateProduction(DevelopmentCard[] cards) {
-        // TODO implement here
+    public void activateProduction(List<DevelopmentCard> cards) throws NegativeResAmountException, InvalidKeyException, NotEnoughResException {
+        for(DevelopmentCard devCard: cards){
+            getPersonalBoard().getStrongbox().addResources(devCard.getProdPower().getOutput());
+        }
     }
 
     public void useLeader(int index, LeaderAction choice) throws TooManyLeaderAbilitiesException, LeaderAbilityAlreadyActive, InvalidLayerNumberException {

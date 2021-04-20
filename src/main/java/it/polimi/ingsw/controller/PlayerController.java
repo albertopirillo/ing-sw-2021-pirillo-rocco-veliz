@@ -4,6 +4,7 @@ import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.network.DepotSetting;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerController {
@@ -44,6 +45,29 @@ public class PlayerController {
         try {
             player.buyDevCard(level, color, numSlot, choice, fromDepot, fromStrongbox);
         } catch (CannotContainFaithException | NotEnoughSpaceException | NegativeResAmountException | DeckEmptyException | CostNotMatchingException | NotEnoughResException | InvalidKeyException | NoLeaderAbilitiesException | InvalidAbilityChoiceException | DevSlotEmptyException | InvalidNumSlotException e) {
+            controller.setException(e);
+        }
+    }
+
+    public void activateProduction(Player player, Resource fromDepot, Resource fromStrongbox, List<Integer> numSlots) {
+        // TODO: Player player = controller.getGame().getCurrentPlayer()
+        PersonalBoard personalBoard = player.getPersonalBoard();
+        List<DevelopmentCard> devCards = new ArrayList<>();
+        Resource total = new Resource(0,0,0,0);
+        Depot depot = personalBoard.getDepot();
+        Strongbox strongbox = personalBoard.getStrongbox();
+        DevelopmentCard card;
+        try {
+            for(Integer i : numSlots){
+                card = personalBoard.getSlot(i).getTopCard();
+                devCards.add(card);
+                total = total.sum(card.getProdPower().getInput());
+            }
+            BasicStrategies.checkAndCompare(depot, strongbox, fromDepot, fromStrongbox, total);
+            player.activateProduction(devCards);
+            depot.retrieveRes(fromDepot);
+            strongbox.retrieveRes(fromStrongbox);
+        } catch (CostNotMatchingException | NotEnoughResException | NegativeResAmountException | InvalidKeyException | DevSlotEmptyException | NotEnoughSpaceException | CannotContainFaithException e) {
             controller.setException(e);
         }
     }

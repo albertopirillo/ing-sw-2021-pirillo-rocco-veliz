@@ -16,15 +16,14 @@ class DevCardsStrategyTest {
 
         Depot depot = player.getPersonalBoard().getDepot();
         Strongbox strongbox = player.getPersonalBoard().getStrongbox();
-        depot.modifyLayer(3, ResourceType.COIN, 3);
+        depot.modifyLayer(2, ResourceType.COIN, 2);
         strongbox.addResources(new Resource(2,1,0,3));
 
-        Card card = player.getGame().getMarket().getCard(2, CardColor.BLUE);
-        //DevelopmentCard{cost={{STONE=0, SHIELD=0, COIN=4, SERVANT=0}}, type=BLUE, level=2, prodPower={input={{STONE=0, SHIELD=0, COIN=0, SERVANT=1}}, output={{FAITH=2}}}}
+        Card card = player.getGame().getMarket().getCard(1, CardColor.BLUE);
+        //DevelopmentCard{cost={{STONE=0, COIN=3, SHIELD=0, SERVANT=0}}, type=BLUE, level=1, prodPower={input={{STONE=2, COIN=0, SHIELD=0, SERVANT=0}},output={{STONE=0, SHIELD=1, COIN=1, SERVANT=1}}}}
 
-
-        player.buyDevCard(2, CardColor.BLUE, 0, AbilityChoice.STANDARD,
-                new Resource(0,3,0,0),
+        player.buyDevCard(1, CardColor.BLUE, 0, AbilityChoice.STANDARD,
+                new Resource(0,2,0,0),
                 new Resource(0,1,0,0));
 
         assertEquals(card, player.getPersonalBoard().getSlot(0).getTopCard());

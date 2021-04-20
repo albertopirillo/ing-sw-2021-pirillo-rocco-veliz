@@ -1,0 +1,24 @@
+Setup della connessione:
+-	start connection
+-	login:
+	- set nickname
+	- set player count (if first)
+-	close connection
+
+
+Setup del gioco:
+-	chooseLeaderCards
+-	chooseInitialResources
+
+
+Azioni di gioco:
+-	takeResources => return Resource
+-	buyDevCard
+-	activateLeaderAbility (and discard)
+-	activateBasicProduction
+-	activateExtraProduction
+-	activateDevProduction
+-	placeResource
+-	reorderDepot
+-	discardResource
+- 	endTurn

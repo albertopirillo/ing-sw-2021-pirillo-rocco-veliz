@@ -2,7 +2,9 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.InvalidKeyException;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.Deque;
+import java.util.List;
 
 public class MarketTray {
 
@@ -20,7 +22,12 @@ public class MarketTray {
             }
         }
     }
-    public MarketTray(int noRandom) {
+
+    //  PURPLE  PURPLE  YELLOW  YELLOW
+    //  GREY  GREY  BLUE  BLUE
+    //  WHITE  WHITE  WHITE  WHITE
+    //  Remaining marble = RED
+    public MarketTray(boolean noRandom) {
         marketMarbles = new MarblesColor[3][4];
         Deque<MarblesColor> marbleList = Marbles.getAllMarbleList(Marbles.getAllMarblesMap());
         //Collections.shuffle((List<MarblesColor>) marbleList);
@@ -85,4 +92,17 @@ public class MarketTray {
 
     //only for testing
     public MarblesColor getRemainingMarble() { return remainingMarble; }
+
+    @Override
+    public String toString() {
+        StringBuilder matrix = new StringBuilder();
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 4; j++) {
+                matrix.append(marketMarbles[i][j]).append("  ");
+            }
+            matrix.append("\n");
+        }
+        matrix.append("Remaining marble = ").append(remainingMarble);
+        return matrix.toString();
+    }
 }

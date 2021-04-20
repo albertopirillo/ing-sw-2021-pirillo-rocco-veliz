@@ -47,8 +47,8 @@ public class DevCardsStrategy {
         }
         for (ResourceType key: cost.keySet()) {
             if (discount.containsKey(key)){
-                int newValue = Math.max(0, cost.getValue(key) - discount.get(key));
-                cost.modifyValue(key, newValue);
+                if (cost.getValue(key) - discount.get(key) > 0) cost.modifyValue(key, - discount.get(key));
+                else cost.modifyValue(key, - cost.getValue(key));
             }
         }
 

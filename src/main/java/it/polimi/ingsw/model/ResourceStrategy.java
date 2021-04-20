@@ -26,7 +26,7 @@ public class ResourceStrategy {
     }
 
     //The player can decide whether to convert the color of every single marble
-    public Resource takeResources(Player player, int position, AbilityChoice choice, int amount1, int amount2) throws InvalidKeyException, NegativeResAmountException, NoLeaderAbilitiesException, InvalidAbilityChoiceException {
+    public Resource takeResources(Player player, int position, AbilityChoice choice, int amount1, int amount2) throws InvalidKeyException, NegativeResAmountException, NoLeaderAbilitiesException, InvalidAbilityChoiceException, CostNotMatchingException {
         if (this.size == 0) throw new NoLeaderAbilitiesException();
         if ((this.size == 1 && (choice == AbilityChoice.SECOND || choice == AbilityChoice.BOTH)))
             throw new InvalidAbilityChoiceException();
@@ -34,7 +34,7 @@ public class ResourceStrategy {
         //Check if amount1+amount2 is equal to the number of white marbles
         Market market = player.getGame().getMarket();
         Marbles marbles = market.getMarketTray().insertMarble(position);
-        if (amount1 + amount2 != marbles.getValue(MarblesColor.WHITE)) throw new InvalidAbilityChoiceException();
+        if (amount1 + amount2 != marbles.getValue(MarblesColor.WHITE)) throw new CostNotMatchingException("The number of white marbles does not match");
 
         //Selects the requested abilities and modifies the output resource
         Resource outputRes = marbles.getResources();
@@ -49,7 +49,6 @@ public class ResourceStrategy {
         }
         if (choice == AbilityChoice.SECOND || choice == AbilityChoice.BOTH) {
             ResourceType modRes2 = resTypes[1].getResourceType();
-            outputRes.modifyValue(modRes2, amount2);
             try {
                 outputRes.addResource(modRes2, amount2);
             } catch (KeyAlreadyExistsException e) {

@@ -37,13 +37,21 @@ public class Game {
         this.playerAmount = playerAmount;
         this.players = players;
         this.gameID = Game.gamesCount + 1;
+        this.market = new Market();
         Game.gamesCount++;
         startGame();
     }
 
+    public Game(boolean testing) throws FullCardDeckException {
+        this.lastTurn = false;
+        this.playerAmount = 4;
+        this.gameID = Game.gamesCount + 1;
+        this.market = new Market(testing);
+        Game.gamesCount++;
+    }
+
     public void startGame() throws FullCardDeckException {
         //init market and devCards
-        this.market = new Market();
         //init leader cart and give them to players
         GsonBuilder builder = new GsonBuilder();
         //add adapter to deserialize from abstract class
@@ -126,7 +134,7 @@ public class Game {
             for (int i = 0; i < playerAmount; i++) {
                 p[i] = players.get(numPlayer + i % playerAmount);
             }
-            players = (ArrayList<Player>) Arrays.asList(p);
+            players = Arrays.asList(p);
         }
     }
 

@@ -111,7 +111,7 @@ public class Player {
         return depotRes.sum(strongboxRes);
     }
 
-    public Resource takeResources(int position, AbilityChoice choice, int amount1, int amount2) throws NegativeResAmountException, InvalidKeyException, InvalidAbilityChoiceException, NoLeaderAbilitiesException {
+    public Resource takeResources(int position, AbilityChoice choice, int amount1, int amount2) throws NegativeResAmountException, InvalidKeyException, InvalidAbilityChoiceException, NoLeaderAbilitiesException, CostNotMatchingException {
         if (choice == AbilityChoice.STANDARD) return BasicStrategies.takeResources(this, position);
         else return this.resStrategy.takeResources(this, position, choice, amount1, amount2);
     }

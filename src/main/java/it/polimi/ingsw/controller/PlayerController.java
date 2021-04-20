@@ -2,14 +2,15 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.network.DepotSetting;
 
 import java.util.List;
 
 public class PlayerController {
 
-    private final Controller controller;
+    private final MasterController controller;
 
-    public PlayerController(Controller controller) {
+    public PlayerController(MasterController controller) {
         this.controller = controller;
     }
 
@@ -34,7 +35,7 @@ public class PlayerController {
         try {
             Resource output = player.takeResources(position, choice, amount1, amount2);
             controller.getDepotController().handleDepot(player, output, settings);
-        } catch (NegativeResAmountException | InvalidKeyException | InvalidAbilityChoiceException | NoLeaderAbilitiesException | WrongDepotInstructionsException e) {
+        } catch (NegativeResAmountException | InvalidKeyException | InvalidAbilityChoiceException | NoLeaderAbilitiesException | WrongDepotInstructionsException | CostNotMatchingException e) {
             controller.setException(e);
         }
     }

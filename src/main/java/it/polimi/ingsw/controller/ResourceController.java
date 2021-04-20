@@ -4,14 +4,15 @@ import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.model.Depot;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.Resource;
+import it.polimi.ingsw.network.DepotSetting;
 
 import java.util.List;
 
-public class DepotController {
+public class ResourceController {
 
-    private final Controller controller;
+    private final MasterController controller;
 
-    public DepotController(Controller controller) {
+    public ResourceController(MasterController controller) {
         this.controller = controller;
     }
 

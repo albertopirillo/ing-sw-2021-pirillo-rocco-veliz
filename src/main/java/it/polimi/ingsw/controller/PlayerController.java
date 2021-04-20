@@ -2,14 +2,15 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.network.DepotSetting;
 
 import java.util.List;
 
 public class PlayerController {
 
-    private final Controller controller;
+    private final MasterController controller;
 
-    public PlayerController(Controller controller) {
+    public PlayerController(MasterController controller) {
         this.controller = controller;
     }
 

@@ -20,7 +20,7 @@ public class BasicStrategies {
     }
 
     //Input resources can be paid from either Depot or Strongbox
-    public static void buyDevCard(Player player, int level, CardColor color, Resource cardCost, Resource fromDepot, Resource fromStrongbox) throws NotEnoughResException, DeckEmptyException, NegativeResAmountException, InvalidKeyException, NotEnoughSpaceException, CannotContainFaithException, CostNotMatchingException {
+    public static void buyDevCard(Player player, int level, CardColor color, int numSlot, Resource cardCost, Resource fromDepot, Resource fromStrongbox) throws NotEnoughResException, DeckEmptyException, NegativeResAmountException, InvalidKeyException, NotEnoughSpaceException, CannotContainFaithException, CostNotMatchingException, DevSlotEmptyException, InvalidNumSlotException {
         Market market = player.getGame().getMarket();
         Depot depot = player.getPersonalBoard().getDepot();
         Strongbox strongbox = player.getPersonalBoard().getStrongbox();
@@ -29,7 +29,7 @@ public class BasicStrategies {
 
         //Give the card to the player
         DevelopmentCard card = market.buyCards(level, color);
-        player.getPersonalBoard().addDevCard(card);
+        player.getPersonalBoard().addDevCard(card, numSlot);
 
         //Remove those resources from the player
         depot.retrieveRes(fromDepot);

@@ -1,7 +1,9 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.DevSlotEmptyException;
+import it.polimi.ingsw.exceptions.InvalidNumSlotException;
 
+import javax.management.openmbean.KeyAlreadyExistsException;
 import java.util.List;
 
 public class PersonalBoard {
@@ -44,17 +46,10 @@ public class PersonalBoard {
         this.strongbox = strongbox;
     }
 
-    public void addDevCard(DevelopmentCard devCard/*, int slotNumber*/){
-        int slotNumber;
-        boolean can = false;
-        for (slotNumber=0; slotNumber<devSlots.length && !can; slotNumber++){
-            try {
-                can = getSlot(slotNumber).canBeAdded(devCard);
-            } catch (DevSlotEmptyException e) {
-                e.printStackTrace();
-            }
-        }
-        this.devSlots[slotNumber-1].addCard(devCard);
+    public void addDevCard(DevelopmentCard devCard, int slotNumber) throws DevSlotEmptyException, InvalidNumSlotException {
+        if(this.devSlots[slotNumber-1].canBeAdded(devCard))
+            this.devSlots[slotNumber-1].addCard(devCard);
+        else throw new InvalidNumSlotException();
     }
 
     public void updateFaithTrack(List<Player> players) {

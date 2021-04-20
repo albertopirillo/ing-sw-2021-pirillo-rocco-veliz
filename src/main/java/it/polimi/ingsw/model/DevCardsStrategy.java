@@ -26,7 +26,7 @@ public class DevCardsStrategy {
         size++;
     }
 
-    public void buyDevCard(Player player, int level, CardColor color, AbilityChoice choice, Resource fromDepot, Resource fromStrongbox) throws DeckEmptyException, NegativeResAmountException, InvalidKeyException, NotEnoughResException, CannotContainFaithException, CostNotMatchingException, NotEnoughSpaceException, NoLeaderAbilitiesException, InvalidAbilityChoiceException {
+    public void buyDevCard(Player player, int level, CardColor color, int numSlot, AbilityChoice choice, Resource fromDepot, Resource fromStrongbox) throws DeckEmptyException, NegativeResAmountException, InvalidKeyException, NotEnoughResException, CannotContainFaithException, CostNotMatchingException, NotEnoughSpaceException, NoLeaderAbilitiesException, InvalidAbilityChoiceException, DevSlotEmptyException, InvalidNumSlotException {
         if (this.size == 0) throw new NoLeaderAbilitiesException();
         if (this.size == 1 && choice.ordinal() > 1) throw new InvalidAbilityChoiceException();
 
@@ -53,6 +53,6 @@ public class DevCardsStrategy {
         }
 
         //Now the basic strategy can be used
-        BasicStrategies.buyDevCard(player, level, color, cost, fromDepot, fromStrongbox);
+        BasicStrategies.buyDevCard(player, level, color, numSlot, cost, fromDepot, fromStrongbox);
     }
 }

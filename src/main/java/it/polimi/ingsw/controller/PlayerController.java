@@ -39,10 +39,10 @@ public class PlayerController {
         }
     }
 
-    public void buyDevCard(Player player, int level, CardColor color, AbilityChoice choice, Resource fromDepot, Resource fromStrongbox) {
+    public void buyDevCard(Player player, int level, CardColor color, int numSlot, AbilityChoice choice, Resource fromDepot, Resource fromStrongbox) {
         try {
-            player.buyDevCard(level, color, choice, fromDepot, fromStrongbox);
-        } catch (CannotContainFaithException | NotEnoughSpaceException | NegativeResAmountException | DeckEmptyException | CostNotMatchingException | NotEnoughResException | InvalidKeyException | NoLeaderAbilitiesException | InvalidAbilityChoiceException e) {
+            player.buyDevCard(level, color, numSlot, choice, fromDepot, fromStrongbox);
+        } catch (CannotContainFaithException | NotEnoughSpaceException | NegativeResAmountException | DeckEmptyException | CostNotMatchingException | NotEnoughResException | InvalidKeyException | NoLeaderAbilitiesException | InvalidAbilityChoiceException | DevSlotEmptyException | InvalidNumSlotException e) {
             controller.setException(e);
         }
     }

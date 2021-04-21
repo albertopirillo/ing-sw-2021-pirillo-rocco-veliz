@@ -199,7 +199,7 @@ public class ConcreteDepotTest {
      }
 
     @Test
-    public void discardTest() throws FullCardDeckException, InvalidResourceException, LayerNotEmptyException, NotEnoughSpaceException, InvalidLayerNumberException, CannotContainFaithException, AlreadyInAnotherLayerException, NegativeResAmountException, InvalidKeyException, NotEnoughResException {
+    public void discardTest() throws FullCardDeckException, CannotContainFaithException, NegativeResAmountException, InvalidKeyException {
         Player player1 = new Player("a");
         Player player2 = new Player("b");
         Player player3 = new Player("c");
@@ -212,16 +212,11 @@ public class ConcreteDepotTest {
         Game game = new Game(3, playerList);
         player1.setGame(game);
         Depot depot1 = player1.getPersonalBoard().getDepot();
-        depot1.modifyLayer(2, ResourceType.COIN, 2);
-        depot1.modifyLayer(3, ResourceType.SERVANT, 2);
 
         Resource KO = new Resource();
         KO.addResource(ResourceType.COIN, 2);
         KO.addResource(ResourceType.FAITH, 1);
         assertThrows(CannotContainFaithException.class, () -> depot1.discardRes(player1, KO));
-
-        assertThrows(NotEnoughResException.class,
-                () -> depot1.discardRes(player1, new Resource(1,2,0,2)));
 
         Resource OK = new Resource(0,2,0,2);
         depot1.discardRes(player1, OK);

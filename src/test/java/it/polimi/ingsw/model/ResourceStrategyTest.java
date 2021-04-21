@@ -39,8 +39,6 @@ class ResourceStrategyTest {
         check1.addResource(ResourceType.SERVANT, 1);
         assertEquals(check1, output1);
         assertEquals(0, player.getPlayerFaith());
-
-        System.out.println(player.getGame().getMarket().getMarketTray());
     }
 
     @Test

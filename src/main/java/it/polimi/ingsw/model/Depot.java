@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.*;
+import it.polimi.ingsw.network.DepotSetting;
 
 import java.util.HashMap;
 import java.util.List;
@@ -51,6 +52,17 @@ public abstract class Depot {
         }
         Layer layer = this.getLayer(layerNumber);
         layer.setResAndAmount(resType, layer.getAmount() + addend);
+    }
+
+    //Used in ResourceController => return true if List<DepotSettings> wont throw exceptions
+    public boolean canInsert(List<DepotSetting> settings) throws InvalidLayerNumberException {
+        for(DepotSetting setting: settings) {
+            if (setting.getAmount() != 0) {
+                Layer layer = this.getLayer(setting.getLayerNumber());
+                    if (!layer.canInsert(setting.getResType(), setting.getAmount())) return false;
+                }
+            }
+        return true;
     }
 
     public void moveResources(int amount, int fromLayerNumber, int toLayerNumber) throws
@@ -119,15 +131,12 @@ public abstract class Depot {
         }
     }
 
-    //A resource can be discarded from the Depot, but all other players will receive a Faith Point
-    public void discardRes(Player player, Resource resource) throws NegativeResAmountException, InvalidKeyException, NotEnoughResException, NotEnoughSpaceException, CannotContainFaithException {
+    //Resources can only be discard when taken from the Market
+    public void discardRes(Player player, Resource resource) throws CannotContainFaithException {
         if (resource.keySet().contains(ResourceType.FAITH))
             throw new CannotContainFaithException("You cannot discard faith points");
-        if (!this.queryAllRes().compare(resource))
-            throw new NotEnoughResException("You're trying to discard more resources than you have");
 
         List<Player> playerList = player.getGame().getPlayers();
-        this.retrieveRes(resource);
         for(Player p: playerList) {
             if (p != player) p.addPlayerFaith(resource.getTotalAmount());
         }

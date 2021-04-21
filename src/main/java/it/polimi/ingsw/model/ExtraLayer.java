@@ -1,6 +1,8 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.exceptions.*;
+import it.polimi.ingsw.exceptions.InvalidResourceException;
+import it.polimi.ingsw.exceptions.NegativeResAmountException;
+import it.polimi.ingsw.exceptions.NotEnoughSpaceException;
 
 public class ExtraLayer implements Layer {
 
@@ -45,6 +47,11 @@ public class ExtraLayer implements Layer {
     public void setResAndAmount(ResourceType resource, int amount) throws NegativeResAmountException, NotEnoughSpaceException, InvalidResourceException {
         if (this.resource != resource) throw new InvalidResourceException();
         else this.setAmount(amount);
+    }
+
+    @Override
+    public boolean canInsert(ResourceType resource, int amount) {
+        return (amount >= 0) && (amount <= MAX) && (this.resource == resource);
     }
 }
 

@@ -10,5 +10,5 @@ public interface Layer {
     void setAmount(int amount) throws NotEnoughSpaceException, NegativeResAmountException;
     void resetLayer();
     void setResAndAmount(ResourceType resource, int amount) throws NegativeResAmountException, NotEnoughSpaceException, InvalidResourceException, CannotContainFaithException, LayerNotEmptyException;
-
+    boolean canInsert(ResourceType resource, int amount);
 }

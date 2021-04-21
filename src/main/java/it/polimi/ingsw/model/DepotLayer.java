@@ -60,4 +60,10 @@ public class DepotLayer implements Layer {
         if (amount == 0) this.resource = null;
         else this.resource = resource;
     }
+
+    @Override
+    public boolean canInsert(ResourceType resource, int amount) {
+        return (resource != ResourceType.FAITH) && (amount >= 0) && (amount <= MAX) &&
+                (this.resource == null || this.resource == resource);
+    }
 }

@@ -15,17 +15,19 @@ public class PlayerController {
         this.controller = controller;
     }
 
-    public void basicProduction(Player player, ResourceType input1, ResourceType input2, ResourceType output, Resource fromDepot, Resource fromStrongbox) {
+    public void basicProduction(ResourceType input1, ResourceType input2, ResourceType output, Resource fromDepot, Resource fromStrongbox) {
         try {
-            player.basicProduction(input1, input2, output, fromDepot, fromStrongbox);
+            Player activePlayer = controller.getGame().getActivePlayer();
+            activePlayer.basicProduction(input1, input2, output, fromDepot, fromStrongbox);
         } catch (CostNotMatchingException | NotEnoughSpaceException | CannotContainFaithException | NotEnoughResException | NegativeResAmountException | InvalidKeyException e) {
             controller.setException(e);
         }
     }
 
-    public void extraProduction(Player player, AbilityChoice choice, Resource fromDepot, Resource fromStrongbox) {
+    public void extraProduction(AbilityChoice choice, Resource fromDepot, Resource fromStrongbox) {
         try {
-            player.extraProduction(choice, fromDepot, fromStrongbox);
+            Player activePlayer = controller.getGame().getActivePlayer();
+            activePlayer.extraProduction(choice, fromDepot, fromStrongbox);
         } catch (CostNotMatchingException | InvalidAbilityChoiceException | NotEnoughSpaceException | NoLeaderAbilitiesException | CannotContainFaithException | NotEnoughResException | NegativeResAmountException | InvalidKeyException e) {
             controller.setException(e);
         }
@@ -36,23 +38,43 @@ public class PlayerController {
         try {
             Player activePlayer = controller.getGame().getActivePlayer();
             Resource output = activePlayer.insertMarble(position, choice, amount1, amount2);
-            controller.getResourceController().setToPlace(output);
+            controller.getResourceController().setToHandle(output);
         } catch (NegativeResAmountException | InvalidKeyException | InvalidAbilityChoiceException | NoLeaderAbilitiesException | CostNotMatchingException e) {
             controller.setException(e);
         }
     }
 
-    public void buyDevCard(Player player, int level, CardColor color, int numSlot, AbilityChoice choice, Resource fromDepot, Resource fromStrongbox) {
+    public void buyDevCard(int level, CardColor color, int numSlot, AbilityChoice choice, Resource fromDepot, Resource fromStrongbox) {
         try {
-            player.buyDevCard(level, color, numSlot, choice, fromDepot, fromStrongbox);
+            Player activePlayer = controller.getGame().getActivePlayer();
+            activePlayer.buyDevCard(level, color, numSlot, choice, fromDepot, fromStrongbox);
         } catch (CannotContainFaithException | NotEnoughSpaceException | NegativeResAmountException | DeckEmptyException | CostNotMatchingException | NotEnoughResException | InvalidKeyException | NoLeaderAbilitiesException | InvalidAbilityChoiceException | DevSlotEmptyException | InvalidNumSlotException e) {
             controller.setException(e);
         }
     }
+    
+    public void placeResource(Resource toDiscard, List<DepotSetting> toPlace) {
+        try {
+            Player activePlayer = controller.getGame().getActivePlayer();
+            controller.getResourceController().handleResource(activePlayer, toDiscard, toPlace);
+        } catch (NotEnoughResException | NotEnoughSpaceException | CannotContainFaithException | NegativeResAmountException | InvalidKeyException | InvalidResourceException | WrongDepotInstructionsException | LayerNotEmptyException | InvalidLayerNumberException | AlreadyInAnotherLayerException e) {
+            controller.setException(e);
+        }
+    }
 
-    public void activateProduction(Player player, Resource fromDepot, Resource fromStrongbox, List<Integer> numSlots) {
-        // TODO: Player player = controller.getGame().getCurrentPlayer()
-        PersonalBoard personalBoard = player.getPersonalBoard();
+    public void endTurn() {
+        try { //Check exception and resource handling
+            if (!controller.getResourceController().isEmpty()) throw new CannotEndTurnException("There are still resources to be placed");
+            controller.setException(null);
+            controller.getGame().nextTurn();
+        } catch (CannotEndTurnException e) {
+            controller.setException(e);
+        }
+    }
+
+    public void activateProduction(Resource fromDepot, Resource fromStrongbox, List<Integer> numSlots) {
+        Player activePlayer = controller.getGame().getActivePlayer();
+        PersonalBoard personalBoard = activePlayer.getPersonalBoard();
         List<DevelopmentCard> devCards = new ArrayList<>();
         Resource total = new Resource(0,0,0,0);
         Depot depot = personalBoard.getDepot();
@@ -65,7 +87,7 @@ public class PlayerController {
                 total = total.sum(card.getProdPower().getInput());
             }
             BasicStrategies.checkAndCompare(depot, strongbox, fromDepot, fromStrongbox, total);
-            player.activateProduction(devCards);
+            activePlayer.activateProduction(devCards);
             depot.retrieveRes(fromDepot);
             strongbox.retrieveRes(fromStrongbox);
         } catch (CostNotMatchingException | NotEnoughResException | NegativeResAmountException | InvalidKeyException | DevSlotEmptyException | NotEnoughSpaceException | CannotContainFaithException e) {

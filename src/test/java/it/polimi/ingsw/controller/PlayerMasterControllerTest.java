@@ -59,14 +59,14 @@ class PlayerMasterControllerTest {
     }
 
     @Test
-    public void takeResources() throws FullCardDeckException {
-        MasterController controller = new MasterController(null);
-        PlayerController playerController = controller.getPlayerController();
-        Player player = new Player( "John");
+    public void takeResources() throws FullCardDeckException, TooManyLeaderAbilitiesException {
         Game game = new Game(true);
-        player.setGame(game);
+        MasterController controller = new MasterController(game);
+        PlayerController playerController = controller.getPlayerController();
+        Player activePlayer = game.getActivePlayer();
+        activePlayer.setGame(game);
 
-        playerController.takeResources(player, 1, AbilityChoice.FIRST, 0, 0, null);
+        playerController.insertMarble(1, AbilityChoice.FIRST, 0, 0);
         assertEquals("The player has no leader ability of that type already active", controller.getError());
 
         //  PURPLE  PURPLE  YELLOW  YELLOW
@@ -74,11 +74,10 @@ class PlayerMasterControllerTest {
         //  WHITE  WHITE  WHITE  WHITE
         //  Remaining marble = RED
 
-        //TODO: test with the new DepotSetting
-        /*ChangeWhiteMarbles changeWhiteMarbles = new ChangeWhiteMarbles(ResourceType.SHIELD);
-        changeWhiteMarbles.activate(player);
-        playerController.takeResources(player, 1, AbilityChoice.STANDARD, 1, 0, null);
-        assertEquals("Result: OK", controller.getError());*/
+        ChangeWhiteMarbles changeWhiteMarbles = new ChangeWhiteMarbles(ResourceType.SHIELD);
+        changeWhiteMarbles.activate(activePlayer);
+        playerController.insertMarble(1, AbilityChoice.STANDARD, 1, 0);
+        assertEquals("Result: OK", controller.getError());
     }
 
     @Test

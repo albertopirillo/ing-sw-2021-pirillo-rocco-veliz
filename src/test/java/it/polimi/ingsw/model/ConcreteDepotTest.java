@@ -209,7 +209,7 @@ public class ConcreteDepotTest {
         playerList.add(player2);
         playerList.add(player3);
 
-        Game game = new Game(4, playerList);
+        Game game = new Game(3, playerList);
         player1.setGame(game);
         Depot depot1 = player1.getPersonalBoard().getDepot();
         depot1.modifyLayer(2, ResourceType.COIN, 2);

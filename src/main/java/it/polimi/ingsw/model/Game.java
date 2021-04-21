@@ -49,6 +49,16 @@ public class Game {
         this.gameID = Game.gamesCount + 1;
         this.market = new Market(testing);
         Game.gamesCount++;
+        Player player1 = new Player("a");
+        Player player2 = new Player("b");
+        Player player3 = new Player("c");
+        Player player4 = new Player("d");
+        this.players = new ArrayList<>();
+        this.players.add(player1);
+        this.players.add(player2);
+        this.players.add(player3);
+        this.players.add(player4);
+        startGame();
     }
 
     public void startGame() {

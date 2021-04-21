@@ -31,9 +31,9 @@ class ResourceStrategyTest {
         Game game = new Game(true);
         player.setGame(game);
 
-        assertThrows(NoLeaderAbilitiesException.class, () -> player.takeResources(3, AbilityChoice.FIRST, 3,5));
+        assertThrows(NoLeaderAbilitiesException.class, () -> player.insertMarble(3, AbilityChoice.FIRST, 3,5));
 
-        Resource output1 = player.takeResources(1, AbilityChoice.STANDARD, 0, 0);
+        Resource output1 = player.insertMarble(1, AbilityChoice.STANDARD, 0, 0);
         Resource check1 = new Resource();
         check1.addResource(ResourceType.STONE, 1);
         check1.addResource(ResourceType.SERVANT, 1);
@@ -49,7 +49,7 @@ class ResourceStrategyTest {
         Game game = new Game(true);
         player.setGame(game);
 
-        Resource output2 = player.takeResources(5, AbilityChoice.STANDARD, 2, 3);
+        Resource output2 = player.insertMarble(5, AbilityChoice.STANDARD, 2, 3);
         Resource check2 = new Resource();
         check2.addResource(ResourceType.STONE, 2);
         check2.addResource(ResourceType.SHIELD, 2);
@@ -62,7 +62,7 @@ class ResourceStrategyTest {
         Player player = new Player( "abc");
         Game game = new Game(true);
         player.setGame(game);
-        player.takeResources(1, AbilityChoice.STANDARD, 0, 0);
+        player.insertMarble(1, AbilityChoice.STANDARD, 0, 0);
 
         //  PURPLE  GREY  YELLOW  YELLOW
         //  GREY  WHITE  BLUE  BLUE
@@ -70,7 +70,7 @@ class ResourceStrategyTest {
         //  Remaining marble = PURPLE
         //Resource output = player.takeResources()
 
-        Resource output2 = player.takeResources(1, AbilityChoice.STANDARD, 0, 0);
+        Resource output2 = player.insertMarble(1, AbilityChoice.STANDARD, 0, 0);
         Resource check2 = new Resource();
         check2.addResource(ResourceType.STONE, 1);
         assertEquals(check2, output2);
@@ -87,7 +87,7 @@ class ResourceStrategyTest {
         ability1.activate(player);
         ability2.activate(player);
 
-        Resource output = player.takeResources(3, AbilityChoice.SECOND, 0, 1);
+        Resource output = player.insertMarble(3, AbilityChoice.SECOND, 0, 1);
         Resource check = new Resource();
         check.addResource(ResourceType.SHIELD, 1);
         check.addResource(ResourceType.COIN, 1);
@@ -106,7 +106,7 @@ class ResourceStrategyTest {
         ability1.activate(player);
         ability2.activate(player);
 
-        Resource output = player.takeResources(4, AbilityChoice.BOTH, 1, 3);
+        Resource output = player.insertMarble(4, AbilityChoice.BOTH, 1, 3);
         Resource check = new Resource();
         check.addResource(ResourceType.COIN, 1);
         check.addResource(ResourceType.SHIELD, 3);

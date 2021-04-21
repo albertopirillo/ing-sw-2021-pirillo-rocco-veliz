@@ -5,7 +5,7 @@ import it.polimi.ingsw.exceptions.*;
 public class BasicStrategies {
 
     //Output resources can only go in the depot
-    public static Resource takeResources(Player player, int position) throws InvalidKeyException, NegativeResAmountException {
+    public static Resource insertMarble(Player player, int position) throws InvalidKeyException, NegativeResAmountException {
        Market market = player.getGame().getMarket();
        Marbles marbles = market.getMarketTray().insertMarble(position);
        Resource temp = marbles.getResources();

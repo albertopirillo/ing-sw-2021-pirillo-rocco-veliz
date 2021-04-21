@@ -32,11 +32,12 @@ public class PlayerController {
     }
 
     //Calls the player method and then DepotController to handle the resource placement in the depot
-    public void takeResources(Player player, int position, AbilityChoice choice, int amount1, int amount2, List<DepotSetting> settings) {
+    public void insertMarble(int position, AbilityChoice choice, int amount1, int amount2) {
         try {
-            Resource output = player.takeResources(position, choice, amount1, amount2);
-            controller.getDepotController().handleDepot(player, output, settings);
-        } catch (NegativeResAmountException | InvalidKeyException | InvalidAbilityChoiceException | NoLeaderAbilitiesException | WrongDepotInstructionsException | CostNotMatchingException e) {
+            Player activePlayer = controller.getGame().getActivePlayer();
+            Resource output = activePlayer.insertMarble(position, choice, amount1, amount2);
+            controller.getResourceController().setToPlace(output);
+        } catch (NegativeResAmountException | InvalidKeyException | InvalidAbilityChoiceException | NoLeaderAbilitiesException | CostNotMatchingException e) {
             controller.setException(e);
         }
     }

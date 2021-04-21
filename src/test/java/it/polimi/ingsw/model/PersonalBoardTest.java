@@ -2,35 +2,30 @@ package it.polimi.ingsw.model;
 
 import org.junit.jupiter.api.Test;
 
-public class GameTest {
+class PersonalBoardTest {
 
     @Test
-    public void gameTest() {
+    public void setDevSlots() {
         //TODO: implement here
     }
 
     @Test
-    public void calculatePointsTest() {
+    public void setStrongbox() {
         //TODO: implement here
     }
 
     @Test
-    public void giveLeaderCardsTest() {
+    public void getAllCards() {
         //TODO: implement here
     }
 
     @Test
-    public void giveInkwellTest() {
+    public void addDevCard() {
         //TODO: implement here
     }
 
     @Test
-    public void giveResourcesTest() {
-        //TODO: implement here
-    }
-
-    @Test
-    public void nextTurnTest() {
+    public void updateFaithTrack() {
         //TODO: implement here
     }
 }

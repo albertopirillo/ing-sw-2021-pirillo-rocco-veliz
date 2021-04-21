@@ -1,8 +1,6 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.exceptions.InvalidLayerNumberException;
-import it.polimi.ingsw.exceptions.LeaderAbilityAlreadyActive;
-import it.polimi.ingsw.exceptions.TooManyLeaderAbilitiesException;
+import it.polimi.ingsw.exceptions.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -10,11 +8,11 @@ import static org.junit.jupiter.api.Assertions.*;
 class ExtraProductionTest {
 
     @Test
-    void activate() throws TooManyLeaderAbilitiesException, InvalidLayerNumberException, LeaderAbilityAlreadyActive {
+    void activate() throws TooManyLeaderAbilitiesException, InvalidLayerNumberException, LeaderAbilityAlreadyActive, NegativeResAmountException, InvalidKeyException, CostNotMatchingException {
         //stub game = null
         Player player = new Player( "abc");
-        Resource resource1 = new Resource(1,2,3,4);
-        Resource resource2 = new Resource(4,3,2,1);
+        Resource resource1 = new Resource(0,0,0,0);
+        Resource resource2 = new Resource(0,0,0,0);
         LeaderAbility ability = new ExtraProduction(new ProductionPower(resource1, resource2));
         ResLeaderCard res1 = new ResLeaderCard(1, ability ,resource1);
         ResLeaderCard res2 = new ResLeaderCard(3, ability ,resource1);

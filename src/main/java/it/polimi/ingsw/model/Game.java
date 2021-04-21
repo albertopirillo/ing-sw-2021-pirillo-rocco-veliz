@@ -50,7 +50,7 @@ public class Game {
         Game.gamesCount++;
     }
 
-    public void startGame() throws FullCardDeckException {
+    public void startGame() {
         //init market and devCards
         //init leader cart and give them to players
         GsonBuilder builder = new GsonBuilder();
@@ -148,17 +148,5 @@ public class Game {
 
     private void nextTurn(Player[] player) {
         // TODO implement here
-    }
-
-    private void initializeMarketCards(DevelopmentCard[] cards) {
-        // TODO implement here
-    }
-
-    private void initializeMarketMarbles(MarblesColor[] marbles) {
-        // TODO implement here
-    }
-
-    private void createFaithTrack(Player player) {
-        // TODO CREATED WHEN CREATING PLAYER PERSONAL BOARD
     }
 }

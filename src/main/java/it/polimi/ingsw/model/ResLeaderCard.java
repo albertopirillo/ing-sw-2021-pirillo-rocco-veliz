@@ -1,10 +1,11 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.exceptions.NotEnoughResException;
+import it.polimi.ingsw.exceptions.InvalidKeyException;
+import it.polimi.ingsw.exceptions.NegativeResAmountException;
 
 public class ResLeaderCard extends LeaderCard {
 
-    private Resource cost;
+    private final Resource cost;
 
     //json initialization
     public ResLeaderCard(int victoryPoints, LeaderAbility specialAbility, Resource cost) {
@@ -12,13 +13,11 @@ public class ResLeaderCard extends LeaderCard {
         this.cost = cost;
     }
 
-    public boolean canBeActivated(Resource playerResource) throws NotEnoughResException {
-        if(playerResource == null)  throw new NotEnoughResException();
-        return playerResource.compare(this.cost);
+    public boolean canBeActivated(Player player) throws NegativeResAmountException, InvalidKeyException {
+        return player.getAllResources().compare(cost);
     }
 
     public Resource getCost() {
         return cost;
     }
-
 }

@@ -136,20 +136,22 @@ public class Player {
         }
     }
 
-    public void useLeader(int index, LeaderAction choice) throws TooManyLeaderAbilitiesException, LeaderAbilityAlreadyActive, InvalidLayerNumberException {
+    public void useLeader(int index, LeaderAction choice) throws TooManyLeaderAbilitiesException, LeaderAbilityAlreadyActive, InvalidLayerNumberException, NegativeResAmountException, InvalidKeyException, CostNotMatchingException {
         LeaderCard leader = this.leaderCards.get(index);
         if (leader.isActive()) throw new LeaderAbilityAlreadyActive();
-        //TODO: check if that card can be activated (enough res)
         if (choice == LeaderAction.DISCARD) {
             this.addPlayerFaith(1);
-            //TODO: do its victoryPoints still count?
+            //Victory points of discard card are not taken into consideration
             this.leaderCards.remove(leader);
         }
         else {
-            LeaderAbility ability = leader.getSpecialAbility();
-            ability.activate(this);
-            leader.activate();
-            this.activeLeaderAbilities.add(ability);
+            if (leader.canBeActivated(this)) {
+                LeaderAbility ability = leader.getSpecialAbility();
+                ability.activate(this);
+                leader.activate();
+                this.activeLeaderAbilities.add(ability);
+            }
+            else throw new CostNotMatchingException("LeaderCard requirements not satisfied");
         }
     }
 

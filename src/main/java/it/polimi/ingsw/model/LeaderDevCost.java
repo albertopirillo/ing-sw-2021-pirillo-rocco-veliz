@@ -2,15 +2,16 @@ package it.polimi.ingsw.model;
 
 public class LeaderDevCost {
 
-    private CardColor color;
+    private final CardColor color;
     private int level;
-    private int amount;
+    private final int amount;
 
     public LeaderDevCost(CardColor color, int level, int amount) {
         this.color = color;
         this.level = level;
         this.amount = amount;
     }
+
     public LeaderDevCost(CardColor color, int amount) {
         this.color = color;
         this.amount = amount;

@@ -3,7 +3,7 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.exceptions.DevSlotEmptyException;
 import it.polimi.ingsw.exceptions.InvalidNumSlotException;
 
-import javax.management.openmbean.KeyAlreadyExistsException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PersonalBoard {
@@ -12,7 +12,7 @@ public class PersonalBoard {
     private DevelopmentSlot[] devSlots;
     private Depot depot;
     private Strongbox strongbox;
-    private FaithTrack faithTrack;
+    private final FaithTrack faithTrack;
 
     public PersonalBoard(Player player) {
         this.depot = new ConcreteDepot();
@@ -52,8 +52,12 @@ public class PersonalBoard {
         return strongbox;
     }
 
-    public void setStrongbox(Strongbox strongbox) {
-        this.strongbox = strongbox;
+    public List<DevelopmentCard> getAllCards() {
+        List<DevelopmentCard> cardList = new ArrayList<>();
+        for (DevelopmentSlot slot: devSlots) {
+            cardList.addAll(slot.getCards());
+        }
+        return cardList;
     }
 
     public void addDevCard(DevelopmentCard devCard, int slotNumber) throws DevSlotEmptyException, InvalidNumSlotException {

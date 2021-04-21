@@ -1,8 +1,7 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.exceptions.NotEnoughResException;
-
-import java.util.*;
+import it.polimi.ingsw.exceptions.InvalidKeyException;
+import it.polimi.ingsw.exceptions.NegativeResAmountException;
 
 public abstract class LeaderCard extends Card {
 
@@ -34,10 +33,5 @@ public abstract class LeaderCard extends Card {
         return super.getVictoryPoints();
     }*/
 
-    public boolean canBeActivated(List<DevelopmentCard> playerCards) {
-        return false;
-    }
-    public boolean canBeActivated(Resource playerResource) throws NotEnoughResException {
-        return true;
-    }
+    public abstract boolean canBeActivated(Player player) throws NegativeResAmountException, InvalidKeyException;
 }

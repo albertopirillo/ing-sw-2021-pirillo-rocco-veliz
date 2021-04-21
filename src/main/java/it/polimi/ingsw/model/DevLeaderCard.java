@@ -5,14 +5,20 @@ import java.util.List;
 
 public class DevLeaderCard extends LeaderCard {
 
-    private List<LeaderDevCost> requires = new ArrayList<>();
+    private final List<LeaderDevCost> requires;
 
     public DevLeaderCard(int victoryPoints, LeaderAbility specialAbility, ArrayList<LeaderDevCost> requires) {
         super(victoryPoints, specialAbility);
         this.requires = requires;
     }
 
-    public boolean canBeActivated(List<DevelopmentCard> playerCards) {
+    public boolean canBeActivated(Player player) {
+        //TODO: implement here
+        return false;
+    }
+
+    //TODO: delete
+    /*public boolean canBeActivated(List<DevelopmentCard> playerCards) {
         boolean check;
         for (LeaderDevCost require : requires){
             if(require.getLevel()==0) {
@@ -24,5 +30,5 @@ public class DevLeaderCard extends LeaderCard {
         }
         return true;
 
-    }
+    }*/
 }

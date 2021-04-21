@@ -101,7 +101,6 @@ public class Game {
 
 
         giveInkwell();
-        game();
     }
 
     public Player getActivePlayer() {

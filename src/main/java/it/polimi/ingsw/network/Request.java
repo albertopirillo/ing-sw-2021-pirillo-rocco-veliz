@@ -1,6 +1,6 @@
 package it.polimi.ingsw.network;
 
-public abstract class Request extends Message {
+public abstract class Request{
 
     public Request() {
     }

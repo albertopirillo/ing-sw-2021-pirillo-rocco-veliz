@@ -5,6 +5,7 @@ public class SetupController {
     private final MasterController controller;
 
     public SetupController(MasterController controller) {
+
         this.controller = controller;
     }
 }

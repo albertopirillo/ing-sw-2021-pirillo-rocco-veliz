@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 class FaithTrackTest {
@@ -36,10 +35,16 @@ class FaithTrackTest {
         players.get(2).addPlayerFaith(8);
         players.get(2).getPersonalBoard().updateFaithTrack(players);
 
+        assertTrue(players.get(0).getPersonalBoard().getFaithTrack().getPopeFavorBySection(VaticanReportSection.GROUP_ONE).isReported());
+        assertFalse(players.get(0).getPersonalBoard().getFaithTrack().getPopeFavorBySection(VaticanReportSection.GROUP_ONE).isFaceUp());
         assertTrue(players.get(0).getPersonalBoard().getFaithTrack().getPopeFavorBySection(VaticanReportSection.GROUP_TWO).isReported());
         assertTrue(players.get(0).getPersonalBoard().getFaithTrack().getPopeFavorBySection(VaticanReportSection.GROUP_TWO).isFaceUp());
+        assertTrue(players.get(0).getPersonalBoard().getFaithTrack().getPopeFavorBySection(VaticanReportSection.GROUP_THREE).isReported());
+        assertFalse(players.get(0).getPersonalBoard().getFaithTrack().getPopeFavorBySection(VaticanReportSection.GROUP_THREE).isFaceUp());
         assertTrue(players.get(1).getPersonalBoard().getFaithTrack().getPopeFavorBySection(VaticanReportSection.GROUP_ONE).isReported());
         assertTrue(players.get(1).getPersonalBoard().getFaithTrack().getPopeFavorBySection(VaticanReportSection.GROUP_ONE).isFaceUp());
+        assertTrue(players.get(1).getPersonalBoard().getFaithTrack().getPopeFavorBySection(VaticanReportSection.GROUP_TWO).isReported());
+        assertFalse(players.get(1).getPersonalBoard().getFaithTrack().getPopeFavorBySection(VaticanReportSection.GROUP_TWO).isFaceUp());
         assertTrue(players.get(1).getPersonalBoard().getFaithTrack().getPopeFavorBySection(VaticanReportSection.GROUP_THREE).isReported());
         assertTrue(players.get(1).getPersonalBoard().getFaithTrack().getPopeFavorBySection(VaticanReportSection.GROUP_THREE).isFaceUp());
         assertTrue(players.get(2).getPersonalBoard().getFaithTrack().getPopeFavorBySection(VaticanReportSection.GROUP_ONE).isReported());

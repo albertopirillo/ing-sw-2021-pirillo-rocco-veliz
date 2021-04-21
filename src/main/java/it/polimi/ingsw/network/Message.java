@@ -1,9 +1,8 @@
 package it.polimi.ingsw.network;
 
-public class Message {
+import java.io.Serializable;
 
-    public Message() {
-    }
+public class Message implements Serializable {
 
     private MessageType type;
 
@@ -11,5 +10,10 @@ public class Message {
 
     private Connection connection;
 
+    public Message(String string) {
+        this.text = string; //test funzionamento sendMessage e receiveMessage
+    }
+
+    public String getText(){ return this.text;}
 
 }

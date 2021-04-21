@@ -94,7 +94,6 @@ public class Game {
 
 
         giveInkwell();
-        game();
     }
 
     public Market getMarket() {

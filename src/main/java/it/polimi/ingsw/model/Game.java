@@ -12,7 +12,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -23,6 +22,8 @@ public class Game {
     private final int gameID;
 
     private List<Player> players;
+
+    private Player activePlayer;
 
     private List<LeaderCard> finalDeckLeader;
 
@@ -97,6 +98,10 @@ public class Game {
         game();
     }
 
+    public Player getActivePlayer() {
+        return this.activePlayer;
+    }
+
     public Market getMarket() {
         return this.market;
     }
@@ -130,23 +135,20 @@ public class Game {
     }
 
     private void giveInkwell() {
+        //First player is chosen randomly
         int numPlayer = new Random().nextInt(playerAmount);
-        this.players.get(numPlayer).setInkwell(true);//player is choose random
-        //set the first player(that has the inkwell) as the element 0 of player[]
-        if (numPlayer != 0) {
-            Player[] p = new Player[playerAmount];
-            for (int i = 0; i < playerAmount; i++) {
-                p[i] = players.get(numPlayer + i % playerAmount);
-            }
-            players = Arrays.asList(p);
-        }
+        Player firstPlayer = this.players.get(numPlayer);
+        firstPlayer.setInkwell(true);
+        this.activePlayer = firstPlayer;
+    }
+
+    //Selects the new active Player
+    public void nextTurn() {
+        int index = this.players.indexOf(this.activePlayer);
+        this.activePlayer = this.players.get((index + 1) % playerAmount);
     }
 
     private void giveResources(Resource resource) {
-        // TODO implement here
-    }
-
-    private void nextTurn(Player[] player) {
         // TODO implement here
     }
 }

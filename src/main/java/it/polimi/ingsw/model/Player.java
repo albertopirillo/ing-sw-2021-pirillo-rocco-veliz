@@ -34,6 +34,7 @@ public class Player {
     public Player(String nickname) {
         this.nickname = nickname;
         this.isHisTurn = false;
+        this.hasInkwell = false;
         this.playerFaith = 0;
         this.victoryPoints = 0;
         this.personalBoard = new PersonalBoard(this);
@@ -45,7 +46,7 @@ public class Player {
     }
 
     public boolean getInkwell() {
-        return hasInkwell;
+        return this.hasInkwell;
     }
 
     public int getPlayerFaith() { return this.playerFaith; }
@@ -59,7 +60,7 @@ public class Player {
     }
 
     public void setInkwell(boolean bool) {
-        hasInkwell = bool;
+        this.hasInkwell = bool;
     }
 
     public String getNickname() {

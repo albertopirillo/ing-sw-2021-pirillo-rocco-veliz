@@ -1,6 +1,9 @@
 package it.polimi.ingsw.controller;
 
-import it.polimi.ingsw.exceptions.*;
+import it.polimi.ingsw.exceptions.FullCardDeckException;
+import it.polimi.ingsw.exceptions.InvalidKeyException;
+import it.polimi.ingsw.exceptions.NegativeResAmountException;
+import it.polimi.ingsw.exceptions.TooManyLeaderAbilitiesException;
 import it.polimi.ingsw.model.*;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +20,7 @@ class PlayerMasterControllerTest {
     public void basicProduction() throws NegativeResAmountException, InvalidKeyException {
         MasterController controller = new MasterController(null);
         PlayerController playerController = controller.getPlayerController();
-        Player player = new Player(false, "John");
+        Player player = new Player( "John");
         Resource fromDepot = new Resource();
         Resource fromStrongbox = new Resource(1,1,0,0);
 
@@ -36,7 +39,7 @@ class PlayerMasterControllerTest {
     public void extraProduction() throws TooManyLeaderAbilitiesException, NegativeResAmountException, InvalidKeyException {
         MasterController controller = new MasterController(null);
         PlayerController playerController = controller.getPlayerController();
-        Player player = new Player(false, "John");
+        Player player = new Player( "John");
         playerController.extraProduction(player, AbilityChoice.FIRST, new Resource(), new Resource());
         assertEquals("The player has no leader ability of that type already active", controller.getError());
 
@@ -59,7 +62,7 @@ class PlayerMasterControllerTest {
     public void takeResources() throws FullCardDeckException {
         MasterController controller = new MasterController(null);
         PlayerController playerController = controller.getPlayerController();
-        Player player = new Player(false, "John");
+        Player player = new Player( "John");
         Game game = new Game(true);
         player.setGame(game);
 
@@ -82,7 +85,7 @@ class PlayerMasterControllerTest {
     public void buyDevCard() throws FullCardDeckException, TooManyLeaderAbilitiesException, NegativeResAmountException, InvalidKeyException {
         MasterController controller = new MasterController(null);
         PlayerController playerController = controller.getPlayerController();
-        Player player = new Player(false, "John");
+        Player player = new Player( "John");
         Game game = new Game(true);
         player.setGame(game);
 
@@ -109,7 +112,7 @@ class PlayerMasterControllerTest {
     public void activateProductionTest() throws FullCardDeckException, NegativeResAmountException, InvalidKeyException{
         MasterController controller = new MasterController(null);
         PlayerController playerController = controller.getPlayerController();
-        Player player = new Player(false, "John");
+        Player player = new Player( "John");
         Game game = new Game(true);
         player.setGame(game);
         //player.getPersonalBoard().getStrongbox().addResources(new Resource(0,2,0,0));

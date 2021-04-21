@@ -3,6 +3,9 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.exceptions.*;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ConcreteDepotTest {
@@ -196,7 +199,36 @@ public class ConcreteDepotTest {
      }
 
     @Test
-    public void discardTest() {
-        //TODO: Test discard
+    public void discardTest() throws FullCardDeckException, InvalidResourceException, LayerNotEmptyException, NotEnoughSpaceException, InvalidLayerNumberException, CannotContainFaithException, AlreadyInAnotherLayerException, NegativeResAmountException, InvalidKeyException, NotEnoughResException {
+        Player player1 = new Player("a");
+        Player player2 = new Player("b");
+        Player player3 = new Player("c");
+
+        List<Player> playerList = new ArrayList<>();
+        playerList.add(player1);
+        playerList.add(player2);
+        playerList.add(player3);
+
+        Game game = new Game(4, playerList);
+        player1.setGame(game);
+        Depot depot1 = player1.getPersonalBoard().getDepot();
+        depot1.modifyLayer(2, ResourceType.COIN, 2);
+        depot1.modifyLayer(3, ResourceType.SERVANT, 2);
+
+        Resource KO = new Resource();
+        KO.addResource(ResourceType.COIN, 2);
+        KO.addResource(ResourceType.FAITH, 1);
+        assertThrows(CannotContainFaithException.class, () -> depot1.discardRes(player1, KO));
+
+        assertThrows(NotEnoughResException.class,
+                () -> depot1.discardRes(player1, new Resource(1,2,0,2)));
+
+        Resource OK = new Resource(0,2,0,2);
+        depot1.discardRes(player1, OK);
+
+        assertEquals(new Resource(0,0,0,0), depot1.queryAllRes());
+        assertEquals(0, player1.getPlayerFaith());
+        assertEquals(4, player2.getPlayerFaith());
+        assertEquals(4, player3.getPlayerFaith());
     }
 }

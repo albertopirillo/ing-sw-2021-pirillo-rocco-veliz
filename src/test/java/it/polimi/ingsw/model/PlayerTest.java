@@ -4,16 +4,16 @@ import it.polimi.ingsw.exceptions.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class PlayerTest {
 
     @Test
     public void allResTest() throws AlreadyInAnotherLayerException, CannotContainFaithException, NotEnoughSpaceException, NegativeResAmountException, LayerNotEmptyException, InvalidLayerNumberException, InvalidKeyException, InvalidResourceException {
         //stub game = null
-        Player player = new Player(false, "abc");
+        Player player = new Player( "abc");
         PersonalBoard personalBoard = player.getPersonalBoard();
         Depot depot = personalBoard.getDepot();
         Strongbox strongbox = personalBoard.getStrongbox();
@@ -33,7 +33,7 @@ class PlayerTest {
 
     @Test
     public void activateProductionTest() throws NegativeResAmountException, InvalidKeyException, NotEnoughResException {
-        Player player = new Player(false, "abc");
+        Player player = new Player( "abc");
         //Depot and StrongBox empty
         assertTrue(player.getAllResources().equals(new Resource(0,0,0,0)));
         //Stub DevelopmentCards

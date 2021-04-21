@@ -3,6 +3,7 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.exceptions.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 //Attribute "mapping" is used to give the user the possibility to specify a
@@ -118,8 +119,17 @@ public abstract class Depot {
         }
     }
 
-    //A resource can be discarded from tge Depot, but all other players will receive a Faith Point
-    public void discardRes(DepotLayer layer) {
-        //TODO implement here
+    //A resource can be discarded from the Depot, but all other players will receive a Faith Point
+    public void discardRes(Player player, Resource resource) throws NegativeResAmountException, InvalidKeyException, NotEnoughResException, NotEnoughSpaceException, CannotContainFaithException {
+        if (resource.keySet().contains(ResourceType.FAITH))
+            throw new CannotContainFaithException("You cannot discard faith points");
+        if (!this.queryAllRes().compare(resource))
+            throw new NotEnoughResException("You're trying to discard more resources than you have");
+
+        List<Player> playerList = player.getGame().getPlayers();
+        this.retrieveRes(resource);
+        for(Player p: playerList) {
+            if (p != player) p.addPlayerFaith(resource.getTotalAmount());
+        }
     }
 }

@@ -2,13 +2,15 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.*;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ProductionStrategyTest {
 
     @Test
     public void addTest() throws TooManyLeaderAbilitiesException {
-        Player player = new Player(false, "abc");
+        Player player = new Player( "abc");
         Resource input = new Resource(0,2,3,0);
         Resource output = new Resource(1,1,2,0);
         ProductionPower productionPower = new ProductionPower(input, output);
@@ -21,7 +23,7 @@ class ProductionStrategyTest {
 
     @Test
     public void standardAbilityTest() throws InvalidResourceException, LayerNotEmptyException, NotEnoughSpaceException, InvalidLayerNumberException, CannotContainFaithException, AlreadyInAnotherLayerException, NegativeResAmountException, InvalidKeyException, CostNotMatchingException, NotEnoughResException {
-        Player player = new Player(false, "abc");
+        Player player = new Player( "abc");
         Depot depot = player.getPersonalBoard().getDepot();
         Strongbox strongbox = player.getPersonalBoard().getStrongbox();
 
@@ -51,7 +53,7 @@ class ProductionStrategyTest {
 
     @Test
     public void oneAbilityTest() throws TooManyLeaderAbilitiesException, CannotContainFaithException, NegativeResAmountException, InvalidKeyException, InvalidResourceException, LayerNotEmptyException, NotEnoughSpaceException, InvalidLayerNumberException, AlreadyInAnotherLayerException, CostNotMatchingException, InvalidAbilityChoiceException, NoLeaderAbilitiesException, NotEnoughResException {
-        Player player = new Player(false, "abc");
+        Player player = new Player( "abc");
         Resource input = new Resource(0,2,3,0);
         Resource output = new Resource(1,1,2,0);
         ProductionPower productionPower = new ProductionPower(input, output);
@@ -82,7 +84,7 @@ class ProductionStrategyTest {
 
     @Test
     public void twoAbilitiesTest() throws TooManyLeaderAbilitiesException, CostNotMatchingException, InvalidAbilityChoiceException, NotEnoughSpaceException, NoLeaderAbilitiesException, CannotContainFaithException, NotEnoughResException, NegativeResAmountException, InvalidKeyException, InvalidResourceException, LayerNotEmptyException, InvalidLayerNumberException, AlreadyInAnotherLayerException {
-        Player player = new Player(false, "abc");
+        Player player = new Player( "abc");
         Resource input1 = new Resource(0,2,3,0);
         Resource output1 = new Resource(1,1,2,0);
         ProductionPower productionPower1 = new ProductionPower(input1, output1);

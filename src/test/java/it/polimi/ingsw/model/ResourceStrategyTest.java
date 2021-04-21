@@ -15,7 +15,7 @@ class ResourceStrategyTest {
 
     @Test
     void addAbility() throws TooManyLeaderAbilitiesException {
-        Player player = new Player(true, "abc");
+        Player player = new Player( "abc");
         ChangeWhiteMarbles changeWhiteMarbles = new ChangeWhiteMarbles(ResourceType.COIN);
 
         player.addResourceStrategy(changeWhiteMarbles);
@@ -27,7 +27,7 @@ class ResourceStrategyTest {
 
     @Test
     void standardTest() throws InvalidAbilityChoiceException, NoLeaderAbilitiesException, NegativeResAmountException, InvalidKeyException, FullCardDeckException, CostNotMatchingException {
-        Player player = new Player(true, "abc");
+        Player player = new Player( "abc");
         Game game = new Game(true);
         player.setGame(game);
 
@@ -45,7 +45,7 @@ class ResourceStrategyTest {
 
     @Test
     void standard2Test() throws InvalidAbilityChoiceException, NoLeaderAbilitiesException, NegativeResAmountException, InvalidKeyException, FullCardDeckException, CostNotMatchingException {
-        Player player = new Player(true, "abc");
+        Player player = new Player( "abc");
         Game game = new Game(true);
         player.setGame(game);
 
@@ -59,7 +59,7 @@ class ResourceStrategyTest {
 
     @Test
     void faithTest() throws FullCardDeckException, InvalidAbilityChoiceException, NoLeaderAbilitiesException, NegativeResAmountException, InvalidKeyException, CostNotMatchingException {
-        Player player = new Player(true, "abc");
+        Player player = new Player( "abc");
         Game game = new Game(true);
         player.setGame(game);
         player.takeResources(1, AbilityChoice.STANDARD, 0, 0);
@@ -79,7 +79,7 @@ class ResourceStrategyTest {
 
     @Test
     void singleAbilityTest() throws FullCardDeckException, TooManyLeaderAbilitiesException, InvalidAbilityChoiceException, NoLeaderAbilitiesException, NegativeResAmountException, InvalidKeyException, CostNotMatchingException {
-        Player player = new Player(true, "abc");
+        Player player = new Player( "abc");
         Game game = new Game(true);
         player.setGame(game);
         ChangeWhiteMarbles ability1 = new ChangeWhiteMarbles(ResourceType.STONE);
@@ -98,7 +98,7 @@ class ResourceStrategyTest {
 
     @Test
     void doubleAbilityTest() throws FullCardDeckException, TooManyLeaderAbilitiesException, InvalidAbilityChoiceException, NoLeaderAbilitiesException, NegativeResAmountException, InvalidKeyException, CostNotMatchingException {
-        Player player = new Player(true, "abc");
+        Player player = new Player( "abc");
         Game game = new Game(true);
         player.setGame(game);
         ChangeWhiteMarbles ability1 = new ChangeWhiteMarbles(ResourceType.COIN);

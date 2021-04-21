@@ -12,7 +12,7 @@ class DiscountTest {
     @Test
     void activate() throws TooManyLeaderAbilitiesException, InvalidLayerNumberException, LeaderAbilityAlreadyActive {
         //stub game = null
-        Player player = new Player(false, "abc");
+        Player player = new Player("abc");
         Resource resource1 = new Resource(1,2,3,4);
         LeaderAbility ability = new Discount(ResourceType.COIN, 2);
         ResLeaderCard res1 = new ResLeaderCard(2, ability ,resource1);

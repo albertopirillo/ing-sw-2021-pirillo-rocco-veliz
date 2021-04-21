@@ -4,7 +4,10 @@ import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 
 import javax.management.openmbean.KeyAlreadyExistsException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 
 public class Resource {
 
@@ -72,6 +75,15 @@ public class Resource {
     //Get keySet of the current Map
     public Set<ResourceType> keySet() {
         return this.map.keySet();
+    }
+
+    //Return the total amount of resources contained in the map
+    public int getTotalAmount() {
+        int amount = 0;
+        for(ResourceType key: map.keySet()) {
+            amount += map.get(key);
+        }
+        return amount;
     }
 
     @Override

@@ -9,7 +9,7 @@ class ExtraSlotTest {
 
     @Test
     public void activate() throws FullCardDeckException, AlreadyInAnotherLayerException, InvalidResourceException, CannotContainFaithException, NotEnoughSpaceException, NegativeResAmountException, LayerNotEmptyException, InvalidLayerNumberException, LeaderAbilityAlreadyActive, TooManyLeaderAbilitiesException {
-        Player player = new Player(false, "abc");
+        Player player = new Player( "abc");
         Depot depot = player.getPersonalBoard().getDepot();
         assertInstanceOf(ConcreteDepot.class, depot);
         depot.modifyLayer(2, ResourceType.COIN, 1);

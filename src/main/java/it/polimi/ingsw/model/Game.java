@@ -30,7 +30,7 @@ public class Game {
 
     private boolean lastTurn;
 
-    private Market market;
+    private final Market market;
 
     public Game(int playerAmount, List<Player> players) throws FullCardDeckException {
         this.lastTurn = false;
@@ -99,6 +99,10 @@ public class Game {
 
     public Market getMarket() {
         return this.market;
+    }
+
+    public List<Player> getPlayers() {
+        return new ArrayList<>(this.players);
     }
 
     public void game() {

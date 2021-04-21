@@ -31,8 +31,7 @@ public class Player {
 
     private int playerFaith;
 
-    public Player(boolean hasInkwell, String nickname) {
-        this.hasInkwell = hasInkwell;
+    public Player(String nickname) {
         this.nickname = nickname;
         this.isHisTurn = false;
         this.playerFaith = 0;
@@ -140,7 +139,7 @@ public class Player {
     public void useLeader(int index, LeaderAction choice) throws TooManyLeaderAbilitiesException, LeaderAbilityAlreadyActive, InvalidLayerNumberException {
         LeaderCard leader = this.leaderCards.get(index);
         if (leader.isActive()) throw new LeaderAbilityAlreadyActive();
-
+        //TODO: check if that card can be activated (enough res)
         if (choice == LeaderAction.DISCARD) {
             this.addPlayerFaith(1);
             //TODO: do its victoryPoints still count?
@@ -152,6 +151,10 @@ public class Player {
             leader.activate();
             this.activeLeaderAbilities.add(ability);
         }
+    }
+
+    public void discardRes(Resource resource) throws NotEnoughSpaceException, CannotContainFaithException, NotEnoughResException, NegativeResAmountException, InvalidKeyException {
+        this.getPersonalBoard().getDepot().discardRes(this, resource);
     }
 
     public List<LeaderAbility> getActiveLeaderAbilities() {

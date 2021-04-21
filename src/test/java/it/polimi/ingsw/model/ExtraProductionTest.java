@@ -12,7 +12,7 @@ class ExtraProductionTest {
     @Test
     void activate() throws TooManyLeaderAbilitiesException, InvalidLayerNumberException, LeaderAbilityAlreadyActive {
         //stub game = null
-        Player player = new Player(false, "abc");
+        Player player = new Player( "abc");
         Resource resource1 = new Resource(1,2,3,4);
         Resource resource2 = new Resource(4,3,2,1);
         LeaderAbility ability = new ExtraProduction(new ProductionPower(resource1, resource2));

@@ -1,11 +1,12 @@
 package it.polimi.ingsw.model;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 class FaithTrackTest {
@@ -15,7 +16,7 @@ class FaithTrackTest {
 
         List<Player> players = new ArrayList<>();
         for(int i=0; i<3; i++){
-            Player player = new Player(false, "player"+ i);
+            Player player = new Player( "player"+ i);
             if(player.getNickname().equals("player2")){ player.setTurn(player, true); }
             players.add(player);
         }

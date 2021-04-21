@@ -10,7 +10,7 @@ class DevCardsStrategyTest {
 
     @Test
     public void buyTest() throws FullCardDeckException, DeckEmptyException, CannotContainFaithException, NotEnoughSpaceException, NegativeResAmountException, CostNotMatchingException, NotEnoughResException, InvalidKeyException, InvalidLayerNumberException, AlreadyInAnotherLayerException, LayerNotEmptyException, InvalidResourceException, NoLeaderAbilitiesException, InvalidAbilityChoiceException, InvalidNumSlotException, DevSlotEmptyException {
-        Player player = new Player(true, "abc");
+        Player player = new Player( "abc");
         Game game = new Game(true);
         player.setGame(game);
 
@@ -33,7 +33,7 @@ class DevCardsStrategyTest {
 
     @Test
     public void CostNotMatchingTest() throws FullCardDeckException, AlreadyInAnotherLayerException, InvalidResourceException, CannotContainFaithException, NotEnoughSpaceException, NegativeResAmountException, LayerNotEmptyException, InvalidLayerNumberException {
-        Player player = new Player(true, "abc");
+        Player player = new Player( "abc");
         Game game = new Game(true);
         player.setGame(game);
 
@@ -59,7 +59,7 @@ class DevCardsStrategyTest {
 
     @Test
     public void abilityTest() throws FullCardDeckException, DeckEmptyException, TooManyLeaderAbilitiesException, CostNotMatchingException, InvalidAbilityChoiceException, NotEnoughSpaceException, NoLeaderAbilitiesException, CannotContainFaithException, NotEnoughResException, NegativeResAmountException, InvalidKeyException, InvalidNumSlotException, DevSlotEmptyException {
-        Player player = new Player(true, "abc");
+        Player player = new Player( "abc");
         Game game = new Game(true);
         player.setGame(game);
 

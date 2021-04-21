@@ -1,8 +1,12 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.exceptions.*;
+import it.polimi.ingsw.exceptions.CannotContainFaithException;
+import it.polimi.ingsw.exceptions.InvalidKeyException;
+import it.polimi.ingsw.exceptions.NegativeResAmountException;
+import it.polimi.ingsw.exceptions.NotEnoughResException;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 //Automatically converts faith Resource into playerFaithPoints
 public class Strongbox {
@@ -40,12 +44,4 @@ public class Strongbox {
             this.resource.modifyValue(key, - toTake.get(key));
         }
     }
-
-    //3x resources can be moved from Strongbox to Depot, at the cost of 1x resource
-    public void moveToDepot(ResourceType resType, Depot depot, int layer) throws NegativeResAmountException, InvalidKeyException, CannotContainFaithException, InvalidLayerNumberException, LayerNotEmptyException, NotEnoughSpaceException, NotEnoughResException, AlreadyInAnotherLayerException, InvalidResourceException {
-        if (this.resource.getValue(resType) < 3) throw new NotEnoughResException();
-        depot.modifyLayer(layer, resType, 2);
-        this.resource.modifyValue(resType, -3);
-    }
-
 }

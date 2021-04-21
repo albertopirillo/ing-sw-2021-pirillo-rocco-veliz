@@ -1,11 +1,15 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.exceptions.*;
+import it.polimi.ingsw.exceptions.CannotContainFaithException;
+import it.polimi.ingsw.exceptions.InvalidKeyException;
+import it.polimi.ingsw.exceptions.NegativeResAmountException;
+import it.polimi.ingsw.exceptions.NotEnoughResException;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class StrongboxTest {
 
@@ -32,7 +36,7 @@ class StrongboxTest {
 
     @Test
     public void faithTest() throws InvalidKeyException, NegativeResAmountException {
-        Player player = new Player(false, "abc");
+        Player player = new Player( "abc");
         Strongbox strongbox = new Strongbox(player);
         Resource res = new Resource(1,1,1,3);
         res.addResource(ResourceType.FAITH, 3);
@@ -56,23 +60,5 @@ class StrongboxTest {
         for (ResourceType key: content.keySet()) {
             assertEquals(checkRes.getValue(key), content.get(key));
         }
-    }
-
-    @Test
-    public void moveToDepot() throws CannotContainFaithException, NegativeResAmountException, InvalidKeyException, NotEnoughSpaceException, InvalidLayerNumberException, LayerNotEmptyException, NotEnoughResException, AlreadyInAnotherLayerException, InvalidResourceException {
-        Strongbox strongbox = new Strongbox(null);
-        strongbox.addResources(new Resource(2, 3, 4, 0));
-        Strongbox strongbox2 = new Strongbox(null);
-        strongbox2.addResources(new Resource(2, 3, 2, 0));
-        Depot depot = new ConcreteDepot();
-        depot.modifyLayer(3, ResourceType.SERVANT, 1);
-
-        assertThrows(NotEnoughResException.class, () -> strongbox2.moveToDepot(ResourceType.SHIELD, depot, 2));
-        assertThrows(LayerNotEmptyException.class, () -> strongbox.moveToDepot(ResourceType.SHIELD, depot, 3));
-        strongbox.moveToDepot(ResourceType.SHIELD, depot, 2);
-        assertEquals(2, depot.getLayer(2).getAmount());
-        assertEquals(ResourceType.SHIELD, depot.getLayer(2).getResource());
-        Map<ResourceType, Integer> content = strongbox.queryAllRes().getMap();
-        assertEquals(1, content.get(ResourceType.SHIELD));
     }
 }

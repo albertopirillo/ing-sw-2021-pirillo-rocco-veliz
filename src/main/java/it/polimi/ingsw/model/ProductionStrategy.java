@@ -23,7 +23,7 @@ public class ProductionStrategy {
         size++;
     }
 
-    public void extraProduction(Player player, AbilityChoice choice, Resource fromDepot, Resource fromStrongbox) throws NegativeResAmountException, InvalidKeyException, CannotContainFaithException, NoLeaderAbilitiesException, InvalidAbilityChoiceException, NotEnoughResException, CostNotMatchingException, NotEnoughSpaceException {
+    public void extraProduction(Player player, AbilityChoice choice, Resource fromDepot, Resource fromStrongbox, ResourceType res) throws NegativeResAmountException, InvalidKeyException, CannotContainFaithException, NoLeaderAbilitiesException, InvalidAbilityChoiceException, NotEnoughResException, CostNotMatchingException, NotEnoughSpaceException {
       if (this.size == 0) throw new NoLeaderAbilitiesException();
         if ((this.size == 1 && choice == AbilityChoice.SECOND) || (choice == AbilityChoice.BOTH))
             throw new InvalidAbilityChoiceException();
@@ -33,8 +33,11 @@ public class ProductionStrategy {
 
         //Note: FIRST.ordinal() == 1 and SECOND.ordinal() == 2
         Resource input = productions[choice.ordinal() - 1].getProduction().getInput();
-        Resource output = productions[choice.ordinal() - 1].getProduction().getOutput();
+        Resource out = productions[choice.ordinal() - 1].getProduction().getOutput();
         BasicStrategies.checkAndCompare(depot, strongbox, fromDepot, fromStrongbox, input);
+        Resource output = new Resource(out.getMap());
+        output.removeResource(ResourceType.ALL);
+        output.modifyValue(res, 1);
 
         //Give the resources to the player
         player.getPersonalBoard().getStrongbox().addResources(output);

@@ -43,22 +43,27 @@ class PlayerControllerTest {
         PlayerController playerController = controller.getPlayerController();
         Player activePlayer = game.getActivePlayer();
         activePlayer.setGame(game);
-        playerController.extraProduction(AbilityChoice.FIRST, new Resource(), new Resource());
+        playerController.extraProduction(AbilityChoice.FIRST, new Resource(), new Resource(), ResourceType.COIN);
         assertEquals("The player has no leader ability of that type already active", controller.getError());
 
+        Resource res = new Resource(0,0,0,0);
+        res.addResource(ResourceType.ALL,1);
+        res.addResource(ResourceType.FAITH,1);
         ProductionPower productionPower = new ProductionPower(
                 new Resource(1,0,1,0),
-                new Resource(0,0,3,0));
+                res);
         ExtraProduction extraProduction = new ExtraProduction(productionPower);
         extraProduction.activate(activePlayer);
 
         activePlayer.getPersonalBoard().getStrongbox().addResources(new Resource(3,3,3,3));
-        playerController.extraProduction(AbilityChoice.SECOND, new Resource(), new Resource());
+        playerController.extraProduction(AbilityChoice.SECOND, new Resource(), new Resource(), ResourceType.COIN);
         assertEquals("You selected an invalid leader ability", controller.getError());
 
         playerController.extraProduction(AbilityChoice.FIRST,
-                new Resource(), new Resource(1,0,1,0));
+                new Resource(), new Resource(1,0,1,0), ResourceType.COIN);
         assertEquals("Result: OK", controller.getError());
+        assertEquals(new Resource(2,4,2,3), activePlayer.getAllResources());
+        assertEquals(1, activePlayer.getPlayerFaith());
     }
 
     @Test

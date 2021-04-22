@@ -65,21 +65,21 @@ class ProductionStrategyTest {
         Resource fromStrongbox = new Resource(0,2,0,0);
 
         assertThrows(NoLeaderAbilitiesException.class,
-                        () -> player.extraProduction(AbilityChoice.FIRST, fromDepot, fromStrongbox));
+                        () -> player.extraProduction(AbilityChoice.FIRST, fromDepot, fromStrongbox, ResourceType.COIN));
 
         player.addProductionStrategy(extraProduction);
         strongbox.addResources(new Resource(0, 2, 0, 0));
         depot.modifyLayer(3, ResourceType.SHIELD, 3);
 
-       player.extraProduction(AbilityChoice.FIRST, fromDepot, fromStrongbox);
+       player.extraProduction(AbilityChoice.FIRST, fromDepot, fromStrongbox, ResourceType.COIN);
 
-        assertEquals(new Resource(1,1,2,0), strongbox.queryAllRes());
+        assertEquals(new Resource(1,2,2,0), strongbox.queryAllRes());
         assertEquals(new Resource(0,0,0,0), depot.queryAllRes());
 
         assertThrows(InvalidAbilityChoiceException.class,
-                () -> player.extraProduction(AbilityChoice.SECOND, fromDepot, fromStrongbox));
+                () -> player.extraProduction(AbilityChoice.SECOND, fromDepot, fromStrongbox, ResourceType.COIN));
         assertThrows(InvalidAbilityChoiceException.class,
-                () -> player.extraProduction(AbilityChoice.BOTH, fromDepot, fromStrongbox));
+                () -> player.extraProduction(AbilityChoice.BOTH, fromDepot, fromStrongbox, ResourceType.COIN));
     }
 
     @Test
@@ -107,8 +107,8 @@ class ProductionStrategyTest {
         depot.modifyLayer(2, ResourceType.SHIELD, 2);
         strongbox.addResources(new Resource(0,1,2,5));
 
-        player.extraProduction(AbilityChoice.SECOND, fromDepot, fromStrongbox);
+        player.extraProduction(AbilityChoice.SECOND, fromDepot, fromStrongbox, ResourceType.COIN);
         assertEquals(new Resource(0,0,1,0), depot.queryAllRes());
-        assertEquals(new Resource(1,1,6,2), strongbox.queryAllRes());
+        assertEquals(new Resource(1,2,6,2), strongbox.queryAllRes());
     }
 }

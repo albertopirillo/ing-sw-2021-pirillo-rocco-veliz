@@ -24,10 +24,10 @@ public class PlayerController {
         }
     }
 
-    public void extraProduction(AbilityChoice choice, Resource fromDepot, Resource fromStrongbox) {
+    public void extraProduction(AbilityChoice choice, Resource fromDepot, Resource fromStrongbox, ResourceType res) {
         try {
             Player activePlayer = controller.getGame().getActivePlayer();
-            activePlayer.extraProduction(choice, fromDepot, fromStrongbox);
+            activePlayer.extraProduction(choice, fromDepot, fromStrongbox, res);
         } catch (CostNotMatchingException | InvalidAbilityChoiceException | NotEnoughSpaceException | NoLeaderAbilitiesException | CannotContainFaithException | NotEnoughResException | NegativeResAmountException | InvalidKeyException e) {
             controller.setException(e);
         }

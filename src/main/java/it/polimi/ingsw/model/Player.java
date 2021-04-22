@@ -127,8 +127,8 @@ public class Player {
         BasicStrategies.basicProduction(this, input1, input2, output, fromDepot, fromStrongbox);
     }
 
-    public void extraProduction(AbilityChoice choice, Resource fromDepot, Resource fromStrongbox) throws NoLeaderAbilitiesException, InvalidAbilityChoiceException, CostNotMatchingException, NotEnoughSpaceException, CannotContainFaithException, NotEnoughResException, NegativeResAmountException, InvalidKeyException {
-        this.prodStrategy.extraProduction(this, choice, fromDepot, fromStrongbox);
+    public void extraProduction(AbilityChoice choice, Resource fromDepot, Resource fromStrongbox, ResourceType res) throws NoLeaderAbilitiesException, InvalidAbilityChoiceException, CostNotMatchingException, NotEnoughSpaceException, CannotContainFaithException, NotEnoughResException, NegativeResAmountException, InvalidKeyException {
+        this.prodStrategy.extraProduction(this, choice, fromDepot, fromStrongbox, res);
     }
 
     public void activateProduction(List<DevelopmentCard> cards) throws NegativeResAmountException, InvalidKeyException, NotEnoughResException {
@@ -156,7 +156,7 @@ public class Player {
         }
     }
 
-    public void discardRes(Resource resource) throws NotEnoughSpaceException, CannotContainFaithException, NotEnoughResException, NegativeResAmountException, InvalidKeyException {
+    public void discardRes(Resource resource) throws CannotContainFaithException{
         this.getPersonalBoard().getDepot().discardRes(this, resource);
     }
 

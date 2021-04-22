@@ -86,6 +86,10 @@ public class Resource {
         return amount;
     }
 
+    public void removeResource(ResourceType res) {
+        this.map.remove(res);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -30,7 +30,7 @@ public class PersonalBoard {
 
     public DevelopmentSlot getSlot(int slotNumber){
         return devSlots[slotNumber];
-    }
+    } //Only testing
 
     public DevelopmentSlot[] getDevSlots() {
         return devSlots;
@@ -54,8 +54,8 @@ public class PersonalBoard {
 
     public List<DevelopmentCard> getAllCards() {
         List<DevelopmentCard> cardList = new ArrayList<>();
-        for (DevelopmentSlot slot: devSlots) {
-            cardList.addAll(slot.getCards());
+        for (DevelopmentSlot slot : devSlots) {
+            if(slot.numberOfElements()>0) cardList.addAll(slot.getCards());
         }
         return cardList;
     }

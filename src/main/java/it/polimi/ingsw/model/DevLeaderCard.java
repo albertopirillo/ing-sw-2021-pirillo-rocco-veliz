@@ -13,8 +13,17 @@ public class DevLeaderCard extends LeaderCard {
     }
 
     public boolean canBeActivated(Player player) {
-        //TODO: implement here
-        return false;
+        List<DevelopmentCard> playerCards = player.getPersonalBoard().getAllCards();
+        boolean check;
+        for (LeaderDevCost require : requires){
+            if(require.getLevel()==0) {
+                check = playerCards.stream().filter(e -> e.getType() == require.getColor()).count() >= require.getAmount();
+            }else {
+                check = playerCards.stream().filter(e -> e.getType() == require.getColor() && e.getLevel() == require.getLevel()).count() >= require.getAmount();
+            }
+            if (!check) return false;
+        }
+        return true;
     }
 
     //TODO: delete

@@ -74,7 +74,7 @@ class ConcreteDepotDecoratorTest {
         ExtraSlot extraSlot2 = new ExtraSlot(ResourceType.SERVANT);
         DepotDecorator doubleExtendedDepot = new ConcreteDepotDecorator(extendedDepot, extraSlot2);
 
-        doubleExtendedDepot.moveResources(1, 4, 2);
+        doubleExtendedDepot.moveResources(4, 2, 1);
         assertEquals(1, doubleExtendedDepot.getLayer(2).getAmount());
         assertEquals(1, doubleExtendedDepot.getLayer(4).getAmount());
         assertEquals(ResourceType.COIN, doubleExtendedDepot.getLayer(2).getResource());
@@ -107,12 +107,12 @@ class ConcreteDepotDecoratorTest {
     public void realTest() throws AlreadyInAnotherLayerException, CannotContainFaithException, NotEnoughSpaceException, NegativeResAmountException, LayerNotEmptyException, InvalidLayerNumberException, NotEnoughResException, InvalidKeyException, InvalidResourceException {
         Depot depot = new ConcreteDepot();
         depot.modifyLayer(2, ResourceType.COIN, 1);
-        depot.moveResources(1, 2, 1);
+        depot.moveResources(2, 1, 1);
         assertEquals(1, depot.getLayer(1).getAmount());
         assertNull(depot.getLayer(2).getResource());
 
         depot.modifyLayer(3, ResourceType.SHIELD, 1);
-        depot.moveResources(1, 3, 1);
+        depot.moveResources(3, 1, 1);
         assertEquals(ResourceType.SHIELD, depot.getLayer(1).getResource());
         assertEquals(ResourceType.COIN, depot.getLayer(3).getResource());
 
@@ -130,7 +130,7 @@ class ConcreteDepotDecoratorTest {
         ExtraSlot extraSlot2 = new ExtraSlot(ResourceType.SERVANT);
         DepotDecorator doubleExtendedDepot = new ConcreteDepotDecorator(extendedDepot, extraSlot2);
         assertEquals(2, doubleExtendedDepot.getLayer(3).getAmount());
-        doubleExtendedDepot.moveResources(2, 3, 5);
+        doubleExtendedDepot.moveResources(3, 5, 2);
         assertEquals(ResourceType.SERVANT, doubleExtendedDepot.getLayer(5).getResource());
         assertNull(doubleExtendedDepot.getLayer(3).getResource());
     }

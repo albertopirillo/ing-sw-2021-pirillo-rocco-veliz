@@ -3,7 +3,8 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.exceptions.*;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 //Test cases of a ConcreteDepot decorated only one time
 class DepotDecoratorTest {
@@ -74,7 +75,7 @@ class DepotDecoratorTest {
         depot.modifyLayer(3, ResourceType.COIN, 3);
         ExtraSlot extraSlot = new ExtraSlot(ResourceType.COIN);
         DepotDecorator extendedDepot = new ConcreteDepotDecorator(depot, extraSlot);
-        extendedDepot.moveResources(2, 3, 4);
+        extendedDepot.moveResources(3, 4, 2);
 
         assertEquals(1, extendedDepot.getLayer(3).getAmount());
         assertEquals(ResourceType.COIN, extendedDepot.getLayer(3).getResource());
@@ -91,10 +92,10 @@ class DepotDecoratorTest {
         DepotDecorator extendedDepot = new ConcreteDepotDecorator(depot, extraSlot);
 
         assertThrows(NotEnoughSpaceException.class,
-                () ->  extendedDepot.moveResources(3, 3, 4));
+                () ->  extendedDepot.moveResources(3, 4, 3));
 
         assertThrows(NotEnoughResException.class,
-                () -> extendedDepot.moveResources(2, 1, 4));
+                () -> extendedDepot.moveResources(1, 4, 2));
     }
 
     @Test

@@ -15,6 +15,6 @@ public class UseLeaderRequest extends Request {
     }
 
     public void activateRequest(MasterController masterController) {
-        //TODO: implement here
+        masterController.getPlayerController().useLeader(index, choice);
     }
 }

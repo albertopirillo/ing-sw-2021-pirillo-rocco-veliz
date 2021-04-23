@@ -17,8 +17,12 @@ class ExtraSlotTest {
         LeaderAbility ability = new ExtraSlot(ResourceType.SERVANT);
         Resource cost = new Resource(0, 0, 0, 0);
         ResLeaderCard res1 = new ResLeaderCard(2, ability, cost);
-        player.addLeaderCards(res1);
-        player.useLeader(0, LeaderAction.USE_ABILITY);
+        player.addLeaderCard(res1);
+        try {
+            player.useLeader(0, LeaderAction.USE_ABILITY);
+        } catch (NoLeaderAbilitiesException e) {
+            e.printStackTrace();
+        }
         depot = player.getPersonalBoard().getDepot();
         assertInstanceOf(DepotDecorator.class, depot);
 
@@ -29,8 +33,12 @@ class ExtraSlotTest {
         LeaderAbility ability2 = new ExtraSlot(ResourceType.SHIELD);
         Resource cost2 = new Resource(0, 0, 0, 0);
         ResLeaderCard res2 = new ResLeaderCard(1, ability2,cost2);
-        player.addLeaderCards(res2);
-        player.useLeader(1, LeaderAction.USE_ABILITY);
+        player.addLeaderCard(res2);
+        try {
+            player.useLeader(1, LeaderAction.USE_ABILITY);
+        } catch (NoLeaderAbilitiesException e) {
+            e.printStackTrace();
+        }
         depot = player.getPersonalBoard().getDepot();
         assertInstanceOf(DepotDecorator.class, depot);
 

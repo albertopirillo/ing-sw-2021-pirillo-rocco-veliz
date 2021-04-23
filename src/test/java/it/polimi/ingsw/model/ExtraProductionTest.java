@@ -17,17 +17,25 @@ class ExtraProductionTest {
         ResLeaderCard res1 = new ResLeaderCard(1, ability ,resource1);
         ResLeaderCard res2 = new ResLeaderCard(3, ability ,resource1);
 
-        player.addLeaderCards(res1);
-        player.addLeaderCards(res2);
+        player.addLeaderCard(res1);
+        player.addLeaderCard(res2);
         assertTrue(player.getActiveLeaderAbilities().isEmpty());
 
-        player.useLeader(0, LeaderAction.USE_ABILITY);
+        try {
+            player.useLeader(0, LeaderAction.USE_ABILITY);
+        } catch (NoLeaderAbilitiesException e) {
+            e.printStackTrace();
+        }
         assertEquals(1, player.getActiveLeaderAbilities().size());
         assertEquals(ability, player.getActiveLeaderAbilities().get(0));
 
         assertThrows(LeaderAbilityAlreadyActive.class, () -> player.useLeader(0, LeaderAction.USE_ABILITY));
 
-        player.useLeader(1, LeaderAction.USE_ABILITY);
+        try {
+            player.useLeader(1, LeaderAction.USE_ABILITY);
+        } catch (NoLeaderAbilitiesException e) {
+            e.printStackTrace();
+        }
         assertEquals(2, player.getActiveLeaderAbilities().size());
         assertEquals(ability, player.getActiveLeaderAbilities().get(1));
 

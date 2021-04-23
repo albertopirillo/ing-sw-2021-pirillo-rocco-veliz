@@ -65,7 +65,7 @@ public abstract class Depot {
         return true;
     }
 
-    public void moveResources(int amount, int fromLayerNumber, int toLayerNumber) throws
+    public void moveResources(int fromLayerNumber, int toLayerNumber, int amount) throws
             NegativeResAmountException, NotEnoughResException, NotEnoughSpaceException, LayerNotEmptyException, CannotContainFaithException, InvalidLayerNumberException, InvalidResourceException {
         if (amount == 0) return;
         Layer fromLayer = this.getLayer(fromLayerNumber);

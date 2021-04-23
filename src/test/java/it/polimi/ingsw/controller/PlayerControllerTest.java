@@ -169,6 +169,42 @@ class PlayerControllerTest {
     }
 
     @Test
+    public void reorderDepotTest() throws FullCardDeckException, InvalidResourceException, LayerNotEmptyException, NotEnoughSpaceException, InvalidLayerNumberException, CannotContainFaithException, NegativeResAmountException, AlreadyInAnotherLayerException {
+        Game game = new Game(true);
+        MasterController controller = new MasterController(game);
+        PlayerController playerController = controller.getPlayerController();
+        Player activePlayer = game.getActivePlayer();
+        activePlayer.setGame(game);
+
+        Depot depot = activePlayer.getPersonalBoard().getDepot();
+        depot.modifyLayer(3, ResourceType.COIN, 2);
+        playerController.reorderDepot(3, 2, 3);
+        assertEquals("The player hasn't got enough Resource to complete the action", controller.getError());
+
+        playerController.reorderDepot(3, 2, 1);
+        assertEquals("Result: OK", controller.getError());
+    }
+
+    @Test
+    public void useLeaderTest() throws FullCardDeckException {
+        Game game = new Game(true);
+        MasterController controller = new MasterController(game);
+        PlayerController playerController = controller.getPlayerController();
+        Player activePlayer = game.getActivePlayer();
+        activePlayer.setGame(game);
+
+        LeaderCard leader = new ResLeaderCard(2, null, new Resource(0,2,3,1));
+        activePlayer.addLeaderCard(leader);
+
+        playerController.useLeader(0, LeaderAction.USE_ABILITY);
+        assertEquals("LeaderCard requirements not satisfied", controller.getError());
+
+        playerController.useLeader(0, LeaderAction.DISCARD);
+        assertEquals("Result: OK", controller.getError());
+
+    }
+
+    @Test
     public void activateProductionTest() throws FullCardDeckException, NegativeResAmountException, InvalidKeyException{
         Game game = new Game(true);
         MasterController controller = new MasterController(game);

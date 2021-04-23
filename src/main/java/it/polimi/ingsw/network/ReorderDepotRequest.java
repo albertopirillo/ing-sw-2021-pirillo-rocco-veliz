@@ -16,6 +16,6 @@ public class ReorderDepotRequest extends Request {
     }
 
     public void activateRequest(MasterController masterController) {
-        //TODO: implement here
+        masterController.getPlayerController().reorderDepot(fromLayer, toLayer, amount);
     }
 }

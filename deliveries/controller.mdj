@@ -1032,13 +1032,47 @@
 											"height": 16,
 											"text": "+activateProduction()",
 											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAF4/ydyEltAU0Y=",
+											"_parent": {
+												"$ref": "AAAAAAF4begGhFtGyG8="
+											},
+											"model": {
+												"$ref": "AAAAAAF4/ydyAFs9dSw="
+											},
+											"font": "Arial;16;0",
+											"left": 413,
+											"top": 483,
+											"width": 207,
+											"height": 16,
+											"text": "+useLeader()",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAF4/yeIklund6o=",
+											"_parent": {
+												"$ref": "AAAAAAF4begGhFtGyG8="
+											},
+											"model": {
+												"$ref": "AAAAAAF4/yeIjFukBq8="
+											},
+											"font": "Arial;16;0",
+											"left": 413,
+											"top": 501,
+											"width": 207,
+											"height": 16,
+											"text": "+reorderDepot()",
+											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;16;0",
 									"left": 408,
 									"top": 334,
 									"width": 217,
-									"height": 152
+									"height": 188
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",
@@ -2868,7 +2902,8 @@
 										"$ref": "AAAAAAF4beakFVYmKhA="
 									},
 									"name": "clientError",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								},
 								{
 									"_type": "UMLAttribute",
@@ -3187,6 +3222,22 @@
 										"$ref": "AAAAAAF4begGhFs9Tds="
 									},
 									"name": "activateProduction"
+								},
+								{
+									"_type": "UMLOperation",
+									"_id": "AAAAAAF4/ydyAFs9dSw=",
+									"_parent": {
+										"$ref": "AAAAAAF4begGhFs9Tds="
+									},
+									"name": "useLeader"
+								},
+								{
+									"_type": "UMLOperation",
+									"_id": "AAAAAAF4/yeIjFukBq8=",
+									"_parent": {
+										"$ref": "AAAAAAF4begGhFs9Tds="
+									},
+									"name": "reorderDepot"
 								}
 							]
 						},

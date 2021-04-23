@@ -16,7 +16,7 @@ class FaithTrackTest {
         List<Player> players = new ArrayList<>();
         for(int i=0; i<3; i++){
             Player player = new Player( "player"+ i);
-            if(player.getNickname().equals("player2")){ player.setTurn(player, true); }
+            if(player.getNickname().equals("player2")){ player.setTurn(true); }
             players.add(player);
         }
 

@@ -15,9 +15,6 @@ public class PlayerController {
         this.controller = controller;
     }
 
-    //TODO: reorderDepot()
-    //TODO: useLeader()
-
     public void basicProduction(ResourceType input1, ResourceType input2, ResourceType output, Resource fromDepot, Resource fromStrongbox) {
         try {
             Player activePlayer = controller.getGame().getActivePlayer();
@@ -71,6 +68,24 @@ public class PlayerController {
             controller.setException(null);
             controller.getGame().nextTurn();
         } catch (CannotEndTurnException e) {
+            controller.setException(e);
+        }
+    }
+
+    public void useLeader(int index, LeaderAction choice) {
+        try {
+            Player activePlayer = controller.getGame().getActivePlayer();
+            activePlayer.useLeader(index, choice);
+        } catch (TooManyLeaderAbilitiesException | CostNotMatchingException | InvalidLayerNumberException | NoLeaderAbilitiesException | NegativeResAmountException | InvalidKeyException | LeaderAbilityAlreadyActive e) {
+            controller.setException(e);
+        }
+    }
+
+    public void reorderDepot(int fromLayer, int toLayer, int amount) {
+        try {
+            Player activePlayer = controller.getGame().getActivePlayer();
+            activePlayer.reorderDepot(fromLayer, toLayer, amount);
+        } catch (InvalidResourceException | LayerNotEmptyException | NotEnoughSpaceException | InvalidLayerNumberException | CannotContainFaithException | NotEnoughResException | NegativeResAmountException e) {
             controller.setException(e);
         }
     }

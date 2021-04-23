@@ -98,7 +98,7 @@ public class ConcreteDepotTest {
             CannotContainFaithException, LayerNotEmptyException, NegativeResAmountException, NotEnoughSpaceException, NotEnoughResException, InvalidLayerNumberException, AlreadyInAnotherLayerException, InvalidResourceException {
         Depot depot = new ConcreteDepot();
         depot.modifyLayer(2, ResourceType.COIN, 2);
-        depot.moveResources(2, 2, 3);
+        depot.moveResources(2, 3, 2);
 
         assertEquals(0, depot.getLayer(2).getAmount());
         assertNull(depot.getLayer(2).getResource());
@@ -113,10 +113,10 @@ public class ConcreteDepotTest {
         depot.modifyLayer(2, ResourceType.COIN, 2);
 
         assertThrows(NotEnoughSpaceException.class,
-                () -> depot.moveResources(2, 2, 1));
+                () -> depot.moveResources(2, 1, 2));
 
         assertThrows(NegativeResAmountException.class,
-                () -> depot.moveResources(-5, 2, 1));
+                () -> depot.moveResources(2, 1, -5));
     }
 
     @Test
@@ -125,7 +125,7 @@ public class ConcreteDepotTest {
         depot.modifyLayer(3, ResourceType.SHIELD, 1);
 
         assertThrows(NotEnoughResException.class,
-                () -> depot.moveResources(3,3, 2));
+                () -> depot.moveResources(3, 2, 3));
     }
 
     @Test
@@ -133,7 +133,7 @@ public class ConcreteDepotTest {
             CannotContainFaithException, LayerNotEmptyException, NegativeResAmountException, NotEnoughSpaceException, NotEnoughResException, InvalidLayerNumberException, AlreadyInAnotherLayerException, InvalidResourceException {
         Depot depot = new ConcreteDepot();
         depot.modifyLayer(2, ResourceType.COIN, 2);
-        depot.moveResources(0, 2, 1);
+        depot.moveResources(2, 1, 0);
 
         assertEquals(2, depot.getLayer(2).getAmount());
         assertEquals(ResourceType.COIN, depot.getLayer(2).getResource());
@@ -147,7 +147,7 @@ public class ConcreteDepotTest {
         Depot depot = new ConcreteDepot();
         depot.modifyLayer(1, ResourceType.COIN, 1);
         depot.modifyLayer(2, ResourceType.SHIELD, 1);
-        depot.moveResources(1, 2, 1);
+        depot.moveResources(2, 1, 1);
 
         assertEquals(ResourceType.SHIELD, depot.getLayer(1).getResource());
         assertEquals(1, depot.getLayer(1).getAmount());
@@ -163,10 +163,10 @@ public class ConcreteDepotTest {
         depot.modifyLayer(2, ResourceType.SHIELD, 1);
 
         assertThrows(NotEnoughResException.class,
-                () -> depot.moveResources(4, 3, 2));
+                () -> depot.moveResources(3, 2, 4));
 
         assertThrows(NotEnoughSpaceException.class,
-                () -> depot.moveResources(2, 3, 1));
+                () -> depot.moveResources(3, 1, 2));
     }
 
     @Test
@@ -174,7 +174,7 @@ public class ConcreteDepotTest {
         Depot depot = new ConcreteDepot();
         depot.modifyLayer(3, ResourceType.COIN, 1);
         depot.modifyLayer(2, ResourceType.SHIELD, 2);
-        depot.moveResources(2, 2, 3);
+        depot.moveResources(2, 3, 2);
 
         assertEquals(ResourceType.SHIELD, depot.getLayer(3).getResource());
         assertEquals(2, depot.getLayer(3).getAmount());

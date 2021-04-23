@@ -67,7 +67,7 @@ public class Player {
         return nickname;
     }
 
-    public void setTurn(Player player, boolean isHisTurn) { this.isHisTurn = isHisTurn; }
+    public void setTurn(boolean isHisTurn) { this.isHisTurn = isHisTurn; }
 
     public boolean getTurn() { return this.isHisTurn; }
 
@@ -83,14 +83,26 @@ public class Player {
         return personalBoard;
     }
 
+    public List<LeaderAbility> getActiveLeaderAbilities() {
+        return this.activeLeaderAbilities;
+    }
+
+    public void setLeaderCards(List<LeaderCard> leaderCards) {
+        this.leaderCards = new ArrayList<>(leaderCards);
+    }
+
     //TODO: only for testing
-    public void addLeaderCards(LeaderCard card) {
+    public void addLeaderCard(LeaderCard card) {
         this.leaderCards.add(card);
     }
 
     //TODO: only for testing
     public void setLeaderCards(int index, LeaderCard card) {
         this.leaderCards.set(index, card);
+    }
+
+    public List<LeaderCard> getLeaderCards() {
+        return new ArrayList<>(this.leaderCards);
     }
 
     public void addResourceStrategy(ChangeWhiteMarbles newStrategy) throws TooManyLeaderAbilitiesException {
@@ -137,38 +149,31 @@ public class Player {
         }
     }
 
-    public void useLeader(int index, LeaderAction choice) throws TooManyLeaderAbilitiesException, LeaderAbilityAlreadyActive, InvalidLayerNumberException, NegativeResAmountException, InvalidKeyException, CostNotMatchingException {
+    public void useLeader(int index, LeaderAction choice) throws TooManyLeaderAbilitiesException, LeaderAbilityAlreadyActive, InvalidLayerNumberException, NegativeResAmountException, InvalidKeyException, CostNotMatchingException, NoLeaderAbilitiesException {
+        if (index < 0 || index > 1) throw new NoLeaderAbilitiesException("The selected leader card does not exist");
         LeaderCard leader = this.leaderCards.get(index);
         if (leader.isActive()) throw new LeaderAbilityAlreadyActive();
+
         if (choice == LeaderAction.DISCARD) {
             this.addPlayerFaith(1);
             //Victory points of discard card are not taken into consideration
             this.leaderCards.remove(leader);
         }
         else {
-            if (leader.canBeActivated(this)) {
-                LeaderAbility ability = leader.getSpecialAbility();
-                ability.activate(this);
-                leader.activate();
-                this.activeLeaderAbilities.add(ability);
-            }
-            else throw new CostNotMatchingException("LeaderCard requirements not satisfied");
+            if (!leader.canBeActivated(this)) throw new CostNotMatchingException("LeaderCard requirements not satisfied");
+            LeaderAbility ability = leader.getSpecialAbility();
+            ability.activate(this);
+            leader.activate();
+            this.activeLeaderAbilities.add(ability);
         }
     }
 
     public void discardRes(Resource resource) throws CannotContainFaithException{
-        this.getPersonalBoard().getDepot().discardRes(this, resource);
+        this.personalBoard.getDepot().discardRes(this, resource);
     }
 
-    public List<LeaderAbility> getActiveLeaderAbilities() {
-        return this.activeLeaderAbilities;
-    }
-
-    public void setLeaderCards(List<LeaderCard> leaderCards) {
-        this.leaderCards = new ArrayList<>(leaderCards);
-    }
-
-    public List<LeaderCard> getLeaderCards() {
-        return this.leaderCards;
+    public void reorderDepot(int fromLayer, int toLayer, int amount) throws InvalidResourceException, LayerNotEmptyException, NotEnoughSpaceException, InvalidLayerNumberException, CannotContainFaithException, NotEnoughResException, NegativeResAmountException {
+        Depot depot = this.personalBoard.getDepot();
+        depot.moveResources(fromLayer, toLayer, amount);
     }
 }

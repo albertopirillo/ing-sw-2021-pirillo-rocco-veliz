@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class PlayerTest {
 
@@ -35,7 +34,7 @@ class PlayerTest {
     public void activateProductionTest() throws NegativeResAmountException, InvalidKeyException, NotEnoughResException {
         Player player = new Player( "abc");
         //Depot and StrongBox empty
-        assertTrue(player.getAllResources().equals(new Resource(0,0,0,0)));
+        assertEquals(player.getAllResources(), new Resource(0, 0, 0, 0));
         //Stub DevelopmentCards
         Resource res1 = new Resource(1,2,3,4);
         Resource res2 = new Resource(1,2,3,1);
@@ -46,10 +45,46 @@ class PlayerTest {
         devs.add(dev1);
         devs.add(dev2);
         player.activateProduction(devs);
-        assertTrue(player.getAllResources().equals(new Resource(2,4,6,2)));
+        assertEquals(player.getAllResources(), new Resource(2, 4, 6, 2));
         ArrayList<DevelopmentCard> devs1 = new ArrayList<>();
         devs1.add(dev3);
         player.activateProduction(devs1);
-        assertTrue(player.getAllResources().equals(new Resource(3,6,9,6)));
+        assertEquals(player.getAllResources(), new Resource(3, 6, 9, 6));
+    }
+
+    @Test
+    public void useLeaderTest() throws TooManyLeaderAbilitiesException, CostNotMatchingException, InvalidLayerNumberException, NoLeaderAbilitiesException, NegativeResAmountException, InvalidKeyException, LeaderAbilityAlreadyActive {
+        Player player = new Player( "abc");
+        assertThrows(NoLeaderAbilitiesException.class, () -> player.useLeader(-1, LeaderAction.USE_ABILITY));
+        assertThrows(NoLeaderAbilitiesException.class, () -> player.useLeader(2, LeaderAction.DISCARD));
+
+        ChangeWhiteMarbles ability1 = new ChangeWhiteMarbles(ResourceType.COIN);
+        LeaderCard leader1 = new ResLeaderCard(2, ability1, new Resource(0,1,2,2));
+        player.addLeaderCard(leader1);
+        assertThrows(CostNotMatchingException.class, () -> player.useLeader(0, LeaderAction.USE_ABILITY));
+
+        player.useLeader(0, LeaderAction.DISCARD);
+        assertTrue(player.getActiveLeaderAbilities().isEmpty());
+        assertTrue(player.getLeaderCards().isEmpty());
+        assertEquals(1, player.getPlayerFaith());
+    }
+
+    @Test
+    public void resLeaderTest() throws InvalidResourceException, LayerNotEmptyException, NotEnoughSpaceException, InvalidLayerNumberException, CannotContainFaithException, AlreadyInAnotherLayerException, NegativeResAmountException, InvalidKeyException, TooManyLeaderAbilitiesException, CostNotMatchingException, NoLeaderAbilitiesException, LeaderAbilityAlreadyActive {
+        Player player = new Player( "abc");
+        ChangeWhiteMarbles ability1 = new ChangeWhiteMarbles(ResourceType.COIN);
+        LeaderCard leader1 = new ResLeaderCard(2, ability1, new Resource(0,1,2,2));
+        player.addLeaderCard(leader1);
+
+        Depot depot = player.getPersonalBoard().getDepot();
+        Strongbox strongbox = player.getPersonalBoard().getStrongbox();
+        depot.modifyLayer(2, ResourceType.SHIELD, 2);
+        strongbox.addResources(new Resource(3,1,0,2));
+
+        player.useLeader(0, LeaderAction.USE_ABILITY);
+        assertTrue(player.getLeaderCards().get(0).isActive());
+        assertEquals(ability1, player.getActiveLeaderAbilities().get(0));
+        assertEquals(2, depot.getLayer(2).getAmount());
+        assertEquals(new Resource(3,1,0,2), strongbox.queryAllRes());
     }
 }

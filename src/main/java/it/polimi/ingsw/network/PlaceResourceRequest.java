@@ -7,15 +7,16 @@ import java.util.List;
 
 public class PlaceResourceRequest extends Request {
 
-    public PlaceResourceRequest() {
+    private final Resource toDiscard;
+    private final List<DepotSetting> toPlace;
+
+    public PlaceResourceRequest(Resource toDiscard, List<DepotSetting> toPlace) {
+        super();
+        this.toDiscard = toDiscard;
+        this.toPlace = toPlace;
     }
 
-    private Resource toDiscard;
-
-    private List<DepotSetting> toPlace;
-
-
     public void activateRequest(MasterController masterController) {
-        // TODO implement here
+        masterController.getPlayerController().placeResource(toDiscard, toPlace);
     }
 }

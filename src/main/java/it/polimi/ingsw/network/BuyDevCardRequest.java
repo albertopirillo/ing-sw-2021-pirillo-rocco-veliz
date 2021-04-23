@@ -7,22 +7,25 @@ import it.polimi.ingsw.model.Resource;
 
 public class BuyDevCardRequest extends Request {
 
-    public BuyDevCardRequest() {
+    private final int level;
+    private final CardColor color;
+    private final int devSlot;
+    private final AbilityChoice choice;
+    private final Resource fromDepot;
+    private final Resource fromStrongbox;
+
+
+    public BuyDevCardRequest(int level, CardColor color, AbilityChoice choice, Resource fromDepot, Resource fromStrongbox, int devSlot) {
+        super();
+        this.level = level;
+        this.color = color;
+        this.devSlot = devSlot;
+        this.choice = choice;
+        this.fromDepot = fromDepot;
+        this.fromStrongbox = fromStrongbox;
     }
 
-    private int level;
-
-    private CardColor color;
-
-    private AbilityChoice choice;
-
-    private Resource fromDepot;
-
-    private Resource fromStrongbox;
-
-    private int devSlot;
-
     public void activateRequest(MasterController masterController) {
-        // TODO implement here
+        masterController.getPlayerController().buyDevCard(level, color, devSlot, choice, fromDepot, fromStrongbox);
     }
 }

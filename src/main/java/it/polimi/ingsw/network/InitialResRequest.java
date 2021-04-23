@@ -5,10 +5,12 @@ import it.polimi.ingsw.model.Resource;
 
 public class InitialResRequest extends Request {
 
-    public InitialResRequest() {
-    }
+    private final Resource res;
 
-    private Resource res;
+    public InitialResRequest(Resource res) {
+        super();
+        this.res = res;
+    }
 
     public void activateRequest(MasterController masterController) {
         // TODO implement here

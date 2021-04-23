@@ -1,17 +1,24 @@
 package it.polimi.ingsw.network;
 
 import it.polimi.ingsw.controller.MasterController;
+import it.polimi.ingsw.model.Resource;
 
 import java.util.List;
 
 public class DevProductionRequest extends Request {
 
-    public DevProductionRequest() {
+    private final List<Integer> devSlots;
+    private final Resource fromDepot;
+    private final Resource fromStrongbox;
+
+    public DevProductionRequest(List<Integer> devSlots, Resource fromDepot, Resource fromStrongbox) {
+        super();
+        this.devSlots = devSlots;
+        this.fromDepot = fromDepot;
+        this.fromStrongbox = fromStrongbox;
     }
 
-    private List<Integer> devSlots;
-
     public void activateRequest(MasterController masterController) {
-        // TODO implement here
+        masterController.getPlayerController().activateProduction(fromDepot, fromStrongbox, devSlots);
     }
 }

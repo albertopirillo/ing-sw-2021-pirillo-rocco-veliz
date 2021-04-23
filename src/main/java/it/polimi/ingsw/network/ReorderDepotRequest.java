@@ -4,16 +4,18 @@ import it.polimi.ingsw.controller.MasterController;
 
 public class ReorderDepotRequest extends Request {
 
-    public ReorderDepotRequest() {
+    private final int fromLayer;
+    private final int toLayer;
+    private final int amount;
+
+    public ReorderDepotRequest(int fromLayer, int toLayer, int amount) {
+        super();
+        this.fromLayer = fromLayer;
+        this.toLayer = toLayer;
+        this.amount = amount;
     }
 
-    private int fromLayer;
-
-    private int toLayer;
-
-    private int amount;
-
     public void activateRequest(MasterController masterController) {
-        // TODO implement here
+        //TODO: implement here
     }
 }

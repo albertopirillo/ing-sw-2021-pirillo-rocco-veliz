@@ -2,14 +2,16 @@ package it.polimi.ingsw.network;
 
 import it.polimi.ingsw.controller.MasterController;
 
-import java.util.List;
-
 public class ChooseLeaderRequest extends Request {
 
-    public ChooseLeaderRequest() {
-    }
+    private final int firstCard;
+    private final int secondCard;
 
-    private List<Integer> chosenCards;
+    public ChooseLeaderRequest(int firstCard, int secondCard) {
+        super();
+        this.firstCard = firstCard;
+        this.secondCard = secondCard;
+    }
 
     public void activateRequest(MasterController masterController) {
         // TODO implement here

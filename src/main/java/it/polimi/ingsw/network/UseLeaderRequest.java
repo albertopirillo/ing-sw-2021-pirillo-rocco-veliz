@@ -5,14 +5,16 @@ import it.polimi.ingsw.model.LeaderAction;
 
 public class UseLeaderRequest extends Request {
 
-    public UseLeaderRequest() {
+    private final int index;
+    private final LeaderAction choice;
+
+    public UseLeaderRequest(int index, LeaderAction choice) {
+        super();
+        this.index = index;
+        this.choice = choice;
     }
 
-    private int index;
-
-    private LeaderAction choice;
-
     public void activateRequest(MasterController masterController) {
-        // TODO implement here
+        //TODO: implement here
     }
 }

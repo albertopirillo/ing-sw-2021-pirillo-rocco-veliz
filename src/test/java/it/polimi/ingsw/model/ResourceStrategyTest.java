@@ -34,10 +34,7 @@ class ResourceStrategyTest {
         assertThrows(NoLeaderAbilitiesException.class, () -> player.insertMarble(3, AbilityChoice.FIRST, 3,5));
 
         Resource output1 = player.insertMarble(1, AbilityChoice.STANDARD, 0, 0);
-        Resource check1 = new Resource();
-        check1.addResource(ResourceType.STONE, 1);
-        check1.addResource(ResourceType.SERVANT, 1);
-        assertEquals(check1, output1);
+        assertEquals(new Resource(1,0,0,1), output1);
         assertEquals(0, player.getPlayerFaith());
     }
 
@@ -48,10 +45,7 @@ class ResourceStrategyTest {
         player.setGame(game);
 
         Resource output2 = player.insertMarble(5, AbilityChoice.STANDARD, 2, 3);
-        Resource check2 = new Resource();
-        check2.addResource(ResourceType.STONE, 2);
-        check2.addResource(ResourceType.SHIELD, 2);
-        assertEquals(check2, output2);
+        assertEquals(new Resource(2,0,2,0), output2);
         assertEquals(0, player.getPlayerFaith());
     }
 
@@ -69,9 +63,7 @@ class ResourceStrategyTest {
         //Resource output = player.takeResources()
 
         Resource output2 = player.insertMarble(1, AbilityChoice.STANDARD, 0, 0);
-        Resource check2 = new Resource();
-        check2.addResource(ResourceType.STONE, 1);
-        assertEquals(check2, output2);
+        assertEquals(new Resource(1,0,0,0), output2);
         assertEquals(1, player.getPlayerFaith());
     }
 

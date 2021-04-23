@@ -54,6 +54,7 @@ public class Game {
         this.players.add(new Player("b"));
         this.players.add(new Player("c"));
         this.players.add(new Player("d"));
+        for(Player p: this.players) p.setGame(this);
         startGame();
     }
 

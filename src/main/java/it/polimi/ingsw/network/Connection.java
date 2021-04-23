@@ -40,11 +40,9 @@ public class Connection implements Runnable {
 
     }
 
-
     private synchronized boolean isActive(){
         return active;
     }
-
 
     public void sendMessage(Message message) {
         if (isActive()) {
@@ -60,7 +58,6 @@ public class Connection implements Runnable {
             }
         }
     }
-
 
     public synchronized void closeConnection(){
         if (isActive()) {
@@ -82,8 +79,6 @@ public class Connection implements Runnable {
         System.out.println("Done!");
     }
 
-
-
     @Override
     public void run() {
         while (isActive()) {
@@ -91,7 +86,7 @@ public class Connection implements Runnable {
                 synchronized (inLock) {
                     Message message = (Message) socketIn.readObject();
 
-                    server.handleMessage(message, this);
+                    server.handleMessage(message);
                     sendMessage(message);
                 }
             } catch (IOException | ClassNotFoundException e) {
@@ -101,5 +96,4 @@ public class Connection implements Runnable {
             }
         }
     }
-
 }

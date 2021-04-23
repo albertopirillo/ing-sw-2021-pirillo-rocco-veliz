@@ -15,6 +15,9 @@ public class PlayerController {
         this.controller = controller;
     }
 
+    //TODO: reorderDepot()
+    //TODO: useLeader()
+
     public void basicProduction(ResourceType input1, ResourceType input2, ResourceType output, Resource fromDepot, Resource fromStrongbox) {
         try {
             Player activePlayer = controller.getGame().getActivePlayer();

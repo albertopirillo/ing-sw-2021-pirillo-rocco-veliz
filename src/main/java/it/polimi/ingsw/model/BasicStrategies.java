@@ -2,19 +2,19 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.*;
 
-public class BasicStrategies {
+public abstract class BasicStrategies {
 
     //Output resources can only go in the depot
     public static Resource insertMarble(Player player, int position) throws InvalidKeyException, NegativeResAmountException {
        Market market = player.getGame().getMarket();
        Marbles marbles = market.getMarketTray().insertMarble(position);
        Resource temp = marbles.getResources();
-       Resource outputRes = new Resource();
+       Resource outputRes = new Resource(0,0,0,0);
 
        //Handles faith and returns a map with no faith in it
        for (ResourceType key: temp.keySet()) {
            if (key == ResourceType.FAITH) player.addPlayerFaith(temp.getValue(key));
-           else outputRes.addResource(key, temp.getValue(key));
+           else outputRes.modifyValue(key, temp.getValue(key));
        }
        return outputRes;
     }

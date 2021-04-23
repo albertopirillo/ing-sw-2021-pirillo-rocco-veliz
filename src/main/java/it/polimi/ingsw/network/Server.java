@@ -7,7 +7,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -19,12 +18,27 @@ public class Server implements Runnable {
     private static final List<Connection> connections = new ArrayList<>();
     private final ExecutorService executor = Executors.newFixedThreadPool(128);
 
-
     public Server() throws IOException {
         this.serverSocket = new ServerSocket(port);
     }
 
-    public void handleMessage(Message message, Connection connection) {
+    //TODO: testing only
+    public void setMasterController(MasterController masterController) {
+        this.masterController = masterController;
+    }
+
+    public MasterController getMasterController() {
+        return masterController;
+    }
+
+    //This method will call handleMessage() if a message was received
+    //or RequestController.processRequest() if a request was received
+    public void handleInput(Processable processable, Connection connection) {
+        processable.process(this);
+    }
+
+    public void handleMessage(Message message) {
+        //TODO: handle the messages
         //in base al messaggio (hashmap key:connection, nickname)
         //initlobby firstplayer playeramount -> creo mastercontroller, player e game
         //da master controller parte gioco

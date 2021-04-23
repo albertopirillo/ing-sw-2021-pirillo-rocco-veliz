@@ -259,7 +259,7 @@
 											"top": 521,
 											"width": 309.0390625,
 											"height": 16,
-											"text": "-clientError: ClientError",
+											"text": "-clientError",
 											"horizontalAlignment": 0
 										},
 										{
@@ -2868,10 +2868,7 @@
 										"$ref": "AAAAAAF4beakFVYmKhA="
 									},
 									"name": "clientError",
-									"visibility": "private",
-									"type": {
-										"$ref": "AAAAAAF4begg813U1oA="
-									}
+									"visibility": "private"
 								},
 								{
 									"_type": "UMLAttribute",

@@ -11,6 +11,6 @@ public class RequestController {
     }
 
     public void processRequest(Request request) {
-        //TODO: implement here
+        request.activateRequest(controller);
     }
 }

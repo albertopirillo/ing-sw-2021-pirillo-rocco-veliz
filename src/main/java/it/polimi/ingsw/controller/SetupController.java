@@ -8,4 +8,8 @@ public class SetupController {
 
         this.controller = controller;
     }
+
+    //TODO: chooseLeaderCards
+
+    //TODO: initialRes
 }

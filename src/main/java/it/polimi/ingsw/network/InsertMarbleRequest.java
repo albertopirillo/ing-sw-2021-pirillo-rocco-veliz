@@ -1,21 +1,24 @@
 package it.polimi.ingsw.network;
 
+import it.polimi.ingsw.controller.MasterController;
 import it.polimi.ingsw.model.AbilityChoice;
 
 public class InsertMarbleRequest extends Request {
 
-    public InsertMarbleRequest() {
+    private final int position;
+    private final AbilityChoice choice;
+    private final int amount1;
+    private final int amount2;
+
+    public InsertMarbleRequest(int position, AbilityChoice choice, int amount1, int amount2) {
+        super();
+        this.position = position;
+        this.choice = choice;
+        this.amount1 = amount1;
+        this.amount2 = amount2;
     }
 
-    private int position;
-
-    private AbilityChoice choice;
-
-    private int amount1;
-
-    private int amount2;
-
-    public void activateRequest() {
-        // TODO implement here
+    public void activateRequest(MasterController masterController) {
+        masterController.getPlayerController().insertMarble(position, choice, amount1, amount2);
     }
 }

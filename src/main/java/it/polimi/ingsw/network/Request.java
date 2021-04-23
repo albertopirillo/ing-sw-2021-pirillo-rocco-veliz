@@ -1,9 +1,18 @@
 package it.polimi.ingsw.network;
 
-public abstract class Request{
+import it.polimi.ingsw.controller.MasterController;
+
+import java.io.Serializable;
+
+public abstract class Request implements Serializable, Processable {
 
     public Request() {
+
     }
 
-    public abstract void activateRequest();
+    public void process(Server server) {
+        server.getMasterController().getRequestController().processRequest(this);
+    }
+
+    public abstract void activateRequest(MasterController masterController);
 }

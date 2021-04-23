@@ -2,7 +2,7 @@ package it.polimi.ingsw.network;
 
 import java.io.Serializable;
 
-public class Message implements Serializable {
+public class Message implements Serializable, Processable {
 
     private MessageType type;
 
@@ -16,4 +16,11 @@ public class Message implements Serializable {
 
     public String getText(){ return this.text;}
 
+    public MessageType getType() {
+        return this.type;
+    }
+
+    public void process(Server server) {
+        server.handleMessage(this);
+    }
 }

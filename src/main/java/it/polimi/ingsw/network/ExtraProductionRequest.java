@@ -1,5 +1,6 @@
 package it.polimi.ingsw.network;
 
+import it.polimi.ingsw.controller.MasterController;
 import it.polimi.ingsw.model.AbilityChoice;
 import it.polimi.ingsw.model.Resource;
 
@@ -14,7 +15,7 @@ public class ExtraProductionRequest extends Request {
 
     private Resource fromStrongbox;
 
-    public void activateRequest() {
+    public void activateRequest(MasterController masterController) {
         // TODO implement here
     }
 }

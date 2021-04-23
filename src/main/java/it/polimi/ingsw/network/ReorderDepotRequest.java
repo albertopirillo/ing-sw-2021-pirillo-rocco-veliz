@@ -1,5 +1,7 @@
 package it.polimi.ingsw.network;
 
+import it.polimi.ingsw.controller.MasterController;
+
 public class ReorderDepotRequest extends Request {
 
     public ReorderDepotRequest() {
@@ -11,7 +13,7 @@ public class ReorderDepotRequest extends Request {
 
     private int amount;
 
-    public void activateRequest() {
+    public void activateRequest(MasterController masterController) {
         // TODO implement here
     }
 }

@@ -8,7 +8,6 @@ import java.util.List;
 
 public class PersonalBoard {
 
-    private SoloActionTokens[] soloActionTokens;
     private DevelopmentSlot[] devSlots;
     private Depot depot;
     private Strongbox strongbox;

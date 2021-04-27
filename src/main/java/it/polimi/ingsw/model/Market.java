@@ -66,7 +66,8 @@ public class Market {
         List<DevelopmentCard> availableCards = new ArrayList<>();
         for(int i=0; i<3; i++){
             for (int j=0; j<4; j++){
-                availableCards.add(this.cards[i][j].getCard());
+                if (this.cards[i][j].getCard() != null)
+                    availableCards.add(this.cards[i][j].getCard());
             }
         }
         return availableCards;
@@ -84,6 +85,11 @@ public class Market {
         DevelopmentCard devCard =  cards[3-level][color.getNumberColumn()].removeCard();
         if(devCard!=null) return devCard;
         throw new DeckEmptyException();
+    }
+
+    public boolean isDeckEmpty(int level, CardColor color) {
+        DevelopmentCard devCard = cards[3-level][color.getNumberColumn()].getCard();
+        return devCard == null;
     }
 
     public MarketTray getMarketTray() {

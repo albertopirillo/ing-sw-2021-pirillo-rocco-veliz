@@ -1,12 +1,13 @@
 package it.polimi.ingsw.model;
 
-public class MoveBlackCross extends SoloActionTokens {
+public class MoveBlackCross extends SoloActionToken {
 
-    public MoveBlackCross() {
+    public MoveBlackCross(SoloGame game) {
+        super(game);
     }
 
-    public void moveBlackCross(int amount) {
-        // TODO implement here
+    @Override
+    public void reveal() {
+        this.getGame().moveBlackCross(2);
     }
-
 }

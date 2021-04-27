@@ -1,16 +1,15 @@
 package it.polimi.ingsw.model;
 
-public class MoveAndShuffle extends SoloActionTokens {
+public class MoveAndShuffle extends SoloActionToken {
 
-    public MoveAndShuffle() {
+    public MoveAndShuffle(SoloGame game) {
+        super(game);
     }
 
-    public void moveBlackCross(int amount) {
-        // TODO implement here
+    @Override
+    public void reveal() {
+        SoloGame game = this.getGame();
+        game.moveBlackCross(1);
+        game.shuffleSoloTokens();
     }
-
-    public void shuffleToken() {
-        // TODO implement here
-    }
-
 }

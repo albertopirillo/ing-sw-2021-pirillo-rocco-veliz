@@ -21,7 +21,7 @@ public class Game {
 
     private final int gameID;
 
-    private List<Player> players;
+    private final List<Player> players;
 
     private Player activePlayer;
 
@@ -66,8 +66,7 @@ public class Game {
         builder.registerTypeAdapter(LeaderAbility.class, new LeaderAbilityDeserializer());
         builder.registerTypeAdapter(LeaderCard.class, new LeaderCardJsonDeserializer());
         Gson gson = builder.create();
-        Type listType = new TypeToken<List<LeaderCard>>() {
-        }.getType();
+        Type listType = new TypeToken<List<LeaderCard>>(){}.getType();
         JsonReader reader = null;
         try {
             reader = new JsonReader(new FileReader("src/main/resources/LeaderCardsConfig.json"));

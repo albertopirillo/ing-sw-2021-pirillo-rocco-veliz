@@ -5,15 +5,12 @@ import java.util.List;
 
 public class FaithTrack {
 
+    private final List<PopeFavorCard> popeCards;
+
     public FaithTrack() {
         this.popeCards = new ArrayList<>();
         initPopeCards();
     }
-
-    //TODO SINGLE PLAYER
-    // private int blackCrossPosition;
-
-    private final List<PopeFavorCard> popeCards;
 
     private void initPopeCards() {
         for (int i = 1; i < 4; i++) {

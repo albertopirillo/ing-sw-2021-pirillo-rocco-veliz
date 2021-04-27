@@ -136,7 +136,7 @@ public abstract class Depot {
         if (resource.keySet().contains(ResourceType.FAITH))
             throw new CannotContainFaithException("You cannot discard faith points");
 
-        List<Player> playerList = player.getGame().getPlayers();
+        List<Player> playerList = player.getGame().getPlayersList();
         for(Player p: playerList) {
             if (p != player) p.addPlayerFaith(resource.getTotalAmount());
         }

@@ -28,7 +28,7 @@ class ResourceStrategyTest {
     @Test
     void standardTest() throws InvalidAbilityChoiceException, NoLeaderAbilitiesException, NegativeResAmountException, InvalidKeyException, FullCardDeckException, CostNotMatchingException {
         Player player = new Player( "abc");
-        Game game = new Game(true);
+        Game game = new MultiGame(true);
         player.setGame(game);
 
         assertThrows(NoLeaderAbilitiesException.class, () -> player.insertMarble(3, AbilityChoice.FIRST, 3,5));
@@ -41,7 +41,7 @@ class ResourceStrategyTest {
     @Test
     void standard2Test() throws InvalidAbilityChoiceException, NoLeaderAbilitiesException, NegativeResAmountException, InvalidKeyException, FullCardDeckException, CostNotMatchingException {
         Player player = new Player( "abc");
-        Game game = new Game(true);
+        Game game = new MultiGame(true);
         player.setGame(game);
 
         Resource output2 = player.insertMarble(5, AbilityChoice.STANDARD, 2, 3);
@@ -52,7 +52,7 @@ class ResourceStrategyTest {
     @Test
     void faithTest() throws FullCardDeckException, InvalidAbilityChoiceException, NoLeaderAbilitiesException, NegativeResAmountException, InvalidKeyException, CostNotMatchingException {
         Player player = new Player( "abc");
-        Game game = new Game(true);
+        Game game = new MultiGame(true);
         player.setGame(game);
         player.insertMarble(1, AbilityChoice.STANDARD, 0, 0);
 
@@ -70,7 +70,7 @@ class ResourceStrategyTest {
     @Test
     void singleAbilityTest() throws FullCardDeckException, TooManyLeaderAbilitiesException, InvalidAbilityChoiceException, NoLeaderAbilitiesException, NegativeResAmountException, InvalidKeyException, CostNotMatchingException {
         Player player = new Player( "abc");
-        Game game = new Game(true);
+        Game game = new MultiGame(true);
         player.setGame(game);
         ChangeWhiteMarbles ability1 = new ChangeWhiteMarbles(ResourceType.STONE);
         ChangeWhiteMarbles ability2 = new ChangeWhiteMarbles(ResourceType.FAITH);
@@ -89,7 +89,7 @@ class ResourceStrategyTest {
     @Test
     void doubleAbilityTest() throws FullCardDeckException, TooManyLeaderAbilitiesException, InvalidAbilityChoiceException, NoLeaderAbilitiesException, NegativeResAmountException, InvalidKeyException, CostNotMatchingException {
         Player player = new Player( "abc");
-        Game game = new Game(true);
+        Game game = new MultiGame(true);
         player.setGame(game);
         ChangeWhiteMarbles ability1 = new ChangeWhiteMarbles(ResourceType.COIN);
         ChangeWhiteMarbles ability2 = new ChangeWhiteMarbles(ResourceType.SHIELD);

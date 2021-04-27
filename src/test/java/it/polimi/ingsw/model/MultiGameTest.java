@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-public class GameTest {
+public class MultiGameTest {
 
     @Test
     public void gameTest() {
@@ -38,10 +38,10 @@ public class GameTest {
         playersList.add(player2);
         playersList.add(player3);
         //playersList.add(player4);
-        Game game = new Game(playerAmount, playersList);
+        Game game = new MultiGame(playerAmount, playersList);
 
         int true_amount = 0, false_amount = 0;
-        for(Player p: game.getPlayers()) {
+        for(Player p: game.getPlayersList()) {
             if(p.getInkwell()) true_amount++;
             else false_amount++;
         }
@@ -66,7 +66,7 @@ public class GameTest {
         playersList.add(player2);
         playersList.add(player3);
         playersList.add(player4);
-        Game game = new Game(playerAmount, playersList);
+        Game game = new MultiGame(playerAmount, playersList);
         Player lastActive = game.getActivePlayer();
         int lastIndex = playersList.indexOf(lastActive);
 

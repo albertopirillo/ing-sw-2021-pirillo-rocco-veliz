@@ -17,7 +17,7 @@ class PlayerControllerTest {
 
     @Test
     public void basicProductionTest() throws FullCardDeckException, NegativeResAmountException, InvalidKeyException {
-        Game game = new Game(true);
+        Game game = new MultiGame(true);
         MasterController controller = new MasterController(game);
         PlayerController playerController = controller.getPlayerController();
         Player activePlayer = game.getActivePlayer();
@@ -38,7 +38,7 @@ class PlayerControllerTest {
 
     @Test
     public void extraProductionTest() throws TooManyLeaderAbilitiesException, FullCardDeckException, NegativeResAmountException, InvalidKeyException {
-        Game game = new Game(true);
+        Game game = new MultiGame(true);
         MasterController controller = new MasterController(game);
         PlayerController playerController = controller.getPlayerController();
         Player activePlayer = game.getActivePlayer();
@@ -68,7 +68,7 @@ class PlayerControllerTest {
 
     @Test
     public void insertMarbleTest() throws FullCardDeckException, TooManyLeaderAbilitiesException {
-        Game game = new Game(true);
+        Game game = new MultiGame(true);
         MasterController controller = new MasterController(game);
         PlayerController playerController = controller.getPlayerController();
         Player activePlayer = game.getActivePlayer();
@@ -90,7 +90,7 @@ class PlayerControllerTest {
 
     @Test
     public void endTurnOKTest() throws FullCardDeckException {
-        Game game = new Game(true);
+        Game game = new MultiGame(true);
         MasterController controller = new MasterController(game);
         PlayerController playerController = controller.getPlayerController();
         Player activePlayer = game.getActivePlayer();
@@ -102,7 +102,7 @@ class PlayerControllerTest {
 
     @Test
     public void endTurnKOTest() throws FullCardDeckException {
-        Game game = new Game(true);
+        Game game = new MultiGame(true);
         MasterController controller = new MasterController(game);
         PlayerController playerController = controller.getPlayerController();
         Player activePlayer = game.getActivePlayer();
@@ -116,7 +116,7 @@ class PlayerControllerTest {
 
     @Test
     public void placeResourceTest() throws FullCardDeckException, InvalidResourceException, LayerNotEmptyException, NotEnoughSpaceException, InvalidLayerNumberException, CannotContainFaithException, AlreadyInAnotherLayerException, NegativeResAmountException, InvalidKeyException {
-        Game game = new Game(true);
+        Game game = new MultiGame(true);
         MasterController controller = new MasterController(game);
         PlayerController playerController = controller.getPlayerController();
         Player activePlayer = game.getActivePlayer();
@@ -143,7 +143,7 @@ class PlayerControllerTest {
 
     @Test
     public void buyDevCardTest() throws FullCardDeckException, TooManyLeaderAbilitiesException, NegativeResAmountException, InvalidKeyException {
-        Game game = new Game(true);
+        Game game = new MultiGame(true);
         MasterController controller = new MasterController(game);
         PlayerController playerController = controller.getPlayerController();
         Player activePlayer = game.getActivePlayer();
@@ -170,7 +170,7 @@ class PlayerControllerTest {
 
     @Test
     public void reorderDepotTest() throws FullCardDeckException, InvalidResourceException, LayerNotEmptyException, NotEnoughSpaceException, InvalidLayerNumberException, CannotContainFaithException, NegativeResAmountException, AlreadyInAnotherLayerException {
-        Game game = new Game(true);
+        Game game = new MultiGame(true);
         MasterController controller = new MasterController(game);
         PlayerController playerController = controller.getPlayerController();
         Player activePlayer = game.getActivePlayer();
@@ -187,7 +187,7 @@ class PlayerControllerTest {
 
     @Test
     public void useLeaderTest() throws FullCardDeckException {
-        Game game = new Game(true);
+        Game game = new MultiGame(true);
         MasterController controller = new MasterController(game);
         PlayerController playerController = controller.getPlayerController();
         Player activePlayer = game.getActivePlayer();
@@ -206,7 +206,7 @@ class PlayerControllerTest {
 
     @Test
     public void activateProductionTest() throws FullCardDeckException, NegativeResAmountException, InvalidKeyException{
-        Game game = new Game(true);
+        Game game = new MultiGame(true);
         MasterController controller = new MasterController(game);
         PlayerController playerController = controller.getPlayerController();
         Player activePlayer = game.getActivePlayer();

@@ -1,0 +1,50 @@
+package it.polimi.ingsw.model;
+
+import it.polimi.ingsw.exceptions.FullCardDeckException;
+import org.junit.jupiter.api.Test;
+
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
+class SoloGameTest {
+
+    @Test
+    public void BuildTest() throws FullCardDeckException {
+        SoloGame game = new SoloGame(new Player("a"));
+        assertEquals(0, game.getBlackCrossPosition());
+        assertEquals(6, game.getSoloTokens().size());
+    }
+
+    @Test
+    public void shuffleSoloTokens() throws FullCardDeckException {
+        SoloGame game = new SoloGame(new Player("a"));
+        List<SoloActionToken> before = game.getSoloTokens();
+        assertEquals(before, game.getSoloTokens());
+        game.shuffleSoloTokens();
+        List<SoloActionToken> after = game.getSoloTokens();
+        assertNotEquals(before, after);
+    }
+
+    @Test
+    public void nextTurn() throws FullCardDeckException {
+        SoloGame game = new SoloGame(true);
+        SoloActionToken firstToken = game.getSoloTokens().get(0);
+        SoloActionToken secondToken = game.getSoloTokens().get(1);
+        game.nextTurn();
+        assertEquals(2, game.getBlackCrossPosition());
+        assertEquals(firstToken, game.getSoloTokens().get(5));
+        assertEquals(secondToken, game.getSoloTokens().get(0));
+    }
+
+    @Test
+    public void computeFinalScore() {
+        //TODO: implement here
+    }
+
+    @Test
+    public void endGame() {
+        //TODO: implement here
+    }
+}

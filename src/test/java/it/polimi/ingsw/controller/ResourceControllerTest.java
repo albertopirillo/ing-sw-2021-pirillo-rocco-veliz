@@ -1,10 +1,7 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.exceptions.*;
-import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.Player;
-import it.polimi.ingsw.model.Resource;
-import it.polimi.ingsw.model.ResourceType;
+import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.network.DepotSetting;
 import org.junit.jupiter.api.Test;
 
@@ -29,7 +26,7 @@ class ResourceControllerTest {
 
     @Test
     public void handleResourceOKTest() throws FullCardDeckException, InvalidResourceException, WrongDepotInstructionsException, LayerNotEmptyException, NotEnoughSpaceException, InvalidLayerNumberException, CannotContainFaithException, NotEnoughResException, AlreadyInAnotherLayerException, InvalidKeyException, NegativeResAmountException {
-        Game game = new Game(true);
+        Game game = new MultiGame(true);
         MasterController masterController = new MasterController(game);
         Player activePlayer = masterController.getGame().getActivePlayer();
         ResourceController resourceController = masterController.getResourceController();
@@ -52,7 +49,7 @@ class ResourceControllerTest {
 
     @Test
     public void handleResourceKOTest() throws FullCardDeckException {
-        Game game = new Game(true);
+        Game game = new MultiGame(true);
         MasterController masterController = new MasterController(game);
         Player activePlayer = masterController.getGame().getActivePlayer();
         ResourceController resourceController = masterController.getResourceController();

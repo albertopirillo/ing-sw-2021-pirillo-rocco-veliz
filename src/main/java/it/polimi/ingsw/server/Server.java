@@ -63,7 +63,7 @@ public class Server implements Runnable {
     public void setupGame(){
         System.out.println("[SERVER] LOADING GAME...");
         for (String nickname : lobbyPlayers.keySet()){
-            System.out.println("[SERVER] Player: "+nickname);
+            System.out.println("[SERVER] Player: " + nickname);
         }
         //Create Game
         Game game = null;
@@ -88,12 +88,17 @@ public class Server implements Runnable {
         System.out.println("[SERVER] Buon divertimento :)");
         game = masterController.getGame();
         System.out.println("[SERVER] Il primo giocatore è : "+game.getActivePlayer().getNickname());
-        game.nextTurn();
+        //Moves to next player without checking turn's ending conditions
+        int index = game.getPlayersList().indexOf(game.getActivePlayer());
+        game.setActivePlayer(game.getPlayersList().get((index + 1) % game.getPlayerAmount()));
 
-        for(int i=1; i<gameSize; i++){
+        //Nothing needs to be done if in Solo Mode
+        for (int i = 1; i < gameSize; i++) {
             String activePlayer = game.getActivePlayer().getNickname();
             sendInitialResources(i, activePlayer);
-            game.nextTurn();
+            //Moves to next player without checking turn's ending conditions
+            index = game.getPlayersList().indexOf(game.getActivePlayer());
+            game.setActivePlayer(game.getPlayersList().get((index + 1) % game.getPlayerAmount()));
         }
 
         //activeGames.put(activeGames.size(), connections

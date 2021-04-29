@@ -24,16 +24,13 @@ public abstract class Game {
     public int getPlayerAmount() {
         return this.playerAmount;
     }
-
     public Player getPlayer(String nickname){
         for(Player player : playersList){
             if(player.getNickname().equals(nickname)) return player;
         }
         return null;
     }
-
     public Player getActivePlayer() {return this.activePlayer;}
-
     public Market getMarket() { return this.market;}
 
     //Inherited setters
@@ -61,11 +58,11 @@ public abstract class Game {
         }
         return finalScores;
     }
+    public String giveInkwell(){return null;}
 
     //Methods to be implemented
     public abstract void lastTurn(boolean win) throws NegativeResAmountException, InvalidKeyException;
     public abstract void nextTurn() throws NegativeResAmountException, InvalidKeyException;
     public abstract void checkEndGame() throws NegativeResAmountException, InvalidKeyException;
-    public String giveInkwell(){return null;};
     public abstract void startGame();
 }

@@ -2,7 +2,9 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.TooManyLeaderAbilitiesException;
 
-public class ChangeWhiteMarbles extends LeaderAbility {
+import java.io.Serializable;
+
+public class ChangeWhiteMarbles extends LeaderAbility implements Serializable {
 
     private final ResourceType resourceType;
 

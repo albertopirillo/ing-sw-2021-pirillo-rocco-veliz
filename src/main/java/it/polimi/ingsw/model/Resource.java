@@ -4,12 +4,13 @@ import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 
 import javax.management.openmbean.KeyAlreadyExistsException;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-public class Resource {
+public class Resource implements Serializable {
 
     private final Map<ResourceType, Integer> map;
 

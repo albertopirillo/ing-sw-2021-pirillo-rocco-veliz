@@ -3,7 +3,10 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.TooManyLeaderAbilitiesException;
 
-public class ExtraProduction extends LeaderAbility {
+import java.io.Serializable;
+
+
+public class ExtraProduction extends LeaderAbility implements Serializable {
 
     private final ProductionPower production;
 

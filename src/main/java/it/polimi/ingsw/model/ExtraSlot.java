@@ -2,7 +2,9 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.InvalidLayerNumberException;
 
-public class ExtraSlot extends LeaderAbility {
+import java.io.Serializable;
+
+public class ExtraSlot extends LeaderAbility implements Serializable {
 
     private final ResourceType resource;
 

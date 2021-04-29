@@ -1,13 +1,13 @@
 package it.polimi.ingsw.model;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
 
-public class DevLeaderCard extends LeaderCard {
+public class DevLeaderCard extends LeaderCard implements Serializable {
 
     private final List<LeaderDevCost> requires;
 
-    public DevLeaderCard(int victoryPoints, LeaderAbility specialAbility, ArrayList<LeaderDevCost> requires) {
+    public DevLeaderCard(int victoryPoints, LeaderAbility specialAbility, List<LeaderDevCost> requires) {
         super(victoryPoints, specialAbility);
         this.requires = requires;
     }

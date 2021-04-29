@@ -1,6 +1,8 @@
 package it.polimi.ingsw.model;
 
-public class LeaderDevCost {
+import java.io.Serializable;
+
+public class LeaderDevCost implements Serializable {
 
     private final CardColor color;
     private int level;

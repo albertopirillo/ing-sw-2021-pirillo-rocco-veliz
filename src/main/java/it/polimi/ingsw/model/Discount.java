@@ -2,7 +2,9 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.TooManyLeaderAbilitiesException;
 
-public class Discount extends LeaderAbility {
+import java.io.Serializable;
+
+public class Discount extends LeaderAbility implements Serializable {
 
     private final ResourceType resource;
     private final int amount;

@@ -3,7 +3,9 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 
-public class ResLeaderCard extends LeaderCard {
+import java.io.Serializable;
+
+public class ResLeaderCard extends LeaderCard implements Serializable {
 
     private final Resource cost;
 

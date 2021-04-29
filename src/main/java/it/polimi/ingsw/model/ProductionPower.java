@@ -1,6 +1,8 @@
 package it.polimi.ingsw.model;
 
-public class ProductionPower {
+import java.io.Serializable;
+
+public class ProductionPower implements Serializable {
 
     private final Resource input;
     private final Resource output;

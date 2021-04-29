@@ -4,7 +4,9 @@ import it.polimi.ingsw.exceptions.InvalidResourceException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import it.polimi.ingsw.exceptions.NotEnoughSpaceException;
 
-public class ExtraLayer implements Layer {
+import java.io.Serializable;
+
+public class ExtraLayer implements Layer, Serializable {
 
     private final ResourceType resource;
     private int amount;

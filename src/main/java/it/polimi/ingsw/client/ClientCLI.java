@@ -1,8 +1,10 @@
 package it.polimi.ingsw.client;
 
+import it.polimi.ingsw.model.LeaderCard;
 import it.polimi.ingsw.model.ResourceType;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -72,6 +74,20 @@ public class ClientCLI {
         return stdin.nextInt();
     }
 
+    public void viewInitialsLeadersCars(List<LeaderCard> leaderCards){
+        System.out.println("Sono arrivati "+leaderCards.size()+" carte ma non so ancora come fartele vedere");
+        System.out.println("Intanto scegline 2");
+    }
+
+    public int getInitialLeaderCards(){
+        System.out.println("Scegli una carta");
+        System.out.println("0) La prima");
+        System.out.println("1) La seconda");
+        System.out.println("2) La terza");
+        System.out.println("3) La quarta");
+        return stdin.nextInt();
+    }
+
     public ResourceType parseToResourceType(int choice){
         switch (choice){
             case 1: return ResourceType.STONE;
@@ -81,5 +97,11 @@ public class ClientCLI {
             default: break;
         }
         return null;
+    }
+
+    public String simulateGame() {
+        System.out.println("Simulazione del gioco");
+        System.out.println("Premi un carattere e invio per passare il turno");
+        return stdin.next();
     }
 }

@@ -7,9 +7,14 @@ import it.polimi.ingsw.server.Server;
 import java.io.Serializable;
 
 public abstract class Request implements Serializable, Processable {
+    //testing
+    private String text;
 
     public Request() {
 
+    }
+    public void setText(String text) {
+        this.text = text;
     }
 
     public void process(Server server, Connection connection) {

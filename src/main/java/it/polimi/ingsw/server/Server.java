@@ -2,6 +2,8 @@ package it.polimi.ingsw.server;
 
 import it.polimi.ingsw.controller.MasterController;
 import it.polimi.ingsw.exceptions.FullCardDeckException;
+import it.polimi.ingsw.exceptions.InvalidKeyException;
+import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MultiGame;
 import it.polimi.ingsw.network.Message;
@@ -81,13 +83,20 @@ public class Server implements Runnable {
             View view = new RemoteView(this, game, connections.get(i), i);
             connections.get(i).setView(view);
             views.add(view);
-            //game.addListener(view)
+            game.addObserver(view);
             view.addController(masterController);
         }
         masterController.getSetupController().setupGame(keys, gameSize);
         System.out.println("[SERVER] Buon divertimento :)");
         game = masterController.getGame();
         System.out.println("[SERVER] Il primo giocatore è : "+game.getActivePlayer().getNickname());
+        try {
+            game.nextTurn();
+        } catch (NegativeResAmountException | InvalidKeyException e) {
+            e.printStackTrace();
+        }
+        sendInitialResources(1, game.getActivePlayer().getNickname());
+        /*
         //Moves to next player without checking turn's ending conditions
         int index = game.getPlayersList().indexOf(game.getActivePlayer());
         game.setActivePlayer(game.getPlayersList().get((index + 1) % game.getPlayerAmount()));
@@ -100,6 +109,7 @@ public class Server implements Runnable {
             index = game.getPlayersList().indexOf(game.getActivePlayer());
             game.setActivePlayer(game.getPlayersList().get((index + 1) % game.getPlayerAmount()));
         }
+        */
 
         //activeGames.put(activeGames.size(), connections
         lobbyPlayers.clear();

@@ -30,6 +30,10 @@ public class Message implements Serializable, Processable {
         this.type = type;
     }
 
+    public void setText(String text){
+        this.text = text;
+    }
+
     public String getActivePlayer() {
         return activePlayer;
     }

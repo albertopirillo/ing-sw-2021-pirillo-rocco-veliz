@@ -1,5 +1,7 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.exceptions.InvalidKeyException;
+import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import it.polimi.ingsw.model.ClientError;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.network.Request;
@@ -52,5 +54,15 @@ public class MasterController {
 
     public void processRequest(Request request) {
         request.activateRequest(this);
+    }
+
+    //Testing
+    public void simulateGame(){
+        try {
+            game.nextTurn();
+        } catch (NegativeResAmountException | InvalidKeyException e) {
+            e.printStackTrace();
+        }
+        game.updateClientModel();
     }
 }

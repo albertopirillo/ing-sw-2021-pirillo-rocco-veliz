@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client;
 
+import it.polimi.ingsw.model.LeaderCard;
 import it.polimi.ingsw.model.ResourceType;
 import it.polimi.ingsw.network.*;
 
@@ -7,6 +8,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.List;
 import java.util.Map;
 
 public class Client implements Runnable{
@@ -48,11 +50,32 @@ public class Client implements Runnable{
                     sendMessage(rsp);
                     break;
                 case INITIAL_RESOURCE:
-                    Map <ResourceType, Integer> res = cli.getInitialResources(Integer.parseInt(msg.getText()));
-                    InitialResRequest request = new InitialResRequest(res);
-                    request.setNumPlayer(Integer.parseInt(msg.getText()));
-                    request.setPlayer(msg.getActivePlayer());
-                    sendMessage(request);
+                    if(msg.getActivePlayer().equals(nickname)) {
+                        Map<ResourceType, Integer> res = cli.getInitialResources(Integer.parseInt(msg.getText()));
+                        InitialResRequest request = new InitialResRequest(res);
+                        request.setNumPlayer(Integer.parseInt(msg.getText()));
+                        request.setPlayer(nickname);
+                        sendMessage(request);
+                    }
+                    break;
+                case INITIAL_CARDS:
+                    if(msg.getActivePlayer().equals(nickname)) {
+                        CardsMessage message = (CardsMessage) msg;
+                        List<LeaderCard> leaderCards = message.getCards();
+                        cli.viewInitialsLeadersCars(leaderCards);
+                        int num1 = cli.getInitialLeaderCards();
+                        int num2 = cli.getInitialLeaderCards();
+                        ChooseLeaderRequest request = new ChooseLeaderRequest(num1, num2);
+                        request.setPlayer(nickname);
+                        sendMessage(request);
+                    }
+                    break;
+                case PLAYER_MOVE:
+                    if(msg.getActivePlayer().equals(nickname)) {
+                        Request request = new TestRequest();
+                        request.setText(cli.simulateGame());
+                        sendMessage(request);
+                    }
                     break;
             }
         }

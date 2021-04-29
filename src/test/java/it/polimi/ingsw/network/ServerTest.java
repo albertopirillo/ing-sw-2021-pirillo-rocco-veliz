@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.AbilityChoice;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MultiGame;
 import it.polimi.ingsw.model.Resource;
+import it.polimi.ingsw.server.Server;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -18,11 +19,12 @@ class ServerTest {
     public void handleRequestTest() throws IOException, FullCardDeckException {
         Server server = new Server();
         Game game = new MultiGame(true);
+        game.giveInkwell();
         MasterController masterController = new MasterController(game);
         server.setMasterController(masterController);
         Processable request = new InsertMarbleRequest(1, AbilityChoice.STANDARD, 0,0);
-        request.process(server);
-
+        //request.process(server, null);//TODO: FIXED
+        masterController.processRequest((Request) request);
         Resource output = masterController.getResourceController().getToHandle();
         assertEquals(new Resource(1,0,0,1), output);
         assertEquals(0, game.getActivePlayer().getPlayerFaith());

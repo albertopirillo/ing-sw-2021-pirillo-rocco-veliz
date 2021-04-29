@@ -19,6 +19,10 @@ public class MultiGame extends Game {
 
     private List<LeaderCard> finalDeckLeader;
 
+    public MultiGame() throws FullCardDeckException {
+        this.setMarket(new Market());
+    }
+
     public MultiGame(int playerAmount, List<Player> players) throws FullCardDeckException {
         this.setPlayerAmount(playerAmount);
         this.setPlayersList(players);
@@ -56,7 +60,7 @@ public class MultiGame extends Game {
         //TODO: implement here
     }
 
-    private void startGame() {
+    public void startGame() {
         //init market and devCards
         //init leader cart and give them to players
         GsonBuilder builder = new GsonBuilder();
@@ -87,9 +91,9 @@ public class MultiGame extends Game {
                 chosenCards.add(chosenCard);
             }
             //now player has to choose which cards to keep
-            List<LeaderCard> returnedCards = giveLeaderCards(pl, chosenCards);
+            giveLeaderCards(pl, chosenCards);
             //insert back not chosen cards (returnedCards)
-            leaderCards.addAll(returnedCards);
+            //leaderCards.addAll(returnedCards);
         }
 
         // leaderCard arraylist now contains not chosen cards
@@ -99,20 +103,21 @@ public class MultiGame extends Game {
         giveInkwell();
     }
 
-    private List<LeaderCard> giveLeaderCards(Player player, List<LeaderCard> leaderCards) {
+    private void giveLeaderCards(Player player, List<LeaderCard> leaderCards) {
         // leaderCards is made of the two chosen card out of 4 given at startGame
         //TODO the choice of leaderCards
-        List<LeaderCard> returnedCards = new ArrayList<>(); //put here cards not chosen
+        //List<LeaderCard> returnedCards = new ArrayList<>(); //put here cards not chosen
         player.setLeaderCards(leaderCards);
-        return returnedCards; //return leaderCards to insert back in deck for other players to choose
+        //return returnedCards; //return leaderCards to insert back in deck for other players to choose
     }
 
-    private void giveInkwell() {
+    public String giveInkwell() {
         //First player is chosen randomly
         int numPlayer = new Random().nextInt(this.getPlayerAmount());
         Player firstPlayer = this.getPlayersList().get(numPlayer);
         firstPlayer.setInkwell(true);
         this.setActivePlayer(firstPlayer);
+        return getActivePlayer().getNickname();
     }
 
     private void giveResources(Resource resource) {

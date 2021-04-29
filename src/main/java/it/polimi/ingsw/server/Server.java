@@ -3,6 +3,7 @@ package it.polimi.ingsw.server;
 import it.polimi.ingsw.controller.MasterController;
 import it.polimi.ingsw.exceptions.FullCardDeckException;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.MultiGame;
 import it.polimi.ingsw.network.Message;
 import it.polimi.ingsw.network.MessageType;
 import it.polimi.ingsw.network.Processable;
@@ -67,7 +68,7 @@ public class Server implements Runnable {
         //Create Game
         Game game = null;
         try {
-            game = new Game();
+            game = new MultiGame();
         } catch (FullCardDeckException e) {
             e.printStackTrace();
         }

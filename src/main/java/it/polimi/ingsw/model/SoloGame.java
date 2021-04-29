@@ -70,7 +70,7 @@ public class SoloGame extends Game {
         return 1;
     }
 
-    private void startGame() {
+    public void startGame() {
         //init leader cart and give them to the player
         GsonBuilder builder = new GsonBuilder();
         //add adapter to deserialize from abstract class

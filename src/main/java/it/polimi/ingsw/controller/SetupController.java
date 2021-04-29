@@ -2,6 +2,7 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.MultiGame;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.ResourceType;
 
@@ -27,7 +28,7 @@ public class SetupController {
         }
         Game game = this.controller.getGame();
         game.setPlayerAmount(numPlayers);
-        game.setPlayers(players);
+        game.setPlayersList(players);
         game.startGame();
         firstPlayer = game.giveInkwell();
     }

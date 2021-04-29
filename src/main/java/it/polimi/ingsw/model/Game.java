@@ -19,6 +19,13 @@ public abstract class Game {
     public int getPlayerAmount() {
         return this.playerAmount;
     }
+
+    public Player getPlayer(String nickname){
+        for(Player player : playersList){
+            if(player.getNickname().equals(nickname)) return player;
+        }
+        return null;
+    }
     public Player getActivePlayer() {return this.activePlayer;}
     public Market getMarket() { return this.market;}
 
@@ -40,4 +47,6 @@ public abstract class Game {
     public abstract void nextTurn();
     public abstract void computeFinalScore();
     public abstract void endGame();
+    public String giveInkwell(){return null;};
+    public abstract void startGame();
 }

@@ -19,7 +19,7 @@ class RequestControllerTest {
         Game game = new MultiGame(true);
         MasterController masterController = new MasterController(game);
         RequestController requestController = masterController.getRequestController();
-        requestController.processRequest(request);
+        masterController.processRequest(request);
 
         Resource output = masterController.getResourceController().getToHandle();
         assertEquals(new Resource(0,1,1,0), output);

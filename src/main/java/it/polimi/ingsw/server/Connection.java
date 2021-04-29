@@ -1,4 +1,8 @@
-package it.polimi.ingsw.network;
+package it.polimi.ingsw.server;
+
+import it.polimi.ingsw.network.Message;
+import it.polimi.ingsw.network.Processable;
+import it.polimi.ingsw.view.View;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -9,12 +13,11 @@ public class Connection implements Runnable {
 
     private final Server server;
     private final Socket socket;
-
     private ObjectInputStream socketIn;
     private ObjectOutputStream socketOut;
-
     private boolean active;
-
+    private View view;
+    //private ConnectionListener lister -> lister = player's remote view
     private final Object outLock = new Object();
     private final Object inLock = new Object();
 
@@ -23,8 +26,7 @@ public class Connection implements Runnable {
         this.socket = socket;
         this.server = server;
         this.active = true;
-
-        System.out.println("Connessione stabilita con un client");
+        System.out.println("[SERVER] Connessione stabilita con un client");
 
         try {
             synchronized (inLock) {
@@ -39,6 +41,9 @@ public class Connection implements Runnable {
         }
 
     }
+
+    public void setView(View view){ this.view = view; }
+    public View getView(){ return this.view; }
 
     private synchronized boolean isActive(){
         return active;
@@ -81,17 +86,20 @@ public class Connection implements Runnable {
 
     @Override
     public void run() {
+        //String nickname;
+        //Message msg = (Message) socketIn.readObject();
+        //server.handleInput(msg, this);
         while (isActive()) {
             try {
                 synchronized (inLock) {
-                    Message message = (Message) socketIn.readObject();
-
+                    Processable msg = (Processable) socketIn.readObject();
+                    server.handleInput(msg, this);
+                    /*Message message = (Message) socketIn.readObject();
                     server.handleMessage(message);
-                    sendMessage(message);
+                    sendMessage(message);*/
                 }
             } catch (IOException | ClassNotFoundException e) {
                 System.out.println(e.getMessage());
-
                 close();
             }
         }

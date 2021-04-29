@@ -39,7 +39,7 @@ class DiscountTest {
         assertEquals(2, player.getActiveLeaderAbilities().size());
         assertEquals(ability, player.getActiveLeaderAbilities().get(1));
 
-        player.setLeaderCards(0, res3);
+        player.setLeaderCard(0, res3);
         assertThrows(TooManyLeaderAbilitiesException.class, () -> player.useLeader(0, LeaderAction.USE_ABILITY));
     }
 }

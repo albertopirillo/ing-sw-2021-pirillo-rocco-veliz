@@ -50,7 +50,7 @@ class ExtraSlotTest {
         LeaderAbility ability3 = new ExtraSlot(ResourceType.STONE);
         Resource cost3 = new Resource(0, 0, 0, 0);
         ResLeaderCard res3 = new ResLeaderCard(2, ability3, cost3);
-        player.setLeaderCards(0, res3);
+        player.setLeaderCard(0, res3);
         assertThrows(InvalidLayerNumberException.class, () -> player.useLeader(0, LeaderAction.USE_ABILITY));
     }
 }

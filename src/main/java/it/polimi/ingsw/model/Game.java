@@ -1,6 +1,11 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.exceptions.InvalidKeyException;
+import it.polimi.ingsw.exceptions.NegativeResAmountException;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public abstract class Game {
 
@@ -36,8 +41,20 @@ public abstract class Game {
         this.market = market;
     }
 
+    //Shared methods
+    public Map<Player, Integer> computeFinalScore() throws NegativeResAmountException, InvalidKeyException {
+        Map<Player, Integer> finalScores = new HashMap<>();
+        for(Player p: this.getPlayersList()) {
+            //Player gets 1 victoryPoint for every 5 resources he has
+            Resource allPlayerRes = p.getAllResources();
+            int amount = allPlayerRes.getTotalAmount();
+            finalScores.put(p, p.getVictoryPoints() + (amount / 5));
+        }
+        return finalScores;
+    }
+
     //Methods to be implemented
-    public abstract void nextTurn();
-    public abstract void computeFinalScore();
-    public abstract void endGame();
+    public abstract void lastTurn(boolean win) throws NegativeResAmountException, InvalidKeyException;
+    public abstract void nextTurn() throws NegativeResAmountException, InvalidKeyException;
+    public abstract void checkEndGame() throws NegativeResAmountException, InvalidKeyException;
 }

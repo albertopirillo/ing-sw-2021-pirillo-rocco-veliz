@@ -5,6 +5,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import it.polimi.ingsw.exceptions.FullCardDeckException;
+import it.polimi.ingsw.exceptions.InvalidKeyException;
+import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import it.polimi.ingsw.utils.LeaderAbilityDeserializer;
 import it.polimi.ingsw.utils.LeaderCardJsonDeserializer;
 
@@ -13,16 +15,19 @@ import java.io.FileReader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class MultiGame extends Game {
 
     private List<LeaderCard> finalDeckLeader;
+    private boolean lastTurn;
 
     public MultiGame(int playerAmount, List<Player> players) throws FullCardDeckException {
         this.setPlayerAmount(playerAmount);
         this.setPlayersList(players);
         this.setMarket(new Market());
+        this.lastTurn = false;
         startGame();
     }
 
@@ -35,25 +40,52 @@ public class MultiGame extends Game {
         players.add(new Player("c"));
         players.add(new Player("d"));
         this.setPlayersList(players);
+        this.lastTurn = false;
         for(Player p: this.getPlayersList()) p.setGame(this);
         startGame();
     }
 
     //Selects the new active Player
     @Override
-    public void nextTurn() {
+    public void nextTurn() throws NegativeResAmountException, InvalidKeyException {
         int index = this.getPlayersList().indexOf(this.getActivePlayer());
         this.setActivePlayer(this.getPlayersList().get((index + 1) % getPlayerAmount()));
+        checkEndGame();
     }
 
     @Override
-    public void computeFinalScore() {
-        // TODO implement here
+    public void checkEndGame() throws NegativeResAmountException, InvalidKeyException {
+        //Every player until the first one have to play their last turn
+        if (lastTurn && this.getActivePlayer().getInkwell()) {
+            List<Player> playerRanks = this.computeRanks(computeFinalScore());
+            //TODO: the games is over, send results to Views
+        }
+    }
+
+    //Returns a list with the player ranks, first element is the winner
+    public List<Player> computeRanks(Map<Player, Integer> finalScores) {
+        List<Player> sortedPlayers = new ArrayList<>();
+        Player maxPlayer = null;
+        //Repeat one time for each player
+        while(finalScores.size() != 0) {
+            //Find the player with the highest score
+            int maxScore = 0;
+            for (Player p : finalScores.keySet()) {
+                if (finalScores.get(p) >= maxScore) {
+                    maxScore = finalScores.get(p);
+                    maxPlayer = p;
+                }
+            }
+            //Remove that player from the map and add it to the list
+            finalScores.remove(maxPlayer);
+            sortedPlayers.add(maxPlayer);
+        }
+        return sortedPlayers;
     }
 
     @Override
-    public void endGame() {
-        //TODO: implement here
+    public void lastTurn(boolean win) {
+        this.lastTurn = true;
     }
 
     private void startGame() {

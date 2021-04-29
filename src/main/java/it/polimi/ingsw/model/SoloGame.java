@@ -5,16 +5,15 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import it.polimi.ingsw.exceptions.FullCardDeckException;
+import it.polimi.ingsw.exceptions.InvalidKeyException;
+import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import it.polimi.ingsw.utils.LeaderAbilityDeserializer;
 import it.polimi.ingsw.utils.LeaderCardJsonDeserializer;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class SoloGame extends Game {
 
@@ -26,48 +25,52 @@ public class SoloGame extends Game {
         //player gets no resources nor faith points in solo game
         this.setActivePlayer(player);
         this.setMarket(new Market());
+        this.setPlayerAmount(1);
+        List<Player> playerList = new ArrayList<>();
+        playerList.add(player);
+        this.setPlayersList(playerList);
         this.blackCrossPosition = 0;
         initSoloTokens(false);
         startGame();
     }
 
     public SoloGame(boolean testing) throws FullCardDeckException {
-        this.setActivePlayer(new Player("nickname"));
+        Player player = new Player("nickname");
+        this.setActivePlayer(player);
         this.setMarket(new Market(true));
+        this.setPlayerAmount(1);
+        List<Player> playerList = new ArrayList<>();
+        playerList.add(player);
+        this.setPlayersList(playerList);
         this.blackCrossPosition = 0;
         this.soloTokens = new LinkedList<>();
         initSoloTokens(true);
     }
 
     @Override
-    public void nextTurn() {
+    public void nextTurn() throws NegativeResAmountException, InvalidKeyException {
         SoloActionToken currentToken = this.soloTokens.remove(0);
         currentToken.reveal();
         this.soloTokens.add(currentToken);
+        checkEndGame();
     }
 
     @Override
-    public void computeFinalScore() {
-        //TODO: implement here
+    public void checkEndGame() throws NegativeResAmountException, InvalidKeyException {
+        if(this.blackCrossPosition >= 20) this.lastTurn(false);
     }
 
     @Override
-    public void endGame() {
-        //TODO: implement here
-        //TODO: game must end also if the player buys the last devCard of a column, or buys his 7th devCard
-        //TODO: can be resolved by overloading buy method in PlayerController?
-    }
-
-    @Override
-    public ArrayList<Player> getPlayersList() {
-        ArrayList<Player> players = new ArrayList<>();
-        players.add(this.getActivePlayer());
-        return players;
-    }
-
-    @Override
-    public int getPlayerAmount() {
-        return 1;
+    public void lastTurn(boolean win) throws NegativeResAmountException, InvalidKeyException {
+        //In solo mode, the game ends immediately
+        if (win) {
+            Map<Player, Integer> map = this.computeFinalScore();
+            int finalScore = map.get(this.getActivePlayer());
+            //TODO: game is over, send score to the View
+        }
+        else {
+            //TODO: game is over, tell the View that you loss
+        }
     }
 
     private void startGame() {

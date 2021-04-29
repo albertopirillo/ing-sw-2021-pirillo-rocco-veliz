@@ -67,7 +67,7 @@ public class PlayerController {
             if (!controller.getResourceController().isEmpty()) throw new CannotEndTurnException("There are still resources to be placed");
             controller.setException(null);
             controller.getGame().nextTurn();
-        } catch (CannotEndTurnException e) {
+        } catch (CannotEndTurnException | NegativeResAmountException | InvalidKeyException e) {
             controller.setException(e);
         }
     }

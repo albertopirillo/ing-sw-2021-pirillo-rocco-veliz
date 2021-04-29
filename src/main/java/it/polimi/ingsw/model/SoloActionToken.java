@@ -1,5 +1,8 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.exceptions.InvalidKeyException;
+import it.polimi.ingsw.exceptions.NegativeResAmountException;
+
 public abstract class SoloActionToken {
 
     private final SoloGame game;
@@ -12,5 +15,5 @@ public abstract class SoloActionToken {
         return game;
     }
 
-    public abstract void reveal();
+    public abstract void reveal() throws NegativeResAmountException, InvalidKeyException;
 }

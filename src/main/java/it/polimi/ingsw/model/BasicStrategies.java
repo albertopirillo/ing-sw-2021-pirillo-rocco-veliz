@@ -30,6 +30,7 @@ public abstract class BasicStrategies {
         //Give the card to the player
         DevelopmentCard card = market.buyCards(level, color);
         player.getPersonalBoard().addDevCard(card, numSlot);
+        player.addVictoryPoints(card.getVictoryPoints());
 
         //Remove those resources from the player
         depot.retrieveRes(fromDepot);

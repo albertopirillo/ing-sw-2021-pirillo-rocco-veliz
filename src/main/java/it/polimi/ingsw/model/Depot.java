@@ -132,13 +132,15 @@ public abstract class Depot {
     }
 
     //Resources can only be discard when taken from the Market
-    public void discardRes(Player player, Resource resource) throws CannotContainFaithException {
+    public void discardRes(Player player, Resource resource) throws CannotContainFaithException, NegativeResAmountException, InvalidKeyException {
         if (resource.keySet().contains(ResourceType.FAITH))
             throw new CannotContainFaithException("You cannot discard faith points");
 
         List<Player> playerList = player.getGame().getPlayersList();
         for(Player p: playerList) {
-            if (p != player) p.addPlayerFaith(resource.getTotalAmount());
+            if (p != player) {
+                p.addPlayerFaith(resource.getTotalAmount());
+            }
         }
     }
 }

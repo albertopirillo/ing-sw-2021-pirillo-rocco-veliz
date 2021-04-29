@@ -1,10 +1,15 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.FullCardDeckException;
+import it.polimi.ingsw.exceptions.InvalidKeyException;
+import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -17,8 +22,23 @@ public class MultiGameTest {
     }
 
     @Test
-    public void calculatePointsTest() {
-        //TODO: implement here
+    public void computeRanksTest() throws FullCardDeckException {
+        MultiGame game = new MultiGame(true);
+        Map<Player, Integer> map = new HashMap<>();
+        Player player1 = new Player("a");
+        Player player2 = new Player("b");
+        Player player3 = new Player("c");
+        Player player4 = new Player("d");
+        map.put(player1, 15);
+        map.put(player4, 0);
+        map.put(player3, 20);
+        map.put(player2, 10);
+
+        List<Player> sortedPlayer = game.computeRanks(map);
+        assertEquals(player3, sortedPlayer.get(0));
+        assertEquals(player1, sortedPlayer.get(1));
+        assertEquals(player2, sortedPlayer.get(2));
+        assertEquals(player4, sortedPlayer.get(3));
     }
 
     @Test
@@ -54,8 +74,13 @@ public class MultiGameTest {
         //TODO: implement here
     }
 
+    @Test
+    public void checkEndGameTest() {
+        //TODO: implement here
+    }
+
     @RepeatedTest(5)
-    public void nextTurnTest() throws FullCardDeckException {
+    public void nextTurnTest() throws FullCardDeckException, NegativeResAmountException, InvalidKeyException {
         int playerAmount = 4;
         Player player1 = new Player("a");
         Player player2 = new Player("b");

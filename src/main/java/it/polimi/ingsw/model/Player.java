@@ -8,27 +8,16 @@ import java.util.List;
 public class Player {
 
     private int victoryPoints;
-
     private boolean hasInkwell;
-
     private final String nickname;
-
     private boolean isHisTurn;
-
     private final PersonalBoard personalBoard;
-
     private Game game;
-
     private List<LeaderCard> leaderCards;
-
     private final List<LeaderAbility> activeLeaderAbilities;
-
     private final ResourceStrategy resStrategy;
-
     private final DevCardsStrategy devStrategy;
-
     private final ProductionStrategy prodStrategy;
-
     private int playerFaith;
 
     public Player(String nickname) {
@@ -51,7 +40,10 @@ public class Player {
 
     public int getPlayerFaith() { return this.playerFaith; }
 
-    public void addPlayerFaith(int amount) { this.playerFaith += amount; }
+    public void addPlayerFaith(int amount) throws NegativeResAmountException, InvalidKeyException {
+        this.playerFaith += amount;
+        if(this.playerFaith >= 20) this.game.lastTurn(true);
+    }
 
     public int getVictoryPoints() {return victoryPoints;}
 
@@ -133,6 +125,8 @@ public class Player {
         if(!getPersonalBoard().getSlot(numSlot).canBeAdded(card)) throw new InvalidNumSlotException();
         if (choice == AbilityChoice.STANDARD) BasicStrategies.buyDevCard(this, level, color, numSlot, card.getCost(), fromDepot, fromStrongbox);
         else this.devStrategy.buyDevCard(this, level, color, numSlot, choice, fromDepot, fromStrongbox);
+        //If the player has bought his seventh DevCard, the game is over
+        if(this.getPersonalBoard().getAllCards().size() == 7) this.game.lastTurn(true);
     }
 
     public void basicProduction(ResourceType input1, ResourceType input2, ResourceType output, Resource fromDepot, Resource fromStrongbox) throws CostNotMatchingException, NotEnoughSpaceException, CannotContainFaithException, NotEnoughResException, NegativeResAmountException, InvalidKeyException {
@@ -165,10 +159,11 @@ public class Player {
             ability.activate(this);
             leader.activate();
             this.activeLeaderAbilities.add(ability);
+            this.victoryPoints = this.victoryPoints + leader.getVictoryPoints();
         }
     }
 
-    public void discardRes(Resource resource) throws CannotContainFaithException{
+    public void discardRes(Resource resource) throws CannotContainFaithException, NegativeResAmountException, InvalidKeyException {
         this.personalBoard.getDepot().discardRes(this, resource);
     }
 

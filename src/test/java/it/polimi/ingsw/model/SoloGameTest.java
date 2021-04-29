@@ -1,6 +1,8 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.FullCardDeckException;
+import it.polimi.ingsw.exceptions.InvalidKeyException;
+import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -28,7 +30,7 @@ class SoloGameTest {
     }
 
     @Test
-    public void nextTurn() throws FullCardDeckException {
+    public void nextTurn() throws FullCardDeckException, NegativeResAmountException, InvalidKeyException {
         SoloGame game = new SoloGame(true);
         SoloActionToken firstToken = game.getSoloTokens().get(0);
         SoloActionToken secondToken = game.getSoloTokens().get(1);
@@ -39,12 +41,7 @@ class SoloGameTest {
     }
 
     @Test
-    public void computeFinalScore() {
-        //TODO: implement here
-    }
-
-    @Test
-    public void endGame() {
+    public void lastTurnTest() {
         //TODO: implement here
     }
 }

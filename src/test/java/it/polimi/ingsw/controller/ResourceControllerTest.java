@@ -30,6 +30,7 @@ class ResourceControllerTest {
     @Test
     public void handleResourceOKTest() throws FullCardDeckException, InvalidResourceException, WrongDepotInstructionsException, LayerNotEmptyException, NotEnoughSpaceException, InvalidLayerNumberException, CannotContainFaithException, NotEnoughResException, AlreadyInAnotherLayerException, InvalidKeyException, NegativeResAmountException {
         Game game = new Game(true);
+        game.giveInkwell();
         MasterController masterController = new MasterController(game);
         Player activePlayer = masterController.getGame().getActivePlayer();
         ResourceController resourceController = masterController.getResourceController();
@@ -53,6 +54,7 @@ class ResourceControllerTest {
     @Test
     public void handleResourceKOTest() throws FullCardDeckException {
         Game game = new Game(true);
+        game.giveInkwell();
         MasterController masterController = new MasterController(game);
         Player activePlayer = masterController.getGame().getActivePlayer();
         ResourceController resourceController = masterController.getResourceController();

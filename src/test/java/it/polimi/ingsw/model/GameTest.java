@@ -39,6 +39,7 @@ public class GameTest {
         playersList.add(player3);
         //playersList.add(player4);
         Game game = new Game(playerAmount, playersList);
+        game.giveInkwell();
 
         int true_amount = 0, false_amount = 0;
         for(Player p: game.getPlayers()) {

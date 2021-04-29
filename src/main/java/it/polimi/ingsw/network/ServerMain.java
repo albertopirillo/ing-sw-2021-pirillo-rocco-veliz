@@ -1,5 +1,7 @@
 package it.polimi.ingsw.network;
 
+import it.polimi.ingsw.server.Server;
+
 import java.io.IOException;
 
 public class ServerMain {

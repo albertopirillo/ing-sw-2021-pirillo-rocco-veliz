@@ -19,7 +19,7 @@ public class Game {
 
     private static int gamesCount = 0;
 
-    private final int gameID;
+    private int gameID;
 
     private List<Player> players;
 
@@ -27,11 +27,17 @@ public class Game {
 
     private List<LeaderCard> finalDeckLeader;
 
-    private final int playerAmount;
+    private int playerAmount;
 
     private boolean lastTurn;
 
     private final Market market;
+
+    public Game() throws FullCardDeckException {
+        this.lastTurn = false;
+        //this.gameID = Game.gamesCount + 1;
+        this.market = new Market();
+    }
 
     public Game(int playerAmount, List<Player> players) throws FullCardDeckException {
         this.lastTurn = false;
@@ -57,6 +63,10 @@ public class Game {
         for(Player p: this.players) p.setGame(this);
         startGame();
     }
+
+    public void setPlayerAmount(int playerAmount){ this.playerAmount = playerAmount; }
+
+    public void setPlayers(List<Player> players){ this.players = players; }
 
     public void startGame() {
         //init market and devCards
@@ -89,10 +99,11 @@ public class Game {
                 leaderCards.remove(chosenInt);
                 chosenCards.add(chosenCard);
             }
+            giveLeaderCards(pl, chosenCards);
             //now player has to choose which cards to keep
-            List<LeaderCard> returnedCards = giveLeaderCards(pl, chosenCards);
+            //List<LeaderCard> returnedCards = giveLeaderCards(pl, chosenCards);
             //insert back not chosen cards (returnedCards)
-            leaderCards.addAll(returnedCards);
+            //leaderCards.addAll(returnedCards);
         }
 
 
@@ -101,11 +112,18 @@ public class Game {
         // (since we don't have an id in leaderCard json)
 
 
-        giveInkwell();
+        //giveInkwell();
     }
 
     public Player getActivePlayer() {
         return this.activePlayer;
+    }
+
+    public Player getPlayer(String nickname){
+        for(Player player : players){
+            if(player.getNickname().equals(nickname)) return player;
+        }
+        return null;
     }
 
     public Market getMarket() {
@@ -132,20 +150,21 @@ public class Game {
         // TODO implement here
     }
 
-    private List<LeaderCard> giveLeaderCards(Player player, List<LeaderCard> leaderCards) {
+    private void giveLeaderCards(Player player, List<LeaderCard> leaderCards) {
         // leaderCards is made of the two chosen card out of 4 given at startGame
         //TODO the choice of leaderCards
-        List<LeaderCard> returnedCards = new ArrayList<>(); //put here cards not chosen
+        //List<LeaderCard> returnedCards = new ArrayList<>(); //put here cards not chosen
         player.setLeaderCards(leaderCards);
-        return returnedCards; //return leaderCards to insert back in deck for other players to choose
+        //return returnedCards; //return leaderCards to insert back in deck for other players to choose
     }
 
-    private void giveInkwell() {
+    public String giveInkwell() {
         //First player is chosen randomly
         int numPlayer = new Random().nextInt(playerAmount);
         Player firstPlayer = this.players.get(numPlayer);
         firstPlayer.setInkwell(true);
         this.activePlayer = firstPlayer;
+        return activePlayer.getNickname();
     }
 
     //Selects the new active Player

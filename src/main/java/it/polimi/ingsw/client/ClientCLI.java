@@ -17,7 +17,7 @@ public class ClientCLI {
     }
 
     public void setup(){
-        System.out.println("Gioco di merda");
+        System.out.println("Game is starting...");
     }
 
     public String getIP(){
@@ -37,22 +37,22 @@ public class ClientCLI {
     }
 
     public int getGameSize(){
-        System.out.println("Scrivi how many giocatori vuoi");
+        System.out.println("Insert player amount:");
         //TODO: Aggiungere controllo ciclo infinito
         return stdin.nextInt();
     }
 
-        public Map<ResourceType, Integer> getInitialResources(int numPlayer) {
+    public Map<ResourceType, Integer> getInitialResources(int numPlayer) {
         Map<ResourceType, Integer> res = new HashMap<>();
         switch (numPlayer){
             case 1:
             case 2:
-                System.out.println("Scelgli una risorsa a scelta");
+                System.out.println("Scegli una risorsa a scelta");
                 int numRes = viewInitialResources();
                 res.put(parseToResourceType(numRes),1);
                 break;
             case 3:
-                System.out.println("Scelgli due una risorse a scelta");
+                System.out.println("Scegli due una risorse a scelta");
                 int res1 = viewInitialResources();
                 int res2 = viewInitialResources();
                 res.put(parseToResourceType(res1),1);

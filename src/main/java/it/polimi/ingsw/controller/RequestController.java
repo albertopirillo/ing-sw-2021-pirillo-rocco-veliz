@@ -1,7 +1,5 @@
 package it.polimi.ingsw.controller;
 
-import it.polimi.ingsw.network.Request;
-
 public class RequestController {
 
     private final MasterController controller;
@@ -10,7 +8,4 @@ public class RequestController {
         this.controller = controller;
     }
 
-    public void processRequest(Request request) {
-        request.activateRequest(controller);
-    }
 }

@@ -97,7 +97,7 @@ public class Player {
     }
 
     //TODO: only for testing
-    public void setLeaderCards(int index, LeaderCard card) {
+    public void setLeaderCard(int index, LeaderCard card) {
         this.leaderCards.set(index, card);
     }
 

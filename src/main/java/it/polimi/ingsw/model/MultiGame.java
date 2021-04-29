@@ -9,6 +9,7 @@ import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import it.polimi.ingsw.utils.LeaderAbilityDeserializer;
 import it.polimi.ingsw.utils.LeaderCardJsonDeserializer;
+import it.polimi.ingsw.utils.ModelObserver;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -21,16 +22,19 @@ import java.util.Random;
 public class MultiGame extends Game {
 
     private List<LeaderCard> finalDeckLeader;
+    private List<ModelObserver> observers;
     private boolean lastTurn;
 
     public MultiGame() throws FullCardDeckException {
         this.setMarket(new Market());
+        this.observers = new ArrayList<>();
     }
 
     public MultiGame(int playerAmount, List<Player> players) throws FullCardDeckException {
         this.setPlayerAmount(playerAmount);
         this.setPlayersList(players);
         this.setMarket(new Market());
+        this.observers = new ArrayList<>();
         this.lastTurn = false;
         startGame();
     }
@@ -38,6 +42,7 @@ public class MultiGame extends Game {
     public MultiGame(boolean testing) throws FullCardDeckException {
         this.setPlayerAmount(4);
         this.setMarket(new Market(testing));
+        this.observers = new ArrayList<>();
         List<Player> players = new ArrayList<>();
         players.add(new Player("a"));
         players.add(new Player("b"));
@@ -47,6 +52,10 @@ public class MultiGame extends Game {
         this.lastTurn = false;
         for(Player p: this.getPlayersList()) p.setGame(this);
         startGame();
+    }
+
+    public void addObserver(ModelObserver observer) {
+        this.observers.add(observer);
     }
 
     //Selects the new active Player
@@ -152,7 +161,21 @@ public class MultiGame extends Game {
         return getActivePlayer().getNickname();
     }
 
-    private void giveResources(Resource resource) {
-        // TODO implement here
+    public void updateClientModel() {
+        System.out.println("[MODEL] Notifying listeners of board update");
+        for(ModelObserver observer : observers)
+            observer.gameStateChange(this);
+    }
+
+    public void updateInitResources(int numPlayer){
+        System.out.println("[MODEL] Notifying listeners of players init resources update");
+        for(ModelObserver observer : observers)
+            observer.notifyInitResources(this, numPlayer);
+    }
+
+    public void updateInitLeaderCards(){
+        System.out.println("[MODEL] Notifying listeners of players init leaders cards update");
+        for(ModelObserver observer : observers)
+            observer.notifyInitLeaderCards(this);
     }
 }

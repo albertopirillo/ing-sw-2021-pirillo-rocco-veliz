@@ -9,6 +9,7 @@ import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import it.polimi.ingsw.utils.LeaderAbilityDeserializer;
 import it.polimi.ingsw.utils.LeaderCardJsonDeserializer;
+import it.polimi.ingsw.utils.ModelObserver;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -121,4 +122,18 @@ public class SoloGame extends Game {
         this.blackCrossPosition = this.blackCrossPosition + amount;
     }
 
+    @Override
+    public void updateClientModel() {
+    }
+
+    @Override
+    public void updateInitResources(int numPlayer) {
+    }
+
+    public void updateInitLeaderCards(){
+    }
+
+    @Override
+    public void addObserver(ModelObserver observer) {
+    }
 }

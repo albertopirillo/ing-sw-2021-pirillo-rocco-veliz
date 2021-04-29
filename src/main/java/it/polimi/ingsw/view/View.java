@@ -5,9 +5,10 @@ import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.network.Request;
 import it.polimi.ingsw.server.Connection;
 import it.polimi.ingsw.server.Server;
+import it.polimi.ingsw.utils.ModelObserver;
 
-public abstract class View {
-    private MasterController masterController;
+public abstract class View implements ModelObserver {
+    protected MasterController masterController;
     private Server server;
     private Game game;
     protected Connection connection;
@@ -23,8 +24,12 @@ public abstract class View {
     public void addController(MasterController masterController){ this.masterController = masterController; }
 
     public void processRequest(Request request){
-        System.out.println("[REMOTEVIEW] Messaggio ricevuto from player "+playerId);
+        //System.out.println("[REMOTEVIEW] Messaggio ricevuto from player "+playerId);
         this.masterController.processRequest(request);
     }
 
+    public abstract void showGameState(Game game);
+    public abstract void gameStateChange(Game game);
+    public abstract void notifyInitResources(Game game, int numPlater);
+    public abstract void notifyInitLeaderCards(Game game);
 }

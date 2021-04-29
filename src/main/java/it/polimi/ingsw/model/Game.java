@@ -2,6 +2,7 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
+import it.polimi.ingsw.utils.ModelObserver;
 
 import java.util.HashMap;
 import java.util.List;
@@ -65,4 +66,8 @@ public abstract class Game {
     public abstract void nextTurn() throws NegativeResAmountException, InvalidKeyException;
     public abstract void checkEndGame() throws NegativeResAmountException, InvalidKeyException;
     public abstract void startGame();
+    public abstract void updateClientModel();
+    public abstract void updateInitResources(int numPlayer);
+    public abstract void updateInitLeaderCards();
+    public abstract void addObserver(ModelObserver observer);
 }

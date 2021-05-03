@@ -9,3 +9,4 @@ public enum MessageType {
     START_CONNECTION,
     END_CONNECTION
 }
+

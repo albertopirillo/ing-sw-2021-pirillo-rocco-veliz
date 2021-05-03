@@ -17,29 +17,47 @@ public class ClientCLI {
     }
 
     public void setup(){
-        System.out.println("Game is starting...");
+        System.out.println("Game is starting...\n");
     }
 
     public String getIP(){
-        System.out.println("Scrivi ip address");
+        System.out.println("Choose ip address: ");
         return stdin.next();
     }
 
     public int getPort(){
-        System.out.println("Scrivi porta");
+        System.out.println("Choose socket port: ");
         return stdin.nextInt();
     }
 
     public String getNickname(){
-        System.out.println("Scrivi il tuo nickname");
-        this.nickname = stdin.next();
+        String nickname = "";
+
+        do {
+            System.out.println("Choose your username (symbols are not allowed): ");
+
+            if (stdin.hasNextLine()){
+                nickname = stdin.nextLine();
+            }
+
+            if (nickname.equals("")){
+                System.out.println("Please choose a valid username" );
+            }
+        } while (!nickname.matches("[a-zA-Z0-9]+"));
+
         return nickname;
     }
 
     public int getGameSize(){
-        System.out.println("Insert player amount:");
-        //TODO: Aggiungere controllo ciclo infinito
-        return stdin.nextInt();
+        int gameSize = 0;
+
+        do{
+            System.out.println("How many players do you want?");
+            System.out.print("[MIN: 2, MAX: 4]: ");
+            gameSize = Integer.parseInt(stdin.nextLine());
+        }while (gameSize < 2 || gameSize > 4);
+
+        return gameSize;
     }
 
     public Map<ResourceType, Integer> getInitialResources(int numPlayer) {
@@ -47,12 +65,12 @@ public class ClientCLI {
         switch (numPlayer){
             case 1:
             case 2:
-                System.out.println("Scegli una risorsa a scelta");
+                System.out.println("Choose one initial resource");
                 int numRes = viewInitialResources();
                 res.put(parseToResourceType(numRes),1);
                 break;
             case 3:
-                System.out.println("Scegli due una risorse a scelta");
+                System.out.println("Choose two initial resources");
                 int res1 = viewInitialResources();
                 int res2 = viewInitialResources();
                 res.put(parseToResourceType(res1),1);
@@ -75,17 +93,22 @@ public class ClientCLI {
     }
 
     public void viewInitialsLeadersCars(List<LeaderCard> leaderCards){
-        System.out.println("Sono arrivati "+leaderCards.size()+" carte ma non so ancora come fartele vedere");
-        System.out.println("Intanto scegline 2");
+        System.out.println("Please choose 2 cards to keep out of the "+leaderCards.size()+" I've chosen for you\n");
     }
 
     public int getInitialLeaderCards(){
-        System.out.println("Scegli una carta");
-        System.out.println("0) La prima");
-        System.out.println("1) La seconda");
-        System.out.println("2) La terza");
-        System.out.println("3) La quarta");
-        return stdin.nextInt();
+        int selection;
+
+        do {
+            System.out.println("Choose a card");
+            System.out.println("0) The first");
+            System.out.println("1) The second");
+            System.out.println("2) The third");
+            System.out.println("3) The fourth\n");
+            selection = stdin.nextInt();
+        } while (selection<0 || selection>3);
+
+        return selection;
     }
 
     public ResourceType parseToResourceType(int choice){
@@ -100,8 +123,37 @@ public class ClientCLI {
     }
 
     public String simulateGame() {
-        System.out.println("Simulazione del gioco");
-        System.out.println("Premi un carattere e invio per passare il turno");
-        return stdin.next();
+        String selection;
+
+        do{
+            System.out.println("It's your turn!");
+            System.out.println("What do you want to do now? //per ora passa il turno e basta");
+            System.out.println("0: Buy from market");
+            System.out.println("1: Buy a development card");
+            System.out.println("2: Discard leader card");
+            System.out.println("3: Activate basic production");
+            System.out.println("4: Activate a development card production");
+            System.out.println("5: Use a leader card ability");
+            System.out.println("6: End Turn\n");
+            selection = stdin.nextLine();
+        } while (!selection.matches("[0-6]"));
+
+        switch(selection) {
+            case "0": //call buy marbles from market request
+                break;
+            case "1": //call buy dev card request
+                break;
+            case "2": //call discard leader card request
+                break;
+            case "3": //activate basic production request
+                break;
+            case "4": //activate dev card production request
+                break;
+            case "5": //use leader ability request
+                break;
+            case "6": //end turn
+                break;
+        }
+        return selection;
     }
 }

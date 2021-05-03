@@ -45,6 +45,7 @@ public class Server implements Runnable {
         this.gameSize = maxPlayers;
         System.out.println("[SERVER] Number of players :"+maxPlayers);
     }
+
     public void lobby(String nickname, Connection connection){
         //TODO Handle if nickname already exists
         System.out.println("[SERVER] New player "+nickname+" added");

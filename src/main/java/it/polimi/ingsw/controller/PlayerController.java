@@ -38,7 +38,7 @@ public class PlayerController {
         try {
             Player activePlayer = controller.getGame().getActivePlayer();
             Resource output = activePlayer.insertMarble(position, choice, amount1, amount2);
-            controller.getResourceController().setToHandle(output);
+            controller.getResourceController().getTempRes().setToHandle(output);
         } catch (NegativeResAmountException | InvalidKeyException | InvalidAbilityChoiceException | NoLeaderAbilitiesException | CostNotMatchingException e) {
             controller.setException(e);
         }
@@ -55,8 +55,7 @@ public class PlayerController {
     
     public void placeResource(Resource toDiscard, List<DepotSetting> toPlace) {
         try {
-            Player activePlayer = controller.getGame().getActivePlayer();
-            controller.getResourceController().handleResource(activePlayer, toDiscard, toPlace);
+            controller.getResourceController().handleResource(toDiscard, toPlace);
         } catch (NotEnoughResException | NotEnoughSpaceException | CannotContainFaithException | NegativeResAmountException | InvalidKeyException | InvalidResourceException | WrongDepotInstructionsException | LayerNotEmptyException | InvalidLayerNumberException | AlreadyInAnotherLayerException e) {
             controller.setException(e);
         }
@@ -64,7 +63,7 @@ public class PlayerController {
 
     public void endTurn() {
         try { //Check exception and resource handling
-            if (!controller.getResourceController().isEmpty()) throw new CannotEndTurnException("There are still resources to be placed");
+            if (!controller.getResourceController().getTempRes().isEmpty()) throw new CannotEndTurnException("There are still resources to be placed");
             controller.setException(null);
             controller.getGame().nextTurn();
         } catch (CannotEndTurnException | NegativeResAmountException | InvalidKeyException e) {

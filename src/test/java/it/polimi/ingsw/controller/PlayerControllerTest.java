@@ -107,11 +107,11 @@ class PlayerControllerTest {
         PlayerController playerController = controller.getPlayerController();
         Player activePlayer = game.getActivePlayer();
         activePlayer.setGame(game);
-        controller.getResourceController().setToHandle(new Resource(2,3,4,5));
+        controller.getResourceController().getTempRes().setToHandle(new Resource(2,3,4,5));
 
         playerController.endTurn();
         assertEquals("There are still resources to be placed", controller.getError());
-        controller.getResourceController().setToHandle(null);
+        controller.getResourceController().getTempRes().setToHandle(null);
     }
 
     @Test
@@ -125,7 +125,7 @@ class PlayerControllerTest {
         ResourceController resourceController = controller.getResourceController();
         Resource toDiscard = new Resource(0,0,0,0);
         Resource toHandle = new Resource(1,0,3,0);
-        resourceController.setToHandle(toHandle);
+        resourceController.getTempRes().setToHandle(toHandle);
 
         Depot depot = activePlayer.getPersonalBoard().getDepot();
         depot.modifyLayer(3, ResourceType.SERVANT, 1);
@@ -137,7 +137,7 @@ class PlayerControllerTest {
         //Error: instruction are correct but there is not enough space to insert them
         playerController.placeResource(toDiscard, settings);
         assertEquals("You provided incorrect instructions to place those resources", controller.getError());
-        assertFalse(resourceController.isEmpty());
+        assertFalse(resourceController.getTempRes().isEmpty());
         assertEquals(new Resource(0,0,0,1), activePlayer.getPersonalBoard().getDepot().queryAllRes());
     }
 

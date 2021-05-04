@@ -2,7 +2,6 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.DeckEmptyException;
 import it.polimi.ingsw.exceptions.FullCardDeckException;
-import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,6 +19,7 @@ class CardDeckTest {
         assertEquals(deck.getNumbersOfCards(), 3);
     }
 
+    //TODO: sometimes test fails, bool is false instead of true at the end
     @Test
     public void shuffleTest() throws FullCardDeckException {
         CardDeck deck = new CardDeck();
@@ -51,7 +51,7 @@ class CardDeckTest {
     @Test
     public void LevelTest() throws FullCardDeckException, DeckEmptyException {
         CardDeck deck = new CardDeck();
-        assertThrows(DeckEmptyException.class, () -> deck.getLevel());
+        assertThrows(DeckEmptyException.class, deck::getLevel);
         DevelopmentCard devCard = new DevelopmentCard(5, new Resource(), CardColor.BLUE, 2, new ProductionPower(new Resource(), new Resource()));
         deck.addCard(devCard);
         assertEquals(deck.getLevel(), 2);

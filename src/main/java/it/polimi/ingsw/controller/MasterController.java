@@ -4,6 +4,7 @@ import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import it.polimi.ingsw.model.ClientError;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.TempResource;
 import it.polimi.ingsw.network.Request;
 
 public class MasterController {
@@ -17,8 +18,9 @@ public class MasterController {
 
     public MasterController(Game game) {
         this.clientError = new ClientError();
+        TempResource tempRes = new TempResource();
         this.playerController = new PlayerController(this);
-        this.resourceController = new ResourceController(this);
+        this.resourceController = new ResourceController(this, tempRes);
         this.requestController = new RequestController(this);
         this.setupController = new SetupController(this);
         this.game = game;

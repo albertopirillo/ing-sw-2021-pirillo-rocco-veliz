@@ -16,7 +16,6 @@ public class SetupController {
     private String firstPlayer;
 
     public SetupController(MasterController controller) {
-
         this.controller = controller;
     }
 
@@ -39,8 +38,7 @@ public class SetupController {
         Player activePlayer = controller.getGame().getActivePlayer();
         if(!activePlayer.getNickname().equals(nickname)) return;
         try {
-            List<ResourceType> resources = new ArrayList<>();
-            resources.addAll(res.keySet());
+            List<ResourceType> resources = new ArrayList<>(res.keySet());
             switch (numPlayer){
                 case 1:
                     activePlayer.getPersonalBoard().getDepot().modifyLayer(1, resources.get(0),1);

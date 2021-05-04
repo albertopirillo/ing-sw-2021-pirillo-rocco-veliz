@@ -16,6 +16,11 @@ public class ExtraSlot extends LeaderAbility implements Serializable {
         return resource;
     }
 
+    @Override
+    public LeaderAbilityType getLeaderAbilityType() {
+        return LeaderAbilityType.EXTRA;
+    }
+
     public void activate(Player player) throws InvalidLayerNumberException {
             Depot oldDepot = player.getPersonalBoard().getDepot();
             player.getPersonalBoard().upgradeDepot(new ConcreteDepotDecorator(oldDepot, this));

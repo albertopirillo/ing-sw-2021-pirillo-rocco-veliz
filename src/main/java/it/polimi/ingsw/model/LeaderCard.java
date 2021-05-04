@@ -7,13 +7,25 @@ import java.io.Serializable;
 
 public abstract class LeaderCard extends Card implements Serializable {
 
+    private final int id;
+    private String img = null;
     private final LeaderAbility specialAbility;
 
     private boolean isActive;
 
     //json initialization
+    public LeaderCard(int id, String img, int victoryPoints, LeaderAbility specialAbility) {
+        super(victoryPoints);
+        this.id = id;
+        this.img = new String(img);
+        this.isActive = false;
+        this.specialAbility = specialAbility;
+    }
+
     public LeaderCard(int victoryPoints, LeaderAbility specialAbility) {
         super(victoryPoints);
+        this.id = 0;
+        this.img = "";
         this.isActive = false;
         this.specialAbility = specialAbility;
     }
@@ -25,6 +37,16 @@ public abstract class LeaderCard extends Card implements Serializable {
     public void activate() {
         this.isActive = true;
     }
+
+    public int getId(){
+        return this.id;
+    }
+
+    public String getImg(){
+        return this.img;
+    }
+
+    public abstract LeaderCardType getLeaderCardType();
 
     public LeaderAbility getSpecialAbility() {
         return specialAbility;

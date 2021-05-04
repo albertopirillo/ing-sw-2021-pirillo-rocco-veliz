@@ -8,5 +8,7 @@ public abstract class LeaderAbility {
     public LeaderAbility() {
     }
 
+    public abstract LeaderAbilityType getLeaderAbilityType();
+
     public abstract void activate(Player player) throws TooManyLeaderAbilitiesException, InvalidLayerNumberException;
 }

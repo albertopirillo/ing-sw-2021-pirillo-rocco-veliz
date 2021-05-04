@@ -22,10 +22,10 @@ class ServerTest {
         game.giveInkwell();
         MasterController masterController = new MasterController(game);
         server.setMasterController(masterController);
-        Processable request = new InsertMarbleRequest(1, AbilityChoice.STANDARD, 0,0);
+        Request request = new InsertMarbleRequest(1, AbilityChoice.STANDARD, 0,0);
         //request.process(server, null);//TODO: FIXED
-        masterController.processRequest((Request) request);
-        Resource output = masterController.getResourceController().getToHandle();
+        masterController.processRequest(request);
+        Resource output = masterController.getResourceController().getTempRes().getToHandle();
         assertEquals(new Resource(1,0,0,1), output);
         assertEquals(0, game.getActivePlayer().getPlayerFaith());
     }

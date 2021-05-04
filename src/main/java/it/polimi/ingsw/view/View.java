@@ -9,12 +9,12 @@ import it.polimi.ingsw.utils.ModelObserver;
 
 public abstract class View implements ModelObserver {
     protected MasterController masterController;
-    private Server server;
-    private Game game;
+    private final Server server;
+    private final Game game;
     protected Connection connection;
     protected int playerId;
 
-    public View(Server sever, Game game, Connection connection, int playerId){
+    public View(Server server, Game game, Connection connection, int playerId){
         this.server = server;
         this.game = game;
         this.connection = connection;

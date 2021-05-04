@@ -12,6 +12,7 @@ public class ClientCLI {
     private final Scanner stdin;
     private String nickname;
     //private Board boardState;
+
     public ClientCLI(){
         this.stdin = new Scanner(System.in);
     }

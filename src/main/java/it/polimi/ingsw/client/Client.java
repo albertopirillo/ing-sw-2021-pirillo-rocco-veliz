@@ -14,8 +14,8 @@ import java.util.Map;
 public class Client implements Runnable{
 
     private static Socket socket;
-    private String ip;
-    private int port;
+    private final String ip;
+    private final int port;
     private ObjectInputStream socketIn;
     private ObjectOutputStream socketOut;
     private ClientCLI cli;
@@ -42,6 +42,12 @@ public class Client implements Runnable{
                 e.printStackTrace();
                 return;
             }
+            //TODO: Use polymorphism instead of this switch
+            /*
+            public void readUpdate(ServerUpdate update) {
+                this.playerInterface.readUpdate(update);
+            }
+             */
             switch (msg.getType()){
                 case LOBBY_SETUP:
                     int gameSize = cli.getGameSize();

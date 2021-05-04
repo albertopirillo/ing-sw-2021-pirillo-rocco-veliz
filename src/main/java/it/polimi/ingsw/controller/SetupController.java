@@ -16,7 +16,6 @@ public class SetupController {
     private String firstPlayer;
 
     public SetupController(MasterController controller) {
-
         this.controller = controller;
     }
 
@@ -26,6 +25,7 @@ public class SetupController {
             Player player = new Player(nickname);
             players.add(player);
         }
+
         Game game = this.controller.getGame();
         game.setPlayerAmount(numPlayers);
         game.setPlayersList(players);

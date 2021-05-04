@@ -62,9 +62,9 @@ public class Client implements Runnable{
                     if(msg.getActivePlayer().equals(nickname)) {
                         CardsMessage message = (CardsMessage) msg;
                         List<LeaderCard> leaderCards = message.getCards();
-                        cli.viewInitialsLeadersCars(leaderCards);
-                        int num1 = cli.getInitialLeaderCards();
-                        int num2 = cli.getInitialLeaderCards();
+                        cli.viewInitialsLeadersCards(leaderCards);
+                        int num1 = cli.getInitialLeaderCards(-1);
+                        int num2 = cli.getInitialLeaderCards(num1);
                         ChooseLeaderRequest request = new ChooseLeaderRequest(num1, num2);
                         request.setPlayer(nickname);
                         sendMessage(request);

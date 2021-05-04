@@ -16,6 +16,11 @@ public class ChangeWhiteMarbles extends LeaderAbility implements Serializable {
         return this.resourceType;
     }
 
+    @Override
+    public LeaderAbilityType getLeaderAbilityType() {
+        return LeaderAbilityType.CHANGE;
+    }
+
     public void activate(Player player) throws TooManyLeaderAbilitiesException {
         player.addResourceStrategy(this);
     }

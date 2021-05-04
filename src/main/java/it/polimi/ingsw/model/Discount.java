@@ -22,6 +22,11 @@ public class Discount extends LeaderAbility implements Serializable {
         return amount;
     }
 
+    @Override
+    public LeaderAbilityType getLeaderAbilityType() {
+        return LeaderAbilityType.DISCOUNT;
+    }
+
     public void activate(Player player) throws TooManyLeaderAbilitiesException {
         player.addDevCardsStrategy(this);
     }

@@ -1,12 +1,8 @@
 package it.polimi.ingsw.client;
 
-import it.polimi.ingsw.model.LeaderCard;
-import it.polimi.ingsw.model.ResourceType;
+import it.polimi.ingsw.model.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class ClientCLI {
     private final Scanner stdin;
@@ -85,29 +81,81 @@ public class ClientCLI {
     }
 
     public int viewInitialResources(){
-        System.out.println("1) STONE");
-        System.out.println("2) COIN");
-        System.out.println("3) SHIELD");
-        System.out.println("4) SERVANT");
+        System.out.println("1: STONE");
+        System.out.println("2: COIN");
+        System.out.println("3: SHIELD");
+        System.out.println("4: SERVANT");
         return stdin.nextInt();
     }
 
-    public void viewInitialsLeadersCars(List<LeaderCard> leaderCards){
-        System.out.println("Please choose 2 cards to keep out of the "+leaderCards.size()+" I've chosen for you\n");
+    public void viewInitialsLeadersCards(List<LeaderCard> leaderCards){
+        System.out.println("You must select two cards out of four:\n");
+        int index = 0;
+        for(LeaderCard leaderCard: leaderCards){
+            System.out.println("\nCard " + index++ + " (" + leaderCard.getImg() + "):");
+            LeaderAbility leaderAbility = leaderCard.getSpecialAbility();
+            if(leaderCard.getLeaderCardType() == LeaderCardType.RES){
+                ResLeaderCard resLeaderCard = (ResLeaderCard)leaderCard;
+                System.out.println("\tCost: " + resLeaderCard.getCost().toString());
+                ExtraSlot extraSlot = (ExtraSlot)leaderAbility;
+                System.out.println("\tAbility");
+                System.out.println("\t\tType: " + extraSlot.getLeaderAbilityType().toString());
+                System.out.println("\t\tResource: " + extraSlot.getResource().toString());
+            } else {
+                DevLeaderCard devLeaderCard = (DevLeaderCard)leaderCard;
+                List<LeaderDevCost> requires = devLeaderCard.getRequires();
+                System.out.println("\tRequires: ");
+                for(LeaderDevCost leaderDevCost: requires){
+                    System.out.println("\t\tColor: " + leaderDevCost.getColor().name());
+                    System.out.println("\t\tLevel: " + leaderDevCost.getLevel());
+                    System.out.println("\t\tAmount: " + leaderDevCost.getAmount());
+                }
+                LeaderAbilityType leaderAbilityType = leaderAbility.getLeaderAbilityType();
+                System.out.println("\tAbility");
+                System.out.println("\t\tType: " + leaderAbilityType.toString());
+                switch(leaderAbilityType){
+                    case CHANGE:
+                        ChangeWhiteMarbles changeWhiteMarbles = (ChangeWhiteMarbles)leaderAbility;
+                        System.out.println("\t\tResource: " + changeWhiteMarbles.getResourceType().toString());
+                        break;
+                    case DISCOUNT:
+                        Discount discount = (Discount)leaderAbility;
+                        System.out.println("\t\tResource: " + discount.getResource().toString());
+                        break;
+                    case PRODUCTION:
+                        ExtraProduction extraProduction = (ExtraProduction)leaderAbility;
+                        ProductionPower production = extraProduction.getProduction();
+                        System.out.println("\t\tInput: " + production.getInput().toString());
+                        System.out.println("\t\tOutput: " + production.getOutput().toString());
+                        break;
+                    default:
+                        break;
+                }
+            }
+            System.out.println("\tVictoryPoints: " + leaderCard.getVictoryPoints());
+        }
+        System.out.println();
     }
 
-    public int getInitialLeaderCards(){
+    public int getInitialLeaderCards(int exclude){
+        List<Integer> list = new ArrayList<>();
+        for(int i = 0; i < 4; i++){
+            if(i != exclude){
+                list.add(i);
+            }
+        }
+        StringBuilder sb = new StringBuilder("Choose card number [");
+        String sep = "";
+        for(Integer element: list){
+            sb.append(sep).append(element);
+            sep = ", ";
+        }
+        sb.append("]:");
         int selection;
-
         do {
-            System.out.println("Choose a card");
-            System.out.println("0) The first");
-            System.out.println("1) The second");
-            System.out.println("2) The third");
-            System.out.println("3) The fourth\n");
+            System.out.println(sb.toString());
             selection = stdin.nextInt();
-        } while (selection<0 || selection>3);
-
+        } while (!list.contains(selection));
         return selection;
     }
 

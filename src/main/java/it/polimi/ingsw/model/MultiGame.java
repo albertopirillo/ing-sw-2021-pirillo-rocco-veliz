@@ -14,14 +14,10 @@ import it.polimi.ingsw.utils.ModelObserver;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 public class MultiGame extends Game {
 
-    private List<LeaderCard> finalDeckLeader;
     private List<ModelObserver> observers;
     private boolean lastTurn;
 
@@ -110,46 +106,48 @@ public class MultiGame extends Game {
         builder.registerTypeAdapter(LeaderCard.class, new LeaderCardJsonDeserializer());
         Gson gson = builder.create();
         Type listType = new TypeToken<List<LeaderCard>>(){}.getType();
-        JsonReader reader = null;
+
         try {
-            reader = new JsonReader(new FileReader("src/main/resources/LeaderCardsConfig.json"));
+            JsonReader reader = new JsonReader(new FileReader("src/main/resources/LeaderCardsConfig.json"));
+            List<LeaderCard> leaderCards = gson.fromJson(reader, listType);
+
+            //select 4 leadersCards. We must make sure to select four different cards
+            List<LeaderCard> finalDeckLeaderCards = new ArrayList<>(leaderCards);
+            for (Player player : this.getPlayersList()) {
+                List<LeaderCard> chosenCards = new ArrayList<>();
+                Set<Integer> chosenIds = new HashSet<>();
+                Set<Integer> selectedIndexes = new HashSet<>();
+                if(finalDeckLeaderCards.size() > 4){
+                    while(selectedIndexes.size() < 4){
+                        Random rnd = new Random();
+                        selectedIndexes.add(rnd.nextInt(finalDeckLeaderCards.size()));
+                    }
+                    for(int id: selectedIndexes){
+                        LeaderCard chosenCard = finalDeckLeaderCards.get(id);
+                        chosenCards.add(chosenCard);
+                        chosenIds.add(chosenCard.getId());
+                    }
+                    //remove from finalDeckLeaderCards the selected cards
+                    finalDeckLeaderCards = new ArrayList<>();
+                    for(LeaderCard card: leaderCards){
+                        Integer id = card.getId();
+                        if(!chosenIds.contains(id)){
+                            finalDeckLeaderCards.add(card);
+                        }
+                    }
+                } else {
+                    //finalDeckLeaderCards contains the last 4 cards
+                    chosenCards.addAll(finalDeckLeaderCards);
+                }
+                //assign the player the four leader cards he will use for making the selection
+                player.setLeaderCards(chosenCards);
+           }
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
-        List<LeaderCard> leaderCards = gson.fromJson(reader, listType);
-        //Collections.shuffle((List<LeaderCard>) this.cards); shuffle leaderCards;
-        //give 2 leadersCards to player
-
-        finalDeckLeader = new ArrayList<>(leaderCards);
-        for (Player pl : this.getPlayersList()) {
-            List<LeaderCard> chosenCards = new ArrayList<>();
-            for (int i = 0; i < 4; i++) {
-                Random rnd = new Random();
-                int chosenInt = rnd.nextInt(leaderCards.size());
-                LeaderCard chosenCard = leaderCards.get(chosenInt);
-                leaderCards.remove(chosenInt);
-                chosenCards.add(chosenCard);
-            }
-            //now player has to choose which cards to keep
-            giveLeaderCards(pl, chosenCards);
-            //insert back not chosen cards (returnedCards)
-            //leaderCards.addAll(returnedCards);
-        }
-
-        // leaderCard arraylist now contains not chosen cards
-        // all leader cards are still all in finalDeckLeader with initial order
-        // (since we don't have an id in leaderCard json)
-
         giveInkwell();
-    }
-
-    private void giveLeaderCards(Player player, List<LeaderCard> leaderCards) {
-        // leaderCards is made of the two chosen card out of 4 given at startGame
-        //TODO the choice of leaderCards
-        //List<LeaderCard> returnedCards = new ArrayList<>(); //put here cards not chosen
-        player.setLeaderCards(leaderCards);
-        //return returnedCards; //return leaderCards to insert back in deck for other players to choose
     }
 
     public String giveInkwell() {

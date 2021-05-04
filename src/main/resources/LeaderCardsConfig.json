@@ -1,5 +1,7 @@
 [
   {
+    "id": 5,
+    "img": "leaderFront05.pdf",
     "type": "res",
     "cost": {
       "map": {
@@ -16,6 +18,8 @@
     "victoryPoints": 3
   },
   {
+    "id": 6,
+    "img": "leaderFront06.pdf",
     "type": "res",
     "cost": {
       "map": {
@@ -32,6 +36,8 @@
     "victoryPoints": 3
   },
   {
+    "id": 7,
+    "img": "leaderFront07.pdf",
     "type": "res",
     "cost": {
       "map": {
@@ -48,6 +54,8 @@
     "victoryPoints": 3
   },
   {
+    "id": 8,
+    "img": "leaderFront08.pdf",
     "type": "res",
     "cost": {
       "map": {
@@ -64,6 +72,8 @@
     "victoryPoints": 3
   },
   {
+    "id": 1,
+    "img": "leaderFront01.pdf",
     "type": "dev",
     "requires": [
       {
@@ -85,6 +95,8 @@
     "victoryPoints": 2
   },
   {
+    "id": 2,
+    "img": "leaderFront02.pdf",
     "type": "dev",
     "requires": [
       {
@@ -106,6 +118,8 @@
     "victoryPoints": 2
   },
   {
+    "id": 3,
+    "img": "leaderFront03.pdf",
     "type": "dev",
     "requires": [
       {
@@ -127,6 +141,8 @@
     "victoryPoints": 2
   },
   {
+    "id": 4,
+    "img": "leaderFront04.pdf",
     "type": "dev",
     "requires": [
       {
@@ -148,6 +164,8 @@
     "victoryPoints": 2
   },
   {
+    "id": 9,
+    "img": "leaderFront09.pdf",
     "type": "dev",
     "requires": [
       {
@@ -168,6 +186,8 @@
     "victoryPoints": 5
   },
   {
+    "id": 10,
+    "img": "leaderFront10.pdf",
     "type": "dev",
     "requires": [
       {
@@ -188,6 +208,8 @@
     "victoryPoints": 5
   },
   {
+    "id": 11,
+    "img": "leaderFront11.pdf",
     "type": "dev",
     "requires": [
       {
@@ -208,6 +230,8 @@
     "victoryPoints": 5
   },
   {
+    "id": 12,
+    "img": "leaderFront12.pdf",
     "type": "dev",
     "requires": [
       {
@@ -228,6 +252,8 @@
     "victoryPoints": 5
   },
   {
+    "id": 13,
+    "img": "leaderFront13.pdf",
     "type": "dev",
     "requires": [
       {
@@ -262,6 +288,8 @@
     "victoryPoints": 4
   },
   {
+    "id": 14,
+    "img": "leaderFront14.pdf",
     "type": "dev",
     "requires": [
       {
@@ -296,6 +324,8 @@
     "victoryPoints": 4
   },
   {
+    "id": 15,
+    "img": "leaderFront15.pdf",
     "type": "dev",
     "requires": [
       {
@@ -330,6 +360,8 @@
     "victoryPoints": 4
   },
   {
+    "id": 16,
+    "img": "leaderFront16.pdf",
     "type": "dev",
     "requires": [
       {

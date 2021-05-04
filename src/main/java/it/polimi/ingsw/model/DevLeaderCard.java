@@ -7,9 +7,23 @@ public class DevLeaderCard extends LeaderCard implements Serializable {
 
     private final List<LeaderDevCost> requires;
 
+    public DevLeaderCard(int id, String img, int victoryPoints, LeaderAbility specialAbility, List<LeaderDevCost> requires) {
+        super(id, img, victoryPoints, specialAbility);
+        this.requires = requires;
+    }
+
     public DevLeaderCard(int victoryPoints, LeaderAbility specialAbility, List<LeaderDevCost> requires) {
         super(victoryPoints, specialAbility);
         this.requires = requires;
+    }
+
+    @Override
+    public LeaderCardType getLeaderCardType() {
+        return LeaderCardType.DEV;
+    }
+
+    public List<LeaderDevCost> getRequires() {
+        return requires;
     }
 
     public boolean canBeActivated(Player player) {
@@ -26,18 +40,6 @@ public class DevLeaderCard extends LeaderCard implements Serializable {
         return true;
     }
 
-    //TODO: delete
-    /*public boolean canBeActivated(List<DevelopmentCard> playerCards) {
-        boolean check;
-        for (LeaderDevCost require : requires){
-            if(require.getLevel()==0) {
-                check = playerCards.stream().filter(e -> e.getType() == require.getColor()).count() >= require.getAmount();
-            }else {
-                check = playerCards.stream().filter(e -> e.getType() == require.getColor() && e.getLevel() == require.getLevel()).count() >= require.getAmount();
-            }
-            if (!check) return false;
-        }
-        return true;
 
-    }*/
+
 }

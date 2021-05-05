@@ -3,7 +3,11 @@ package it.polimi.ingsw.view;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.LeaderCard;
 import it.polimi.ingsw.model.Player;
-import it.polimi.ingsw.network.*;
+import it.polimi.ingsw.network.requests.Request;
+import it.polimi.ingsw.network.updates.InitialLeaderUpdate;
+import it.polimi.ingsw.network.updates.InitialResourcesUpdate;
+import it.polimi.ingsw.network.updates.ServerUpdate;
+import it.polimi.ingsw.network.updates.TestUpdate;
 import it.polimi.ingsw.server.Connection;
 import it.polimi.ingsw.server.Server;
 
@@ -17,7 +21,7 @@ public class RemoteView extends View {
     }
 
     public void notifyInitResources(Game game, int numPlayer){
-        ServerUpdate msg = new InitialResourcesMessage(game.getActivePlayer().getNickname(), false, numPlayer);
+        ServerUpdate msg = new InitialResourcesUpdate(game.getActivePlayer().getNickname(), false, numPlayer);
         connection.sendMessage(msg);
     }
 
@@ -25,7 +29,7 @@ public class RemoteView extends View {
         //Prepare message with initial Leader Cards
         Player activePlayer = game.getActivePlayer();
         List<LeaderCard> cards = new ArrayList<>(activePlayer.getLeaderCards());
-        ServerUpdate msg = new LeaderCardsUpdate(activePlayer.getNickname(), false, cards);
+        ServerUpdate msg = new InitialLeaderUpdate(activePlayer.getNickname(), false, cards);
         //msg.setType(MessageType.INITIAL_CARDS);
         //msg.setText("prova");
         connection.sendMessage(msg);

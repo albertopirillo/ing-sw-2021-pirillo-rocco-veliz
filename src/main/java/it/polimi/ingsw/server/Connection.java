@@ -1,7 +1,7 @@
 package it.polimi.ingsw.server;
 
 import it.polimi.ingsw.network.Processable;
-import it.polimi.ingsw.network.ServerUpdate;
+import it.polimi.ingsw.network.updates.ServerUpdate;
 import it.polimi.ingsw.view.View;
 
 import java.io.IOException;

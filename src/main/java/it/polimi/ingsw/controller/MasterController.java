@@ -5,7 +5,7 @@ import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import it.polimi.ingsw.model.ClientError;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.TempResource;
-import it.polimi.ingsw.network.Request;
+import it.polimi.ingsw.network.requests.Request;
 
 public class MasterController {
 

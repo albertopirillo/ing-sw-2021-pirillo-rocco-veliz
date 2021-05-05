@@ -1,8 +1,8 @@
 package it.polimi.ingsw.client;
 
-import it.polimi.ingsw.network.LoginMessage;
 import it.polimi.ingsw.network.Processable;
-import it.polimi.ingsw.network.ServerUpdate;
+import it.polimi.ingsw.network.messages.LoginMessage;
+import it.polimi.ingsw.network.updates.ServerUpdate;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

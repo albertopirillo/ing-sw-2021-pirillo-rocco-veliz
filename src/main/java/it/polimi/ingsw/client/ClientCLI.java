@@ -2,7 +2,13 @@ package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.model.LeaderCard;
 import it.polimi.ingsw.model.ResourceType;
-import it.polimi.ingsw.network.*;
+import it.polimi.ingsw.network.Processable;
+import it.polimi.ingsw.network.messages.GameSizeMessage;
+import it.polimi.ingsw.network.requests.ChooseLeaderRequest;
+import it.polimi.ingsw.network.requests.InitialResRequest;
+import it.polimi.ingsw.network.requests.Request;
+import it.polimi.ingsw.network.requests.TestRequest;
+import it.polimi.ingsw.network.updates.*;
 
 import java.util.*;
 
@@ -198,6 +204,12 @@ public class ClientCLI extends PlayerInterface {
         player.sendMessage(request);
         //return selection;
     }
+
+    @Override
+    public void updateTempResource(TempResourceUpdate update) {
+
+    }
+
     @Override
     public void updateStorages(StorageUpdate update) {
 
@@ -219,12 +231,22 @@ public class ClientCLI extends PlayerInterface {
     }
 
     @Override
-    public void updateMarket() {
+    public void updatePlayer(PlayerUpdate update) {
 
     }
 
     @Override
-    public void updateMarketTray() {
+    public void updateFaithTrack(FaithTrackUpdate faithTrackUpdate) {
+
+    }
+
+    @Override
+    public void updateMarket(MarketUpdate update) {
+
+    }
+
+    @Override
+    public void updateMarketTray(MarketTrayUpdate update) {
 
     }
 }

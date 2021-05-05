@@ -5,8 +5,8 @@ import it.polimi.ingsw.model.AbilityChoice;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MultiGame;
 import it.polimi.ingsw.model.Resource;
-import it.polimi.ingsw.network.InsertMarbleRequest;
-import it.polimi.ingsw.network.Request;
+import it.polimi.ingsw.network.requests.InsertMarbleRequest;
+import it.polimi.ingsw.network.requests.Request;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -31,7 +31,7 @@ public class ClientCLI {
         String nickname = "";
 
         do {
-            System.out.println("Choose your username (symbols are not allowed): ");
+            System.out.println("\nChoose your username (symbols are not allowed): ");
 
             if (stdin.hasNextLine()){
                 nickname = stdin.nextLine();
@@ -47,32 +47,35 @@ public class ClientCLI {
 
     public int getGameSize(){
         int gameSize = 0;
-
-        do{
-            System.out.println("How many players do you want?");
-            System.out.print("[MIN: 2, MAX: 4]: ");
+        do {
+            System.out.println("\nHow many players do you want?");
+            System.out.print("[MIN: 1, MAX: 4]: ");
             gameSize = Integer.parseInt(stdin.nextLine());
-        }while (gameSize < 2 || gameSize > 4);
-
+        } while (gameSize < 1 || gameSize > 4);
         return gameSize;
     }
 
     public Map<ResourceType, Integer> getInitialResources(int numPlayer) {
         Map<ResourceType, Integer> res = new HashMap<>();
         switch (numPlayer){
+            case 0:
+                break;
             case 1:
             case 2:
-                System.out.println("Choose one initial resource");
+                System.out.println("\nChoose one initial resource");
                 int numRes = viewInitialResources();
-                res.put(parseToResourceType(numRes),1);
+                res.put(parseToResourceType(numRes), 1);
                 break;
             case 3:
-                System.out.println("Choose two initial resources");
+                System.out.println("\nChoose two initial resources");
                 int res1 = viewInitialResources();
                 int res2 = viewInitialResources();
-                res.put(parseToResourceType(res1),1);
-                if(res1==res2) res.put(parseToResourceType(res2),2);
-                else res.put(parseToResourceType(res2),1);
+                res.put(parseToResourceType(res1), 1);
+                if(res1 == res2) {
+                    res.put(parseToResourceType(res2), 2);
+                } else {
+                    res.put(parseToResourceType(res2), 1);
+                }
                 break;
             default:
                 System.out.println("ko");
@@ -90,7 +93,7 @@ public class ClientCLI {
     }
 
     public void viewInitialsLeadersCards(List<LeaderCard> leaderCards){
-        System.out.println("You must select two cards out of four:");
+        System.out.println("\nYou must select two cards out of four:");
         int index = 0;
         for(LeaderCard leaderCard: leaderCards){
             System.out.println("\nCard " + index++ + " (" + leaderCard.getImg() + "):");
@@ -134,17 +137,16 @@ public class ClientCLI {
 
     public String simulateGame() {
         String selection;
-
-        do{
-            System.out.println("It's your turn!");
-            System.out.println("What do you want to do now? //per ora passa il turno e basta");
-            System.out.println("0: Buy from market");
-            System.out.println("1: Buy a development card");
-            System.out.println("2: Discard leader card");
-            System.out.println("3: Activate basic production");
-            System.out.println("4: Activate a development card production");
-            System.out.println("5: Use a leader card ability");
-            System.out.println("6: End Turn\n");
+        System.out.println("\nIt's your turn!");
+        System.out.println("What do you want to do now? //per ora passa il turno e basta");
+        System.out.println("0: Buy from market");
+        System.out.println("1: Buy a development card");
+        System.out.println("2: Discard leader card");
+        System.out.println("3: Activate basic production");
+        System.out.println("4: Activate a development card production");
+        System.out.println("5: Use a leader card ability");
+        System.out.println("6: End Turn\n");
+        do {
             selection = stdin.nextLine();
         } while (!selection.matches("[0-6]"));
 

@@ -59,7 +59,8 @@ public abstract class Game {
         }
         return finalScores;
     }
-    public String giveInkwell(){return null;}
+
+    public abstract String giveInkwell();
 
     //Methods to be implemented
     public abstract void lastTurn(boolean win) throws NegativeResAmountException, InvalidKeyException;

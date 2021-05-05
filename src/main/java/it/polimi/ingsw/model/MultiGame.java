@@ -98,8 +98,7 @@ public class MultiGame extends Game {
     }
 
     public void startGame() {
-        //init market and devCards
-        //init leader cart and give them to players
+        //init leader cards and give them to players
         GsonBuilder builder = new GsonBuilder();
         //add adapter to deserialize from abstract class
         builder.registerTypeAdapter(LeaderAbility.class, new LeaderAbilityDeserializer());

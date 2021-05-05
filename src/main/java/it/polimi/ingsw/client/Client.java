@@ -83,6 +83,8 @@ public class Client implements Runnable{
                         sendMessage(request);
                     }
                     break;
+                default:
+                    break;
             }
         }
     }

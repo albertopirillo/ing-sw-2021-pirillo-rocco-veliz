@@ -6,8 +6,8 @@ public class InitialResourcesUpdate extends ServerUpdate {
 
     private final int numPlayer;
 
-    public InitialResourcesUpdate(String activePlayer, boolean lastUpdate, int numPlayer) {
-        super(activePlayer, lastUpdate);
+    public InitialResourcesUpdate(String activePlayer, int numPlayer) {
+        super(activePlayer);
         this.numPlayer = numPlayer;
     }
 

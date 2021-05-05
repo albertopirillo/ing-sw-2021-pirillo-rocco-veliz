@@ -12,8 +12,8 @@ public class StorageUpdate extends ServerUpdate {
     private final Map<String, List<DepotSetting>> depotMap;
     private final Map<String, List<Resource>> strongboxMap;
 
-    public StorageUpdate(String activePlayer, boolean lastUpdate, Map<String, List<DepotSetting>> depotMap, Map<String, List<Resource>> strongboxMap) {
-        super(activePlayer, lastUpdate);
+    public StorageUpdate(String activePlayer, Map<String, List<DepotSetting>> depotMap, Map<String, List<Resource>> strongboxMap) {
+        super(activePlayer);
         this.depotMap = depotMap;
         this.strongboxMap = strongboxMap;
     }

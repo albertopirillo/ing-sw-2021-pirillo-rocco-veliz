@@ -7,8 +7,8 @@ public class TestUpdate extends ServerUpdate {
 
     private final String text;
 
-    public TestUpdate(String activePlayer, boolean lastUpdate, String text) {
-        super(activePlayer, lastUpdate);
+    public TestUpdate(String activePlayer, String text) {
+        super(activePlayer);
         this.text = text;
     }
 

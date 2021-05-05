@@ -6,8 +6,8 @@ import it.polimi.ingsw.model.Resource;
 public class TempResourceUpdate extends ServerUpdate {
     private final Resource resource;
 
-    public TempResourceUpdate(String activePlayer, boolean lastUpdate, Resource resource) {
-        super(activePlayer, lastUpdate);
+    public TempResourceUpdate(String activePlayer, Resource resource) {
+        super(activePlayer);
         this.resource = resource;
     }
 

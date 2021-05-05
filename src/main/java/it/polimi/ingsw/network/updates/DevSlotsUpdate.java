@@ -9,8 +9,8 @@ import java.util.Map;
 public class DevSlotsUpdate extends ServerUpdate {
     private final Map<String, List<DevelopmentSlot>> devSlotList;
 
-    public DevSlotsUpdate(String activePlayer, boolean lastUpdate, Map<String, List<DevelopmentSlot>> devSlotList) {
-        super(activePlayer, lastUpdate);
+    public DevSlotsUpdate(String activePlayer, Map<String, List<DevelopmentSlot>> devSlotList) {
+        super(activePlayer);
         this.devSlotList = devSlotList;
     }
 

@@ -6,8 +6,8 @@ import it.polimi.ingsw.model.Player;
 public class PlayerUpdate extends ServerUpdate {
     private final Player player;
 
-    public PlayerUpdate(String activePlayer, boolean lastUpdate, Player player) {
-        super(activePlayer, lastUpdate);
+    public PlayerUpdate(String activePlayer, Player player) {
+        super(activePlayer);
         this.player = player;
     }
 

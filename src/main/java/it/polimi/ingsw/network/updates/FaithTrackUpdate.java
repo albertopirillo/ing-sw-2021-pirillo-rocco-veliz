@@ -8,8 +8,8 @@ import java.util.Map;
 public class FaithTrackUpdate extends ServerUpdate {
     private final Map<String, FaithTrack> faithTrackMap;
 
-    public FaithTrackUpdate(String activePlayer, boolean lastUpdate, Map<String, FaithTrack> faithTrackMap) {
-        super(activePlayer, lastUpdate);
+    public FaithTrackUpdate(String activePlayer, Map<String, FaithTrack> faithTrackMap) {
+        super(activePlayer);
         this.faithTrackMap = faithTrackMap;
     }
 

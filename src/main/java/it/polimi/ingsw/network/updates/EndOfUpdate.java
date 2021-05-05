@@ -4,8 +4,8 @@ import it.polimi.ingsw.client.PlayerInterface;
 
 public class EndOfUpdate extends ServerUpdate {
 
-    public EndOfUpdate(String activePlayer, boolean lastUpdate) {
-        super(activePlayer, lastUpdate);
+    public EndOfUpdate(String activePlayer) {
+        super(activePlayer);
     }
 
     @Override

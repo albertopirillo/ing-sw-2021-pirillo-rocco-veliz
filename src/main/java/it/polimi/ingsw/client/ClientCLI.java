@@ -26,6 +26,7 @@ public class ClientCLI extends PlayerInterface {
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
+
     public String getNickname(){
         return this.nickname;
     }
@@ -75,7 +76,7 @@ public class ClientCLI extends PlayerInterface {
             gameSize = Integer.parseInt(stdin.nextLine());
         }while (gameSize < 2 || gameSize > 4);
 
-        Processable rsp = new GameSizeMessage(nickname, false, gameSize);
+        Processable rsp = new GameSizeMessage(nickname, gameSize);
         player.sendMessage(rsp);
         //return gameSize;
     }

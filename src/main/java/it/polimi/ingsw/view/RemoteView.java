@@ -21,7 +21,7 @@ public class RemoteView extends View {
     }
 
     public void notifyInitResources(Game game, int numPlayer){
-        ServerUpdate msg = new InitialResourcesUpdate(game.getActivePlayer().getNickname(), false, numPlayer);
+        ServerUpdate msg = new InitialResourcesUpdate(game.getActivePlayer().getNickname(), numPlayer);
         connection.sendMessage(msg);
     }
 
@@ -29,7 +29,7 @@ public class RemoteView extends View {
         //Prepare message with initial Leader Cards
         Player activePlayer = game.getActivePlayer();
         List<LeaderCard> cards = new ArrayList<>(activePlayer.getLeaderCards());
-        ServerUpdate msg = new InitialLeaderUpdate(activePlayer.getNickname(), false, cards);
+        ServerUpdate msg = new InitialLeaderUpdate(activePlayer.getNickname(), cards);
         //msg.setType(MessageType.INITIAL_CARDS);
         //msg.setText("prova");
         connection.sendMessage(msg);
@@ -43,7 +43,7 @@ public class RemoteView extends View {
     public void showGameState(Game game){
         //Preparare messaggio con board compelta da inviare al cliente
         //connection.sendMessage(null);
-        ServerUpdate msg = new TestUpdate(game.getActivePlayer().getNickname(), false, "Simulazione turno di gioco");
+        ServerUpdate msg = new TestUpdate(game.getActivePlayer().getNickname(), "Simulazione turno di gioco");
         //msg.setType(MessageType.PLAYER_MOVE);
         connection.sendMessage(msg);
     }

@@ -52,7 +52,7 @@ public class Server implements Runnable {
         System.out.println("[SERVER] New player "+nickname+" added");
         if(lobbyPlayers.isEmpty()){
             addToLobby(nickname, connection);
-            ServerUpdate msg = new LoginMessage(nickname, false, nickname);
+            ServerUpdate msg = new LoginMessage(nickname, nickname);
             //Message msg = new Message();
             //msg.setType(MessageType.LOBBY_SETUP);
             connection.sendMessage(msg);
@@ -121,7 +121,7 @@ public class Server implements Runnable {
     }
 
     public void sendInitialResources(int numPlayer, String activePlayer){
-        ServerUpdate msg = new InitialResourcesUpdate(activePlayer, false, numPlayer);
+        ServerUpdate msg = new InitialResourcesUpdate(activePlayer, numPlayer);
         lobbyPlayers.get(activePlayer).sendMessage(msg);
         //Message msg = new Message(numPlayer);
         //msg.setActivePlayer(activePlayer);

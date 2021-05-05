@@ -7,8 +7,8 @@ public class ErrorUpdate extends ServerUpdate {
 
     private final ClientError clientError;
 
-    public ErrorUpdate(String activePlayer, boolean lastUpdate, ClientError clientError) {
-        super(activePlayer, lastUpdate);
+    public ErrorUpdate(String activePlayer, ClientError clientError) {
+        super(activePlayer);
         this.clientError = clientError;
     }
 

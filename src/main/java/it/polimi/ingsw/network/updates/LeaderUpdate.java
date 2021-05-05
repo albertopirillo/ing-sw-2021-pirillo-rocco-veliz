@@ -10,8 +10,8 @@ public class LeaderUpdate extends ServerUpdate {
 
     private final Map<String, List<LeaderCard>> leaderMap;
 
-    public LeaderUpdate(String activePlayer, boolean lastUpdate, Map<String, List<LeaderCard>> leaderMap) {
-        super(activePlayer, lastUpdate);
+    public LeaderUpdate(String activePlayer, Map<String, List<LeaderCard>> leaderMap) {
+        super(activePlayer);
         this.leaderMap = leaderMap;
     }
 

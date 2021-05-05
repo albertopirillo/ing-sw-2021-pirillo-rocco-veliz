@@ -7,8 +7,8 @@ public class MarketTrayUpdate extends ServerUpdate {
     private final int[][] marketTray;
     private final MarblesColor remainingMarble;
 
-    public MarketTrayUpdate(String activePlayer, boolean lastUpdate, int[][] marketTray, MarblesColor remainingMarble) {
-        super(activePlayer, lastUpdate);
+    public MarketTrayUpdate(String activePlayer, int[][] marketTray, MarblesColor remainingMarble) {
+        super(activePlayer);
         this.marketTray = marketTray;
         this.remainingMarble = remainingMarble;
     }

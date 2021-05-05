@@ -8,8 +8,8 @@ import java.util.List;
 public class MarketUpdate extends ServerUpdate {
     private final List<DevelopmentCard> devCardList;
 
-    public MarketUpdate(String activePlayer, boolean lastUpdate, List<DevelopmentCard> devCardList) {
-        super(activePlayer, lastUpdate);
+    public MarketUpdate(String activePlayer, List<DevelopmentCard> devCardList) {
+        super(activePlayer);
         this.devCardList = devCardList;
     }
 

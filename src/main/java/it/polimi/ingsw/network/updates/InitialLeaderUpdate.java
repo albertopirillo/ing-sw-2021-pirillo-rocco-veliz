@@ -9,8 +9,8 @@ import java.util.List;
 public class InitialLeaderUpdate extends ServerUpdate implements Serializable {
     private final List<LeaderCard> cards;
 
-    public InitialLeaderUpdate(String activePlayer, boolean lastUpdate, List<LeaderCard> cards) {
-        super(activePlayer, lastUpdate);
+    public InitialLeaderUpdate(String activePlayer, List<LeaderCard> cards) {
+        super(activePlayer);
         this.cards = cards;
     }
 

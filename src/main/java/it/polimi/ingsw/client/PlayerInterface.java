@@ -3,12 +3,15 @@ package it.polimi.ingsw.client;
 import it.polimi.ingsw.model.LeaderCard;
 import it.polimi.ingsw.network.ServerUpdate;
 import it.polimi.ingsw.network.StorageUpdate;
+import it.polimi.ingsw.network.*;
 
 import java.util.List;
 
 public interface PlayerInterface {
 
-    public void readUpdate(ServerUpdate updateMessage);
+    public String getNickname() {
+        return nickname;
+    }
 
     public void updateStorages(StorageUpdate update);
     public void updateLeaderCards();
@@ -24,5 +27,11 @@ public interface PlayerInterface {
     public void getInitialResources(int numPlayer);
 
     public void simulateGame(); //testing
+    public abstract void updateStorages(StorageUpdate update);
+    public abstract void updateLeaderCards(LeaderUpdate update);
+    public abstract void updateDevSlots(DevSlotsUpdate update);
+    public abstract void displayError(ErrorUpdate update);
+    public abstract void updateMarket();
+    public abstract void updateMarketTray();
     //more...
 }

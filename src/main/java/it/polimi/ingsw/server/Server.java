@@ -6,9 +6,10 @@ import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MultiGame;
+import it.polimi.ingsw.network.InitalResourcesMessage;
+import it.polimi.ingsw.network.LoginMessage;
 import it.polimi.ingsw.network.Message;
-import it.polimi.ingsw.network.MessageType;
-import it.polimi.ingsw.network.Processable;
+import it.polimi.ingsw.network.ServerUpdate;
 import it.polimi.ingsw.view.RemoteView;
 import it.polimi.ingsw.view.View;
 
@@ -51,8 +52,9 @@ public class Server implements Runnable {
         System.out.println("[SERVER] New player "+nickname+" added");
         if(lobbyPlayers.isEmpty()){
             addToLobby(nickname, connection);
-            Message msg = new Message();
-            msg.setType(MessageType.LOBBY_SETUP);
+            ServerUpdate msg = new LoginMessage(nickname);
+            //Message msg = new Message();
+            //msg.setType(MessageType.LOBBY_SETUP);
             connection.sendMessage(msg);
         }else{
             addToLobby(nickname,connection);
@@ -119,16 +121,13 @@ public class Server implements Runnable {
     }
 
     public void sendInitialResources(int numPlayer, String activePlayer){
-        Message msg = new Message(numPlayer);
+        ServerUpdate msg = new InitalResourcesMessage(numPlayer);
         msg.setActivePlayer(activePlayer);
-        msg.setType(MessageType.INITIAL_RESOURCE);
         lobbyPlayers.get(activePlayer).sendMessage(msg);
-    }
-
-    //This method will call handleMessage() if a message was received
-    //or RequestController.processRequest() if a request was received
-    public void handleInput(Processable processable, Connection connection) {
-        processable.process(this, connection);
+        //Message msg = new Message(numPlayer);
+        //msg.setActivePlayer(activePlayer);
+        //msg.setType(MessageType.INITIAL_RESOURCE);
+        //lobbyPlayers.get(activePlayer).sendMessage(msg);
     }
 
     public void handleMessage(Message message, Connection connection) {
@@ -137,12 +136,12 @@ public class Server implements Runnable {
         //initlobby firstplayer playeramount -> creo mastercontroller, player e game
         //da master controller parte gioco
         //tutti gli altri mess non login li rigiro al controller
-        switch (message.getType()){
+        /*switch (message.getType()){
             case LOGIN: lobby(message.getText(), connection);
                 break;
             case LOBBY_SETUP: setGameSize(Integer.parseInt(message.getText()));
                 break;
-        }
+        }*/
         // System.out.println(message.getText()); test print
     }
 

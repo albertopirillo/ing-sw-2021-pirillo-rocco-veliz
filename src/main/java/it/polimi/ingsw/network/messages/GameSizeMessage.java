@@ -1,4 +1,4 @@
-package it.polimi.ingsw.network;
+package it.polimi.ingsw.network.messages;
 
 import it.polimi.ingsw.client.PlayerInterface;
 import it.polimi.ingsw.server.Connection;

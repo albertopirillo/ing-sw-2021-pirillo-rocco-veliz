@@ -1,7 +1,8 @@
-package it.polimi.ingsw.network;
+package it.polimi.ingsw.network.updates;
 
 import it.polimi.ingsw.client.PlayerInterface;
 
+@Deprecated
 public class TestUpdate extends ServerUpdate {
 
     private final String text;

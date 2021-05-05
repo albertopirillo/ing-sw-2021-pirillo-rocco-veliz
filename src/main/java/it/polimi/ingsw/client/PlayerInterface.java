@@ -17,7 +17,7 @@ public abstract class PlayerInterface {
     public abstract String chooseNickname();
     public abstract void getGameSize();
     public abstract void setup();
-    public abstract void viewInitialsLeadersCards(List<LeaderCard> cards);
+    public abstract void viewInitialsLeaderCards(List<LeaderCard> cards);
     public abstract void getInitialResources(int numPlayer);
     public abstract void simulateGame(); //testing
 
@@ -29,5 +29,5 @@ public abstract class PlayerInterface {
     public abstract void updatePlayer(PlayerUpdate update);
     public abstract void updateFaithTrack(FaithTrackUpdate faithTrackUpdate);
     public abstract void updateMarket(MarketUpdate marketUpdate);
-    public abstract void updateMarketTray(MarketTrayUpdate marketTrayUpdate);
+    public abstract void updateMarketTray(MarketTrayUpdate update);
 }

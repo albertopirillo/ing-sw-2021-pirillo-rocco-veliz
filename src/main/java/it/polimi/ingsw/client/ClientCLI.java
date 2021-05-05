@@ -117,7 +117,7 @@ public class ClientCLI extends PlayerInterface {
         return stdin.nextInt();
     }
 
-    public void viewInitialsLeadersCards(List<LeaderCard> leaderCards){
+    public void viewInitialsLeaderCards(List<LeaderCard> leaderCards){
         System.out.println("You must select two cards out of four:");
         int index = 0;
         for(LeaderCard leaderCard: leaderCards){

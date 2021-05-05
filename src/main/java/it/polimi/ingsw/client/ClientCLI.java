@@ -1,15 +1,16 @@
 package it.polimi.ingsw.client;
 
-import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.model.LeaderCard;
+import it.polimi.ingsw.model.ResourceType;
 import it.polimi.ingsw.network.*;
 
 import java.util.*;
 
-public class ClientCLI implements PlayerInterface {
+public class ClientCLI extends PlayerInterface {
     private final Scanner stdin;
 
     private String nickname;
-    private Client player;
+    private final Client player;
     //private Board boardState;
 
     public ClientCLI(Client player){
@@ -68,7 +69,7 @@ public class ClientCLI implements PlayerInterface {
             gameSize = Integer.parseInt(stdin.nextLine());
         }while (gameSize < 2 || gameSize > 4);
 
-        Processable rsp = new GameSizeMessage(gameSize);
+        Processable rsp = new GameSizeMessage(nickname, false, gameSize);
         player.sendMessage(rsp);
         //return gameSize;
     }
@@ -114,7 +115,7 @@ public class ClientCLI implements PlayerInterface {
         int index = 0;
         for(LeaderCard leaderCard: leaderCards){
             System.out.println("\nCard " + index++ + " (" + leaderCard.getImg() + "):");
-            System.out.println(leaderCard.toString());
+            System.out.println(leaderCard);
         }
         System.out.println();
 
@@ -141,7 +142,7 @@ public class ClientCLI implements PlayerInterface {
         sb.append("]:");
         int selection;
         do {
-            System.out.println(sb.toString());
+            System.out.println(sb);
             selection = stdin.nextInt();
         } while (!list.contains(selection));
         return selection;
@@ -203,7 +204,17 @@ public class ClientCLI implements PlayerInterface {
     }
 
     @Override
-    public void updateLeaderCards() {
+    public void updateLeaderCards(LeaderUpdate update) {
+
+    }
+
+    @Override
+    public void updateDevSlots(DevSlotsUpdate update) {
+
+    }
+
+    @Override
+    public void displayError(ErrorUpdate update) {
 
     }
 

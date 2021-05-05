@@ -23,8 +23,4 @@ public abstract class ServerUpdate implements Serializable {
     }
 
     public abstract void update(PlayerInterface playerInterface);
-
-    public void setActivePlayer(String activePlayer){
-        this.activePlayer = activePlayer;
-    }
 }

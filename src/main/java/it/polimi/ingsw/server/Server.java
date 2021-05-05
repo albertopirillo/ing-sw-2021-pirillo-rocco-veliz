@@ -6,7 +6,7 @@ import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MultiGame;
-import it.polimi.ingsw.network.InitalResourcesMessage;
+import it.polimi.ingsw.network.InitialResourcesMessage;
 import it.polimi.ingsw.network.LoginMessage;
 import it.polimi.ingsw.network.Message;
 import it.polimi.ingsw.network.ServerUpdate;
@@ -25,11 +25,11 @@ import java.util.concurrent.Executors;
 
 public class Server implements Runnable {
 
-    private int port = 8080;
-    private ServerSocket serverSocket;
+    private final int port = 8080;
+    private final ServerSocket serverSocket;
     private MasterController masterController;
     private static final List<Connection> connections = new ArrayList<>();
-    private Map<String, Connection> lobbyPlayers = new HashMap<>();
+    private final Map<String, Connection> lobbyPlayers = new HashMap<>();
     private final ExecutorService executor = Executors.newFixedThreadPool(128);
     private String firstPlayer;
     private int gameSize = 0;
@@ -52,7 +52,7 @@ public class Server implements Runnable {
         System.out.println("[SERVER] New player "+nickname+" added");
         if(lobbyPlayers.isEmpty()){
             addToLobby(nickname, connection);
-            ServerUpdate msg = new LoginMessage(nickname);
+            ServerUpdate msg = new LoginMessage(nickname, false, nickname);
             //Message msg = new Message();
             //msg.setType(MessageType.LOBBY_SETUP);
             connection.sendMessage(msg);
@@ -121,8 +121,7 @@ public class Server implements Runnable {
     }
 
     public void sendInitialResources(int numPlayer, String activePlayer){
-        ServerUpdate msg = new InitalResourcesMessage(numPlayer);
-        msg.setActivePlayer(activePlayer);
+        ServerUpdate msg = new InitialResourcesMessage(activePlayer, false, numPlayer);
         lobbyPlayers.get(activePlayer).sendMessage(msg);
         //Message msg = new Message(numPlayer);
         //msg.setActivePlayer(activePlayer);

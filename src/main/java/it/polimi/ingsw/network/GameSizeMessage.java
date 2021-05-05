@@ -6,9 +6,10 @@ import it.polimi.ingsw.server.Server;
 
 public class GameSizeMessage extends Message {
 
-    private int size;
+    private final int size;
 
-    public GameSizeMessage(int size){
+    public GameSizeMessage(String activePlayer, boolean lastUpdate, int size) {
+        super(activePlayer, lastUpdate);
         this.size = size;
     }
 

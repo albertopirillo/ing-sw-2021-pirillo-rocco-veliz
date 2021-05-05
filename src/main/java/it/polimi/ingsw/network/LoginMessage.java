@@ -6,9 +6,10 @@ import it.polimi.ingsw.server.Server;
 
 public class LoginMessage extends Message {
 
-    private String nickname;
+    private final String nickname;
 
-    public LoginMessage(String nickname) {
+    public LoginMessage(String activePlayer, boolean lastUpdate, String nickname) {
+        super(activePlayer, lastUpdate);
         this.nickname = nickname;
     }
 

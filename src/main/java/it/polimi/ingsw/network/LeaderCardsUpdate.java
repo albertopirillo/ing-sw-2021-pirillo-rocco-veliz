@@ -7,9 +7,10 @@ import java.io.Serializable;
 import java.util.List;
 
 public class LeaderCardsUpdate extends ServerUpdate implements Serializable {
-    private List<LeaderCard> cards;
+    private final List<LeaderCard> cards;
 
-    public LeaderCardsUpdate(List<LeaderCard> cards){
+    public LeaderCardsUpdate(String activePlayer, boolean lastUpdate, List<LeaderCard> cards) {
+        super(activePlayer, lastUpdate);
         this.cards = cards;
     }
 

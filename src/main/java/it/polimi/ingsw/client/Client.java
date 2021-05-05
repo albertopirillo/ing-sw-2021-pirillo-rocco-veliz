@@ -29,7 +29,7 @@ public class Client implements Runnable{
         cli.setup();
         startConnection();
         String nickname = cli.chooseNickname();
-        Processable login = new LoginMessage(nickname);
+        Processable login = new LoginMessage(nickname, false, nickname);
         cli.setNickname(nickname);
         //Message login = new Message(nickname);
         //login.setType(MessageType.LOGIN);

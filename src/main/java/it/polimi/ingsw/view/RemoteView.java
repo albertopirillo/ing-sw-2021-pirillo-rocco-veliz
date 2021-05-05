@@ -17,8 +17,7 @@ public class RemoteView extends View {
     }
 
     public void notifyInitResources(Game game, int numPlayer){
-        ServerUpdate msg = new InitalResourcesMessage(numPlayer);
-        msg.setActivePlayer(game.getActivePlayer().getNickname());
+        ServerUpdate msg = new InitialResourcesMessage(game.getActivePlayer().getNickname(), false, numPlayer);
         connection.sendMessage(msg);
     }
 
@@ -26,9 +25,8 @@ public class RemoteView extends View {
         //Prepare message with initial Leader Cards
         Player activePlayer = game.getActivePlayer();
         List<LeaderCard> cards = new ArrayList<>(activePlayer.getLeaderCards());
-        ServerUpdate msg = new LeaderCardsUpdate(cards);
+        ServerUpdate msg = new LeaderCardsUpdate(activePlayer.getNickname(), false, cards);
         //msg.setType(MessageType.INITIAL_CARDS);
-        msg.setActivePlayer(activePlayer.getNickname());
         //msg.setText("prova");
         connection.sendMessage(msg);
     }
@@ -41,15 +39,16 @@ public class RemoteView extends View {
     public void showGameState(Game game){
         //Preparare messaggio con board compelta da inviare al cliente
         //connection.sendMessage(null);
-        ServerUpdate msg = new TestUpdate("Simulazione turno di gioco");
+        ServerUpdate msg = new TestUpdate(game.getActivePlayer().getNickname(), false, "Simulazione turno di gioco");
         //msg.setType(MessageType.PLAYER_MOVE);
-        msg.setActivePlayer(game.getActivePlayer().getNickname());
         connection.sendMessage(msg);
     }
+
     public  void gameStateChange(Game game){
         System.out.println("[REMOTE VIEW] Gioco in corso, turno di "+playerId);
         showGameState(game);
     }
+
     public void notifyGameOver(String winner) {
         //TODO: ...
     }

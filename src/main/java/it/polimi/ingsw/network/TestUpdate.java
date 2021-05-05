@@ -4,9 +4,10 @@ import it.polimi.ingsw.client.PlayerInterface;
 
 public class TestUpdate extends ServerUpdate {
 
-    private String text;
+    private final String text;
 
-    public TestUpdate(String text) {
+    public TestUpdate(String activePlayer, boolean lastUpdate, String text) {
+        super(activePlayer, lastUpdate);
         this.text = text;
     }
 

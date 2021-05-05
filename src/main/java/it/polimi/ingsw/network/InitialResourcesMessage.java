@@ -2,11 +2,12 @@ package it.polimi.ingsw.network;
 
 import it.polimi.ingsw.client.PlayerInterface;
 
-public class InitalResourcesMessage extends ServerUpdate {
+public class InitialResourcesMessage extends ServerUpdate {
 
-    private int numPlayer;
+    private final int numPlayer;
 
-    public InitalResourcesMessage(int numPlayer) {
+    public InitialResourcesMessage(String activePlayer, boolean lastUpdate, int numPlayer) {
+        super(activePlayer, lastUpdate);
         this.numPlayer = numPlayer;
     }
 

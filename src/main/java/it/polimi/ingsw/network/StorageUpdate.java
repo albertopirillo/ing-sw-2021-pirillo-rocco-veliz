@@ -17,8 +17,10 @@ public class StorageUpdate extends ServerUpdate {
         this.settingsList = settingsList;
         this.strongboxList = strongboxList;
     }
+
     public List<Player> getPlayerList() {
         return playerList;
+    }
 
     public List<List<DepotSetting>> getSettingsList() {
         return settingsList;

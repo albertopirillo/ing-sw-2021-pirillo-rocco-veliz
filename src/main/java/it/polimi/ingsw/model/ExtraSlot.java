@@ -25,4 +25,12 @@ public class ExtraSlot extends LeaderAbility implements Serializable {
             Depot oldDepot = player.getPersonalBoard().getDepot();
             player.getPersonalBoard().upgradeDepot(new ConcreteDepotDecorator(oldDepot, this));
     }
+
+    public String toString(){
+        StringBuilder textAbility = new StringBuilder();
+        textAbility.append("\t\tType: EXTRA");
+        textAbility.append("\n");
+        textAbility.append("\t\tResource: " + resource.toString());
+        return textAbility.toString();
+    }
 }

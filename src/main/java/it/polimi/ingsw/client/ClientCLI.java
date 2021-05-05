@@ -96,16 +96,18 @@ public class ClientCLI {
             System.out.println("\nCard " + index++ + " (" + leaderCard.getImg() + "):");
             LeaderAbility leaderAbility = leaderCard.getSpecialAbility();
             if(leaderCard.getLeaderCardType() == LeaderCardType.RES){
-                ResLeaderCard resLeaderCard = (ResLeaderCard)leaderCard;
+                /*ResLeaderCard resLeaderCard = (ResLeaderCard)leaderCard;
                 System.out.println("\tCost: " + resLeaderCard.getCost().toString());
                 ExtraSlot extraSlot = (ExtraSlot)leaderAbility;
                 System.out.println("\tAbility");
                 System.out.println("\t\tType: " + extraSlot.getLeaderAbilityType().toString());
-                System.out.println("\t\tResource: " + extraSlot.getResource().toString());
+                System.out.println("\t\tResource: " + extraSlot.getResource().toString());*/
+                System.out.println(leaderCard.toString());
             } else {
                 DevLeaderCard devLeaderCard = (DevLeaderCard)leaderCard;
                 List<LeaderDevCost> requires = devLeaderCard.getRequires();
                 System.out.println("\tRequires: ");
+
                 for(LeaderDevCost leaderDevCost: requires){
                     System.out.println("\t\tColor: " + leaderDevCost.getColor().name());
                     System.out.println("\t\tLevel: " + leaderDevCost.getLevel());

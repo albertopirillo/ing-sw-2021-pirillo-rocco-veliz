@@ -1,7 +1,6 @@
 package it.polimi.ingsw.client;
 
-import it.polimi.ingsw.network.ServerUpdate;
-import it.polimi.ingsw.network.StorageUpdate;
+import it.polimi.ingsw.network.*;
 
 public abstract class PlayerInterface {
     private String nickname;
@@ -15,7 +14,9 @@ public abstract class PlayerInterface {
     }
 
     public abstract void updateStorages(StorageUpdate update);
-    public abstract void updateLeaderCards();
+    public abstract void updateLeaderCards(LeaderUpdate update);
+    public abstract void updateDevSlots(DevSlotsUpdate update);
+    public abstract void displayError(ErrorUpdate update);
     public abstract void updateMarket();
     public abstract void updateMarketTray();
     //more...

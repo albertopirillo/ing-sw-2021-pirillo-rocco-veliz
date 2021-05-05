@@ -34,12 +34,11 @@ public class ResLeaderCard extends LeaderCard implements Serializable {
     }
 
     public String toString(){
-        StringBuilder textCard = new StringBuilder();
-        textCard.append("\tCost: " + cost.toString());
-        textCard.append("\n");
-        textCard.append("\tAbility");
-        textCard.append("\n");
-        textCard.append(getSpecialAbility().toString());
-        return textCard.toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append("\tCost: ").append(cost.toString());
+        sb.append("\n\tAbility");
+        sb.append(getSpecialAbility().toString());
+        sb.append("\n\tVictoryPoints: ").append(getVictoryPoints());
+        return sb.toString();
     }
 }

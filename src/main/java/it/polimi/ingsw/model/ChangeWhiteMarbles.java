@@ -25,4 +25,11 @@ public class ChangeWhiteMarbles extends LeaderAbility implements Serializable {
         player.addResourceStrategy(this);
     }
 
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n\t\tType: ").append(getLeaderAbilityType().toString());
+        sb.append("\n\t\tResource: ").append(resourceType.toString());
+        return sb.toString();
+    }
+
 }

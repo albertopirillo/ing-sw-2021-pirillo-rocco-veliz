@@ -31,4 +31,12 @@ public class Discount extends LeaderAbility implements Serializable {
         player.addDevCardsStrategy(this);
     }
 
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n\t\tType: ").append(getLeaderAbilityType().toString());
+        sb.append("\n\t\tResource: ").append(resource.toString());
+        return sb.toString();
+    }
+
+
 }

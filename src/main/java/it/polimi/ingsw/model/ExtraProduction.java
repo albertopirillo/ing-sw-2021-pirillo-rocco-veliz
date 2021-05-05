@@ -27,4 +27,13 @@ public class ExtraProduction extends LeaderAbility implements Serializable {
         player.addProductionStrategy(this);
     }
 
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n\t\tType: ").append(getLeaderAbilityType().toString());
+        sb.append("\n\t\tInput: ").append(production.getInput().toString());
+        sb.append("\n\t\tOutput: ").append(production.getOutput().toString());
+        return sb.toString();
+    }
+
+
 }

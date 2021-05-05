@@ -52,10 +52,5 @@ public abstract class LeaderCard extends Card implements Serializable {
         return specialAbility;
     }
 
-    /*Inherited from superclass
-    public int getVictoryPoints() {
-        return super.getVictoryPoints();
-    }*/
-
     public abstract boolean canBeActivated(Player player) throws NegativeResAmountException, InvalidKeyException;
 }

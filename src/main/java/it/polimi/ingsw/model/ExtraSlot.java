@@ -22,15 +22,14 @@ public class ExtraSlot extends LeaderAbility implements Serializable {
     }
 
     public void activate(Player player) throws InvalidLayerNumberException {
-            Depot oldDepot = player.getPersonalBoard().getDepot();
-            player.getPersonalBoard().upgradeDepot(new ConcreteDepotDecorator(oldDepot, this));
+        Depot oldDepot = player.getPersonalBoard().getDepot();
+        player.getPersonalBoard().upgradeDepot(new ConcreteDepotDecorator(oldDepot, this));
     }
 
     public String toString(){
-        StringBuilder textAbility = new StringBuilder();
-        textAbility.append("\t\tType: EXTRA");
-        textAbility.append("\n");
-        textAbility.append("\t\tResource: " + resource.toString());
-        return textAbility.toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n\t\tType: ").append(getLeaderAbilityType().toString());
+        sb.append("\n\t\tResource: ").append(resource.toString());
+        return sb.toString();
     }
 }

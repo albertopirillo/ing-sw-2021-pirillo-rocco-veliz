@@ -1,15 +1,13 @@
 package it.polimi.ingsw.client;
 
-import it.polimi.ingsw.model.LeaderCard;
-import it.polimi.ingsw.model.ResourceType;
-import it.polimi.ingsw.network.*;
+import it.polimi.ingsw.network.LoginMessage;
+import it.polimi.ingsw.network.Processable;
+import it.polimi.ingsw.network.ServerUpdate;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.List;
-import java.util.Map;
 
 public class Client implements Runnable{
 
@@ -18,7 +16,7 @@ public class Client implements Runnable{
     private final int port;
     private ObjectInputStream socketIn;
     private ObjectOutputStream socketOut;
-    private ClientCLI cli;
+    private PlayerInterface cli;
 
     public Client() {
         this.port = 8080;
@@ -27,28 +25,26 @@ public class Client implements Runnable{
 
     @Override
     public void run() {
-        cli = new ClientCLI();
+        cli = new ClientCLI(this);
         cli.setup();
         startConnection();
-        String nickname = cli.getNickname();
-        Message login = new Message(nickname);
-        login.setType(MessageType.LOGIN);
+        String nickname = cli.chooseNickname();
+        Processable login = new LoginMessage(nickname);
+        cli.setNickname(nickname);
+        //Message login = new Message(nickname);
+        //login.setType(MessageType.LOGIN);
         sendMessage(login);
-        while(!Thread.currentThread().isInterrupted()){
-            Message msg;
+        while(!Thread.currentThread().isInterrupted()) {
+            ServerUpdate msg;
             try {
                 msg = receiveMessage();
             } catch (IOException e) {
                 e.printStackTrace();
                 return;
             }
-            //TODO: Use polymorphism instead of this switch
-            /*
-            public void readUpdate(ServerUpdate update) {
-                this.playerInterface.readUpdate(update);
-            }
-             */
-            switch (msg.getType()){
+            cli.readUpdate(msg);
+        }
+            /*switch (msg.getType()){
                 case LOBBY_SETUP:
                     int gameSize = cli.getGameSize();
                     Message rsp = new Message(gameSize);
@@ -83,8 +79,7 @@ public class Client implements Runnable{
                         sendMessage(request);
                     }
                     break;
-            }
-        }
+            }*/
     }
 
     private void startConnection(){
@@ -108,10 +103,10 @@ public class Client implements Runnable{
         }
     }
 
-    private Message receiveMessage() throws IOException{
-        Message msg = new Message();
+    private ServerUpdate receiveMessage() throws IOException{
+        ServerUpdate msg = null;
         try{
-            msg = (Message) socketIn.readObject();
+            msg = (ServerUpdate) socketIn.readObject();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }

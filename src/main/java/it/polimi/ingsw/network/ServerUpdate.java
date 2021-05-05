@@ -2,17 +2,19 @@ package it.polimi.ingsw.network;
 
 import it.polimi.ingsw.client.PlayerInterface;
 
-public abstract class ServerUpdate {
-    //The player nickname has to be unique for this
-    private final String activePlayer;
+import java.io.Serializable;
 
-    public ServerUpdate(String activePlayer) {
-        this.activePlayer = activePlayer;
-    }
+public abstract class ServerUpdate implements Serializable {
+    //The player nickname has to be unique for this
+    private String activePlayer;
 
     public String getActivePlayer() {
         return activePlayer;
     }
 
     public abstract void update(PlayerInterface playerInterface);
+
+    public void setActivePlayer(String activePlayer){
+        this.activePlayer = activePlayer;
+    }
 }

@@ -10,7 +10,7 @@ public class StorageUpdate extends ServerUpdate {
     private final Resource strongbox;
 
     public StorageUpdate(String activePlayer, List<DepotSetting> depotSettings, Resource strongbox) {
-        super(activePlayer);
+        //super(activePlayer);
         this.depotSettings = depotSettings;
         this.strongbox = strongbox;
     }
@@ -25,6 +25,6 @@ public class StorageUpdate extends ServerUpdate {
 
     @Override
     public void update(PlayerInterface playerInterface) {
-        playerInterface.updateStorages(this);
+        //playerInterface.updateStorages(this);
     }
 }

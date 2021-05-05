@@ -1,7 +1,7 @@
 package it.polimi.ingsw.server;
 
-import it.polimi.ingsw.network.Message;
 import it.polimi.ingsw.network.Processable;
+import it.polimi.ingsw.network.ServerUpdate;
 import it.polimi.ingsw.view.View;
 
 import java.io.IOException;
@@ -49,7 +49,7 @@ public class Connection implements Runnable {
         return active;
     }
 
-    public void sendMessage(Message message) {
+    public void sendMessage(ServerUpdate message) {
         if (isActive()) {
             try {
                 synchronized (outLock) {
@@ -92,8 +92,8 @@ public class Connection implements Runnable {
         while (isActive()) {
             try {
                 synchronized (inLock) {
-                    Processable msg = (Processable) socketIn.readObject();
-                    server.handleInput(msg, this);
+                    Processable request = (Processable) socketIn.readObject();
+                    request.process(server, this);
                     /*Message message = (Message) socketIn.readObject();
                     server.handleMessage(message);
                     sendMessage(message);*/

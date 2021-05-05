@@ -134,7 +134,9 @@ public class ClientCLI {
 
     public String simulateGame() {
         String selection;
-
+        System.out.println("Simulazione gioco");
+        System.out.println("manda una lettera per ritornare");
+        selection = stdin.next();
         do{
             System.out.println("It's your turn!");
             System.out.println("What do you want to do now? //per ora passa il turno e basta");

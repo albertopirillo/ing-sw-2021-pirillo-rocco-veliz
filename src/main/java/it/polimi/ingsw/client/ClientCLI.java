@@ -1,16 +1,31 @@
 package it.polimi.ingsw.client;
 
-import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.model.LeaderCard;
+import it.polimi.ingsw.model.ResourceType;
+import it.polimi.ingsw.network.*;
 
 import java.util.*;
 
-public class ClientCLI {
+public class ClientCLI extends PlayerInterface {
     private final Scanner stdin;
+
     private String nickname;
+    private final Client player;
     //private Board boardState;
 
-    public ClientCLI(){
+    public ClientCLI(Client player){
+        this.player = player;
         this.stdin = new Scanner(System.in);
+    }
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+    public String getNickname(){
+        return this.nickname;
+    }
+
+    public void readUpdate(ServerUpdate updateMessage) {
+        updateMessage.update(this);
     }
 
     public void setup(){
@@ -27,7 +42,7 @@ public class ClientCLI {
         return stdin.nextInt();
     }
 
-    public String getNickname(){
+    public String chooseNickname(){
         String nickname = "";
 
         do {
@@ -51,11 +66,14 @@ public class ClientCLI {
             System.out.println("\nHow many players do you want?");
             System.out.print("[MIN: 1, MAX: 4]: ");
             gameSize = Integer.parseInt(stdin.nextLine());
-        } while (gameSize < 1 || gameSize > 4);
-        return gameSize;
+        }while (gameSize < 1 || gameSize > 4);
+
+        Processable rsp = new GameSizeMessage(nickname, false, gameSize);
+        player.sendMessage(rsp);
+        //return gameSize;
     }
 
-    public Map<ResourceType, Integer> getInitialResources(int numPlayer) {
+    public void getInitialResources(int numPlayer) {
         Map<ResourceType, Integer> res = new HashMap<>();
         switch (numPlayer){
             case 0:
@@ -81,7 +99,11 @@ public class ClientCLI {
                 System.out.println("ko");
                 break;
         }
-        return res;
+        InitialResRequest request = new InitialResRequest(res);
+        request.setNumPlayer(numPlayer);
+        request.setPlayer(nickname);
+        player.sendMessage(request);
+        //return res;
     }
 
     public int viewInitialResources(){
@@ -100,6 +122,12 @@ public class ClientCLI {
             System.out.println(leaderCard.toString());
         }
         System.out.println();
+
+        int num1 = getInitialLeaderCards(-1);
+        int num2 = getInitialLeaderCards(num1);
+        ChooseLeaderRequest request = new ChooseLeaderRequest(num1, num2);
+        request.setPlayer(nickname);
+        player.sendMessage(request);
     }
 
     public int getInitialLeaderCards(int exclude){
@@ -135,19 +163,22 @@ public class ClientCLI {
         return null;
     }
 
-    public String simulateGame() {
+    public void simulateGame() {
         String selection;
-        System.out.println("\nIt's your turn!");
-        System.out.println("What do you want to do now? //per ora passa il turno e basta");
-        System.out.println("0: Buy from market");
-        System.out.println("1: Buy a development card");
-        System.out.println("2: Discard leader card");
-        System.out.println("3: Activate basic production");
-        System.out.println("4: Activate a development card production");
-        System.out.println("5: Use a leader card ability");
-        System.out.println("6: End Turn\n");
-        do {
-            selection = stdin.nextLine();
+        System.out.println("Simulazione gioco");
+        System.out.println("manda una lettera per ritornare");
+        selection = stdin.next();
+        do{
+            System.out.println("It's your turn!");
+            System.out.println("What do you want to do now? //per ora passa il turno e basta");
+            System.out.println("0: Buy from market");
+            System.out.println("1: Buy a development card");
+            System.out.println("2: Discard leader card");
+            System.out.println("3: Activate basic production");
+            System.out.println("4: Activate a development card production");
+            System.out.println("5: Use a leader card ability");
+            System.out.println("6: End Turn\n");
+            selection = stdin.next();
         } while (!selection.matches("[0-6]"));
 
         switch(selection) {
@@ -166,6 +197,38 @@ public class ClientCLI {
             case "6": //end turn
                 break;
         }
-        return selection;
+        Request request = new TestRequest();
+        request.setText(selection);
+        player.sendMessage(request);
+        //return selection;
+    }
+    @Override
+    public void updateStorages(StorageUpdate update) {
+
+    }
+
+    @Override
+    public void updateLeaderCards(LeaderUpdate update) {
+
+    }
+
+    @Override
+    public void updateDevSlots(DevSlotsUpdate update) {
+
+    }
+
+    @Override
+    public void displayError(ErrorUpdate update) {
+
+    }
+
+    @Override
+    public void updateMarket() {
+
+    }
+
+    @Override
+    public void updateMarketTray() {
+
     }
 }

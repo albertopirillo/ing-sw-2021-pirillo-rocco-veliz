@@ -18,8 +18,8 @@ import java.util.*;
 
 public class SoloGame extends Game {
 
+    private ModelObserver observer;
     private List<SoloActionToken> soloTokens;
-
     private int blackCrossPosition;
 
     public SoloGame(Player player) throws FullCardDeckException {
@@ -62,6 +62,14 @@ public class SoloGame extends Game {
     }
 
     @Override
+    public String giveInkwell() {
+        Player firstPlayer = this.getPlayersList().get(0);
+        firstPlayer.setInkwell(true);
+        this.setActivePlayer(firstPlayer);
+        return getActivePlayer().getNickname();
+    }
+
+    @Override
     public void lastTurn(boolean win) throws NegativeResAmountException, InvalidKeyException {
         //In solo mode, the game ends immediately
         if (win) {
@@ -75,25 +83,34 @@ public class SoloGame extends Game {
     }
 
     public void startGame() {
-        //init leader cart and give them to the player
+        //init leader cards and give them to player
         GsonBuilder builder = new GsonBuilder();
         //add adapter to deserialize from abstract class
         builder.registerTypeAdapter(LeaderAbility.class, new LeaderAbilityDeserializer());
         builder.registerTypeAdapter(LeaderCard.class, new LeaderCardJsonDeserializer());
         Gson gson = builder.create();
-        List<LeaderCard> leaderCards;
         Type listType = new TypeToken<List<LeaderCard>>(){}.getType();
+
         try {
             JsonReader reader = new JsonReader(new FileReader("src/main/resources/LeaderCardsConfig.json"));
-            leaderCards = gson.fromJson(reader, listType);
+            List<LeaderCard> leaderCards = gson.fromJson(reader, listType);
+            //select 4 leadersCards. We must make sure to select four different cards
+            Player player = getPlayersList().get(0);
+            List<LeaderCard> chosenCards = new ArrayList<>();
+            Set<Integer> selectedIndexes = new HashSet<>();
+            while(selectedIndexes.size() < 4){
+                Random rnd = new Random();
+                selectedIndexes.add(rnd.nextInt(leaderCards.size()));
+            }
+            for(int id: selectedIndexes){
+                LeaderCard chosenCard = leaderCards.get(id);
+                chosenCards.add(chosenCard);
+            }
+            //assign the player the four leader cards he will use for making the selection
+            player.setLeaderCards(chosenCards);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            return;
         }
-        Collections.shuffle(leaderCards);
-        leaderCards = leaderCards.subList(0, 4);
-        //now player has to choose which cards to keep
-        //TODO: this.player.chooseLeaderCards(leaderCards);
     }
 
     private void initSoloTokens(boolean testing) {
@@ -124,6 +141,8 @@ public class SoloGame extends Game {
 
     @Override
     public void updateClientModel() {
+        System.out.println("[MODEL] Notifying listeners of board update");
+        observer.gameStateChange(this);
     }
 
     @Override
@@ -131,9 +150,12 @@ public class SoloGame extends Game {
     }
 
     public void updateInitLeaderCards(){
+        System.out.println("[MODEL] Notifying player listener of init leaders cards update");
+        observer.notifyInitLeaderCards(this);
     }
 
     @Override
     public void addObserver(ModelObserver observer) {
+        this.observer = observer;
     }
 }

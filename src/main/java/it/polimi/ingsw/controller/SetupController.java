@@ -56,14 +56,17 @@ public class SetupController {
                         activePlayer.getPersonalBoard().getDepot().modifyLayer(2, resources.get(1), 1);
                     }
                     break;
+                default:
+                    break;
             }
             Game game = controller.getGame();
             game.nextTurn();
-            if(!game.getActivePlayer().getNickname().equals(firstPlayer))
-                game.updateInitResources(numPlayer+1);
-            else
+            if(game.getPlayerAmount() == 1 || game.getActivePlayer().getNickname().equals(firstPlayer)){
                 game.updateInitLeaderCards();
-            System.out.println("Totale risorse player + "+numPlayer+": "+activePlayer.getAllResources());//testing
+            } else {
+                game.updateInitResources(numPlayer+1);
+            }
+            System.out.println("Totale risorse player " + numPlayer + ": " + activePlayer.getAllResources());//testing
         } catch (NegativeResAmountException | CannotContainFaithException | LayerNotEmptyException | NotEnoughSpaceException | InvalidLayerNumberException | AlreadyInAnotherLayerException | InvalidResourceException | InvalidKeyException e) {
             controller.setException(e);
         }
@@ -79,13 +82,24 @@ public class SetupController {
         Game game = controller.getGame();
         try {
             game.nextTurn();
+            List<LeaderCard> leaderCards = activePlayer.getLeaderCards();
+            System.out.println("[CONTROLLER] Player " + nickname + " has " + leaderCards.size() + " leader cards:");
+            int index = 1;
+            for(LeaderCard leaderCard: leaderCards){
+                System.out.println("\nCard " + index++ + " (" + leaderCard.getImg() + "):");
+                System.out.println(leaderCard.toString());
+            }
+            System.out.println();
+
+            if(game.getActivePlayer().getNickname().equals(firstPlayer)) {
+                game.updateClientModel();
+            } else {
+                game.updateInitLeaderCards();
+            }
         } catch (NegativeResAmountException | InvalidKeyException e) {
             e.printStackTrace();
         }
-        System.out.println("[CONTROLLER] Testing! Carte del player ora sono "+activePlayer.getLeaderCards().size());
-        System.out.println("[CONTROLLER] Non sono ancora come stamparla");
-        if(game.getActivePlayer().getNickname().equals(firstPlayer)) game.updateClientModel();
-        else game.updateInitLeaderCards();
+
     }
 
 }

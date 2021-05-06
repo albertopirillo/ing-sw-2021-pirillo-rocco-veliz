@@ -36,7 +36,7 @@ public class RemoteView extends View {
     }
 
     public void processRequest(Request request){
-        System.out.println("[REMOTEVIEW] Messaggio ricevuto from player "+playerId);
+        System.out.println("[REMOTEVIEW] Messaggio ricevuto from player " + playerId);
         super.processRequest(request);
     }
 
@@ -49,7 +49,7 @@ public class RemoteView extends View {
     }
 
     public  void gameStateChange(Game game){
-        System.out.println("[REMOTE VIEW] Gioco in corso, turno di "+playerId);
+        System.out.println("[REMOTE VIEW] Gioco in corso, turno di " + playerId);
         showGameState(game);
     }
 

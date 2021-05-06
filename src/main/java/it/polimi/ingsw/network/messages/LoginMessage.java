@@ -21,6 +21,6 @@ public class LoginMessage extends Message {
 
     @Override
     public void process(Server server, Connection connection) {
-        server.lobby(nickname, connection);
+        server.login(nickname, connection);
     }
 }

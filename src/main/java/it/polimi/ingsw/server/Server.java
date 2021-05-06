@@ -10,6 +10,8 @@ import it.polimi.ingsw.network.messages.LoginMessage;
 import it.polimi.ingsw.network.messages.Message;
 import it.polimi.ingsw.network.updates.InitialResourcesUpdate;
 import it.polimi.ingsw.network.updates.ServerUpdate;
+import it.polimi.ingsw.model.Player;
+import it.polimi.ingsw.model.SoloGame;
 import it.polimi.ingsw.view.RemoteView;
 import it.polimi.ingsw.view.View;
 
@@ -44,61 +46,94 @@ public class Server implements Runnable {
 
     public void setGameSize(int maxPlayers){
         this.gameSize = maxPlayers;
-        System.out.println("[SERVER] Number of players :"+maxPlayers);
+        System.out.println("[SERVER] Number of players: " + maxPlayers);
+        if(maxPlayers == 1){
+            String nickname = new ArrayList<>(lobbyPlayers.keySet()).get(0);
+            setupGame(maxPlayers, nickname);
+        }
     }
 
-    public void lobby(String nickname, Connection connection){
+    public void login(String nickname, Connection connection){
         //TODO Handle if nickname already exists
-        System.out.println("[SERVER] New player "+nickname+" added");
+        System.out.println("[SERVER] New player " + nickname + " added");
         if(lobbyPlayers.isEmpty()){
             addToLobby(nickname, connection);
             ServerUpdate msg = new LoginMessage(nickname, nickname);
             //Message msg = new Message();
             //msg.setType(MessageType.LOBBY_SETUP);
             connection.sendMessage(msg);
-        }else{
-            addToLobby(nickname,connection);
+        } else {
+            addToLobby(nickname, connection);
         }
         if(gameSize == lobbyPlayers.size()){
-            setupGame();
+            setupGame(gameSize, nickname);
         }
 
     }
 
-    public void setupGame(){
+    public void setupGame(int gameSize, String nickname){
         System.out.println("[SERVER] LOADING GAME...");
-        for (String nickname : lobbyPlayers.keySet()){
-            System.out.println("[SERVER] Player: " + nickname);
+        for (String n : lobbyPlayers.keySet()){
+            System.out.println("[SERVER] Player: " + n);
         }
-        //Create Game
-        Game game = null;
+        if(gameSize == 1){
+            setupSoloGame(nickname);
+        } else {
+            setupMultiGame();
+        }
+    }
+
+    public void setupSoloGame(String nickname){
+        Player player = new Player(nickname);
         try {
-            game = new MultiGame();
+            Game game = new SoloGame(player);
+            MasterController masterController = new MasterController(game);
+            List<String> keys = new ArrayList<>(lobbyPlayers.keySet());
+            Connection connection = lobbyPlayers.get(keys.get(0));
+            View view = new RemoteView(this, game, connections.get(0), 0);
+            connection.setView(view);
+            game.addObserver(view);
+            view.addController(masterController);
+            masterController.getSetupController().setupGame(keys, gameSize);
+            System.out.println("[SERVER] Buon divertimento " + nickname);
+            game = masterController.getGame();
+            try {
+                game.nextTurn();
+            } catch (NegativeResAmountException | InvalidKeyException e) {
+                e.printStackTrace();
+            }
+            sendInitialResources(0, nickname);
         } catch (FullCardDeckException e) {
             e.printStackTrace();
         }
-        MasterController masterController = new MasterController(game);
-        List<String> keys = new ArrayList<>(lobbyPlayers.keySet());
-        List<View> views = new ArrayList<>();
-        List<Connection> connections = new ArrayList<>();
-        for(int i=0; i<gameSize; i++){
-            connections.add(lobbyPlayers.get(keys.get(i)));
-            View view = new RemoteView(this, game, connections.get(i), i);
-            connections.get(i).setView(view);
-            views.add(view);
-            game.addObserver(view);
-            view.addController(masterController);
-        }
-        masterController.getSetupController().setupGame(keys, gameSize);
-        System.out.println("[SERVER] Buon divertimento :)");
-        game = masterController.getGame();
-        System.out.println("[SERVER] Il primo giocatore è : "+game.getActivePlayer().getNickname());
+    }
+
+    public void setupMultiGame(){
         try {
-            game.nextTurn();
-        } catch (NegativeResAmountException | InvalidKeyException e) {
-            e.printStackTrace();
-        }
-        sendInitialResources(1, game.getActivePlayer().getNickname());
+            //Create Game
+            Game game = new MultiGame();
+            MasterController masterController = new MasterController(game);
+            List<String> keys = new ArrayList<>(lobbyPlayers.keySet());
+            List<View> views = new ArrayList<>();
+            List<Connection> connections = new ArrayList<>();
+            for(int i=0; i<gameSize; i++){
+                connections.add(lobbyPlayers.get(keys.get(i)));
+                View view = new RemoteView(this, game, connections.get(i), i);
+                connections.get(i).setView(view);
+                views.add(view);
+                game.addObserver(view);
+                view.addController(masterController);
+            }
+            masterController.getSetupController().setupGame(keys, gameSize);
+            System.out.println("[SERVER] Buon divertimento :)");
+            game = masterController.getGame();
+            System.out.println("[SERVER] Il primo giocatore è : "+game.getActivePlayer().getNickname());
+            try {
+                game.nextTurn();
+            } catch (NegativeResAmountException | InvalidKeyException e) {
+                e.printStackTrace();
+            }
+            sendInitialResources(1, game.getActivePlayer().getNickname());
         /*
         //Moves to next player without checking turn's ending conditions
         int index = game.getPlayersList().indexOf(game.getActivePlayer());
@@ -114,10 +149,13 @@ public class Server implements Runnable {
         }
         */
 
-        //activeGames.put(activeGames.size(), connections
-        lobbyPlayers.clear();
-        gameSize = 0;
-        //masterController.getSetupController().startGame();
+            //activeGames.put(activeGames.size(), connections
+            lobbyPlayers.clear();
+            gameSize = 0;
+            //masterController.getSetupController().startGame();
+        } catch (FullCardDeckException e) {
+            e.printStackTrace();
+        }
     }
 
     public void sendInitialResources(int numPlayer, String activePlayer){
@@ -136,9 +174,10 @@ public class Server implements Runnable {
         //da master controller parte gioco
         //tutti gli altri mess non login li rigiro al controller
         /*switch (message.getType()){
-            case LOGIN: lobby(message.getText(), connection);
+            case LOGIN: login(message.getText(), connection);
                 break;
-            case LOBBY_SETUP: setGameSize(Integer.parseInt(message.getText()));
+            case LOBBY_SETUP:
+                setGameSize(Integer.parseInt(message.getText()));
                 break;
         }*/
         // System.out.println(message.getText()); test print

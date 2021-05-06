@@ -30,6 +30,6 @@ public abstract class View implements ModelObserver {
 
     public abstract void showGameState(Game game);
     public abstract void gameStateChange(Game game);
-    public abstract void notifyInitResources(Game game, int numPlater);
+    public abstract void notifyInitResources(Game game, int numPlayer);
     public abstract void notifyInitLeaderCards(Game game);
 }

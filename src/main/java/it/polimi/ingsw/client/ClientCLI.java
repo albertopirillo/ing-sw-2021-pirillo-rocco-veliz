@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client;
 
+import it.polimi.ingsw.model.FaithTrack;
 import it.polimi.ingsw.model.LeaderCard;
 import it.polimi.ingsw.model.ResourceType;
 import it.polimi.ingsw.network.*;
@@ -165,43 +166,56 @@ public class ClientCLI extends PlayerInterface {
 
     public void simulateGame() {
         String selection;
-        System.out.println("Simulazione gioco");
-        System.out.println("manda una lettera per ritornare");
-        selection = stdin.next();
-        do{
-            System.out.println("It's your turn!");
-            System.out.println("What do you want to do now? //per ora passa il turno e basta");
-            System.out.println("0: Buy from market");
-            System.out.println("1: Buy a development card");
-            System.out.println("2: Discard leader card");
-            System.out.println("3: Activate basic production");
-            System.out.println("4: Activate a development card production");
-            System.out.println("5: Use a leader card ability");
-            System.out.println("6: End Turn\n");
+        do {
+            System.out.println("\nIt's your turn!");
+            System.out.println("What do you want to do now?");
+            System.out.println("0: Get faith track info");
+            System.out.println("1: Buy from market");
+            System.out.println("2: Buy a development card");
+            System.out.println("3: Discard leader card");
+            System.out.println("4: Activate basic production");
+            System.out.println("5: Activate a development card production");
+            System.out.println("6: Use a leader card ability");
+            System.out.println("7: End Turn\n");
             selection = stdin.next();
         } while (!selection.matches("[0-6]"));
 
+        Request request = new TestRequest();
         switch(selection) {
-            case "0": //call buy marbles from market request
+            case "0": //faith track info
+                request = new FaithTrackRequest();
                 break;
-            case "1": //call buy dev card request
+            case "1": //call buy marbles from market request
                 break;
-            case "2": //call discard leader card request
+            case "2": //call buy dev card request
                 break;
-            case "3": //activate basic production request
+            case "3": //call discard leader card request
                 break;
-            case "4": //activate dev card production request
+            case "4": //activate basic production request
                 break;
-            case "5": //use leader ability request
+            case "5": //activate dev card production request
+               break;
+            case "6": //use leader ability request
                 break;
-            case "6": //end turn
+            case "7": //end turn
+                break;
+            default:
                 break;
         }
-        Request request = new TestRequest();
         request.setText(selection);
         player.sendMessage(request);
-        //return selection;
     }
+
+    @Override
+    public void showFaithTrack(FaithTrackUpdate update) {
+        Map<String, FaithTrack> map = update.getFaithTrackInfoMap();
+        System.out.println("\nFaith track information: ");
+        for(Map.Entry<String, FaithTrack> entry: map.entrySet()){
+            System.out.println("\nPlayer: " + entry.getKey());
+            System.out.println(entry.getValue().toString());
+        }
+    }
+
     @Override
     public void updateStorages(StorageUpdate update) {
 

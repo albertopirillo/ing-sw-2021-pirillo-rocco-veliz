@@ -60,7 +60,7 @@ public abstract class Game {
         return finalScores;
     }
 
-    public abstract String giveInkwell();
+        public abstract String giveInkwell();
 
     //Methods to be implemented
     public abstract void lastTurn(boolean win) throws NegativeResAmountException, InvalidKeyException;
@@ -70,5 +70,6 @@ public abstract class Game {
     public abstract void updateClientModel();
     public abstract void updateInitResources(int numPlayer);
     public abstract void updateInitLeaderCards();
+    public abstract void showFaithTrack();
     public abstract void addObserver(ModelObserver observer);
 }

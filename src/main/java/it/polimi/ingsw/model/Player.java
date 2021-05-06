@@ -18,13 +18,11 @@ public class Player {
     private final ResourceStrategy resStrategy;
     private final DevCardsStrategy devStrategy;
     private final ProductionStrategy prodStrategy;
-    private int playerFaith;
 
     public Player(String nickname) {
         this.nickname = nickname;
         this.isHisTurn = false;
         this.hasInkwell = false;
-        this.playerFaith = 0;
         this.victoryPoints = 0;
         this.personalBoard = new PersonalBoard(this);
         this.leaderCards = new ArrayList<>();
@@ -38,11 +36,12 @@ public class Player {
         return this.hasInkwell;
     }
 
-    public int getPlayerFaith() { return this.playerFaith; }
+    public int getPlayerFaith() {
+        return this.getPersonalBoard().getFaithTrack().getPlayerFaith();
+    }
 
     public void addPlayerFaith(int amount) throws NegativeResAmountException, InvalidKeyException {
-        this.playerFaith += amount;
-        if(this.playerFaith >= 20) this.game.lastTurn(true);
+        this.getPersonalBoard().getFaithTrack().addPlayerFaith(amount);
     }
 
     public int getVictoryPoints() {return victoryPoints;}

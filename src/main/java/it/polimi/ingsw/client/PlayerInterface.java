@@ -17,6 +17,7 @@ public abstract class PlayerInterface {
     public abstract void getInitialResources(int numPlayer);
 
     public abstract void simulateGame(); //testing
+    public abstract void showFaithTrack(FaithTrackUpdate update);
     public abstract void updateStorages(StorageUpdate update);
     public abstract void updateLeaderCards(LeaderUpdate update);
     public abstract void updateDevSlots(DevSlotsUpdate update);

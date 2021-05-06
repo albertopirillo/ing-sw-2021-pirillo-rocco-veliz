@@ -9,8 +9,8 @@ import it.polimi.ingsw.utils.ModelObserver;
 
 public abstract class View implements ModelObserver {
     protected MasterController masterController;
-    private final Server server;
-    private final Game game;
+    protected final Server server;
+    protected final Game game;
     protected Connection connection;
     protected int playerId;
 
@@ -30,6 +30,7 @@ public abstract class View implements ModelObserver {
 
     public abstract void showGameState(Game game);
     public abstract void gameStateChange(Game game);
+    public abstract void showFaithTrack();
     public abstract void notifyInitResources(Game game, int numPlayer);
     public abstract void notifyInitLeaderCards(Game game);
 }

@@ -33,7 +33,6 @@ public class SetupController {
         firstPlayer = game.giveInkwell();
     }
 
-
     public void placeInitialResource(Map<ResourceType, Integer> res, int numPlayer, String nickname) {
         //Player activePlayer = controller.getGame().getPlayer(nickname);
         Player activePlayer = controller.getGame().getActivePlayer();

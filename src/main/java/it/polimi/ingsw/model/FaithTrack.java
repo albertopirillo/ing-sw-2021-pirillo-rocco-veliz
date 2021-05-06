@@ -1,13 +1,15 @@
 package it.polimi.ingsw.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FaithTrack {
-
+public class FaithTrack implements Serializable {
+    private int playerFaith;
     private final List<PopeFavorCard> popeCards;
 
     public FaithTrack() {
+        this.playerFaith = 0;
         this.popeCards = new ArrayList<>();
         initPopeCards();
     }
@@ -16,6 +18,14 @@ public class FaithTrack {
         for (int i = 1; i < 4; i++) {
             this.popeCards.add(new PopeFavorCard(i));
         }
+    }
+
+    public int getPlayerFaith() {
+        return playerFaith;
+    }
+
+    public void addPlayerFaith(int amount) {
+        this.playerFaith += amount;
     }
 
     //check if vaticanReport condition applies
@@ -102,6 +112,10 @@ public class FaithTrack {
             }
         }
         return null;
+    }
+
+    public String toString(){
+        return "Test faith track print";
     }
 
 }

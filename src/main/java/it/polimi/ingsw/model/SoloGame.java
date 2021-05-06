@@ -154,6 +154,11 @@ public class SoloGame extends Game {
         observer.notifyInitLeaderCards(this);
     }
 
+    public void showFaithTrack(){
+        System.out.println("[MODEL] Notifying listeners of faith track info request");
+        observer.showFaithTrack();
+    }
+
     @Override
     public void addObserver(ModelObserver observer) {
         this.observer = observer;

@@ -60,7 +60,7 @@ public class ClientCLI extends PlayerInterface {
         return nickname;
     }
 
-    public int getGameSize(){
+    public void getGameSize(){
         int gameSize = 0;
         do {
             System.out.println("\nHow many players do you want?");

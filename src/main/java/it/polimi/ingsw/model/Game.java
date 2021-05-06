@@ -2,7 +2,7 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
-import it.polimi.ingsw.utils.ModelObserver;
+import it.polimi.ingsw.view.ModelObserver;
 
 import java.util.HashMap;
 import java.util.List;
@@ -86,5 +86,8 @@ public abstract class Game {
     public abstract void updateInitLeaderCards();
     public abstract void showFaithTrack();
     public abstract void showLeaderCards(String errorMsg);
+    public abstract void showClientError(ClientError clientError);
     public abstract void addObserver(ModelObserver observer);
+    public abstract void updateMarketTray();
+    public abstract void updateMarket();
 }

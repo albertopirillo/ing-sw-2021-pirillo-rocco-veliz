@@ -9,7 +9,7 @@ import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import it.polimi.ingsw.utils.LeaderAbilityDeserializer;
 import it.polimi.ingsw.utils.LeaderCardJsonDeserializer;
-import it.polimi.ingsw.utils.ModelObserver;
+import it.polimi.ingsw.view.ModelObserver;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -159,7 +159,7 @@ public class MultiGame extends Game {
     }
 
     public void updateClientModel() {
-        System.out.println("[MODEL] Notifying listeners of board update");
+        System.out.println("[MODEL] Notifying listeners of simulate game");
         for(ModelObserver observer : observers)
             observer.gameStateChange(this);
     }
@@ -179,13 +179,31 @@ public class MultiGame extends Game {
     public void showFaithTrack(){
         System.out.println("[MODEL] Notifying listeners of faith track info request");
         for(ModelObserver observer : observers)
-            observer.showFaithTrack();
+            observer.showFaithTrack(this);
     }
 
     public void showLeaderCards(String errorMsg){
         System.out.println("[MODEL] Notifying listeners of leader cards info request");
         for(ModelObserver observer : observers)
-            observer.showLeaderCards(errorMsg);
+            observer.showLeaderCards(this, errorMsg);
+    }
+
+    public void showClientError(ClientError clientError){
+        System.out.println("[MODEL] Notifying listeners of client error");
+        for(ModelObserver observer : observers)
+            observer.showClientError(this, clientError);
+    }
+
+    public void updateMarketTray(){
+        System.out.println("[MODEL] Notifying listeners of market tray update");
+        for(ModelObserver observer : observers)
+            observer.showMarketTray(this);
+    }
+
+    public void updateMarket(){
+        System.out.println("[MODEL] Notifying listeners of market update");
+        for(ModelObserver observer : observers)
+            observer.showMarket(this);
     }
 
 

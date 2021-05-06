@@ -9,6 +9,7 @@ public abstract class PlayerInterface {
 
     public void endOfUpdate() {
         //Call Client method to make requests;
+        simulateGame();
     }
 
     public abstract void readUpdate(ServerUpdate update);
@@ -17,8 +18,8 @@ public abstract class PlayerInterface {
     public abstract String chooseNickname();
     public abstract void getGameSize();
     public abstract void setup();
+    public abstract void viewInitialResources(int numPlayer);
     public abstract void viewInitialsLeaderCards(List<LeaderCard> cards);
-    public abstract void getInitialResources(int numPlayer);
     public abstract void simulateGame(); //testing
 
     public abstract void updateTempResource(TempResourceUpdate update);

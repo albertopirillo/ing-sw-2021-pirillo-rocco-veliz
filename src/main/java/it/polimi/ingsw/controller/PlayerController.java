@@ -21,6 +21,8 @@ public class PlayerController {
             activePlayer.basicProduction(input1, input2, output, fromDepot, fromStrongbox);
         } catch (CostNotMatchingException | NotEnoughSpaceException | CannotContainFaithException | NotEnoughResException | NegativeResAmountException | InvalidKeyException e) {
             controller.setException(e);
+            controller.getGame().showClientError(controller.getClientError());
+            controller.getGame().updateClientModel();
         }
     }
 
@@ -30,6 +32,8 @@ public class PlayerController {
             activePlayer.extraProduction(choice, fromDepot, fromStrongbox, res);
         } catch (CostNotMatchingException | InvalidAbilityChoiceException | NotEnoughSpaceException | NoLeaderAbilitiesException | CannotContainFaithException | NotEnoughResException | NegativeResAmountException | InvalidKeyException e) {
             controller.setException(e);
+            controller.getGame().showClientError(controller.getClientError());
+            controller.getGame().updateClientModel();
         }
     }
 
@@ -41,6 +45,8 @@ public class PlayerController {
             controller.getResourceController().getTempRes().setToHandle(output);
         } catch (NegativeResAmountException | InvalidKeyException | InvalidAbilityChoiceException | NoLeaderAbilitiesException | CostNotMatchingException e) {
             controller.setException(e);
+            controller.getGame().showClientError(controller.getClientError());
+            controller.getGame().updateClientModel();
         }
     }
 
@@ -50,6 +56,8 @@ public class PlayerController {
             activePlayer.buyDevCard(level, color, numSlot, choice, fromDepot, fromStrongbox);
         } catch (CannotContainFaithException | NotEnoughSpaceException | NegativeResAmountException | DeckEmptyException | CostNotMatchingException | NotEnoughResException | InvalidKeyException | NoLeaderAbilitiesException | InvalidAbilityChoiceException | DevSlotEmptyException | InvalidNumSlotException e) {
             controller.setException(e);
+            controller.getGame().showClientError(controller.getClientError());
+            controller.getGame().updateClientModel();
         }
     }
     
@@ -58,6 +66,8 @@ public class PlayerController {
             controller.getResourceController().handleResource(toDiscard, toPlace);
         } catch (NotEnoughResException | NotEnoughSpaceException | CannotContainFaithException | NegativeResAmountException | InvalidKeyException | InvalidResourceException | WrongDepotInstructionsException | LayerNotEmptyException | InvalidLayerNumberException | AlreadyInAnotherLayerException e) {
             controller.setException(e);
+            controller.getGame().showClientError(controller.getClientError());
+            controller.getGame().updateClientModel();
         }
     }
 
@@ -66,8 +76,13 @@ public class PlayerController {
             if (!controller.getResourceController().getTempRes().isEmpty()) throw new CannotEndTurnException("There are still resources to be placed");
             controller.setException(null);
             controller.getGame().nextTurn();
+            controller.getGame().updateMarketTray();
+            controller.getGame().updateMarket();
+            controller.getGame().updateClientModel();
         } catch (CannotEndTurnException | NegativeResAmountException | InvalidKeyException e) {
             controller.setException(e);
+            controller.getGame().showClientError(controller.getClientError());
+            controller.getGame().updateClientModel();
         }
     }
 
@@ -78,6 +93,8 @@ public class PlayerController {
             game.showLeaderCards(activePlayer.useLeader(index, choice));
         } catch (TooManyLeaderAbilitiesException | CostNotMatchingException | InvalidLayerNumberException | NoLeaderAbilitiesException | NegativeResAmountException | InvalidKeyException | LeaderAbilityAlreadyActive e) {
             controller.setException(e);
+            controller.getGame().showClientError(controller.getClientError());
+            controller.getGame().updateClientModel();
         }
     }
 
@@ -87,6 +104,8 @@ public class PlayerController {
             activePlayer.reorderDepot(fromLayer, toLayer, amount);
         } catch (InvalidResourceException | LayerNotEmptyException | NotEnoughSpaceException | InvalidLayerNumberException | CannotContainFaithException | NotEnoughResException | NegativeResAmountException e) {
             controller.setException(e);
+            controller.getGame().showClientError(controller.getClientError());
+            controller.getGame().updateClientModel();
         }
     }
 
@@ -110,6 +129,8 @@ public class PlayerController {
             strongbox.retrieveRes(fromStrongbox);
         } catch (CostNotMatchingException | NotEnoughResException | NegativeResAmountException | InvalidKeyException | DevSlotEmptyException | NotEnoughSpaceException | CannotContainFaithException e) {
             controller.setException(e);
+            controller.getGame().showClientError(controller.getClientError());
+            controller.getGame().updateClientModel();
         }
     }
 }

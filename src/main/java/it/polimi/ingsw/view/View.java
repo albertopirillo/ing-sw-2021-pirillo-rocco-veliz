@@ -1,37 +1,34 @@
 package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.controller.MasterController;
+import it.polimi.ingsw.model.ClientError;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.network.requests.Request;
 import it.polimi.ingsw.server.Connection;
 import it.polimi.ingsw.server.Server;
-import it.polimi.ingsw.utils.ModelObserver;
 
 public abstract class View implements ModelObserver {
     protected MasterController masterController;
     protected final Server server;
-    protected final Game game;
     protected Connection connection;
-    protected int playerId;
+    protected String player;
 
-    public View(Server server, Game game, Connection connection, int playerId){
+    public View(Server server, Connection connection, String player){
         this.server = server;
-        this.game = game;
         this.connection = connection;
-        this.playerId = playerId;
+        this.player = player;
     }
 
     public void addController(MasterController masterController){ this.masterController = masterController; }
 
     public void processRequest(Request request){
-        //System.out.println("[REMOTEVIEW] Messaggio ricevuto from player "+playerId);
         this.masterController.processRequest(request);
     }
 
-    public abstract void showGameState(Game game);
     public abstract void gameStateChange(Game game);
-    public abstract void showFaithTrack();
-    public abstract void showLeaderCards(String errorMsg);
+    public abstract void showFaithTrack(Game game);
+    public abstract void showLeaderCards(Game game, String errorMsg);
     public abstract void notifyInitResources(Game game, int numPlayer);
     public abstract void notifyInitLeaderCards(Game game);
+    public abstract void showClientError(Game game, ClientError clientError);
 }

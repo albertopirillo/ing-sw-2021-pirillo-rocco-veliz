@@ -9,7 +9,7 @@ import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import it.polimi.ingsw.utils.LeaderAbilityDeserializer;
 import it.polimi.ingsw.utils.LeaderCardJsonDeserializer;
-import it.polimi.ingsw.utils.ModelObserver;
+import it.polimi.ingsw.view.ModelObserver;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -157,16 +157,31 @@ public class SoloGame extends Game {
 
     public void showFaithTrack(){
         System.out.println("[MODEL] Notifying listeners of faith track info request");
-        observer.showFaithTrack();
+        observer.showFaithTrack(this);
     }
 
     @Override
     public void showLeaderCards(String errorMsg) {
-        observer.showLeaderCards(errorMsg);
+        observer.showLeaderCards(this, errorMsg);
+    }
+
+    @Override
+    public void showClientError(ClientError clientError) {
+
     }
 
     @Override
     public void addObserver(ModelObserver observer) {
         this.observer = observer;
+    }
+
+    @Override
+    public void updateMarketTray() {
+
+    }
+
+    @Override
+    public void updateMarket() {
+
     }
 }

@@ -1,6 +1,8 @@
 package it.polimi.ingsw.model;
 
-public class ClientError {
+import java.io.Serializable;
+
+public class ClientError implements Serializable {
     private Throwable exception;
 
     public ClientError() {

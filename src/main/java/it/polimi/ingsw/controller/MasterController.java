@@ -26,6 +26,10 @@ public class MasterController {
         this.game = game;
     }
 
+    public ClientError getClientError() {
+        return clientError;
+    }
+
     public String getError() {
         return this.clientError.getError();
     }
@@ -65,6 +69,8 @@ public class MasterController {
         } catch (NegativeResAmountException | InvalidKeyException e) {
             e.printStackTrace();
         }
+        game.updateMarketTray();
+        game.updateMarket();
         game.updateClientModel();
     }
 }

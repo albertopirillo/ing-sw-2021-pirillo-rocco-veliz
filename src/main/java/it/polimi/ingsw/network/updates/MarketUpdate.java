@@ -19,6 +19,8 @@ public class MarketUpdate extends ServerUpdate {
 
     @Override
     public void update(PlayerInterface playerInterface) {
-        playerInterface.updateMarket(this);
+        if(getActivePlayer().equals(playerInterface.getNickname())){
+            playerInterface.updateMarket(this);
+        }
     }
 }

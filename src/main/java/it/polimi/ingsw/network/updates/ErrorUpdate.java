@@ -18,7 +18,9 @@ public class ErrorUpdate extends ServerUpdate {
 
     @Override
     public void update(PlayerInterface playerInterface) {
-        playerInterface.displayError(this);
+        if(getActivePlayer().equals(playerInterface.getNickname())) {
+            playerInterface.displayError(this);
+        }
     }
 
     @Override

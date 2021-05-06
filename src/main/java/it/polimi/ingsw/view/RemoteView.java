@@ -1,9 +1,6 @@
 package it.polimi.ingsw.view;
 
-import it.polimi.ingsw.model.FaithTrack;
-import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.LeaderCard;
-import it.polimi.ingsw.model.Player;
+import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.network.requests.Request;
 import it.polimi.ingsw.network.updates.*;
 import it.polimi.ingsw.server.Connection;
@@ -16,8 +13,13 @@ import java.util.Map;
 
 public class RemoteView extends View {
 
-    public RemoteView(Server server, Game game, Connection connection, int playerId){
-        super(server, game, connection, playerId);
+    public RemoteView(Server server, Connection connection, String player){
+        super(server, connection, player);
+    }
+
+    public void processRequest(Request request){
+        System.out.println("[REMOTEVIEW] Messaggio ricevuto from player " + player);
+        super.processRequest(request);
     }
 
     public void notifyInitResources(Game game, int numPlayer){
@@ -33,12 +35,7 @@ public class RemoteView extends View {
         connection.sendMessage(msg);
     }
 
-    public void processRequest(Request request){
-        System.out.println("[REMOTEVIEW] Messaggio ricevuto from player " + playerId);
-        super.processRequest(request);
-    }
-
-    public void showFaithTrack(){
+    public void showFaithTrack(Game game){
         Map<String, FaithTrack> faithTrackInfoMap = new HashMap<>();
         List<Player> players = game.getPlayersList();
         for(Player player: players){
@@ -48,7 +45,7 @@ public class RemoteView extends View {
         connection.sendMessage(faithTrackMsg);
     }
 
-    public void showLeaderCards(String errorMsg){
+    public void showLeaderCards(Game game, String errorMsg){
         Map<String, List<LeaderCard>> leaderCardsMap = new HashMap<>();
         List<Player> players = game.getPlayersList();
         for(Player player: players){
@@ -59,18 +56,34 @@ public class RemoteView extends View {
         connection.sendMessage(leaderUpdateMsg);
     }
 
-    public void showGameState(Game game){
-        //Preparare messaggio con board compelta da inviare al cliente
-        ServerUpdate msg = new TestUpdate(game.getActivePlayer().getNickname(), "Simulazione turno di gioco");
-        connection.sendMessage(msg);
-    }
-
     public void gameStateChange(Game game){
-        System.out.println("[REMOTE VIEW] Gioco in corso, turno di " + playerId);
-        showGameState(game);
+        //Simulazione endTurnRequest and endUpdate
+        //System.out.println("[REMOTE VIEW] Gioco in corso, turno di " + player);
+        ServerUpdate msg = new EndOfUpdate(game.getActivePlayer().getNickname());
+        connection.sendMessage(msg);
     }
 
     public void notifyGameOver(String winner) {
         //TODO: ...
+    }
+    @Override
+    public void showClientError(Game game, ClientError clientError) {
+        Player activePlayer = game.getActivePlayer();
+        ServerUpdate msg = new ErrorUpdate(activePlayer.getNickname(), clientError);
+        connection.sendMessage(msg);
+    }
+
+    public void showMarketTray(Game game){
+        Player activePlayer = game.getActivePlayer();
+        MarketTray marketTray = game.getMarket().getMarketTray();
+        ServerUpdate msg = new MarketTrayUpdate(activePlayer.getNickname(), marketTray.getMarketMarbles(), marketTray.getRemainingMarble());
+        connection.sendMessage(msg);
+    }
+
+    public void showMarket(Game game){
+        Player activePlayer = game.getActivePlayer();
+        Market market = game.getMarket();
+        ServerUpdate msg = new MarketUpdate(activePlayer.getNickname(), market.getAvailableCards());
+        connection.sendMessage(msg);
     }
 }

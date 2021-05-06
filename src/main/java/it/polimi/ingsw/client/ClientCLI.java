@@ -12,18 +12,18 @@ import java.util.*;
 
 public class ClientCLI extends PlayerInterface {
     private final Scanner stdin;
-
     private String nickname;
     private final Client player;
-    //private Board boardState;
 
     public ClientCLI(Client player){
         this.player = player;
         this.stdin = new Scanner(System.in);
     }
+
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
+
     public String getNickname(){
         return this.nickname;
     }
@@ -34,23 +34,6 @@ public class ClientCLI extends PlayerInterface {
 
     public void setup(){
         System.out.println("Game is starting...\n");
-    }
-
-    @Override
-    public void viewInitialsLeaderCards(List<LeaderCard> leaderCards) {
-        System.out.println("\nYou must select two cards out of four:");
-        int index = 0;
-        for(LeaderCard leaderCard: leaderCards){
-            System.out.println("\nCard " + index++ + " (" + leaderCard.getImg() + "):");
-            System.out.println(leaderCard);
-        }
-        System.out.println();
-
-        int num1 = getInitialLeaderCards(-1);
-        int num2 = getInitialLeaderCards(num1);
-        ChooseLeaderRequest request = new ChooseLeaderRequest(num1, num2);
-        request.setPlayer(nickname);
-        player.sendMessage(request);
     }
 
     public String getIP(){
@@ -94,7 +77,8 @@ public class ClientCLI extends PlayerInterface {
         //return gameSize;
     }
 
-    public void getInitialResources(int numPlayer) {
+    @Override
+    public void viewInitialResources(int numPlayer) {
         Map<ResourceType, Integer> res = new HashMap<>();
         switch (numPlayer){
             case 0:
@@ -102,13 +86,13 @@ public class ClientCLI extends PlayerInterface {
             case 1:
             case 2:
                 System.out.println("\nChoose one initial resource");
-                int numRes = viewInitialResources();
+                int numRes = getInitialResources();
                 res.put(parseToResourceType(numRes), 1);
                 break;
             case 3:
                 System.out.println("\nChoose two initial resources");
-                int res1 = viewInitialResources();
-                int res2 = viewInitialResources();
+                int res1 = getInitialResources();
+                int res2 = getInitialResources();
                 res.put(parseToResourceType(res1), 1);
                 if(res1 == res2) {
                     res.put(parseToResourceType(res2), 2);
@@ -124,15 +108,31 @@ public class ClientCLI extends PlayerInterface {
         request.setNumPlayer(numPlayer);
         request.setPlayer(nickname);
         player.sendMessage(request);
-        //return res;
     }
 
-    public int viewInitialResources(){
+    public int getInitialResources(){
         System.out.println("1: STONE");
         System.out.println("2: COIN");
         System.out.println("3: SHIELD");
         System.out.println("4: SERVANT");
         return stdin.nextInt();
+    }
+
+    @Override
+    public void viewInitialsLeaderCards(List<LeaderCard> leaderCards) {
+        System.out.println("\nYou must select two cards out of four:");
+        int index = 0;
+        for(LeaderCard leaderCard: leaderCards){
+            System.out.println("\nCard " + index++ + " (" + leaderCard.getImg() + "):");
+            System.out.println(leaderCard);
+        }
+        System.out.println();
+
+        int num1 = getInitialLeaderCards(-1);
+        int num2 = getInitialLeaderCards(num1);
+        ChooseLeaderRequest request = new ChooseLeaderRequest(num1, num2);
+        request.setPlayer(nickname);
+        player.sendMessage(request);
     }
 
     public int getInitialLeaderCards(int exclude){
@@ -204,6 +204,9 @@ public class ClientCLI extends PlayerInterface {
             case "8": //use leader ability request
                 request = new UseLeaderRequest(1, LeaderAction.DISCARD);
                 break;
+            case "9":
+                request = new EndTurnRequest();
+                break;
             default:
                 break;
         }
@@ -242,7 +245,6 @@ public class ClientCLI extends PlayerInterface {
         if(update.getErrorMsg().length() > 0){
             System.out.println("\nError: " + update.getErrorMsg());
         }
-
         List<LeaderCard> leaderCards = update.getLeaderMap().get(nickname);
         if(leaderCards.size() > 0){
             System.out.println("\nYou have the following leader cards:");
@@ -256,7 +258,6 @@ public class ClientCLI extends PlayerInterface {
         } else {
             System.out.println("\nYou have no more leader cards.");
         }
-
         simulateGame();
     }
 
@@ -283,6 +284,7 @@ public class ClientCLI extends PlayerInterface {
     public void displayError(ErrorUpdate update) {
         System.out.println(ANSIColor.RED + "Received an error message from the server:" + ANSIColor.RESET);
         System.out.println(ANSIColor.RED + update + ANSIColor.RESET);
+        //simulateGame();
     }
 
     @Override
@@ -303,11 +305,20 @@ public class ClientCLI extends PlayerInterface {
 
     @Override
     public void updateMarket(MarketUpdate update) {
-
+        List<DevelopmentCard> devCards = update.getDevCardList();
+        int index = 0;
+        for(DevelopmentCard devCard: devCards){
+            System.out.println("\nCard " + index++ + " (url.pdf) ");
+            System.out.println(devCard);
+        }
+        System.out.println();
+        //simulateGame();
     }
 
     @Override
     public void updateMarketTray(MarketTrayUpdate update) {
-
+        System.out.println("Market: ");
+        System.out.println(update);
+        //simulateGame();
     }
 }

@@ -65,9 +65,10 @@ public class SetupController {
             } else {
                 game.updateInitResources(numPlayer+1);
             }
-            System.out.println("Totale risorse player " + numPlayer + ": " + activePlayer.getAllResources());//testing
         } catch (NegativeResAmountException | CannotContainFaithException | LayerNotEmptyException | NotEnoughSpaceException | InvalidLayerNumberException | AlreadyInAnotherLayerException | InvalidResourceException | InvalidKeyException e) {
             controller.setException(e);
+            controller.getGame().showClientError(controller.getClientError());
+            controller.getGame().updateClientModel();
         }
     }
 
@@ -81,24 +82,16 @@ public class SetupController {
         Game game = controller.getGame();
         try {
             game.nextTurn();
-            List<LeaderCard> leaderCards = activePlayer.getLeaderCards();
-            System.out.println("[CONTROLLER] Player " + nickname + " has " + leaderCards.size() + " leader cards:");
-            int index = 1;
-            for(LeaderCard leaderCard: leaderCards){
-                System.out.println("\nCard " + index++ + " (" + leaderCard.getImg() + "):");
-                System.out.println(leaderCard.toString());
-            }
-            System.out.println();
-
-            if(game.getActivePlayer().getNickname().equals(firstPlayer)) {
-                game.updateClientModel();
-            } else {
-                game.updateInitLeaderCards();
-            }
-        } catch (NegativeResAmountException | InvalidKeyException e) {
+        }catch (NegativeResAmountException | InvalidKeyException e) {
             e.printStackTrace();
         }
-
+        if(game.getActivePlayer().getNickname().equals(firstPlayer)) {
+            game.updateMarketTray();
+            game.updateMarket();
+            game.updateClientModel();
+        } else {
+            game.updateInitLeaderCards();
+        }
     }
 
 }

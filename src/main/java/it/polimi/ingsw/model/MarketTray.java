@@ -87,22 +87,13 @@ public class MarketTray {
         return mar;
     }
 
+    public MarblesColor[][] getMarketMarbles() {
+        return marketMarbles;
+    }
     //only for testing
     public MarblesColor getMarble(int i, int j) { return marketMarbles[i][j]; }
 
     //only for testing
     public MarblesColor getRemainingMarble() { return remainingMarble; }
 
-    @Override
-    public String toString() {
-        StringBuilder matrix = new StringBuilder();
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 4; j++) {
-                matrix.append(marketMarbles[i][j]).append("  ");
-            }
-            matrix.append("\n");
-        }
-        matrix.append("Remaining marble = ").append(remainingMarble);
-        return matrix.toString();
-    }
 }

@@ -6,6 +6,7 @@ import it.polimi.ingsw.network.updates.*;
 import java.util.List;
 
 public class ClientGUI extends PlayerInterface {
+
     @Override
     public void readUpdate(ServerUpdate update) {
 
@@ -42,7 +43,7 @@ public class ClientGUI extends PlayerInterface {
     }
 
     @Override
-    public void getInitialResources(int numPlayer) {
+    public void viewInitialResources(int numPlayer) {
 
     }
 

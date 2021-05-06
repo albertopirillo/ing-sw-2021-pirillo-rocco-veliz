@@ -52,6 +52,7 @@ public abstract class Game {
     public Map<Player, Integer> computeFinalScore() throws NegativeResAmountException, InvalidKeyException {
         Map<Player, Integer> finalScores = new HashMap<>();
         for(Player p: this.getPlayersList()) {
+            p.addVictoryPoints(finalPositionVP(p.getPlayerFaith()));
             //Player gets 1 victoryPoint for every 5 resources he has
             Resource allPlayerRes = p.getAllResources();
             int amount = allPlayerRes.getTotalAmount();
@@ -60,7 +61,20 @@ public abstract class Game {
         return finalScores;
     }
 
-        public abstract String giveInkwell();
+    //Faith Track gives you VPs depending on the final position of your Faith Marker
+    public int finalPositionVP(int finalPosition) {
+        if (finalPosition < 3) return 0;
+        else if (finalPosition < 6) return 1;
+        else if (finalPosition < 9) return 2;
+        else if (finalPosition < 12) return 4;
+        else if (finalPosition < 15) return 6;
+        else if (finalPosition < 18) return 9;
+        else if (finalPosition < 21) return 12;
+        else if (finalPosition < 24) return 16;
+        else return 20;
+    }
+
+    public abstract String giveInkwell();
 
     //Methods to be implemented
     public abstract void lastTurn(boolean win) throws NegativeResAmountException, InvalidKeyException;

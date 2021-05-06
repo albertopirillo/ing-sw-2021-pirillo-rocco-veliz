@@ -90,7 +90,6 @@ public class SoloGame extends Game {
         builder.registerTypeAdapter(LeaderCard.class, new LeaderCardJsonDeserializer());
         Gson gson = builder.create();
         Type listType = new TypeToken<List<LeaderCard>>(){}.getType();
-
         try {
             JsonReader reader = new JsonReader(new FileReader("src/main/resources/LeaderCardsConfig.json"));
             List<LeaderCard> leaderCards = gson.fromJson(reader, listType);
@@ -106,8 +105,10 @@ public class SoloGame extends Game {
                 LeaderCard chosenCard = leaderCards.get(id);
                 chosenCards.add(chosenCard);
             }
+
+            //TODO: this is breaking tests, player should never have more than 2 leaderCards
             //assign the player the four leader cards he will use for making the selection
-            player.setLeaderCards(chosenCards);
+            // player.setLeaderCards(chosenCards);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

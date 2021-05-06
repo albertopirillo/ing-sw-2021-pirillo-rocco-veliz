@@ -1,13 +1,12 @@
 package it.polimi.ingsw.client;
 
-import it.polimi.ingsw.model.FaithTrack;
-import it.polimi.ingsw.model.LeaderAction;
-import it.polimi.ingsw.model.LeaderCard;
-import it.polimi.ingsw.model.ResourceType;
+import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.network.DepotSetting;
 import it.polimi.ingsw.network.Processable;
 import it.polimi.ingsw.network.messages.GameSizeMessage;
 import it.polimi.ingsw.network.requests.*;
 import it.polimi.ingsw.network.updates.*;
+import it.polimi.ingsw.utils.ANSIColor;
 
 import java.util.*;
 
@@ -43,7 +42,7 @@ public class ClientCLI extends PlayerInterface {
         int index = 0;
         for(LeaderCard leaderCard: leaderCards){
             System.out.println("\nCard " + index++ + " (" + leaderCard.getImg() + "):");
-            System.out.println(leaderCard.toString());
+            System.out.println(leaderCard);
         }
         System.out.println();
 
@@ -152,7 +151,7 @@ public class ClientCLI extends PlayerInterface {
         sb.append("]:");
         int selection;
         do {
-            System.out.println(sb.toString());
+            System.out.println(sb);
             selection = stdin.nextInt();
         } while (!list.contains(selection));
         return selection;
@@ -222,6 +221,19 @@ public class ClientCLI extends PlayerInterface {
 
     @Override
     public void updateStorages(StorageUpdate update) {
+        Map<String, List<DepotSetting>> depotMap = update.getDepotMap();
+        Map<String, Resource> strongboxMap = update.getStrongboxMap();
+        for(String playerNick: depotMap.keySet()) {
+            System.out.println("Showing " + playerNick + "'s resources:");
+            System.out.println("Depot:");
+            for(DepotSetting layer: depotMap.get(playerNick)) {
+                System.out.print("\t" + layer.getLayerNumber() + ": ");
+                if (layer.getResType() == null) System.out.println("Empty");
+                else System.out.println(layer.getResType() + " x" + layer.getAmount());
+            }
+            System.out.println("Strongbox:");
+            System.out.println("\t" + strongboxMap.get(playerNick) + "\n");
+        }
 
     }
 
@@ -238,7 +250,7 @@ public class ClientCLI extends PlayerInterface {
             for(LeaderCard leaderCard: leaderCards){
                 System.out.println("\nCard " + index++ + " (" + leaderCard.getImg() + "):");
                 System.out.println("active: " + leaderCard.isActive());
-                System.out.println(leaderCard.toString());
+                System.out.println(leaderCard);
             }
             System.out.println();
         } else {
@@ -250,12 +262,27 @@ public class ClientCLI extends PlayerInterface {
 
     @Override
     public void updateDevSlots(DevSlotsUpdate update) {
+        Map<String, List<DevelopmentSlot>> devSlotList = update.getDevSlotMap();
 
+        for(String playerNick: devSlotList.keySet()) {
+            System.out.println("Showing " + playerNick + "'s development slots:");
+            int slotNumber = 1;
+            for (DevelopmentSlot slot : devSlotList.get(playerNick)) {
+                if (slot.getCards().size() == 0) System.out.println("\tSlot number " + slotNumber + " is empty");
+                else System.out.println("\tShowing slot number " + slotNumber + ":");
+                for (DevelopmentCard card : slot.getCards()) {
+                    System.out.println("\t   - " + card);
+                }
+                slotNumber++;
+            }
+            System.out.println();
+        }
     }
 
     @Override
     public void displayError(ErrorUpdate update) {
-
+        System.out.println(ANSIColor.RED + "Received an error message from the server:" + ANSIColor.RESET);
+        System.out.println(ANSIColor.RED + update + ANSIColor.RESET);
     }
 
     @Override

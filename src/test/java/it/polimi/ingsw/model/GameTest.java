@@ -51,6 +51,7 @@ class GameTest {
         assertEquals(4, finalScores.get(player4));
     }
 
+    /*//TODO:
     @Test
     public void scoreSoloTest() throws FullCardDeckException, InvalidResourceException, LayerNotEmptyException, NotEnoughSpaceException, InvalidLayerNumberException, CannotContainFaithException, AlreadyInAnotherLayerException, NegativeResAmountException, TooManyLeaderAbilitiesException, CostNotMatchingException, NoLeaderAbilitiesException, InvalidKeyException, LeaderAbilityAlreadyActive {
         Player player = new Player("a");
@@ -73,6 +74,6 @@ class GameTest {
 
 
 
-    }
+    }*/
 }
 

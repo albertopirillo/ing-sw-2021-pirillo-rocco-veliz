@@ -217,16 +217,6 @@ public class ClientCLI extends PlayerInterface {
     }
 
     @Override
-    public void showFaithTrack(FaithTrackUpdate update) {
-        Map<String, FaithTrack> map = update.getFaithTrackInfoMap();
-        System.out.println("\nFaith track information: ");
-        for(Map.Entry<String, FaithTrack> entry: map.entrySet()){
-            System.out.println("\nPlayer: " + entry.getKey());
-            System.out.println(entry.getValue().toString());
-        }
-    }
-
-    @Override
     public void updateStorages(StorageUpdate update) {
 
     }
@@ -253,7 +243,12 @@ public class ClientCLI extends PlayerInterface {
 
     @Override
     public void updateFaithTrack(FaithTrackUpdate faithTrackUpdate) {
-
+        Map<String, FaithTrack> map = faithTrackUpdate.getFaithTrackInfoMap();
+        System.out.println("\nFaith track information: ");
+        for(Map.Entry<String, FaithTrack> entry: map.entrySet()){
+            System.out.println("\nPlayer: " + entry.getKey());
+            System.out.println(entry.getValue().toString());
+        }
     }
 
     @Override

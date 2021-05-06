@@ -20,6 +20,5 @@ public class ChooseLeaderRequest extends Request {
 
     public void activateRequest(MasterController masterController) {
         masterController.getSetupController().setInitialLeaderCards(firstCard, secondCard, player);
-
     }
 }

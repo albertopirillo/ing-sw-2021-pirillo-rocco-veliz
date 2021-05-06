@@ -15,7 +15,6 @@ public class LeaderUpdate extends ServerUpdate {
         this.leaderMap = leaderMap;
     }
 
-
     public Map<String, List<LeaderCard>> getLeaderMap() {
         return leaderMap;
     }
@@ -24,16 +23,4 @@ public class LeaderUpdate extends ServerUpdate {
     public void update(PlayerInterface playerInterface) {
         playerInterface.updateLeaderCards(this);
     }
-
-//    @Override TODO
-//    public String toString() {
-//        StringBuilder string = new StringBuilder();
-//        for (int i = 0; i < playerList.size(); i++) {
-//            string.append(playerList.get(i).getNickname()).append("'s leader cards:\n");
-//            for (int j = 0; j < leaderIDs.size(); j++) {
-//                string.append(/*TODO: read from JSON for card j + */ "active: " + abilityActive.get(j));
-//            }
-//        }
-//        return string.toString();
-//    }
 }

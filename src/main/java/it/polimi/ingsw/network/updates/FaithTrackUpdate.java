@@ -9,7 +9,7 @@ import java.util.Map;
 public class FaithTrackUpdate extends ServerUpdate {
     private final Map<String, FaithTrack> faithTrackInfoMap;
 
-    public FaithTrackUpdate(String activePlayer, boolean lastUpdate, Map<String, FaithTrack> faithTrackInfoMap) {
+    public FaithTrackUpdate(String activePlayer, Map<String, FaithTrack> faithTrackInfoMap) {
         super(activePlayer);
         this.faithTrackInfoMap = faithTrackInfoMap;
     }
@@ -17,7 +17,7 @@ public class FaithTrackUpdate extends ServerUpdate {
     @Override
     public void update(PlayerInterface playerInterface) {
         if(getActivePlayer().equals(playerInterface.getNickname())){
-            playerInterface.showFaithTrack(this);
+            playerInterface.updateFaithTrack(this);
         }
     }
 

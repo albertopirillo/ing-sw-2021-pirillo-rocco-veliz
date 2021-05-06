@@ -30,8 +30,6 @@ public class RemoteView extends View {
         Player activePlayer = game.getActivePlayer();
         List<LeaderCard> cards = new ArrayList<>(activePlayer.getLeaderCards());
         ServerUpdate msg = new InitialLeaderUpdate(activePlayer.getNickname(), cards);
-        //msg.setType(MessageType.INITIAL_CARDS);
-        //msg.setText("prova");
         connection.sendMessage(msg);
     }
 
@@ -46,15 +44,13 @@ public class RemoteView extends View {
         for(Player player: players){
             faithTrackInfoMap.put(player.getNickname(), player.getPersonalBoard().getFaithTrack());
         }
-        FaithTrackUpdate faithTrackMsg = new FaithTrackUpdate(game.getActivePlayer().getNickname(),true, faithTrackInfoMap);
+        FaithTrackUpdate faithTrackMsg = new FaithTrackUpdate(game.getActivePlayer().getNickname(), faithTrackInfoMap);
         connection.sendMessage(faithTrackMsg);
     }
 
     public void showGameState(Game game){
         //Preparare messaggio con board compelta da inviare al cliente
-        //connection.sendMessage(null);
         ServerUpdate msg = new TestUpdate(game.getActivePlayer().getNickname(), "Simulazione turno di gioco");
-        //msg.setType(MessageType.PLAYER_MOVE);
         connection.sendMessage(msg);
     }
 

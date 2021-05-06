@@ -5,10 +5,7 @@ import it.polimi.ingsw.model.LeaderCard;
 import it.polimi.ingsw.model.ResourceType;
 import it.polimi.ingsw.network.Processable;
 import it.polimi.ingsw.network.messages.GameSizeMessage;
-import it.polimi.ingsw.network.requests.ChooseLeaderRequest;
-import it.polimi.ingsw.network.requests.InitialResRequest;
-import it.polimi.ingsw.network.requests.Request;
-import it.polimi.ingsw.network.requests.TestRequest;
+import it.polimi.ingsw.network.requests.*;
 import it.polimi.ingsw.network.updates.*;
 
 import java.util.*;
@@ -37,6 +34,23 @@ public class ClientCLI extends PlayerInterface {
 
     public void setup(){
         System.out.println("Game is starting...\n");
+    }
+
+    @Override
+    public void viewInitialsLeaderCards(List<LeaderCard> leaderCards) {
+        System.out.println("\nYou must select two cards out of four:");
+        int index = 0;
+        for(LeaderCard leaderCard: leaderCards){
+            System.out.println("\nCard " + index++ + " (" + leaderCard.getImg() + "):");
+            System.out.println(leaderCard.toString());
+        }
+        System.out.println();
+
+        int num1 = getInitialLeaderCards(-1);
+        int num2 = getInitialLeaderCards(num1);
+        ChooseLeaderRequest request = new ChooseLeaderRequest(num1, num2);
+        request.setPlayer(nickname);
+        player.sendMessage(request);
     }
 
     public String getIP(){
@@ -121,22 +135,6 @@ public class ClientCLI extends PlayerInterface {
         return stdin.nextInt();
     }
 
-    public void viewInitialsLeadersCards(List<LeaderCard> leaderCards){
-        System.out.println("\nYou must select two cards out of four:");
-        int index = 0;
-        for(LeaderCard leaderCard: leaderCards){
-            System.out.println("\nCard " + index++ + " (" + leaderCard.getImg() + "):");
-            System.out.println(leaderCard.toString());
-        }
-        System.out.println();
-
-        int num1 = getInitialLeaderCards(-1);
-        int num2 = getInitialLeaderCards(num1);
-        ChooseLeaderRequest request = new ChooseLeaderRequest(num1, num2);
-        request.setPlayer(nickname);
-        player.sendMessage(request);
-    }
-
     public int getInitialLeaderCards(int exclude){
         List<Integer> list = new ArrayList<>();
         for(int i = 0; i < 4; i++){
@@ -208,10 +206,14 @@ public class ClientCLI extends PlayerInterface {
             default:
                 break;
         }
-        Request request = new TestRequest();
         request.setText(selection);
         player.sendMessage(request);
         //return selection;
+    }
+
+    @Override
+    public void updateTempResource(TempResourceUpdate update) {
+
     }
 
     @Override

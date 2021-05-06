@@ -31,8 +31,6 @@ public class Client implements Runnable{
         String nickname = cli.chooseNickname();
         Processable login = new LoginMessage(nickname, nickname);
         cli.setNickname(nickname);
-        //Message login = new Message(nickname);
-        //login.setType(MessageType.LOGIN);
         sendMessage(login);
         while(!Thread.currentThread().isInterrupted()) {
             ServerUpdate msg;
@@ -44,42 +42,6 @@ public class Client implements Runnable{
             }
             cli.readUpdate(msg);
         }
-            /*switch (msg.getType()){
-                case LOBBY_SETUP:
-                    int gameSize = cli.getGameSize();
-                    Message rsp = new Message(gameSize);
-                    rsp.setType(MessageType.LOBBY_SETUP);
-                    sendMessage(rsp);
-                    break;
-                case INITIAL_RESOURCE:
-                    if(msg.getActivePlayer().equals(nickname)) {
-                        Map<ResourceType, Integer> res = cli.getInitialResources(Integer.parseInt(msg.getText()));
-                        InitialResRequest request = new InitialResRequest(res);
-                        request.setNumPlayer(Integer.parseInt(msg.getText()));
-                        request.setPlayer(nickname);
-                        sendMessage(request);
-                    }
-                    break;
-                case INITIAL_CARDS:
-                    if(msg.getActivePlayer().equals(nickname)) {
-                        CardsMessage message = (CardsMessage) msg;
-                        List<LeaderCard> leaderCards = message.getCards();
-                        cli.viewInitialsLeadersCards(leaderCards);
-                        int num1 = cli.getInitialLeaderCards(-1);
-                        int num2 = cli.getInitialLeaderCards(num1);
-                        ChooseLeaderRequest request = new ChooseLeaderRequest(num1, num2);
-                        request.setPlayer(nickname);
-                        sendMessage(request);
-                    }
-                    break;
-                case PLAYER_MOVE:
-                    if(msg.getActivePlayer().equals(nickname)) {
-                        Request request = new TestRequest();
-                        request.setText(cli.simulateGame());
-                        sendMessage(request);
-                    }
-                    break;
-            }*/
     }
 
     private void startConnection(){
@@ -110,7 +72,6 @@ public class Client implements Runnable{
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        //System.out.println(msg.getText());
         return msg;
     }
 }

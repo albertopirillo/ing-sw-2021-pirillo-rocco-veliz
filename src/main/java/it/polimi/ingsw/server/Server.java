@@ -6,12 +6,11 @@ import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MultiGame;
-import it.polimi.ingsw.network.messages.LoginMessage;
-import it.polimi.ingsw.network.messages.Message;
-import it.polimi.ingsw.network.updates.InitialResourcesUpdate;
-import it.polimi.ingsw.network.updates.ServerUpdate;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.SoloGame;
+import it.polimi.ingsw.network.messages.LoginMessage;
+import it.polimi.ingsw.network.updates.InitialResourcesUpdate;
+import it.polimi.ingsw.network.updates.ServerUpdate;
 import it.polimi.ingsw.view.RemoteView;
 import it.polimi.ingsw.view.View;
 
@@ -59,8 +58,6 @@ public class Server implements Runnable {
         if(lobbyPlayers.isEmpty()){
             addToLobby(nickname, connection);
             ServerUpdate msg = new LoginMessage(nickname, nickname);
-            //Message msg = new Message();
-            //msg.setType(MessageType.LOBBY_SETUP);
             connection.sendMessage(msg);
         } else {
             addToLobby(nickname, connection);
@@ -90,7 +87,7 @@ public class Server implements Runnable {
             MasterController masterController = new MasterController(game);
             List<String> keys = new ArrayList<>(lobbyPlayers.keySet());
             Connection connection = lobbyPlayers.get(keys.get(0));
-            View view = new RemoteView(this, game, connections.get(0), 0);
+            View view = new RemoteView(this, /*game,*/ connections.get(0), keys.get(0));
             connection.setView(view);
             game.addObserver(view);
             view.addController(masterController);
@@ -118,7 +115,7 @@ public class Server implements Runnable {
             List<Connection> connections = new ArrayList<>();
             for(int i=0; i<gameSize; i++){
                 connections.add(lobbyPlayers.get(keys.get(i)));
-                View view = new RemoteView(this, game, connections.get(i), i);
+                View view = new RemoteView(this, /*game,*/ connections.get(i), keys.get(i));
                 connections.get(i).setView(view);
                 views.add(view);
                 game.addObserver(view);
@@ -148,7 +145,6 @@ public class Server implements Runnable {
             game.setActivePlayer(game.getPlayersList().get((index + 1) % game.getPlayerAmount()));
         }
         */
-
             //activeGames.put(activeGames.size(), connections
             lobbyPlayers.clear();
             gameSize = 0;
@@ -161,26 +157,6 @@ public class Server implements Runnable {
     public void sendInitialResources(int numPlayer, String activePlayer){
         ServerUpdate msg = new InitialResourcesUpdate(activePlayer, numPlayer);
         lobbyPlayers.get(activePlayer).sendMessage(msg);
-        //Message msg = new Message(numPlayer);
-        //msg.setActivePlayer(activePlayer);
-        //msg.setType(MessageType.INITIAL_RESOURCE);
-        //lobbyPlayers.get(activePlayer).sendMessage(msg);
-    }
-
-    public void handleMessage(Message message, Connection connection) {
-        //TODO: handle the messages
-        //in base al messaggio (hashmap key:connection, nickname)
-        //initlobby firstplayer playeramount -> creo mastercontroller, player e game
-        //da master controller parte gioco
-        //tutti gli altri mess non login li rigiro al controller
-        /*switch (message.getType()){
-            case LOGIN: login(message.getText(), connection);
-                break;
-            case LOBBY_SETUP:
-                setGameSize(Integer.parseInt(message.getText()));
-                break;
-        }*/
-        // System.out.println(message.getText()); test print
     }
 
     @Override

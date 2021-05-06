@@ -6,6 +6,7 @@ public interface ModelObserver {
     void gameStateChange(Game game);
     void notifyGameOver(String playerWinner);
     void showFaithTrack();
+    void showLeaderCards(String errorMsg);
     void notifyInitResources(Game game, int numPlayer);
     void notifyInitLeaderCards(Game game);
 }

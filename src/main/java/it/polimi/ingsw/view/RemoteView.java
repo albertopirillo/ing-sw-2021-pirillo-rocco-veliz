@@ -48,6 +48,17 @@ public class RemoteView extends View {
         connection.sendMessage(faithTrackMsg);
     }
 
+    public void showLeaderCards(String errorMsg){
+        Map<String, List<LeaderCard>> leaderCardsMap = new HashMap<>();
+        List<Player> players = game.getPlayersList();
+        for(Player player: players){
+            leaderCardsMap.put(player.getNickname(), player.getLeaderCards());
+        }
+        LeaderUpdate leaderUpdateMsg = new LeaderUpdate(game.getActivePlayer().getNickname(), leaderCardsMap);
+        leaderUpdateMsg.setErrorMsg(errorMsg);
+        connection.sendMessage(leaderUpdateMsg);
+    }
+
     public void showGameState(Game game){
         //Preparare messaggio con board compelta da inviare al cliente
         ServerUpdate msg = new TestUpdate(game.getActivePlayer().getNickname(), "Simulazione turno di gioco");

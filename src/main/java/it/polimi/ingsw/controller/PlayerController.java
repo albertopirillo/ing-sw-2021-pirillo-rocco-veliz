@@ -73,8 +73,9 @@ public class PlayerController {
 
     public void useLeader(int index, LeaderAction choice) {
         try {
-            Player activePlayer = controller.getGame().getActivePlayer();
-            activePlayer.useLeader(index, choice);
+            Game game = controller.getGame();
+            Player activePlayer = game.getActivePlayer();
+            game.showLeaderCards(activePlayer.useLeader(index, choice));
         } catch (TooManyLeaderAbilitiesException | CostNotMatchingException | InvalidLayerNumberException | NoLeaderAbilitiesException | NegativeResAmountException | InvalidKeyException | LeaderAbilityAlreadyActive e) {
             controller.setException(e);
         }

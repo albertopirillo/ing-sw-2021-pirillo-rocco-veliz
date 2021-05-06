@@ -142,24 +142,29 @@ public class Player {
         }
     }
 
-    public void useLeader(int index, LeaderAction choice) throws TooManyLeaderAbilitiesException, LeaderAbilityAlreadyActive, InvalidLayerNumberException, NegativeResAmountException, InvalidKeyException, CostNotMatchingException, NoLeaderAbilitiesException {
-        if (index < 0 || index > 1) throw new NoLeaderAbilitiesException("The selected leader card does not exist");
-        LeaderCard leader = this.leaderCards.get(index);
-        if (leader.isActive()) throw new LeaderAbilityAlreadyActive();
+    public String useLeader(int index, LeaderAction choice) throws TooManyLeaderAbilitiesException, LeaderAbilityAlreadyActive, InvalidLayerNumberException, NegativeResAmountException, InvalidKeyException, CostNotMatchingException, NoLeaderAbilitiesException {
+        String errorMsg = "";
+        if (index < 0 || index >= leaderCards.size()) {
+            errorMsg = "The selected leader card does not exist";
+        } else {
+            LeaderCard leader = this.leaderCards.get(index);
+            //if (leader.isActive()) throw new LeaderAbilityAlreadyActive();
 
-        if (choice == LeaderAction.DISCARD) {
-            this.addPlayerFaith(1);
-            //Victory points of discard card are not taken into consideration
-            this.leaderCards.remove(leader);
+            if (choice == LeaderAction.DISCARD) {
+                this.addPlayerFaith(1);
+                //Victory points of discarded cards are not taken into account
+                this.leaderCards.remove(leader);
+            } else if (leader.canBeActivated(this)) {
+                leader.activate();
+                LeaderAbility ability = leader.getSpecialAbility();
+                ability.activate(this);
+                this.activeLeaderAbilities.add(ability);
+                this.victoryPoints = this.victoryPoints + leader.getVictoryPoints();
+            } else {
+                errorMsg = "LeaderCard requirements not satisfied";
+            }
         }
-        else {
-            if (!leader.canBeActivated(this)) throw new CostNotMatchingException("LeaderCard requirements not satisfied");
-            LeaderAbility ability = leader.getSpecialAbility();
-            ability.activate(this);
-            leader.activate();
-            this.activeLeaderAbilities.add(ability);
-            this.victoryPoints = this.victoryPoints + leader.getVictoryPoints();
-        }
+        return errorMsg;
     }
 
     public void discardRes(Resource resource) throws CannotContainFaithException, NegativeResAmountException, InvalidKeyException {

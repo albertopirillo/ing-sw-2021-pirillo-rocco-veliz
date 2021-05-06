@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.model.FaithTrack;
+import it.polimi.ingsw.model.LeaderAction;
 import it.polimi.ingsw.model.LeaderCard;
 import it.polimi.ingsw.model.ResourceType;
 import it.polimi.ingsw.network.Processable;
@@ -176,39 +177,42 @@ public class ClientCLI extends PlayerInterface {
             System.out.println("0: Get faith track info");
             System.out.println("1: Buy from market");
             System.out.println("2: Buy a development card");
-            System.out.println("3: Discard leader card");
-            System.out.println("4: Activate basic production");
-            System.out.println("5: Activate a development card production");
-            System.out.println("6: Use a leader card ability");
-            System.out.println("7: End Turn\n");
+            System.out.println("3: Activate basic production");
+            System.out.println("4: Activate a development card production");
+            System.out.println("5: Use leader card 1");
+            System.out.println("6: Use leader card 2");
+            System.out.println("7: Discard leader card 1");
+            System.out.println("8: Discard leader card 2");
+            System.out.println("9: End Turn");
+            System.out.println();
             selection = stdin.next();
-        } while (!selection.matches("[0-6]"));
+        } while (!selection.matches("[0-9]"));
 
-        Request request = new TestRequest();
+        Request request = null;
         switch(selection) {
-            case "0": //faith track info
+            case "0":
                 request = new FaithTrackRequest();
                 break;
-            case "1": //call buy marbles from market request
+            case "5":
+                request = new UseLeaderRequest(0, LeaderAction.USE_ABILITY);
                 break;
-            case "2": //call buy dev card request
+            case "6":
+                request = new UseLeaderRequest(1, LeaderAction.USE_ABILITY);
                 break;
-            case "3": //call discard leader card request
+            case "7":
+                request = new UseLeaderRequest(0, LeaderAction.DISCARD);
                 break;
-            case "4": //activate basic production request
-                break;
-            case "5": //activate dev card production request
-               break;
-            case "6": //use leader ability request
-                break;
-            case "7": //end turn
+            case "8": //use leader ability request
+                request = new UseLeaderRequest(1, LeaderAction.DISCARD);
                 break;
             default:
                 break;
         }
-        request.setText(selection);
-        player.sendMessage(request);
-        //return selection;
+        if(request != null){
+            player.sendMessage(request);
+        } else {
+            simulateGame();
+        }
     }
 
     @Override
@@ -223,7 +227,25 @@ public class ClientCLI extends PlayerInterface {
 
     @Override
     public void updateLeaderCards(LeaderUpdate update) {
+        if(update.getErrorMsg().length() > 0){
+            System.out.println("\nError: " + update.getErrorMsg());
+        }
 
+        List<LeaderCard> leaderCards = update.getLeaderMap().get(nickname);
+        if(leaderCards.size() > 0){
+            System.out.println("\nYou have the following leader cards:");
+            int index = 0;
+            for(LeaderCard leaderCard: leaderCards){
+                System.out.println("\nCard " + index++ + " (" + leaderCard.getImg() + "):");
+                System.out.println("active: " + leaderCard.isActive());
+                System.out.println(leaderCard.toString());
+            }
+            System.out.println();
+        } else {
+            System.out.println("\nYou have no more leader cards.");
+        }
+
+        simulateGame();
     }
 
     @Override
@@ -249,6 +271,7 @@ public class ClientCLI extends PlayerInterface {
             System.out.println("\nPlayer: " + entry.getKey());
             System.out.println(entry.getValue().toString());
         }
+        simulateGame();
     }
 
     @Override

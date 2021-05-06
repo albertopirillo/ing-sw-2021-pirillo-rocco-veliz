@@ -160,6 +160,11 @@ public class SoloGame extends Game {
     }
 
     @Override
+    public void showLeaderCards(String errorMsg) {
+        observer.showLeaderCards(errorMsg);
+    }
+
+    @Override
     public void addObserver(ModelObserver observer) {
         this.observer = observer;
     }

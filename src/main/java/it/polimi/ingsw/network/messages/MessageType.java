@@ -1,5 +1,6 @@
-package it.polimi.ingsw.network;
+package it.polimi.ingsw.network.messages;
 
+@Deprecated
 public enum MessageType {
     LOGIN,
     LOBBY_SETUP,

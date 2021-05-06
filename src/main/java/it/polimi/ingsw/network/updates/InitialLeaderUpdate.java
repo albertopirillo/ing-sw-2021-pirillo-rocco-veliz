@@ -1,4 +1,4 @@
-package it.polimi.ingsw.network;
+package it.polimi.ingsw.network.updates;
 
 import it.polimi.ingsw.client.PlayerInterface;
 import it.polimi.ingsw.model.LeaderCard;
@@ -6,11 +6,11 @@ import it.polimi.ingsw.model.LeaderCard;
 import java.io.Serializable;
 import java.util.List;
 
-public class LeaderCardsUpdate extends ServerUpdate implements Serializable {
+public class InitialLeaderUpdate extends ServerUpdate implements Serializable {
     private final List<LeaderCard> cards;
 
-    public LeaderCardsUpdate(String activePlayer, boolean lastUpdate, List<LeaderCard> cards) {
-        super(activePlayer, lastUpdate);
+    public InitialLeaderUpdate(String activePlayer, List<LeaderCard> cards) {
+        super(activePlayer);
         this.cards = cards;
     }
 
@@ -21,7 +21,7 @@ public class LeaderCardsUpdate extends ServerUpdate implements Serializable {
     @Override
     public void update(PlayerInterface playerInterface) {
         if(super.getActivePlayer().equals(playerInterface.getNickname())) {
-            playerInterface.viewInitialsLeadersCards(cards);
+            playerInterface.viewInitialsLeaderCards(cards);
         }
     }
 

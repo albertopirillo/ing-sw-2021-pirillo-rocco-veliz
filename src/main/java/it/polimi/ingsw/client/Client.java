@@ -1,8 +1,8 @@
 package it.polimi.ingsw.client;
 
-import it.polimi.ingsw.network.LoginMessage;
 import it.polimi.ingsw.network.Processable;
-import it.polimi.ingsw.network.ServerUpdate;
+import it.polimi.ingsw.network.messages.LoginMessage;
+import it.polimi.ingsw.network.updates.ServerUpdate;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -29,7 +29,7 @@ public class Client implements Runnable{
         cli.setup();
         startConnection();
         String nickname = cli.chooseNickname();
-        Processable login = new LoginMessage(nickname, false, nickname);
+        Processable login = new LoginMessage(nickname, nickname);
         cli.setNickname(nickname);
         //Message login = new Message(nickname);
         //login.setType(MessageType.LOGIN);

@@ -1,4 +1,4 @@
-package it.polimi.ingsw.network;
+package it.polimi.ingsw.network.requests;
 
 import it.polimi.ingsw.controller.MasterController;
 import it.polimi.ingsw.model.AbilityChoice;

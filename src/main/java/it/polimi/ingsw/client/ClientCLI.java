@@ -3,7 +3,13 @@ package it.polimi.ingsw.client;
 import it.polimi.ingsw.model.FaithTrack;
 import it.polimi.ingsw.model.LeaderCard;
 import it.polimi.ingsw.model.ResourceType;
-import it.polimi.ingsw.network.*;
+import it.polimi.ingsw.network.Processable;
+import it.polimi.ingsw.network.messages.GameSizeMessage;
+import it.polimi.ingsw.network.requests.ChooseLeaderRequest;
+import it.polimi.ingsw.network.requests.InitialResRequest;
+import it.polimi.ingsw.network.requests.Request;
+import it.polimi.ingsw.network.requests.TestRequest;
+import it.polimi.ingsw.network.updates.*;
 
 import java.util.*;
 
@@ -69,7 +75,7 @@ public class ClientCLI extends PlayerInterface {
             gameSize = Integer.parseInt(stdin.nextLine());
         }while (gameSize < 1 || gameSize > 4);
 
-        Processable rsp = new GameSizeMessage(nickname, false, gameSize);
+        Processable rsp = new GameSizeMessage(nickname, gameSize);
         player.sendMessage(rsp);
         //return gameSize;
     }
@@ -202,8 +208,10 @@ public class ClientCLI extends PlayerInterface {
             default:
                 break;
         }
+        Request request = new TestRequest();
         request.setText(selection);
         player.sendMessage(request);
+        //return selection;
     }
 
     @Override
@@ -237,12 +245,22 @@ public class ClientCLI extends PlayerInterface {
     }
 
     @Override
-    public void updateMarket() {
+    public void updatePlayer(PlayerUpdate update) {
 
     }
 
     @Override
-    public void updateMarketTray() {
+    public void updateFaithTrack(FaithTrackUpdate faithTrackUpdate) {
+
+    }
+
+    @Override
+    public void updateMarket(MarketUpdate update) {
+
+    }
+
+    @Override
+    public void updateMarketTray(MarketTrayUpdate update) {
 
     }
 }

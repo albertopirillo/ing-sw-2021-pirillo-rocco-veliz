@@ -1,4 +1,4 @@
-package it.polimi.ingsw.network;
+package it.polimi.ingsw.network.messages;
 
 import it.polimi.ingsw.client.PlayerInterface;
 import it.polimi.ingsw.server.Connection;
@@ -8,8 +8,8 @@ public class LoginMessage extends Message {
 
     private final String nickname;
 
-    public LoginMessage(String activePlayer, boolean lastUpdate, String nickname) {
-        super(activePlayer, lastUpdate);
+    public LoginMessage(String activePlayer, String nickname) {
+        super(activePlayer);
         this.nickname = nickname;
     }
 

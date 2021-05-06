@@ -1,7 +1,8 @@
-package it.polimi.ingsw.network;
+package it.polimi.ingsw.network.requests;
 
 import it.polimi.ingsw.controller.MasterController;
 import it.polimi.ingsw.model.Resource;
+import it.polimi.ingsw.network.DepotSetting;
 
 import java.util.List;
 

@@ -6,12 +6,12 @@ import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MultiGame;
-import it.polimi.ingsw.network.InitialResourcesMessage;
-import it.polimi.ingsw.network.LoginMessage;
+import it.polimi.ingsw.network.messages.LoginMessage;
+import it.polimi.ingsw.network.messages.Message;
+import it.polimi.ingsw.network.updates.InitialResourcesUpdate;
+import it.polimi.ingsw.network.updates.ServerUpdate;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.SoloGame;
-import it.polimi.ingsw.network.Message;
-import it.polimi.ingsw.network.ServerUpdate;
 import it.polimi.ingsw.view.RemoteView;
 import it.polimi.ingsw.view.View;
 
@@ -58,7 +58,7 @@ public class Server implements Runnable {
         System.out.println("[SERVER] New player " + nickname + " added");
         if(lobbyPlayers.isEmpty()){
             addToLobby(nickname, connection);
-            ServerUpdate msg = new LoginMessage(nickname, false, nickname);
+            ServerUpdate msg = new LoginMessage(nickname, nickname);
             //Message msg = new Message();
             //msg.setType(MessageType.LOBBY_SETUP);
             connection.sendMessage(msg);
@@ -68,6 +68,7 @@ public class Server implements Runnable {
         if(gameSize == lobbyPlayers.size()){
             setupGame(gameSize, nickname);
         }
+
     }
 
     public void setupGame(int gameSize, String nickname){
@@ -158,7 +159,7 @@ public class Server implements Runnable {
     }
 
     public void sendInitialResources(int numPlayer, String activePlayer){
-        ServerUpdate msg = new InitialResourcesMessage(activePlayer, false, numPlayer);
+        ServerUpdate msg = new InitialResourcesUpdate(activePlayer, numPlayer);
         lobbyPlayers.get(activePlayer).sendMessage(msg);
         //Message msg = new Message(numPlayer);
         //msg.setActivePlayer(activePlayer);

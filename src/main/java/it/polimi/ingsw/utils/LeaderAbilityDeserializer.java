@@ -33,7 +33,7 @@ public class LeaderAbilityDeserializer implements JsonDeserializer<LeaderAbility
                 case "change":
                     return context.deserialize(json, ChangeWhiteMarbles.class);
                 default:
-                    throw new IllegalArgumentException("Nessun tipo di abilità leader");
+                    throw new IllegalArgumentException("Invalid LeaderAbility type");
             }
         }
     }

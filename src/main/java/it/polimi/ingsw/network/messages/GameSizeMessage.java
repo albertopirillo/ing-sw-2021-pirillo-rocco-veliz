@@ -1,4 +1,4 @@
-package it.polimi.ingsw.network;
+package it.polimi.ingsw.network.messages;
 
 import it.polimi.ingsw.client.PlayerInterface;
 import it.polimi.ingsw.server.Connection;
@@ -8,8 +8,8 @@ public class GameSizeMessage extends Message {
 
     private final int size;
 
-    public GameSizeMessage(String activePlayer, boolean lastUpdate, int size) {
-        super(activePlayer, lastUpdate);
+    public GameSizeMessage(String activePlayer, int size) {
+        super(activePlayer);
         this.size = size;
     }
 

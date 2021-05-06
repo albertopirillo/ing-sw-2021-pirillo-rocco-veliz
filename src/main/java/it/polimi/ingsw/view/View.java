@@ -2,7 +2,7 @@ package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.controller.MasterController;
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.network.Request;
+import it.polimi.ingsw.network.requests.Request;
 import it.polimi.ingsw.server.Connection;
 import it.polimi.ingsw.server.Server;
 import it.polimi.ingsw.utils.ModelObserver;

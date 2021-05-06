@@ -101,6 +101,11 @@ public class Resource implements Serializable {
 
     @Override
     public String toString() {
-        return "{" + map + "}";
+        StringBuilder sb = new StringBuilder();
+        sb.append("| ");
+        for(ResourceType key: this.map.keySet()){
+            sb.append(key).append("x").append(this.map.get(key)).append(" | ");
+        }
+        return sb.toString();
     }
 }

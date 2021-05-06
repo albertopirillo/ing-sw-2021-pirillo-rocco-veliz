@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.utils.ANSIColor;
+
 public enum CardColor {
     GREEN,
     BLUE,
@@ -19,5 +21,17 @@ public enum CardColor {
             default:
                 throw new IllegalArgumentException();
         }
+    }
+
+    @Override
+    public String toString() {
+        String color = null;
+        switch (this) {
+            case GREEN: color = ANSIColor.GREEN + "GREEN";break;
+            case BLUE: color = ANSIColor.BLUE + "BLUE"; break;
+            case YELLOW: color = ANSIColor.BRIGHT_YELLOW + "YELLOW";break;
+            case PURPLE:color = ANSIColor.MAGENTA + "PURPLE";break;
+        }
+        return color.concat(ANSIColor.RESET);
     }
 }

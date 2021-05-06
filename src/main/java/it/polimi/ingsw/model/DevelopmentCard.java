@@ -53,9 +53,8 @@ public class DevelopmentCard extends Card {
 
     @Override
     public String toString() {
-        return "DevelopmentCard{" +
-                "cost=" + cost +
-                ", type=" + type +
+        return  "cost=" + cost +
+                ", color=" + type +
                 ", level=" + level +
                 ", prodPower=" + prodPower +
                 '}';

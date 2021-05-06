@@ -29,7 +29,6 @@ public enum ResourceType {
         }
         return color.concat(ANSIColor.RESET);
     }
-
 }
 
 //equals() method is not needed, operator "==" can be used to check ResourceType

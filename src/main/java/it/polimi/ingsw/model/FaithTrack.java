@@ -8,6 +8,14 @@ public class FaithTrack implements Serializable {
     private int playerFaith;
     private final List<PopeFavorCard> popeCards;
 
+    //LIST OF ANSI CODES FOR COLORED OUTPUT ON CLI
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
+
     public FaithTrack() {
         this.playerFaith = 0;
         this.popeCards = new ArrayList<>();
@@ -115,7 +123,57 @@ public class FaithTrack implements Serializable {
     }
 
     public String toString(){
-        return "Test faith track print";
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n\tFaithTrack Legend:");
+        sb.append("\n\t\tEmptyTile = |-|");
+        sb.append("\n\t\tPopeTile = |" + ANSI_YELLOW + "P" + ANSI_RESET + "|");
+        sb.append("\n\t\tPlayerMarker = |" + ANSI_PURPLE + "X" + ANSI_RESET + "|");
+        sb.append("\n\t\tVaticanReportSection = " + ANSI_BLUE + "SECTION_ONE " + ANSI_RESET + ", " + ANSI_RED + "SECTION_TWO " + ANSI_RESET + ", " + ANSI_GREEN + "SECTION THREE " + ANSI_RESET + "\n\n\t");
+
+        for (int i = 1; i < 25; i++) {
+            if (4<i && i<9){
+                sb.append(ANSI_BLUE + "|" + ANSI_RESET);
+            } else if(11<i && i<17){
+                sb.append(ANSI_RED + "|" + ANSI_RESET);
+            } else if (18<i){
+                sb.append(ANSI_GREEN + "|" + ANSI_RESET);
+            } else sb.append("|");
+
+            if (i == playerFaith) {
+                sb.append(ANSI_PURPLE + "X" + ANSI_RESET);
+            } else if (i==8 || i==16 || i==24) {
+                sb.append(ANSI_YELLOW + "P" + ANSI_RESET);
+            } else { sb.append("-"); }
+
+            if (4<i && i<9){
+                sb.append(ANSI_BLUE + "| " + ANSI_RESET);
+            } else if(11<i && i<17){
+                sb.append(ANSI_RED + "| " + ANSI_RESET);
+            } else if (18<i){
+                sb.append(ANSI_GREEN + "| " + ANSI_RESET);
+            } else sb.append("| ");
+        }
+
+        sb.append("\n\n\tActivated Vatican Reports: ");
+        boolean flag = false;
+        for(PopeFavorCard popeFavorCard : popeCards){
+            if(popeFavorCard.isReported()){
+                sb.append(popeFavorCard.getSection()).append(" ");
+                flag = true;
+            }
+        }
+        if(!flag) sb.append("No report has yet occurred");
+        sb.append("\n\tPope Favor cards that are face up: ");
+        flag = false;
+        for(PopeFavorCard popeFavorCard : popeCards){
+            if(popeFavorCard.isFaceUp()){
+                sb.append(popeFavorCard.getSection()).append(" ");
+                flag = true;
+            }
+        }
+        if(!flag) sb.append("You have no cards face up");
+
+        return sb.toString();
     }
 
 }

@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.utils.ANSIColor;
+
 public enum ResourceType {
     STONE,
     COIN,
@@ -13,6 +15,21 @@ public enum ResourceType {
             if (other == res) return true;
         return false;
     }
+
+    @Override
+    public String toString() {
+        String color = null;
+        switch (this) {
+            case STONE: color = ANSIColor.GREY + "STONE";break;
+            case COIN: color = ANSIColor.BRIGHT_YELLOW + "COIN"; break;
+            case SHIELD: color = ANSIColor.BLUE + "SHIELD";break;
+            case SERVANT:color = ANSIColor.MAGENTA + "SERVANT";break;
+            case FAITH: color = ANSIColor.BRIGHT_RED + "FAITH";break;
+            case ALL: color = ANSIColor.GREEN + "ALL";break;
+        }
+        return color.concat(ANSIColor.RESET);
+    }
+
 }
 
 //equals() method is not needed, operator "==" can be used to check ResourceType

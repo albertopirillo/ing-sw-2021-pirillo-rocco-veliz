@@ -9,7 +9,6 @@ import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import it.polimi.ingsw.utils.LeaderAbilityDeserializer;
 import it.polimi.ingsw.utils.LeaderCardJsonDeserializer;
-import it.polimi.ingsw.view.ModelObserver;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -18,12 +17,12 @@ import java.util.*;
 
 public class SoloGame extends Game {
 
-    private ModelObserver observer;
     private List<SoloActionToken> soloTokens;
     private int blackCrossPosition;
 
     public SoloGame(Player player) throws FullCardDeckException {
         //player gets no resources nor faith points in solo game
+        super();
         this.setActivePlayer(player);
         this.setMarket(new Market());
         this.setPlayerAmount(1);
@@ -36,6 +35,7 @@ public class SoloGame extends Game {
     }
 
     public SoloGame(boolean testing) throws FullCardDeckException {
+        super();
         Player player = new Player("nickname");
         this.setActivePlayer(player);
         this.setMarket(new Market(true));
@@ -138,53 +138,5 @@ public class SoloGame extends Game {
 
     public void moveBlackCross(int amount) {
         this.blackCrossPosition = this.blackCrossPosition + amount;
-    }
-
-    @Override
-    public void notifyEndOfUpdates() {
-        System.out.println("[MODEL] Notifying listeners of board update");
-        observer.gameStateChange(this);
-    }
-
-    @Override
-    public void updateInitResources(int numPlayer) {
-    }
-
-    public void updateInitLeaderCards(){
-        System.out.println("[MODEL] Notifying player listener of init leaders cards update");
-        observer.notifyInitLeaderCards(this);
-    }
-
-    public void showFaithTrack(){
-        System.out.println("[MODEL] Notifying listeners of faith track info request");
-        observer.showFaithTrack(this);
-    }
-
-    @Override
-    public void showLeaderCards() {
-        observer.showLeaderCards(this);
-    }
-
-    @Override
-    public void showClientError(ClientError clientError) {
-        System.out.println("[MODEL] Notifying listener of client error");
-        observer.showClientError(this, clientError);
-    }
-
-    @Override
-    public void addObserver(ModelObserver observer) {
-        this.observer = observer;
-    }
-
-    @Override
-    public void updateMarketTray() {
-        System.out.println("[MODEL] Notifying listener of market tray update");
-        observer.showMarketTray(this);
-    }
-
-    @Override
-    public void updateMarket() {
-        System.out.println("[MODEL] Notifying listener of market update");
-        observer.showMarket(this);
     }
 }

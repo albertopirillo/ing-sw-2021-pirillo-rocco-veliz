@@ -27,7 +27,7 @@ public abstract class View implements ModelObserver {
 
     public abstract void gameStateChange(Game game);
     public abstract void showFaithTrack(Game game);
-    public abstract void showLeaderCards(Game game, String errorMsg);
+    public abstract void showLeaderCards(Game game);
     public abstract void notifyInitResources(Game game, int numPlayer);
     public abstract void notifyInitLeaderCards(Game game);
     public abstract void showClientError(Game game, ClientError clientError);

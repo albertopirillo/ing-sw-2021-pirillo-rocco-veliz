@@ -242,9 +242,6 @@ public class ClientCLI extends PlayerInterface {
 
     @Override
     public void updateLeaderCards(LeaderUpdate update) {
-        if(update.getErrorMsg().length() > 0){
-            System.out.println("\nError: " + update.getErrorMsg());
-        }
         List<LeaderCard> leaderCards = update.getLeaderMap().get(nickname);
         if(leaderCards.size() > 0){
             System.out.println("\nYou have the following leader cards:");

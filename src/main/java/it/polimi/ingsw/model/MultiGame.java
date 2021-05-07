@@ -182,10 +182,10 @@ public class MultiGame extends Game {
             observer.showFaithTrack(this);
     }
 
-    public void showLeaderCards(String errorMsg){
+    public void showLeaderCards(){
         System.out.println("[MODEL] Notifying listeners of leader cards info request");
         for(ModelObserver observer : observers)
-            observer.showLeaderCards(this, errorMsg);
+            observer.showLeaderCards(this);
     }
 
     public void showClientError(ClientError clientError){

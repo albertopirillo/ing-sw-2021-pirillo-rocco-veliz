@@ -108,7 +108,7 @@ public class SoloGame extends Game {
 
             //TODO: this is breaking tests, player should never have more than 2 leaderCards
             //assign the player the four leader cards he will use for making the selection
-            // player.setLeaderCards(chosenCards);
+            player.setLeaderCards(chosenCards);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -161,8 +161,8 @@ public class SoloGame extends Game {
     }
 
     @Override
-    public void showLeaderCards(String errorMsg) {
-        observer.showLeaderCards(this, errorMsg);
+    public void showLeaderCards() {
+        observer.showLeaderCards(this);
     }
 
     @Override

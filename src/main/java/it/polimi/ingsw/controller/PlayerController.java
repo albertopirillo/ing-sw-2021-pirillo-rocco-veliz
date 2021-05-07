@@ -90,7 +90,8 @@ public class PlayerController {
         try {
             Game game = controller.getGame();
             Player activePlayer = game.getActivePlayer();
-            game.showLeaderCards(activePlayer.useLeader(index, choice));
+            activePlayer.useLeader(index, choice);
+            game.showLeaderCards();
         } catch (TooManyLeaderAbilitiesException | CostNotMatchingException | InvalidLayerNumberException | NoLeaderAbilitiesException | NegativeResAmountException | InvalidKeyException | LeaderAbilityAlreadyActive e) {
             controller.setException(e);
             controller.getGame().showClientError(controller.getClientError());

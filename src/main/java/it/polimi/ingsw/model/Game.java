@@ -85,7 +85,7 @@ public abstract class Game {
     public abstract void updateInitResources(int numPlayer);
     public abstract void updateInitLeaderCards();
     public abstract void showFaithTrack();
-    public abstract void showLeaderCards(String errorMsg);
+    public abstract void showLeaderCards();
     public abstract void showClientError(ClientError clientError);
     public abstract void addObserver(ModelObserver observer);
     public abstract void updateMarketTray();

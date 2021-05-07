@@ -8,6 +8,7 @@ public class MoveBlackCross extends SoloActionToken {
 
     @Override
     public void reveal() {
+        System.out.println("[SOLO_ACTION_TOKEN] Move black cross +2");
         this.getGame().moveBlackCross(2);
     }
 }

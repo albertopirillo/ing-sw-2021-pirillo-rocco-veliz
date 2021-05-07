@@ -59,7 +59,9 @@ public class SetupController {
                     break;
             }
             Game game = controller.getGame();
-            game.nextTurn();
+            if(game.getPlayerAmount() > 1){
+                game.nextTurn();
+            }
             if(game.getPlayerAmount() == 1 || game.getActivePlayer().getNickname().equals(firstPlayer)){
                 game.updateInitLeaderCards();
             } else {
@@ -81,8 +83,10 @@ public class SetupController {
         activePlayer.setLeaderCards(finalLeaderCards);
         Game game = controller.getGame();
         try {
-            game.nextTurn();
-        }catch (NegativeResAmountException | InvalidKeyException e) {
+            if(game.getPlayerAmount() > 1){
+                game.nextTurn();
+            }
+        } catch (NegativeResAmountException | InvalidKeyException e) {
             e.printStackTrace();
         }
         if(game.getActivePlayer().getNickname().equals(firstPlayer)) {

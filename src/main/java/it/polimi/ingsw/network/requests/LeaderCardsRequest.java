@@ -2,10 +2,9 @@ package it.polimi.ingsw.network.requests;
 
 import it.polimi.ingsw.controller.MasterController;
 
-public class FaithTrackRequest extends Request {
-
+public class LeaderCardsRequest extends Request{
     @Override
     public void activateRequest(MasterController masterController) {
-        masterController.getGame().showFaithTrack();
+        masterController.getGame().showLeaderCards();
     }
 }

@@ -65,7 +65,7 @@ public class ClientCLI extends PlayerInterface {
     }
 
     public void getGameSize(){
-        int gameSize = 0;
+        int gameSize;
         do {
             System.out.println("\nHow many players do you want?");
             System.out.print("[MIN: 1, MAX: 4]: ");
@@ -169,42 +169,46 @@ public class ClientCLI extends PlayerInterface {
     }
 
     public void simulateGame() {
-        String selection;
+        int selection;
         do {
             System.out.println("\nIt's your turn!");
             System.out.println("What do you want to do now?");
-            System.out.println("0: Get faith track info");
-            System.out.println("1: Buy from market");
-            System.out.println("2: Buy a development card");
-            System.out.println("3: Activate basic production");
-            System.out.println("4: Activate a development card production");
-            System.out.println("5: Use leader card 1");
-            System.out.println("6: Use leader card 2");
-            System.out.println("7: Discard leader card 1");
-            System.out.println("8: Discard leader card 2");
-            System.out.println("9: End Turn");
+            System.out.println("0: Show faith track");
+            System.out.println("1: Show leader cards");
+            System.out.println("2: Buy from market");
+            System.out.println("3: Buy a development card");
+            System.out.println("4: Activate basic production");
+            System.out.println("5: Activate a development card production");
+            System.out.println("6: Use leader card 1");
+            System.out.println("7: Use leader card 2");
+            System.out.println("8: Discard leader card 1");
+            System.out.println("9: Discard leader card 2");
+            System.out.println("10: End Turn");
             System.out.println();
-            selection = stdin.next();
-        } while (!selection.matches("[0-9]"));
+            selection = stdin.nextInt();
+        } while (selection < 0 || selection > 10);
 
         Request request = null;
         switch(selection) {
-            case "0":
+            case 0:
                 request = new FaithTrackRequest();
                 break;
-            case "5":
+            case 1:
+                request = new LeaderCardsRequest();
+                break;
+            case 6:
                 request = new UseLeaderRequest(0, LeaderAction.USE_ABILITY);
                 break;
-            case "6":
+            case 7:
                 request = new UseLeaderRequest(1, LeaderAction.USE_ABILITY);
                 break;
-            case "7":
+            case 8:
                 request = new UseLeaderRequest(0, LeaderAction.DISCARD);
                 break;
-            case "8": //use leader ability request
+            case 9: //use leader ability request
                 request = new UseLeaderRequest(1, LeaderAction.DISCARD);
                 break;
-            case "9":
+            case 10:
                 request = new EndTurnRequest();
                 break;
             default:

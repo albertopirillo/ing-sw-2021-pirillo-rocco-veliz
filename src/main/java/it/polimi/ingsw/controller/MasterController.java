@@ -60,6 +60,7 @@ public class MasterController {
 
     public void processRequest(Request request) {
         request.activateRequest(this);
+       // this.getGame().updateClientModel();
     }
 
     //Testing
@@ -71,6 +72,6 @@ public class MasterController {
         }
         game.updateMarketTray();
         game.updateMarket();
-        game.updateClientModel();
+        game.notifyEndOfUpdates();
     }
 }

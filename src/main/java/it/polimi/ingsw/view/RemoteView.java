@@ -65,6 +65,7 @@ public class RemoteView extends View {
     public void notifyGameOver(String winner) {
         //TODO: ...
     }
+
     @Override
     public void showClientError(Game game, ClientError clientError) {
         Player activePlayer = game.getActivePlayer();

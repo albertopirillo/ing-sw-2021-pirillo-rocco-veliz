@@ -2,7 +2,6 @@ package it.polimi.ingsw.network.updates;
 
 import it.polimi.ingsw.client.PlayerInterface;
 import it.polimi.ingsw.model.FaithTrack;
-import it.polimi.ingsw.network.updates.ServerUpdate;
 
 import java.util.Map;
 
@@ -16,9 +15,7 @@ public class FaithTrackUpdate extends ServerUpdate {
 
     @Override
     public void update(PlayerInterface playerInterface) {
-        if(getActivePlayer().equals(playerInterface.getNickname())){
-            playerInterface.updateFaithTrack(this);
-        }
+        playerInterface.updateFaithTrack(this);
     }
 
     public Map<String, FaithTrack> getFaithTrackInfoMap(){

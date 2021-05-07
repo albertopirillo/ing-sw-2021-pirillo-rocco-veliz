@@ -23,9 +23,7 @@ public class MarketTrayUpdate extends ServerUpdate {
 
     @Override
     public void update(PlayerInterface playerInterface) {
-        if(getActivePlayer().equals(playerInterface.getNickname())){
-            playerInterface.updateMarketTray(this);
-        }
+        playerInterface.updateMarketTray(this);
     }
 
     @Override

@@ -68,7 +68,7 @@ public class SetupController {
         } catch (NegativeResAmountException | CannotContainFaithException | LayerNotEmptyException | NotEnoughSpaceException | InvalidLayerNumberException | AlreadyInAnotherLayerException | InvalidResourceException | InvalidKeyException e) {
             controller.setException(e);
             controller.getGame().showClientError(controller.getClientError());
-            controller.getGame().updateClientModel();
+            controller.getGame().notifyEndOfUpdates();
         }
     }
 
@@ -88,7 +88,7 @@ public class SetupController {
         if(game.getActivePlayer().getNickname().equals(firstPlayer)) {
             game.updateMarketTray();
             game.updateMarket();
-            game.updateClientModel();
+            game.notifyEndOfUpdates();
         } else {
             game.updateInitLeaderCards();
         }

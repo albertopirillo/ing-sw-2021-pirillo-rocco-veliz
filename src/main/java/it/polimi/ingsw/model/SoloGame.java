@@ -104,7 +104,7 @@ public class SoloGame extends Game {
                 LeaderCard chosenCard = leaderCards.get(id);
                 chosenCards.add(chosenCard);
             }
-
+            //assign the player the four leader cards he will use for making the selection
             player.setLeaderCards(chosenCards);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -141,7 +141,7 @@ public class SoloGame extends Game {
     }
 
     @Override
-    public void updateClientModel() {
+    public void notifyEndOfUpdates() {
         System.out.println("[MODEL] Notifying listeners of board update");
         observer.gameStateChange(this);
     }

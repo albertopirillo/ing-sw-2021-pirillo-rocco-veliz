@@ -81,7 +81,7 @@ public abstract class Game {
     public abstract void nextTurn() throws NegativeResAmountException, InvalidKeyException;
     public abstract void checkEndGame() throws NegativeResAmountException, InvalidKeyException;
     public abstract void startGame();
-    public abstract void updateClientModel();
+    public abstract void notifyEndOfUpdates();
     public abstract void updateInitResources(int numPlayer);
     public abstract void updateInitLeaderCards();
     public abstract void showFaithTrack();

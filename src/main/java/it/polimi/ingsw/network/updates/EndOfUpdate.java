@@ -10,8 +10,6 @@ public class EndOfUpdate extends ServerUpdate {
 
     @Override
     public void update(PlayerInterface playerInterface) {
-        if(getActivePlayer().equals(playerInterface.getNickname())){
-            playerInterface.endOfUpdate();
-        }
+        playerInterface.endOfUpdate();
     }
 }

@@ -25,13 +25,16 @@ class PlayerControllerTest {
         Resource fromDepot = new Resource();
         Resource fromStrongbox = new Resource(1,1,0,0);
 
+        controller.setException(null);
         playerController.basicProduction(ResourceType.COIN, ResourceType.STONE, ResourceType.SERVANT, fromDepot, fromStrongbox);
         assertEquals("The player hasn't got enough Resource to complete the action", controller.getError());
 
+        controller.setException(null);
         activePlayer.getPersonalBoard().getStrongbox().addResources(new Resource(2,2,2,2));
         playerController.basicProduction(ResourceType.SHIELD, ResourceType.STONE, ResourceType.SERVANT, fromDepot, fromStrongbox);
         assertEquals("You did not provide enough resources to complete the action", controller.getError());
 
+        controller.setException(null);
         playerController.basicProduction(ResourceType.COIN, ResourceType.STONE, ResourceType.SERVANT, fromDepot, fromStrongbox);
         assertEquals("Result: OK", controller.getError());
     }
@@ -58,7 +61,7 @@ class PlayerControllerTest {
         activePlayer.getPersonalBoard().getStrongbox().addResources(new Resource(3,3,3,3));
         playerController.extraProduction(AbilityChoice.SECOND, new Resource(), new Resource(), ResourceType.COIN);
         assertEquals("You selected an invalid leader ability", controller.getError());
-
+        controller.setException(null);
         playerController.extraProduction(AbilityChoice.FIRST,
                 new Resource(), new Resource(1,0,1,0), ResourceType.COIN);
         assertEquals("Result: OK", controller.getError());
@@ -84,6 +87,7 @@ class PlayerControllerTest {
 
         ChangeWhiteMarbles changeWhiteMarbles = new ChangeWhiteMarbles(ResourceType.SHIELD);
         changeWhiteMarbles.activate(activePlayer);
+        controller.setException(null);
         playerController.insertMarble(1, AbilityChoice.STANDARD, 1, 0);
         assertEquals("Result: OK", controller.getError());
     }
@@ -162,6 +166,7 @@ class PlayerControllerTest {
         Discount discount = new Discount(ResourceType.COIN, 2);
         discount.activate(activePlayer);
         activePlayer.getPersonalBoard().getStrongbox().addResources(new Resource(0,1,0,0));
+        controller.setException(null);
         playerController.buyDevCard(1, CardColor.BLUE, 0, AbilityChoice.FIRST,
                 new Resource(0,0,0,0),
                 new Resource(0,1,0,0));
@@ -180,7 +185,7 @@ class PlayerControllerTest {
         depot.modifyLayer(3, ResourceType.COIN, 2);
         playerController.reorderDepot(3, 2, 3);
         assertEquals("The player hasn't got enough Resource to complete the action", controller.getError());
-
+        controller.setException(null);
         playerController.reorderDepot(3, 2, 1);
         assertEquals("Result: OK", controller.getError());
     }
@@ -195,10 +200,10 @@ class PlayerControllerTest {
 
         LeaderCard leader = new ResLeaderCard(2, null, new Resource(0,2,3,1));
         activePlayer.addLeaderCard(leader);
-
+        controller.setException(null);
         playerController.useLeader(0, LeaderAction.USE_ABILITY);
         assertEquals("LeaderCard requirements not satisfied", controller.getError());
-
+        controller.setException(null);
         playerController.useLeader(0, LeaderAction.DISCARD);
         assertEquals("Result: OK", controller.getError());
 
@@ -214,6 +219,8 @@ class PlayerControllerTest {
         //player.getPersonalBoard().getStrongbox().addResources(new Resource(0,2,0,0));
         List<Integer> numSlots = new ArrayList<>();
         numSlots.add(1);
+
+        controller.setException(null);
         playerController.activateProduction(null, null, numSlots);
         assertEquals("The slot is empty or the slot number is invalid", controller.getError());
         //Card card = player.getGame().getMarket().getCard(1, CardColor.BLUE);
@@ -224,17 +231,20 @@ class PlayerControllerTest {
         activePlayer.getPersonalBoard().getStrongbox().addResources(new Resource(2,3,0,0));
         assertEquals(activePlayer.getPersonalBoard().getStrongbox().queryAllRes(), new Resource(2, 3, 0, 0));
 
+        controller.setException(null);
         playerController.buyDevCard(1, CardColor.BLUE, 1, AbilityChoice.STANDARD,
                 new Resource(0,0,0,0),
                 new Resource(0,3,0,0));
         assertEquals("Result: OK", controller.getError());
         //This devCard is in slot number 1
+        controller.setException(null);
         playerController.activateProduction(
                 new Resource(0,1,0,0),
                 new Resource(0,3,0,0),
                 numSlots);
         //cost not matching
         assertEquals("The player hasn't got enough Resource to complete the action", controller.getError());
+        controller.setException(null);
         playerController.activateProduction(
                 new Resource(0,0,0,0),
                 new Resource(2,0,0,0),
@@ -252,11 +262,13 @@ class PlayerControllerTest {
         activePlayer.getPersonalBoard().getStrongbox().addResources(new Resource(1,0,4,0));
 
         //test invalid number of slot
+        controller.setException(null);
         playerController.buyDevCard(2, CardColor.GREEN, 2, AbilityChoice.STANDARD,
                 new Resource(0,0,0,0),
                 new Resource(0,0,4,0));
         assertEquals("The slot is empty or the slot number is invalid", controller.getError());
 
+        controller.setException(null);
         playerController.buyDevCard(2, CardColor.GREEN, 1, AbilityChoice.STANDARD,
                 new Resource(0,0,0,0),
                 new Resource(0,0,4,0));
@@ -267,6 +279,7 @@ class PlayerControllerTest {
         assertEquals(activePlayer.getPersonalBoard().getStrongbox().queryAllRes(), new Resource(1, 1, 1, 1));
         assertEquals(0, activePlayer.getPlayerFaith());
 
+        controller.setException(null);
         playerController.activateProduction(
                 new Resource(0,0,0,0),
                 new Resource(1,0,0,0),
@@ -279,6 +292,7 @@ class PlayerControllerTest {
         assertEquals(2, activePlayer.getPlayerFaith());
 
         //Testing num activate slot empty
+        controller.setException(null);
         playerController.activateProduction(
                 new Resource(0,0,0,0),
                 new Resource(1,0,0,0),
@@ -291,15 +305,18 @@ class PlayerControllerTest {
         //          input={{STONE=0, COIN=0, SHIELD=2, SERVANT=0}},
         //          output={{STONE=1, COIN=1, SHIELD=0, SERVANT=1}}}}
         activePlayer.getPersonalBoard().getStrongbox().addResources(new Resource(3,0,2,0));
+        controller.setException(null);
         playerController.buyDevCard(1, CardColor.YELLOW, 0, AbilityChoice.STANDARD,
                 new Resource(0,0,0,0),
                 new Resource(3,0,0,0));
         assertEquals("Result: OK", controller.getError());
+        controller.setException(null);
         playerController.activateProduction(
                 new Resource(0,0,0,0),
                 new Resource(0,0,2,0),
                 new ArrayList<>(Arrays.asList(0,1)));
         assertEquals("You did not provide enough resources to complete the action", controller.getError());
+        controller.setException(null);
         playerController.activateProduction(
                 new Resource(0,0,0,0),
                 new Resource(0,0,2,0),
@@ -317,6 +334,7 @@ class PlayerControllerTest {
         //              input={{STONE=0, COIN=1, SHIELD=0, SERVANT=0}},
         //              output={{STONE=1, COIN=0, SHIELD=1, SERVANT=1}}}}
         activePlayer.getPersonalBoard().getStrongbox().addResources(new Resource(0,0,2,3));
+        controller.setException(null);
         playerController.buyDevCard(1, CardColor.PURPLE, 2, AbilityChoice.STANDARD,
                 new Resource(0,0,0,0),
                 new Resource(0,0,0,3));
@@ -341,6 +359,7 @@ class PlayerControllerTest {
         //        output={{STONE=1, COIN=0, SHIELD=1, SERVANT=1}}}}
 
         //Test not enough Resource in the strongbox
+        controller.setException(null);
         playerController.activateProduction(
                 new Resource(0,0,0,0),
                 new Resource(10,0,10,0),
@@ -348,6 +367,7 @@ class PlayerControllerTest {
         assertEquals("The player hasn't got enough Resource to complete the action", controller.getError());
 
         //Test not enough Resource passed to controller
+        controller.setException(null);
         playerController.activateProduction(
                 new Resource(0,0,0,0),
                 new Resource(0,1,2,0),
@@ -355,6 +375,7 @@ class PlayerControllerTest {
         assertEquals("You did not provide enough resources to complete the action", controller.getError());
 
         //Test correct, passed the correct Resource to controller
+        controller.setException(null);
         playerController.activateProduction(
                 new Resource(0,0,0,0),
                 new Resource(1,1,2,0),

@@ -76,8 +76,7 @@ public class SoloGame extends Game {
             Map<Player, Integer> map = this.computeFinalScore();
             int finalScore = map.get(this.getActivePlayer());
             //TODO: game is over, send score to the View
-        }
-        else {
+        } else {
             //TODO: game is over, tell the View that you loss
         }
     }
@@ -116,9 +115,12 @@ public class SoloGame extends Game {
         this.soloTokens = new LinkedList<>();
         this.soloTokens.add(new MoveBlackCross(this));
         this.soloTokens.add(new MoveAndShuffle(this));
-        for(CardColor color: CardColor.values())
+        for(CardColor color: CardColor.values()){
             this.soloTokens.add(new DiscardDevCards(this, color));
-        if (!testing) shuffleSoloTokens();
+        }
+        if (!testing) {
+            shuffleSoloTokens();
+        }
     }
 
     public void shuffleSoloTokens() {
@@ -165,7 +167,8 @@ public class SoloGame extends Game {
 
     @Override
     public void showClientError(ClientError clientError) {
-
+        System.out.println("[MODEL] Notifying listener of client error");
+        observer.showClientError(this, clientError);
     }
 
     @Override
@@ -175,11 +178,13 @@ public class SoloGame extends Game {
 
     @Override
     public void updateMarketTray() {
-
+        System.out.println("[MODEL] Notifying listener of market tray update");
+        observer.showMarketTray(this);
     }
 
     @Override
     public void updateMarket() {
-
+        System.out.println("[MODEL] Notifying listener of market update");
+        observer.showMarket(this);
     }
 }

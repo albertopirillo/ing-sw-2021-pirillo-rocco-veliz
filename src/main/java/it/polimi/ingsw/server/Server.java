@@ -92,13 +92,7 @@ public class Server implements Runnable {
             game.addObserver(view);
             view.addController(masterController);
             masterController.getSetupController().setupGame(keys, gameSize);
-            System.out.println("[SERVER] Buon divertimento " + nickname);
-            game = masterController.getGame();
-            try {
-                game.nextTurn();
-            } catch (NegativeResAmountException | InvalidKeyException e) {
-                e.printStackTrace();
-            }
+            System.out.println("[SERVER] Starting solo game for player " + nickname);
             sendInitialResources(0, nickname);
         } catch (FullCardDeckException e) {
             e.printStackTrace();

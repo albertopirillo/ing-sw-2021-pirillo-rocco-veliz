@@ -70,11 +70,9 @@ public class ClientCLI extends PlayerInterface {
             System.out.println("\nHow many players do you want?");
             System.out.print("[MIN: 1, MAX: 4]: ");
             gameSize = Integer.parseInt(stdin.nextLine());
-        }while (gameSize < 1 || gameSize > 4);
-
+        } while (gameSize < 1 || gameSize > 4);
         Processable rsp = new GameSizeMessage(nickname, gameSize);
         player.sendMessage(rsp);
-        //return gameSize;
     }
 
     @Override
@@ -85,12 +83,12 @@ public class ClientCLI extends PlayerInterface {
                 break;
             case 1:
             case 2:
-                System.out.println("\nChoose one initial resource");
+                System.out.println("\nChoose one initial resource:");
                 int numRes = getInitialResources();
                 res.put(parseToResourceType(numRes), 1);
                 break;
             case 3:
-                System.out.println("\nChoose two initial resources");
+                System.out.println("\nChoose two initial resources:");
                 int res1 = getInitialResources();
                 int res2 = getInitialResources();
                 res.put(parseToResourceType(res1), 1);
@@ -283,7 +281,7 @@ public class ClientCLI extends PlayerInterface {
 
     @Override
     public void displayError(ErrorUpdate update) {
-        System.out.println(ANSIColor.RED + "Received an error message from the server:" + ANSIColor.RESET);
+        System.out.println(ANSIColor.RED + "\nReceived an error message from the server:" + ANSIColor.RESET);
         System.out.println(ANSIColor.RED + update + ANSIColor.RESET);
         //simulateGame();
     }
@@ -318,7 +316,7 @@ public class ClientCLI extends PlayerInterface {
 
     @Override
     public void updateMarketTray(MarketTrayUpdate update) {
-        System.out.println("Market: ");
+        System.out.println("\nMarket: ");
         System.out.println(update);
         //simulateGame();
     }

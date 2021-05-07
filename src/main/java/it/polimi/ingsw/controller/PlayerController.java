@@ -87,15 +87,16 @@ public class PlayerController {
     }
 
     public void useLeader(int index, LeaderAction choice) {
+        Game game = controller.getGame();
         try {
-            Game game = controller.getGame();
             Player activePlayer = game.getActivePlayer();
             activePlayer.useLeader(index, choice);
             game.showLeaderCards();
         } catch (TooManyLeaderAbilitiesException | CostNotMatchingException | InvalidLayerNumberException | NoLeaderAbilitiesException | NegativeResAmountException | InvalidKeyException | LeaderAbilityAlreadyActive e) {
             controller.setException(e);
-            controller.getGame().showClientError(controller.getClientError());
-            controller.getGame().updateClientModel();
+            ClientError clientError = controller.getClientError();
+            game.showClientError(clientError);
+            game.updateClientModel();
         }
     }
 

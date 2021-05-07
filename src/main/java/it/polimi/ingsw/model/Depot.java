@@ -3,6 +3,7 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.network.DepotSetting;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -142,5 +143,16 @@ public abstract class Depot {
                 p.addPlayerFaith(resource.getTotalAmount());
             }
         }
+    }
+
+    //Converts current depot in List<DepotSetting> to easily serialize it
+    public List<DepotSetting> toDepotSetting() {
+        List<DepotSetting> depotSettings = new ArrayList<>();
+        int layerNum = 1;
+        for(Layer layer: this.mapping.values()) {
+            depotSettings.add(new DepotSetting(layerNum, layer.getResource(), layer.getAmount()));
+            layerNum++;
+        }
+        return depotSettings;
     }
 }

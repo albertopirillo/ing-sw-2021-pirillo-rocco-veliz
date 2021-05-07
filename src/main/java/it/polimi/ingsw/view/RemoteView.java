@@ -1,15 +1,13 @@
 package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.network.DepotSetting;
 import it.polimi.ingsw.network.requests.Request;
 import it.polimi.ingsw.network.updates.*;
 import it.polimi.ingsw.server.Connection;
 import it.polimi.ingsw.server.Server;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class RemoteView extends View {
 
@@ -84,6 +82,37 @@ public class RemoteView extends View {
         Player activePlayer = game.getActivePlayer();
         Market market = game.getMarket();
         ServerUpdate msg = new MarketUpdate(activePlayer.getNickname(), market.getAvailableCards());
+        connection.sendMessage(msg);
+    }
+
+    @Override
+    public void showDevSlots(Game game) {
+        Player activePlayer = game.getActivePlayer();
+        Map<String, List<DevelopmentSlot>> map = new HashMap<>();
+        for(Player p: game.getPlayersList()) {
+            map.put(p.getNickname(), Arrays.asList(p.getPersonalBoard().getDevSlots()));
+        }
+        ServerUpdate msg = new DevSlotsUpdate(activePlayer.getNickname(), map);
+        connection.sendMessage(msg);
+    }
+
+    @Override
+    public void showStorage(Game game) {
+        Player activePlayer = game.getActivePlayer();
+        Map<String, List<DepotSetting>> depotMap = new HashMap<>();
+        Map<String, Resource> strongboxMap = new HashMap<>();
+        for(Player p: game.getPlayersList()) {
+            depotMap.put(p.getNickname(),p.getPersonalBoard().getDepot().toDepotSetting());
+            strongboxMap.put(p.getNickname(), p.getPersonalBoard().getStrongbox().queryAllRes());
+        }
+        ServerUpdate msg = new StorageUpdate(activePlayer.getNickname(), depotMap, strongboxMap);
+        connection.sendMessage(msg);
+    }
+
+    @Override
+    public void showTempRes(Game game, TempResource tempResource) {
+        Player activePlayer = game.getActivePlayer();
+        ServerUpdate msg = new TempResourceUpdate(activePlayer.getNickname(), tempResource.getToHandle());
         connection.sendMessage(msg);
     }
 }

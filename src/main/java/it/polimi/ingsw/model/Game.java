@@ -136,8 +136,7 @@ public abstract class Game {
         for(ModelObserver observer : observers)
             observer.showMarketTray(this);
     }
-    
-/*
+
     public void updateDevSlots() {
         System.out.println("[MODEL] Notifying listeners of development slots update");
         for(ModelObserver observer : observers)
@@ -149,11 +148,16 @@ public abstract class Game {
         for(ModelObserver observer : observers)
             observer.showStorage(this);
     }
-*/
 
     public void updateMarket(){
         System.out.println("[MODEL] Notifying listeners of market update");
         for(ModelObserver observer : observers)
             observer.showMarket(this);
+    }
+
+    public void updateTempResource(TempResource tempResource) {
+        System.out.println("[MODEL] Notifying listeners of temporary resources update");
+        for(ModelObserver observer : observers)
+            observer.showTempRes(this, tempResource);
     }
 }

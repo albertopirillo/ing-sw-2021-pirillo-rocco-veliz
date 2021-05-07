@@ -75,6 +75,9 @@ public class ClientCLITest {
                 CardColor.GREEN,3, prodPower));
 
         DevelopmentSlot slot2 = new DevelopmentSlot();
+        slot2.addCard(new DevelopmentCard(2,
+                new Resource(1,2,3,4),
+                CardColor.PURPLE, 1, prodPower));
 
         DevelopmentSlot slot3 = new DevelopmentSlot();
         slot3.addCard(new DevelopmentCard(3,
@@ -99,4 +102,13 @@ public class ClientCLITest {
         cli.updateDevSlots(update);
     }
 
+    @Test
+    public void devCardTest() {
+        ProductionPower prodPower = new ProductionPower(new Resource(0,1,2,3),
+                new Resource(1,2,3,4));
+
+        System.out.println(new DevelopmentCard(1,
+                new Resource(0, 1, 2, 3),
+                CardColor.GREEN,1, prodPower));
+    }
 }

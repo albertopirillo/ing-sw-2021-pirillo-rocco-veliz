@@ -102,9 +102,14 @@ public class Resource implements Serializable {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("| ");
-        for(ResourceType key: this.map.keySet()){
-            sb.append(key).append("x").append(this.map.get(key)).append(" | ");
+        sb.append(" ");
+        int i = 0;
+        for(ResourceType key: this.map.keySet()) {
+            if (this.map.get(key) != 0) {
+                sb.append(key).append("x").append(this.map.get(key));
+                if (i < this.map.size() - 1) sb.append(", ");
+            }
+            i++;
         }
         return sb.toString();
     }

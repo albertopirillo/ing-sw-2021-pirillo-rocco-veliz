@@ -22,9 +22,7 @@ public class ProductionPower implements Serializable {
 
     @Override
     public String toString() {
-        return "{" +
-                "input=" + input +
-                ", output=" + output +
-                '}';
+        return "\n\t\tInput:  " + input +
+                "\n\t\tOutput: " + output;
     }
 }

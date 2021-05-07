@@ -38,6 +38,10 @@ public class MasterController {
         this.clientError.setException(exception);
     }
 
+    public void resetException() {
+        this.clientError.reset();
+    }
+
     public PlayerController getPlayerController() {
         return playerController;
     }

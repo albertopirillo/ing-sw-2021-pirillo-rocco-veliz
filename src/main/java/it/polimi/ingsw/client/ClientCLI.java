@@ -243,7 +243,6 @@ public class ClientCLI extends PlayerInterface {
         } else {
             System.out.println("\nYou have no more leader cards.");
         }
-        simulateGame();
     }
 
     @Override
@@ -317,7 +316,7 @@ public class ClientCLI extends PlayerInterface {
     @Override
     public void displayError(ErrorUpdate update) {
         System.out.println(ANSIColor.RED + "\nReceived an error message from the server:" + ANSIColor.RESET);
-        System.out.println(ANSIColor.RED + update + ANSIColor.RESET);
+        System.out.println(ANSIColor.RED + update.getClientError().getError() + ANSIColor.RESET);
         //simulateGame();
     }
 

@@ -20,9 +20,4 @@ public class ErrorUpdate extends ServerUpdate {
     public void update(PlayerInterface playerInterface) {
         playerInterface.displayError(this);
     }
-
-    @Override
-    public String toString() {
-        return clientError.getError();
-    }
 }

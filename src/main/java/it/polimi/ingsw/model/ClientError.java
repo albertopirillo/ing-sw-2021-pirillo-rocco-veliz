@@ -14,6 +14,15 @@ public class ClientError implements Serializable {
     }
 
     public String getError() {
+        /*
+        if(this.exception == null){
+            return "Result: OK";
+        } else {
+           String msg =  this.exception.getMessage();
+           this.exception = null;
+           return msg;
+        }
+        */
         return this.exception != null ? this.exception.getMessage() : "Result: OK";
     }
 }

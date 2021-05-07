@@ -57,7 +57,7 @@ public class ClientCLI extends PlayerInterface {
             System.out.print("[MIN: 1, MAX: 4]: ");
             gameSize = Integer.parseInt(stdin.nextLine());
         } while (gameSize < 1 || gameSize > 4);
-        Processable rsp = new GameSizeMessage(nickname, gameSize);
+        Processable rsp = new GameSizeMessage(getNickname(), gameSize);
         getPlayer().sendMessage(rsp);
     }
 

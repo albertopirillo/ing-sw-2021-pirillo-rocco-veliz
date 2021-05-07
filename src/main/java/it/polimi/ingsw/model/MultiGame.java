@@ -18,7 +18,7 @@ import java.util.*;
 
 public class MultiGame extends Game {
 
-    private List<ModelObserver> observers;
+    private final List<ModelObserver> observers;
     private boolean lastTurn;
 
     public MultiGame() throws FullCardDeckException {
@@ -158,7 +158,7 @@ public class MultiGame extends Game {
         return getActivePlayer().getNickname();
     }
 
-    public void updateClientModel() {
+    public void notifyEndOfUpdates() {
         System.out.println("[MODEL] Notifying listeners of simulate game");
         for(ModelObserver observer : observers)
             observer.gameStateChange(this);

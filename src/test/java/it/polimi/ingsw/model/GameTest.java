@@ -91,10 +91,10 @@ class GameTest {
         Resource cost = new Resource(2,2,2,2);
         LeaderCard leader = new ResLeaderCard(5, ability, cost);
         player.addLeaderCard(leader);
-        player.useLeader(0, LeaderAction.USE_ABILITY); //Gives 5 points
+        player.useLeader(4, LeaderAction.USE_ABILITY); //Gives 5 points
 
         Map<Player, Integer> finalScores = game.computeFinalScore();
-        assertEquals(15, finalScores.get(player));
+        assertEquals(17, finalScores.get(player));
     }
 }
 

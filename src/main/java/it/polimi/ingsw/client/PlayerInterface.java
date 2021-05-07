@@ -7,14 +7,33 @@ import java.util.List;
 
 public abstract class PlayerInterface {
 
+    private String nickname;
+    private final Client player;
+
+    public PlayerInterface(Client player) {
+        this.player = player;
+    }
+
+    public Client getPlayer() {
+        return player;
+    }
+    public String getNickname() {
+        return nickname;
+    }
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
     public void endOfUpdate() {
         //Call Client method to make requests;
         simulateGame();
     }
 
-    public abstract void readUpdate(ServerUpdate update);
-    public abstract void setNickname(String nickname);
-    public abstract String getNickname();
+    public void readUpdate(ServerUpdate updateMessage) {
+        if (updateMessage.getActivePlayer().equals(this.nickname))
+            updateMessage.update(this);
+    }
+
     public abstract String chooseNickname();
     public abstract void getGameSize();
     public abstract void setup();

@@ -12,24 +12,10 @@ import java.util.*;
 
 public class ClientCLI extends PlayerInterface {
     private final Scanner stdin;
-    private String nickname;
-    private final Client player;
 
     public ClientCLI(Client player){
-        this.player = player;
+        super(player);
         this.stdin = new Scanner(System.in);
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public String getNickname(){
-        return this.nickname;
-    }
-
-    public void readUpdate(ServerUpdate updateMessage) {
-        updateMessage.update(this);
     }
 
     public void setup(){
@@ -72,8 +58,8 @@ public class ClientCLI extends PlayerInterface {
             gameSize = Integer.parseInt(stdin.nextLine());
         }while (gameSize < 1 || gameSize > 4);
 
-        Processable rsp = new GameSizeMessage(nickname, gameSize);
-        player.sendMessage(rsp);
+        Processable rsp = new GameSizeMessage(getNickname(), gameSize);
+        getPlayer().sendMessage(rsp);
         //return gameSize;
     }
 
@@ -106,8 +92,8 @@ public class ClientCLI extends PlayerInterface {
         }
         InitialResRequest request = new InitialResRequest(res);
         request.setNumPlayer(numPlayer);
-        request.setPlayer(nickname);
-        player.sendMessage(request);
+        request.setPlayer(getNickname());
+        getPlayer().sendMessage(request);
     }
 
     public int getInitialResources(){
@@ -131,8 +117,8 @@ public class ClientCLI extends PlayerInterface {
         int num1 = getInitialLeaderCards(-1);
         int num2 = getInitialLeaderCards(num1);
         ChooseLeaderRequest request = new ChooseLeaderRequest(num1, num2);
-        request.setPlayer(nickname);
-        player.sendMessage(request);
+        request.setPlayer(getNickname());
+        getPlayer().sendMessage(request);
     }
 
     public int getInitialLeaderCards(int exclude){
@@ -215,7 +201,7 @@ public class ClientCLI extends PlayerInterface {
                 break;
         }
         if(request != null){
-            player.sendMessage(request);
+            getPlayer().sendMessage(request);
         } else {
             simulateGame();
         }
@@ -246,7 +232,7 @@ public class ClientCLI extends PlayerInterface {
 
     @Override
     public void updateLeaderCards(LeaderUpdate update) {
-        List<LeaderCard> leaderCards = update.getLeaderMap().get(nickname);
+        List<LeaderCard> leaderCards = update.getLeaderMap().get(getNickname());
         if(leaderCards.size() > 0){
             System.out.println("\nYou have the following leader cards:");
             int index = 0;

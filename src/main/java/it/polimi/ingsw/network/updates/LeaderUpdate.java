@@ -21,8 +21,6 @@ public class LeaderUpdate extends ServerUpdate {
 
     @Override
     public void update(PlayerInterface playerInterface) {
-        if(getActivePlayer().equals(playerInterface.getNickname())){
-            playerInterface.updateLeaderCards(this);
-        }
+        playerInterface.updateLeaderCards(this);
     }
 }

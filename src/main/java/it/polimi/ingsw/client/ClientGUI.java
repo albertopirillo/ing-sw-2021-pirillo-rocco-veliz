@@ -7,19 +7,8 @@ import java.util.List;
 
 public class ClientGUI extends PlayerInterface {
 
-    @Override
-    public void readUpdate(ServerUpdate update) {
-
-    }
-
-    @Override
-    public void setNickname(String nickname) {
-
-    }
-
-    @Override
-    public String getNickname() {
-        return null;
+    public ClientGUI(Client player) {
+        super(player);
     }
 
     @Override

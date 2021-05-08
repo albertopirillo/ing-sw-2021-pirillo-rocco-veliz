@@ -1,0 +1,8 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="2 Players Game" type="CompoundRunConfigurationType">
+    <toRun name="ClientMain2" type="Application" />
+    <toRun name="ServerMain" type="Application" />
+    <toRun name="ClientMain1" type="Application" />
+    <method v="2" />
+  </configuration>
+</component>

@@ -22,18 +22,13 @@ public class Discount extends LeaderAbility implements Serializable {
         return amount;
     }
 
-    @Override
-    public LeaderAbilityType getLeaderAbilityType() {
-        return LeaderAbilityType.DISCOUNT;
-    }
-
     public void activate(Player player) throws TooManyLeaderAbilitiesException {
         player.addDevCardsStrategy(this);
     }
 
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        sb.append("\n\t\tType: ").append(getLeaderAbilityType().toString());
+        sb.append("\n\t\tType: ").append("DISCOUNT");
         sb.append("\n\t\tResource: ").append(resource.toString());
         return sb.toString();
     }

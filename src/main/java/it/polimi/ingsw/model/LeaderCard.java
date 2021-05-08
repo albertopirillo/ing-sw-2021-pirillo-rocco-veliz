@@ -8,7 +8,7 @@ import java.io.Serializable;
 public abstract class LeaderCard extends Card implements Serializable {
 
     private final int id;
-    private String img = null;
+    private final String img ;
     private final LeaderAbility specialAbility;
 
     private boolean isActive;
@@ -17,7 +17,7 @@ public abstract class LeaderCard extends Card implements Serializable {
     public LeaderCard(int id, String img, int victoryPoints, LeaderAbility specialAbility) {
         super(victoryPoints);
         this.id = id;
-        this.img = new String(img);
+        this.img = img;
         this.isActive = false;
         this.specialAbility = specialAbility;
     }
@@ -45,8 +45,6 @@ public abstract class LeaderCard extends Card implements Serializable {
     public String getImg(){
         return this.img;
     }
-
-    public abstract LeaderCardType getLeaderCardType();
 
     public LeaderAbility getSpecialAbility() {
         return specialAbility;

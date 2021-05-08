@@ -20,11 +20,6 @@ public class ResLeaderCard extends LeaderCard implements Serializable {
         this.cost = cost;
     }
 
-    @Override
-    public LeaderCardType getLeaderCardType() {
-        return LeaderCardType.RES;
-    }
-
     public boolean canBeActivated(Player player) throws NegativeResAmountException, InvalidKeyException {
         return player.getAllResources().compare(this.cost);
     }

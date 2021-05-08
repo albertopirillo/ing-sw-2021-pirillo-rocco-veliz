@@ -18,18 +18,13 @@ public class ExtraProduction extends LeaderAbility implements Serializable {
         return production;
     }
 
-    @Override
-    public LeaderAbilityType getLeaderAbilityType() {
-        return LeaderAbilityType.PRODUCTION;
-    }
-
     public void activate(Player player) throws TooManyLeaderAbilitiesException {
         player.addProductionStrategy(this);
     }
 
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        sb.append("\n\t\tType: ").append(getLeaderAbilityType().toString());
+        sb.append("\n\t\tType: ").append("PRODUCTION");
         sb.append("\n\t\tInput: ").append(production.getInput().toString());
         sb.append("\n\t\tOutput: ").append(production.getOutput().toString());
         return sb.toString();

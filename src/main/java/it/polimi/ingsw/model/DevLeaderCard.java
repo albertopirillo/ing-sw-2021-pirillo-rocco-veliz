@@ -17,11 +17,6 @@ public class DevLeaderCard extends LeaderCard implements Serializable {
         this.requires = requires;
     }
 
-    @Override
-    public LeaderCardType getLeaderCardType() {
-        return LeaderCardType.DEV;
-    }
-
     public List<LeaderDevCost> getRequires() {
         return requires;
     }

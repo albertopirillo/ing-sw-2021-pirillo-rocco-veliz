@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.*;
+import it.polimi.ingsw.network.DepotSetting;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -225,5 +226,41 @@ public class ConcreteDepotTest {
         assertEquals(0, player1.getPlayerFaith());
         assertEquals(4, player2.getPlayerFaith());
         assertEquals(4, player3.getPlayerFaith());
+    }
+
+    @Test
+    public void toDepotSettingTest() throws InvalidResourceException, LayerNotEmptyException, NotEnoughSpaceException, InvalidLayerNumberException, CannotContainFaithException, AlreadyInAnotherLayerException, NegativeResAmountException {
+        Depot depot = new ConcreteDepot();
+        depot.modifyLayer(1, ResourceType.SERVANT, 1);
+        depot.modifyLayer(3, ResourceType.SHIELD, 2);
+        List<DepotSetting> settings = depot.toDepotSetting();
+
+        assertEquals(1, settings.get(0).getLayerNumber());
+        assertEquals(2, settings.get(1).getLayerNumber());
+        assertEquals(3, settings.get(2).getLayerNumber());
+        assertEquals(1, settings.get(0).getAmount());
+        assertEquals(0, settings.get(1).getAmount());
+        assertEquals(2, settings.get(2).getAmount());
+        assertEquals(ResourceType.SERVANT, settings.get(0).getResType());
+        assertNull(settings.get(1).getResType());
+        assertEquals(ResourceType.SHIELD, settings.get(2).getResType());
+
+        ExtraSlot extraSlot = new ExtraSlot(ResourceType.COIN);
+        depot = new ConcreteDepotDecorator(depot, extraSlot);
+        depot.modifyLayer(4, ResourceType.COIN, 2);
+        settings = depot.toDepotSetting();
+
+        assertEquals(1, settings.get(0).getLayerNumber());
+        assertEquals(2, settings.get(1).getLayerNumber());
+        assertEquals(3, settings.get(2).getLayerNumber());
+        assertEquals(4, settings.get(3).getLayerNumber());
+        assertEquals(1, settings.get(0).getAmount());
+        assertEquals(0, settings.get(1).getAmount());
+        assertEquals(2, settings.get(2).getAmount());
+        assertEquals(2, settings.get(3).getAmount());
+        assertEquals(ResourceType.SERVANT, settings.get(0).getResType());
+        assertNull(settings.get(1).getResType());
+        assertEquals(ResourceType.SHIELD, settings.get(2).getResType());
+        assertEquals(ResourceType.COIN, settings.get(3).getResType());
     }
 }

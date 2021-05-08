@@ -146,6 +146,7 @@ public class MultiGame extends Game {
     public String giveInkwell() {
         //First player is chosen randomly
         int numPlayer = new Random().nextInt(this.getPlayerAmount());
+        //numPlayer = 0; //uncomment to disable randomization
         Player firstPlayer = this.getPlayersList().get(numPlayer);
         firstPlayer.setInkwell(true);
         this.setActivePlayer(firstPlayer);

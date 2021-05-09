@@ -55,7 +55,11 @@ public class ClientCLI extends PlayerInterface {
         do {
             System.out.println("\nHow many players do you want?");
             System.out.print("[MIN: 1, MAX: 4]: ");
-            gameSize = Integer.parseInt(stdin.nextLine());
+            try {
+                gameSize = Integer.parseInt(stdin.nextLine());
+            } catch(Exception e){
+                gameSize = -1;
+            }
         } while (gameSize < 1 || gameSize > 4);
         Processable rsp = new GameSizeMessage(getNickname(), gameSize);
         getPlayer().sendMessage(rsp);
@@ -101,7 +105,11 @@ public class ClientCLI extends PlayerInterface {
             System.out.println("2: COIN");
             System.out.println("3: SHIELD");
             System.out.println("4: SERVANT");
-            selection = stdin.nextInt();
+            try {
+                selection = Integer.parseInt(stdin.nextLine());
+            } catch(Exception e){
+                selection = -1;
+            }
         } while (selection<1 || selection>4);
         return selection;
     }
@@ -140,7 +148,11 @@ public class ClientCLI extends PlayerInterface {
         int selection;
         do {
             System.out.println(sb);
-            selection = stdin.nextInt();
+            try {
+                selection = Integer.parseInt(stdin.nextLine());
+            } catch(Exception e){
+                selection = -1;
+            }
         } while (!list.contains(selection));
         return selection;
     }
@@ -173,7 +185,11 @@ public class ClientCLI extends PlayerInterface {
             System.out.println("9: Discard leader card 2");
             System.out.println("10: End Turn");
             System.out.println();
-            selection = stdin.nextInt();
+            try {
+                selection = Integer.parseInt(stdin.nextLine());
+            } catch(Exception e){
+                selection = -1;
+            }
         } while (selection < 0 || selection > 10);
 
         Request request = null;

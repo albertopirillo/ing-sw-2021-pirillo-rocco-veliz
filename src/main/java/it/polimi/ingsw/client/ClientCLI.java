@@ -95,11 +95,15 @@ public class ClientCLI extends PlayerInterface {
     }
 
     public int getInitialResources(){
-        System.out.println("1: STONE");
-        System.out.println("2: COIN");
-        System.out.println("3: SHIELD");
-        System.out.println("4: SERVANT");
-        return stdin.nextInt();
+        int selection;
+        do {
+            System.out.println("1: STONE");
+            System.out.println("2: COIN");
+            System.out.println("3: SHIELD");
+            System.out.println("4: SERVANT");
+            selection = stdin.nextInt();
+        } while (selection<1 || selection>4);
+        return selection;
     }
 
     @Override

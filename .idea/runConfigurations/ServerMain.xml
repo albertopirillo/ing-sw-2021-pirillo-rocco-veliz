@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="ServerMain" type="Application" factoryName="Application" nameIsGenerated="true">
+  <configuration default="false" name="ServerMain" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.network.ServerMain" />
     <module name="Progetto_ING_SOFT" />
     <extension name="coverage">

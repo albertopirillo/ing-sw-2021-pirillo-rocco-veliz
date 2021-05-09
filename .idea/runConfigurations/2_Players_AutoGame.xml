@@ -1,8 +1,8 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="2 Players AutoGame" type="CompoundRunConfigurationType">
+    <toRun name="ServerMain" type="Application" />
     <toRun name="AutoClient1" type="Application" />
     <toRun name="AutoClient2" type="Application" />
-    <toRun name="ServerMain" type="Application" />
     <method v="2" />
   </configuration>
 </component>

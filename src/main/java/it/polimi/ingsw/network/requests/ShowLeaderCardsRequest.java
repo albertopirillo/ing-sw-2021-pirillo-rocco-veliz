@@ -2,9 +2,11 @@ package it.polimi.ingsw.network.requests;
 
 import it.polimi.ingsw.controller.MasterController;
 
-public class QuitGameRequest extends Request{
+public class ShowLeaderCardsRequest extends Request{
+
     @Override
     public void activateRequest(MasterController masterController) {
-        masterController.getGame().quitGame();
+        masterController.getGame().updateLeaderCards();
+        masterController.getGame().notifyEndOfUpdates();
     }
 }

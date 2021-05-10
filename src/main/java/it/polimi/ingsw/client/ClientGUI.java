@@ -67,11 +67,6 @@ public class ClientGUI extends PlayerInterface {
     }
 
     @Override
-    public void updatePlayer(PlayerUpdate update) {
-
-    }
-
-    @Override
     public void updateFaithTrack(FaithTrackUpdate faithTrackUpdate) {
 
     }

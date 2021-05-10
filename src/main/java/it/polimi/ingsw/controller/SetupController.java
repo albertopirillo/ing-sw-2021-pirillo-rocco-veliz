@@ -69,7 +69,7 @@ public class SetupController {
             }
         } catch (NegativeResAmountException | CannotContainFaithException | LayerNotEmptyException | NotEnoughSpaceException | InvalidLayerNumberException | AlreadyInAnotherLayerException | InvalidResourceException | InvalidKeyException e) {
             controller.setException(e);
-            controller.getGame().showClientError(controller.getClientError());
+            controller.getGame().updateClientError(controller.getClientError());
             controller.getGame().notifyEndOfUpdates();
         }
     }

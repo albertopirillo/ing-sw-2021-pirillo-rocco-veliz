@@ -37,11 +37,9 @@ public class ClientCLI extends PlayerInterface {
 
         do {
             System.out.println("\nChoose your username (symbols are not allowed): ");
-
             if (stdin.hasNextLine()){
                 nickname = stdin.nextLine();
             }
-
             if (nickname.equals("")){
                 System.out.println("Please choose a valid username" );
             }
@@ -174,65 +172,96 @@ public class ClientCLI extends PlayerInterface {
         do {
             System.out.println("\nIt's your turn!");
             System.out.println("What do you want to do now?");
-            System.out.println("0: Show faith track");
-            System.out.println("1: Show market tray");
+            System.out.println("1: Show faith track");
             System.out.println("2: Show depot and strongbox");
             System.out.println("3: Show leader cards");
             System.out.println("4: Show pending resources from the Market");
-            System.out.println("5: Buy from market");
-            System.out.println("6: Buy a development card");
-            System.out.println("7: Activate basic production");
-            System.out.println("8: Activate a development card production");
-            System.out.println("9: Use leader card 1");
-            System.out.println("10: Use leader card 2");
-            System.out.println("11: Discard leader card 1");
-            System.out.println("12: Discard leader card 2");
-            System.out.println("13: End Turn");
-            System.out.println("14: Quit Game");
+            System.out.println("5: Show market");
+            System.out.println("6: Show market tray");
+            System.out.println("7: Show Development Slots");
+            System.out.println("8: Buy from market");
+            System.out.println("9: Buy a development card");
+            System.out.println("10: Activate basic production");
+            System.out.println("11: Activate extra production");
+            System.out.println("12: Activate a development card production");
+            System.out.println("13: Use leader card 1");
+            System.out.println("14: Use leader card 2");
+            System.out.println("15: Discard leader card 1");
+            System.out.println("16: Discard leader card 2");
+            System.out.println("17: Reorder depot");
+            System.out.println("18: Place pending resources from the Market");
+            System.out.println("19: End Turn");
+            System.out.println("20: Quit Game");
             System.out.println();
             try {
                 selection = Integer.parseInt(stdin.nextLine());
             } catch(Exception e){
                 selection = -1;
+                System.out.println("Invalid selection");
             }
-        } while (selection < 0 || selection > 14);
+        } while (selection < 1 || selection > 20);
 
         Request request = null;
         switch(selection) {
-            case 0:
-                request = new FaithTrackRequest();
-                break;
             case 1:
-                request = new MarketTrayRequest();
+                request = new ShowFaithTrackRequest();
                 break;
             case 2:
-                request = new ShowStoragesRequest(this.getNickname());
+                request = new ShowStoragesRequest();
                 break;
             case 3:
-                request = new LeaderCardsRequest();
+                request = new ShowLeaderCardsRequest();
                 break;
             case 4:
                 request = new ShowTempResRequest();
                 break;
+            case 5:
+                request = new ShowMarketRequest();
+                break;
+            case 6:
+                request = new ShowMarketTrayRequest();
+                break;
+            case 7:
+                request = new ShowDevSlotsRequest();
+                break;
+            case 8:
+                //request = new InsertMarbleRequest(0, AbilityChoice.STANDARD, 0,0); @Aldair
+                break;
             case 9:
-                request = new UseLeaderRequest(0, LeaderAction.USE_ABILITY);
+                //request = new BuyDevCardRequest(); @Aldair
                 break;
             case 10:
-                request = new UseLeaderRequest(1, LeaderAction.USE_ABILITY);
+                //request = new BasicProductionRequest(); @Riccardo
                 break;
             case 11:
-                request = new UseLeaderRequest(0, LeaderAction.DISCARD);
+                //request = new ExtraProductionRequest(); @Riccardo
                 break;
             case 12:
-                request = new UseLeaderRequest(1, LeaderAction.DISCARD);
+                //request = new DevProductionRequest(); @Riccardo
                 break;
             case 13:
-                request = new EndTurnRequest();
+                request = new UseLeaderRequest(0, LeaderAction.USE_ABILITY);
                 break;
             case 14:
-                request = new QuitGameRequest();
+                request = new UseLeaderRequest(1, LeaderAction.USE_ABILITY);
                 break;
-            default:
+            case 15:
+                request = new UseLeaderRequest(0, LeaderAction.DISCARD);
+                break;
+            case 16:
+                request = new UseLeaderRequest(1, LeaderAction.DISCARD);
+                break;
+            case 17:
+                //request = new ReorderDepotRequest(); @Alberto
+                break;
+            case 18:
+                //request = new PlaceResourceRequest(); @Alberto
+                break;
+            case 19:
+                request = new EndTurnRequest();
+                break;
+            case 20:
+                request = new QuitGameRequest();
                 break;
         }
         if(request != null){
@@ -248,7 +277,7 @@ public class ClientCLI extends PlayerInterface {
             System.out.println("Resources obtained from the Market that need to be placed: ");
             System.out.println(update.getResource());
         }
-        else System.out.println("There are no resources that need to be placed");
+        else System.out.println(ANSIColor.RED + "There are no resources that need to be placed" + ANSIColor.RESET);
     }
 
     @Override
@@ -267,7 +296,6 @@ public class ClientCLI extends PlayerInterface {
             if(strongboxMap.get(playerNick).getTotalAmount() == 0) System.out.println("Empty");
             else System.out.println("\n\t" + strongboxMap.get(playerNick) + "\n");
         }
-
     }
 
     @Override
@@ -290,7 +318,6 @@ public class ClientCLI extends PlayerInterface {
     @Override
     public void updateDevSlots(DevSlotsUpdate update) {
         Map<String, List<DevelopmentSlot>> devSlotList = update.getDevSlotMap();
-
         for(String playerNick: devSlotList.keySet()) {
             System.out.println("Showing " + playerNick + "'s development slots:");
             int slotNumber = 1;
@@ -302,10 +329,9 @@ public class ClientCLI extends PlayerInterface {
                 }
                 slotNumber++;
             }
-            System.out.println();
+            System.out.println("\n");
         }
     }
-
 
     public void updateDevSlotsPretty(DevSlotsUpdate update) {
         Map<String, List<DevelopmentSlot>> devSlotList = update.getDevSlotMap();
@@ -362,11 +388,6 @@ public class ClientCLI extends PlayerInterface {
     }
 
     @Override
-    public void updatePlayer(PlayerUpdate update) {
-        //TODO: handle this type of update, also in the Controller and the RemoteView
-    }
-
-    @Override
     public void updateFaithTrack(FaithTrackUpdate faithTrackUpdate) {
         Map<String, FaithTrack> map = faithTrackUpdate.getFaithTrackInfoMap();
         System.out.println("\nFaith track information: ");
@@ -390,6 +411,6 @@ public class ClientCLI extends PlayerInterface {
     @Override
     public void updateMarketTray(MarketTrayUpdate update) {
         System.out.println("\nMarket: ");
-        System.out.println(update.toString());
+        System.out.println(update);
     }
 }

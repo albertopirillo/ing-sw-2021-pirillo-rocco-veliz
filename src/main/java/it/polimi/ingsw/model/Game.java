@@ -55,7 +55,7 @@ public abstract class Game {
 
 
     //Shared methods
-    public Player getPlayer(String nickname){
+    public Player getPlayerFromNick(String nickname){
         for(Player player : playersList){
             if(player.getNickname().equals(nickname)) return player;
         }
@@ -132,28 +132,22 @@ public abstract class Game {
     public void updateInitLeaderCards(){
         //System.out.println("[MODEL] Notifying listeners of players init leaders cards update");
         for(ModelObserver observer : observers)
-            observer.notifyInitLeaderCards(this);
+            observer.showInitLeaderCards(this);
     }
 
-    public void showFaithTrack(){
+    public void updateFaithTrack(){
         //System.out.println("[MODEL] Notifying listeners of faith track info request");
         for(ModelObserver observer : observers)
             observer.showFaithTrack(this);
     }
 
-    public void showLeaderCards(){
+    public void updateLeaderCards(){
         //System.out.println("[MODEL] Notifying listeners of leader cards info request");
         for(ModelObserver observer : observers)
             observer.showLeaderCards(this);
     }
 
-    public void showMarketTray() {
-        //System.out.println("[MODEL] Notifying listeners of leader cards info request");
-        for(ModelObserver observer : observers)
-            observer.showMarketTray(this);
-    }
-
-    public void showClientError(ClientError clientError){
+    public void updateClientError(ClientError clientError){
         //System.out.println("[MODEL] Notifying listeners of client error");
         for(ModelObserver observer : observers)
             observer.showClientError(this, clientError);
@@ -174,13 +168,7 @@ public abstract class Game {
     public void updateStorages() {
         //System.out.println("[MODEL] Notifying listeners of storage update");
         for(ModelObserver observer : observers)
-            observer.updateStorages(this);
-    }
-
-    public void showStorages(String playerNick) {
-        //System.out.println("[MODEL] Notifying listeners of storage info request");
-        for(ModelObserver observer : observers)
-            observer.showStorages(this, playerNick);
+            observer.showStorages(this);
     }
 
     public void updateMarket(){
@@ -189,7 +177,7 @@ public abstract class Game {
             observer.showMarket(this);
     }
 
-    public void showTempRes() {
+    public void updateTempRes() {
         //System.out.println("[MODEL] Notifying listeners of temporary resources update");
         for(ModelObserver observer : observers)
             observer.showTempRes(this);

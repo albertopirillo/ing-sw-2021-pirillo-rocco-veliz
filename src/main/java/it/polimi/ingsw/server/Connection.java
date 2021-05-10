@@ -26,7 +26,7 @@ public class Connection implements Runnable {
         this.socket = socket;
         this.server = server;
         this.active = true;
-        System.out.println("[SERVER] Connessione stabilita con un client");
+        System.out.println("[SERVER] Client connection established.");
 
         try {
             synchronized (inLock) {
@@ -53,7 +53,9 @@ public class Connection implements Runnable {
         if (isActive()) {
             try {
                 synchronized (outLock) {
+                    socketOut.reset();
                     socketOut.writeObject(message);
+                    System.out.println("[CONNECTION] Sent message " + message.getClass().getSimpleName());
                     socketOut.flush();
                 }
             } catch (IOException ex) {
@@ -86,17 +88,12 @@ public class Connection implements Runnable {
 
     @Override
     public void run() {
-        //String nickname;
-        //Message msg = (Message) socketIn.readObject();
-        //server.handleInput(msg, this);
         while (isActive()) {
             try {
                 synchronized (inLock) {
                     Processable request = (Processable) socketIn.readObject();
+                    System.out.println("\n[CONNECTION] Received request " + request.getClass().getSimpleName());
                     request.process(server, this);
-                    /*Message message = (Message) socketIn.readObject();
-                    server.handleMessage(message);
-                    sendMessage(message);*/
                 }
             } catch (IOException | ClassNotFoundException e) {
                 System.out.println(e.getMessage());

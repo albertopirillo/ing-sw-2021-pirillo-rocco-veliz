@@ -16,7 +16,7 @@ public class RemoteView extends View {
     }
 
     public void processRequest(Request request){
-        System.out.println("[REMOTEVIEW] Messaggio ricevuto from player " + player);
+        System.out.println("[REMOTEVIEW] from player " + player);
         super.processRequest(request);
     }
 

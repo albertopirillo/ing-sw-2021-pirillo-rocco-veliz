@@ -263,7 +263,6 @@ public class ClientCLI extends PlayerInterface {
         } else {
             System.out.println("\nYou have no more leader cards.");
         }
-        //simulateGame()
     }
 
     @Override
@@ -338,7 +337,6 @@ public class ClientCLI extends PlayerInterface {
     public void displayError(ErrorUpdate update) {
         System.out.println(ANSIColor.RED + "\nReceived an error message from the server:" + ANSIColor.RESET);
         System.out.println(ANSIColor.RED + update.getClientError().getError() + ANSIColor.RESET);
-        //simulateGame();
     }
 
     @Override
@@ -354,7 +352,6 @@ public class ClientCLI extends PlayerInterface {
             System.out.println("\nPlayer: " + entry.getKey());
             System.out.println(entry.getValue().toString());
         }
-        simulateGame();
     }
 
     @Override
@@ -366,13 +363,11 @@ public class ClientCLI extends PlayerInterface {
             System.out.println(devCard);
         }
         System.out.println();
-        //simulateGame();
     }
 
     @Override
     public void updateMarketTray(MarketTrayUpdate update) {
         System.out.println("\nMarket: ");
         System.out.println(update);
-        //simulateGame();
     }
 }

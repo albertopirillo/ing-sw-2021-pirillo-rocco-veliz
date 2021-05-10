@@ -114,7 +114,9 @@ public class PlayerController {
             Player activePlayer = game.getActivePlayer();
             activePlayer.useLeader(index, choice);
             game.showLeaderCards();
-            if (choice == LeaderAction.DISCARD) game.showFaithTrack();
+            if (choice == LeaderAction.DISCARD) {
+                game.showFaithTrack();
+            }
             controller.resetException();
         } catch (TooManyLeaderAbilitiesException | CostNotMatchingException | InvalidLayerNumberException | NoLeaderAbilitiesException | NegativeResAmountException | InvalidKeyException | LeaderAbilityAlreadyActive e) {
             controller.setException(e);
@@ -122,6 +124,18 @@ public class PlayerController {
         } finally {
             game.notifyEndOfUpdates();
         }
+    }
+
+    public void showFaithTrack(){
+        Game game = controller.getGame();
+        game.showFaithTrack();
+        game.notifyEndOfUpdates();
+    }
+
+    public void showLeaderCards(){
+        Game game = controller.getGame();
+        game.showLeaderCards();
+        game.notifyEndOfUpdates();
     }
 
     public void reorderDepot(int fromLayer, int toLayer, int amount) {

@@ -79,7 +79,7 @@ public class Connection implements Runnable {
 
     }
 
-    private void close(){
+    public void close(){
         closeConnection();
         System.out.println("Deregistering client...");
         Thread.currentThread().interrupt();

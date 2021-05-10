@@ -19,6 +19,10 @@ public abstract class View implements ModelObserver {
         this.player = player;
     }
 
+    public String getPlayer(){
+        return player;
+    }
+
     public MasterController getMasterController() {
         return masterController;
     }
@@ -29,6 +33,7 @@ public abstract class View implements ModelObserver {
         this.masterController.processRequest(request);
     }
 
+    public abstract void quitGame();
     public abstract void gameStateChange(Game game);
     public abstract void showFaithTrack(Game game);
     public abstract void showLeaderCards(Game game);

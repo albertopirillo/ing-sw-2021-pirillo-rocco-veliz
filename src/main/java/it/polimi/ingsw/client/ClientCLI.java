@@ -186,13 +186,14 @@ public class ClientCLI extends PlayerInterface {
             System.out.println("10: Discard leader card 1");
             System.out.println("11: Discard leader card 2");
             System.out.println("12: End Turn");
+            System.out.println("13: Quit Game");
             System.out.println();
             try {
                 selection = Integer.parseInt(stdin.nextLine());
             } catch(Exception e){
                 selection = -1;
             }
-        } while (selection < 0 || selection > 12);
+        } while (selection < 0 || selection > 13);
 
         Request request = null;
         switch(selection) {
@@ -222,6 +223,9 @@ public class ClientCLI extends PlayerInterface {
                 break;
             case 12:
                 request = new EndTurnRequest();
+                break;
+            case 13:
+                request = new QuitGameRequest();
                 break;
             default:
                 break;

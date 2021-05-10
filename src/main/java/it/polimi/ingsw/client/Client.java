@@ -37,7 +37,6 @@ public class Client implements Runnable{
             try {
                 msg = receiveMessage();
             } catch (IOException e) {
-                e.printStackTrace();
                 return;
             }
             cli.readUpdate(msg);
@@ -73,6 +72,9 @@ public class Client implements Runnable{
             //System.out.println("[CLIENT] Receiving message " + message.getClass().getSimpleName());
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+        } catch(IOException e){
+            System.out.println("\nThe connection with the server was interrupted.");
+            throw e;
         }
         return message;
     }

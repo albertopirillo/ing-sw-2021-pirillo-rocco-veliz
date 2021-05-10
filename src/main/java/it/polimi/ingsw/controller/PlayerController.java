@@ -95,7 +95,9 @@ public class PlayerController {
 
     public void endTurn() {
         try { //Check exception and resource handling
-            if (!controller.getResourceController().getTempRes().isEmpty()) throw new CannotEndTurnException("There are still resources to be placed");
+            if (!controller.getResourceController().getTempRes().isEmpty()) {
+                throw new CannotEndTurnException("There are still resources to be placed");
+            }
             controller.getGame().nextTurn();
             controller.getGame().updateMarketTray();
             controller.getGame().updateMarket();
@@ -136,6 +138,11 @@ public class PlayerController {
         Game game = controller.getGame();
         game.showLeaderCards();
         game.notifyEndOfUpdates();
+    }
+
+    public void quitGame(){
+        Game game = controller.getGame();
+        game.quitGame();
     }
 
     public void reorderDepot(int fromLayer, int toLayer, int amount) {

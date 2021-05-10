@@ -23,6 +23,7 @@ public class SetupController {
         List <Player> players = new ArrayList<>();
         for (String nickname : nicknames){
             Player player = new Player(nickname);
+            player.setGame(this.controller.getGame());
             players.add(player);
         }
 
@@ -90,8 +91,8 @@ public class SetupController {
             e.printStackTrace();
         }
         if(game.getActivePlayer().getNickname().equals(firstPlayer)) {
-            game.updateMarketTray();
-            game.updateMarket();
+            //game.updateMarketTray();
+            //game.updateMarket();
             game.notifyEndOfUpdates();
         } else {
             game.updateInitLeaderCards();

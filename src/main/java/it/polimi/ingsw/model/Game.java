@@ -147,6 +147,12 @@ public abstract class Game {
             observer.showLeaderCards(this);
     }
 
+    public void showMarketTray() {
+        //System.out.println("[MODEL] Notifying listeners of leader cards info request");
+        for(ModelObserver observer : observers)
+            observer.showMarketTray(this);
+    }
+
     public void showClientError(ClientError clientError){
         //System.out.println("[MODEL] Notifying listeners of client error");
         for(ModelObserver observer : observers)
@@ -188,4 +194,5 @@ public abstract class Game {
         for(ModelObserver observer : observers)
             observer.showTempRes(this);
     }
+
 }

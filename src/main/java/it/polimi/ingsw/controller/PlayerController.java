@@ -140,6 +140,12 @@ public class PlayerController {
         game.notifyEndOfUpdates();
     }
 
+    public void showMarketTray() {
+        Game game = controller.getGame();
+        game.showMarketTray();
+        game.notifyEndOfUpdates();
+    }
+
     public void quitGame(){
         Game game = controller.getGame();
         game.quitGame();
@@ -187,4 +193,5 @@ public class PlayerController {
             controller.getGame().notifyEndOfUpdates();
         }
     }
+
 }

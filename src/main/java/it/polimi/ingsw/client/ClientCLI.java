@@ -170,30 +170,32 @@ public class ClientCLI extends PlayerInterface {
 
     public void simulateGame() {
         int selection;
+        int numErrors = 0;
         do {
             System.out.println("\nIt's your turn!");
             System.out.println("What do you want to do now?");
             System.out.println("0: Show faith track");
-            System.out.println("1: Show depot and strongbox");
-            System.out.println("2: Show leader cards");
-            System.out.println("3: Show pending resources from the Market");
-            System.out.println("4: Buy from market");
-            System.out.println("5: Buy a development card");
-            System.out.println("6: Activate basic production");
-            System.out.println("7: Activate a development card production");
-            System.out.println("8: Use leader card 1");
-            System.out.println("9: Use leader card 2");
-            System.out.println("10: Discard leader card 1");
-            System.out.println("11: Discard leader card 2");
-            System.out.println("12: End Turn");
-            System.out.println("13: Quit Game");
+            System.out.println("1: Show market tray");
+            System.out.println("2: Show depot and strongbox");
+            System.out.println("3: Show leader cards");
+            System.out.println("4: Show pending resources from the Market");
+            System.out.println("5: Buy from market");
+            System.out.println("6: Buy a development card");
+            System.out.println("7: Activate basic production");
+            System.out.println("8: Activate a development card production");
+            System.out.println("9: Use leader card 1");
+            System.out.println("10: Use leader card 2");
+            System.out.println("11: Discard leader card 1");
+            System.out.println("12: Discard leader card 2");
+            System.out.println("13: End Turn");
+            System.out.println("14: Quit Game");
             System.out.println();
             try {
                 selection = Integer.parseInt(stdin.nextLine());
             } catch(Exception e){
                 selection = -1;
             }
-        } while (selection < 0 || selection > 13);
+        } while (selection < 0 || selection > 14);
 
         Request request = null;
         switch(selection) {
@@ -201,30 +203,33 @@ public class ClientCLI extends PlayerInterface {
                 request = new FaithTrackRequest();
                 break;
             case 1:
-                request = new ShowStoragesRequest(this.getNickname());
+                request = new MarketTrayRequest();
                 break;
             case 2:
-                request = new LeaderCardsRequest();
+                request = new ShowStoragesRequest(this.getNickname());
                 break;
             case 3:
+                request = new LeaderCardsRequest();
+                break;
+            case 4:
                 request = new ShowTempResRequest();
                 break;
-            case 8:
+            case 9:
                 request = new UseLeaderRequest(0, LeaderAction.USE_ABILITY);
                 break;
-            case 9:
+            case 10:
                 request = new UseLeaderRequest(1, LeaderAction.USE_ABILITY);
                 break;
-            case 10:
+            case 11:
                 request = new UseLeaderRequest(0, LeaderAction.DISCARD);
                 break;
-            case 11: //use leader ability request
+            case 12:
                 request = new UseLeaderRequest(1, LeaderAction.DISCARD);
                 break;
-            case 12:
+            case 13:
                 request = new EndTurnRequest();
                 break;
-            case 13:
+            case 14:
                 request = new QuitGameRequest();
                 break;
             default:
@@ -385,6 +390,6 @@ public class ClientCLI extends PlayerInterface {
     @Override
     public void updateMarketTray(MarketTrayUpdate update) {
         System.out.println("\nMarket: ");
-        System.out.println(update);
+        System.out.println(update.toString());
     }
 }

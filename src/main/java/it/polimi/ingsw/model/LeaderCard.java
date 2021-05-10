@@ -10,7 +10,6 @@ public abstract class LeaderCard extends Card implements Serializable {
     private final int id;
     private final String img ;
     private final LeaderAbility specialAbility;
-
     private boolean isActive;
 
     //json initialization

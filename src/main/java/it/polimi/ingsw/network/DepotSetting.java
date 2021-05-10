@@ -2,7 +2,9 @@ package it.polimi.ingsw.network;
 
 import it.polimi.ingsw.model.ResourceType;
 
-public class DepotSetting {
+import java.io.Serializable;
+
+public class DepotSetting implements Serializable {
     private final int layerNumber;
 
     private final ResourceType resType;

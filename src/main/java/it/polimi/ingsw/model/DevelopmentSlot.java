@@ -9,8 +9,9 @@ import java.util.List;
 
 public class DevelopmentSlot {
 
-    private Deque<DevelopmentCard> cards;
-    private boolean isProductionActive;
+    private final Deque<DevelopmentCard> cards;
+
+    private transient boolean isProductionActive; //TODO: might be useless at all
 
     public DevelopmentSlot() {
         this.cards = new LinkedList<>();

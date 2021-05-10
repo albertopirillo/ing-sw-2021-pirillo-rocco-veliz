@@ -166,6 +166,11 @@ public class ClientCLI extends PlayerInterface {
         return null;
     }
 
+    public int getPosition(){
+        System.out.println("Choose num of position : [0-3 to column 4-6 to rows, 6 is the first row]");
+        return Integer.parseInt(stdin.nextLine());
+    }
+
     public void simulateGame() {
         int selection;
         int numErrors = 0;
@@ -225,10 +230,10 @@ public class ClientCLI extends PlayerInterface {
                 request = new ShowDevSlotsRequest();
                 break;
             case 8:
-                //request = new InsertMarbleRequest(0, AbilityChoice.STANDARD, 0,0); @Aldair
+                request = new InsertMarbleRequest(getPosition(), AbilityChoice.STANDARD, 0,0);
                 break;
             case 9:
-                //request = new BuyDevCardRequest(); @Aldair
+                //request = new BuyDevCardRequest(getLevel(),getCardColo(),getAbilityChoice(),..);
                 break;
             case 10:
                 //request = new BasicProductionRequest(); @Riccardo

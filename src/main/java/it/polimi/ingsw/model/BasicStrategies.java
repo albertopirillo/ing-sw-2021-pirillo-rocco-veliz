@@ -13,7 +13,10 @@ public abstract class BasicStrategies {
 
        //Handles faith and returns a map with no faith in it
        for (ResourceType key: temp.keySet()) {
-           if (key == ResourceType.FAITH) player.addPlayerFaith(temp.getValue(key));
+           if (key == ResourceType.FAITH){
+               player.addPlayerFaith(temp.getValue(key));
+               player.getGame().updateFaithTrack();
+           }
            else outputRes.modifyValue(key, temp.getValue(key));
        }
        return outputRes;

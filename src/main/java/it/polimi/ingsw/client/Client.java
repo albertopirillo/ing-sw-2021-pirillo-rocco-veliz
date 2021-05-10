@@ -58,20 +58,22 @@ public class Client implements Runnable{
     public synchronized void sendMessage(Processable message){
         try {
             socketOut.reset();
+            //System.out.println("[CLIENT] Sending request " + message.getClass().getSimpleName());
             socketOut.writeObject(message);
             socketOut.flush();
-        }catch (IOException e){
+        } catch (IOException e){
             System.err.println(e.getMessage());
         }
     }
 
     private ServerUpdate receiveMessage() throws IOException{
-        ServerUpdate msg = null;
+        ServerUpdate message = null;
         try{
-            msg = (ServerUpdate) socketIn.readObject();
+            message = (ServerUpdate) socketIn.readObject();
+            //System.out.println("[CLIENT] Receiving message " + message.getClass().getSimpleName());
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        return msg;
+        return message;
     }
 }

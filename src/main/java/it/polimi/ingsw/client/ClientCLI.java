@@ -170,27 +170,7 @@ public class ClientCLI extends PlayerInterface {
 
     public void simulateGame() {
         int selection;
-/*        StringBuilder sb = new StringBuilder();
-        sb.append("\nIt's your turn!\n");
-        sb.append("What do you want to do now?\n");
-        sb.append("0: Show faith track\n");
-        sb.append("1: Show leader cards\n");
-        sb.append("2: Buy from market\n");
-        sb.append("3: Buy a development card\n");
-        sb.append("4: Activate basic production\n");
-        sb.append("5: Activate a development card production\n");
-        sb.append("6: Use leader card 1\n");
-        sb.append("7: Use leader card 2\n");
-        sb.append("8: Discard leader card 1\n");
-        sb.append("9: Discard leader card 2\n");
-        sb.append("10: End Turn\n");
         do {
-            System.out.println(sb);
-            selection = stdin.nextInt();
-        } while (selection < 0 || selection > 10);
-        //TODO: System.out.println("Invalid selection")*/
-
-            do {
             System.out.println("\nIt's your turn!");
             System.out.println("What do you want to do now?");
             System.out.println("0: Show faith track");
@@ -296,7 +276,6 @@ public class ClientCLI extends PlayerInterface {
         } else {
             System.out.println("\nYou have no more leader cards.");
         }
-        //simulateGame()
     }
 
     @Override
@@ -386,7 +365,6 @@ public class ClientCLI extends PlayerInterface {
             System.out.println("\nPlayer: " + entry.getKey());
             System.out.println(entry.getValue().toString());
         }
-        simulateGame();
     }
 
     @Override
@@ -398,13 +376,11 @@ public class ClientCLI extends PlayerInterface {
             System.out.println(devCard);
         }
         System.out.println();
-        //simulateGame();
     }
 
     @Override
     public void updateMarketTray(MarketTrayUpdate update) {
         System.out.println("\nMarket: ");
         System.out.println(update);
-        //simulateGame();
     }
 }

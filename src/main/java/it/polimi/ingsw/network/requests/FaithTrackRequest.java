@@ -6,6 +6,6 @@ public class FaithTrackRequest extends Request {
 
     @Override
     public void activateRequest(MasterController masterController) {
-        masterController.getGame().showFaithTrack();
+        masterController.getPlayerController().showFaithTrack();
     }
 }

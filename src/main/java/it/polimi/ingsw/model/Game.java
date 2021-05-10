@@ -97,73 +97,73 @@ public abstract class Game {
 
     //Observers methods
     public void notifyEndOfUpdates() {
-        System.out.println("[MODEL] Notifying listeners of simulate game");
+        //System.out.println("[MODEL] Notifying listeners of simulate game");
         for(ModelObserver observer : observers)
             observer.gameStateChange(this);
     }
 
     public void updateInitResources(int numPlayer){
-        System.out.println("[MODEL] Notifying listeners of players init resources update");
+        //System.out.println("[MODEL] Notifying listeners of players init resources update");
         for(ModelObserver observer : observers)
             observer.notifyInitResources(this, numPlayer);
     }
 
     public void updateInitLeaderCards(){
-        System.out.println("[MODEL] Notifying listeners of players init leaders cards update");
+        //System.out.println("[MODEL] Notifying listeners of players init leaders cards update");
         for(ModelObserver observer : observers)
             observer.notifyInitLeaderCards(this);
     }
 
     public void showFaithTrack(){
-        System.out.println("[MODEL] Notifying listeners of faith track info request");
+        //System.out.println("[MODEL] Notifying listeners of faith track info request");
         for(ModelObserver observer : observers)
             observer.showFaithTrack(this);
     }
 
     public void showLeaderCards(){
-        System.out.println("[MODEL] Notifying listeners of leader cards info request");
+        //System.out.println("[MODEL] Notifying listeners of leader cards info request");
         for(ModelObserver observer : observers)
             observer.showLeaderCards(this);
     }
 
     public void showClientError(ClientError clientError){
-        System.out.println("[MODEL] Notifying listeners of client error");
+        //System.out.println("[MODEL] Notifying listeners of client error");
         for(ModelObserver observer : observers)
             observer.showClientError(this, clientError);
     }
 
     public void updateMarketTray(){
-        System.out.println("[MODEL] Notifying listeners of market tray update");
+        //System.out.println("[MODEL] Notifying listeners of market tray update");
         for(ModelObserver observer : observers)
             observer.showMarketTray(this);
     }
 
     public void updateDevSlots() {
-        System.out.println("[MODEL] Notifying listeners of development slots update");
+        //System.out.println("[MODEL] Notifying listeners of development slots update");
         for(ModelObserver observer : observers)
             observer.showDevSlots(this);
     }
 
     public void updateStorages() {
-        System.out.println("[MODEL] Notifying listeners of storage update");
+        //System.out.println("[MODEL] Notifying listeners of storage update");
         for(ModelObserver observer : observers)
             observer.updateStorages(this);
     }
 
     public void showStorages(String playerNick) {
-        System.out.println("[MODEL] Notifying listeners of storage info request");
+        //System.out.println("[MODEL] Notifying listeners of storage info request");
         for(ModelObserver observer : observers)
             observer.showStorages(this, playerNick);
     }
 
     public void updateMarket(){
-        System.out.println("[MODEL] Notifying listeners of market update");
+        //System.out.println("[MODEL] Notifying listeners of market update");
         for(ModelObserver observer : observers)
             observer.showMarket(this);
     }
 
     public void showTempRes() {
-        System.out.println("[MODEL] Notifying listeners of temporary resources update");
+        //System.out.println("[MODEL] Notifying listeners of temporary resources update");
         for(ModelObserver observer : observers)
             observer.showTempRes(this);
     }

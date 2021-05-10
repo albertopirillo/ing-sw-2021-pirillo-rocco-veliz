@@ -20,11 +20,6 @@ public class RemoteView extends View {
         super.processRequest(request);
     }
 
-    @Override
-    public void quitGame() {
-        connection.close();
-    }
-
     public void notifyInitResources(Game game, int numPlayer){
         ServerUpdate msg = new InitialResourcesUpdate(game.getActivePlayer().getNickname(), numPlayer);
         connection.sendMessage(msg);

@@ -115,11 +115,8 @@ public class Player {
     }
 
     public Resource insertMarble(int position, AbilityChoice choice, int amount1, int amount2) throws NegativeResAmountException, InvalidKeyException, InvalidAbilityChoiceException, NoLeaderAbilitiesException, CostNotMatchingException {
-        if (choice == AbilityChoice.STANDARD) {
-            return BasicStrategies.insertMarble(this, position);
-        } else {
-            return this.resStrategy.insertMarble(this, position, choice, amount1, amount2);
-        }
+        if (choice == AbilityChoice.STANDARD) return BasicStrategies.insertMarble(this, position);
+        else return this.resStrategy.insertMarble(this, position, choice, amount1, amount2);
     }
 
     public void buyDevCard(int level, CardColor color, int numSlot, AbilityChoice choice, Resource fromDepot, Resource fromStrongbox) throws CannotContainFaithException, NotEnoughSpaceException, NegativeResAmountException, DeckEmptyException, CostNotMatchingException, NotEnoughResException, InvalidKeyException, NoLeaderAbilitiesException, InvalidAbilityChoiceException, DevSlotEmptyException, InvalidNumSlotException {

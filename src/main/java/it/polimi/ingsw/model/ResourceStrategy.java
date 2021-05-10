@@ -34,9 +34,7 @@ public class ResourceStrategy {
         //Check if amount1+amount2 is equal to the number of white marbles
         Market market = player.getGame().getMarket();
         Marbles marbles = market.getMarketTray().insertMarble(position);
-        if (amount1 + amount2 != marbles.getValue(MarblesColor.WHITE)) {
-            throw new CostNotMatchingException("The number of white marbles does not match");
-        }
+        if (amount1 + amount2 != marbles.getValue(MarblesColor.WHITE)) throw new CostNotMatchingException("The number of white marbles does not match");
 
         //Selects the requested abilities and modifies the output resource
         Resource outputRes = marbles.getResources();

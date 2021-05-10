@@ -94,29 +94,8 @@ public abstract class Game {
     public abstract void checkEndGame() throws NegativeResAmountException, InvalidKeyException;
     public abstract void startGame();
 
+
     //Observers methods
-    public void quitGame(){
-        if(observers.size() < 3){
-            //end the game for all players if there are 1 or 2 players
-            for(ModelObserver observer : observers){
-                observer.quitGame();
-            }
-        } else {
-            //quit the game only for the player who sent the QuitGameRequest
-            for(int i = 0; i < observers.size(); i++){
-                if(observers.get(i).getPlayer().equals(getActivePlayer().getNickname())){
-                    setActivePlayer(getPlayersList().get((i + 1) % getPlayerAmount()));
-                    observers.get(i).quitGame();
-                    observers.remove(i);
-                    playersList.remove(i);
-                    break;
-                }
-            }
-            notifyEndOfUpdates();
-        }
-
-    }
-
     public void notifyEndOfUpdates() {
         //System.out.println("[MODEL] Notifying listeners of simulate game");
         for(ModelObserver observer : observers)
@@ -145,12 +124,6 @@ public abstract class Game {
         //System.out.println("[MODEL] Notifying listeners of leader cards info request");
         for(ModelObserver observer : observers)
             observer.showLeaderCards(this);
-    }
-
-    public void showMarketTray() {
-        //System.out.println("[MODEL] Notifying listeners of leader cards info request");
-        for(ModelObserver observer : observers)
-            observer.showMarketTray(this);
     }
 
     public void showClientError(ClientError clientError){
@@ -194,5 +167,4 @@ public abstract class Game {
         for(ModelObserver observer : observers)
             observer.showTempRes(this);
     }
-
 }

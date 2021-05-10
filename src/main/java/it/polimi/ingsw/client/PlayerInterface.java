@@ -30,9 +30,8 @@ public abstract class PlayerInterface {
     }
 
     public void readUpdate(ServerUpdate updateMessage) {
-        if (updateMessage != null && updateMessage.getActivePlayer().equals(this.nickname)){
+        if (updateMessage.getActivePlayer().equals(this.nickname))
             updateMessage.update(this);
-        }
     }
 
     public abstract String chooseNickname();

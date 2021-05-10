@@ -9,12 +9,11 @@ public interface ModelObserver {
     void showFaithTrack(Game game);
     void showLeaderCards(Game game);
     void notifyInitResources(Game game, int numPlayer);
-    void notifyInitLeaderCards(Game game);
+    void showInitLeaderCards(Game game);
     void showClientError(Game game, ClientError clientError);
     void showMarketTray(Game game);
     void showMarket(Game game);
-    void showStorages(Game game, String playerNick);
+    void showStorages(Game game);
     void showDevSlots(Game game);
-    void updateStorages(Game game);
     void showTempRes(Game game);
 }

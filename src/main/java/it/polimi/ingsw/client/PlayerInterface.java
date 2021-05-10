@@ -2,6 +2,7 @@ package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.model.LeaderCard;
 import it.polimi.ingsw.network.updates.*;
+import it.polimi.ingsw.utils.ANSIColor;
 
 import java.util.List;
 
@@ -9,6 +10,7 @@ public abstract class PlayerInterface {
 
     private String nickname;
     private final Client player;
+    private final boolean debug = false; //TODO: remove
 
     public PlayerInterface(Client player) {
         this.player = player;
@@ -29,9 +31,19 @@ public abstract class PlayerInterface {
         simulateGame();
     }
 
+    public void debugPrint(String string) {
+        if (debug) {
+            System.out.print(ANSIColor.BRIGHT_YELLOW + "[DEBUG] ");
+            System.out.println(string + ANSIColor.RESET);
+        }
+    }
+
     public void readUpdate(ServerUpdate updateMessage) {
-        if (updateMessage.getActivePlayer().equals(this.nickname))
+        debugPrint("Received updated of type: " + updateMessage);
+        if (updateMessage != null && updateMessage.getActivePlayer().equals(this.nickname)){
+            debugPrint("Processing update...");
             updateMessage.update(this);
+        }
     }
 
     public abstract String chooseNickname();
@@ -46,7 +58,6 @@ public abstract class PlayerInterface {
     public abstract void updateLeaderCards(LeaderUpdate update);
     public abstract void updateDevSlots(DevSlotsUpdate update);
     public abstract void displayError(ErrorUpdate update);
-    public abstract void updatePlayer(PlayerUpdate update);
     public abstract void updateFaithTrack(FaithTrackUpdate faithTrackUpdate);
     public abstract void updateMarket(MarketUpdate marketUpdate);
     public abstract void updateMarketTray(MarketTrayUpdate update);

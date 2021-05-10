@@ -15,17 +15,25 @@ public class RemoteView extends View {
         super(server, connection, player);
     }
 
+    @Override
     public void processRequest(Request request){
         System.out.println("[REMOTEVIEW] from player " + player);
         super.processRequest(request);
     }
 
+    @Override
+    public void quitGame() {
+        connection.close();
+    }
+
+    @Override
     public void notifyInitResources(Game game, int numPlayer){
         ServerUpdate msg = new InitialResourcesUpdate(game.getActivePlayer().getNickname(), numPlayer);
         connection.sendMessage(msg);
     }
 
-    public void notifyInitLeaderCards(Game game){
+    @Override
+    public void showInitLeaderCards(Game game){
         //Prepare message with initial Leader Cards
         Player activePlayer = game.getActivePlayer();
         List<LeaderCard> cards = new ArrayList<>(activePlayer.getLeaderCards());
@@ -33,6 +41,7 @@ public class RemoteView extends View {
         connection.sendMessage(msg);
     }
 
+    @Override
     public void showFaithTrack(Game game){
         Map<String, FaithTrack> faithTrackInfoMap = new HashMap<>();
         List<Player> players = game.getPlayersList();
@@ -43,6 +52,7 @@ public class RemoteView extends View {
         connection.sendMessage(faithTrackMsg);
     }
 
+    @Override
     public void showLeaderCards(Game game){
         Map<String, List<LeaderCard>> leaderCardsMap = new HashMap<>();
         List<Player> players = game.getPlayersList();
@@ -53,6 +63,7 @@ public class RemoteView extends View {
         connection.sendMessage(leaderUpdateMsg);
     }
 
+    @Override
     public void gameStateChange(Game game){
         //Simulazione endTurnRequest and endUpdate
         //System.out.println("[REMOTE VIEW] Gioco in corso, turno di " + player);
@@ -60,6 +71,7 @@ public class RemoteView extends View {
         connection.sendMessage(msg);
     }
 
+    @Override
     public void notifyGameOver(String winner) {
         //TODO: ...
     }
@@ -71,6 +83,7 @@ public class RemoteView extends View {
         connection.sendMessage(msg);
     }
 
+    @Override
     public void showMarketTray(Game game){
         Player activePlayer = game.getActivePlayer();
         MarketTray marketTray = game.getMarket().getMarketTray();
@@ -78,6 +91,7 @@ public class RemoteView extends View {
         connection.sendMessage(msg);
     }
 
+    @Override
     public void showMarket(Game game){
         Player activePlayer = game.getActivePlayer();
         Market market = game.getMarket();
@@ -96,8 +110,9 @@ public class RemoteView extends View {
         connection.sendMessage(msg);
     }
 
+
     @Override
-    public void updateStorages(Game game) {
+    public void showStorages(Game game) {
         Player activePlayer = game.getActivePlayer();
         Map<String, List<DepotSetting>> depotMap = new HashMap<>();
         Map<String, Resource> strongboxMap = new HashMap<>();
@@ -110,26 +125,10 @@ public class RemoteView extends View {
     }
 
     @Override
-    public void showStorages(Game game, String playerNick) {
-        Map<String, List<DepotSetting>> depotMap = new HashMap<>();
-        Map<String, Resource> strongboxMap = new HashMap<>();
-        for(Player p: game.getPlayersList())
-            if (p.getNickname().equals(playerNick)) {
-                depotMap.put(playerNick,p.getPersonalBoard().getDepot().toDepotSetting());
-                strongboxMap.put(playerNick, p.getPersonalBoard().getStrongbox().queryAllRes());
-                break;
-        }
-        ServerUpdate msg = new StorageUpdate(playerNick, depotMap, strongboxMap);
-        connection.sendMessage(msg);
-        connection.sendMessage(new EndOfUpdate(game.getActivePlayer().getNickname()));
-    }
-
-    @Override
     public void showTempRes(Game game) {
         Player activePlayer = game.getActivePlayer();
         Resource tempRes = getMasterController().getResourceController().getTempRes().getToHandle();
         ServerUpdate msg = new TempResourceUpdate(activePlayer.getNickname(), tempRes);
         connection.sendMessage(msg);
-        connection.sendMessage(new EndOfUpdate(activePlayer.getNickname()));
     }
 }

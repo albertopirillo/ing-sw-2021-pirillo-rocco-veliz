@@ -6,6 +6,7 @@ public class ShowTempResRequest extends Request {
 
     @Override
     public void activateRequest(MasterController masterController) {
-        masterController.getGame().showTempRes();
+        masterController.getGame().updateTempRes();
+        masterController.getGame().notifyEndOfUpdates();
     }
 }

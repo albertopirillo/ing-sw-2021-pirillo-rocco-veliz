@@ -170,27 +170,49 @@ public class ClientCLI extends PlayerInterface {
 
     public void simulateGame() {
         int selection;
+/*        StringBuilder sb = new StringBuilder();
+        sb.append("\nIt's your turn!\n");
+        sb.append("What do you want to do now?\n");
+        sb.append("0: Show faith track\n");
+        sb.append("1: Show leader cards\n");
+        sb.append("2: Buy from market\n");
+        sb.append("3: Buy a development card\n");
+        sb.append("4: Activate basic production\n");
+        sb.append("5: Activate a development card production\n");
+        sb.append("6: Use leader card 1\n");
+        sb.append("7: Use leader card 2\n");
+        sb.append("8: Discard leader card 1\n");
+        sb.append("9: Discard leader card 2\n");
+        sb.append("10: End Turn\n");
         do {
+            System.out.println(sb);
+            selection = stdin.nextInt();
+        } while (selection < 0 || selection > 10);
+        //TODO: System.out.println("Invalid selection")*/
+
+            do {
             System.out.println("\nIt's your turn!");
             System.out.println("What do you want to do now?");
             System.out.println("0: Show faith track");
-            System.out.println("1: Show leader cards");
-            System.out.println("2: Buy from market");
-            System.out.println("3: Buy a development card");
-            System.out.println("4: Activate basic production");
-            System.out.println("5: Activate a development card production");
-            System.out.println("6: Use leader card 1");
-            System.out.println("7: Use leader card 2");
-            System.out.println("8: Discard leader card 1");
-            System.out.println("9: Discard leader card 2");
-            System.out.println("10: End Turn");
+            System.out.println("1: Show depot and strongbox");
+            System.out.println("2: Show leader cards");
+            System.out.println("3: Show pending resources from the Market");
+            System.out.println("4: Buy from market");
+            System.out.println("5: Buy a development card");
+            System.out.println("6: Activate basic production");
+            System.out.println("7: Activate a development card production");
+            System.out.println("8: Use leader card 1");
+            System.out.println("9: Use leader card 2");
+            System.out.println("10: Discard leader card 1");
+            System.out.println("11: Discard leader card 2");
+            System.out.println("12: End Turn");
             System.out.println();
             try {
                 selection = Integer.parseInt(stdin.nextLine());
             } catch(Exception e){
                 selection = -1;
             }
-        } while (selection < 0 || selection > 10);
+        } while (selection < 0 || selection > 12);
 
         Request request = null;
         switch(selection) {
@@ -198,21 +220,27 @@ public class ClientCLI extends PlayerInterface {
                 request = new FaithTrackRequest();
                 break;
             case 1:
+                request = new ShowStoragesRequest(this.getNickname());
+                break;
+            case 2:
                 request = new LeaderCardsRequest();
                 break;
-            case 6:
-                request = new UseLeaderRequest(0, LeaderAction.USE_ABILITY);
-                break;
-            case 7:
-                request = new UseLeaderRequest(1, LeaderAction.USE_ABILITY);
+            case 3:
+                request = new ShowTempResRequest();
                 break;
             case 8:
-                request = new UseLeaderRequest(0, LeaderAction.DISCARD);
+                request = new UseLeaderRequest(0, LeaderAction.USE_ABILITY);
                 break;
-            case 9: //use leader ability request
-                request = new UseLeaderRequest(1, LeaderAction.DISCARD);
+            case 9:
+                request = new UseLeaderRequest(1, LeaderAction.USE_ABILITY);
                 break;
             case 10:
+                request = new UseLeaderRequest(0, LeaderAction.DISCARD);
+                break;
+            case 11: //use leader ability request
+                request = new UseLeaderRequest(1, LeaderAction.DISCARD);
+                break;
+            case 12:
                 request = new EndTurnRequest();
                 break;
             default:
@@ -227,7 +255,11 @@ public class ClientCLI extends PlayerInterface {
 
     @Override
     public void updateTempResource(TempResourceUpdate update) {
-
+        if (update.getResource() != null) {
+            System.out.println("Resources obtained from the Market that need to be placed: ");
+            System.out.println(update.getResource());
+        }
+        else System.out.println("There are no resources that need to be placed");
     }
 
     @Override
@@ -242,8 +274,9 @@ public class ClientCLI extends PlayerInterface {
                 if (layer.getResType() == null) System.out.println("Empty");
                 else System.out.println(layer.getResType() + " x" + layer.getAmount());
             }
-            System.out.println("Strongbox:");
-            System.out.println("\t" + strongboxMap.get(playerNick) + "\n");
+            System.out.print("Strongbox: ");
+            if(strongboxMap.get(playerNick).getTotalAmount() == 0) System.out.println("Empty");
+            else System.out.println("\n\t" + strongboxMap.get(playerNick) + "\n");
         }
 
     }
@@ -337,13 +370,12 @@ public class ClientCLI extends PlayerInterface {
     @Override
     public void displayError(ErrorUpdate update) {
         System.out.println(ANSIColor.RED + "\nReceived an error message from the server:" + ANSIColor.RESET);
-        System.out.println(ANSIColor.RED + update.getClientError().getError() + ANSIColor.RESET);
-        //simulateGame();
+        System.out.println(ANSIColor.RED + update.getClientError().getError() + ANSIColor.RESET + "\n");
     }
 
     @Override
     public void updatePlayer(PlayerUpdate update) {
-
+        //TODO: handle this type of update, also in the Controller and the RemoteView
     }
 
     @Override

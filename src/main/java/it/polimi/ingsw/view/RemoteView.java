@@ -97,7 +97,7 @@ public class RemoteView extends View {
     }
 
     @Override
-    public void showStorage(Game game) {
+    public void updateStorages(Game game) {
         Player activePlayer = game.getActivePlayer();
         Map<String, List<DepotSetting>> depotMap = new HashMap<>();
         Map<String, Resource> strongboxMap = new HashMap<>();
@@ -110,9 +110,26 @@ public class RemoteView extends View {
     }
 
     @Override
-    public void showTempRes(Game game, TempResource tempResource) {
-        Player activePlayer = game.getActivePlayer();
-        ServerUpdate msg = new TempResourceUpdate(activePlayer.getNickname(), tempResource.getToHandle());
+    public void showStorages(Game game, String playerNick) {
+        Map<String, List<DepotSetting>> depotMap = new HashMap<>();
+        Map<String, Resource> strongboxMap = new HashMap<>();
+        for(Player p: game.getPlayersList())
+            if (p.getNickname().equals(playerNick)) {
+                depotMap.put(playerNick,p.getPersonalBoard().getDepot().toDepotSetting());
+                strongboxMap.put(playerNick, p.getPersonalBoard().getStrongbox().queryAllRes());
+                break;
+        }
+        ServerUpdate msg = new StorageUpdate(playerNick, depotMap, strongboxMap);
         connection.sendMessage(msg);
+        connection.sendMessage(new EndOfUpdate(game.getActivePlayer().getNickname()));
+    }
+
+    @Override
+    public void showTempRes(Game game) {
+        Player activePlayer = game.getActivePlayer();
+        Resource tempRes = getMasterController().getResourceController().getTempRes().getToHandle();
+        ServerUpdate msg = new TempResourceUpdate(activePlayer.getNickname(), tempRes);
+        connection.sendMessage(msg);
+        connection.sendMessage(new EndOfUpdate(activePlayer.getNickname()));
     }
 }

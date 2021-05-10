@@ -3,7 +3,6 @@ package it.polimi.ingsw.view;
 import it.polimi.ingsw.controller.MasterController;
 import it.polimi.ingsw.model.ClientError;
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.TempResource;
 import it.polimi.ingsw.network.requests.Request;
 import it.polimi.ingsw.server.Connection;
 import it.polimi.ingsw.server.Server;
@@ -20,6 +19,10 @@ public abstract class View implements ModelObserver {
         this.player = player;
     }
 
+    public MasterController getMasterController() {
+        return masterController;
+    }
+
     public void addController(MasterController masterController){ this.masterController = masterController; }
 
     public void processRequest(Request request){
@@ -34,8 +37,9 @@ public abstract class View implements ModelObserver {
     public abstract void showClientError(Game game, ClientError clientError);
     public abstract void notifyGameOver(String playerWinner);
     public abstract void showMarketTray(Game game);
+    public abstract void showStorages(Game game, String playerNick);
     public abstract void showMarket(Game game);
     public abstract void showDevSlots(Game game);
-    public abstract void showStorage(Game game);
-    public abstract void showTempRes(Game game, TempResource tempResource);
+    public abstract void updateStorages(Game game);
+    public abstract void showTempRes(Game game);
 }

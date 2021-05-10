@@ -53,7 +53,7 @@ public class PlayerController {
             ResourceController resourceController = controller.getResourceController();
             resourceController.getTempRes().setToHandle(output);
             controller.getGame().updateMarketTray();
-            controller.getGame().updateTempResource(resourceController.getTempRes());
+            controller.getGame().showTempRes();
             controller.resetException();
         } catch (NegativeResAmountException | InvalidKeyException | InvalidAbilityChoiceException | NoLeaderAbilitiesException | CostNotMatchingException e) {
             controller.setException(e);
@@ -69,7 +69,7 @@ public class PlayerController {
             activePlayer.buyDevCard(level, color, numSlot, choice, fromDepot, fromStrongbox);
             controller.getGame().updateMarket();
             controller.getGame().updateDevSlots();
-            controller.getGame().updateStorage();
+            controller.getGame().updateStorages();
             controller.resetException();
         } catch (CannotContainFaithException | NotEnoughSpaceException | NegativeResAmountException | DeckEmptyException | CostNotMatchingException | NotEnoughResException | InvalidKeyException | NoLeaderAbilitiesException | InvalidAbilityChoiceException | DevSlotEmptyException | InvalidNumSlotException e) {
             controller.setException(e);
@@ -82,7 +82,7 @@ public class PlayerController {
     public void placeResource(Resource toDiscard, List<DepotSetting> toPlace) {
         try {
             controller.getResourceController().handleResource(toDiscard, toPlace);
-            controller.getGame().updateStorage();
+            controller.getGame().updateStorages();
             controller.getGame().showFaithTrack();
             controller.resetException();
         } catch (NotEnoughResException | NotEnoughSpaceException | CannotContainFaithException | NegativeResAmountException | InvalidKeyException | InvalidResourceException | WrongDepotInstructionsException | LayerNotEmptyException | InvalidLayerNumberException | AlreadyInAnotherLayerException e) {
@@ -128,7 +128,7 @@ public class PlayerController {
         try {
             Player activePlayer = controller.getGame().getActivePlayer();
             activePlayer.reorderDepot(fromLayer, toLayer, amount);
-            controller.getGame().updateStorage();
+            controller.getGame().updateStorages();
             controller.resetException();
         } catch (InvalidResourceException | LayerNotEmptyException | NotEnoughSpaceException | InvalidLayerNumberException | CannotContainFaithException | NotEnoughResException | NegativeResAmountException e) {
             controller.setException(e);
@@ -156,7 +156,7 @@ public class PlayerController {
             activePlayer.activateProduction(devCards);
             depot.retrieveRes(fromDepot);
             strongbox.retrieveRes(fromStrongbox);
-            controller.getGame().updateStorage();
+            controller.getGame().updateStorages();
             controller.getGame().showFaithTrack();
             controller.resetException();
         } catch (CostNotMatchingException | NotEnoughResException | NegativeResAmountException | InvalidKeyException | DevSlotEmptyException | NotEnoughSpaceException | CannotContainFaithException e) {

@@ -16,4 +16,6 @@ public interface ModelObserver {
     void showStorages(Game game);
     void showDevSlots(Game game);
     void showTempRes(Game game);
+    void quitGame();
+    String getPlayer();
 }

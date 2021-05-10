@@ -21,7 +21,6 @@ public class RemoteView extends View {
         super.processRequest(request);
     }
 
-    @Override
     public void quitGame() {
         connection.close();
     }

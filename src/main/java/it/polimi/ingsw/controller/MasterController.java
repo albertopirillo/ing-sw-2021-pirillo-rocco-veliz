@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.ClientError;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.TempResource;
 import it.polimi.ingsw.network.requests.Request;
+import it.polimi.ingsw.utils.ANSIColor;
 
 public class MasterController {
 
@@ -36,6 +37,7 @@ public class MasterController {
 
     public void setException(Throwable exception) {
         this.clientError.setException(exception);
+        System.out.println(ANSIColor.RED + "[SERVER] Exception: " + exception.getMessage() + ANSIColor.RESET);
     }
 
     public void resetException() {

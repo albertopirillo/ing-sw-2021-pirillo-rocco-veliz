@@ -26,12 +26,12 @@
       <version>5.8.0-M1</version>
       <scope>test</scope>
     </dependency>
-      <dependency>
-          <groupId>org.junit.jupiter</groupId>
-          <artifactId>junit-jupiter</artifactId>
-          <version>5.8.0-M1</version>
-          <scope>test</scope>
-      </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>5.8.0-M1</version>
+      <scope>test</scope>
+    </dependency>
 
     <!-- old junit 4
       <dependency>
@@ -55,22 +55,15 @@
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-controls</artifactId>
-      <version>13</version>
-    </dependency>
-
-<!--    &lt;!&ndash; https://mvnrepository.com/artifact/org.openjfx/javafx-graphics &ndash;&gt;
-    <dependency>
-      <groupId>org.openjfx</groupId>
-      <artifactId>javafx-graphics</artifactId>
       <version>17-ea+9</version>
     </dependency>
 
-    &lt;!&ndash; https://mvnrepository.com/artifact/org.openjfx/javafx-base &ndash;&gt;
+    <!-- Scene Builder for JavaFX -->
     <dependency>
       <groupId>org.openjfx</groupId>
-      <artifactId>javafx-base</artifactId>
+      <artifactId>javafx-fxml</artifactId>
       <version>17-ea+9</version>
-    </dependency>-->
+    </dependency>
 
   </dependencies>
 
@@ -118,9 +111,9 @@
         <plugin>
           <groupId>org.openjfx</groupId>
           <artifactId>javafx-maven-plugin</artifactId>
-          <version>0.0.4</version>
+          <version>0.0.6</version>
           <configuration>
-            <mainClass>it.polimi.ingsw.client.Launcher</mainClass>
+            <mainClass>it.polimi.ingsw.client.gui.Launcher</mainClass>
           </configuration>
         </plugin>
 
@@ -128,7 +121,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-shade-plugin</artifactId>
-          <version>3.2.0</version>
+          <version>3.2.4</version>
           <executions>
             <execution>
               <phase>package</phase>
@@ -142,7 +135,7 @@
                 <transformers>
                   <transformer implementation=
                                        "org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                    <mainClass>it.polimi.ingsw.client.Launcher</mainClass>
+                    <mainClass>it.polimi.ingsw.client.gui.Launcher</mainClass>
                   </transformer>
                 </transformers>
               </configuration>
@@ -168,15 +161,15 @@
       </plugins>
     </pluginManagement>
 
-      <plugins>
-          <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-compiler-plugin</artifactId>
-              <configuration>
-                  <source>8</source>
-                  <target>8</target>
-              </configuration>
-          </plugin>
-      </plugins>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>8</source>
+          <target>8</target>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
 </project>

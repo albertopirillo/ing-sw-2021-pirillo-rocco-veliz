@@ -8,6 +8,9 @@ import it.polimi.ingsw.network.requests.*;
 import it.polimi.ingsw.network.updates.*;
 import it.polimi.ingsw.utils.ANSIColor;
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.List;
 import java.util.*;
 
 public class ClientCLI extends PlayerInterface {
@@ -257,10 +260,10 @@ public class ClientCLI extends PlayerInterface {
                 request = new UseLeaderRequest(1, LeaderAction.DISCARD);
                 break;
             case 17:
-                //request = new ReorderDepotRequest(); @Alberto
+                request = reorderDepotMenu();
                 break;
             case 18:
-                //request = new PlaceResourceRequest(); @Alberto
+                request = PlaceResourceMenu();
                 break;
             case 19:
                 request = new EndTurnRequest();
@@ -273,6 +276,91 @@ public class ClientCLI extends PlayerInterface {
             getPlayer().sendMessage(request);
         } else {
             simulateGame();
+        }
+    }
+
+    private Request PlaceResourceMenu() {
+        Resource toDiscard = toDiscardMenu();
+        List<DepotSetting> toPlace = toPlaceMenu();
+        return new PlaceResourceRequest(toDiscard, toPlace);
+    }
+
+    public ResourceType strToResType(String input){
+        switch (input) {
+            case "stone": return ResourceType.STONE;
+            case "coin": return ResourceType.COIN;
+            case "shield": return ResourceType.SHIELD;
+            case "servant": return ResourceType.SERVANT;
+            default: return null;
+        }
+    }
+
+    private Resource toDiscardMenu() {
+        Resource toDiscard = new Resource();
+        String inputStr;
+        int amountSelection;
+        ResourceType resSelection;
+        while (true) {
+            try {
+                System.out.print("What resources would you like to DISCARD?");
+                System.out.println(" (Press q to abort or k to choose the resources to place)");
+                inputStr = stdin.nextLine().toLowerCase();
+                if(inputStr.equals("q")) return null;
+                else if(inputStr.equals("k")) return toDiscard;
+                else {
+                    resSelection = strToResType(inputStr);
+                    if (resSelection == null) throw new Exception();
+                    System.out.println("How many of this type of resource?");
+                    amountSelection = Integer.parseInt(stdin.nextLine());
+                    toDiscard.addResource(resSelection, amountSelection);
+                }
+            } catch (Exception e) {
+                System.out.println("Invalid input, retry");
+            }
+        }
+    }
+
+    private List<DepotSetting> toPlaceMenu() {
+        List<DepotSetting> toPlace = new ArrayList<>();
+        ResourceType resSelection;
+        String inputStr;
+        int amountSelection, layerSelection;
+        while(true) {
+            try{
+                System.out.print("What resources would you like to PLACE?");
+                System.out.println(" (Press q to abort or k to send)");
+                inputStr = stdin.nextLine().toLowerCase();
+                if (inputStr.equals("q")) return null;
+                else if (inputStr.equals("k")) return toPlace;
+                else {
+                    resSelection = strToResType(inputStr);
+                    if (resSelection == null) throw new Exception();
+                    System.out.println("How many of this type of resource?");
+                    amountSelection = Integer.parseInt(stdin.nextLine());
+                    System.out.println("In which layer would you like to place it?");
+                    layerSelection = Integer.parseInt(stdin.nextLine());
+                    toPlace.add(new DepotSetting(layerSelection, resSelection, amountSelection));
+                }
+            } catch (Exception e) {
+                System.out.println("Invalid input, retry");
+            }
+        }
+    }
+
+    private ReorderDepotRequest reorderDepotMenu() {
+        int fromLayer, toLayer, amount;
+        while(true) {
+            try {
+                System.out.println("Move resources FROM which layer?");
+                fromLayer = Integer.parseInt(stdin.nextLine());
+                System.out.println("Move resources TO which layer?");
+                toLayer = Integer.parseInt(stdin.nextLine());
+                System.out.println("How many resources would you like to move?");
+                amount = Integer.parseInt(stdin.nextLine());
+                return new ReorderDepotRequest(fromLayer, toLayer, amount);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input, retry");
+            }
         }
     }
 
@@ -290,7 +378,7 @@ public class ClientCLI extends PlayerInterface {
         Map<String, List<DepotSetting>> depotMap = update.getDepotMap();
         Map<String, Resource> strongboxMap = update.getStrongboxMap();
         for(String playerNick: depotMap.keySet()) {
-            System.out.println("Showing " + playerNick + "'s resources:");
+            System.out.println("\nShowing " + playerNick + "'s resources:");
             System.out.println("Depot:");
             for(DepotSetting layer: depotMap.get(playerNick)) {
                 System.out.print("\t" + layer.getLayerNumber() + ": ");

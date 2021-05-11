@@ -10,14 +10,14 @@ public class Player {
     private int victoryPoints;
     private boolean hasInkwell;
     private final String nickname;
-    private transient boolean isHisTurn;
+    private boolean isHisTurn;
     private final PersonalBoard personalBoard;
-    private transient Game game;
+    private Game game;
     private List<LeaderCard> leaderCards;
-    private transient final List<LeaderAbility> activeLeaderAbilities;
-    private transient final ResourceStrategy resStrategy;
-    private transient final DevCardsStrategy devStrategy;
-    private transient final ProductionStrategy prodStrategy;
+    private final List<LeaderAbility> activeLeaderAbilities;
+    private final ResourceStrategy resStrategy;
+    private final DevCardsStrategy devStrategy;
+    private final ProductionStrategy prodStrategy;
 
     public Player(String nickname) {
         this.nickname = nickname;

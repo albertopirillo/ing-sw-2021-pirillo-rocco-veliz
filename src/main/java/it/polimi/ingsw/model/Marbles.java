@@ -77,6 +77,9 @@ public class Marbles {
     public boolean containWhiteMarbles(){
         return marbles.containsKey(MarblesColor.WHITE);
     }
+    public int numWhiteMarbles(){
+        return marbles.get(MarblesColor.WHITE);
+    }
     public boolean containFaith(){
         return marbles.containsKey(MarblesColor.RED);
     }

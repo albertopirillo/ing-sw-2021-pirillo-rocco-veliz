@@ -80,4 +80,9 @@ public class ClientGUI extends PlayerInterface {
     public void updateMarketTray(MarketTrayUpdate update) {
 
     }
+
+    @Override
+    public void updateTempMarbles(TempMarblesUpdate tempMarblesUpdate) {
+
+    }
 }

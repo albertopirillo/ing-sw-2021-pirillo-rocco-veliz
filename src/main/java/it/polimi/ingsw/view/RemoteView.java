@@ -127,7 +127,14 @@ public class RemoteView extends View {
     public void showTempRes(Game game) {
         Player activePlayer = game.getActivePlayer();
         Resource tempRes = getMasterController().getResourceController().getTempRes().getToHandle();
+
         ServerUpdate msg = new TempResourceUpdate(activePlayer.getNickname(), tempRes);
+        connection.sendMessage(msg);
+    }
+
+    public void showTempMarbles(Game game, int numWhiteMarbles){
+        Player activePlayer = game.getActivePlayer();
+        ServerUpdate msg = new TempMarblesUpdate(activePlayer.getNickname(), numWhiteMarbles, activePlayer.getResTypesAbility());
         connection.sendMessage(msg);
     }
 }

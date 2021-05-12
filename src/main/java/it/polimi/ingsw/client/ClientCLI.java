@@ -8,9 +8,6 @@ import it.polimi.ingsw.network.requests.*;
 import it.polimi.ingsw.network.updates.*;
 import it.polimi.ingsw.utils.ANSIColor;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.util.List;
 import java.util.*;
 
 public class ClientCLI extends PlayerInterface {
@@ -169,8 +166,13 @@ public class ClientCLI extends PlayerInterface {
         return null;
     }
 
-    public int getPosition(){
+    private int getPosition(){
         System.out.println("Choose num of position : [0-3 to column 4-6 to rows, 6 is the first row]");
+        return Integer.parseInt(stdin.nextLine());
+    }
+
+    private int getNumWhiteMarble(){
+        System.out.println("How many white marbles you want ");
         return Integer.parseInt(stdin.nextLine());
     }
 
@@ -233,7 +235,7 @@ public class ClientCLI extends PlayerInterface {
                 request = new ShowDevSlotsRequest();
                 break;
             case 8:
-                request = new InsertMarbleRequest(getPosition(), AbilityChoice.STANDARD, 0,0);
+                request = new InsertMarbleRequest(getPosition());
                 break;
             case 9:
                 //request = new BuyDevCardRequest(getLevel(),getCardColo(),getAbilityChoice(),..);
@@ -362,6 +364,18 @@ public class ClientCLI extends PlayerInterface {
                 System.out.println("Invalid input, retry");
             }
         }
+    }
+
+    @Override
+    public void updateTempMarbles(TempMarblesUpdate tempMarblesUpdate){
+        System.out.println(tempMarblesUpdate);
+        System.out.println("Choice the num of "+tempMarblesUpdate.getResources().get(0));
+        int amount1 = Integer.parseInt(stdin.nextLine());
+        System.out.println("Choice the num of "+tempMarblesUpdate.getResources().get(1));
+        int amount2 = Integer.parseInt(stdin.nextLine());
+        //check amount1 + amount 2 = tempMarblesUpdate
+        Request request = new ChangeMarblesRequest(amount1, amount2);
+        getPlayer().sendMessage(request);
     }
 
     @Override

@@ -15,6 +15,7 @@ public class Player {
     private Game game;
     private List<LeaderCard> leaderCards;
     private final List<LeaderAbility> activeLeaderAbilities;
+
     private final ResourceStrategy resStrategy;
     private final DevCardsStrategy devStrategy;
     private final ProductionStrategy prodStrategy;
@@ -32,6 +33,13 @@ public class Player {
         this.prodStrategy = new ProductionStrategy();
     }
 
+    public void changeWhiteMarbles(int amount1, int amount2, Resource toHandle) throws InvalidKeyException, NegativeResAmountException, CostNotMatchingException, NoLeaderAbilitiesException {
+        this.resStrategy.changeWhiteMarbles(this, amount1, amount2, toHandle);
+    }
+
+    public List<ResourceType> getResTypesAbility(){
+        return this.resStrategy.getResType();
+    }
     public boolean getInkwell() {
         return this.hasInkwell;
     }
@@ -114,9 +122,10 @@ public class Player {
         return depotRes.sum(strongboxRes);
     }
 
-    public Resource insertMarble(int position, AbilityChoice choice, int amount1, int amount2) throws NegativeResAmountException, InvalidKeyException, InvalidAbilityChoiceException, NoLeaderAbilitiesException, CostNotMatchingException {
-        if (choice == AbilityChoice.STANDARD) return BasicStrategies.insertMarble(this, position);
-        else return this.resStrategy.insertMarble(this, position, choice, amount1, amount2);
+    public Resource insertMarble(int position) throws NegativeResAmountException, InvalidKeyException, InvalidAbilityChoiceException, NoLeaderAbilitiesException, CostNotMatchingException {
+        //if (choice == AbilityChoice.STANDARD) return BasicStrategies.insertMarble(this, position);
+        //else return this.resStrategy.insertMarble(this, position, choice, amount1, amount2);
+        return this.resStrategy.insertMarble(this, position);
     }
 
     public void buyDevCard(int level, CardColor color, int numSlot, AbilityChoice choice, Resource fromDepot, Resource fromStrongbox) throws CannotContainFaithException, NotEnoughSpaceException, NegativeResAmountException, DeckEmptyException, CostNotMatchingException, NotEnoughResException, InvalidKeyException, NoLeaderAbilitiesException, InvalidAbilityChoiceException, DevSlotEmptyException, InvalidNumSlotException {

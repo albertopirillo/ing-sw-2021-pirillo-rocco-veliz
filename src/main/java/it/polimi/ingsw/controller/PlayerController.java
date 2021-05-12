@@ -3,6 +3,7 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.network.DepotSetting;
+import it.polimi.ingsw.network.requests.ChangeMarblesRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,20 +47,45 @@ public class PlayerController {
     }
 
     //Calls the player method and then DepotController to handle the resource placement in the depot
-    public void insertMarble(int position, AbilityChoice choice, int amount1, int amount2) {
+    public void insertMarble(int position) {
         try {
             Player activePlayer = controller.getGame().getActivePlayer();
-            Resource output = activePlayer.insertMarble(position, choice, amount1, amount2);
+            Resource output = activePlayer.insertMarble(position);
             ResourceController resourceController = controller.getResourceController();
             resourceController.getTempRes().setToHandle(output);
-            controller.getGame().updateMarketTray();
-            controller.getGame().updateTempRes();
-            controller.resetException();
+            if(output.hasAllResources()){
+                controller.getGame().updateTempMarbles(output.getValue(ResourceType.ALL));
+            }
+            else {
+                controller.getGame().updateMarketTray();
+                controller.getGame().updateTempRes();
+                controller.resetException();
+            }
         } catch (NegativeResAmountException | InvalidKeyException | InvalidAbilityChoiceException | NoLeaderAbilitiesException | CostNotMatchingException e) {
             controller.setException(e);
             controller.getGame().updateClientError(controller.getClientError());
-        } finally {
-            controller.getGame().notifyEndOfUpdates();
+        }
+    }
+
+    public void changeWhiteMarbles(ChangeMarblesRequest changeMarblesRequest){
+        ResourceController resourceController = controller.getResourceController();
+        Resource toHandle = resourceController.getTempRes().getToHandle();
+        try {
+            Player activePlayer = controller.getGame().getActivePlayer();
+            int amount1 = changeMarblesRequest.getAmount1();
+            int amount2 = changeMarblesRequest.getAmount2();
+            if(toHandle.getValue(ResourceType.ALL) != amount1 + amount2) throw new CostNotMatchingException("The number of white marbles does not match");
+            activePlayer.changeWhiteMarbles(amount1, amount2, toHandle);
+            controller.getGame().updateTempRes();
+            controller.resetException();
+        } catch (InvalidKeyException | NegativeResAmountException | CostNotMatchingException | NoLeaderAbilitiesException e) {
+            controller.setException(e);
+            controller.getGame().updateClientError(controller.getClientError());
+            try {
+                controller.getGame().updateTempMarbles(toHandle.getValue(ResourceType.ALL));
+            } catch (InvalidKeyException invalidKeyException) {
+                invalidKeyException.printStackTrace();
+            }
         }
     }
 
@@ -99,8 +125,6 @@ public class PlayerController {
                 throw new CannotEndTurnException("There are still resources to be placed");
             }
             controller.getGame().nextTurn();
-            controller.getGame().updateMarketTray();
-            controller.getGame().updateMarket();
             controller.resetException();
         } catch (CannotEndTurnException | NegativeResAmountException | InvalidKeyException e) {
             controller.setException(e);

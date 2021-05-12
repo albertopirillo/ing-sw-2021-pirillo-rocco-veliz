@@ -61,4 +61,5 @@ public abstract class PlayerInterface {
     public abstract void updateFaithTrack(FaithTrackUpdate faithTrackUpdate);
     public abstract void updateMarket(MarketUpdate marketUpdate);
     public abstract void updateMarketTray(MarketTrayUpdate update);
+    public abstract void updateTempMarbles(TempMarblesUpdate tempMarblesUpdate);
 }

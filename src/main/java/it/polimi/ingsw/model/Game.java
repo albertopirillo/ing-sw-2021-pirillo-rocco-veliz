@@ -183,4 +183,9 @@ public abstract class Game {
             observer.showTempRes(this);
     }
 
+    public void updateTempMarbles(int numWhiteMarbles){
+        //System.out.println("[MODEL] Notifying listeners of temporary resources update");
+        for(ModelObserver observer : observers)
+            observer.showTempMarbles(this, numWhiteMarbles);
+    }
 }

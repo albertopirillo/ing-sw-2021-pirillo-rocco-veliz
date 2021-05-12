@@ -18,4 +18,5 @@ public interface ModelObserver {
     void showTempRes(Game game);
     void quitGame();
     String getPlayer();
+    void showTempMarbles(Game game, int numWhiteMarbles);
 }

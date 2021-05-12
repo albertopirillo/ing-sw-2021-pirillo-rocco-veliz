@@ -123,8 +123,6 @@ public class Player {
     }
 
     public Resource insertMarble(int position) throws NegativeResAmountException, InvalidKeyException, InvalidAbilityChoiceException, NoLeaderAbilitiesException, CostNotMatchingException {
-        //if (choice == AbilityChoice.STANDARD) return BasicStrategies.insertMarble(this, position);
-        //else return this.resStrategy.insertMarble(this, position, choice, amount1, amount2);
         return this.resStrategy.insertMarble(this, position);
     }
 

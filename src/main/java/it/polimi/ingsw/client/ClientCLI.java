@@ -193,9 +193,13 @@ public class ClientCLI extends PlayerInterface {
         return null;
     }
 
-    public int getPosition(){
-        System.out.println("Choose num of position : [0-3 to column 4-6 to rows, 6 is the first row]");
-        return Integer.parseInt(stdin.nextLine());
+    public int getPosition(int min, int max){
+        int position;
+        do {
+            System.out.println("Choose num of position : [MIN : "+ min + " MAX: " + max + "]");
+            position = Integer.parseInt(stdin.nextLine());
+        }while (position < min || position >max);
+        return position;
     }
 
     public void simulateGame() {
@@ -256,10 +260,11 @@ public class ClientCLI extends PlayerInterface {
                 request = new ShowDevSlotsRequest();
                 break;
             case 8:
-                request = new InsertMarbleRequest(getPosition(), AbilityChoice.STANDARD, 0,0);
+                request = new InsertMarbleRequest(getPosition(0,6));
                 break;
             case 9:
-                //request = new BuyDevCardRequest(getLevel(),getCardColo(),getAbilityChoice(),..);
+
+                request = buyDevCardMenu();
                 break;
             case 10:
                 request = basicProductionMenu();
@@ -302,7 +307,52 @@ public class ClientCLI extends PlayerInterface {
         }
     }
 
+    private Request buyDevCardMenu() {
+        Resource depotResource = new Resource(0, 0, 0, 0);
+        Resource strongboxResource = new Resource(0, 0, 0, 0);
+        String[] abilityOptions = {"1: NO ABILITY", "2: FIRST ABILITY", "3: SECOND ABILITY", "4: BOTH ABILITY"};
+        String[] levelOptions = {"1: Level 1", "2: Level 2", "3: Level 3"};
+        String[] colorOptions = {"1: GREEN", "2: BLUE", "3: YELLLOW", "4: PURPLE"};
+        String[] slotOptions = {"1: Slot 1", "2: Slot 2", "3: Slot 3"};
+        String[] options = {"STONE", "COIN", "SHIELD", "SERVANT"};
+        while(true) {
+            try {
+                System.out.println("Choose what ability you want to use");
+                int ability = getIntegerSelection(abilityOptions);
+                System.out.println("Choose the DevCard's level");
+                int level = getIntegerSelection(levelOptions);
+                System.out.println("Choose the DevCard's level");
+                int color = getIntegerSelection(colorOptions);
+                System.out.println("Choose the slot's num");
+                int slot = getIntegerSelection(slotOptions);
+                System.out.println("\nSelect where are you taking the resource from");
+                for (String option : options) {
+                    System.out.println(option);
+                    System.out.println("How many resources to take from Depot");
+                    int amountDepot = Integer.parseInt(stdin.nextLine());
+                    if (amountDepot < 0 || amountDepot > 3) throw new Exception();
+                    System.out.println("How many resources to take from Strongbox");
+                    int amountStrongbox = Integer.parseInt(stdin.nextLine());
+                    if (amountStrongbox < 0) throw new Exception();
+                    depotResource.modifyValue(strToResType(option.toLowerCase()),amountDepot);
+                    strongboxResource.modifyValue(strToResType(option.toLowerCase()),amountStrongbox);
+                }
+                return new BuyDevCardRequest(level,CardColor.parseColorCard(color), parseToAbility(ability),depotResource, strongboxResource, slot-1);
+            } catch (Exception e){
+                System.out.println("Invalid input, retry");
+            }
+        }
+    }
 
+    private AbilityChoice parseToAbility(int choice){
+       switch (choice){
+           case 1: return AbilityChoice.STANDARD;
+           case 2: return AbilityChoice.FIRST;
+           case 3: return AbilityChoice.SECOND;
+           case 4: return AbilityChoice.BOTH;
+       }
+       return null;
+    }
     private Request basicProductionMenu(){
         Request request = null;
         Resource depotResource = new Resource(0, 0, 0, 0);
@@ -392,7 +442,7 @@ public class ClientCLI extends PlayerInterface {
         return new PlaceResourceRequest(toDiscard, toPlace);
     }
 
-    @Deprecated
+    //@Deprecated
     public ResourceType strToResType(String input){
         switch (input) {
             case "stone": return ResourceType.STONE;
@@ -622,5 +672,29 @@ public class ClientCLI extends PlayerInterface {
     public void updateSoloTokens(ActionTokenUpdate actionTokenUpdate) {
         System.out.println("\nAction tokens have been updated, the next one on the list is:");
         System.out.println(actionTokenUpdate.getNextToken());
+    }
+
+    @Override
+    public void updateTempMarbles(TempMarblesUpdate tempMarblesUpdate) {
+        System.out.println(tempMarblesUpdate);
+        Request request = toChangeMarble(tempMarblesUpdate.getResources().get(0),tempMarblesUpdate.getResources().get(1),tempMarblesUpdate.getNumWhiteMarbles());
+        getPlayer().sendMessage(request);
+    }
+
+    private Request toChangeMarble(ResourceType res1, ResourceType res2, int numMarble){
+        while(true) {
+            try{
+                System.out.println("Choice the num of "+res1);
+                int amount1 = Integer.parseInt(stdin.nextLine());
+                if (amount1 > numMarble) throw new Exception();
+                System.out.println("Choice the num of "+res2);
+                int amount2 = Integer.parseInt(stdin.nextLine());
+                if (amount2 > numMarble) throw new Exception();
+                if (amount1 + amount2 > numMarble) throw new Exception();
+                return new ChangeMarblesRequest(amount1, amount2);
+            } catch (Exception e) {
+                System.out.println("Invalid input, retry");
+            }
+        }
     }
 }

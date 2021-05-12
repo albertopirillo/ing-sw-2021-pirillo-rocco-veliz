@@ -3,6 +3,7 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.network.DepotSetting;
+import it.polimi.ingsw.network.requests.ChangeMarblesRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,8 +59,8 @@ public class PlayerController {
             else {
                 controller.getGame().updateMarketTray();
                 controller.getGame().updateTempRes();
-                controller.resetException();
             }
+            controller.resetException();
         } catch (NegativeResAmountException | InvalidKeyException | InvalidAbilityChoiceException | NoLeaderAbilitiesException | CostNotMatchingException e) {
             controller.setException(e);
             controller.getGame().updateClientError(controller.getClientError());

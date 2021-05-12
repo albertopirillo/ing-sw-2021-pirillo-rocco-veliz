@@ -51,12 +51,10 @@ public class ResourceStrategy {
 
     //The player can decide whether to convert the color of every single marble
     public Resource insertMarble(Player player, int position) throws InvalidKeyException, NegativeResAmountException, NoLeaderAbilitiesException, InvalidAbilityChoiceException, CostNotMatchingException {
-        if (this.size == 0) return BasicStrategies.insertMarble(player, position);//throw new NoLeaderAbilitiesException();
+        if (this.size == 0) return BasicStrategies.insertMarble(player, position);
 
-        //Check if amount1+amount2 is equal to the number of white marbles
         Market market = player.getGame().getMarket();
         Marbles marbles = market.getMarketTray().insertMarble(position);
-        //if (amount1 + amount2 != marbles.getValue(MarblesColor.WHITE)) throw new CostNotMatchingException("The number of white marbles does not match");
 
         //Selects the requested abilities and modifies the output resource
         Resource outputRes = marbles.getResources();

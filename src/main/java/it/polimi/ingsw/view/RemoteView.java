@@ -132,6 +132,13 @@ public class RemoteView extends View {
     }
 
     @Override
+    public void showTempMarbles(Game game, int numWhiteMarbles) {
+        Player activePlayer = game.getActivePlayer();
+        ServerUpdate msg = new TempMarblesUpdate(activePlayer.getNickname(), numWhiteMarbles, activePlayer.getResTypesAbility());
+        connection.sendMessage(msg);
+    }
+
+    @Override
     public void showDiscardedCards(SoloGame soloGame, List<DevelopmentCard> cardList) {
         Player activePlayer = soloGame.getActivePlayer();
         ServerUpdate msg = new DiscardedCardsUpdate(activePlayer.getNickname(), cardList);

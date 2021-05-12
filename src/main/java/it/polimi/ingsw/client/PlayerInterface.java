@@ -63,4 +63,5 @@ public abstract class PlayerInterface {
     public abstract void updateMarketTray(MarketTrayUpdate update);
     public abstract void updateDiscardedCards(DiscardedCardsUpdate update);
     public abstract void updateSoloTokens(ActionTokenUpdate actionTokenUpdate);
+    public abstract void updateTempMarbles(TempMarblesUpdate tempMarblesUpdate);
 }

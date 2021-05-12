@@ -8,6 +8,19 @@ public enum CardColor {
     YELLOW,
     PURPLE;
 
+    public static CardColor parseColorCard(int num){
+        switch(num){
+            case 1:
+                return CardColor.GREEN;
+            case 2:
+                return CardColor.BLUE;
+            case 3:
+                return CardColor.YELLOW;
+            case 4:
+                return CardColor.PURPLE;
+        }
+        return null;
+    }
     public int getNumberColumn(){
         switch(this){
             case GREEN:

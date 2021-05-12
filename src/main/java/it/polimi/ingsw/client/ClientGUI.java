@@ -90,4 +90,9 @@ public class ClientGUI extends PlayerInterface {
     public void updateSoloTokens(ActionTokenUpdate actionTokenUpdate) {
 
     }
+
+    @Override
+    public void updateTempMarbles(TempMarblesUpdate tempMarblesUpdate) {
+        
+    }
 }

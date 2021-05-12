@@ -82,7 +82,12 @@ public class ClientGUI extends PlayerInterface {
     }
 
     @Override
-    public void updateTempMarbles(TempMarblesUpdate tempMarblesUpdate) {
+    public void updateDiscardedCards(DiscardedCardsUpdate update) {
+
+    }
+
+    @Override
+    public void updateSoloTokens(ActionTokenUpdate actionTokenUpdate) {
 
     }
 }

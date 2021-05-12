@@ -28,19 +28,27 @@ public class ResourceController {
         //Check if there are enough resources to be discarded
         if(!tempRes.compare(toDiscard))
             throw new WrongDepotInstructionsException("You are trying to discard more resources than you can");
-        player.discardRes(toDiscard);
-        for(ResourceType key: toDiscard.keySet()) {
-            tempRes.modifyValue(key, - toDiscard.getValue(key));
-        }
 
         //Check if the provided settings are correct to store this resource
         Resource checkRes = new Resource(0,0,0,0);
         for(DepotSetting setting: settings) {
             checkRes.modifyValue(setting.getResType(), setting.getAmount());
         }
+
+        //Temporary resource used only to do the following check, clone of tempRes at the beginning
+        Resource willBeDiscarded = new Resource(tempRes.getMap());
+        for(ResourceType key: toDiscard.keySet()) {
+            willBeDiscarded.modifyValue(key, - toDiscard.getValue(key));
+        }
         Depot depot = player.getPersonalBoard().getDepot();
-        if (!checkRes.equals(tempRes) || !depot.canInsert(settings))
+        if (!checkRes.equals(willBeDiscarded) || !depot.canInsert(settings))
             throw new WrongDepotInstructionsException("You provided incorrect instructions to place those resources");
+
+        //Discard those resources
+        player.discardRes(toDiscard);
+        for(ResourceType key: toDiscard.keySet()) {
+            tempRes.modifyValue(key, - toDiscard.getValue(key));
+        }
 
         //Place those resources in the depot
         for(DepotSetting setting: settings) {

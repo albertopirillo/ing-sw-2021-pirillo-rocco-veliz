@@ -1,5 +1,7 @@
 package it.polimi.ingsw.client;
 
+import it.polimi.ingsw.exceptions.InvalidKeyException;
+import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.network.DepotSetting;
 import it.polimi.ingsw.network.Processable;
@@ -12,6 +14,7 @@ import java.util.*;
 
 public class ClientCLI extends PlayerInterface {
     private final Scanner stdin;
+    private Resource tempRes;
 
     public ClientCLI(Client player){
         super(player);
@@ -96,20 +99,44 @@ public class ClientCLI extends PlayerInterface {
         getPlayer().sendMessage(request);
     }
 
-    public int getInitialResources(){
+    private int getIntegerSelection(String[] options){
         int selection;
         do {
-            System.out.println("1: STONE");
-            System.out.println("2: COIN");
-            System.out.println("3: SHIELD");
-            System.out.println("4: SERVANT");
+            for (String option : options) {
+                System.out.println(option);
+            }
             try {
                 selection = Integer.parseInt(stdin.nextLine());
             } catch(Exception e){
                 selection = -1;
             }
-        } while (selection<1 || selection>4);
+        } while(selection < 1 || selection > options.length);
         return selection;
+    }
+
+    private String getStringSelection(String[] selections, String[] options){
+        String selection;
+        List<String> selectionList = Arrays.asList(selections);
+        do {
+            for (String option : options) {
+                System.out.println(option);
+            }
+            try {
+                selection = stdin.nextLine();
+            } catch(Exception e){
+                selection = "";
+            }
+        } while(!selectionList.contains(selection));
+        return selection;
+    }
+
+    private int getResourceMenu(){
+        String[] options = {"1: STONE", "2: COIN", "3: SHIELD", "4: SERVANT"};
+        return getIntegerSelection(options);
+    }
+
+    public int getInitialResources(){
+        return getResourceMenu();
     }
 
     @Override
@@ -166,26 +193,20 @@ public class ClientCLI extends PlayerInterface {
         return null;
     }
 
-    private int getPosition(){
+    public int getPosition(){
         System.out.println("Choose num of position : [0-3 to column 4-6 to rows, 6 is the first row]");
-        return Integer.parseInt(stdin.nextLine());
-    }
-
-    private int getNumWhiteMarble(){
-        System.out.println("How many white marbles you want ");
         return Integer.parseInt(stdin.nextLine());
     }
 
     public void simulateGame() {
         int selection;
-        int numErrors = 0;
         do {
             System.out.println("\nIt's your turn!");
             System.out.println("What do you want to do now?");
             System.out.println("1: Show faith track");
             System.out.println("2: Show depot and strongbox");
             System.out.println("3: Show leader cards");
-            System.out.println("4: Show pending resources from the Market");
+            /*System.out.println("4: Show pending resources from the Market");*/
             System.out.println("5: Show market");
             System.out.println("6: Show market tray");
             System.out.println("7: Show Development Slots");
@@ -199,7 +220,7 @@ public class ClientCLI extends PlayerInterface {
             System.out.println("15: Discard leader card 1");
             System.out.println("16: Discard leader card 2");
             System.out.println("17: Reorder depot");
-            System.out.println("18: Place pending resources from the Market");
+            /*System.out.println("18: Place pending resources from the Market");*/
             System.out.println("19: End Turn");
             System.out.println("20: Quit Game");
             System.out.println();
@@ -222,9 +243,9 @@ public class ClientCLI extends PlayerInterface {
             case 3:
                 request = new ShowLeaderCardsRequest();
                 break;
-            case 4:
+            /*case 4:
                 request = new ShowTempResRequest();
-                break;
+                break; TODO: fix order */
             case 5:
                 request = new ShowMarketRequest();
                 break;
@@ -235,13 +256,13 @@ public class ClientCLI extends PlayerInterface {
                 request = new ShowDevSlotsRequest();
                 break;
             case 8:
-                request = new InsertMarbleRequest(getPosition());
+                request = new InsertMarbleRequest(getPosition(), AbilityChoice.STANDARD, 0,0);
                 break;
             case 9:
                 //request = new BuyDevCardRequest(getLevel(),getCardColo(),getAbilityChoice(),..);
                 break;
             case 10:
-                //request = new BasicProductionRequest(); @Riccardo
+                request = basicProductionMenu();
                 break;
             case 11:
                 //request = new ExtraProductionRequest(); @Riccardo
@@ -264,9 +285,9 @@ public class ClientCLI extends PlayerInterface {
             case 17:
                 request = reorderDepotMenu();
                 break;
-            case 18:
-                request = PlaceResourceMenu();
-                break;
+           /* case 18:
+                request = placeResourceMenu();
+                break;*/
             case 19:
                 request = new EndTurnRequest();
                 break;
@@ -281,12 +302,97 @@ public class ClientCLI extends PlayerInterface {
         }
     }
 
-    private Request PlaceResourceMenu() {
+
+    private Request basicProductionMenu(){
+        Request request = null;
+        Resource depotResource = new Resource(0, 0, 0, 0);
+        Resource strongboxResource = new Resource(0, 0, 0, 0);
+
+        String[] options = {"d: DEPOT", "s: STRONGBOX"};
+        String[] selections = {"d", "s"};
+
+        System.out.println("\nSelect first input resource type:");
+        ResourceType input1 = parseToResourceType(getResourceMenu());
+        System.out.println("\nWhere are you taking this resource from:");
+        String inputPlace1 = getStringSelection(selections, options);
+        System.out.println("\nSelect second input resource type:");
+        ResourceType input2 = parseToResourceType(getResourceMenu());
+        System.out.println("\nWhere are you taking this resource from:");
+        String inputPlace2 = getStringSelection(selections, options);
+        System.out.println("\nSelect output resource type:");
+        ResourceType output = parseToResourceType(getResourceMenu());
+
+        try {
+            if(inputPlace1.equals("d")) {
+                depotResource.modifyValue(input1, 1);
+            } else if(inputPlace1.equals("s")){
+                strongboxResource.modifyValue(input1, 1);
+            }
+            if(inputPlace2.equals("d")) {
+                depotResource.modifyValue(input2, 1);
+            } else if(inputPlace2.equals("s")){
+                strongboxResource.modifyValue(input2, 1);
+            }
+            request = new BasicProductionRequest(input1, input2, output, depotResource, strongboxResource);
+        } catch (InvalidKeyException | NegativeResAmountException e) {
+            e.printStackTrace();
+        }
+        return request;
+    }
+
+    @Override
+    public void updateTempResource(TempResourceUpdate update) {
+        Resource resource = update.getResource();
+        if (resource != null) {
+            System.out.println("\nResources obtained from the Market that need to be placed: ");
+            System.out.println(resource);
+            this.tempRes = resource;
+            Request request = this.placeResourceMenu();
+            this.getPlayer().sendMessage(request);
+        }
+        else {
+            this.tempRes = null;
+            System.out.println("\nThere are no resources from the market that need to be placed");
+        }
+    }
+
+    private Request placeResourceMenu() {
+        int amountSelection, layerSelection;
+        List<DepotSetting> toPlace = new ArrayList<>();
+        Resource toDiscard = new Resource(0,0,0,0);
+        try {
+            for(ResourceType key: this.tempRes.keySet()) {
+                if (tempRes.getValue(key) != 0) {
+                    System.out.println("\nYou have " + key + "x" + tempRes.getValue(key));
+                    System.out.println("How many resources to discard?");
+                    amountSelection = Integer.parseInt(stdin.nextLine());
+                    toDiscard.modifyValue(key, amountSelection);
+                    tempRes.modifyValue(key, -amountSelection);
+
+                    while (tempRes.getValue(key) > 0) {
+                        System.out.println("How many resources to place? (Remaining: " + tempRes.getValue(key) + ")");
+                        amountSelection = Integer.parseInt(stdin.nextLine());
+                        System.out.println("In which layer would you like to place them?");
+                        layerSelection = Integer.parseInt(stdin.nextLine());
+                        toPlace.add(new DepotSetting(layerSelection, key, amountSelection));
+                        tempRes.modifyValue(key, -amountSelection);
+                    }
+                }
+            }
+        }   catch (Exception e) {
+            System.out.println("Invalid input, retry");
+        }
+        return new PlaceResourceRequest(toDiscard, toPlace);
+    }
+
+    @Deprecated
+    private Request placeResourceMenuOld() {
         Resource toDiscard = toDiscardMenu();
         List<DepotSetting> toPlace = toPlaceMenu();
         return new PlaceResourceRequest(toDiscard, toPlace);
     }
 
+    @Deprecated
     public ResourceType strToResType(String input){
         switch (input) {
             case "stone": return ResourceType.STONE;
@@ -297,6 +403,7 @@ public class ClientCLI extends PlayerInterface {
         }
     }
 
+    @Deprecated
     private Resource toDiscardMenu() {
         Resource toDiscard = new Resource();
         String inputStr;
@@ -322,6 +429,7 @@ public class ClientCLI extends PlayerInterface {
         }
     }
 
+    @Deprecated
     private List<DepotSetting> toPlaceMenu() {
         List<DepotSetting> toPlace = new ArrayList<>();
         ResourceType resSelection;
@@ -367,27 +475,6 @@ public class ClientCLI extends PlayerInterface {
     }
 
     @Override
-    public void updateTempMarbles(TempMarblesUpdate tempMarblesUpdate){
-        System.out.println(tempMarblesUpdate);
-        System.out.println("Choice the num of "+tempMarblesUpdate.getResources().get(0));
-        int amount1 = Integer.parseInt(stdin.nextLine());
-        System.out.println("Choice the num of "+tempMarblesUpdate.getResources().get(1));
-        int amount2 = Integer.parseInt(stdin.nextLine());
-        //check amount1 + amount 2 = tempMarblesUpdate
-        Request request = new ChangeMarblesRequest(amount1, amount2);
-        getPlayer().sendMessage(request);
-    }
-
-    @Override
-    public void updateTempResource(TempResourceUpdate update) {
-        if (update.getResource() != null) {
-            System.out.println("Resources obtained from the Market that need to be placed: ");
-            System.out.println(update.getResource());
-        }
-        else System.out.println(ANSIColor.RED + "There are no resources that need to be placed" + ANSIColor.RESET);
-    }
-
-    @Override
     public void updateStorages(StorageUpdate update) {
         Map<String, List<DepotSetting>> depotMap = update.getDepotMap();
         Map<String, Resource> strongboxMap = update.getStrongboxMap();
@@ -426,7 +513,7 @@ public class ClientCLI extends PlayerInterface {
     public void updateDevSlots(DevSlotsUpdate update) {
         Map<String, List<DevelopmentSlot>> devSlotList = update.getDevSlotMap();
         for(String playerNick: devSlotList.keySet()) {
-            System.out.println("Showing " + playerNick + "'s development slots:");
+            System.out.println("\nShowing " + playerNick + "'s development slots:");
             int slotNumber = 1;
             for (DevelopmentSlot slot : devSlotList.get(playerNick)) {
                 if (slot.getCards().size() == 0) System.out.println("\tSlot number " + slotNumber + " is empty");
@@ -519,5 +606,21 @@ public class ClientCLI extends PlayerInterface {
     public void updateMarketTray(MarketTrayUpdate update) {
         System.out.println("\nMarket: ");
         System.out.println(update);
+    }
+
+    @Override
+    public void updateDiscardedCards(DiscardedCardsUpdate update) {
+        int index = 1;
+        System.out.print("\nLorenzo discarded the following cards: ");
+        for(DevelopmentCard devCard: update.getCardList()){
+            System.out.println("\nCard " + index++ + ":");
+            System.out.println(devCard);
+        }
+    }
+
+    @Override
+    public void updateSoloTokens(ActionTokenUpdate actionTokenUpdate) {
+        System.out.println("\nAction tokens have been updated, the next one on the list is:");
+        System.out.println(actionTokenUpdate.getNextToken());
     }
 }

@@ -9,6 +9,7 @@ import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import it.polimi.ingsw.utils.LeaderAbilityDeserializer;
 import it.polimi.ingsw.utils.LeaderCardJsonDeserializer;
+import it.polimi.ingsw.view.ModelObserver;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -53,12 +54,25 @@ public class SoloGame extends Game {
         SoloActionToken currentToken = this.soloTokens.remove(0);
         currentToken.reveal();
         this.soloTokens.add(currentToken);
+        this.updateNextActionToken(this.soloTokens.get(0));
         checkEndGame();
     }
 
     @Override
     public void checkEndGame() throws NegativeResAmountException, InvalidKeyException {
         if(this.blackCrossPosition >= 20) this.lastTurn(false);
+    }
+
+    public void updateDiscardedCards(List<DevelopmentCard> cardList){
+        //System.out.println("[MODEL] Notifying listeners of card discarded by Lorenzo");
+        for(ModelObserver observer : getObservers())
+            observer.showDiscardedCards(this, cardList);
+    }
+
+    public void updateNextActionToken(SoloActionToken nextToken) {
+        //System.out.println("[MODEL] Notifying listeners of solo action token update");
+        for(ModelObserver observer : getObservers())
+            observer.showNextActionToken(this, nextToken);
     }
 
     @Override

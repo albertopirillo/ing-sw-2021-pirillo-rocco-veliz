@@ -130,4 +130,19 @@ public class RemoteView extends View {
         ServerUpdate msg = new TempResourceUpdate(activePlayer.getNickname(), tempRes);
         connection.sendMessage(msg);
     }
+
+    @Override
+    public void showDiscardedCards(SoloGame soloGame, List<DevelopmentCard> cardList) {
+        Player activePlayer = soloGame.getActivePlayer();
+        ServerUpdate msg = new DiscardedCardsUpdate(activePlayer.getNickname(), cardList);
+        connection.sendMessage(msg);
+    }
+
+    @Override
+    public void showNextActionToken(SoloGame soloGame, SoloActionToken nextToken) {
+        Player activePlayer = soloGame.getActivePlayer();
+        ServerUpdate msg = new ActionTokenUpdate(activePlayer.getNickname(), nextToken);
+        connection.sendMessage(msg);
+    }
+
 }

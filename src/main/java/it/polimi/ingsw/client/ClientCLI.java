@@ -14,6 +14,7 @@ import java.util.*;
 
 public class ClientCLI extends PlayerInterface {
     private final Scanner stdin;
+    private Resource tempRes;
 
     public ClientCLI(Client player){
         super(player);
@@ -101,8 +102,8 @@ public class ClientCLI extends PlayerInterface {
     private int getIntegerSelection(String[] options){
         int selection;
         do {
-            for(int i = 0; i < options.length; i++){
-                System.out.println(options[i]);
+            for (String option : options) {
+                System.out.println(option);
             }
             try {
                 selection = Integer.parseInt(stdin.nextLine());
@@ -117,8 +118,8 @@ public class ClientCLI extends PlayerInterface {
         String selection;
         List<String> selectionList = Arrays.asList(selections);
         do {
-            for(int i = 0; i < options.length; i++){
-                System.out.println(options[i]);
+            for (String option : options) {
+                System.out.println(option);
             }
             try {
                 selection = stdin.nextLine();
@@ -205,7 +206,7 @@ public class ClientCLI extends PlayerInterface {
             System.out.println("1: Show faith track");
             System.out.println("2: Show depot and strongbox");
             System.out.println("3: Show leader cards");
-            System.out.println("4: Show pending resources from the Market");
+            /*System.out.println("4: Show pending resources from the Market");*/
             System.out.println("5: Show market");
             System.out.println("6: Show market tray");
             System.out.println("7: Show Development Slots");
@@ -219,7 +220,7 @@ public class ClientCLI extends PlayerInterface {
             System.out.println("15: Discard leader card 1");
             System.out.println("16: Discard leader card 2");
             System.out.println("17: Reorder depot");
-            System.out.println("18: Place pending resources from the Market");
+            /*System.out.println("18: Place pending resources from the Market");*/
             System.out.println("19: End Turn");
             System.out.println("20: Quit Game");
             System.out.println();
@@ -242,9 +243,9 @@ public class ClientCLI extends PlayerInterface {
             case 3:
                 request = new ShowLeaderCardsRequest();
                 break;
-            case 4:
+            /*case 4:
                 request = new ShowTempResRequest();
-                break;
+                break; TODO: fix order */
             case 5:
                 request = new ShowMarketRequest();
                 break;
@@ -284,9 +285,9 @@ public class ClientCLI extends PlayerInterface {
             case 17:
                 request = reorderDepotMenu();
                 break;
-            case 18:
+           /* case 18:
                 request = placeResourceMenu();
-                break;
+                break;*/
             case 19:
                 request = new EndTurnRequest();
                 break;
@@ -339,12 +340,59 @@ public class ClientCLI extends PlayerInterface {
         return request;
     }
 
+    @Override
+    public void updateTempResource(TempResourceUpdate update) {
+        Resource resource = update.getResource();
+        if (resource != null) {
+            System.out.println("\nResources obtained from the Market that need to be placed: ");
+            System.out.println(resource);
+            this.tempRes = resource;
+            Request request = this.placeResourceMenu();
+            this.getPlayer().sendMessage(request);
+        }
+        else {
+            this.tempRes = null;
+            System.out.println("\nThere are no resources from the market that need to be placed");
+        }
+    }
+
     private Request placeResourceMenu() {
+        int amountSelection, layerSelection;
+        List<DepotSetting> toPlace = new ArrayList<>();
+        Resource toDiscard = new Resource(0,0,0,0);
+        try {
+            for(ResourceType key: this.tempRes.keySet()) {
+                if (tempRes.getValue(key) != 0) {
+                    System.out.println("\nYou have " + key + "x" + tempRes.getValue(key));
+                    System.out.println("How many resources to discard?");
+                    amountSelection = Integer.parseInt(stdin.nextLine());
+                    toDiscard.modifyValue(key, amountSelection);
+                    tempRes.modifyValue(key, -amountSelection);
+
+                    while (tempRes.getValue(key) > 0) {
+                        System.out.println("How many resources to place? (Remaining: " + tempRes.getValue(key) + ")");
+                        amountSelection = Integer.parseInt(stdin.nextLine());
+                        System.out.println("In which layer would you like to place them?");
+                        layerSelection = Integer.parseInt(stdin.nextLine());
+                        toPlace.add(new DepotSetting(layerSelection, key, amountSelection));
+                        tempRes.modifyValue(key, -amountSelection);
+                    }
+                }
+            }
+        }   catch (Exception e) {
+            System.out.println("Invalid input, retry");
+        }
+        return new PlaceResourceRequest(toDiscard, toPlace);
+    }
+
+    @Deprecated
+    private Request placeResourceMenuOld() {
         Resource toDiscard = toDiscardMenu();
         List<DepotSetting> toPlace = toPlaceMenu();
         return new PlaceResourceRequest(toDiscard, toPlace);
     }
 
+    @Deprecated
     public ResourceType strToResType(String input){
         switch (input) {
             case "stone": return ResourceType.STONE;
@@ -355,6 +403,7 @@ public class ClientCLI extends PlayerInterface {
         }
     }
 
+    @Deprecated
     private Resource toDiscardMenu() {
         Resource toDiscard = new Resource();
         String inputStr;
@@ -380,6 +429,7 @@ public class ClientCLI extends PlayerInterface {
         }
     }
 
+    @Deprecated
     private List<DepotSetting> toPlaceMenu() {
         List<DepotSetting> toPlace = new ArrayList<>();
         ResourceType resSelection;
@@ -422,15 +472,6 @@ public class ClientCLI extends PlayerInterface {
                 System.out.println("Invalid input, retry");
             }
         }
-    }
-
-    @Override
-    public void updateTempResource(TempResourceUpdate update) {
-        if (update.getResource() != null) {
-            System.out.println("Resources obtained from the Market that need to be placed: ");
-            System.out.println(update.getResource());
-        }
-        else System.out.println(ANSIColor.RED + "There are no resources that need to be placed" + ANSIColor.RESET);
     }
 
     @Override

@@ -59,7 +59,7 @@ public class PlayerController {
             controller.setException(e);
             controller.getGame().updateClientError(controller.getClientError());
         } finally {
-            controller.getGame().notifyEndOfUpdates();
+            //controller.getGame().notifyEndOfUpdates(); no more needed
         }
     }
 
@@ -85,11 +85,11 @@ public class PlayerController {
             controller.getGame().updateStorages();
             controller.getGame().updateFaithTrack();
             controller.resetException();
+            controller.getGame().notifyEndOfUpdates();
         } catch (NotEnoughResException | NotEnoughSpaceException | CannotContainFaithException | NegativeResAmountException | InvalidKeyException | InvalidResourceException | WrongDepotInstructionsException | LayerNotEmptyException | InvalidLayerNumberException | AlreadyInAnotherLayerException e) {
             controller.setException(e);
             controller.getGame().updateClientError(controller.getClientError());
-        } finally {
-            controller.getGame().notifyEndOfUpdates();
+            controller.getGame().updateTempRes();
         }
     }
 

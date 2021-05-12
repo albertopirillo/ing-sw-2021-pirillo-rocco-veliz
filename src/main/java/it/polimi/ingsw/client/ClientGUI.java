@@ -80,4 +80,14 @@ public class ClientGUI extends PlayerInterface {
     public void updateMarketTray(MarketTrayUpdate update) {
 
     }
+
+    @Override
+    public void updateDiscardedCards(DiscardedCardsUpdate update) {
+
+    }
+
+    @Override
+    public void updateSoloTokens(ActionTokenUpdate actionTokenUpdate) {
+
+    }
 }

@@ -10,7 +10,6 @@ import it.polimi.ingsw.network.requests.*;
 import it.polimi.ingsw.network.updates.*;
 import it.polimi.ingsw.utils.ANSIColor;
 
-import java.util.List;
 import java.util.*;
 
 public class ClientCLI extends PlayerInterface {
@@ -566,5 +565,21 @@ public class ClientCLI extends PlayerInterface {
     public void updateMarketTray(MarketTrayUpdate update) {
         System.out.println("\nMarket: ");
         System.out.println(update);
+    }
+
+    @Override
+    public void updateDiscardedCards(DiscardedCardsUpdate update) {
+        int index = 1;
+        System.out.print("\nLorenzo discarded the following cards: ");
+        for(DevelopmentCard devCard: update.getCardList()){
+            System.out.println("\nCard " + index++ + ":");
+            System.out.println(devCard);
+        }
+    }
+
+    @Override
+    public void updateSoloTokens(ActionTokenUpdate actionTokenUpdate) {
+        System.out.println("\nAction tokens have been updated, the next one on the list is:");
+        System.out.println(actionTokenUpdate.getNextToken());
     }
 }

@@ -1,7 +1,8 @@
 package it.polimi.ingsw.view;
 
-import it.polimi.ingsw.model.ClientError;
-import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.*;
+
+import java.util.List;
 
 public interface ModelObserver {
     void gameStateChange(Game game);
@@ -16,6 +17,8 @@ public interface ModelObserver {
     void showStorages(Game game);
     void showDevSlots(Game game);
     void showTempRes(Game game);
+    void showDiscardedCards(SoloGame soloGame, List<DevelopmentCard> cardList);
+    void showNextActionToken(SoloGame soloGame, SoloActionToken nextToken);
     void quitGame();
     String getPlayer();
 }

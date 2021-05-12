@@ -3,9 +3,11 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 
-public abstract class SoloActionToken {
+import java.io.Serializable;
 
-    private final SoloGame game;
+public abstract class SoloActionToken implements Serializable {
+
+    private transient final SoloGame game;
 
     public SoloActionToken(SoloGame game) {
         this.game = game;

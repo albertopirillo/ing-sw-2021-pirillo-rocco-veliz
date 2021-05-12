@@ -1,5 +1,7 @@
 package it.polimi.ingsw.client;
 
+import it.polimi.ingsw.exceptions.InvalidKeyException;
+import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.network.DepotSetting;
 import it.polimi.ingsw.network.Processable;
@@ -8,8 +10,6 @@ import it.polimi.ingsw.network.requests.*;
 import it.polimi.ingsw.network.updates.*;
 import it.polimi.ingsw.utils.ANSIColor;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.*;
 
@@ -99,20 +99,44 @@ public class ClientCLI extends PlayerInterface {
         getPlayer().sendMessage(request);
     }
 
-    public int getInitialResources(){
+    private int getIntegerSelection(String[] options){
         int selection;
         do {
-            System.out.println("1: STONE");
-            System.out.println("2: COIN");
-            System.out.println("3: SHIELD");
-            System.out.println("4: SERVANT");
+            for(int i = 0; i < options.length; i++){
+                System.out.println(options[i]);
+            }
             try {
                 selection = Integer.parseInt(stdin.nextLine());
             } catch(Exception e){
                 selection = -1;
             }
-        } while (selection<1 || selection>4);
+        } while(selection < 1 || selection > options.length);
         return selection;
+    }
+
+    private String getStringSelection(String[] selections, String[] options){
+        String selection;
+        List<String> selectionList = Arrays.asList(selections);
+        do {
+            for(int i = 0; i < options.length; i++){
+                System.out.println(options[i]);
+            }
+            try {
+                selection = stdin.nextLine();
+            } catch(Exception e){
+                selection = "";
+            }
+        } while(!selectionList.contains(selection));
+        return selection;
+    }
+
+    private int getResourceMenu(){
+        String[] options = {"1: STONE", "2: COIN", "3: SHIELD", "4: SERVANT"};
+        return getIntegerSelection(options);
+    }
+
+    public int getInitialResources(){
+        return getResourceMenu();
     }
 
     @Override
@@ -176,7 +200,6 @@ public class ClientCLI extends PlayerInterface {
 
     public void simulateGame() {
         int selection;
-        int numErrors = 0;
         do {
             System.out.println("\nIt's your turn!");
             System.out.println("What do you want to do now?");
@@ -239,7 +262,7 @@ public class ClientCLI extends PlayerInterface {
                 //request = new BuyDevCardRequest(getLevel(),getCardColo(),getAbilityChoice(),..);
                 break;
             case 10:
-                //request = new BasicProductionRequest(); @Riccardo
+                request = basicProductionMenu();
                 break;
             case 11:
                 //request = new ExtraProductionRequest(); @Riccardo
@@ -263,7 +286,7 @@ public class ClientCLI extends PlayerInterface {
                 request = reorderDepotMenu();
                 break;
             case 18:
-                request = PlaceResourceMenu();
+                request = placeResourceMenu();
                 break;
             case 19:
                 request = new EndTurnRequest();
@@ -279,7 +302,45 @@ public class ClientCLI extends PlayerInterface {
         }
     }
 
-    private Request PlaceResourceMenu() {
+
+    private Request basicProductionMenu(){
+        Request request = null;
+        Resource depotResource = new Resource();
+        Resource strongboxResource = new Resource();
+
+        String[] options = {"d: DEPOT", "s: STRONGBOX"};
+        String[] selections = {"d", "s"};
+
+        System.out.println("\nSelect first input resource type:");
+        ResourceType input1 = parseToResourceType(getResourceMenu());
+        System.out.println("\nWhere are you taking this resource from:");
+        String inputPlace1 = getStringSelection(selections, options);
+        System.out.println("\nSelect second input resource type:");
+        ResourceType input2 = parseToResourceType(getResourceMenu());
+        System.out.println("\nWhere are you taking this resource from:");
+        String inputPlace2 = getStringSelection(selections, options);
+        System.out.println("\nSelect output resource type:");
+        ResourceType output = parseToResourceType(getResourceMenu());
+
+        try {
+            if(inputPlace1.equals("d")) {
+                depotResource.addResource(input1, 1);
+            } else if(inputPlace1.equals("s")){
+                strongboxResource.addResource(input1, 1);
+            }
+            if(inputPlace2.equals("d")) {
+                depotResource.addResource(input2, 1);
+            } else if(inputPlace2.equals("s")){
+                strongboxResource.addResource(input2, 1);
+            }
+            request = new BasicProductionRequest(input1, input2, output, depotResource, strongboxResource);
+        } catch (InvalidKeyException | NegativeResAmountException e) {
+            e.printStackTrace();
+        }
+        return request;
+    }
+
+    private Request placeResourceMenu() {
         Resource toDiscard = toDiscardMenu();
         List<DepotSetting> toPlace = toPlaceMenu();
         return new PlaceResourceRequest(toDiscard, toPlace);

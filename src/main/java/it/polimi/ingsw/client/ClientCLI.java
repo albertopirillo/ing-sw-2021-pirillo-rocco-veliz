@@ -412,7 +412,7 @@ public class ClientCLI extends PlayerInterface {
     public void updateDevSlots(DevSlotsUpdate update) {
         Map<String, List<DevelopmentSlot>> devSlotList = update.getDevSlotMap();
         for(String playerNick: devSlotList.keySet()) {
-            System.out.println("Showing " + playerNick + "'s development slots:");
+            System.out.println("\nShowing " + playerNick + "'s development slots:");
             int slotNumber = 1;
             for (DevelopmentSlot slot : devSlotList.get(playerNick)) {
                 if (slot.getCards().size() == 0) System.out.println("\tSlot number " + slotNumber + " is empty");

@@ -8,9 +8,6 @@ import it.polimi.ingsw.network.requests.*;
 import it.polimi.ingsw.network.updates.*;
 import it.polimi.ingsw.utils.ANSIColor;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.util.List;
 import java.util.*;
 
 public class ClientCLI extends PlayerInterface {

@@ -17,7 +17,7 @@ public class SceneBuilder extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/test.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/scene1.fxml")));
         Scene scene = new Scene(root);
         /*String css = Objects.requireNonNull(this.getClass().getResource("/test.css")).toExternalForm();
         scene.getStylesheets().add(css);*/

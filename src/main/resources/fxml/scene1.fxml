@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<AnchorPane fx:id="pane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.Controller1">
+   <children>
+      <Button fx:id="loginButton" layoutX="274.0" layoutY="266.0" mnemonicParsing="false" onAction="#login" text="Button" />
+      <Label layoutX="37.0" layoutY="175.0" text="Username">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <TextField fx:id="textField" layoutX="227.0" layoutY="189.0" />
+   </children>
+</AnchorPane>

@@ -1,6 +1,6 @@
 package it.polimi.ingsw.client.gui;
 
-public class Controller {
+public class MainController {
 
     //@FXML
 

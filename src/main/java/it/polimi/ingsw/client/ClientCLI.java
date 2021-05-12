@@ -305,8 +305,8 @@ public class ClientCLI extends PlayerInterface {
 
     private Request basicProductionMenu(){
         Request request = null;
-        Resource depotResource = new Resource();
-        Resource strongboxResource = new Resource();
+        Resource depotResource = new Resource(0, 0, 0, 0);
+        Resource strongboxResource = new Resource(0, 0, 0, 0);
 
         String[] options = {"d: DEPOT", "s: STRONGBOX"};
         String[] selections = {"d", "s"};
@@ -324,14 +324,14 @@ public class ClientCLI extends PlayerInterface {
 
         try {
             if(inputPlace1.equals("d")) {
-                depotResource.addResource(input1, 1);
+                depotResource.modifyValue(input1, 1);
             } else if(inputPlace1.equals("s")){
-                strongboxResource.addResource(input1, 1);
+                strongboxResource.modifyValue(input1, 1);
             }
             if(inputPlace2.equals("d")) {
-                depotResource.addResource(input2, 1);
+                depotResource.modifyValue(input2, 1);
             } else if(inputPlace2.equals("s")){
-                strongboxResource.addResource(input2, 1);
+                strongboxResource.modifyValue(input2, 1);
             }
             request = new BasicProductionRequest(input1, input2, output, depotResource, strongboxResource);
         } catch (InvalidKeyException | NegativeResAmountException e) {

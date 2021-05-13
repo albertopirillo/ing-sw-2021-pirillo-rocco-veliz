@@ -5,24 +5,23 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import it.polimi.ingsw.exceptions.DeckEmptyException;
 import it.polimi.ingsw.exceptions.FullCardDeckException;
-import it.polimi.ingsw.exceptions.InvalidKeyException;
-import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.lang.reflect.Type;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class MarketTest {
 
     @Test
-    public void parserTest() throws FullCardDeckException, NegativeResAmountException, InvalidKeyException, FileNotFoundException {
+    public void parserTest() throws FileNotFoundException {
 
         Type listType = new TypeToken<ArrayList<DevelopmentCard>>(){}.getType();
-        List<DevelopmentCard> devs = new Gson().fromJson(new JsonReader(new FileReader("src/main/resources/DevCardsConfig.json")), listType);
+        List<DevelopmentCard> devs = new Gson().fromJson(new JsonReader(new FileReader("src/main/resources/json/DevCardsConfig.json")), listType);
         //parser JSON
         /*devs.add(new DevelopmentCard(1, new Resource().addResource(ResourceType.SHIELD, 2),
                 CardColor.GREEN, 1, new ProductionPower(

@@ -312,7 +312,7 @@ public class ClientCLI extends PlayerInterface {
         Resource strongboxResource = new Resource(0, 0, 0, 0);
         String[] abilityOptions = {"1: NO ABILITY", "2: FIRST ABILITY", "3: SECOND ABILITY", "4: BOTH ABILITY"};
         String[] levelOptions = {"1: Level 1", "2: Level 2", "3: Level 3"};
-        String[] colorOptions = {"1: GREEN", "2: BLUE", "3: YELLLOW", "4: PURPLE"};
+        String[] colorOptions = {"1: GREEN", "2: BLUE", "3: YELLOW", "4: PURPLE"};
         String[] slotOptions = {"1: Slot 1", "2: Slot 2", "3: Slot 3"};
         String[] options = {"STONE", "COIN", "SHIELD", "SERVANT"};
         while(true) {
@@ -321,9 +321,9 @@ public class ClientCLI extends PlayerInterface {
                 int ability = getIntegerSelection(abilityOptions);
                 System.out.println("Choose the DevCard's level");
                 int level = getIntegerSelection(levelOptions);
-                System.out.println("Choose the DevCard's level");
+                System.out.println("Choose the DevCard's color");
                 int color = getIntegerSelection(colorOptions);
-                System.out.println("Choose the slot's num");
+                System.out.println("Choose the slot's number");
                 int slot = getIntegerSelection(slotOptions);
                 System.out.println("\nSelect where are you taking the resource from");
                 for (String option : options) {
@@ -454,7 +454,6 @@ public class ClientCLI extends PlayerInterface {
         return new PlaceResourceRequest(toDiscard, toPlace);
     }
 
-    //@Deprecated
     public ResourceType strToResType(String input){
         switch (input) {
             case "stone": return ResourceType.STONE;
@@ -666,7 +665,7 @@ public class ClientCLI extends PlayerInterface {
 
     @Override
     public void updateMarketTray(MarketTrayUpdate update) {
-        System.out.println("\nMarket: ");
+        System.out.println("\nShowing Market tray: ");
         System.out.println(update);
     }
 

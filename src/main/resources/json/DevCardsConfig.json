@@ -1,0 +1,1522 @@
+[
+  {
+    "cost": {
+      "map": {
+        "STONE": 0,
+        "COIN": 0,
+        "SHIELD": 2,
+        "SERVANT": 0
+      }
+    },
+    "type": "GREEN",
+    "level": 1,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 0,
+          "COIN": 1,
+          "SHIELD": 0,
+          "SERVANT": 0
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 0,
+          "FAITH": 1
+        }
+      }
+    },
+    "victoryPoints": 1
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 0,
+        "COIN": 0,
+        "SHIELD": 0,
+        "SERVANT": 3
+      }
+    },
+    "type": "PURPLE",
+    "level": 1,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 0,
+          "COIN": 1,
+          "SHIELD": 0,
+          "SERVANT": 0
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 1,
+          "COIN": 0,
+          "SHIELD": 1,
+          "SERVANT": 1
+        }
+      }
+    },
+    "victoryPoints": 3
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 0,
+        "COIN": 3,
+        "SHIELD": 0,
+        "SERVANT": 0
+      }
+    },
+    "type": "BLUE",
+    "level": 1,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 2,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 0
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 0,
+          "SHIELD": 1,
+          "COIN": 1,
+          "SERVANT": 1
+        }
+      }
+    },
+    "victoryPoints": 3
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 3,
+        "COIN": 0,
+        "SHIELD": 0,
+        "SERVANT": 0
+      }
+    },
+    "type": "YELLOW",
+    "level": 1,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 2,
+          "SERVANT": 0
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 1,
+          "COIN": 1,
+          "SHIELD": 0,
+          "SERVANT": 1
+        }
+      }
+    },
+    "victoryPoints": 3
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 0,
+        "COIN": 2,
+        "SHIELD": 2,
+        "SERVANT": 0
+      }
+    },
+    "type": "GREEN",
+    "level": 1,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 1,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 1
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 0,
+          "COIN": 2,
+          "SHIELD": 0,
+          "SERVANT": 0,
+          "FAITH": 1
+        }
+      }
+    },
+    "victoryPoints": 4
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 2,
+        "COIN": 0,
+        "SHIELD": 0,
+        "SERVANT": 2
+      }
+    },
+    "type": "PURPLE",
+    "level": 1,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 0,
+          "COIN": 1,
+          "SHIELD": 1,
+          "SERVANT": 0
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 2,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 0,
+          "FAITH": 1
+        }
+      }
+    },
+    "victoryPoints": 4
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 0,
+        "COIN": 2,
+        "SHIELD": 0,
+        "SERVANT": 2
+      }
+    },
+    "type": "BLUE",
+    "level": 1,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 1,
+          "COIN": 0,
+          "SHIELD": 1,
+          "SERVANT": 0
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 2,
+          "FAITH": 1
+        }
+      }
+    },
+    "victoryPoints": 4
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 2,
+        "COIN": 0,
+        "SHIELD": 2,
+        "SERVANT": 0
+      }
+    },
+    "type": "YELLOW",
+    "level": 1,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 0,
+          "COIN": 1,
+          "SHIELD": 0,
+          "SERVANT": 1
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 2,
+          "SERVANT": 0,
+          "FAITH": 1
+        }
+      }
+    },
+    "victoryPoints": 4
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 0,
+        "COIN": 0,
+        "SHIELD": 4,
+        "SERVANT": 0
+      }
+    },
+    "type": "GREEN",
+    "level": 2,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 1,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 0
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 0,
+          "FAITH": 2
+        }
+      }
+    },
+    "victoryPoints": 5
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 0,
+        "COIN": 0,
+        "SHIELD": 0,
+        "SERVANT": 4
+      }
+    },
+    "type": "PURPLE",
+    "level": 2,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 0,
+          "COIN": 1,
+          "SHIELD": 0,
+          "SERVANT": 0
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 0,
+          "FAITH": 2
+        }
+      }
+    },
+    "victoryPoints": 5
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 0,
+        "COIN": 4,
+        "SHIELD": 0,
+        "SERVANT": 0
+      }
+    },
+    "type": "BLUE",
+    "level": 2,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 1
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 0,
+          "FAITH": 2
+        }
+      }
+    },
+    "victoryPoints": 5
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 0,
+        "COIN": 0,
+        "SHIELD": 0,
+        "SERVANT": 2
+      }
+    },
+    "type": "PURPLE",
+    "level": 1,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 1,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 0
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 0,
+          "FAITH": 1
+        }
+      }
+    },
+    "victoryPoints": 1
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 4,
+        "COIN": 0,
+        "SHIELD": 0,
+        "SERVANT": 0
+      }
+    },
+    "type": "YELLOW",
+    "level": 2,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 1,
+          "SERVANT": 0
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 0,
+          "FAITH": 2
+        }
+      }
+    },
+    "victoryPoints": 5
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 0,
+        "COIN": 0,
+        "SHIELD": 3,
+        "SERVANT": 2
+      }
+    },
+    "type": "GREEN",
+    "level": 2,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 1,
+          "SERVANT": 1
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 3,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 0
+        }
+      }
+    },
+    "victoryPoints": 6
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 0,
+        "COIN": 2,
+        "SHIELD": 0,
+        "SERVANT": 3
+      }
+    },
+    "type": "PURPLE",
+    "level": 2,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 0,
+          "COIN": 1,
+          "SHIELD": 0,
+          "SERVANT": 1
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 3,
+          "SERVANT": 0
+        }
+      }
+    },
+    "victoryPoints": 6
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 2,
+        "COIN": 3,
+        "SHIELD": 0,
+        "SERVANT": 0
+      }
+    },
+    "type": "BLUE",
+    "level": 2,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 1,
+          "COIN": 1,
+          "SHIELD": 0,
+          "SERVANT": 0
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 3
+        }
+      }
+    },
+    "victoryPoints": 6
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 3,
+        "COIN": 0,
+        "SHIELD": 2,
+        "SERVANT": 0
+      }
+    },
+    "type": "YELLOW",
+    "level": 2,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 1,
+          "COIN": 0,
+          "SHIELD": 1,
+          "SERVANT": 0
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 0,
+          "COIN": 3,
+          "SHIELD": 0,
+          "SERVANT": 0
+        }
+      }
+    },
+    "victoryPoints": 6
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 0,
+        "COIN": 0,
+        "SHIELD": 5,
+        "SERVANT": 0
+      }
+    },
+    "type": "GREEN",
+    "level": 2,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 0,
+          "COIN": 2,
+          "SHIELD": 0,
+          "SERVANT": 0
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 2,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 0,
+          "FAITH": 2
+        }
+      }
+    },
+    "victoryPoints": 7
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 0,
+        "COIN": 0,
+        "SHIELD": 0,
+        "SERVANT": 5
+      }
+    },
+    "type": "PURPLE",
+    "level": 2,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 2,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 0
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 0,
+          "COIN": 2,
+          "SHIELD": 0,
+          "SERVANT": 0,
+          "FAITH": 2
+        }
+      }
+    },
+    "victoryPoints": 7
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 0,
+        "COIN": 5,
+        "SHIELD": 0,
+        "SERVANT": 0
+      }
+    },
+    "type": "BLUE",
+    "level": 2,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 2
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 2,
+          "SERVANT": 0,
+          "FAITH": 2
+        }
+      }
+    },
+    "victoryPoints": 7
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 5,
+        "COIN": 0,
+        "SHIELD": 0,
+        "SERVANT": 0
+      }
+    },
+    "type": "YELLOW",
+    "level": 2,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 2,
+          "SERVANT": 0
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 2,
+          "FAITH": 2
+        }
+      }
+    },
+    "victoryPoints": 7
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 0,
+        "COIN": 3,
+        "SHIELD": 3,
+        "SERVANT": 0
+      }
+    },
+    "type": "GREEN",
+    "level": 2,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 0,
+          "COIN": 1,
+          "SHIELD": 0,
+          "SERVANT": 0
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 2,
+          "SERVANT": 0,
+          "FAITH": 1
+        }
+      }
+    },
+    "victoryPoints": 8
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 0,
+        "COIN": 2,
+        "SHIELD": 0,
+        "SERVANT": 0
+      }
+    },
+    "type": "BLUE",
+    "level": 1,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 1,
+          "SERVANT": 0
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 0,
+          "FAITH": 1
+        }
+      }
+    },
+    "victoryPoints": 1
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 0,
+        "COIN": 0,
+        "SHIELD": 3,
+        "SERVANT": 3
+      }
+    },
+    "type": "PURPLE",
+    "level": 2,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 1,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 0
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 2,
+          "FAITH": 1
+        }
+      }
+    },
+    "victoryPoints": 8
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 3,
+        "COIN": 3,
+        "SHIELD": 0,
+        "SERVANT": 0
+      }
+    },
+    "type": "BLUE",
+    "level": 2,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 1
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 2,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 0,
+          "FAITH": 1
+        }
+      }
+    },
+    "victoryPoints": 8
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 3,
+        "COIN": 0,
+        "SHIELD": 0,
+        "SERVANT": 3
+      }
+    },
+    "type": "YELLOW",
+    "level": 2,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 1,
+          "SERVANT": 0
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 0,
+          "COIN": 2,
+          "SHIELD": 0,
+          "SERVANT": 0,
+          "FAITH": 1
+        }
+      }
+    },
+    "victoryPoints": 8
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 0,
+        "COIN": 0,
+        "SHIELD": 6,
+        "SERVANT": 0
+      }
+    },
+    "type": "GREEN",
+    "level": 3,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 0,
+          "COIN": 2,
+          "SHIELD": 0,
+          "SERVANT": 0
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 3,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 0,
+          "FAITH": 2
+        }
+      }
+    },
+    "victoryPoints": 9
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 0,
+        "COIN": 0,
+        "SHIELD": 0,
+        "SERVANT": 6
+      }
+    },
+    "type": "PURPLE",
+    "level": 3,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 2,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 0
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 0,
+          "COIN": 3,
+          "SHIELD": 0,
+          "SERVANT": 0,
+          "FAITH": 2
+        }
+      }
+    },
+    "victoryPoints": 9
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 0,
+        "COIN": 6,
+        "SHIELD": 0,
+        "SERVANT": 0
+      }
+    },
+    "type": "BLUE",
+    "level": 3,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 2
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 3,
+          "SERVANT": 0,
+          "FAITH": 2
+        }
+      }
+    },
+    "victoryPoints": 9
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 6,
+        "COIN": 0,
+        "SHIELD": 0,
+        "SERVANT": 0
+      }
+    },
+    "type": "YELLOW",
+    "level": 3,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 2,
+          "SERVANT": 0
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 3,
+          "FAITH": 2
+        }
+      }
+    },
+    "victoryPoints": 9
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 0,
+        "COIN": 0,
+        "SHIELD": 5,
+        "SERVANT": 2
+      }
+    },
+    "type": "GREEN",
+    "level": 3,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 0,
+          "COIN": 1,
+          "SHIELD": 0,
+          "SERVANT": 1
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 2,
+          "COIN": 0,
+          "SHIELD": 2,
+          "SERVANT": 0,
+          "FAITH": 1
+        }
+      }
+    },
+    "victoryPoints": 10
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 0,
+        "COIN": 2,
+        "SHIELD": 0,
+        "SERVANT": 5
+      }
+    },
+    "type": "PURPLE",
+    "level": 3,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 1,
+          "COIN": 0,
+          "SHIELD": 1,
+          "SERVANT": 0
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 0,
+          "COIN": 2,
+          "SHIELD": 0,
+          "SERVANT": 2,
+          "FAITH": 1
+        }
+      }
+    },
+    "victoryPoints": 10
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 2,
+        "COIN": 5,
+        "SHIELD": 0,
+        "SERVANT": 0
+      }
+    },
+    "type": "BLUE",
+    "level": 3,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 0,
+          "COIN": 1,
+          "SHIELD": 1,
+          "SERVANT": 0
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 2,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 2,
+          "FAITH": 1
+        }
+      }
+    },
+    "victoryPoints": 10
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 2,
+        "COIN": 0,
+        "SHIELD": 0,
+        "SERVANT": 0
+      }
+    },
+    "type": "YELLOW",
+    "level": 1,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 1
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 0,
+          "FAITH": 1
+        }
+      }
+    },
+    "victoryPoints": 1
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 5,
+        "COIN": 0,
+        "SHIELD": 0,
+        "SERVANT": 2
+      }
+    },
+    "type": "YELLOW",
+    "level": 3,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 1,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 1
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 0,
+          "COIN": 2,
+          "SHIELD": 2,
+          "SERVANT": 0,
+          "FAITH": 1
+        }
+      }
+    },
+    "victoryPoints": 10
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 0,
+        "COIN": 0,
+        "SHIELD": 7,
+        "SERVANT": 0
+      }
+    },
+    "type": "GREEN",
+    "level": 3,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 1
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 0,
+          "COIN": 1,
+          "SHIELD": 0,
+          "SERVANT": 0,
+          "FAITH": 1
+        }
+      }
+    },
+    "victoryPoints": 11
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 0,
+        "COIN": 0,
+        "SHIELD": 0,
+        "SERVANT": 7
+      }
+    },
+    "type": "PURPLE",
+    "level": 3,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 0,
+          "COIN": 1,
+          "SHIELD": 0,
+          "SERVANT": 0
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 1,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 0,
+          "FAITH": 3
+        }
+      }
+    },
+    "victoryPoints": 11
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 0,
+        "COIN": 7,
+        "SHIELD": 0,
+        "SERVANT": 0
+      }
+    },
+    "type": "BLUE",
+    "level": 3,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 1,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 0
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 1,
+          "SERVANT": 0,
+          "FAITH": 3
+        }
+      }
+    },
+    "victoryPoints": 11
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 7,
+        "COIN": 0,
+        "SHIELD": 0,
+        "SERVANT": 0
+      }
+    },
+    "type": "YELLOW",
+    "level": 3,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 1,
+          "SERVANT": 0
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 1,
+          "FAITH": 3
+        }
+      }
+    },
+    "victoryPoints": 11
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 0,
+        "COIN": 4,
+        "SHIELD": 4,
+        "SERVANT": 0
+      }
+    },
+    "type": "GREEN",
+    "level": 3,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 1,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 0
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 0,
+          "COIN": 3,
+          "SHIELD": 1,
+          "SERVANT": 0
+        }
+      }
+    },
+    "victoryPoints": 12
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 0,
+        "COIN": 0,
+        "SHIELD": 4,
+        "SERVANT": 4
+      }
+    },
+    "type": "PURPLE",
+    "level": 3,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 0,
+          "COIN": 1,
+          "SHIELD": 0,
+          "SERVANT": 0
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 3,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 1
+        }
+      }
+    },
+    "victoryPoints": 12
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 4,
+        "COIN": 4,
+        "SHIELD": 0,
+        "SERVANT": 0
+      }
+    },
+    "type": "BLUE",
+    "level": 3,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 1
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 0,
+          "COIN": 1,
+          "SHIELD": 3,
+          "SERVANT": 0
+        }
+      }
+    },
+    "victoryPoints": 12
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 4,
+        "COIN": 0,
+        "SHIELD": 0,
+        "SERVANT": 4
+      }
+    },
+    "type": "YELLOW",
+    "level": 3,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 1,
+          "SERVANT": 0
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 1,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 3
+        }
+      }
+    },
+    "victoryPoints": 12
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 1,
+        "COIN": 0,
+        "SHIELD": 1,
+        "SERVANT": 1
+      }
+    },
+    "type": "GREEN",
+    "level": 1,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 1,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 0
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 1
+        }
+      }
+    },
+    "victoryPoints": 2
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 0,
+        "COIN": 1,
+        "SHIELD": 1,
+        "SERVANT": 1
+      }
+    },
+    "type": "PURPLE",
+    "level": 1,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 0,
+          "COIN": 1,
+          "SHIELD": 0,
+          "SERVANT": 0
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 1,
+          "SERVANT": 0
+        }
+      }
+    },
+    "victoryPoints": 2
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 1,
+        "COIN": 1,
+        "SHIELD": 0,
+        "SERVANT": 1
+      }
+    },
+    "type": "BLUE",
+    "level": 1,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 1
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 1,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 0
+        }
+      }
+    },
+    "victoryPoints": 2
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 1,
+        "COIN": 1,
+        "SHIELD": 1,
+        "SERVANT": 0
+      }
+    },
+    "type": "YELLOW",
+    "level": 1,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 1,
+          "SERVANT": 0
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 0,
+          "COIN": 1,
+          "SHIELD": 0,
+          "SERVANT": 0
+        }
+      }
+    },
+    "victoryPoints": 2
+  },
+  {
+    "cost": {
+      "map": {
+        "STONE": 0,
+        "COIN": 0,
+        "SHIELD": 3,
+        "SERVANT": 0
+      }
+    },
+    "type": "GREEN",
+    "level": 1,
+    "prodPower": {
+      "input": {
+        "map": {
+          "STONE": 0,
+          "COIN": 0,
+          "SHIELD": 0,
+          "SERVANT": 2
+        }
+      },
+      "output": {
+        "map": {
+          "STONE": 1,
+          "COIN": 1,
+          "SHIELD": 1,
+          "SERVANT": 0
+        }
+      }
+    },
+    "victoryPoints": 3
+  }
+]

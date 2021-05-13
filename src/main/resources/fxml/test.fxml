@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<GridPane alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.MainController">
+   <columnConstraints>
+      <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+   </rowConstraints>
+   <children>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="558.0" prefWidth="905.0">
+         <children>
+            <TabPane fx:id="tabPane" prefHeight="558.0" prefWidth="697.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab text="Player 1">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="500.0" fitWidth="708.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../png/personal_board/personal_board.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab text="Player 2">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="508.0" prefWidth="697.0">
+                           <children>
+                              <ImageView fitHeight="500.0" fitWidth="708.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../png/personal_board/personal_board.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+            <ImageView fitHeight="335.0" fitWidth="208.0" layoutX="698.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../png/generic/market_tray.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="775.0" layoutY="78.0" mnemonicParsing="false" onAction="#addTab" text="Button" />
+         </children>
+      </AnchorPane>
+   </children>
+</GridPane>

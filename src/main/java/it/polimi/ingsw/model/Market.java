@@ -43,7 +43,7 @@ public class Market {
     private void initCards() throws FullCardDeckException {
         //ParserJSON... devCards contain all DevCards
         try {
-            JsonReader reader = new JsonReader(new FileReader("src/main/resources/DevCardsConfig.json"));
+            JsonReader reader = new JsonReader(new FileReader("src/main/resources/json/DevCardsConfig.json"));
             Type listType = new TypeToken<ArrayList<DevelopmentCard>>(){}.getType();
             List<DevelopmentCard> devCards = new Gson().fromJson(reader, listType);
             for (DevelopmentCard devCard : devCards) {

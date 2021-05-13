@@ -101,7 +101,7 @@ public class MultiGame extends Game {
         Type listType = new TypeToken<List<LeaderCard>>(){}.getType();
 
         try {
-            JsonReader reader = new JsonReader(new FileReader("src/main/resources/LeaderCardsConfig.json"));
+            JsonReader reader = new JsonReader(new FileReader("src/main/resources/json/LeaderCardsConfig.json"));
             List<LeaderCard> leaderCards = gson.fromJson(reader, listType);
 
             //select 4 leadersCards. We must make sure to select four different cards

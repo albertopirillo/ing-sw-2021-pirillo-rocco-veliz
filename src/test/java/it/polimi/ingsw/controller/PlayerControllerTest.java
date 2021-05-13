@@ -3,6 +3,8 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.network.DepotSetting;
+import it.polimi.ingsw.network.requests.ChangeMarblesRequest;
+import it.polimi.ingsw.network.requests.Request;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -10,8 +12,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 class PlayerControllerTest {
 
@@ -70,15 +71,15 @@ class PlayerControllerTest {
     }
 
     @Test
-    public void insertMarbleTest() throws FullCardDeckException, TooManyLeaderAbilitiesException {
+    public void insertMarbleTest() throws FullCardDeckException, TooManyLeaderAbilitiesException{
         Game game = new MultiGame(true);
         MasterController controller = new MasterController(game);
         PlayerController playerController = controller.getPlayerController();
         Player activePlayer = game.getActivePlayer();
         activePlayer.setGame(game);
 
-        playerController.insertMarble(1, AbilityChoice.FIRST, 0, 0);
-        assertEquals("The player has no leader ability of that type already active", controller.getError());
+        playerController.insertMarble(1);
+        //assertEquals("The player has no leader ability of that type already active", controller.getError());
 
         //  PURPLE  PURPLE  YELLOW  YELLOW
         //  GREY  GREY  BLUE  BLUE
@@ -88,10 +89,77 @@ class PlayerControllerTest {
         ChangeWhiteMarbles changeWhiteMarbles = new ChangeWhiteMarbles(ResourceType.SHIELD);
         changeWhiteMarbles.activate(activePlayer);
         controller.resetException();
-        playerController.insertMarble(1, AbilityChoice.STANDARD, 1, 0);
+        playerController.insertMarble(1);
         assertEquals("Result: OK", controller.getError());
+
+        //  PURPLE  GREY  YELLOW  YELLOW
+        //  GREY  WHITE  BLUE  BLUE
+        //  WHITE  RED  WHITE  WHITE
+        //  Remaining marble = PURPLE
+        ChangeWhiteMarbles changeWhiteMarbles2 = new ChangeWhiteMarbles(ResourceType.COIN);
+        changeWhiteMarbles2.activate(activePlayer);
+
+        playerController.insertMarble(0);
+        Resource output = controller.getResourceController().getTempRes().getToHandle();
+        Resource expect = new Resource(1,0,0,1);
+        //OUTPUT ALLx1 SERVANTx1 STONEx1
+        System.out.println(output);
     }
 
+    @Test
+    public void changeMarbleTest() throws FullCardDeckException, TooManyLeaderAbilitiesException, InvalidKeyException, NegativeResAmountException {
+        Game game = new MultiGame(true);
+        MasterController controller = new MasterController(game);
+        PlayerController playerController = controller.getPlayerController();
+        Player activePlayer = game.getActivePlayer();
+        activePlayer.setGame(game);
+
+        ChangeWhiteMarbles changeWhiteMarbles = new ChangeWhiteMarbles(ResourceType.SHIELD);
+        changeWhiteMarbles.activate(activePlayer);
+        ChangeWhiteMarbles changeWhiteMarbles2 = new ChangeWhiteMarbles(ResourceType.COIN);
+        changeWhiteMarbles2.activate(activePlayer);
+
+        playerController.insertMarble(4);
+
+        //  PURPLE  PURPLE  YELLOW  YELLOW
+        //  GREY  GREY  BLUE  BLUE
+        //  WHITE  WHITE  WHITE  WHITE
+        //  Remaining marble = RED
+
+        //OUTPUT ALLx4
+        Resource output = controller.getResourceController().getTempRes().getToHandle();
+        Resource check = new Resource();
+        check.addResource(ResourceType.ALL,4);
+        //OUTPUT ALLx4
+        assertEquals(check, output);
+        //System.out.println(output);
+
+        Request changeMarble = new ChangeMarblesRequest(3,1);
+        changeMarble.activateRequest(controller);
+        Resource check2 = new Resource();
+        check2.addResource(ResourceType.SHIELD,3);
+        check2.addResource(ResourceType.COIN,1);
+        //System.out.println(output);
+        assertEquals(check2, output);
+
+        //  PURPLE  PURPLE  YELLOW  YELLOW
+        //  GREY  GREY  BLUE  BLUE
+        //  WHITE  WHITE  WHITE  RED
+        //  Remaining marble = WHITE
+
+        playerController.insertMarble(4);
+        Resource output2 = controller.getResourceController().getTempRes().getToHandle();
+        Resource check3 = new Resource();
+        check3.addResource(ResourceType.ALL,3);
+        assertEquals(check3, output2);
+        assertEquals(1, activePlayer.getPlayerFaith());
+
+        changeMarble = new ChangeMarblesRequest(1,1);
+        changeMarble.activateRequest(controller);
+        assertEquals(check3, output2);
+        assertEquals("The number of white marbles does not match", controller.getError());
+
+    }
     @Test
     public void endTurnOKTest() throws FullCardDeckException {
         Game game = new MultiGame(true);

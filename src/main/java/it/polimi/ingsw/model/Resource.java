@@ -7,7 +7,6 @@ import javax.management.openmbean.KeyAlreadyExistsException;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 
 public class Resource implements Serializable {
@@ -36,6 +35,10 @@ public class Resource implements Serializable {
     public int getValue(ResourceType key) throws InvalidKeyException {
         if (!map.containsKey(key)) throw new InvalidKeyException();
         return map.get(key);
+    }
+
+    public boolean hasAllResources(){
+        return map.containsKey(ResourceType.ALL);
     }
 
     //Use this method only to add a new key (ResourceType)
@@ -96,7 +99,7 @@ public class Resource implements Serializable {
         if (this == o) return true;
         if (!(o instanceof Resource)) return false;
         Resource resource = (Resource) o;
-        return Objects.equals(map, resource.map);
+        return map.equals(((Resource) o).map);
     }
 
     @Override

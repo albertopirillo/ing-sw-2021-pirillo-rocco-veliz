@@ -31,9 +31,9 @@ class ResourceStrategyTest {
         Game game = new MultiGame(true);
         player.setGame(game);
 
-        assertThrows(NoLeaderAbilitiesException.class, () -> player.insertMarble(3, AbilityChoice.FIRST, 3,5));
+        //assertThrows(NoLeaderAbilitiesException.class, () -> player.insertMarble(3, AbilityChoice.FIRST, 3,5));
 
-        Resource output1 = player.insertMarble(1, AbilityChoice.STANDARD, 0, 0);
+        Resource output1 = player.insertMarble(1);
         assertEquals(new Resource(1,0,0,1), output1);
         assertEquals(0, player.getPlayerFaith());
     }
@@ -44,7 +44,7 @@ class ResourceStrategyTest {
         Game game = new MultiGame(true);
         player.setGame(game);
 
-        Resource output2 = player.insertMarble(5, AbilityChoice.STANDARD, 2, 3);
+        Resource output2 = player.insertMarble(5);
         assertEquals(new Resource(2,0,2,0), output2);
         assertEquals(0, player.getPlayerFaith());
     }
@@ -54,7 +54,7 @@ class ResourceStrategyTest {
         Player player = new Player( "abc");
         Game game = new MultiGame(true);
         player.setGame(game);
-        player.insertMarble(1, AbilityChoice.STANDARD, 0, 0);
+        player.insertMarble(1);
 
         //  PURPLE  GREY  YELLOW  YELLOW
         //  GREY  WHITE  BLUE  BLUE
@@ -62,7 +62,7 @@ class ResourceStrategyTest {
         //  Remaining marble = PURPLE
         //Resource output = player.takeResources()
 
-        Resource output2 = player.insertMarble(1, AbilityChoice.STANDARD, 0, 0);
+        Resource output2 = player.insertMarble(1);
         assertEquals(new Resource(1,0,0,0), output2);
         assertEquals(1, player.getPlayerFaith());
     }
@@ -73,17 +73,20 @@ class ResourceStrategyTest {
         Game game = new MultiGame(true);
         player.setGame(game);
         ChangeWhiteMarbles ability1 = new ChangeWhiteMarbles(ResourceType.STONE);
-        ChangeWhiteMarbles ability2 = new ChangeWhiteMarbles(ResourceType.FAITH);
         ability1.activate(player);
-        ability2.activate(player);
 
-        Resource output = player.insertMarble(3, AbilityChoice.SECOND, 0, 1);
+        Resource output = player.insertMarble(3);
         Resource check = new Resource();
         check.addResource(ResourceType.SHIELD, 1);
         check.addResource(ResourceType.COIN, 1);
+        check.addResource(ResourceType.STONE, 1);
 
+        //  PURPLE  PURPLE  YELLOW  YELLOW
+        //  GREY  GREY  BLUE  BLUE
+        //  WHITE  WHITE  WHITE  WHITE
+        //  Remaining marble = RED
         assertEquals(check, output);
-        assertEquals(1, player.getPlayerFaith());
+        assertEquals(0, player.getPlayerFaith());
     }
 
     @Test
@@ -96,11 +99,13 @@ class ResourceStrategyTest {
         ability1.activate(player);
         ability2.activate(player);
 
-        Resource output = player.insertMarble(4, AbilityChoice.BOTH, 1, 3);
+        Resource output = player.insertMarble(4);
         Resource check = new Resource();
-        check.addResource(ResourceType.COIN, 1);
-        check.addResource(ResourceType.SHIELD, 3);
-
+        check.addResource(ResourceType.ALL, 4);
+        //  PURPLE  PURPLE  YELLOW  YELLOW
+        //  GREY  GREY  BLUE  BLUE
+        //  WHITE  WHITE  WHITE  WHITE
+        //  Remaining marble = RED
         assertEquals(check, output);
         assertEquals(0, player.getPlayerFaith());
     }

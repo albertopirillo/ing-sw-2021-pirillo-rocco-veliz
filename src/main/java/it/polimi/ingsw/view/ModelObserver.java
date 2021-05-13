@@ -21,4 +21,5 @@ public interface ModelObserver {
     void showNextActionToken(SoloGame soloGame, SoloActionToken nextToken);
     void quitGame();
     String getPlayer();
+    void showTempMarbles(Game game, int numWhiteMarbles);
 }

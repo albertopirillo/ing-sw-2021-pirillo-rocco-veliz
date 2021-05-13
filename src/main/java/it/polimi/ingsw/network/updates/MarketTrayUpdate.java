@@ -31,7 +31,7 @@ public class MarketTrayUpdate extends ServerUpdate {
         StringBuilder matrix = new StringBuilder();
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 4; j++) {
-                matrix.append(marketTray[i][j]).append("  ");
+                matrix.append(marketTray[i][j]).append(" \t");
             }
             matrix.append("\n");
         }

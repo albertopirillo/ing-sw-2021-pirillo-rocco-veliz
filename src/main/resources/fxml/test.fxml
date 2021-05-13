@@ -50,11 +50,6 @@
                   <Image url="@../png/generic/market_tray.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="295.0" fitWidth="191.0" layoutX="706.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../png/generic/Masters%20of%20Renaissance_Cards_FRONT_3mmBleed_1-35-1.png" />
-               </image>
-            </ImageView>
             <Button layoutX="775.0" layoutY="78.0" mnemonicParsing="false" onAction="#addTab" text="Button" />
          </children>
       </AnchorPane>

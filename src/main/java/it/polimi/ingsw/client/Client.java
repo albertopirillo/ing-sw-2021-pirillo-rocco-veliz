@@ -4,6 +4,7 @@ import it.polimi.ingsw.network.Processable;
 import it.polimi.ingsw.network.messages.LoginMessage;
 import it.polimi.ingsw.network.updates.ServerUpdate;
 
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -36,9 +37,12 @@ public class Client implements Runnable{
             ServerUpdate msg;
             try {
                 msg = receiveMessage();
+            } catch(EOFException e){
+                System.out.println("\nQuitting game.");
+                break;
             } catch (IOException e) {
                 e.printStackTrace();
-                return;
+                break;
             }
             cli.readUpdate(msg);
         }

@@ -270,10 +270,10 @@ public class ClientCLI extends PlayerInterface {
                 request = basicProductionMenu();
                 break;
             case 11:
-                //request = new ExtraProductionRequest(); @Riccardo
+                request = extraProductionMenu();
                 break;
             case 12:
-                //request = new DevProductionRequest(); @Riccardo
+                request = devProductionMenu();
                 break;
             case 13:
                 request = new UseLeaderRequest(0, LeaderAction.USE_ABILITY);
@@ -387,6 +387,18 @@ public class ClientCLI extends PlayerInterface {
         } catch (InvalidKeyException | NegativeResAmountException e) {
             e.printStackTrace();
         }
+        return request;
+    }
+
+    private Request extraProductionMenu(){
+        Request request = null;
+        //new ExtraProductionRequest();
+        return request;
+    }
+
+    private Request devProductionMenu(){
+        Request request = null;
+        //new DevProductionRequest(); @Riccardo
         return request;
     }
 

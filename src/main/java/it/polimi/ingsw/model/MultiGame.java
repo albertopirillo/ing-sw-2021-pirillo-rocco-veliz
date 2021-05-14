@@ -50,7 +50,7 @@ public class MultiGame extends Game {
 
     //Selects the new active Player
     @Override
-    public void nextTurn() throws NegativeResAmountException, InvalidKeyException {
+    public synchronized void  nextTurn() throws NegativeResAmountException, InvalidKeyException {
         int index = this.getPlayersList().indexOf(this.getActivePlayer());
         this.setActivePlayer(this.getPlayersList().get((index + 1) % getPlayerAmount()));
         checkEndGame();

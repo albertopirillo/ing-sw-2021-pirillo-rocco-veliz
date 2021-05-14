@@ -30,6 +30,7 @@ public class SceneBuilder extends Application {
         stage.setTitle("Master of Renaissance");
         Image icon = new Image("/png/generic/inkwell.png");
         stage.getIcons().add(icon);
+        //stage.setFullScreen(true);
 
         stage.setOnCloseRequest(event -> {
             event.consume();

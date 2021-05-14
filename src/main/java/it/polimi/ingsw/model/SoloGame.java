@@ -50,7 +50,7 @@ public class SoloGame extends Game {
     }
 
     @Override
-    public void nextTurn() throws NegativeResAmountException, InvalidKeyException {
+    public synchronized void nextTurn() throws NegativeResAmountException, InvalidKeyException {
         SoloActionToken currentToken = this.soloTokens.remove(0);
         currentToken.reveal();
         this.soloTokens.add(currentToken);

@@ -27,7 +27,6 @@ public class Resource implements Serializable {
         map = new HashMap<>();
     }
 
-
     /**
      * Creates a Resource object from a given map
      * Can be used to clone a resource
@@ -71,7 +70,6 @@ public class Resource implements Serializable {
         return map.containsKey(ResourceType.ALL);
     }
 
-
     /**
      * Use this method only to add a new key
      * @param key   the resource you want to add
@@ -99,7 +97,6 @@ public class Resource implements Serializable {
         map.put(key, newValue);
     }
 
-
     /**
      * Returns a copy of this.map field (it's a new object and not a reference)
      * @return  a copy of this.map field
@@ -125,7 +122,6 @@ public class Resource implements Serializable {
      * @param that  the resource you want to sum with this
      * @return  the result of the sum operation
      */
-
     public Resource sum(Resource that) {
         Map<ResourceType, Integer> copy = new HashMap<>(that.map);
         this.map.forEach((k,v) -> copy.merge(k, v, Integer::sum));

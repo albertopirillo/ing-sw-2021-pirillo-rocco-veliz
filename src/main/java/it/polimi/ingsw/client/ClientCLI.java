@@ -692,16 +692,16 @@ public class ClientCLI extends PlayerInterface {
         getPlayer().sendMessage(request);
     }
 
-    private Request toChangeMarble(ResourceType res1, ResourceType res2, int numMarble){
+    private Request toChangeMarble(ResourceType res1, ResourceType res2, int numMarbles){
         while(true) {
             try{
                 System.out.println("Choice the num of "+res1);
                 int amount1 = Integer.parseInt(stdin.nextLine());
-                if (amount1 > numMarble) throw new Exception();
+                if (amount1 > numMarbles) throw new Exception();
                 System.out.println("Choice the num of "+res2);
                 int amount2 = Integer.parseInt(stdin.nextLine());
-                if (amount2 > numMarble) throw new Exception();
-                if (amount1 + amount2 > numMarble) throw new Exception();
+                if (amount2 > numMarbles) throw new Exception();
+                if (amount1 + amount2 > numMarbles) throw new Exception();
                 return new ChangeMarblesRequest(amount1, amount2);
             } catch (Exception e) {
                 System.out.println("Invalid input, retry");

@@ -2,6 +2,9 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.utils.ANSIColor;
 
+/**
+ * Enum with all resource types
+ */
 public enum ResourceType {
     STONE,
     COIN,
@@ -9,12 +12,6 @@ public enum ResourceType {
     SERVANT,
     FAITH,
     ALL;
-
-    public static boolean contains(ResourceType other) {
-        for (ResourceType res: ResourceType.values())
-            if (other == res) return true;
-        return false;
-    }
 
     @Override
     public String toString() {

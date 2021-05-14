@@ -6,12 +6,30 @@ import it.polimi.ingsw.exceptions.NotEnoughSpaceException;
 
 import java.io.Serializable;
 
+/**
+ * <p>Layer implementation of the slot added by a leader ability</p>
+ * <p>Only the specified resources from the leader ability can be inserted</p>
+ * <p>A max of two resources can be inserted in every layer</p>
+ */
 public class ExtraLayer implements Layer, Serializable {
 
+    /**
+     * The only type of resource that can be inserted in the layer
+     */
     private final ResourceType resource;
+    /**
+     * The amount of that resource currently present in the layer
+     */
     private int amount;
+    /**
+     * The maximum amount of resource that it can contain
+     */
     public final int MAX = 2;
 
+    /**
+     * Creates a new empty layer from a leader ability
+     * @param extraSlot the leader ability to create the layer from
+     */
     public ExtraLayer(ExtraSlot extraSlot) {
         this.resource = extraSlot.getResource();
         this.amount = 0;

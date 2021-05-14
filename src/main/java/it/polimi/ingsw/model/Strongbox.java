@@ -8,22 +8,46 @@ import it.polimi.ingsw.exceptions.NotEnoughResException;
 import java.util.HashMap;
 import java.util.Map;
 
-//Automatically converts faith Resource into playerFaithPoints
+/**
+ * <p>The Strongbox is a special depot with no restrictions:
+ * there, you can store any number and type of Resources together.</p>
+ * <p>Place the Resources received from the production in the Strongbox on your Personal Board</p>
+ * <p>The strongbox automatically converts Faith into playerFaithPoints</p>
+ */
 public class Strongbox {
 
+    /**
+     * The resources stored in the strongbox
+     */
     private final Resource resource;
+    /**
+     * Reference to the player that owns the strongbox
+     */
     private final Player player;
 
+    /**
+     * The only constructor that should be used
+     * @param player    the player that owns the strongbox
+     */
     public Strongbox(Player player) {
         this.resource = new Resource(0,0,0,0);
         this.player = player;
     }
 
-    //Returns a copy of all the resources stored
+    /**
+     * Returns a copy of all the resources store in the strongbox
+     * @return  a copy of all the resources stored in the strongbox
+     */
     public Resource queryAllRes() {
         return new Resource(new HashMap<>(resource.getMap()));
     }
 
+    /**
+     * Adds resources into the strongbox, and converts faith automatically
+     * @param resource  the resources you want to add
+     * @throws NegativeResAmountException   if a resource will end up with a negative value
+     * @throws InvalidKeyException  if a resource different from faith or the storable ones is passed
+     */
     public void addResources(Resource resource) throws NegativeResAmountException, InvalidKeyException {
         Map<ResourceType, Integer> copy = resource.getMap();
 
@@ -33,6 +57,14 @@ public class Strongbox {
         }
     }
 
+    /**
+     * Take resource from the strongbox, to use them to e.g. buy Development Cards
+     * @param resource  the resources you want to take from the strongbox
+     * @throws CannotContainFaithException  if faith is trying to be taken
+     * @throws NotEnoughResException    if the strongbox hasn't got the requested resources
+     * @throws NegativeResAmountException   if a resource will end up with a negative value
+     * @throws InvalidKeyException  if a resource different from faith or the storable ones is passed
+     */
     public void retrieveRes(Resource resource) throws CannotContainFaithException, NotEnoughResException, NegativeResAmountException, InvalidKeyException {
         Map<ResourceType, Integer> toTake = resource.getMap();
         if ((toTake.get(ResourceType.FAITH) != null)) throw new CannotContainFaithException();

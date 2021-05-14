@@ -5,13 +5,29 @@ import it.polimi.ingsw.exceptions.LayerNotEmptyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import it.polimi.ingsw.exceptions.NotEnoughSpaceException;
 
-//DepotLayer cannot contain ResourceType.FAITH
+/**
+ * <p>Layer implementation of the 3 standard layers of the depot</p>
+ * <p>Every resource, with the exception of Faith, can be inserted</p>
+ */
 public class DepotLayer implements Layer {
 
+    /**
+     * The type of resource currently present in the layer
+     */
     private ResourceType resource;
+    /**
+     * The amount of that resource currently present in the layer
+     */
     private int amount;
+    /**
+     * The maximum amount of resource that can be present in this layer
+     */
     public final int MAX;
 
+    /**
+     * Creates a new empty layer, also setting how much resources it can contain
+     * @param MAX   the maximum amount of resource that it can contain
+     */
     public DepotLayer(int MAX) {
         this.resource = null;
         this.amount = 0;
@@ -48,7 +64,6 @@ public class DepotLayer implements Layer {
         this.amount = 0;
     }
 
-    //This method should be the only one used to modify a layer's ResourceType, because it checks every exception
     @Override
     public void setResAndAmount(ResourceType resource, int amount) throws CannotContainFaithException, LayerNotEmptyException, NegativeResAmountException, NotEnoughSpaceException {
         if (resource == ResourceType.FAITH) throw new CannotContainFaithException();

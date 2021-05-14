@@ -15,10 +15,14 @@ import java.util.*;
 public class ClientCLI extends PlayerInterface {
     private final Scanner stdin;
     private Resource tempRes;
+    //Set testing to false to make the player perform one action per turn, like the real game
+    private final boolean testing = true;
+    private boolean doneAction;
 
     public ClientCLI(Client player){
         super(player);
         this.stdin = new Scanner(System.in);
+        this.doneAction = false;
     }
 
     public void setup(){
@@ -260,11 +264,22 @@ public class ClientCLI extends PlayerInterface {
                 request = new ShowDevSlotsRequest();
                 break;
             case 8:
-                request = new InsertMarbleRequest(getPosition(0,6));
+                if(this.doneAction) {
+                    errorPrint("\nYou already performed an action this turn");
+                }
+                else {
+                    request = new InsertMarbleRequest(getPosition(0,6));
+                    if (!testing) this.doneAction = true;
+                }
                 break;
             case 9:
-
-                request = buyDevCardMenu();
+                if(this.doneAction) {
+                    errorPrint("\nYou already performed an action this turn");
+                }
+                else {
+                    request = buyDevCardMenu();
+                    if (!testing) this.doneAction = true;
+                }
                 break;
             case 10:
                 request = basicProductionMenu();
@@ -273,7 +288,13 @@ public class ClientCLI extends PlayerInterface {
                 request = extraProductionMenu();
                 break;
             case 12:
-                request = devProductionMenu();
+                if(this.doneAction) {
+                    errorPrint("\nYou already performed an action this turn");
+                }
+                else {
+                    request = devProductionMenu();
+                    if (!testing) this.doneAction = true;
+                }
                 break;
             case 13:
                 request = new UseLeaderRequest(0, LeaderAction.USE_ABILITY);
@@ -294,7 +315,13 @@ public class ClientCLI extends PlayerInterface {
                 request = placeResourceMenu();
                 break;*/
             case 19:
-                request = new EndTurnRequest();
+                if(!this.doneAction) {
+                    errorPrint("\nYou have to perform an action before ending the turn");
+                }
+                else {
+                    request = new EndTurnRequest();
+                    if (!testing) this.doneAction = false;
+                }
                 break;
             case 20:
                 request = new QuitGameRequest();
@@ -305,6 +332,10 @@ public class ClientCLI extends PlayerInterface {
         } else {
             simulateGame();
         }
+    }
+
+    private void errorPrint(String str) {
+        System.out.println(ANSIColor.RED + str + ANSIColor.RESET);
     }
 
     private Request buyDevCardMenu() {
@@ -353,6 +384,7 @@ public class ClientCLI extends PlayerInterface {
        }
        return null;
     }
+
     private Request basicProductionMenu(){
         Request request = null;
         Resource depotResource = new Resource(0, 0, 0, 0);
@@ -385,7 +417,7 @@ public class ClientCLI extends PlayerInterface {
             }
             request = new BasicProductionRequest(input1, input2, output, depotResource, strongboxResource);
         } catch (InvalidKeyException | NegativeResAmountException e) {
-            e.printStackTrace();
+            System.out.println("Invalid input, retry");
         }
         return request;
     }
@@ -447,13 +479,6 @@ public class ClientCLI extends PlayerInterface {
         return new PlaceResourceRequest(toDiscard, toPlace);
     }
 
-    @Deprecated
-    private Request placeResourceMenuOld() {
-        Resource toDiscard = toDiscardMenu();
-        List<DepotSetting> toPlace = toPlaceMenu();
-        return new PlaceResourceRequest(toDiscard, toPlace);
-    }
-
     public ResourceType strToResType(String input){
         switch (input) {
             case "stone": return ResourceType.STONE;
@@ -461,60 +486,6 @@ public class ClientCLI extends PlayerInterface {
             case "shield": return ResourceType.SHIELD;
             case "servant": return ResourceType.SERVANT;
             default: return null;
-        }
-    }
-
-    @Deprecated
-    private Resource toDiscardMenu() {
-        Resource toDiscard = new Resource();
-        String inputStr;
-        int amountSelection;
-        ResourceType resSelection;
-        while (true) {
-            try {
-                System.out.print("What resources would you like to DISCARD?");
-                System.out.println(" (Press q to abort or k to choose the resources to place)");
-                inputStr = stdin.nextLine().toLowerCase();
-                if(inputStr.equals("q")) return null;
-                else if(inputStr.equals("k")) return toDiscard;
-                else {
-                    resSelection = strToResType(inputStr);
-                    if (resSelection == null) throw new Exception();
-                    System.out.println("How many of this type of resource?");
-                    amountSelection = Integer.parseInt(stdin.nextLine());
-                    toDiscard.addResource(resSelection, amountSelection);
-                }
-            } catch (Exception e) {
-                System.out.println("Invalid input, retry");
-            }
-        }
-    }
-
-    @Deprecated
-    private List<DepotSetting> toPlaceMenu() {
-        List<DepotSetting> toPlace = new ArrayList<>();
-        ResourceType resSelection;
-        String inputStr;
-        int amountSelection, layerSelection;
-        while(true) {
-            try{
-                System.out.print("What resources would you like to PLACE?");
-                System.out.println(" (Press q to abort or k to send)");
-                inputStr = stdin.nextLine().toLowerCase();
-                if (inputStr.equals("q")) return null;
-                else if (inputStr.equals("k")) return toPlace;
-                else {
-                    resSelection = strToResType(inputStr);
-                    if (resSelection == null) throw new Exception();
-                    System.out.println("How many of this type of resource?");
-                    amountSelection = Integer.parseInt(stdin.nextLine());
-                    System.out.println("In which layer would you like to place it?");
-                    layerSelection = Integer.parseInt(stdin.nextLine());
-                    toPlace.add(new DepotSetting(layerSelection, resSelection, amountSelection));
-                }
-            } catch (Exception e) {
-                System.out.println("Invalid input, retry");
-            }
         }
     }
 
@@ -674,7 +645,7 @@ public class ClientCLI extends PlayerInterface {
         int index = 1;
         System.out.print("\nLorenzo discarded the following cards: ");
         for(DevelopmentCard devCard: update.getCardList()){
-            System.out.println("\nCard " + index++ + ":");
+            System.out.println("\nCard " + (index++) + ":");
             System.out.println(devCard);
         }
     }

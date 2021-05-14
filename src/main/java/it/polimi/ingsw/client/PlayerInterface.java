@@ -26,9 +26,11 @@ public abstract class PlayerInterface {
         this.nickname = nickname;
     }
 
-    public void endOfUpdate() {
-        //Call Client method to make requests;
-        simulateGame();
+    public void endOfUpdate(EndOfUpdate update) {
+        if (update.getActivePlayer().equals(this.nickname)) {
+            //Call Client method to make requests;
+            simulateGame();
+        }
     }
 
     public void debugPrint(String string) {
@@ -40,7 +42,7 @@ public abstract class PlayerInterface {
 
     public void readUpdate(ServerUpdate updateMessage) {
         debugPrint("Received updated of type: " + updateMessage);
-        if (updateMessage != null && updateMessage.getActivePlayer().equals(this.nickname)){
+        if (updateMessage != null) {
             debugPrint("Processing update...");
             updateMessage.update(this);
         }

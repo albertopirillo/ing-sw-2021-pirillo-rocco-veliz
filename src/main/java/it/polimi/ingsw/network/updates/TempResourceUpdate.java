@@ -18,6 +18,8 @@ public class TempResourceUpdate extends ServerUpdate {
 
     @Override
     public void update(PlayerInterface playerInterface) {
-        playerInterface.updateTempResource(this);
+        if (this.getActivePlayer().equals(playerInterface.getNickname())) {
+            playerInterface.updateTempResource(this);
+        }
     }
 }

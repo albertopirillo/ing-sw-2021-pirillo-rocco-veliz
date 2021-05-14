@@ -19,6 +19,7 @@ public class ClientCLITest {
     public void storageTest() {
         Client client = new Client();
         PlayerInterface cli = new ClientCLI(client);
+        cli.setNickname("a");
 
         Map<String, Resource> strongboxMap =  new HashMap<>();
         strongboxMap.put("a", new Resource(1,2,4,3));
@@ -60,6 +61,7 @@ public class ClientCLITest {
     public void devSlotTest() {
         Client client = new Client();
         PlayerInterface cli = new ClientCLI(client);
+        cli.setNickname("a");
         ProductionPower prodPower = new ProductionPower(new Resource(0,1,2,3),
                 new Resource(1,2,3,4));
 

@@ -10,6 +10,6 @@ public class EndOfUpdate extends ServerUpdate {
 
     @Override
     public void update(PlayerInterface playerInterface) {
-        playerInterface.endOfUpdate();
+        playerInterface.endOfUpdate(this);
     }
 }

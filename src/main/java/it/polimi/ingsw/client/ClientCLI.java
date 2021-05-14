@@ -16,7 +16,7 @@ public class ClientCLI extends PlayerInterface {
     private final Scanner stdin;
     private Resource tempRes;
     //Set testing to false to make the player perform one action per turn, like the real game
-    private final boolean testing = true;
+    private final boolean testing = false;
     private boolean doneAction;
 
     public ClientCLI(Client player){
@@ -436,6 +436,7 @@ public class ClientCLI extends PlayerInterface {
 
     @Override
     public void updateTempResource(TempResourceUpdate update) {
+        //Calling selectPlayerList() is not needed
         Resource resource = update.getResource();
         if (resource != null) {
             System.out.println("\nResources obtained from the Market that need to be placed: ");
@@ -506,11 +507,30 @@ public class ClientCLI extends PlayerInterface {
         }
     }
 
+    /**
+     * Choose whose player information should be printed
+     * @param playerList    the complete list of players received with the update
+     * @param activePlayer  the activePlayer received with the update
+     * @return  playerList if the owner of the client is the active player,
+     * otherwise a list with the active player only
+     */
+    public Set<String> selectPlayerList(Set<String> playerList, String activePlayer) {
+        Set<String> newSet = new HashSet<>();
+        if (this.getNickname().equals(activePlayer)) {
+            return playerList;
+        }
+        else {
+            newSet.add(activePlayer);
+            return newSet;
+        }
+    }
+
     @Override
     public void updateStorages(StorageUpdate update) {
+        Set<String> toPrint = this.selectPlayerList(update.getStrongboxMap().keySet(), update.getActivePlayer());
         Map<String, List<DepotSetting>> depotMap = update.getDepotMap();
         Map<String, Resource> strongboxMap = update.getStrongboxMap();
-        for(String playerNick: depotMap.keySet()) {
+        for(String playerNick: toPrint) {
             System.out.println("\nShowing " + playerNick + "'s resources:");
             System.out.println("Depot:");
             for(DepotSetting layer: depotMap.get(playerNick)) {
@@ -526,25 +546,35 @@ public class ClientCLI extends PlayerInterface {
 
     @Override
     public void updateLeaderCards(LeaderUpdate update) {
-        List<LeaderCard> leaderCards = update.getLeaderMap().get(getNickname());
-        if(leaderCards.size() > 0){
-            System.out.println("\nYou have the following leader cards:");
-            int index = 0;
-            for(LeaderCard leaderCard: leaderCards){
-                System.out.println("\nCard " + index++ + " (" + leaderCard.getImg() + "):");
-                System.out.println("active: " + leaderCard.isActive());
-                System.out.println(leaderCard);
+        Set<String> toPrint = this.selectPlayerList(update.getLeaderMap().keySet(), update.getActivePlayer());
+        Map<String, List<LeaderCard>> leaderMap = update.getLeaderMap();
+        for(String playerNick: toPrint) {
+            List<LeaderCard> leaderCards = leaderMap.get(playerNick);
+            if (leaderCards.size() > 0) {
+                System.out.println("\nThe player " + playerNick + " has the following leader cards:");
+                int index = 0;
+                for (LeaderCard leaderCard : leaderCards) {
+                    if(playerNick.equals(this.getNickname()) || leaderCard.isActive()) {
+                        System.out.println("\nCard " + index++ + " (" + leaderCard.getImg() + "):");
+                        System.out.println("active: " + leaderCard.isActive());
+                        System.out.println(leaderCard);
+                    }
+                    else {
+                        System.out.println("\nThis card is hidden");
+                    }
+                }
+                System.out.println();
+            } else {
+                System.out.println("\nYou have no more leader cards.");
             }
-            System.out.println();
-        } else {
-            System.out.println("\nYou have no more leader cards.");
         }
     }
 
     @Override
     public void updateDevSlots(DevSlotsUpdate update) {
+        Set<String> toPrint = this.selectPlayerList(update.getDevSlotMap().keySet(), update.getActivePlayer());
         Map<String, List<DevelopmentSlot>> devSlotList = update.getDevSlotMap();
-        for(String playerNick: devSlotList.keySet()) {
+        for(String playerNick: toPrint) {
             System.out.println("\nShowing " + playerNick + "'s development slots:");
             int slotNumber = 1;
             for (DevelopmentSlot slot : devSlotList.get(playerNick)) {
@@ -609,8 +639,10 @@ public class ClientCLI extends PlayerInterface {
 
     @Override
     public void displayError(ErrorUpdate update) {
-        System.out.println(ANSIColor.RED + "\nReceived an error message from the server:" + ANSIColor.RESET);
-        System.out.println(ANSIColor.RED + update.getClientError().getError() + ANSIColor.RESET + "\n");
+        if(update.getActivePlayer().equals(this.getNickname())) {
+            System.out.println(ANSIColor.RED + "\nReceived an error message from the server:" + ANSIColor.RESET);
+            System.out.println(ANSIColor.RED + update.getClientError().getError() + ANSIColor.RESET + "\n");
+        }
     }
 
     @Override
@@ -621,6 +653,11 @@ public class ClientCLI extends PlayerInterface {
             System.out.println("\nPlayer: " + entry.getKey());
             System.out.println(entry.getValue().toString());
         }
+        /*Set<String> toPrint = this.selectPlayerList(faithTrackUpdate.getFaithTrackInfoMap().keySet(), faithTrackUpdate.getActivePlayer());*/
+        /*for(String playerNick: toPrint) {
+            System.out.println("\nPlayer: " + playerNick);
+            System.out.println(map.get(playerNick));
+        }*/
     }
 
     @Override
@@ -658,6 +695,7 @@ public class ClientCLI extends PlayerInterface {
 
     @Override
     public void updateTempMarbles(TempMarblesUpdate tempMarblesUpdate) {
+        //No need to call selectPlayerList() here
         System.out.println(tempMarblesUpdate);
         Request request = toChangeMarble(tempMarblesUpdate.getResources().get(0),tempMarblesUpdate.getResources().get(1),tempMarblesUpdate.getNumWhiteMarbles());
         getPlayer().sendMessage(request);

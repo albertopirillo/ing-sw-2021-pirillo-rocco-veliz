@@ -20,6 +20,8 @@ public class InitialLeaderUpdate extends ServerUpdate implements Serializable {
 
     @Override
     public void update(PlayerInterface playerInterface) {
+        if (this.getActivePlayer().equals(playerInterface.getNickname())) {
             playerInterface.viewInitialsLeaderCards(cards);
+        }
     }
 }

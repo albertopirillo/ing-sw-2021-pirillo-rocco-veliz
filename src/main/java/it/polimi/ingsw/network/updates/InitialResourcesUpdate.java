@@ -13,6 +13,8 @@ public class InitialResourcesUpdate extends ServerUpdate {
 
     @Override
     public void update(PlayerInterface playerInterface) {
-        playerInterface.viewInitialResources(numPlayer);
+        if (this.getActivePlayer().equals(playerInterface.getNickname())) {
+            playerInterface.viewInitialResources(numPlayer);
+        }
     }
 }

@@ -2,29 +2,31 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.*;
 
+import java.io.Serializable;
+
 /**
  * <p>Generic structure of a generic depot's layer</p>
  * <p>Layers cannot contain Faith</p>
  */
-public interface Layer {
+public abstract class Layer implements Serializable {
 
     /**
      * Check if the layer is empty or not
      * @return true if no resources are present, false otherwise
      */
-    boolean isEmpty();
+    public abstract boolean isEmpty();
 
     /**
      * Get the type of resource currently stored
      * @return the resource type
      */
-    ResourceType getResource();
+    public abstract ResourceType getResource();
 
     /**
      * Get the amount of resources that is currently stored
      * @return the resource amount
      */
-    int getAmount();
+    public abstract int getAmount();
 
     /**
      * Testing only: set the amount of resources stored in the layer
@@ -32,12 +34,12 @@ public interface Layer {
      * @throws NotEnoughSpaceException  if the maximum amount of the layer is exceeded
      * @throws NegativeResAmountException   if a negative value is specified
      */
-    void setAmount(int amount) throws NotEnoughSpaceException, NegativeResAmountException;
+    public abstract void setAmount(int amount) throws NotEnoughSpaceException, NegativeResAmountException;
 
     /**
      * Reset a layer's content, both for the resource type and the amount
      */
-    void resetLayer();
+    public abstract void resetLayer();
 
     /**
      * Modifies a layer resource type and amount, checking every exception first
@@ -48,7 +50,7 @@ public interface Layer {
      * @throws NegativeResAmountException   if a negative amount is specified
      * @throws NotEnoughSpaceException  if the maximum amount of the layer is exceeded
      */
-    void setResAndAmount(ResourceType resource, int amount) throws NegativeResAmountException, NotEnoughSpaceException, InvalidResourceException, CannotContainFaithException, LayerNotEmptyException;
+    public abstract void setResAndAmount(ResourceType resource, int amount) throws NegativeResAmountException, NotEnoughSpaceException, InvalidResourceException, CannotContainFaithException, LayerNotEmptyException;
 
     /**
      * Check if the given resource type and resource amount can be inserted in the current layer
@@ -56,5 +58,5 @@ public interface Layer {
      * @param amount    the resource amount
      * @return  true if it can be done, false otherwise
      */
-    boolean canInsert(ResourceType resource, int amount);
+    public abstract boolean canInsert(ResourceType resource, int amount);
 }

@@ -9,7 +9,7 @@ import it.polimi.ingsw.exceptions.NotEnoughSpaceException;
  * <p>Layer implementation of the 3 standard layers of the depot</p>
  * <p>Every resource, with the exception of Faith, can be inserted</p>
  */
-public class DepotLayer implements Layer {
+public class DepotLayer extends Layer {
 
     /**
      * The type of resource currently present in the layer

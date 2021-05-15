@@ -25,7 +25,7 @@ class ResourceControllerTest {
     }
 
     @Test
-    public void handleResourceOKTest() throws FullCardDeckException, InvalidResourceException, WrongDepotInstructionsException, LayerNotEmptyException, NotEnoughSpaceException, InvalidLayerNumberException, CannotContainFaithException, NotEnoughResException, AlreadyInAnotherLayerException, InvalidKeyException, NegativeResAmountException {
+    public void handleResourceOKTest() throws FullCardDeckException, InvalidResourceException, WrongDepotInstructionsException, LayerNotEmptyException, NotEnoughSpaceException, InvalidLayerNumberException, CannotContainFaithException, AlreadyInAnotherLayerException, InvalidKeyException, NegativeResAmountException {
         Game game = new MultiGame(true);
         MasterController masterController = new MasterController(game);
         Player activePlayer = masterController.getGame().getActivePlayer();

@@ -1,8 +1,6 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.FullCardDeckException;
-import it.polimi.ingsw.exceptions.InvalidKeyException;
-import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -24,55 +22,19 @@ class FaithTrackTest {
             players.add(player);
         }
 
-        try {
-            players.get(0).addPlayerFaith(4);
-        } catch (NegativeResAmountException | InvalidKeyException e) {
-            e.printStackTrace();
-        }
-        try {
-            players.get(1).addPlayerFaith(5);
-        } catch (NegativeResAmountException | InvalidKeyException e) {
-            e.printStackTrace();
-        }
-        try {
-            players.get(2).addPlayerFaith(8);
-        } catch (NegativeResAmountException | InvalidKeyException e) {
-            e.printStackTrace();
-        }
+        players.get(0).addPlayerFaith(4);
+        players.get(1).addPlayerFaith(5);
+        players.get(2).addPlayerFaith(8);
         players.get(2).getPersonalBoard().updateFaithTrack(players);
 
-        try {
-            players.get(0).addPlayerFaith(8);
-        } catch (NegativeResAmountException | InvalidKeyException e) {
-            e.printStackTrace();
-        }
-        try {
-            players.get(1).addPlayerFaith(6);
-        } catch (NegativeResAmountException | InvalidKeyException e) {
-            e.printStackTrace();
-        }
-        try {
-            players.get(2).addPlayerFaith(8);
-        } catch (NegativeResAmountException | InvalidKeyException e) {
-            e.printStackTrace();
-        }
+        players.get(0).addPlayerFaith(8);
+        players.get(1).addPlayerFaith(6);
+        players.get(2).addPlayerFaith(8);
         players.get(2).getPersonalBoard().updateFaithTrack(players);
 
-        try {
-            players.get(0).addPlayerFaith(3);
-        } catch (NegativeResAmountException | InvalidKeyException e) {
-            e.printStackTrace();
-        }
-        try {
-            players.get(1).addPlayerFaith(9);
-        } catch (NegativeResAmountException | InvalidKeyException e) {
-            e.printStackTrace();
-        }
-        try {
-            players.get(2).addPlayerFaith(8);
-        } catch (NegativeResAmountException | InvalidKeyException e) {
-            e.printStackTrace();
-        }
+        players.get(0).addPlayerFaith(3);
+        players.get(1).addPlayerFaith(9);
+        players.get(2).addPlayerFaith(8);
         players.get(2).getPersonalBoard().updateFaithTrack(players);
 
         assertTrue(players.get(0).getPersonalBoard().getFaithTrack().getPopeFavorBySection(VaticanReportSection.GROUP_ONE).isReported());

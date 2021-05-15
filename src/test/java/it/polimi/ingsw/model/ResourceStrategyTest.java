@@ -1,6 +1,9 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.exceptions.*;
+import it.polimi.ingsw.exceptions.FullCardDeckException;
+import it.polimi.ingsw.exceptions.InvalidKeyException;
+import it.polimi.ingsw.exceptions.NegativeResAmountException;
+import it.polimi.ingsw.exceptions.TooManyLeaderAbilitiesException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -26,7 +29,7 @@ class ResourceStrategyTest {
     }
 
     @Test
-    void standardTest() throws InvalidAbilityChoiceException, NoLeaderAbilitiesException, NegativeResAmountException, InvalidKeyException, FullCardDeckException, CostNotMatchingException {
+    void standardTest() throws NegativeResAmountException, InvalidKeyException, FullCardDeckException {
         Player player = new Player( "abc");
         Game game = new MultiGame(true);
         player.setGame(game);
@@ -39,7 +42,7 @@ class ResourceStrategyTest {
     }
 
     @Test
-    void standard2Test() throws InvalidAbilityChoiceException, NoLeaderAbilitiesException, NegativeResAmountException, InvalidKeyException, FullCardDeckException, CostNotMatchingException {
+    void standard2Test() throws NegativeResAmountException, InvalidKeyException, FullCardDeckException {
         Player player = new Player( "abc");
         Game game = new MultiGame(true);
         player.setGame(game);
@@ -50,7 +53,7 @@ class ResourceStrategyTest {
     }
 
     @Test
-    void faithTest() throws FullCardDeckException, InvalidAbilityChoiceException, NoLeaderAbilitiesException, NegativeResAmountException, InvalidKeyException, CostNotMatchingException {
+    void faithTest() throws FullCardDeckException, NegativeResAmountException, InvalidKeyException {
         Player player = new Player( "abc");
         Game game = new MultiGame(true);
         player.setGame(game);
@@ -68,7 +71,7 @@ class ResourceStrategyTest {
     }
 
     @Test
-    void singleAbilityTest() throws FullCardDeckException, TooManyLeaderAbilitiesException, InvalidAbilityChoiceException, NoLeaderAbilitiesException, NegativeResAmountException, InvalidKeyException, CostNotMatchingException {
+    void singleAbilityTest() throws FullCardDeckException, TooManyLeaderAbilitiesException, NegativeResAmountException, InvalidKeyException {
         Player player = new Player( "abc");
         Game game = new MultiGame(true);
         player.setGame(game);
@@ -90,7 +93,7 @@ class ResourceStrategyTest {
     }
 
     @Test
-    void doubleAbilityTest() throws FullCardDeckException, TooManyLeaderAbilitiesException, InvalidAbilityChoiceException, NoLeaderAbilitiesException, NegativeResAmountException, InvalidKeyException, CostNotMatchingException {
+    void doubleAbilityTest() throws FullCardDeckException, TooManyLeaderAbilitiesException, NegativeResAmountException, InvalidKeyException {
         Player player = new Player( "abc");
         Game game = new MultiGame(true);
         player.setGame(game);

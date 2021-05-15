@@ -8,13 +8,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//Attribute "mapping" is used to give the user the possibility to specify a
-//level by its number instead of its full name
+//Attribute "mapping" is
+// instead of its full name
 //This way only one getter and one setter are needed
 public abstract class Depot {
 
+    /**
+     * <p>Map used to query a layer by its number</p>
+     * <p>Only one getter and one setter are needed this way</p>
+     * <p>mapping cannot contain more than 5 layers</p>
+     */
     private final Map<Integer, Layer> mapping = new HashMap<>();
 
+    /**
+     * <p>Creates a standard 3 layers depot</p>
+     * <p>Every layer has a different maximum amount</p>
+     */
     public Depot() {
         Layer firstLayer = new DepotLayer(1);
         Layer secondLayer =new DepotLayer(2);
@@ -24,22 +33,48 @@ public abstract class Depot {
         mapping.put(3, thirdLayer);
     }
 
-    //Returns a copy of mapping field
+    /**
+     * Returns a copy of the number-layer mapping
+     * @return a copy of the internal map
+     */
     protected Map<Integer, Layer> getMapCopy() {
         return new HashMap<>(mapping);
     }
 
+    /**
+     * Adds a layer to the mapping, used in subclasses
+     * @param key   the number of the layer to add
+     * @param depotLayer    the layer to add
+     * @throws InvalidLayerNumberException  if more than 5 layers are already present
+     */
     protected void addToMap(int key, Layer depotLayer) throws InvalidLayerNumberException {
         if (this.mapping.size() >= 5) throw new InvalidLayerNumberException();
         else this.mapping.put(key, depotLayer);
     }
 
+    /**
+     * Returns the layer with the corresponding number
+     * @param layerNumber  the number of the layer
+     * @return a Layer object representing the corresponding layer
+     * @throws InvalidLayerNumberException if layerNumber isn't between 1 and 5
+     */
     public Layer getLayer(int layerNumber) throws InvalidLayerNumberException {
-        //cannot create a Depot with more than 5 layers
         if (layerNumber < 0 || layerNumber > this.mapping.size()) throw new InvalidLayerNumberException();
         return mapping.get(layerNumber);
     }
 
+    /**
+     * Modifies the content of a layer, checking the others to see if that's valid
+     * @param layerNumber   the layer to be modified
+     * @param resType   the resource type to insert in that layer
+     * @param addend    the amount of resource to add in that layer
+     * @throws CannotContainFaithException  if faith is trying to be inserted
+     * @throws LayerNotEmptyException   if trying to insert a different type of resource from the one present
+     * @throws NotEnoughSpaceException  if the maximum amount of the layer is exceeded
+     * @throws InvalidLayerNumberException  if layerNumber isn't between 1 and 5
+     * @throws AlreadyInAnotherLayerException   if that resource type is already present in another layer
+     * @throws InvalidResourceException if trying to insert an invalid resource type in a ExtraLayer
+     */
     public void modifyLayer(int layerNumber, ResourceType resType, int addend) throws
             NegativeResAmountException, CannotContainFaithException, LayerNotEmptyException, NotEnoughSpaceException, InvalidLayerNumberException, AlreadyInAnotherLayerException, InvalidResourceException {
         if (addend == 0 ) return;
@@ -55,7 +90,12 @@ public abstract class Depot {
         layer.setResAndAmount(resType, layer.getAmount() + addend);
     }
 
-    //Used in ResourceController => return true if List<DepotSettings> wont throw exceptions
+    /**
+     * Check if a List of DepotSetting can be inserted in the layer
+     * @param settings the list of the DepotSetting to check
+     * @return  true if no exceptions will be thrown, false otherwise
+     * @throws InvalidLayerNumberException if layerNumber isn't between 1 and 5
+     */
     public boolean canInsert(List<DepotSetting> settings) throws InvalidLayerNumberException {
         for(DepotSetting setting: settings) {
             if (setting.getAmount() != 0) {
@@ -66,6 +106,18 @@ public abstract class Depot {
         return true;
     }
 
+    /**
+     * Moves resources from a depot layer to another
+     * @param fromLayerNumber   the layer to take the resources from
+     * @param toLayerNumber   the layer to put the resources in
+     * @param amount    the amount of resources to move
+     * @throws NotEnoughResException     if fromLayer doesnt contain the specified resources
+     * @throws NotEnoughSpaceException  if toLayer's maximum amount is exceeded
+     * @throws LayerNotEmptyException   if toLayer is not empty and a different type of resource is specified
+     * @throws CannotContainFaithException  if faith is trying to be moved
+     * @throws InvalidLayerNumberException   if layerNumber isn't between 1 and 5
+     * @throws InvalidResourceException  if trying to insert an invalid resource type in a ExtraLayer
+     */
     public void moveResources(int fromLayerNumber, int toLayerNumber, int amount) throws
             NegativeResAmountException, NotEnoughResException, NotEnoughSpaceException, LayerNotEmptyException, CannotContainFaithException, InvalidLayerNumberException, InvalidResourceException {
         if (amount == 0) return;
@@ -100,7 +152,10 @@ public abstract class Depot {
         fromLayer.setResAndAmount(tempLayer.getResource(), tempLayer.getAmount());
     }
 
-    //Returns a map with all the resources stored in the depot
+    /**
+     *  Returns a map with all the resources stored in the depot
+     * @return  a Resource object with all the resources
+     */
     public Resource queryAllRes() throws NegativeResAmountException, InvalidKeyException {
         Resource res = new Resource(0, 0, 0, 0);
         for (Layer layer: mapping.values()) {
@@ -110,6 +165,11 @@ public abstract class Depot {
         return res;
     }
 
+    /**
+     * Removes the requested resources from the depot
+     * @param res   the resources to be taken
+     * @throws NotEnoughResException    if the depot doesnt contain that resources
+     */
     public void retrieveRes(Resource res) throws NegativeResAmountException, InvalidKeyException, NotEnoughResException, NotEnoughSpaceException {
         if (!this.queryAllRes().compare(res)) throw new NotEnoughResException();
         Map<ResourceType, Integer> toTake = res.getMap();
@@ -132,7 +192,13 @@ public abstract class Depot {
         }
     }
 
-    //Resources can only be discard when taken from the Market
+    /**
+     * <p>Discards the specified resources, giving one faithPoint for each resource to every other player</p>
+     * <p>Resources can only be discarded when taken from the Market</p>
+     * @param player    the player that wants to discard the resources
+     * @param resource  the amount of resources to be discarded
+     * @throws CannotContainFaithException  if faith is trying to be discarded
+     */
     public void discardRes(Player player, Resource resource) throws CannotContainFaithException, NegativeResAmountException, InvalidKeyException {
         if (resource.keySet().contains(ResourceType.FAITH))
             throw new CannotContainFaithException("You cannot discard faith points");
@@ -145,7 +211,10 @@ public abstract class Depot {
         }
     }
 
-    //Converts current depot in List<DepotSetting> to easily serialize it
+    /**
+     * Converts the content of the depot to a List of DepotSetting
+     * @return  the corresponding list of DepotSetting
+     */
     public List<DepotSetting> toDepotSetting() {
         List<DepotSetting> depotSettings = new ArrayList<>();
         int layerNum = 1;

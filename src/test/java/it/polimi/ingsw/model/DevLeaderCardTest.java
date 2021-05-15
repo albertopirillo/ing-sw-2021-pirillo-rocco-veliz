@@ -3,7 +3,6 @@ package it.polimi.ingsw.model;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
 import it.polimi.ingsw.exceptions.DevSlotEmptyException;
 import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.InvalidNumSlotException;
@@ -12,8 +11,6 @@ import it.polimi.ingsw.utils.LeaderAbilityDeserializer;
 import it.polimi.ingsw.utils.LeaderCardJsonDeserializer;
 import org.junit.jupiter.api.Test;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class DevLeaderCardTest {
 
     @Test
-    void parserTest() throws FileNotFoundException{
+    void parserTest() {
         //register adapter
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeAdapter(LeaderAbility.class, new LeaderAbilityDeserializer());
@@ -32,7 +29,7 @@ class DevLeaderCardTest {
         Gson gson = builder.create();
         Type listType = new TypeToken<List<LeaderCard>>(){}.getType();
         //leaders contains the 16 leader cards...
-        List<LeaderCard> leaders = gson.fromJson(new JsonReader(new FileReader("src/main/resources/json/LeaderCardsConfig.json")), listType);
+        //List<LeaderCard> leaders = gson.fromJson(new JsonReader(new FileReader("src/main/resources/json/LeaderCardsConfig.json")), listType);
 
     }
     @Test

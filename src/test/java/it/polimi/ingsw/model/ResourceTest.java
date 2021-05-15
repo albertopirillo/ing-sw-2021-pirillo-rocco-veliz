@@ -5,7 +5,6 @@ import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import org.junit.jupiter.api.Test;
 
 import javax.management.openmbean.KeyAlreadyExistsException;
-
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -71,7 +70,7 @@ public class ResourceTest {
     }
 
     @Test
-    public void compareTest() throws NegativeResAmountException, InvalidKeyException {
+    public void compareTest() throws NegativeResAmountException {
         Resource res1 = new Resource(1, 0, 2, 5);
         Resource res2 = new Resource(1, 2, 3, 1);
         Resource res3 = new Resource(3, 2, 4, 1);
@@ -90,7 +89,7 @@ public class ResourceTest {
     }
 
     @Test
-    public void sumTest() throws NegativeResAmountException, InvalidKeyException {
+    public void sumTest() throws NegativeResAmountException {
         Resource res1 = new Resource(1, 0, 2, 5);
         Resource res2 = new Resource(2, 2, 1, 0);
         Resource res3 = new Resource();

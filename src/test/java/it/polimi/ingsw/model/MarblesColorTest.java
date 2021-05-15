@@ -1,11 +1,10 @@
 package it.polimi.ingsw.model;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import it.polimi.ingsw.model.MarblesColor;
-import it.polimi.ingsw.model.ResourceType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MarblesColorTest {
 
@@ -13,7 +12,7 @@ public class MarblesColorTest {
     public void getResourceType() {
         MarblesColor marble = MarblesColor.WHITE;
         MarblesColor mar = MarblesColor.RED;
-        assertThrows(IllegalArgumentException.class, () -> marble.getResourceType());
+        assertThrows(IllegalArgumentException.class, marble::getResourceType);
         Assertions.assertEquals(mar.getResourceType(), ResourceType.FAITH);
         assertNotEquals(mar.getResourceType(), ResourceType.SERVANT);
     }

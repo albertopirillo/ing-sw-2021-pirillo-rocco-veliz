@@ -515,11 +515,11 @@ public class ClientCLI extends PlayerInterface {
      * otherwise a list with the active player only
      */
     public Set<String> selectPlayerList(Set<String> playerList, String activePlayer) {
-        Set<String> newSet = new HashSet<>();
         if (this.getNickname().equals(activePlayer)) {
             return playerList;
         }
         else {
+            Set<String> newSet = new HashSet<>();
             newSet.add(activePlayer);
             return newSet;
         }

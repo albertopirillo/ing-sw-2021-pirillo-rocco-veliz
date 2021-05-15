@@ -1,12 +1,11 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.exceptions.NotEnoughResException;
 import org.junit.jupiter.api.Test;
 
 class ResLeaderCardTest {
 
     @Test
-    void canBeActivated() throws NotEnoughResException {
+    void canBeActivated() {
         Resource resource1 = new Resource(1,2,3,4);
         LeaderAbility ability = new Discount(ResourceType.COIN, 2);
         ResLeaderCard res = new ResLeaderCard(2, ability ,resource1);

@@ -74,10 +74,9 @@ public class Resource implements Serializable {
      * Use this method only to add a new key
      * @param key   the resource you want to add
      * @param value the value associated to that key
-     * @throws InvalidKeyException  if the map already contains that key
      * @throws NegativeResAmountException   if the value specified is negative
      */
-    public void addResource(ResourceType key, int value) throws InvalidKeyException, NegativeResAmountException {
+    public void addResource(ResourceType key, int value) throws NegativeResAmountException {
         if (value < 0) throw new NegativeResAmountException();
         if (map.containsKey(key)) throw new KeyAlreadyExistsException();
         map.put(key, value);

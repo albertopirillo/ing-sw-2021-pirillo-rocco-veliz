@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +9,7 @@ import java.util.List;
 class LeaderCardTest {
 
     @Test
-    void getSpecialAbility() throws NegativeResAmountException, InvalidKeyException {
+    void getSpecialAbility() throws NegativeResAmountException {
         //parser JSON leaderCards
         List<LeaderCard> leader = new ArrayList<>();
         Resource r5 = new Resource();

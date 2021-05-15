@@ -9,9 +9,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * <p>The Strongbox is a special depot with no restrictions:
- * there, you can store any number and type of Resources together.</p>
- * <p>Place the Resources received from the production in the Strongbox on your Personal Board</p>
+ * <p>Implements the strongbox, a special depot with no restrictions</p>
+ * <p>In the strongbox you can store any number and type of Resources together.</p>
+ * <p>Place the Resources received from the production in the Strongbox</p>
  * <p>The strongbox automatically converts Faith into playerFaithPoints</p>
  */
 public class Strongbox {

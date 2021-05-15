@@ -61,7 +61,7 @@ public class PlayerController {
                 controller.getGame().updateTempRes();
             }
             controller.resetException();
-        } catch (NegativeResAmountException | InvalidKeyException | InvalidAbilityChoiceException | NoLeaderAbilitiesException | CostNotMatchingException e) {
+        } catch (NegativeResAmountException | InvalidKeyException e) {
             controller.setException(e);
             controller.getGame().updateClientError(controller.getClientError());
         }
@@ -112,7 +112,7 @@ public class PlayerController {
             controller.getGame().updateFaithTrack();
             controller.resetException();
             controller.getGame().notifyEndOfUpdates();
-        } catch (NotEnoughResException | NotEnoughSpaceException | CannotContainFaithException | NegativeResAmountException | InvalidKeyException | InvalidResourceException | WrongDepotInstructionsException | LayerNotEmptyException | InvalidLayerNumberException | AlreadyInAnotherLayerException e) {
+        } catch (NotEnoughSpaceException | CannotContainFaithException | NegativeResAmountException | InvalidKeyException | InvalidResourceException | WrongDepotInstructionsException | LayerNotEmptyException | InvalidLayerNumberException | AlreadyInAnotherLayerException e) {
             controller.setException(e);
             controller.getGame().updateClientError(controller.getClientError());
             controller.getGame().updateTempRes();

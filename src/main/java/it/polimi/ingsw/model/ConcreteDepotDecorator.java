@@ -4,14 +4,20 @@ import it.polimi.ingsw.exceptions.InvalidLayerNumberException;
 
 import java.util.Map;
 
+/**
+ * Depot decorator that adds one more slot, thanks to a leader ability
+ */
 public class ConcreteDepotDecorator extends DepotDecorator {
 
-    //inherited from Depot, but cannot access directly because it's private:
     //private final Map<Integer, DepotLayer> mapping = new HashMap<>();
-
     //protected Depot depot <== inherited from the DepotDecorator, has direct access
 
-    //The builder just adds another element to the superclass' mapping
+    /**
+     * Adds another layer to the generic decorator mapping
+     * @param depot the depot to decorate
+     * @param extraSlot the slot to add
+     * @throws InvalidLayerNumberException  if the maximum number of layers (5) is already reached
+     */
     public ConcreteDepotDecorator(Depot depot, ExtraSlot extraSlot) throws InvalidLayerNumberException {
         super(depot);
         Map<Integer, Layer> copy = this.depot.getMapCopy();

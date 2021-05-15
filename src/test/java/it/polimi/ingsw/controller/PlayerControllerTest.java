@@ -12,7 +12,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class PlayerControllerTest {
 
@@ -101,13 +102,11 @@ class PlayerControllerTest {
 
         playerController.insertMarble(0);
         Resource output = controller.getResourceController().getTempRes().getToHandle();
-        Resource expect = new Resource(1,0,0,1);
-        //OUTPUT ALLx1 SERVANTx1 STONEx1
         System.out.println(output);
     }
 
     @Test
-    public void changeMarbleTest() throws FullCardDeckException, TooManyLeaderAbilitiesException, InvalidKeyException, NegativeResAmountException {
+    public void changeMarbleTest() throws FullCardDeckException, TooManyLeaderAbilitiesException, NegativeResAmountException {
         Game game = new MultiGame(true);
         MasterController controller = new MasterController(game);
         PlayerController playerController = controller.getPlayerController();

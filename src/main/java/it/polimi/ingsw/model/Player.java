@@ -48,7 +48,7 @@ public class Player {
         return this.getPersonalBoard().getFaithTrack().getPlayerFaith();
     }
 
-    public void addPlayerFaith(int amount) throws NegativeResAmountException, InvalidKeyException {
+    public void addPlayerFaith(int amount) {
         this.getPersonalBoard().getFaithTrack().addPlayerFaith(amount);
     }
 
@@ -122,7 +122,7 @@ public class Player {
         return depotRes.sum(strongboxRes);
     }
 
-    public Resource insertMarble(int position) throws NegativeResAmountException, InvalidKeyException, InvalidAbilityChoiceException, NoLeaderAbilitiesException, CostNotMatchingException {
+    public Resource insertMarble(int position) throws NegativeResAmountException, InvalidKeyException {
         return this.resStrategy.insertMarble(this, position);
     }
 
@@ -143,7 +143,7 @@ public class Player {
         this.prodStrategy.extraProduction(this, choice, fromDepot, fromStrongbox, res);
     }
 
-    public void activateProduction(List<DevelopmentCard> cards) throws NegativeResAmountException, InvalidKeyException, NotEnoughResException {
+    public void activateProduction(List<DevelopmentCard> cards) throws NegativeResAmountException, InvalidKeyException {
         for(DevelopmentCard devCard: cards){
             getPersonalBoard().getStrongbox().addResources(devCard.getProdPower().getOutput());
         }

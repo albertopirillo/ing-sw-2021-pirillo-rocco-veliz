@@ -20,7 +20,7 @@ public class ResourceController {
         return tempRes;
     }
 
-    public void handleResource(Resource toDiscard, List<DepotSetting> settings) throws NotEnoughResException, InvalidKeyException, NegativeResAmountException, WrongDepotInstructionsException, InvalidResourceException, LayerNotEmptyException, NotEnoughSpaceException, InvalidLayerNumberException, CannotContainFaithException, AlreadyInAnotherLayerException {
+    public void handleResource(Resource toDiscard, List<DepotSetting> settings) throws InvalidKeyException, NegativeResAmountException, WrongDepotInstructionsException, InvalidResourceException, LayerNotEmptyException, NotEnoughSpaceException, InvalidLayerNumberException, CannotContainFaithException, AlreadyInAnotherLayerException {
         if(this.tempRes.isEmpty()) throw new WrongDepotInstructionsException("There are no resources to be placed now");
         Resource tempRes = this.tempRes.getToHandle();
         Player player = this.controller.getGame().getActivePlayer();

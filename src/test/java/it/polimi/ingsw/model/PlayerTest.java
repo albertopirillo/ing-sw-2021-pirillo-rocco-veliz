@@ -31,7 +31,7 @@ class PlayerTest {
     }
 
     @Test
-    public void activateProductionTest() throws NegativeResAmountException, InvalidKeyException, NotEnoughResException {
+    public void activateProductionTest() throws NegativeResAmountException, InvalidKeyException {
         Player player = new Player( "abc");
         //Depot and StrongBox empty
         assertEquals(player.getAllResources(), new Resource(0, 0, 0, 0));

@@ -1,7 +1,6 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.DevSlotEmptyException;
-import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +15,7 @@ class DevelopmentSlotTest {
     Resource res3 = new Resource();
 
     @Test
-    void getCards() throws InvalidKeyException, NegativeResAmountException {
+    void getCards() throws NegativeResAmountException {
         res1.addResource(ResourceType.SHIELD,2);
         res2.addResource(ResourceType.FAITH, 1);
         res3.addResource(ResourceType.COIN,1);
@@ -39,7 +38,7 @@ class DevelopmentSlotTest {
     }
 
     @Test
-    void addCard() throws InvalidKeyException, NegativeResAmountException {
+    void addCard() throws NegativeResAmountException {
         //first element of devCards is..
         res1.addResource(ResourceType.SHIELD,2);
         res2.addResource(ResourceType.FAITH, 1);
@@ -59,7 +58,7 @@ class DevelopmentSlotTest {
     }
 
     @Test
-    void getLevelSlot() throws InvalidKeyException, NegativeResAmountException, DevSlotEmptyException {
+    void getLevelSlot() throws NegativeResAmountException, DevSlotEmptyException {
         res1.addResource(ResourceType.SHIELD,2);
         res2.addResource(ResourceType.FAITH, 1);
         res3.addResource(ResourceType.COIN,1);
@@ -67,7 +66,7 @@ class DevelopmentSlotTest {
         DevelopmentCard dev2 = new DevelopmentCard(1, res1, CardColor.GREEN, 2, new ProductionPower(res2, res3));
         DevelopmentCard dev3 = new DevelopmentCard(1, res1, CardColor.GREEN, 1, new ProductionPower(res2, res3));
         DevelopmentSlot devSlot = new DevelopmentSlot();
-        assertThrows(DevSlotEmptyException.class, () -> devSlot.getLevelSlot());
+        assertThrows(DevSlotEmptyException.class, devSlot::getLevelSlot);
         devSlot.addCard(dev1);
         assertEquals(3, devSlot.getLevelSlot());
         devSlot.addCard(dev2);
@@ -77,7 +76,7 @@ class DevelopmentSlotTest {
     }
 
     @Test
-    void getTopCard() throws InvalidKeyException, NegativeResAmountException, DevSlotEmptyException {
+    void getTopCard() throws NegativeResAmountException, DevSlotEmptyException {
         res1.addResource(ResourceType.SHIELD,2);
         res2.addResource(ResourceType.FAITH, 1);
         res3.addResource(ResourceType.COIN,1);
@@ -88,8 +87,8 @@ class DevelopmentSlotTest {
         DevelopmentCard dev2 = new DevelopmentCard(1, res1, CardColor.GREEN, 2, new ProductionPower(res2, res3));
         DevelopmentCard dev3 = new DevelopmentCard(1, res1, CardColor.GREEN, 1, new ProductionPower(res2, res3));
         DevelopmentSlot devSlot = new DevelopmentSlot();
-        assertThrows(DevSlotEmptyException.class, () -> devSlot.getLevelSlot());
-        assertThrows(DevSlotEmptyException.class, () -> devSlot.getTopCard());
+        assertThrows(DevSlotEmptyException.class, devSlot::getLevelSlot);
+        assertThrows(DevSlotEmptyException.class, devSlot::getTopCard);
         devSlot.addCard(dev1);
         assertEquals(dev1, devSlot.getTopCard());
         assertNotEquals(dev2, devSlot.getTopCard());
@@ -101,7 +100,7 @@ class DevelopmentSlotTest {
     }
 
     @Test
-    void canBeAdded() throws InvalidKeyException, NegativeResAmountException, DevSlotEmptyException {
+    void canBeAdded() throws NegativeResAmountException, DevSlotEmptyException {
         res1.addResource(ResourceType.SHIELD,2);
         res2.addResource(ResourceType.FAITH, 1);
         res3.addResource(ResourceType.COIN,1);

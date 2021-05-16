@@ -10,10 +10,26 @@ import java.util.List;
 
 public class PlayerController {
 
+    /**
+     * Reference to the associated MasterController
+     */
     private final MasterController controller;
+    /**
+     * Specifies if the player has already performed a main action this turn
+     */
+    private boolean mainActionDone;
+    /**
+     * Set to false to make the player perform one action per turn, like the real game
+     */
+    private boolean testing = true;
 
     public PlayerController(MasterController controller) {
         this.controller = controller;
+        this.mainActionDone = false;
+    }
+
+    public void setTesting(boolean testing) {
+        this.testing = testing;
     }
 
     public void basicProduction(ResourceType input1, ResourceType input2, ResourceType output, Resource fromDepot, Resource fromStrongbox) {
@@ -49,6 +65,7 @@ public class PlayerController {
     //Calls the player method and then DepotController to handle the resource placement in the depot
     public void insertMarble(int position) {
         try {
+            if (this.mainActionDone) throw new MainActionException();
             Player activePlayer = controller.getGame().getActivePlayer();
             Resource output = activePlayer.insertMarble(position);
             ResourceController resourceController = controller.getResourceController();
@@ -62,9 +79,11 @@ public class PlayerController {
                 controller.getGame().updateTempRes();
             }
             controller.resetException();
-        } catch (NegativeResAmountException | InvalidKeyException e) {
+            if (!testing) this.mainActionDone = true;
+        } catch (NegativeResAmountException | InvalidKeyException | MainActionException e) {
             controller.setException(e);
             controller.getGame().updateClientError(controller.getClientError());
+            controller.getGame().notifyEndOfUpdates();
         }
     }
 
@@ -92,13 +111,15 @@ public class PlayerController {
 
     public void buyDevCard(int level, CardColor color, int numSlot, AbilityChoice choice, Resource fromDepot, Resource fromStrongbox) {
         try {
+            if (this.mainActionDone) throw new MainActionException();
             Player activePlayer = controller.getGame().getActivePlayer();
             activePlayer.buyDevCard(level, color, numSlot, choice, fromDepot, fromStrongbox);
             controller.getGame().updateMarket();
             controller.getGame().updateDevSlots();
             controller.getGame().updateStorages();
             controller.resetException();
-        } catch (CannotContainFaithException | NotEnoughSpaceException | NegativeResAmountException | DeckEmptyException | CostNotMatchingException | NotEnoughResException | InvalidKeyException | NoLeaderAbilitiesException | InvalidAbilityChoiceException | DevSlotEmptyException | InvalidNumSlotException e) {
+            if(!testing) this.mainActionDone = true;
+        } catch (CannotContainFaithException | NotEnoughSpaceException | NegativeResAmountException | DeckEmptyException | CostNotMatchingException | NotEnoughResException | InvalidKeyException | NoLeaderAbilitiesException | InvalidAbilityChoiceException | DevSlotEmptyException | InvalidNumSlotException | MainActionException e) {
             controller.setException(e);
             controller.getGame().updateClientError(controller.getClientError());
         } finally {
@@ -125,9 +146,13 @@ public class PlayerController {
             if (!controller.getResourceController().getTempRes().isEmpty()) {
                 throw new CannotEndTurnException("There are still resources to be placed");
             }
+            if (!testing && !this.mainActionDone) {
+                throw new MainActionException("You have to perform an action before ending the turn");
+            }
+            this.mainActionDone = false;
             controller.getGame().nextTurn();
             controller.resetException();
-        } catch (CannotEndTurnException | NegativeResAmountException | InvalidKeyException e) {
+        } catch (CannotEndTurnException | NegativeResAmountException | InvalidKeyException | MainActionException e) {
             controller.setException(e);
             controller.getGame().updateClientError(controller.getClientError());
         } finally {
@@ -168,6 +193,7 @@ public class PlayerController {
     }
 
     public void activateProduction(Resource fromDepot, Resource fromStrongbox, List<Integer> numSlots) {
+
         Player activePlayer = controller.getGame().getActivePlayer();
         PersonalBoard personalBoard = activePlayer.getPersonalBoard();
         List<DevelopmentCard> devCards = new ArrayList<>();
@@ -176,6 +202,7 @@ public class PlayerController {
         Strongbox strongbox = personalBoard.getStrongbox();
         DevelopmentCard card;
         try {
+            if(this.mainActionDone) throw new MainActionException();
             for(Integer i : numSlots){
                 card = personalBoard.getSlot(i).getTopCard();
                 devCards.add(card);
@@ -188,7 +215,8 @@ public class PlayerController {
             controller.getGame().updateFaithTrack();
             controller.getGame().updateStorages();
             controller.resetException();
-        } catch (CostNotMatchingException | NotEnoughResException | NegativeResAmountException | InvalidKeyException | DevSlotEmptyException | NotEnoughSpaceException | CannotContainFaithException e) {
+            if(!testing) this.mainActionDone = true;
+        } catch (CostNotMatchingException | NotEnoughResException | NegativeResAmountException | InvalidKeyException | DevSlotEmptyException | NotEnoughSpaceException | CannotContainFaithException | MainActionException e) {
             controller.setException(e);
             controller.getGame().updateClientError(controller.getClientError());
         } finally {

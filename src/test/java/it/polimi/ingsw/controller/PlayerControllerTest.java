@@ -22,6 +22,7 @@ class PlayerControllerTest {
         Game game = new MultiGame(true);
         MasterController controller = new MasterController(game);
         PlayerController playerController = controller.getPlayerController();
+        playerController.setTesting(true);
         Player activePlayer = game.getActivePlayer();
         activePlayer.setGame(game);
         Resource fromDepot = new Resource();
@@ -47,6 +48,7 @@ class PlayerControllerTest {
         MasterController controller = new MasterController(game);
         PlayerController playerController = controller.getPlayerController();
         Player activePlayer = game.getActivePlayer();
+        playerController.setTesting(true);
         activePlayer.setGame(game);
         playerController.extraProduction(AbilityChoice.FIRST, new Resource(), new Resource(), ResourceType.COIN);
         assertEquals("The player has no leader ability of that type already active", controller.getError());
@@ -76,6 +78,7 @@ class PlayerControllerTest {
         Game game = new MultiGame(true);
         MasterController controller = new MasterController(game);
         PlayerController playerController = controller.getPlayerController();
+        playerController.setTesting(true);
         Player activePlayer = game.getActivePlayer();
         activePlayer.setGame(game);
 
@@ -111,6 +114,7 @@ class PlayerControllerTest {
         MasterController controller = new MasterController(game);
         PlayerController playerController = controller.getPlayerController();
         Player activePlayer = game.getActivePlayer();
+        playerController.setTesting(true);
         activePlayer.setGame(game);
 
         ChangeWhiteMarbles changeWhiteMarbles = new ChangeWhiteMarbles(ResourceType.SHIELD);
@@ -164,6 +168,7 @@ class PlayerControllerTest {
         Game game = new MultiGame(true);
         MasterController controller = new MasterController(game);
         PlayerController playerController = controller.getPlayerController();
+        playerController.setTesting(true);
         Player activePlayer = game.getActivePlayer();
         activePlayer.setGame(game);
 
@@ -176,7 +181,9 @@ class PlayerControllerTest {
         Game game = new MultiGame(true);
         MasterController controller = new MasterController(game);
         PlayerController playerController = controller.getPlayerController();
+        playerController.setTesting(true);
         Player activePlayer = game.getActivePlayer();
+
         activePlayer.setGame(game);
         controller.getResourceController().getTempRes().setToHandle(new Resource(2,3,4,5));
 
@@ -190,6 +197,7 @@ class PlayerControllerTest {
         Game game = new MultiGame(true);
         MasterController controller = new MasterController(game);
         PlayerController playerController = controller.getPlayerController();
+        playerController.setTesting(true);
         Player activePlayer = game.getActivePlayer();
         activePlayer.setGame(game);
 
@@ -217,6 +225,7 @@ class PlayerControllerTest {
         Game game = new MultiGame(true);
         MasterController controller = new MasterController(game);
         PlayerController playerController = controller.getPlayerController();
+        playerController.setTesting(true);
         Player activePlayer = game.getActivePlayer();
         activePlayer.setGame(game);
 
@@ -245,6 +254,7 @@ class PlayerControllerTest {
         Game game = new MultiGame(true);
         MasterController controller = new MasterController(game);
         PlayerController playerController = controller.getPlayerController();
+        playerController.setTesting(true);
         Player activePlayer = game.getActivePlayer();
         activePlayer.setGame(game);
 
@@ -262,6 +272,7 @@ class PlayerControllerTest {
         Game game = new MultiGame(true);
         MasterController controller = new MasterController(game);
         PlayerController playerController = controller.getPlayerController();
+        playerController.setTesting(true);
         Player activePlayer = game.getActivePlayer();
         activePlayer.setGame(game);
 
@@ -281,6 +292,8 @@ class PlayerControllerTest {
         Game game = new MultiGame(true);
         MasterController controller = new MasterController(game);
         PlayerController playerController = controller.getPlayerController();
+        playerController.setTesting(true);
+        playerController.setTesting(true);
         Player activePlayer = game.getActivePlayer();
         activePlayer.setGame(game);
         //player.getPersonalBoard().getStrongbox().addResources(new Resource(0,2,0,0));

@@ -15,14 +15,10 @@ import java.util.*;
 public class ClientCLI extends PlayerInterface {
     private final Scanner stdin;
     private Resource tempRes;
-    //Set testing to false to make the player perform one action per turn, like the real game
-    private final boolean testing = false;
-    private boolean doneAction;
 
     public ClientCLI(Client player){
         super(player);
         this.stdin = new Scanner(System.in);
-        this.doneAction = false;
     }
 
     public void setup(){
@@ -271,32 +267,16 @@ public class ClientCLI extends PlayerInterface {
                 request = new ShowDevSlotsRequest();
                 break;
             case 8:
-                if(this.doneAction) {
-                    errorPrint("\nYou already performed an action this turn");
-                }
-                else {
-                    int position = getPosition(0,6);
-                    if (position != -1) {
-                        request = new InsertMarbleRequest(position);
-                        if (!testing) this.doneAction = true;
-                    }
+                int position = getPosition(0,6);
+                if (position != -1) {
+                    request = new InsertMarbleRequest(position);
                 }
                 break;
             case 9:
-                if(this.doneAction) {
-                    errorPrint("\nYou already performed an action this turn");
-                }
-                else {
-                    request = buyDevCardMenu();
-                }
+                request = buyDevCardMenu();
                 break;
             case 10:
-                if(this.doneAction) {
-                    errorPrint("\nYou already performed an action this turn");
-                }
-                else {
-                    request = productionMenu();
-                }
+                request = productionMenu();
                 break;
             case 13:
                 request = UseLeaderMenu();
@@ -305,13 +285,7 @@ public class ClientCLI extends PlayerInterface {
                 request = reorderDepotMenu();
                 break;
             case 19:
-                if(!this.doneAction) {
-                    errorPrint("\nYou have to perform an action before ending the turn");
-                }
-                else {
-                    request = new EndTurnRequest();
-                    if (!testing) this.doneAction = false;
-                }
+                request = new EndTurnRequest();
                 break;
             case 20:
                 request = new QuitGameRequest();
@@ -358,7 +332,6 @@ public class ClientCLI extends PlayerInterface {
                     depotResource.modifyValue(strToResType(option.toLowerCase()),amountDepot);
                     strongboxResource.modifyValue(strToResType(option.toLowerCase()),amountStrongbox);
                 }
-                if (!testing) this.doneAction = true; //TODO: not enough
                 return new BuyDevCardRequest(level,CardColor.parseColorCard(color), parseToAbility(ability),depotResource, strongboxResource, slot-1);
             } catch (Exception e){
                 errorPrint("Invalid input, retry");
@@ -378,18 +351,10 @@ public class ClientCLI extends PlayerInterface {
         if (selection.equals("b")) {
             request = basicProductionMenu();
         } else if (selection.equals("d")) {
-            if(this.doneAction) {
-                errorPrint("\nYou already performed an action this turn");
-            }
-            else {
-                request = devProductionMenu();
-                if (!testing) this.doneAction = true;
-            }
+            request = devProductionMenu();
         } else if (selection.equals("e")) {
             request = extraProductionMenu();
         }
-
-        if (!testing) this.doneAction = true;
         return request;
     }
 
@@ -656,8 +621,9 @@ public class ClientCLI extends PlayerInterface {
     }
 
     public void updateDevSlotsPretty(DevSlotsUpdate update) {
+        Set<String> toPrint = this.selectPlayerList(update.getDevSlotMap().keySet(), update.getActivePlayer());
         Map<String, List<DevelopmentSlot>> devSlotList = update.getDevSlotMap();
-        for(String playerNick: devSlotList.keySet()) {
+        for(String playerNick: toPrint) {
             List<DevelopmentSlot> currentSlots = devSlotList.get(playerNick);
             System.out.println("Showing " + playerNick + "'s development slots:");
             System.out.println("\t\t\t\tSlot number 1:\t\t\t\t\t\t\t\t\t\tSlot number2:\t\t\t\t\t\t\t\t\t\t\tSlot number3:");

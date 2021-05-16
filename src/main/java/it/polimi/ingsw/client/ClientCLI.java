@@ -197,6 +197,16 @@ public class ClientCLI extends PlayerInterface {
         return null;
     }
 
+    private AbilityChoice parseToAbility(int choice){
+        switch (choice){
+            case 1: return AbilityChoice.STANDARD;
+            case 2: return AbilityChoice.FIRST;
+            case 3: return AbilityChoice.SECOND;
+            case 4: return AbilityChoice.BOTH;
+        }
+        return null;
+    }
+
     public int getPosition(int min, int max){
         int position;
         do {
@@ -214,19 +224,13 @@ public class ClientCLI extends PlayerInterface {
             System.out.println("1: Show faith track");
             System.out.println("2: Show depot and strongbox");
             System.out.println("3: Show leader cards");
-            /*System.out.println("4: Show pending resources from the Market");*/
             System.out.println("5: Show market development cards");
             System.out.println("6: Show market marbles tray");
             System.out.println("7: Show Development Slots");
             System.out.println("8: Buy from marbles tray");
             System.out.println("9: Buy a development card");
             System.out.println("10: Activate a production");
-            /*System.out.println("11: Activate extra production");
-            System.out.println("12: Activate a development card production");*/
             System.out.println("13: Leader Card options");
-            /*System.out.println("14: Use leader card 2");
-            System.out.println("15: Discard leader card 1");
-            System.out.println("16: Discard leader card 2");*/
             System.out.println("17: Reorder depot");
             /*System.out.println("18: Place pending resources from the Market");*/
             System.out.println("19: End Turn");
@@ -284,36 +288,12 @@ public class ClientCLI extends PlayerInterface {
             case 10:
                 request = productionMenu();
                 break;
-            /*case 11:
-                request = extraProductionMenu();
-                break;
-            case 12:
-                if(this.doneAction) {
-                    errorPrint("\nYou already performed an action this turn");
-                }
-                else {
-                    request = devProductionMenu();
-                    if (!testing) this.doneAction = true;
-                }
-                break;*/
             case 13:
                 request = UseLeaderMenu();
                 break;
-            /*case 14:
-                request = new UseLeaderRequest(1, LeaderAction.USE_ABILITY);
-                break;
-            case 15:
-                request = new UseLeaderRequest(0, LeaderAction.DISCARD);
-                break;
-            case 16:
-                request = new UseLeaderRequest(1, LeaderAction.DISCARD);
-                break;*/
             case 17:
                 request = reorderDepotMenu();
                 break;
-           /* case 18:
-                request = placeResourceMenu();
-                break;*/
             case 19:
                 if(!this.doneAction) {
                     errorPrint("\nYou have to perform an action before ending the turn");
@@ -373,16 +353,6 @@ public class ClientCLI extends PlayerInterface {
                 errorPrint("Invalid input, retry");
             }
         }
-    }
-
-    private AbilityChoice parseToAbility(int choice){
-       switch (choice){
-           case 1: return AbilityChoice.STANDARD;
-           case 2: return AbilityChoice.FIRST;
-           case 3: return AbilityChoice.SECOND;
-           case 4: return AbilityChoice.BOTH;
-       }
-       return null;
     }
 
     private Request productionMenu(){
@@ -489,7 +459,7 @@ public class ClientCLI extends PlayerInterface {
 
     private Request devProductionMenu(){
         Request request = null;
-        //new DevProductionRequest(); @Riccardo
+        //new DevProductionRequest(); //TODO Riccardo
         return request;
     }
 

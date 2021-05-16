@@ -223,10 +223,10 @@ public class ClientCLI extends PlayerInterface {
             System.out.println("10: Activate basic production");
             System.out.println("11: Activate extra production");
             System.out.println("12: Activate a development card production");
-            System.out.println("13: Use leader card 1");
-            System.out.println("14: Use leader card 2");
+            System.out.println("13: Leader Card options");
+            /*System.out.println("14: Use leader card 2");
             System.out.println("15: Discard leader card 1");
-            System.out.println("16: Discard leader card 2");
+            System.out.println("16: Discard leader card 2");*/
             System.out.println("17: Reorder depot");
             /*System.out.println("18: Place pending resources from the Market");*/
             System.out.println("19: End Turn");
@@ -297,9 +297,9 @@ public class ClientCLI extends PlayerInterface {
                 }
                 break;
             case 13:
-                request = new UseLeaderRequest(0, LeaderAction.USE_ABILITY);
+                request = UseLeaderMenu();
                 break;
-            case 14:
+            /*case 14:
                 request = new UseLeaderRequest(1, LeaderAction.USE_ABILITY);
                 break;
             case 15:
@@ -307,7 +307,7 @@ public class ClientCLI extends PlayerInterface {
                 break;
             case 16:
                 request = new UseLeaderRequest(1, LeaderAction.DISCARD);
-                break;
+                break;*/
             case 17:
                 request = reorderDepotMenu();
                 break;
@@ -431,6 +431,31 @@ public class ClientCLI extends PlayerInterface {
     private Request devProductionMenu(){
         Request request = null;
         //new DevProductionRequest(); @Riccardo
+        return request;
+    }
+
+    private Request UseLeaderMenu() {
+        Request request = null;
+
+        String[] firstActionOptions = {"a: Activate a leader card", "d: Discard a leader card", "p: Use an Extra Production ability", "q: Exit this menu"};
+        String[] firstSelections = {"a", "d", "p", "q"};
+        String[] leaderOptions = {"1: The first", "2: The second"};
+
+        System.out.println("\nWhat do you want to do with you leader cards?");
+        String action = getStringSelection(firstSelections, firstActionOptions);
+
+        if (action.equals("a")) {
+            System.out.println("\nWhich leader card do you want to activate?");
+            int leader = getIntegerSelection(leaderOptions);
+            request = new UseLeaderRequest(leader, LeaderAction.USE_ABILITY);
+        } else if (action.equals("d")) {
+            System.out.println("\nWhich leader card do you want to activate?");
+            int leader = getIntegerSelection(leaderOptions);
+            request = new UseLeaderRequest(leader, LeaderAction.DISCARD);
+        } else if (action.equals("p")) {
+            //extraProductionMenu()
+            //request = new ExtraProductionRequest();
+        }
         return request;
     }
 

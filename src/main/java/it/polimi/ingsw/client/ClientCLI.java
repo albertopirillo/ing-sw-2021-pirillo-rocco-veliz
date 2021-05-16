@@ -215,10 +215,10 @@ public class ClientCLI extends PlayerInterface {
             System.out.println("2: Show depot and strongbox");
             System.out.println("3: Show leader cards");
             /*System.out.println("4: Show pending resources from the Market");*/
-            System.out.println("5: Show market");
-            System.out.println("6: Show market tray");
+            System.out.println("5: Show market development cards");
+            System.out.println("6: Show market marbles tray");
             System.out.println("7: Show Development Slots");
-            System.out.println("8: Buy from market");
+            System.out.println("8: Buy from marbles tray");
             System.out.println("9: Buy a development card");
             System.out.println("10: Activate a production");
             /*System.out.println("11: Activate extra production");
@@ -370,7 +370,7 @@ public class ClientCLI extends PlayerInterface {
                 }
                 return new BuyDevCardRequest(level,CardColor.parseColorCard(color), parseToAbility(ability),depotResource, strongboxResource, slot-1);
             } catch (Exception e){
-                System.out.println("Invalid input, retry");
+                errorPrint("Invalid input, retry");
             }
         }
     }
@@ -448,9 +448,42 @@ public class ClientCLI extends PlayerInterface {
         return request;
     }
 
-    private Request extraProductionMenu(){
+    private Request extraProductionMenu() {
         Request request = null;
-        //new ExtraProductionRequest();
+
+        Resource depotResource = new Resource(0, 0, 0, 0);
+        Resource strongboxResource = new Resource(0, 0, 0, 0);
+        String[] abilityOptions = {"1: FIRST", "2: SECOND",/*"3: BOTH",*/ "3: Exit this menu"};
+        String[] options = {"STONE", "COIN", "SHIELD", "SERVANT"};
+
+        System.out.println("\nWhat leader card production do you want to use");
+        int ability = getIntegerSelection(abilityOptions);
+        if (ability == 3){
+            return null;
+        } else {
+            System.out.println("\nWhere do you want to get the resources from?");
+            try{
+                for (String option : options) {
+                    System.out.println(option);
+                    System.out.println("How many resources to take from Depot");
+                    int amountDepot = Integer.parseInt(stdin.nextLine());
+                    if (amountDepot < 0 || amountDepot > 3) throw new Exception();
+                    System.out.println("How many resources to take from Strongbox");
+                    int amountStrongbox = Integer.parseInt(stdin.nextLine());
+                    if (amountStrongbox < 0) throw new Exception();
+                    depotResource.modifyValue(strToResType(option.toLowerCase()),amountDepot);
+                    strongboxResource.modifyValue(strToResType(option.toLowerCase()),amountStrongbox);
+                }
+            } catch (Exception e){
+                errorPrint("Invalid input, retry");
+            }
+            System.out.println("\nWhat resource do you want to get?");
+            ResourceType res = parseToResourceType(getResourceMenu());
+
+            request = new ExtraProductionRequest(parseToAbility(ability+1), depotResource, strongboxResource, res);
+        }
+
+
         return request;
     }
 
@@ -463,18 +496,17 @@ public class ClientCLI extends PlayerInterface {
     private Request UseLeaderMenu() {
         Request request = null;
 
-        String[] firstActionOptions = {"a: Activate a leader card", "d: Discard a leader card", "q: Exit this menu"};
-        String[] firstSelections = {"a", "d", "q"};
+        String[] firstActionOptions = {"1: Activate a leader card", "2: Discard a leader card", "3: Exit this menu"};String[] firstSelections = {"a", "d", "q"};
         String[] leaderOptions = {"1: The first", "2: The second"};
 
         System.out.println("\nWhat do you want to do with you leader cards?");
-        String action = getStringSelection(firstSelections, firstActionOptions);
+        int selection = getIntegerSelection(firstActionOptions);
 
-        if (action.equals("a")) {
+        if (selection == 1) {
             System.out.println("\nWhich leader card do you want to activate?");
             int leader = getIntegerSelection(leaderOptions);
             request = new UseLeaderRequest(leader, LeaderAction.USE_ABILITY);
-        } else if (action.equals("d")) {
+        } else if (selection == 2) {
             System.out.println("\nWhich leader card do you want to activate?");
             int leader = getIntegerSelection(leaderOptions);
             request = new UseLeaderRequest(leader, LeaderAction.DISCARD);

@@ -419,7 +419,7 @@ public class ClientCLI extends PlayerInterface {
     }
 
     private Request extraProductionMenu() {
-        Request request = null;
+        Request request;
 
         Resource depotResource = new Resource(0, 0, 0, 0);
         Resource strongboxResource = new Resource(0, 0, 0, 0);
@@ -703,11 +703,6 @@ public class ClientCLI extends PlayerInterface {
             System.out.println("\nPlayer: " + entry.getKey());
             System.out.println(entry.getValue().toString());
         }
-        /*Set<String> toPrint = this.selectPlayerList(faithTrackUpdate.getFaithTrackInfoMap().keySet(), faithTrackUpdate.getActivePlayer());*/
-        /*for(String playerNick: toPrint) {
-            System.out.println("\nPlayer: " + playerNick);
-            System.out.println(map.get(playerNick));
-        }*/
     }
 
     @Override

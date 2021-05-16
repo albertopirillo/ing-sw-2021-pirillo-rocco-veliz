@@ -32,7 +32,6 @@ public class TempMarblesUpdate extends ServerUpdate{
 
     @Override
     public String toString() {
-        return "Hai "+numWhiteMarbles+"  white marbles!";
-
+        return "You have "+ numWhiteMarbles + "  white marbles!";
     }
 }

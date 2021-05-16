@@ -20,8 +20,8 @@ public class PlayerController {
         try {
             Player activePlayer = controller.getGame().getActivePlayer();
             activePlayer.basicProduction(input1, input2, output, fromDepot, fromStrongbox);
-            controller.getGame().updateDevSlots();
             controller.getGame().updateFaithTrack();
+            controller.getGame().updateStorages();
             controller.resetException();
         } catch (CostNotMatchingException | NotEnoughSpaceException | CannotContainFaithException | NotEnoughResException | NegativeResAmountException | InvalidKeyException e) {
             controller.setException(e);

@@ -162,17 +162,41 @@ public class Resource implements Serializable {
         return map.equals(((Resource) o).map);
     }
 
+    /**
+     * Returns the amount of different type of resource with values greater than zero
+     * @return   an int representing the actual size
+     */
+    private int getActualSize() {
+        int size = 0;
+        for (ResourceType key: map.keySet()) {
+            if(map.get(key) != 0) size++;
+        }
+        return size;
+    }
+
+    /**
+     * <p>Fancy toString() method</p>
+     * <p>If a resource is empty, "Empty" is printed</p>
+     * <p>Resources are separated with comma</p>
+     * <p>Resources with value equal to zero are not printed</p>
+     * @return  a String representing a human-readable representation of the object
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(" ");
-        int i = 0;
-        for(ResourceType key: this.map.keySet()) {
-            if (this.map.get(key) != 0) {
-                sb.append(key).append("x").append(this.map.get(key));
-                if (i < this.map.size() - 1) sb.append(", ");
+        if (this.getActualSize() == 0) {
+            sb.append("Empty");
+        }
+        else {
+            int i = 0;
+            for (ResourceType key : this.map.keySet()) {
+                if (this.map.get(key) != 0) {
+                    sb.append(key).append("x").append(this.map.get(key));
+                    if (i < this.getActualSize() - 1) sb.append(", ");
+                    i++;
+                }
             }
-            i++;
         }
         return sb.toString();
     }

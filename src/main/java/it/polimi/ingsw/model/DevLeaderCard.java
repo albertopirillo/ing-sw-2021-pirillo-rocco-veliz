@@ -40,8 +40,13 @@ public class DevLeaderCard extends LeaderCard implements Serializable {
         StringBuilder sb = new StringBuilder();
         sb.append("\tRequires: ");
         for(LeaderDevCost leaderDevCost: requires){
-            sb.append("\n\t\tColor: ").append(leaderDevCost.getColor().name());
-            sb.append("\n\t\tLevel: ").append(leaderDevCost.getLevel());
+            sb.append("\n\t >\tColor: ").append(leaderDevCost.getColor());
+            if (leaderDevCost.getLevel() == 0) {
+                sb.append("\n\t\tLevel: ANY");
+            }
+            else {
+                sb.append("\n\t\tLevel: ").append(leaderDevCost.getLevel());
+            }
             sb.append("\n\t\tAmount: ").append(leaderDevCost.getAmount());
         }
         sb.append("\n\tAbility");
@@ -49,6 +54,4 @@ public class DevLeaderCard extends LeaderCard implements Serializable {
         sb.append("\n\tVictoryPoints: ").append(getVictoryPoints());
         return sb.toString();
     }
-
-
 }

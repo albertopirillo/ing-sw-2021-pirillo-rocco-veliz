@@ -35,8 +35,8 @@ public class PlayerController {
         try {
             Player activePlayer = controller.getGame().getActivePlayer();
             activePlayer.extraProduction(choice, fromDepot, fromStrongbox, res);
-            controller.getGame().updateDevSlots();
             controller.getGame().updateFaithTrack();
+            controller.getGame().updateDevSlots();
             controller.resetException();
         } catch (CostNotMatchingException | InvalidAbilityChoiceException | NotEnoughSpaceException | NoLeaderAbilitiesException | CannotContainFaithException | NotEnoughResException | NegativeResAmountException | InvalidKeyException e) {
             controller.setException(e);
@@ -58,6 +58,7 @@ public class PlayerController {
             }
             else {
                 controller.getGame().updateMarketTray();
+                controller.getGame().updateStorages();
                 controller.getGame().updateTempRes();
             }
             controller.resetException();
@@ -108,8 +109,8 @@ public class PlayerController {
     public void placeResource(Resource toDiscard, List<DepotSetting> toPlace) {
         try {
             controller.getResourceController().handleResource(toDiscard, toPlace);
-            controller.getGame().updateStorages();
             controller.getGame().updateFaithTrack();
+            controller.getGame().updateStorages();
             controller.resetException();
             controller.getGame().notifyEndOfUpdates();
         } catch (NotEnoughSpaceException | CannotContainFaithException | NegativeResAmountException | InvalidKeyException | InvalidResourceException | WrongDepotInstructionsException | LayerNotEmptyException | InvalidLayerNumberException | AlreadyInAnotherLayerException e) {
@@ -184,8 +185,8 @@ public class PlayerController {
             activePlayer.activateProduction(devCards);
             depot.retrieveRes(fromDepot);
             strongbox.retrieveRes(fromStrongbox);
-            controller.getGame().updateStorages();
             controller.getGame().updateFaithTrack();
+            controller.getGame().updateStorages();
             controller.resetException();
         } catch (CostNotMatchingException | NotEnoughResException | NegativeResAmountException | InvalidKeyException | DevSlotEmptyException | NotEnoughSpaceException | CannotContainFaithException e) {
             controller.setException(e);

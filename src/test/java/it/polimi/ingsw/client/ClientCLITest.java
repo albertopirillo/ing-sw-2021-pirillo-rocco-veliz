@@ -118,17 +118,17 @@ public class ClientCLITest {
     @Test
     public void resTest() throws NegativeResAmountException {
         Resource resource1 = new Resource(0,0,0,0);
-        System.out.println("1" + resource1);
+        System.out.println("1 " + resource1);
         Resource resource2 = new Resource(3,2,1,0);
-        System.out.println("2" + resource2);
+        System.out.println("2 " + resource2);
         Resource resource3 = new Resource(0,2,0,3);
-        System.out.println("3" + resource3);
+        System.out.println("3 " + resource3);
         Resource resource4 = new Resource();
-        System.out.println("4" + resource4);
+        System.out.println("4 " + resource4);
         Resource resource5 = new Resource();
         resource5.addResource(ResourceType.STONE, 2);
         resource5.addResource(ResourceType.FAITH, 3);
         resource5.addResource(ResourceType.COIN, 0);
-        System.out.println("5" + resource5);
+        System.out.println("5 " + resource5);
        }
 }

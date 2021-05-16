@@ -210,8 +210,12 @@ public class ClientCLI extends PlayerInterface {
     public int getPosition(int min, int max){
         int position;
         do {
-            System.out.println("Choose num of position : [MIN : "+ min + " MAX: " + max + "]");
-            position = Integer.parseInt(stdin.nextLine());
+            System.out.print("Choose num of position : [MIN : "+ min + " MAX: " + max + "] ");
+            System.out.println("(Press q to abort)");
+            String input = stdin.nextLine();
+            if (input.equals("q")) return - 1;
+            else position = Integer.parseInt(input);
+            System.out.println(position);
         }while (position < min || position >max);
         return position;
     }
@@ -232,7 +236,6 @@ public class ClientCLI extends PlayerInterface {
             System.out.println("10: Activate a production");
             System.out.println("13: Leader Card options");
             System.out.println("17: Reorder depot");
-            /*System.out.println("18: Place pending resources from the Market");*/
             System.out.println("19: End Turn");
             System.out.println("20: Quit Game");
             System.out.println();
@@ -272,8 +275,11 @@ public class ClientCLI extends PlayerInterface {
                     errorPrint("\nYou already performed an action this turn");
                 }
                 else {
-                    request = new InsertMarbleRequest(getPosition(0,6));
-                    if (!testing) this.doneAction = true;
+                    int position = getPosition(0,6);
+                    if (position != -1) {
+                        request = new InsertMarbleRequest(position);
+                        if (!testing) this.doneAction = true;
+                    }
                 }
                 break;
             case 9:
@@ -282,11 +288,15 @@ public class ClientCLI extends PlayerInterface {
                 }
                 else {
                     request = buyDevCardMenu();
-                    if (!testing) this.doneAction = true;
                 }
                 break;
             case 10:
-                request = productionMenu();
+                if(this.doneAction) {
+                    errorPrint("\nYou already performed an action this turn");
+                }
+                else {
+                    request = productionMenu();
+                }
                 break;
             case 13:
                 request = UseLeaderMenu();
@@ -348,6 +358,7 @@ public class ClientCLI extends PlayerInterface {
                     depotResource.modifyValue(strToResType(option.toLowerCase()),amountDepot);
                     strongboxResource.modifyValue(strToResType(option.toLowerCase()),amountStrongbox);
                 }
+                if (!testing) this.doneAction = true; //TODO: not enough
                 return new BuyDevCardRequest(level,CardColor.parseColorCard(color), parseToAbility(ability),depotResource, strongboxResource, slot-1);
             } catch (Exception e){
                 errorPrint("Invalid input, retry");
@@ -378,6 +389,7 @@ public class ClientCLI extends PlayerInterface {
             request = extraProductionMenu();
         }
 
+        if (!testing) this.doneAction = true;
         return request;
     }
 
@@ -466,7 +478,8 @@ public class ClientCLI extends PlayerInterface {
     private Request UseLeaderMenu() {
         Request request = null;
 
-        String[] firstActionOptions = {"1: Activate a leader card", "2: Discard a leader card", "3: Exit this menu"};String[] firstSelections = {"a", "d", "q"};
+        String[] firstActionOptions = {"1: Activate a leader card", "2: Discard a leader card", "3: Exit this menu"};
+        String[] firstSelections = {"a", "d", "q"};
         String[] leaderOptions = {"1: The first", "2: The second"};
 
         System.out.println("\nWhat do you want to do with you leader cards?");
@@ -488,16 +501,17 @@ public class ClientCLI extends PlayerInterface {
     public void updateTempResource(TempResourceUpdate update) {
         //Calling selectPlayerList() is not needed
         Resource resource = update.getResource();
-        if (resource != null) {
+        if (resource == null || resource.getActualSize() == 0) {
+            this.tempRes = null;
+            System.out.println("\nThere are no resources from the market that need to be placed");
+            this.simulateGame();
+        }
+        else {
             System.out.println("\nResources obtained from the Market that need to be placed: ");
             System.out.println(resource);
             this.tempRes = resource;
             Request request = this.placeResourceMenu();
             this.getPlayer().sendMessage(request);
-        }
-        else {
-            this.tempRes = null;
-            System.out.println("\nThere are no resources from the market that need to be placed");
         }
     }
 
@@ -544,8 +558,10 @@ public class ClientCLI extends PlayerInterface {
         int fromLayer, toLayer, amount;
         while(true) {
             try {
-                System.out.println("Move resources FROM which layer?");
-                fromLayer = Integer.parseInt(stdin.nextLine());
+                System.out.println("Move resources FROM which layer? (Press q to abort)");
+                String input = stdin.next();
+                if (input.equals("q")) return null;
+                fromLayer = Integer.parseInt(input);
                 System.out.println("Move resources TO which layer?");
                 toLayer = Integer.parseInt(stdin.nextLine());
                 System.out.println("How many resources would you like to move?");

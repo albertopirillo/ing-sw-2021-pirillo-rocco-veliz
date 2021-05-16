@@ -166,7 +166,7 @@ public class Resource implements Serializable {
      * Returns the amount of different type of resource with values greater than zero
      * @return   an int representing the actual size
      */
-    private int getActualSize() {
+    public int getActualSize() {
         int size = 0;
         for (ResourceType key: map.keySet()) {
             if(map.get(key) != 0) size++;
@@ -184,7 +184,6 @@ public class Resource implements Serializable {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(" ");
         if (this.getActualSize() == 0) {
             sb.append("Empty");
         }

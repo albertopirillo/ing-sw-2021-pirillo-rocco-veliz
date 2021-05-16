@@ -67,13 +67,12 @@ public class PersonalBoard {
 
     public void updateFaithTrack(List<Player> players) {
         for(Player player: players){
-            if(player.getTurn()){
-                if (player.getPlayerFaith() >= 24) {
-                    //TODO ENDGAME
-                }
-                //needed first getPersonalBoard()
-                player.getPersonalBoard().getFaithTrack().checkPopeTile(player, players);
+            //if(player.getTurn()){}
+            if (player.getPlayerFaith() >= 24) {
+                //TODO ENDGAME
             }
+            //needed first getPersonalBoard()
+            player.getPersonalBoard().getFaithTrack().checkPopeTile(player, players);
         }
     }
 }

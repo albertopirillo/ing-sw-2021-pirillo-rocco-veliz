@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.utils.ANSIColor;
+import java.util.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,13 +10,6 @@ public class FaithTrack implements Serializable {
     private int playerFaith;
     private final List<PopeFavorCard> popeCards;
 
-    //LIST OF ANSI CODES FOR COLORED OUTPUT ON CLI
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_GREEN = "\u001B[32m";
-    public static final String ANSI_YELLOW = "\u001B[33m";
-    public static final String ANSI_BLUE = "\u001B[34m";
-    public static final String ANSI_PURPLE = "\u001B[35m";
 
     public FaithTrack() {
         this.playerFaith = 0;
@@ -22,21 +17,42 @@ public class FaithTrack implements Serializable {
         initPopeCards();
     }
 
+    /**
+    *  Initializes all three Pope Favor Cards
+    */
     private void initPopeCards() {
         for (int i = 1; i < 4; i++) {
             this.popeCards.add(new PopeFavorCard(i));
         }
     }
 
+    /**
+     * Player's faith is stored in his own faith track
+     * Used to calculate it's position on the track
+     * @return integer corresponding to player's faith amount
+     */
     public int getPlayerFaith() {
         return playerFaith;
     }
 
+    /**
+     * Use this method to add faith points to the players
+     * based on their game moves
+     * @param amount the amount of faith obtained by the player
+     */
     public void addPlayerFaith(int amount) {
         this.playerFaith += amount;
     }
 
     //check if vaticanReport condition applies
+
+    /**
+     * This method is called by PersonalBoard's "UpdateFaithTrack" and checks
+     * If player is on a tile that gives Victory Points those are given to him
+     * Otherwise if the player is on a Pope Tile (n° 8, 16 or 24) a Vatican Report is activated
+     * @param player the current player checked by "UpdateFaithTrack" method
+     * @param players the list of players in the current game
+     */
     public void checkPopeTile(Player player, List<Player> players) {
         switch (player.getPlayerFaith()) {
             case 8:
@@ -44,9 +60,18 @@ public class FaithTrack implements Serializable {
             case 24:
                 vaticanReport(player, players);
                 break;
+
+            //TODO Add cells that give points
         }
     }
 
+    /**
+     * This method is used to check if a player is within the last activated Vatican Report
+     * region and according to the rules he will also get the Report points
+     * @param player the player being checked
+     * @param section the currently activated region of the Vatican Report
+     * @return True if player is in the region according to the rules
+     */
     private boolean inProximityOfVaticanReport(Player player, VaticanReportSection section) {
         switch (section) {
             case GROUP_ONE:
@@ -59,6 +84,12 @@ public class FaithTrack implements Serializable {
         return false;
     }
 
+    /**
+     * This method gives Victory Points to the player that triggered the Vatican Report
+     * and flips it's Pope Favor card
+     * @param player the player on the Pope Tile (cell n° 8, 16 or 24)
+     * @param players the other players used to check if they are within the report region
+     */
     private void vaticanReport(Player player, List<Player> players) {
         // Triggered by checkPopeTile
         // gives points according to group value and changes hasReportHappened
@@ -89,6 +120,14 @@ public class FaithTrack implements Serializable {
         }
     }
 
+    /**
+     * When a Vatican Report is activated by another player, based on the player position this
+     * method flips his card and gives him the report points
+     * Otherwise, according to the rules, the Vatican Report section get deactivated and the
+     * player loses the opportunity to get those extra points
+     * @param section The section that has been activated
+     * @param players The list of players
+     */
     private void vaticanReportOthers(VaticanReportSection section, List<Player> players){
         //CHECK OTHER PLAYERS
         for(Player pl: players){
@@ -113,6 +152,12 @@ public class FaithTrack implements Serializable {
         }
     }
 
+    /**
+     * Used in VaticanReport method to obtain the Pope Favor card corresponding to
+     * the report section currently activated
+     * @param section The report section currently activated
+     * @return The corresponding Pope Favor card
+     */
     public PopeFavorCard getPopeFavorBySection(VaticanReportSection section) {
         for (PopeFavorCard popeFavor: popeCards){
             if( popeFavor.getSection() == section){
@@ -122,35 +167,36 @@ public class FaithTrack implements Serializable {
         return null;
     }
 
+
     public String toString(){
         StringBuilder sb = new StringBuilder();
         sb.append("\n\tFaithTrack Legend:");
         sb.append("\n\t\tEmptyTile = |-|");
-        sb.append("\n\t\tPopeTile = |" + ANSI_YELLOW + "P" + ANSI_RESET + "|");
-        sb.append("\n\t\tPlayerMarker = |" + ANSI_PURPLE + "X" + ANSI_RESET + "|");
-        sb.append("\n\t\tVaticanReportSection = " + ANSI_BLUE + "SECTION_ONE " + ANSI_RESET + ", " + ANSI_RED + "SECTION_TWO " + ANSI_RESET + ", " + ANSI_GREEN + "SECTION THREE " + ANSI_RESET + "\n\n\t");
+        sb.append("\n\t\tPopeTile = |" + ANSIColor.YELLOW + "P" + ANSIColor.RESET + "|");
+        sb.append("\n\t\tPlayerMarker = |" + ANSIColor.MAGENTA + "X" +ANSIColor.RESET + "|");
+        sb.append("\n\t\tVaticanReportSection = " + ANSIColor.BLUE + "SECTION_ONE " + ANSIColor.RESET + ", " + ANSIColor.RED + "SECTION_TWO " + ANSIColor.RESET + ", " + ANSIColor.GREEN + "SECTION THREE " + ANSIColor.RESET + "\n\n\t");
 
         for (int i = 1; i < 25; i++) {
             if (4<i && i<9){
-                sb.append(ANSI_BLUE + "|" + ANSI_RESET);
+                sb.append(ANSIColor.BLUE + "|" + ANSIColor.RESET);
             } else if(11<i && i<17){
-                sb.append(ANSI_RED + "|" + ANSI_RESET);
+                sb.append(ANSIColor.RED + "|" + ANSIColor.RESET);
             } else if (18<i){
-                sb.append(ANSI_GREEN + "|" + ANSI_RESET);
+                sb.append(ANSIColor.GREEN + "|" + ANSIColor.RESET);
             } else sb.append("|");
 
             if (i == playerFaith) {
-                sb.append(ANSI_PURPLE + "X" + ANSI_RESET);
+                sb.append(ANSIColor.MAGENTA + "X" + ANSIColor.RESET);
             } else if (i==8 || i==16 || i==24) {
-                sb.append(ANSI_YELLOW + "P" + ANSI_RESET);
+                sb.append(ANSIColor.YELLOW + "P" + ANSIColor.RESET);
             } else { sb.append("-"); }
 
             if (4<i && i<9){
-                sb.append(ANSI_BLUE + "| " + ANSI_RESET);
+                sb.append(ANSIColor.BLUE + "| " + ANSIColor.RESET);
             } else if(11<i && i<17){
-                sb.append(ANSI_RED + "| " + ANSI_RESET);
+                sb.append(ANSIColor.RED + "| " + ANSIColor.RESET);
             } else if (18<i){
-                sb.append(ANSI_GREEN + "| " + ANSI_RESET);
+                sb.append(ANSIColor.GREEN + "| " + ANSIColor.RESET);
             } else sb.append("| ");
         }
 

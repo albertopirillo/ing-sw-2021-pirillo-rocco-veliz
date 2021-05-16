@@ -220,9 +220,9 @@ public class ClientCLI extends PlayerInterface {
             System.out.println("7: Show Development Slots");
             System.out.println("8: Buy from market");
             System.out.println("9: Buy a development card");
-            System.out.println("10: Activate basic production");
-            System.out.println("11: Activate extra production");
-            System.out.println("12: Activate a development card production");
+            System.out.println("10: Activate a production");
+            /*System.out.println("11: Activate extra production");
+            System.out.println("12: Activate a development card production");*/
             System.out.println("13: Leader Card options");
             /*System.out.println("14: Use leader card 2");
             System.out.println("15: Discard leader card 1");
@@ -282,9 +282,9 @@ public class ClientCLI extends PlayerInterface {
                 }
                 break;
             case 10:
-                request = basicProductionMenu();
+                request = productionMenu();
                 break;
-            case 11:
+            /*case 11:
                 request = extraProductionMenu();
                 break;
             case 12:
@@ -295,7 +295,7 @@ public class ClientCLI extends PlayerInterface {
                     request = devProductionMenu();
                     if (!testing) this.doneAction = true;
                 }
-                break;
+                break;*/
             case 13:
                 request = UseLeaderMenu();
                 break;
@@ -385,6 +385,32 @@ public class ClientCLI extends PlayerInterface {
        return null;
     }
 
+    private Request productionMenu(){
+        Request request = null;
+
+        String[] options = {"b: Use a Basic Production", "d: Use a Development Card Production", "e: Use a Leader Card Extra Production", "q: Exit this menu"};
+        String[] selections = {"b", "d", "e", "q"};
+
+        System.out.println("\nWhat type of production do you want to activate?");
+        String selection = getStringSelection(selections, options);
+
+        if (selection.equals("b")) {
+            request = basicProductionMenu();
+        } else if (selection.equals("d")) {
+            if(this.doneAction) {
+                errorPrint("\nYou already performed an action this turn");
+            }
+            else {
+                request = devProductionMenu();
+                if (!testing) this.doneAction = true;
+            }
+        } else if (selection.equals("e")) {
+            request = extraProductionMenu();
+        }
+
+        return request;
+    }
+
     private Request basicProductionMenu(){
         Request request = null;
         Resource depotResource = new Resource(0, 0, 0, 0);
@@ -437,8 +463,8 @@ public class ClientCLI extends PlayerInterface {
     private Request UseLeaderMenu() {
         Request request = null;
 
-        String[] firstActionOptions = {"a: Activate a leader card", "d: Discard a leader card", "p: Use an Extra Production ability", "q: Exit this menu"};
-        String[] firstSelections = {"a", "d", "p", "q"};
+        String[] firstActionOptions = {"a: Activate a leader card", "d: Discard a leader card", "q: Exit this menu"};
+        String[] firstSelections = {"a", "d", "q"};
         String[] leaderOptions = {"1: The first", "2: The second"};
 
         System.out.println("\nWhat do you want to do with you leader cards?");
@@ -452,9 +478,6 @@ public class ClientCLI extends PlayerInterface {
             System.out.println("\nWhich leader card do you want to activate?");
             int leader = getIntegerSelection(leaderOptions);
             request = new UseLeaderRequest(leader, LeaderAction.DISCARD);
-        } else if (action.equals("p")) {
-            //extraProductionMenu()
-            //request = new ExtraProductionRequest();
         }
         return request;
     }

@@ -153,6 +153,7 @@ public class Player {
         if (index < 0 || index >= leaderCards.size()) {
             throw new NoLeaderAbilitiesException("The selected leader card does not exist");
         }
+
         LeaderCard leader = this.leaderCards.get(index);
         if (leader.isActive()) throw new LeaderAbilityAlreadyActive();
         if (choice == LeaderAction.DISCARD) {
@@ -160,15 +161,15 @@ public class Player {
             //Victory points of discarded cards are not taken into account
             this.leaderCards.remove(leader);
         } else{
-            if(leader.canBeActivated(this)) {
+            //if(leader.canBeActivated(this)) {
                 leader.activate();
                 LeaderAbility ability = leader.getSpecialAbility();
                 ability.activate(this);
                 this.activeLeaderAbilities.add(ability);
                 this.victoryPoints = this.victoryPoints + leader.getVictoryPoints();
-            } else {
-                throw new CostNotMatchingException("LeaderCard requirements not satisfied");
-            }
+            //} else {
+                //throw new CostNotMatchingException("LeaderCard requirements not satisfied");
+            //}
         }
 }
 

@@ -75,7 +75,7 @@ public class PlayerController {
             }
             else {
                 controller.getGame().updateMarketTray();
-                controller.getGame().updateStorages();
+                //controller.getGame().updateStorages();
                 controller.getGame().updateTempRes();
             }
             controller.resetException();
@@ -129,10 +129,11 @@ public class PlayerController {
     
     public void placeResource(Resource toDiscard, List<DepotSetting> toPlace) {
         try {
-            controller.getResourceController().handleResource(toDiscard, toPlace);
-            controller.getGame().updateFaithTrack();
-            controller.getGame().updateStorages();
             controller.resetException();
+            controller.getResourceController().handleResource(toDiscard, toPlace);
+            //controller.getGame().updateFaithTrack();
+            controller.getGame().updateStorages();
+            //controller.resetException();
             controller.getGame().notifyEndOfUpdates();
         } catch (NotEnoughSpaceException | CannotContainFaithException | NegativeResAmountException | InvalidKeyException | InvalidResourceException | WrongDepotInstructionsException | LayerNotEmptyException | InvalidLayerNumberException | AlreadyInAnotherLayerException e) {
             controller.setException(e);

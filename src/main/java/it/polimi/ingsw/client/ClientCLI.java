@@ -453,11 +453,11 @@ public class ClientCLI extends PlayerInterface {
         if (selection == 1) {
             System.out.println("\nWhich leader card do you want to activate?");
             int leader = getIntegerSelection(leaderOptions);
-            request = new UseLeaderRequest(leader, LeaderAction.USE_ABILITY);
+            request = new UseLeaderRequest(leader-1, LeaderAction.USE_ABILITY);
         } else if (selection == 2) {
             System.out.println("\nWhich leader card do you want to activate?");
             int leader = getIntegerSelection(leaderOptions);
-            request = new UseLeaderRequest(leader, LeaderAction.DISCARD);
+            request = new UseLeaderRequest(leader-1, LeaderAction.DISCARD);
         }
         return request;
     }
@@ -723,9 +723,11 @@ public class ClientCLI extends PlayerInterface {
     @Override
     public void updateTempMarbles(TempMarblesUpdate tempMarblesUpdate) {
         //No need to call selectPlayerList() here
-        System.out.println(tempMarblesUpdate);
-        Request request = toChangeMarble(tempMarblesUpdate.getResources().get(0),tempMarblesUpdate.getResources().get(1),tempMarblesUpdate.getNumWhiteMarbles());
-        getPlayer().sendMessage(request);
+        if(tempMarblesUpdate.getActivePlayer().equals(this.getNickname())) {
+            System.out.println(tempMarblesUpdate);
+            Request request = toChangeMarble(tempMarblesUpdate.getResources().get(0), tempMarblesUpdate.getResources().get(1), tempMarblesUpdate.getNumWhiteMarbles());
+            getPlayer().sendMessage(request);
+        }
     }
 
     private Request toChangeMarble(ResourceType res1, ResourceType res2, int numMarbles){
@@ -737,10 +739,10 @@ public class ClientCLI extends PlayerInterface {
                 System.out.println("Choice the num of "+res2);
                 int amount2 = Integer.parseInt(stdin.nextLine());
                 if (amount2 > numMarbles) throw new Exception();
-                if (amount1 + amount2 > numMarbles) throw new Exception();
+                if (amount1 + amount2 != numMarbles) throw new Exception();
                 return new ChangeMarblesRequest(amount1, amount2);
             } catch (Exception e) {
-                System.out.println("Invalid input, retry");
+                System.out.println(ANSIColor.RED + "The number of white marbles does not match" + ANSIColor.RESET);
             }
         }
     }

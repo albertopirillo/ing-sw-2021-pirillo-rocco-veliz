@@ -100,7 +100,7 @@ public class ResourceStrategy {
 
         //Selects the requested abilities and modifies the output resource
         Resource outputRes = marbles.getResources();
-        Resource finalRes = new Resource();
+        Resource finalRes = new Resource(0,0,0,0);
         if (marbles.containWhiteMarbles()) {
             int amount1 = marbles.numWhiteMarbles();
             if (this.size == 1) {
@@ -122,8 +122,17 @@ public class ResourceStrategy {
 
         //Handles faith and returns a map with no faith in it
         for (ResourceType key : outputRes.keySet()) {
-            if (key == ResourceType.FAITH) player.addPlayerFaith(outputRes.getValue(key));
-            else finalRes.addResource(key, outputRes.getValue(key));
+            if (key == ResourceType.FAITH) {
+                player.addPlayerFaith(outputRes.getValue(key));
+                player.getGame().updateFaithTrack();
+            }
+            else {
+                try {
+                    finalRes.modifyValue(key, outputRes.getValue(key));
+                } catch (InvalidKeyException e) {
+                    finalRes.addResource(key, outputRes.getValue(key));
+                }
+            }
         }
         return finalRes;
     }

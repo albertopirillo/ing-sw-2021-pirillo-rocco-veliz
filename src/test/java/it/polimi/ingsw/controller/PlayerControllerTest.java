@@ -131,7 +131,7 @@ class PlayerControllerTest {
 
         //OUTPUT ALLx4
         Resource output = controller.getResourceController().getTempRes().getToHandle();
-        Resource check = new Resource();
+        Resource check = new Resource(0,0,0,0);
         check.addResource(ResourceType.ALL,4);
         //OUTPUT ALLx4
         assertEquals(check, output);
@@ -278,7 +278,7 @@ class PlayerControllerTest {
 
         LeaderCard leader = new ResLeaderCard(2, null, new Resource(0,2,3,1));
         activePlayer.addLeaderCard(leader);
-        controller.resetException();
+        //controller.resetException();
         playerController.useLeader(0, LeaderAction.USE_ABILITY);
         assertEquals("LeaderCard requirements not satisfied", controller.getError());
         controller.resetException();

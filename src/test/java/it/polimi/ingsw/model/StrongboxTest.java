@@ -1,9 +1,6 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.exceptions.CannotContainFaithException;
-import it.polimi.ingsw.exceptions.InvalidKeyException;
-import it.polimi.ingsw.exceptions.NegativeResAmountException;
-import it.polimi.ingsw.exceptions.NotEnoughResException;
+import it.polimi.ingsw.exceptions.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
@@ -35,8 +32,10 @@ class StrongboxTest {
     }
 
     @Test
-    public void faithTest() throws InvalidKeyException, NegativeResAmountException {
+    public void faithTest() throws InvalidKeyException, NegativeResAmountException, FullCardDeckException {
         Player player = new Player( "abc");
+        Game game = new MultiGame(true);
+        player.setGame(game);
         Strongbox strongbox = new Strongbox(player);
         Resource res = new Resource(1,1,1,3);
         res.addResource(ResourceType.FAITH, 3);

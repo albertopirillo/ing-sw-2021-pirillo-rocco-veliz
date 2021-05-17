@@ -182,6 +182,32 @@ public class ClientCLI extends PlayerInterface {
         return selection;
     }
 
+    public int getDevCardsSlot (List<Integer> exclude){
+        List<Integer> list = new ArrayList<>();
+        for(int i = 1; i < 4; i++){
+            if(!exclude.contains(i-1)){
+                list.add(i);
+            }
+        }
+        StringBuilder sb = new StringBuilder("Which leader card production do you want to use [");
+        String sep = "";
+        for(Integer element: list){
+            sb.append(sep).append(element);
+            sep = ", ";
+        }
+        sb.append("]:");
+        int selection;
+        do {
+            System.out.println(sb);
+            try {
+                selection = Integer.parseInt(stdin.nextLine());
+            } catch(Exception e){
+                selection = -1;
+            }
+        } while (!list.contains(selection));
+        return selection;
+    }
+
     public ResourceType parseToResourceType(int choice){
         switch (choice){
             case 1: return ResourceType.STONE;
@@ -436,7 +462,46 @@ public class ClientCLI extends PlayerInterface {
 
     private Request devProductionMenu(){
         Request request = null;
-        //new DevProductionRequest(); //TODO Riccardo
+
+        List<Integer> cards = new ArrayList<>();
+        Resource depotResource = new Resource(0, 0, 0, 0);
+        Resource strongboxResource = new Resource(0, 0, 0, 0);
+        String[] amountOptions = {"1", "2", "3", "4: Quit this menu"};
+        String[] resourceOptions = {"STONE", "COIN", "SHIELD", "SERVANT"};
+
+        System.out.println("\nHow many development card production do you want to use?");
+        int amount = getIntegerSelection(amountOptions);
+
+        if(amount==4){
+            return null;
+        } else {
+            for (int i=0; i<amount; i++){
+
+                System.out.println("\nWhat leader card production do you want to use");
+                int card = getDevCardsSlot(cards);
+
+                cards.add(card-1);
+                System.out.println("\nSelect the input resources:");
+                try{
+                    for (String option : resourceOptions) {
+                        System.out.println(option);
+                        System.out.println("\nHow many resources to take from Depot");
+                        int amountDepot = Integer.parseInt(stdin.nextLine());
+                        if (amountDepot < 0 || amountDepot > 3) throw new Exception();
+                        System.out.println("\nHow many resources to take from Strongbox");
+                        int amountStrongbox = Integer.parseInt(stdin.nextLine());
+                        if (amountStrongbox < 0) throw new Exception();
+                        depotResource.modifyValue(strToResType(option.toLowerCase()),amountDepot);
+                        strongboxResource.modifyValue(strToResType(option.toLowerCase()),amountStrongbox);
+                    }
+                } catch (Exception e){
+                    errorPrint("Invalid input, retry");
+                }
+            }
+        }
+
+        request = new DevProductionRequest(cards, depotResource, strongboxResource);
+
         return request;
     }
 

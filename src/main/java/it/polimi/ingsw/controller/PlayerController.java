@@ -36,7 +36,6 @@ public class PlayerController {
         try {
             Player activePlayer = controller.getGame().getActivePlayer();
             activePlayer.basicProduction(input1, input2, output, fromDepot, fromStrongbox);
-            controller.getGame().updateFaithTrack();
             controller.getGame().updateStorages();
             controller.resetException();
         } catch (CostNotMatchingException | NotEnoughSpaceException | CannotContainFaithException | NotEnoughResException | NegativeResAmountException | InvalidKeyException e) {
@@ -51,8 +50,8 @@ public class PlayerController {
         try {
             Player activePlayer = controller.getGame().getActivePlayer();
             activePlayer.extraProduction(choice, fromDepot, fromStrongbox, res);
-            controller.getGame().updateFaithTrack();
-            controller.getGame().updateDevSlots();
+            //controller.getGame().updateFaithTrack();
+            //controller.getGame().updateDevSlots();
             controller.resetException();
         } catch (CostNotMatchingException | InvalidAbilityChoiceException | NotEnoughSpaceException | NoLeaderAbilitiesException | CannotContainFaithException | NotEnoughResException | NegativeResAmountException | InvalidKeyException e) {
             controller.setException(e);
@@ -213,7 +212,7 @@ public class PlayerController {
             activePlayer.activateProduction(devCards);
             depot.retrieveRes(fromDepot);
             strongbox.retrieveRes(fromStrongbox);
-            controller.getGame().updateFaithTrack();
+            //controller.getGame().updateFaithTrack();
             controller.getGame().updateStorages();
             controller.resetException();
             if(!testing) this.mainActionDone = true;

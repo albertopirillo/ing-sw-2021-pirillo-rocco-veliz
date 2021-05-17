@@ -52,7 +52,10 @@ public class Strongbox {
         Map<ResourceType, Integer> copy = resource.getMap();
 
         for (ResourceType key: copy.keySet()) {
-            if (key == ResourceType.FAITH) this.player.addPlayerFaith(copy.get(key));
+            if (key == ResourceType.FAITH) {
+                this.player.addPlayerFaith(copy.get(key));
+                this.player.getGame().updateFaithTrack();
+            }
             else this.resource.modifyValue(key, copy.get(key));
         }
     }

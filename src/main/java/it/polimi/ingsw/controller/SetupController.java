@@ -55,6 +55,7 @@ public class SetupController {
                         activePlayer.getPersonalBoard().getDepot().modifyLayer(1, resources.get(0), 1);
                         activePlayer.getPersonalBoard().getDepot().modifyLayer(2, resources.get(1), 1);
                     }
+                    activePlayer.addPlayerFaith(1);
                     break;
                 default:
                     break;

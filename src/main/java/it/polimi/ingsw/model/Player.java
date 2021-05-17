@@ -153,6 +153,7 @@ public class Player {
         if (index < 0 || index >= leaderCards.size()) {
             throw new NoLeaderAbilitiesException("The selected leader card does not exist");
         }
+
         LeaderCard leader = this.leaderCards.get(index);
         if (leader.isActive()) throw new LeaderAbilityAlreadyActive();
         if (choice == LeaderAction.DISCARD) {

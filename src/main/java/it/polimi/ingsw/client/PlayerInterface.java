@@ -69,4 +69,6 @@ public abstract class PlayerInterface {
     public abstract void updateSoloTokens(ActionTokenUpdate actionTokenUpdate);
     public abstract void updateTempMarbles(TempMarblesUpdate tempMarblesUpdate);
     public abstract void updateGameOver(GameOverUpdate update);
+    public abstract void changeNickname();
+
 }

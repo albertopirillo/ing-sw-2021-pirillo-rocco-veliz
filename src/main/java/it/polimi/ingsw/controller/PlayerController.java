@@ -75,7 +75,7 @@ public class PlayerController {
             }
             else {
                 controller.getGame().updateMarketTray();
-                //controller.getGame().updateStorages();
+                controller.getGame().updateStorages();
                 controller.getGame().updateTempRes();
             }
             controller.resetException();
@@ -131,7 +131,7 @@ public class PlayerController {
         try {
             controller.resetException();
             controller.getResourceController().handleResource(toDiscard, toPlace);
-            //controller.getGame().updateFaithTrack();
+            controller.getGame().updateFaithTrack();
             controller.getGame().updateStorages();
             //controller.resetException();
             controller.getGame().notifyEndOfUpdates();
@@ -194,7 +194,6 @@ public class PlayerController {
     }
 
     public void activateProduction(Resource fromDepot, Resource fromStrongbox, List<Integer> numSlots) {
-
         Player activePlayer = controller.getGame().getActivePlayer();
         PersonalBoard personalBoard = activePlayer.getPersonalBoard();
         List<DevelopmentCard> devCards = new ArrayList<>();

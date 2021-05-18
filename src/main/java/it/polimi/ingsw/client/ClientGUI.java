@@ -42,6 +42,16 @@ public class ClientGUI extends PlayerInterface {
     }
 
     @Override
+    public void errorPrint(String error) {
+
+    }
+
+    @Override
+    public void loginMessage() {
+
+    }
+
+    @Override
     public void updateTempResource(TempResourceUpdate update) {
 
     }
@@ -94,6 +104,11 @@ public class ClientGUI extends PlayerInterface {
     @Override
     public void updateTempMarbles(TempMarblesUpdate tempMarblesUpdate) {
         
+    }
+
+    @Override
+    public void changeNickname() {
+
     }
 
     @Override

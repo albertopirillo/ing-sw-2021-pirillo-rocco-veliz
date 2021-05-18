@@ -54,6 +54,8 @@ public abstract class PlayerInterface {
     public abstract void viewInitialResources(int numPlayer);
     public abstract void viewInitialsLeaderCards(List<LeaderCard> cards);
     public abstract void simulateGame(); //testing
+    public abstract void errorPrint(String error);
+    public abstract void loginMessage();
 
     public abstract void updateTempResource(TempResourceUpdate update);
     public abstract void updateStorages(StorageUpdate update);

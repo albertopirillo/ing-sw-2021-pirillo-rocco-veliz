@@ -38,6 +38,7 @@ public class PlayerController {
             activePlayer.basicProduction(input1, input2, output, fromDepot, fromStrongbox);
             controller.getGame().updateStorages();
             controller.resetException();
+            if (!testing) this.mainActionDone = true;
         } catch (CostNotMatchingException | NotEnoughSpaceException | CannotContainFaithException | NotEnoughResException | NegativeResAmountException | InvalidKeyException e) {
             controller.setException(e);
             controller.getGame().updateClientError(controller.getClientError());

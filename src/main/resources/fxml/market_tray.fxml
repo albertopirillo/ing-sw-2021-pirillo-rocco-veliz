@@ -2,7 +2,7 @@
 
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.AnchorPane?>
-<AnchorPane fx:id="trayRoot" prefHeight="655.0" prefWidth="504.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.MarketController">
+<AnchorPane fx:id="trayRoot" prefHeight="655.0" prefWidth="504.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.TrayController">
    <children>
       <ImageView fx:id="marketTray" fitHeight="653.0" fitWidth="527.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.44417724609377274">
          <image>

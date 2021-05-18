@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.*?>
 <AnchorPane prefHeight="825.0" prefWidth="1618.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.MainController">
@@ -50,5 +51,6 @@
             <Font size="20.0" />
          </font>
       </SplitMenuButton>
+      <ImageView fx:id="imageTest" fitHeight="136.0" fitWidth="202.0" layoutX="38.0" layoutY="245.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

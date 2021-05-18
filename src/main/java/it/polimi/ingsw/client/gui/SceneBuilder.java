@@ -54,6 +54,7 @@ public class SceneBuilder extends Application {
             quit(stage);
         });*/
 
+        mainController.depotTest();
         stage.show();
     }
 

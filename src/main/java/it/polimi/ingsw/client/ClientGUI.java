@@ -1,11 +1,15 @@
 package it.polimi.ingsw.client;
 
+import it.polimi.ingsw.client.gui.MainController;
 import it.polimi.ingsw.model.LeaderCard;
 import it.polimi.ingsw.network.updates.*;
 
 import java.util.List;
 
 public class ClientGUI extends PlayerInterface {
+
+    private MainController guiController;
+    //TODO: Platform.runLater(() -> {});
 
     public ClientGUI(Client player) {
         super(player);

@@ -41,8 +41,8 @@
             <Image url="@../png/market/market_tray.png" />
          </image>
       </ImageView>
-      <Button layoutX="771.0" layoutY="78.0" mnemonicParsing="false" onAction="#addTab" text="Add tab" />
-      <Button fx:id="popUpButton" alignment="CENTER" layoutX="706.0" layoutY="294.0" minHeight="0.0" mnemonicParsing="false" onAction="#switchToMarket" prefHeight="43.0" prefWidth="189.0" text="Show Market Tray">
+      <Button layoutX="771.0" layoutY="78.0" mnemonicParsing="false" text="Add tab" />
+      <Button fx:id="popUpButton" alignment="CENTER" layoutX="706.0" layoutY="294.0" minHeight="0.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="189.0" text="Show Market Tray">
          <font>
             <Font size="16.0" />
          </font>

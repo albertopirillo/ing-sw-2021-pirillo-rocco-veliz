@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client.gui;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -8,9 +9,13 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class SceneBuilder extends Application {
+
+    private List<String> playerList;
 
     public static void main(String[] args) {
         launch(args);
@@ -18,24 +23,47 @@ public class SceneBuilder extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-
-        Parent root = Util.loadFXML("test");
+        //Load FXML
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
+        Parent root = loader.load();
+        //Parent root = Util.loadFXML("main");
         stage.setResizable(false);
         Scene scene = new Scene(root);
         stage.setScene(scene);
 
-        String css = Util.getCSS("market");
+        //Load CSS
+        String css = Util.getCSS("main");
         scene.getStylesheets().add(css);
 
+        //Windows title and image
         stage.setTitle("Master of Renaissance");
         Image icon = new Image("/png/generic/inkwell.png");
         stage.getIcons().add(icon);
 
-        stage.setOnCloseRequest(event -> {
+        //Tab creation
+        this.playerList = new ArrayList<>();
+        this.playerList.add("Player 1");
+        this.playerList.add("Player 2");
+        this.playerList.add("Player 3");
+        MainController mainController = loader.getController();
+        mainController.addPlayers(this.playerList);
+
+        //Popup on quitting
+       /* stage.setOnCloseRequest(event -> {
             event.consume();
             quit(stage);
-        });
+        });*/
+
+        mainController.depotTest();
         stage.show();
+    }
+
+    /**
+     * Sets the player list for the current game
+     * @param playerList a list of String representing the players' nicknames
+     */
+    public void setPlayerList(List<String> playerList) {
+        this.playerList = playerList;
     }
 
     /**

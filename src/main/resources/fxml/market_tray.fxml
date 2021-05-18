@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane fx:id="trayRoot" prefHeight="655.0" prefWidth="504.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.TrayController">
+   <children>
+      <ImageView fx:id="marketTray" fitHeight="653.0" fitWidth="527.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.44417724609377274">
+         <image>
+            <Image url="@../png/market/market_tray.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="86.0" fitWidth="86.0" layoutX="81.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="86.0" fitWidth="86.0" layoutX="167.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="86.0" fitWidth="86.0" layoutX="253.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="86.0" fitWidth="86.0" layoutX="339.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="398.0" fitWidth="506.0" layoutY="297.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../png/market/tray_background.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

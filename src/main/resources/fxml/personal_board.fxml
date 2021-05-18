@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="794.0" prefWidth="1364.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.PersonalBoardController">
+   <children>
+      <ImageView fitHeight="795.0" fitWidth="1119.0" layoutX="252.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../png/personal_board/personal_board.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="390.0" fitWidth="252.0" layoutY="414.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../png/leader_cards/test_card.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="396.0" fitWidth="252.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../png/leader_cards/test_card.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="57.0" layoutY="406.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Leader Cards" textAlignment="CENTER">
+         <font>
+            <Font name="Blackadder ITC" size="30.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="51.0" fitWidth="56.0" layoutX="291.0" layoutY="590.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../png/res/stone.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="51.0" fitWidth="56.0" layoutX="296.0" layoutY="659.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../png/res/shield.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="depot3_1" fitHeight="51.0" fitWidth="56.0" layoutX="318.0" layoutY="480.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="depot3_2" fitHeight="51.0" fitWidth="56.0" layoutX="366.0" layoutY="480.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="depot3_3" fitHeight="51.0" fitWidth="56.0" layoutX="414.0" layoutY="480.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="depot2_2" fitHeight="51.0" fitWidth="56.0" layoutX="397.0" layoutY="407.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="depot2_1" fitHeight="51.0" fitWidth="56.0" layoutX="343.0" layoutY="407.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="depot1_1" fitHeight="51.0" fitWidth="56.0" layoutX="371.0" layoutY="335.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="extra2_2" fitHeight="51.0" fitWidth="56.0" layoutX="149.0" layoutY="721.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="extra2_1" fitHeight="51.0" fitWidth="56.0" layoutX="54.0" layoutY="721.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="extra1_1" fitHeight="51.0" fitWidth="56.0" layoutX="54.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="extra1_2" fitHeight="51.0" fitWidth="56.0" layoutX="149.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="51.0" fitWidth="56.0" layoutX="379.0" layoutY="661.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../png/res/coin.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="51.0" fitWidth="56.0" layoutX="381.0" layoutY="591.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../png/res/servant.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="sb_stone" layoutX="341.0" layoutY="589.0" text="x0" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <Label fx:id="sb_servant" layoutX="434.0" layoutY="589.0" text="x0" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <Label fx:id="sb_shield" layoutX="339.0" layoutY="658.0" text="x0" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <Label fx:id="sb_coin" layoutX="434.0" layoutY="657.0" text="x0" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

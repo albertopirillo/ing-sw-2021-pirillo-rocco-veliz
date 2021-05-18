@@ -1,7 +1,12 @@
 package it.polimi.ingsw.client.gui;
 
+import it.polimi.ingsw.model.ResourceType;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -19,12 +24,11 @@ public abstract class Util {
     /**
      * Wrapper to load an .fxml file
      * @param fileName  the name of the file, with no path or extension
-     * @return  a Parent Object representing the loaded file
+     * @return  a FXMLLoader Object associated the loaded file
      * @throws IOException  if the file doesnt exists
      */
-    public static Parent loadFXML(String fileName) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Launcher.class.getResource("/fxml/" + fileName + ".fxml"));
-        return fxmlLoader.load();
+    public static FXMLLoader loadFXML(String fileName) {
+       return new FXMLLoader(Launcher.class.getResource("/fxml/" + fileName + ".fxml"));
     }
 
     /**
@@ -34,5 +38,25 @@ public abstract class Util {
      */
     public static String getCSS(String fileName) {
         return Objects.requireNonNull(mainClass.getResource("/css/" + fileName + ".css")).toExternalForm();
+    }
+
+    /**
+     * Returns the image that corresponds to the given resource
+     * @param resourceType  the resource type to get the image
+     * @return  an Image object of the requested resource type
+     */
+    public static Image getResImage(ResourceType resourceType) {
+        String path = "/png/res/" + resourceType.name() + ".png";
+        return new Image(Objects.requireNonNull(mainClass.getResourceAsStream(path)));
+    }
+
+    /**
+     * Gets the current Stage of a given Event
+     * @param event the Event to get the Stage from
+     * @return  a Stage object representing the current Stage
+     */
+    public static Stage getStageFromEvent(ActionEvent event) {
+        Scene lastScene = ((Node)(event.getSource())).getScene();
+        return (Stage)lastScene.getWindow();
     }
 }

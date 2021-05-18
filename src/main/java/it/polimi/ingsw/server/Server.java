@@ -9,8 +9,8 @@ import it.polimi.ingsw.model.MultiGame;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.SoloGame;
 import it.polimi.ingsw.network.messages.ErrorMessage;
-import it.polimi.ingsw.network.messages.NicknameErrorMessage;
 import it.polimi.ingsw.network.messages.LoginMessage;
+import it.polimi.ingsw.network.messages.NicknameErrorMessage;
 import it.polimi.ingsw.network.updates.InitialResourcesUpdate;
 import it.polimi.ingsw.network.updates.ServerUpdate;
 import it.polimi.ingsw.view.RemoteView;
@@ -19,13 +19,16 @@ import it.polimi.ingsw.view.View;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Server implements Runnable {
 
-    private final int port = 8080;
+    private final int port;
     private final ServerSocket serverSocket;
     private MasterController masterController;
     private static final List<Connection> connections = new ArrayList<>();
@@ -36,6 +39,12 @@ public class Server implements Runnable {
     private int gameSize = 0;
 
     public Server() throws IOException {
+        this.port = 8080;
+        this.serverSocket = new ServerSocket(8080);
+    }
+
+    public Server(int port) throws IOException {
+        this.port = port;
         this.serverSocket = new ServerSocket(port);
     }
 
@@ -56,11 +65,9 @@ public class Server implements Runnable {
     }
 
     private boolean checkUsernameExist(String nickname){
-        Iterator mapIterator = games.iterator();
-        while (mapIterator.hasNext()) {
-            Map<String, Connection> map = (Map<String, Connection>) mapIterator.next();
-            for(String nick : map.keySet()){
-                if(nick.equals(nickname))
+        for (Map<String, Connection> map : games) {
+            for (String nick : map.keySet()) {
+                if (nick.equals(nickname))
                     return true;
             }
         }

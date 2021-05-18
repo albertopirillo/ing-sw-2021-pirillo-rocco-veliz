@@ -6,7 +6,7 @@ import it.polimi.ingsw.network.updates.*;
 
 import java.util.List;
 
-public class ClientGUI extends PlayerInterface {
+public class ClientGUI extends UserInterface {
 
     private MainController guiController;
     //TODO: Platform.runLater(() -> {});

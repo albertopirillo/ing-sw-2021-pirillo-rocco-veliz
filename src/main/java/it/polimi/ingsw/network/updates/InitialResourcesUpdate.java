@@ -1,6 +1,6 @@
 package it.polimi.ingsw.network.updates;
 
-import it.polimi.ingsw.client.PlayerInterface;
+import it.polimi.ingsw.client.UserInterface;
 
 public class InitialResourcesUpdate extends ServerUpdate {
 
@@ -12,9 +12,9 @@ public class InitialResourcesUpdate extends ServerUpdate {
     }
 
     @Override
-    public void update(PlayerInterface playerInterface) {
-        if (this.getActivePlayer().equals(playerInterface.getNickname())) {
-            playerInterface.viewInitialResources(numPlayer);
+    public void update(UserInterface userInterface) {
+        if (this.getActivePlayer().equals(userInterface.getNickname())) {
+            userInterface.viewInitialResources(numPlayer);
         }
     }
 }

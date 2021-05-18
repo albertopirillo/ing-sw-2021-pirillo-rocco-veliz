@@ -1,6 +1,6 @@
 package it.polimi.ingsw.network.updates;
 
-import it.polimi.ingsw.client.PlayerInterface;
+import it.polimi.ingsw.client.UserInterface;
 import it.polimi.ingsw.model.ClientError;
 
 public class ErrorUpdate extends ServerUpdate {
@@ -17,7 +17,7 @@ public class ErrorUpdate extends ServerUpdate {
     }
 
     @Override
-    public void update(PlayerInterface playerInterface) {
-        playerInterface.displayError(this);
+    public void update(UserInterface userInterface) {
+        userInterface.displayError(this);
     }
 }

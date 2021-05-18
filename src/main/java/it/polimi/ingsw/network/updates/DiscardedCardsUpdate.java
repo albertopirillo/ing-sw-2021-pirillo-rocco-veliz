@@ -1,6 +1,6 @@
 package it.polimi.ingsw.network.updates;
 
-import it.polimi.ingsw.client.PlayerInterface;
+import it.polimi.ingsw.client.UserInterface;
 import it.polimi.ingsw.model.DevelopmentCard;
 
 import java.util.List;
@@ -19,7 +19,7 @@ public class DiscardedCardsUpdate extends ServerUpdate {
     }
 
     @Override
-    public void update(PlayerInterface playerInterface) {
-        playerInterface.updateDiscardedCards(this);
+    public void update(UserInterface userInterface) {
+        userInterface.updateDiscardedCards(this);
     }
 }

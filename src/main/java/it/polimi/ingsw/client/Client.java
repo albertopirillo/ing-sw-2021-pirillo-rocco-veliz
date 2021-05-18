@@ -12,26 +12,34 @@ import java.net.Socket;
 
 public class Client implements Runnable{
 
-    private static Socket socket;
+    private static Socket socket; //TODO: static??
     private final String ip;
     private final int port;
     private ObjectInputStream socketIn;
     private ObjectOutputStream socketOut;
-    private PlayerInterface cli;
+    private final UserInterface userInterface;
 
     public Client() {
         this.port = 8080;
         this.ip = "127.0.0.1";
+        this.userInterface = new ClientCLI(this);
+    }
+
+    public Client(int port, boolean gui) {
+        this.port = port;
+        this.ip = "127.0.0.1";
+        if (gui) this.userInterface = new ClientGUI(this);
+        else this.userInterface = new ClientCLI(this);
     }
 
     @Override
     public void run() {
-        cli = new ClientCLI(this);
-        cli.setup();
+        //userInterface = new ClientCLI(this);
+        userInterface.setup();
         startConnection();
-        String nickname = cli.chooseNickname();
+        String nickname = userInterface.chooseNickname();
         Processable login = new LoginMessage(nickname, nickname);
-        cli.setNickname(nickname);
+        userInterface.setNickname(nickname);
         sendMessage(login);
         while(!Thread.currentThread().isInterrupted()) {
             ServerUpdate msg;
@@ -44,7 +52,7 @@ public class Client implements Runnable{
                 e.printStackTrace();
                 break;
             }
-            cli.readUpdate(msg);
+            userInterface.readUpdate(msg);
         }
     }
 

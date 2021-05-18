@@ -1,6 +1,6 @@
 package it.polimi.ingsw.network.updates;
 
-import it.polimi.ingsw.client.PlayerInterface;
+import it.polimi.ingsw.client.UserInterface;
 import it.polimi.ingsw.model.DevelopmentCard;
 
 import java.util.List;
@@ -18,7 +18,7 @@ public class MarketUpdate extends ServerUpdate {
     }
 
     @Override
-    public void update(PlayerInterface playerInterface) {
-        playerInterface.updateMarket(this);
+    public void update(UserInterface userInterface) {
+        userInterface.updateMarket(this);
     }
 }

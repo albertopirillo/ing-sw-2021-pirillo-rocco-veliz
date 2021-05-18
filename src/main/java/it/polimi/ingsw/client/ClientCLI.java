@@ -13,12 +13,12 @@ import it.polimi.ingsw.utils.ANSIColor;
 
 import java.util.*;
 
-public class ClientCLI extends PlayerInterface {
+public class ClientCLI extends UserInterface {
     private final Scanner stdin;
     private Resource tempRes;
 
-    public ClientCLI(Client player){
-        super(player);
+    public ClientCLI(Client client){
+        super(client);
         this.stdin = new Scanner(System.in);
     }
 

@@ -19,7 +19,7 @@ public class ClientCLITest {
     @Test
     public void storageTest() {
         Client client = new Client();
-        PlayerInterface cli = new ClientCLI(client);
+        UserInterface cli = new ClientCLI(client);
         cli.setNickname("a");
 
         Map<String, Resource> strongboxMap =  new HashMap<>();
@@ -46,7 +46,7 @@ public class ClientCLITest {
     @Test
     public void errorTest() {
         Client client = new Client();
-        PlayerInterface cli = new ClientCLI(client);
+        UserInterface cli = new ClientCLI(client);
         ClientError clientError = new ClientError();
 
         clientError.setException(new InvalidKeyException());
@@ -61,7 +61,7 @@ public class ClientCLITest {
     @Test
     public void devSlotTest() {
         Client client = new Client();
-        PlayerInterface cli = new ClientCLI(client);
+        UserInterface cli = new ClientCLI(client);
         cli.setNickname("a");
         ProductionPower prodPower = new ProductionPower(new Resource(0,1,2,3),
                 new Resource(1,2,3,4));

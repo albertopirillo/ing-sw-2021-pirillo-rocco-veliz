@@ -1,6 +1,6 @@
 package it.polimi.ingsw.network.updates;
 
-import it.polimi.ingsw.client.PlayerInterface;
+import it.polimi.ingsw.client.UserInterface;
 
 import java.io.Serializable;
 
@@ -16,5 +16,5 @@ public abstract class ServerUpdate implements Serializable {
         return activePlayer;
     }
 
-    public abstract void update(PlayerInterface playerInterface);
+    public abstract void update(UserInterface userInterface);
 }

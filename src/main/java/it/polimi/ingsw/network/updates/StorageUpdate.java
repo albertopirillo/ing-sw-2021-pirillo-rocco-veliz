@@ -1,6 +1,6 @@
 package it.polimi.ingsw.network.updates;
 
-import it.polimi.ingsw.client.PlayerInterface;
+import it.polimi.ingsw.client.UserInterface;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.network.DepotSetting;
 
@@ -26,7 +26,7 @@ public class StorageUpdate extends ServerUpdate {
     }
 
     @Override
-    public void update(PlayerInterface playerInterface) {
-        playerInterface.updateStorages(this);
+    public void update(UserInterface userInterface) {
+        userInterface.updateStorages(this);
     }
 }

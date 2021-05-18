@@ -1,6 +1,6 @@
 package it.polimi.ingsw.network.updates;
 
-import it.polimi.ingsw.client.PlayerInterface;
+import it.polimi.ingsw.client.UserInterface;
 import it.polimi.ingsw.model.SoloActionToken;
 
 public class ActionTokenUpdate extends ServerUpdate {
@@ -17,7 +17,7 @@ public class ActionTokenUpdate extends ServerUpdate {
     }
 
     @Override
-    public void update(PlayerInterface playerInterface) {
-        playerInterface.updateSoloTokens(this);
+    public void update(UserInterface userInterface) {
+        userInterface.updateSoloTokens(this);
     }
 }

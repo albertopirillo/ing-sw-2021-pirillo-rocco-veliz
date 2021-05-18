@@ -6,13 +6,13 @@ import it.polimi.ingsw.utils.ANSIColor;
 
 import java.util.List;
 
-public abstract class PlayerInterface {
+public abstract class UserInterface {
 
     private String nickname;
     private final Client player;
     private final boolean debug = false; //TODO: remove
 
-    public PlayerInterface(Client player) {
+    public UserInterface(Client player) {
         this.player = player;
     }
 

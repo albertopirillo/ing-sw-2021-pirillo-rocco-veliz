@@ -1,14 +1,14 @@
 package it.polimi.ingsw.network.updates;
 
-import it.polimi.ingsw.client.PlayerInterface;
+import it.polimi.ingsw.client.UserInterface;
 
 import java.util.List;
 import java.util.Map;
 
 public class GameOverUpdate extends ServerUpdate{
-    private boolean win;
-    private Map<String, Integer> scores;
-    private List<String> ranking;
+    private final boolean win;
+    private final Map<String, Integer> scores;
+    private final List<String> ranking;
 
     public GameOverUpdate(String activePlayer, boolean win, List<String> ranking, Map<String, Integer> scores) {
         super(activePlayer);
@@ -18,8 +18,8 @@ public class GameOverUpdate extends ServerUpdate{
     }
 
     @Override
-    public void update(PlayerInterface playerInterface) {
-        playerInterface.updateGameOver(this);
+    public void update(UserInterface userInterface) {
+        userInterface.updateGameOver(this);
     }
 
     public boolean isWin(){

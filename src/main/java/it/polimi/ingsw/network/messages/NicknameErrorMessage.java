@@ -1,6 +1,6 @@
 package it.polimi.ingsw.network.messages;
 
-import it.polimi.ingsw.client.PlayerInterface;
+import it.polimi.ingsw.client.UserInterface;
 import it.polimi.ingsw.server.Connection;
 import it.polimi.ingsw.server.Server;
 
@@ -13,8 +13,8 @@ public class NicknameErrorMessage extends Message {
     }
 
     @Override
-    public void update(PlayerInterface playerInterface) {
-        playerInterface.changeNickname();
+    public void update(UserInterface userInterface) {
+        userInterface.changeNickname();
     }
 
     @Override

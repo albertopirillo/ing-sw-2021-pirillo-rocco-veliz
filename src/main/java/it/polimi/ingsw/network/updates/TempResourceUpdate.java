@@ -1,6 +1,6 @@
 package it.polimi.ingsw.network.updates;
 
-import it.polimi.ingsw.client.PlayerInterface;
+import it.polimi.ingsw.client.UserInterface;
 import it.polimi.ingsw.model.Resource;
 
 public class TempResourceUpdate extends ServerUpdate {
@@ -17,9 +17,9 @@ public class TempResourceUpdate extends ServerUpdate {
     }
 
     @Override
-    public void update(PlayerInterface playerInterface) {
-        if (this.getActivePlayer().equals(playerInterface.getNickname())) {
-            playerInterface.updateTempResource(this);
+    public void update(UserInterface userInterface) {
+        if (this.getActivePlayer().equals(userInterface.getNickname())) {
+            userInterface.updateTempResource(this);
         }
     }
 }

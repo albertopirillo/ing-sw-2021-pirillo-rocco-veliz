@@ -1,6 +1,6 @@
 package it.polimi.ingsw.network.updates;
 
-import it.polimi.ingsw.client.PlayerInterface;
+import it.polimi.ingsw.client.UserInterface;
 import it.polimi.ingsw.model.ResourceType;
 
 import java.util.List;
@@ -26,8 +26,8 @@ public class TempMarblesUpdate extends ServerUpdate{
     }
 
     @Override
-    public void update(PlayerInterface playerInterface) {
-        playerInterface.updateTempMarbles(this);
+    public void update(UserInterface userInterface) {
+        userInterface.updateTempMarbles(this);
     }
 
     @Override

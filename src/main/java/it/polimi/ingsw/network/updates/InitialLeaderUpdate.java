@@ -1,6 +1,6 @@
 package it.polimi.ingsw.network.updates;
 
-import it.polimi.ingsw.client.PlayerInterface;
+import it.polimi.ingsw.client.UserInterface;
 import it.polimi.ingsw.model.LeaderCard;
 
 import java.io.Serializable;
@@ -19,9 +19,9 @@ public class InitialLeaderUpdate extends ServerUpdate implements Serializable {
     }
 
     @Override
-    public void update(PlayerInterface playerInterface) {
-        if (this.getActivePlayer().equals(playerInterface.getNickname())) {
-            playerInterface.viewInitialsLeaderCards(cards);
+    public void update(UserInterface userInterface) {
+        if (this.getActivePlayer().equals(userInterface.getNickname())) {
+            userInterface.viewInitialsLeaderCards(cards);
         }
     }
 }

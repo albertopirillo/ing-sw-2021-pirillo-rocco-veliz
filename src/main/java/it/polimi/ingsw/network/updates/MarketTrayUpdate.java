@@ -1,6 +1,6 @@
 package it.polimi.ingsw.network.updates;
 
-import it.polimi.ingsw.client.PlayerInterface;
+import it.polimi.ingsw.client.UserInterface;
 import it.polimi.ingsw.model.MarblesColor;
 
 public class MarketTrayUpdate extends ServerUpdate {
@@ -22,8 +22,8 @@ public class MarketTrayUpdate extends ServerUpdate {
     }
 
     @Override
-    public void update(PlayerInterface playerInterface) {
-        playerInterface.updateMarketTray(this);
+    public void update(UserInterface userInterface) {
+        userInterface.updateMarketTray(this);
     }
 
     @Override

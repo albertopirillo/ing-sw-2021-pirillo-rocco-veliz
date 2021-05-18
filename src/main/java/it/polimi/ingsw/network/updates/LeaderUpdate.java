@@ -1,6 +1,6 @@
 package it.polimi.ingsw.network.updates;
 
-import it.polimi.ingsw.client.PlayerInterface;
+import it.polimi.ingsw.client.UserInterface;
 import it.polimi.ingsw.model.LeaderCard;
 
 import java.util.List;
@@ -20,7 +20,7 @@ public class LeaderUpdate extends ServerUpdate {
     }
 
     @Override
-    public void update(PlayerInterface playerInterface) {
-        playerInterface.updateLeaderCards(this);
+    public void update(UserInterface userInterface) {
+        userInterface.updateLeaderCards(this);
     }
 }

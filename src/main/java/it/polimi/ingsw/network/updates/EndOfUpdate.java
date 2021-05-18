@@ -1,6 +1,6 @@
 package it.polimi.ingsw.network.updates;
 
-import it.polimi.ingsw.client.PlayerInterface;
+import it.polimi.ingsw.client.UserInterface;
 
 public class EndOfUpdate extends ServerUpdate {
 
@@ -9,7 +9,7 @@ public class EndOfUpdate extends ServerUpdate {
     }
 
     @Override
-    public void update(PlayerInterface playerInterface) {
-        playerInterface.endOfUpdate(this);
+    public void update(UserInterface userInterface) {
+        userInterface.endOfUpdate(this);
     }
 }

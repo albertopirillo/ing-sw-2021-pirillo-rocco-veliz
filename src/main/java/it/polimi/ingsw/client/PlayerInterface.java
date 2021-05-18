@@ -54,6 +54,8 @@ public abstract class PlayerInterface {
     public abstract void viewInitialResources(int numPlayer);
     public abstract void viewInitialsLeaderCards(List<LeaderCard> cards);
     public abstract void simulateGame(); //testing
+    public abstract void errorPrint(String error);
+    public abstract void loginMessage();
 
     public abstract void updateTempResource(TempResourceUpdate update);
     public abstract void updateStorages(StorageUpdate update);
@@ -66,4 +68,5 @@ public abstract class PlayerInterface {
     public abstract void updateDiscardedCards(DiscardedCardsUpdate update);
     public abstract void updateSoloTokens(ActionTokenUpdate actionTokenUpdate);
     public abstract void updateTempMarbles(TempMarblesUpdate tempMarblesUpdate);
+    public abstract void changeNickname();
 }

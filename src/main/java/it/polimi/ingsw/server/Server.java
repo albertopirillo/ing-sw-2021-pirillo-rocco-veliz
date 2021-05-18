@@ -8,6 +8,8 @@ import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MultiGame;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.SoloGame;
+import it.polimi.ingsw.network.messages.ErrorMessage;
+import it.polimi.ingsw.network.messages.NicknameErrorMessage;
 import it.polimi.ingsw.network.messages.LoginMessage;
 import it.polimi.ingsw.network.updates.InitialResourcesUpdate;
 import it.polimi.ingsw.network.updates.ServerUpdate;
@@ -17,10 +19,7 @@ import it.polimi.ingsw.view.View;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -30,7 +29,8 @@ public class Server implements Runnable {
     private final ServerSocket serverSocket;
     private MasterController masterController;
     private static final List<Connection> connections = new ArrayList<>();
-    private final Map<String, Connection> lobbyPlayers = new HashMap<>();
+    private final Map<String,Connection> lobbyPlayers = new HashMap<>();
+    private final List<Map<String,Connection> > games = new ArrayList<>();
     private final ExecutorService executor = Executors.newFixedThreadPool(128);
     private String firstPlayer;
     private int gameSize = 0;
@@ -39,11 +39,14 @@ public class Server implements Runnable {
         this.serverSocket = new ServerSocket(port);
     }
 
-    public void addToLobby(String nickname, Connection connection){
+    public synchronized void addToLobby(String nickname, Connection connection){
         lobbyPlayers.put(nickname, connection);
+        if(gameSize == lobbyPlayers.size()){
+            setupGame(gameSize, nickname);
+        }
     }
 
-    public void setGameSize(int maxPlayers){
+    public synchronized void setGameSize(int maxPlayers){
         this.gameSize = maxPlayers;
         System.out.println("[SERVER] Number of players: " + maxPlayers);
         if(maxPlayers == 1){
@@ -52,8 +55,33 @@ public class Server implements Runnable {
         }
     }
 
+    private boolean checkUsernameExist(String nickname){
+        Iterator mapIterator = games.iterator();
+        while (mapIterator.hasNext()) {
+            Map<String, Connection> map = (Map<String, Connection>) mapIterator.next();
+            for(String nick : map.keySet()){
+                if(nick.equals(nickname))
+                    return true;
+            }
+        }
+        for (String nick : lobbyPlayers.keySet()){
+            if(nick.equals(nickname))
+                return true;
+        }
+        return false;
+    }
+
     public void login(String nickname, Connection connection){
-        //TODO Handle if nickname already exists
+        if(checkUsernameExist(nickname)){
+            ServerUpdate msg = new NicknameErrorMessage(nickname, nickname);
+            connection.sendMessage(msg);
+            return;
+        }
+        if(!lobbyPlayers.isEmpty() && gameSize==0){
+            ServerUpdate msg = new ErrorMessage(nickname, "A game is being created. Please wait the host.");
+            connection.sendMessage(msg);
+            return;
+        }
         System.out.println("[SERVER] New player " + nickname + " added");
         if(lobbyPlayers.isEmpty()){
             addToLobby(nickname, connection);
@@ -62,22 +90,22 @@ public class Server implements Runnable {
         } else {
             addToLobby(nickname, connection);
         }
-        if(gameSize == lobbyPlayers.size()){
-            setupGame(gameSize, nickname);
-        }
-
     }
 
-    public void setupGame(int gameSize, String nickname){
+    public synchronized void setupGame(int gameSize, String nickname){
         System.out.println("[SERVER] LOADING GAME...");
         for (String n : lobbyPlayers.keySet()){
             System.out.println("[SERVER] Player: " + n);
         }
+        games.add(new HashMap<>(lobbyPlayers));
         if(gameSize == 1){
             setupSoloGame(nickname);
         } else {
             setupMultiGame();
         }
+        lobbyPlayers.clear();
+        this.gameSize = 0;
+
     }
 
     public void setupSoloGame(String nickname){
@@ -87,7 +115,7 @@ public class Server implements Runnable {
             MasterController masterController = new MasterController(game);
             List<String> keys = new ArrayList<>(lobbyPlayers.keySet());
             Connection connection = lobbyPlayers.get(keys.get(0));
-            View view = new RemoteView(this, /*game,*/ connections.get(0), keys.get(0));
+            View view = new RemoteView(this, connection, keys.get(0));
             connection.setView(view);
             game.addObserver(view);
             view.addController(masterController);
@@ -109,7 +137,7 @@ public class Server implements Runnable {
             List<Connection> connections = new ArrayList<>();
             for(int i=0; i<gameSize; i++){
                 connections.add(lobbyPlayers.get(keys.get(i)));
-                View view = new RemoteView(this, /*game,*/ connections.get(i), keys.get(i));
+                View view = new RemoteView(this, connections.get(i), keys.get(i));
                 connections.get(i).setView(view);
                 views.add(view);
                 game.addObserver(view);
@@ -140,8 +168,6 @@ public class Server implements Runnable {
         }
         */
             //activeGames.put(activeGames.size(), connections
-            lobbyPlayers.clear();
-            gameSize = 0;
             //masterController.getSetupController().startGame();
         } catch (FullCardDeckException e) {
             e.printStackTrace();

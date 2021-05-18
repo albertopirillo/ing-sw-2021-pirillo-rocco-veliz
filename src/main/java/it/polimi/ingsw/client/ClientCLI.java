@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.network.DepotSetting;
 import it.polimi.ingsw.network.Processable;
 import it.polimi.ingsw.network.messages.GameSizeMessage;
+import it.polimi.ingsw.network.messages.LoginMessage;
 import it.polimi.ingsw.network.requests.*;
 import it.polimi.ingsw.network.updates.*;
 import it.polimi.ingsw.utils.ANSIColor;
@@ -35,6 +36,17 @@ public class ClientCLI extends PlayerInterface {
         return stdin.nextInt();
     }
 
+    public void loginMessage(){
+        String nickname = chooseNickname();
+        Processable login = new LoginMessage(nickname, nickname);
+        setNickname(nickname);
+        getPlayer().sendMessage(login);
+    }
+
+    public void changeNickname(){
+        errorPrint("The nickname already exists");
+        loginMessage();
+    }
     public String chooseNickname(){
         String nickname = "";
 
@@ -324,7 +336,7 @@ public class ClientCLI extends PlayerInterface {
         }
     }
 
-    private void errorPrint(String str) {
+    public void errorPrint(String str) {
         System.out.println(ANSIColor.RED + str + ANSIColor.RESET);
     }
 
@@ -496,6 +508,7 @@ public class ClientCLI extends PlayerInterface {
                     }
                 } catch (Exception e){
                     errorPrint("Invalid input, retry");
+                    return null;
                 }
             }
         }

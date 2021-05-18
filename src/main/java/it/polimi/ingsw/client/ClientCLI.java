@@ -811,4 +811,25 @@ public class ClientCLI extends PlayerInterface {
             }
         }
     }
+
+    public void updateGameOver(GameOverUpdate update){
+        int numPlayers = update.getScores().keySet().size();
+        if(update.isWin()){
+            System.out.println("\n***** CONGRATULATIONS YOU WON THE GAME******");
+            if(numPlayers == 1){
+                System.out.println("\nYour final score is: " + update.getScores().get(getNickname()));
+            }
+        } else {
+            System.out.println("\n YOU LOST");
+        }
+
+        if(numPlayers > 1){
+            System.out.println("\nThe final scores are the following:");
+            for(int i = 0; i < numPlayers; i++){
+                String playerName = update.getRanking().get(i);
+                System.out.println("\n" + i + ": " + playerName + " - " + update.getScores().get(playerName));
+            }
+        }
+    }
+
 }

@@ -3,10 +3,11 @@ package it.polimi.ingsw.view;
 import it.polimi.ingsw.model.*;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ModelObserver {
     void gameStateChange(Game game);
-    void notifyGameOver(String playerWinner);
+    void notifyGameOver(Game game, boolean win, List<String> ranking, Map<String, Integer> scores);
     void showFaithTrack(Game game);
     void showLeaderCards(Game game);
     void notifyInitResources(Game game, int numPlayer);

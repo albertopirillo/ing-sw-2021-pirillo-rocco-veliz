@@ -95,4 +95,10 @@ public class ClientGUI extends PlayerInterface {
     public void updateTempMarbles(TempMarblesUpdate tempMarblesUpdate) {
         
     }
+
+    @Override
+    public void updateGameOver(GameOverUpdate update){
+
+    }
+
 }

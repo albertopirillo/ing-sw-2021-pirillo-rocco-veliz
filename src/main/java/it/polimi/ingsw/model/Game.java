@@ -95,6 +95,13 @@ public abstract class Game {
     public abstract void startGame();
 
     //Observers methods
+    public void notifyEndOfGame(List<String> ranking, Map<String, Integer> scores){
+        String winnerName = ranking.size() > 0 ? ranking.get(0) : null;
+        for(ModelObserver observer: observers){
+            observer.notifyGameOver(this, observer.getPlayer().equals(winnerName), ranking, scores);
+        }
+    }
+
     public void quitGame(){
         if(observers.size() < 3){
             //end the game for all players if there are 1 or 2 players
@@ -114,7 +121,6 @@ public abstract class Game {
             }
             notifyEndOfUpdates();
         }
-
     }
 
     public void notifyEndOfUpdates() {

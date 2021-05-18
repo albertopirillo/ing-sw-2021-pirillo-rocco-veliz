@@ -9,6 +9,7 @@ import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import it.polimi.ingsw.utils.LeaderAbilityDeserializer;
 import it.polimi.ingsw.utils.LeaderCardJsonDeserializer;
+import it.polimi.ingsw.view.ModelObserver;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -60,8 +61,17 @@ public class MultiGame extends Game {
     public void checkEndGame() throws NegativeResAmountException, InvalidKeyException {
         //Every player until the first one have to play their last turn
         if (lastTurn && this.getActivePlayer().getInkwell()) {
-            List<Player> playerRanks = this.computeRanks(computeFinalScore());
-            //TODO: the games is over, send results to Views
+            Map<Player, Integer> finalScores = computeFinalScore();
+            List<Player> playerRanks = computeRanks(finalScores);
+            Map<String, Integer> scores = new HashMap<>();
+            List<String> ranking = new ArrayList<>();
+            for(Map.Entry<Player, Integer> entry: finalScores.entrySet()){
+                scores.put(entry.getKey().getNickname(), entry.getValue());
+            }
+            for(Player player: playerRanks){
+                ranking.add(player.getNickname());
+            }
+            notifyEndOfGame(ranking, scores);
         }
     }
 
@@ -87,6 +97,7 @@ public class MultiGame extends Game {
     }
 
     @Override
+    //the argument win is only used for solo game
     public void lastTurn(boolean win) {
         this.lastTurn = true;
     }

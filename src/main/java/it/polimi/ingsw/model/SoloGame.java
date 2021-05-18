@@ -91,7 +91,7 @@ public class SoloGame extends Game {
             int finalScore = map.get(this.getActivePlayer());
             //TODO: game is over, send score to the View
         } else {
-            //TODO: game is over, tell the View that you loss
+            //TODO: game is over, tell the View that you lost
         }
     }
 

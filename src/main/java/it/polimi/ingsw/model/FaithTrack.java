@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.exceptions.InvalidKeyException;
+import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import it.polimi.ingsw.utils.ANSIColor;
 import java.util.*;
 import java.io.Serializable;
@@ -116,6 +118,11 @@ public class FaithTrack implements Serializable {
                     popeFavor.setReportedAndFlip(true);
                     player.addVictoryPoints(4);
                     vaticanReportOthers(VaticanReportSection.GROUP_THREE, players);
+                    try {
+                        player.getGame().lastTurn(true);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 } break;
         }
     }

@@ -66,4 +66,5 @@ public abstract class PlayerInterface {
     public abstract void updateDiscardedCards(DiscardedCardsUpdate update);
     public abstract void updateSoloTokens(ActionTokenUpdate actionTokenUpdate);
     public abstract void updateTempMarbles(TempMarblesUpdate tempMarblesUpdate);
+    public abstract void updateGameOver(GameOverUpdate update);
 }

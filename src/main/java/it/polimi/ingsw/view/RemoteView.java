@@ -71,8 +71,10 @@ public class RemoteView extends View {
     }
 
     @Override
-    public void notifyGameOver(String winner) {
-        //TODO: ...
+    public void notifyGameOver(Game game, boolean win, List<String> ranking, Map<String, Integer> scores) {
+        Player activePlayer = game.getActivePlayer();
+        ServerUpdate msg = new GameOverUpdate(game.getActivePlayer().getNickname(), win, ranking, scores);
+        connection.sendMessage(msg);
     }
 
     @Override

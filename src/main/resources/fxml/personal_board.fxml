@@ -41,7 +41,7 @@
       <ImageView fx:id="depot3_3" fitHeight="51.0" fitWidth="56.0" layoutX="414.0" layoutY="480.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="depot2_2" fitHeight="51.0" fitWidth="56.0" layoutX="397.0" layoutY="407.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="depot2_1" fitHeight="51.0" fitWidth="56.0" layoutX="343.0" layoutY="407.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="depot1_1" fitHeight="51.0" fitWidth="56.0" layoutX="371.0" layoutY="335.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="depot1_1" fitHeight="51.0" fitWidth="56.0" layoutX="371.0" layoutY="335.0" onDragDetected="#dragStart" onDragExited="#dragStop" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="extra2_2" fitHeight="51.0" fitWidth="56.0" layoutX="149.0" layoutY="721.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="extra2_1" fitHeight="51.0" fitWidth="56.0" layoutX="54.0" layoutY="721.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="extra1_1" fitHeight="51.0" fitWidth="56.0" layoutX="54.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true" />

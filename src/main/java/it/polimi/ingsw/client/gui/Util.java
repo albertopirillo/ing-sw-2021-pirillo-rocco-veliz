@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client.gui;
 
+import it.polimi.ingsw.client.ClientGUI;
 import it.polimi.ingsw.model.ResourceType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -8,7 +9,6 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.util.Objects;
 
 /**
@@ -19,13 +19,12 @@ public abstract class Util {
     /**
      * The mainClass of JavaFX, specified in pom.xml
      */
-    public static Class<Launcher> mainClass = Launcher.class;
+    public static Class<ClientGUI> mainClass = ClientGUI.class;
 
     /**
      * Wrapper to load an .fxml file
      * @param fileName  the name of the file, with no path or extension
      * @return  a FXMLLoader Object associated the loaded file
-     * @throws IOException  if the file doesnt exists
      */
     public static FXMLLoader loadFXML(String fileName) {
        return new FXMLLoader(Launcher.class.getResource("/fxml/" + fileName + ".fxml"));

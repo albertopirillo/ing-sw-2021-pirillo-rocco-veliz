@@ -102,4 +102,12 @@ public class PersonalBoardController {
             setLayer(setting.getLayerNumber(), setting.getResType(), setting.getAmount());
         }
     }
+
+    public void dragStart() {
+        System.out.println("DRAG STARTED");
+    }
+
+    public void dragStop() {
+        System.out.println("DRAG STOPPED");
+    }
 }

@@ -77,11 +77,18 @@ public class MainController {
     }
 
     /**
-     * Creates one tab for each player in the given playerList
-     * @param playerList    a list of String representing the players' nickname
-     * @throws IOException  if the .fxml file is not found
+     * <p>Creates one tab for each player in the given playerList</p>
+     * <p>Initializes all popups and links them to the given stage</p>
+     * @param playerList a list of String representing the player's nickname
+     * @throws IOException if a .fxml file is not found
      */
-    public void addPlayers(List<String> playerList) throws IOException {
+    public void init(List<String> playerList) throws IOException {
+        addPlayers(playerList);
+        initTrayPopup();
+        initMarketPopup();
+    }
+
+    private void addPlayers(List<String> playerList) throws IOException {
         for(String nickname: playerList) {
             FXMLLoader loader = Util.loadFXML("personal_board");
             Parent node = loader.load();
@@ -96,20 +103,31 @@ public class MainController {
         }
     }
 
+    private void initTrayPopup() throws IOException {
+        this.trayPopup.setText("Show Market Tray");
+        FXMLLoader loader = Util.loadFXML("market_tray");
+        Parent tray = loader.load();
+        this.trayController = loader.getController();
+        this.trayPopUp.getContent().add(tray);
+    }
+
+    private void initMarketPopup() throws IOException {
+        this.marketPopup.setText("Show Market Cards");
+        FXMLLoader loader = Util.loadFXML("market");
+        Parent tray = loader.load();
+        this.marketController = loader.getController();
+        this.marketPopUp.getContent().add(tray);
+    }
+
     //TODO: popups show above all windows
     /**
      * Shows and hides the tray popup, changing also the text of the button
      * @param event the event triggered when the button is pressed
-     * @throws IOException  if the .fxml file is not found
      */
-    public void showTray(ActionEvent event) throws IOException {
+    public void showTray(ActionEvent event) {
         Stage stage = Util.getStageFromEvent(event);
         if (!this.trayPopUp.isShowing()) {
             trayPopup.setText("Back to Personal Board");
-            FXMLLoader loader = Util.loadFXML("market_tray");
-            Parent tray = loader.load();
-            this.trayController = loader.getController();
-            this.trayPopUp.getContent().add(tray);
             this.trayPopUp.show(stage);
         }
         else {
@@ -121,16 +139,11 @@ public class MainController {
     /**
      * Shows and hides the market popup, changing also the text of the button
      * @param event the event triggered when the button is pressed
-     * @throws IOException  if the .fxml file is not found
      */
-    public void showMarket(ActionEvent event) throws IOException {
+    public void showMarket(ActionEvent event) {
         Stage stage = Util.getStageFromEvent(event);
         if (!this.marketPopUp.isShowing()) {
             marketPopup.setText("Back to Personal Board");
-            FXMLLoader loader = Util.loadFXML("market");
-            Parent market = loader.load();
-            this.marketController = loader.getController();
-            this.marketPopUp.getContent().add(market);
             this.marketPopUp.show(stage);
         }
         else {

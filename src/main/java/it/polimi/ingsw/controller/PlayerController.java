@@ -193,6 +193,20 @@ public class PlayerController {
         }
     }
 
+    public void reorderDepot(List<DepotSetting> settings) {
+        try {
+            Player activePlayer = controller.getGame().getActivePlayer();
+            activePlayer.getPersonalBoard().getDepot().setFromDepotSetting(settings);
+            controller.getGame().updateStorages();
+            controller.resetException();
+        } catch (InvalidResourceException | WrongDepotInstructionsException | LayerNotEmptyException | InvalidLayerNumberException | NotEnoughSpaceException | CannotContainFaithException | NegativeResAmountException e) {
+            controller.setException(e);
+            controller.getGame().updateClientError(controller.getClientError());
+        } finally {
+            controller.getGame().notifyEndOfUpdates();
+        }
+    }
+
     public void activateProduction(Resource fromDepot, Resource fromStrongbox, List<Integer> numSlots) {
         Player activePlayer = controller.getGame().getActivePlayer();
         PersonalBoard personalBoard = activePlayer.getPersonalBoard();

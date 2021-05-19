@@ -44,9 +44,24 @@ public abstract class Util {
      * @param resourceType  the resource type to get the image
      * @return  an Image object of the requested resource type
      */
-    public static Image getResImage(ResourceType resourceType) {
+    public static Image resToImage(ResourceType resourceType) {
         String path = "/png/res/" + resourceType.name() + ".png";
         return new Image(Objects.requireNonNull(mainClass.getResourceAsStream(path)));
+    }
+
+    /**
+     * Returns the ResourceType that corresponds to the given image, if any
+     * @param image the image to get the ResourceType from
+     * @return  a ResourceType if the image represent a ResourceType, null otherwise
+     */
+    public static ResourceType imageToRes(Image image) {
+        if (image == null) return null;
+        String path = image.getUrl();
+        if (path.contains("stone")) return ResourceType.STONE;
+        else if (path.contains("coin")) return ResourceType.COIN;
+        else if (path.contains("shield")) return ResourceType.SHIELD;
+        else if (path.contains("servant")) return ResourceType.SERVANT;
+        else return null;
     }
 
     /**

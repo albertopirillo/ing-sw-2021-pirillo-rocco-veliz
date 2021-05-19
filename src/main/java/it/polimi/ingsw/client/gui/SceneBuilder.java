@@ -54,6 +54,7 @@ public class SceneBuilder extends Application {
         });*/
 
         mainController.init(this.playerList);
+        mainController.depotTest();
         /*clientGUI.setGuiController(mainController);*/
         stage.show();
     }

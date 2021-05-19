@@ -4,9 +4,13 @@ import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.ResourceType;
 import it.polimi.ingsw.network.DepotSetting;
+import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,6 +25,13 @@ public class PersonalBoardController {
     ImageView extra1_1, extra1_2, extra2_1, extra2_2;
     @FXML
     Label sb_stone, sb_servant, sb_shield, sb_coin;
+    @FXML
+    Button reorderButton;
+
+    private ImageView dragSource;
+    private boolean isReorderDepotPressed;
+    private boolean canReorder;
+    private MainController mainController;
 
     /**
      * A map to get a list of all the corresponding images from a given layer
@@ -54,6 +65,14 @@ public class PersonalBoardController {
     }
 
     /**
+     * Sets the MainController
+     * @param mainController  the MainController to associate with this controller
+     */
+    public void setMainController(MainController mainController) {
+        this.mainController = mainController;
+    }
+
+    /**
      * Updates the strongbox
      * @param resource the resources to update the strongbox with
      */
@@ -84,7 +103,7 @@ public class PersonalBoardController {
         List<ImageView> layer = this.layerMapping.get(layerNumber);
         for (ImageView slot: layer) {
             if (i < amount) {
-                slot.setImage(Util.getResImage(res));
+                slot.setImage(Util.resToImage(res));
                 i++;
             }
             else {
@@ -103,11 +122,82 @@ public class PersonalBoardController {
         }
     }
 
-    public void dragStart() {
-        System.out.println("DRAG STARTED");
+    public void reorder(Event event) {
+        if(!isReorderDepotPressed) {
+            reorderButton.setText("End reorder");
+            isReorderDepotPressed = true;
+            canReorder = true;
+
+        }
+        else {
+            reorderButton.setText("Reorder Depot");
+            isReorderDepotPressed = false;
+            canReorder = false;
+            //Read the Depot and send a Request
+            /*Request request = new ReorderDepotGUIRequest(convertToDepotSetting());
+            this.mainController.getClient().sendMessage(request);*/
+        }
     }
 
-    public void dragStop() {
-        System.out.println("DRAG STOPPED");
+    private List<DepotSetting> convertToDepotSetting() {
+        List<DepotSetting> settings = new ArrayList<>();
+        for(Integer layerNum: layerMapping.keySet()) {
+            List<ImageView> currentLayer = layerMapping.get(layerNum);
+            ResourceType lastRes = Util.imageToRes(currentLayer.get(0).getImage());
+            int amount = 0;
+            for(ImageView slot: currentLayer) {
+                ResourceType checkRes = Util.imageToRes(slot.getImage());
+                if (checkRes != null && checkRes != lastRes) {
+                    //Invalid setting, abort
+                    return null;
+                }
+                else {
+                    amount++;
+                }
+            }
+            settings.add(new DepotSetting(layerNum, lastRes, amount));
+        }
+        return settings;
+    }
+
+    //Method that makes an entity draggable
+    public void dragDetection(MouseEvent event) {
+        if (canReorder) {
+            this.dragSource = (ImageView) event.getSource();
+            Dragboard db = this.dragSource.startDragAndDrop(TransferMode.ANY);
+            ClipboardContent cb = new ClipboardContent();
+            cb.putImage(this.dragSource.getImage());
+            db.setContent(cb);
+            event.consume();
+        }
+    }
+
+    //TODO: useless?
+    //Method to call when an entity is hovering on the drop area
+    public void dragOver(DragEvent event) {
+        System.out.println("DRAGGING OVER");
+        if(event.getDragboard().hasImage()) {
+            event.acceptTransferModes(TransferMode.ANY);
+        }
+    }
+
+    //Method to call when the entity is released
+    public void dragDrop(DragEvent event) {
+        System.out.println("DRAG DROPPED");
+        ImageView destination = (ImageView) event.getSource();
+        if (destination.getImage() != null) {
+            this.dragSource.setImage(destination.getImage());
+        }
+        else {
+            this.dragSource.setImage(null);
+        }
+        Image img = event.getDragboard().getImage();
+        destination.setImage(img);
+    }
+
+    //TODO: useless?
+    //Method to call when the drag finished successfully
+    public void dragDone(DragEvent event) {
+        System.out.println("DRAG DONE");
     }
 }

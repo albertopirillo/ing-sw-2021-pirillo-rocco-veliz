@@ -1,6 +1,19 @@
 #trayRoot {
     -fx-background-color: "wheat";
 }
+
 #marketRoot {
     -fx-background-color: "cyan";
+}
+
+.label{
+    -fx-font-size: 23;
+    -fx-font-family: "Blackadder ITC";
+    -fx-alignment: center;
+}
+
+.button{
+    -fx-font-size: 23;
+    -fx-font-family: "Blackadder ITC";
+    -fx-alignment: center;
 }

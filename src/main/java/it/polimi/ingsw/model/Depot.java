@@ -91,7 +91,7 @@ public abstract class Depot {
     }
 
     /**
-     * Check if a List of DepotSetting can be inserted in the layer
+     * Check if a List of DepotSetting can be inserted in the Depot
      * @param settings the list of the DepotSetting to check
      * @return  true if no exceptions will be thrown, false otherwise
      * @throws InvalidLayerNumberException if layerNumber isn't between 1 and 5
@@ -199,7 +199,7 @@ public abstract class Depot {
      * @param resource  the amount of resources to be discarded
      * @throws CannotContainFaithException  if faith is trying to be discarded
      */
-    public void discardRes(Player player, Resource resource) throws CannotContainFaithException, NegativeResAmountException, InvalidKeyException {
+    public void discardRes(Player player, Resource resource) throws CannotContainFaithException {
         if (resource.keySet().contains(ResourceType.FAITH))
             throw new CannotContainFaithException("You cannot discard faith points");
 
@@ -223,5 +223,21 @@ public abstract class Depot {
             layerNum++;
         }
         return depotSettings;
+    }
+
+    /**
+     * Resets the content of the depot and sets it from the given List of DepotSetting
+     * @param settings  the list of settings to rebase the Depot from
+     * @throws InvalidLayerNumberException if layerNumber isn't between 1 and 5
+     * @throws WrongDepotInstructionsException if incorrect or no instructions at all where provided
+     * @throws CannotContainFaithException if faith is trying to be inserted
+     */
+    public void setFromDepotSetting(List<DepotSetting> settings) throws InvalidLayerNumberException, WrongDepotInstructionsException, InvalidResourceException, LayerNotEmptyException, NotEnoughSpaceException, CannotContainFaithException, NegativeResAmountException {
+       if (settings == null || !canInsert(settings)) throw new WrongDepotInstructionsException();
+       for(DepotSetting setting: settings) {
+           Layer currentLayer = this.getLayer(setting.getLayerNumber());
+           currentLayer.resetLayer();
+           currentLayer.setResAndAmount(setting.getResType(), setting.getAmount());
+       }
     }
 }

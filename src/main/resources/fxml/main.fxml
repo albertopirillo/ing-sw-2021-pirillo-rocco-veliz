@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.*?>
 <AnchorPane prefHeight="825.0" prefWidth="1618.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.MainController">
    <children>
       <TabPane fx:id="tabPane" layoutX="269.0" layoutY="3.0" prefHeight="822.0" prefWidth="1360.0" tabClosingPolicy="UNAVAILABLE" />
-      <MenuButton layoutX="33.0" layoutY="402.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="214.0" text="Activate leader">
+      <MenuButton layoutX="33.0" layoutY="377.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="214.0" text="Activate leader">
         <items>
           <MenuItem mnemonicParsing="false" text="Action 1" />
           <MenuItem mnemonicParsing="false" text="Action 2" />
@@ -25,7 +24,7 @@
          <font>
             <Font size="20.0" />
          </font></Button>
-      <Button fx:id="marketPopup" layoutX="31.0" layoutY="170.0" mnemonicParsing="false" onAction="#showMarket" prefHeight="30.0" prefWidth="214.0" text="Show Market Cards" textAlignment="CENTER">
+      <Button fx:id="marketPopup" layoutX="33.0" layoutY="181.0" mnemonicParsing="false" onAction="#showMarket" prefHeight="30.0" prefWidth="214.0" text="Show Market Cards" textAlignment="CENTER">
          <font>
             <Font size="20.0" />
          </font></Button>
@@ -33,7 +32,7 @@
          <font>
             <Font size="24.0" />
          </font></Button>
-      <MenuButton layoutX="31.0" layoutY="277.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="214.0" text="Activate production">
+      <MenuButton layoutX="33.0" layoutY="263.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="214.0" text="Activate production">
         <items>
           <MenuItem mnemonicParsing="false" text="Action 1" />
           <MenuItem mnemonicParsing="false" text="Action 2" />
@@ -42,7 +41,7 @@
             <Font size="18.0" />
          </font>
       </MenuButton>
-      <SplitMenuButton layoutX="33.0" layoutY="512.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="214.0" text="Discard leader">
+      <SplitMenuButton layoutX="33.0" layoutY="492.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="214.0" text="Discard leader">
         <items>
           <MenuItem mnemonicParsing="false" text="Action 1" />
           <MenuItem mnemonicParsing="false" text="Action 2" />
@@ -51,6 +50,5 @@
             <Font size="20.0" />
          </font>
       </SplitMenuButton>
-      <ImageView fx:id="imageTest" fitHeight="136.0" fitWidth="202.0" layoutX="38.0" layoutY="245.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

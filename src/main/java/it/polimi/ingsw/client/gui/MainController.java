@@ -1,6 +1,6 @@
 package it.polimi.ingsw.client.gui;
 
-import it.polimi.ingsw.model.Resource;
+import it.polimi.ingsw.client.Client;
 import it.polimi.ingsw.model.ResourceType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -44,6 +44,10 @@ public class MainController {
      * Reference to the actual TrayController
      */
     private TrayController trayController;
+    /**
+     * The client this controller is associated with
+     */
+    private Client client;
 
     @FXML
     Button trayPopup;
@@ -51,6 +55,7 @@ public class MainController {
     Button marketPopup;
     @FXML
     TabPane tabPane;
+
 
     /**
      * Gets the mapping between nicknames and PersonalBoardController
@@ -74,6 +79,22 @@ public class MainController {
      */
     public TrayController getTrayController() {
         return trayController;
+    }
+
+    /**
+     * Gets the Client the controller is associated with
+     * @return the Client
+     */
+    public Client getClient() {
+        return client;
+    }
+
+    /**
+     * Sets the Client
+     * @param client the Client to associate with this controller
+     */
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     /**
@@ -153,9 +174,12 @@ public class MainController {
     }
 
     public void depotTest() {
-        this.personalBoardControllerMap.get("Player 1").setStrongbox(new Resource(0,2,3,1));
+        /*this.personalBoardControllerMap.get("Player 1").setStrongbox(new Resource(0,2,3,1));
         this.personalBoardControllerMap.get("Player 2").setLayer(4, ResourceType.COIN, 2);
         this.personalBoardControllerMap.get("Player 2").setLayer(3, ResourceType.SHIELD, 2);
-        this.personalBoardControllerMap.get("Player 2").setLayer(1, ResourceType.SERVANT, 1);
+        this.personalBoardControllerMap.get("Player 2").setLayer(1, ResourceType.SERVANT, 1);*/
+        this.personalBoardControllerMap.get("Player 1").setLayer(1, ResourceType.SHIELD, 1);
+        this.personalBoardControllerMap.get("Player 1").setLayer(3, ResourceType.STONE, 2);
+        this.personalBoardControllerMap.get("Player 1").setLayer(4, ResourceType.COIN, 1);
     }
 }

@@ -13,15 +13,49 @@ import it.polimi.ingsw.utils.ANSIColor;
 
 import java.util.*;
 
-public class ClientCLI extends UserInterface {
+public class ClientCLI implements UserInterface {
+
+    private String nickname;
+    private final Client client;
     private final Scanner stdin;
     private Resource tempRes;
 
     public ClientCLI(Client client){
-        super(client);
+        this.client = client;
         this.stdin = new Scanner(System.in);
     }
 
+    @Override
+    public Client getClient() {
+        return this.client;
+    }
+
+    @Override
+    public String getNickname() {
+        return this.nickname;
+    }
+
+    @Override
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    @Override
+    public void endOfUpdate(EndOfUpdate update) {
+        if (update.getActivePlayer().equals(this.nickname)) {
+            //Call Client method to make requests;
+            gameMenu();
+        }
+    }
+
+    @Override
+    public void readUpdate(ServerUpdate updateMessage) {
+        if (updateMessage != null) {
+            updateMessage.update(this);
+        }
+    }
+
+    @Override
     public void setup(){
         System.out.println("Game is starting...\n");
     }
@@ -36,17 +70,21 @@ public class ClientCLI extends UserInterface {
         return stdin.nextInt();
     }
 
+    @Override
     public void loginMessage(){
         String nickname = chooseNickname();
         Processable login = new LoginMessage(nickname, nickname);
         setNickname(nickname);
-        getPlayer().sendMessage(login);
+        getClient().sendMessage(login);
     }
 
+    @Override
     public void changeNickname(){
         errorPrint("The nickname already exists");
         loginMessage();
     }
+
+    @Override
     public String chooseNickname(){
         String nickname = "";
 
@@ -63,6 +101,7 @@ public class ClientCLI extends UserInterface {
         return nickname;
     }
 
+    @Override
     public void getGameSize(){
         int gameSize;
         do {
@@ -75,7 +114,7 @@ public class ClientCLI extends UserInterface {
             }
         } while (gameSize < 1 || gameSize > 4);
         Processable rsp = new GameSizeMessage(getNickname(), gameSize);
-        getPlayer().sendMessage(rsp);
+        getClient().sendMessage(rsp);
     }
 
     @Override
@@ -108,7 +147,7 @@ public class ClientCLI extends UserInterface {
         InitialResRequest request = new InitialResRequest(res);
         request.setNumPlayer(numPlayer);
         request.setPlayer(getNickname());
-        getPlayer().sendMessage(request);
+        getClient().sendMessage(request);
     }
 
     private int getIntegerSelection(String[] options){
@@ -165,7 +204,7 @@ public class ClientCLI extends UserInterface {
         int num2 = getInitialLeaderCards(num1);
         ChooseLeaderRequest request = new ChooseLeaderRequest(num1, num2);
         request.setPlayer(getNickname());
-        getPlayer().sendMessage(request);
+        getClient().sendMessage(request);
     }
 
     public int getInitialLeaderCards(int exclude){
@@ -254,7 +293,8 @@ public class ClientCLI extends UserInterface {
         return position;
     }
 
-    public void simulateGame() {
+    @Override
+    public void gameMenu() {
         int selection;
         do {
             System.out.println("\nIt's your turn!");
@@ -330,12 +370,13 @@ public class ClientCLI extends UserInterface {
                 break;
         }
         if(request != null){
-            getPlayer().sendMessage(request);
+            getClient().sendMessage(request);
         } else {
-            simulateGame();
+            gameMenu();
         }
     }
 
+    @Override
     public void errorPrint(String str) {
         System.out.println(ANSIColor.RED + str + ANSIColor.RESET);
     }
@@ -473,7 +514,7 @@ public class ClientCLI extends UserInterface {
     }
 
     private Request devProductionMenu(){
-        Request request = null;
+        Request request;
 
         List<Integer> cards = new ArrayList<>();
         Resource depotResource = new Resource(0, 0, 0, 0);
@@ -547,14 +588,14 @@ public class ClientCLI extends UserInterface {
         if (resource == null || resource.getActualSize() == 0) {
             this.tempRes = null;
             System.out.println("\nThere are no resources from the market that need to be placed");
-            this.simulateGame();
+            this.gameMenu();
         }
         else {
             System.out.println("\nResources obtained from the Market that need to be placed: ");
             System.out.println(resource);
             this.tempRes = resource;
             Request request = this.placeResourceMenu();
-            this.getPlayer().sendMessage(request);
+            this.getClient().sendMessage(request);
         }
     }
 
@@ -804,7 +845,7 @@ public class ClientCLI extends UserInterface {
         if(tempMarblesUpdate.getActivePlayer().equals(this.getNickname())) {
             System.out.println(tempMarblesUpdate);
             Request request = toChangeMarble(tempMarblesUpdate.getResources().get(0), tempMarblesUpdate.getResources().get(1), tempMarblesUpdate.getNumWhiteMarbles());
-            getPlayer().sendMessage(request);
+            getClient().sendMessage(request);
         }
     }
 
@@ -825,6 +866,7 @@ public class ClientCLI extends UserInterface {
         }
     }
 
+    @Override
     public void updateGameOver(GameOverUpdate update){
         int numPlayers = update.getScores().keySet().size();
         if(update.isWin()){

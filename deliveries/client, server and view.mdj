@@ -446,7 +446,7 @@
 											"top": 251,
 											"width": 281.4765625,
 											"height": 16,
-											"text": "-cli: PlayerInterface",
+											"text": "-cli: UserInterface",
 											"horizontalAlignment": 0
 										}
 									],
@@ -2857,11 +2857,12 @@
 											"_parent": {
 												"$ref": "AAAAAAF5PqXOLDJBXNM="
 											},
-											"visible": false,
 											"font": "Arial;16;0",
-											"left": 376,
-											"top": -240,
-											"height": 16
+											"left": 2349,
+											"top": 101,
+											"width": 407.78125,
+											"height": 16,
+											"text": "«interface»"
 										},
 										{
 											"_type": "LabelView",
@@ -2869,12 +2870,12 @@
 											"_parent": {
 												"$ref": "AAAAAAF5PqXOLDJBXNM="
 											},
-											"font": "Arial;16;3",
+											"font": "Arial;16;1",
 											"left": 2349,
-											"top": 103,
+											"top": 119,
 											"width": 407.78125,
 											"height": 16,
-											"text": "PlayerInterface"
+											"text": "UserInterface"
 										},
 										{
 											"_type": "LabelView",
@@ -2908,7 +2909,7 @@
 									"left": 2344,
 									"top": 96,
 									"width": 417.78125,
-									"height": 28,
+									"height": 44,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF5PqXOLDJCGjg="
 									},
@@ -2943,7 +2944,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 2349,
-											"top": 129,
+											"top": 145,
 											"width": 407.78125,
 											"height": 16,
 											"text": "-nickname: String",
@@ -2960,7 +2961,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 2349,
-											"top": 147,
+											"top": 163,
 											"width": 407.78125,
 											"height": 16,
 											"text": "-player: Client",
@@ -2969,7 +2970,7 @@
 									],
 									"font": "Arial;16;0",
 									"left": 2344,
-									"top": 124,
+									"top": 140,
 									"width": 417.78125,
 									"height": 44
 								},
@@ -2994,7 +2995,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 2349,
-											"top": 173,
+											"top": 189,
 											"width": 407.78125,
 											"height": 16,
 											"text": "+setup()",
@@ -3011,7 +3012,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 2349,
-											"top": 191,
+											"top": 207,
 											"width": 407.78125,
 											"height": 16,
 											"text": "+readUpdate(serverUpdate: ServerUpdate)",
@@ -3028,7 +3029,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 2349,
-											"top": 209,
+											"top": 225,
 											"width": 407.78125,
 											"height": 16,
 											"text": "+endOfUpdate()",
@@ -3045,7 +3046,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 2349,
-											"top": 227,
+											"top": 243,
 											"width": 407.78125,
 											"height": 16,
 											"text": "-simulateGame()",
@@ -3062,7 +3063,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 2349,
-											"top": 245,
+											"top": 261,
 											"width": 407.78125,
 											"height": 16,
 											"text": "+setNickname(nickname: String)",
@@ -3079,7 +3080,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 2349,
-											"top": 263,
+											"top": 279,
 											"width": 407.78125,
 											"height": 16,
 											"text": "+getNickname(): String",
@@ -3096,7 +3097,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 2349,
-											"top": 281,
+											"top": 297,
 											"width": 407.78125,
 											"height": 16,
 											"text": "+chooseNickname(): String",
@@ -3113,7 +3114,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 2349,
-											"top": 299,
+											"top": 315,
 											"width": 407.78125,
 											"height": 16,
 											"text": "+getGameSize()",
@@ -3130,7 +3131,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 2349,
-											"top": 317,
+											"top": 333,
 											"width": 407.78125,
 											"height": 16,
 											"text": "+viewtInitialResources(numPlayer: int)",
@@ -3147,7 +3148,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 2349,
-											"top": 335,
+											"top": 351,
 											"width": 407.78125,
 											"height": 16,
 											"text": "+viewInitialLeaderCards(cards: List<LeaderCards>)",
@@ -3164,7 +3165,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 2349,
-											"top": 353,
+											"top": 369,
 											"width": 407.78125,
 											"height": 16,
 											"text": "+updateTempResource(update: TempResourcesUpdate)",
@@ -3181,7 +3182,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 2349,
-											"top": 371,
+											"top": 387,
 											"width": 407.78125,
 											"height": 16,
 											"text": "+updateStorages(update: StorageUpdate)",
@@ -3198,7 +3199,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 2349,
-											"top": 389,
+											"top": 405,
 											"width": 407.78125,
 											"height": 16,
 											"text": "+updateLeaderCards(update: LeaderUpdate)",
@@ -3215,7 +3216,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 2349,
-											"top": 407,
+											"top": 423,
 											"width": 407.78125,
 											"height": 16,
 											"text": "+updateDevSlots(update: DevSlotsUpdate)",
@@ -3232,7 +3233,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 2349,
-											"top": 425,
+											"top": 441,
 											"width": 407.78125,
 											"height": 16,
 											"text": "+updateFaithTrack(update: FaithTrackUpdate)",
@@ -3249,7 +3250,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 2349,
-											"top": 443,
+											"top": 459,
 											"width": 407.78125,
 											"height": 16,
 											"text": "+updateMarket(update: MarketUpdate)",
@@ -3266,7 +3267,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 2349,
-											"top": 461,
+											"top": 477,
 											"width": 407.78125,
 											"height": 16,
 											"text": "+updateMarketTray(update: MarketTrayUpdate)",
@@ -3283,7 +3284,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 2349,
-											"top": 479,
+											"top": 495,
 											"width": 407.78125,
 											"height": 16,
 											"text": "+updateTempMarbles(update TempMarblesUpdate)",
@@ -3300,7 +3301,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 2349,
-											"top": 497,
+											"top": 513,
 											"width": 407.78125,
 											"height": 16,
 											"text": "+updateDiscardedCards(update: DiscardedCardsUpdate)",
@@ -3317,7 +3318,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 2349,
-											"top": 515,
+											"top": 531,
 											"width": 407.78125,
 											"height": 16,
 											"text": "+updateSoloTokens(update: ActionTokenUpdate)",
@@ -3334,7 +3335,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 2349,
-											"top": 533,
+											"top": 549,
 											"width": 407.78125,
 											"height": 16,
 											"text": "+displayError(update: ErrorUpdate)",
@@ -3343,7 +3344,7 @@
 									],
 									"font": "Arial;16;0",
 									"left": 2344,
-									"top": 168,
+									"top": 184,
 									"width": 417.78125,
 									"height": 386
 								},
@@ -3388,7 +3389,7 @@
 							"left": 2344,
 							"top": 96,
 							"width": 417.78125,
-							"height": 458,
+							"height": 474,
 							"nameCompartment": {
 								"$ref": "AAAAAAF5PqXOLDJBXNM="
 							},
@@ -3937,7 +3938,7 @@
 							"tail": {
 								"$ref": "AAAAAAF5HwFwCiPBDbE="
 							},
-							"points": "2112:776;2112:664;2560:664;2560:553",
+							"points": "2112:776;2112:664;2560:664;2560:569",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAF5PqbwiTy20IE="
@@ -4030,7 +4031,7 @@
 							"tail": {
 								"$ref": "AAAAAAF5PqX0qzM9ou0="
 							},
-							"points": "3008:784;3008:664;2560:664;2560:553",
+							"points": "3008:784;3008:664;2560:664;2560:569",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAF5Pqb+jD0GqBA="
@@ -8408,7 +8409,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF5HsLPoBaBq+w="
 							},
-							"name": "PlayerInterface",
+							"name": "UserInterface",
+							"stereotype": "interface",
 							"attributes": [
 								{
 									"_type": "UMLAttribute",
@@ -8790,8 +8792,7 @@
 										}
 									]
 								}
-							],
-							"isAbstract": true
+							]
 						},
 						{
 							"_type": "UMLClass",

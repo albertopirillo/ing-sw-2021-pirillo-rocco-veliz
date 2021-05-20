@@ -34,13 +34,14 @@ public class PlayerController {
 
     public void basicProduction(ResourceType input1, ResourceType input2, ResourceType output, Resource fromDepot, Resource fromStrongbox) {
         try {
+            if (this.mainActionDone) throw new MainActionException();
             Player activePlayer = controller.getGame().getActivePlayer();
             activePlayer.basicProduction(input1, input2, output, fromDepot, fromStrongbox);
             controller.getGame().updateStorages();
             controller.getGame().setProductionDone();
             controller.resetException();
             if (!testing) this.mainActionDone = true;
-        } catch (CostNotMatchingException | NotEnoughSpaceException | CannotContainFaithException | NotEnoughResException | NegativeResAmountException | InvalidKeyException e) {
+        } catch (MainActionException | CostNotMatchingException | NotEnoughSpaceException | CannotContainFaithException | NotEnoughResException | NegativeResAmountException | InvalidKeyException e) {
             controller.setException(e);
             controller.getGame().updateClientError(controller.getClientError());
         } finally {

@@ -1,28 +1,43 @@
-package it.polimi.ingsw.view;
+package it.polimi.ingsw.network;
 
+import it.polimi.ingsw.controller.MasterController;
 import it.polimi.ingsw.model.*;
-import it.polimi.ingsw.network.DepotSetting;
 import it.polimi.ingsw.network.requests.Request;
 import it.polimi.ingsw.network.updates.*;
 import it.polimi.ingsw.server.Connection;
-import it.polimi.ingsw.server.Server;
+import it.polimi.ingsw.utils.ModelObserver;
 
 import java.util.*;
 
-public class RemoteView extends View {
+public class RemoteView implements ModelObserver {
+    private MasterController masterController;
+    private final Connection connection;
+    private final String player;
 
-    public RemoteView(Server server, Connection connection, String player){
-        super(server, connection, player);
+    public RemoteView(Connection connection, String player){
+        this.connection = connection;
+        this.player = player;
+    }
+
+    public void processRequest(Request request){
+        System.out.println("[REMOTE VIEW] from player " + player);
+        this.masterController.processRequest(request);
+    }
+
+    public MasterController getMasterController() {
+        return masterController;
+    }
+
+    public void addController(MasterController masterController){ this.masterController = masterController; }
+
+    @Override
+    public void quitGame() {
+        connection.close();
     }
 
     @Override
-    public void processRequest(Request request){
-        System.out.println("[REMOTEVIEW] from player " + player);
-        super.processRequest(request);
-    }
-
-    public void quitGame() {
-        connection.close();
+    public String getPlayer() {
+        return null;
     }
 
     @Override
@@ -64,15 +79,14 @@ public class RemoteView extends View {
 
     @Override
     public void gameStateChange(Game game){
-        //Simulazione endTurnRequest and endUpdate
-        //System.out.println("[REMOTE VIEW] Gioco in corso, turno di " + player);
+        //Simulation of endTurnRequest and endUpdate
+        //System.out.println("[REMOTE VIEW] Game in progress, turn of " + player);
         ServerUpdate msg = new EndOfUpdate(game.getActivePlayer().getNickname());
         connection.sendMessage(msg);
     }
 
     @Override
     public void notifyGameOver(Game game, boolean win, List<String> ranking, Map<String, Integer> scores) {
-        Player activePlayer = game.getActivePlayer();
         ServerUpdate msg = new GameOverUpdate(game.getActivePlayer().getNickname(), win, ranking, scores);
         connection.sendMessage(msg);
     }

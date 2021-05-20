@@ -20,7 +20,7 @@ public abstract class Request implements Serializable, Processable {
 
     public void process(Server server, Connection connection) {
         //server.getMasterController().getRequestController().processRequest(this);
-        connection.getView().processRequest(this);
+        connection.getRemoteView().processRequest(this);
     }
 
     public abstract void activateRequest(MasterController masterController);

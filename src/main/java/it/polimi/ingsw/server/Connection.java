@@ -1,8 +1,8 @@
 package it.polimi.ingsw.server;
 
 import it.polimi.ingsw.network.Processable;
+import it.polimi.ingsw.network.RemoteView;
 import it.polimi.ingsw.network.updates.ServerUpdate;
-import it.polimi.ingsw.view.View;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -16,7 +16,7 @@ public class Connection implements Runnable {
     private ObjectInputStream socketIn;
     private ObjectOutputStream socketOut;
     private boolean active;
-    private View view;
+    private RemoteView remoteView;
     //private ConnectionListener lister -> lister = player's remote view
     private final Object outLock = new Object();
     private final Object inLock = new Object();
@@ -42,9 +42,8 @@ public class Connection implements Runnable {
 
     }
 
-    public void setView(View view){ this.view = view; }
-    public View getView(){ return this.view; }
-
+    public void setRemoteView(RemoteView remoteView){ this.remoteView = remoteView; }
+    public RemoteView getRemoteView(){ return this.remoteView; }
     private synchronized boolean isActive(){
         return active;
     }
@@ -81,7 +80,7 @@ public class Connection implements Runnable {
 
     public void close(){
         closeConnection();
-        System.out.println("Deregistering client...");
+        System.out.println("Unregistering client...");
         Thread.currentThread().interrupt();
         System.out.println("Done!");
     }

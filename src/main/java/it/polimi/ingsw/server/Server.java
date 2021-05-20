@@ -8,13 +8,12 @@ import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MultiGame;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.SoloGame;
+import it.polimi.ingsw.network.RemoteView;
 import it.polimi.ingsw.network.messages.ErrorMessage;
 import it.polimi.ingsw.network.messages.LoginMessage;
 import it.polimi.ingsw.network.messages.NicknameErrorMessage;
 import it.polimi.ingsw.network.updates.InitialResourcesUpdate;
 import it.polimi.ingsw.network.updates.ServerUpdate;
-import it.polimi.ingsw.view.RemoteView;
-import it.polimi.ingsw.view.View;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -122,10 +121,10 @@ public class Server implements Runnable {
             MasterController masterController = new MasterController(game);
             List<String> keys = new ArrayList<>(lobbyPlayers.keySet());
             Connection connection = lobbyPlayers.get(keys.get(0));
-            View view = new RemoteView(this, connection, keys.get(0));
-            connection.setView(view);
-            game.addObserver(view);
-            view.addController(masterController);
+            RemoteView remoteView = new RemoteView(connection, keys.get(0));
+            connection.setRemoteView(remoteView);
+            game.addObserver(remoteView);
+            remoteView.addController(masterController);
             masterController.getSetupController().setupGame(keys, gameSize);
             System.out.println("[SERVER] Starting solo game for player " + nickname);
             sendInitialResources(0, nickname);
@@ -140,20 +139,20 @@ public class Server implements Runnable {
             Game game = new MultiGame();
             MasterController masterController = new MasterController(game);
             List<String> keys = new ArrayList<>(lobbyPlayers.keySet());
-            List<View> views = new ArrayList<>();
+            List<RemoteView> remoteViews = new ArrayList<>();
             List<Connection> connections = new ArrayList<>();
             for(int i=0; i<gameSize; i++){
                 connections.add(lobbyPlayers.get(keys.get(i)));
-                View view = new RemoteView(this, connections.get(i), keys.get(i));
-                connections.get(i).setView(view);
-                views.add(view);
-                game.addObserver(view);
-                view.addController(masterController);
+                RemoteView remoteView = new RemoteView(connections.get(i), keys.get(i));
+                connections.get(i).setRemoteView(remoteView);
+                remoteViews.add(remoteView);
+                game.addObserver(remoteView);
+                remoteView.addController(masterController);
             }
             masterController.getSetupController().setupGame(keys, gameSize);
-            System.out.println("[SERVER] Buon divertimento :)");
+            System.out.println("[SERVER] Have fun :)");
             game = masterController.getGame();
-            System.out.println("[SERVER] Il primo giocatore è : "+game.getActivePlayer().getNickname());
+            System.out.println("[SERVER] The first player is : "+game.getActivePlayer().getNickname());
             try {
                 game.nextTurn();
             } catch (NegativeResAmountException | InvalidKeyException e) {

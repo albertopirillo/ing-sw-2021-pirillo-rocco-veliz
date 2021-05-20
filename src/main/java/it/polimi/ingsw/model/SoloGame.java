@@ -9,7 +9,7 @@ import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import it.polimi.ingsw.utils.LeaderAbilityDeserializer;
 import it.polimi.ingsw.utils.LeaderCardJsonDeserializer;
-import it.polimi.ingsw.view.ModelObserver;
+import it.polimi.ingsw.utils.ModelObserver;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;

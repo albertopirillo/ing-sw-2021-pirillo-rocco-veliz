@@ -2,7 +2,7 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
-import it.polimi.ingsw.view.ModelObserver;
+import it.polimi.ingsw.utils.ModelObserver;
 
 import java.util.ArrayList;
 import java.util.HashMap;

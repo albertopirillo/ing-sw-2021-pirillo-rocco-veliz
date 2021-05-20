@@ -365,6 +365,7 @@ public class ClientCLI implements UserInterface {
                 break;
             case 19:
                 request = new EndTurnRequest();
+                this.productionDone = false;
                 break;
             case 20:
                 request = new QuitGameRequest();

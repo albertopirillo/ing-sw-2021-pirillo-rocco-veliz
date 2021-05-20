@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Launch GUI" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.client.gui.Launcher" />
-    <module name="Progetto_ING_SOFT" />
+    <module name="ing-sw-2021-pirillo-rocco-veliz" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="it.polimi.ingsw.client.*" />

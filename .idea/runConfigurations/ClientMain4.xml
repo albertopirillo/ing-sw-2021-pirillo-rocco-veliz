@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="ClientMain4" type="Application" factoryName="Application" singleton="false">
     <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.network.ClientMain" />
-    <module name="Progetto_ING_SOFT" />
+    <module name="ing-sw-2021-pirillo-rocco-veliz" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="it.polimi.ingsw.network.*" />

@@ -19,6 +19,7 @@ public class ClientCLI implements UserInterface {
     private final Client client;
     private final Scanner stdin;
     private Resource tempRes;
+    private boolean productionDone = false;
 
     public ClientCLI(Client client){
         this.client = client;
@@ -477,36 +478,43 @@ public class ClientCLI implements UserInterface {
     private Request extraProductionMenu() {
         Request request;
 
-        Resource depotResource = new Resource(0, 0, 0, 0);
-        Resource strongboxResource = new Resource(0, 0, 0, 0);
-        String[] abilityOptions = {"1: FIRST", "2: SECOND",/*"3: BOTH",*/ "3: Exit this menu"};
-        String[] options = {"STONE", "COIN", "SHIELD", "SERVANT"};
+        if (this.productionDone){
 
-        System.out.println("\nWhat leader card production do you want to use");
-        int ability = getIntegerSelection(abilityOptions);
-        if (ability == 3){
-            return null;
-        } else {
-            System.out.println("\nWhere do you want to get the resources from?");
-            try{
-                for (String option : options) {
-                    System.out.println(option);
-                    System.out.println("How many resources to take from Depot");
-                    int amountDepot = Integer.parseInt(stdin.nextLine());
-                    if (amountDepot < 0 || amountDepot > 3) throw new Exception();
-                    System.out.println("How many resources to take from Strongbox");
-                    int amountStrongbox = Integer.parseInt(stdin.nextLine());
-                    if (amountStrongbox < 0) throw new Exception();
-                    depotResource.modifyValue(strToResType(option.toLowerCase()),amountDepot);
-                    strongboxResource.modifyValue(strToResType(option.toLowerCase()),amountStrongbox);
+            Resource depotResource = new Resource(0, 0, 0, 0);
+            Resource strongboxResource = new Resource(0, 0, 0, 0);
+            String[] abilityOptions = {"1: FIRST", "2: SECOND",/*"3: BOTH",*/ "3: Exit this menu"};
+            String[] options = {"STONE", "COIN", "SHIELD", "SERVANT"};
+
+            System.out.println("\nWhat leader card production do you want to use");
+            int ability = getIntegerSelection(abilityOptions);
+            if (ability == 3){
+                return null;
+            } else {
+                System.out.println("\nWhere do you want to get the resources from?");
+                try{
+                    for (String option : options) {
+                        System.out.println(option);
+                        System.out.println("How many resources to take from Depot");
+                        int amountDepot = Integer.parseInt(stdin.nextLine());
+                        if (amountDepot < 0 || amountDepot > 3) throw new Exception();
+                        System.out.println("How many resources to take from Strongbox");
+                        int amountStrongbox = Integer.parseInt(stdin.nextLine());
+                        if (amountStrongbox < 0) throw new Exception();
+                        depotResource.modifyValue(strToResType(option.toLowerCase()),amountDepot);
+                        strongboxResource.modifyValue(strToResType(option.toLowerCase()),amountStrongbox);
+                    }
+                } catch (Exception e){
+                    errorPrint("Invalid input, retry");
                 }
-            } catch (Exception e){
-                errorPrint("Invalid input, retry");
-            }
-            System.out.println("\nWhat resource do you want to get?");
-            ResourceType res = parseToResourceType(getResourceMenu());
+                System.out.println("\nWhat resource do you want to get?");
+                ResourceType res = parseToResourceType(getResourceMenu());
 
-            request = new ExtraProductionRequest(parseToAbility(ability+1), depotResource, strongboxResource, res);
+                request = new ExtraProductionRequest(parseToAbility(ability+1), depotResource, strongboxResource, res);
+            }
+
+        } else {
+            errorPrint("You have to use a basic productio before using a leader production");
+            request = null;
         }
 
 
@@ -516,45 +524,51 @@ public class ClientCLI implements UserInterface {
     private Request devProductionMenu(){
         Request request;
 
-        List<Integer> cards = new ArrayList<>();
-        Resource depotResource = new Resource(0, 0, 0, 0);
-        Resource strongboxResource = new Resource(0, 0, 0, 0);
-        String[] amountOptions = {"1", "2", "3", "4: Quit this menu"};
-        String[] resourceOptions = {"STONE", "COIN", "SHIELD", "SERVANT"};
+        if (this.productionDone) {
+            List<Integer> cards = new ArrayList<>();
+            Resource depotResource = new Resource(0, 0, 0, 0);
+            Resource strongboxResource = new Resource(0, 0, 0, 0);
+            String[] amountOptions = {"1", "2", "3", "4: Quit this menu"};
+            String[] resourceOptions = {"STONE", "COIN", "SHIELD", "SERVANT"};
 
-        System.out.println("\nHow many development card production do you want to use?");
-        int amount = getIntegerSelection(amountOptions);
+            System.out.println("\nHow many development card production do you want to use?");
+            int amount = getIntegerSelection(amountOptions);
 
-        if(amount==4){
-            return null;
-        } else {
-            for (int i=0; i<amount; i++){
+            if (amount == 4) {
+                return null;
+            } else {
+                for (int i = 0; i < amount; i++) {
 
-                System.out.println("\nWhat leader card production do you want to use");
-                int card = getDevCardsSlot(cards);
+                    System.out.println("\nWhich development's card production do you want to use");
+                    int card = getDevCardsSlot(cards);
 
-                cards.add(card-1);
-                System.out.println("\nSelect the input resources:");
-                try{
-                    for (String option : resourceOptions) {
-                        System.out.println(option);
-                        System.out.println("\nHow many resources to take from Depot");
-                        int amountDepot = Integer.parseInt(stdin.nextLine());
-                        if (amountDepot < 0 || amountDepot > 3) throw new Exception();
-                        System.out.println("\nHow many resources to take from Strongbox");
-                        int amountStrongbox = Integer.parseInt(stdin.nextLine());
-                        if (amountStrongbox < 0) throw new Exception();
-                        depotResource.modifyValue(strToResType(option.toLowerCase()),amountDepot);
-                        strongboxResource.modifyValue(strToResType(option.toLowerCase()),amountStrongbox);
+                    cards.add(card - 1);
+                    System.out.println("\nSelect the input resources:");
+                    try {
+                        for (String option : resourceOptions) {
+                            System.out.println(option);
+                            System.out.println("\nHow many resources to take from Depot");
+                            int amountDepot = Integer.parseInt(stdin.nextLine());
+                            if (amountDepot < 0 || amountDepot > 3) throw new Exception();
+                            System.out.println("\nHow many resources to take from Strongbox");
+                            int amountStrongbox = Integer.parseInt(stdin.nextLine());
+                            if (amountStrongbox < 0) throw new Exception();
+                            depotResource.modifyValue(strToResType(option.toLowerCase()), amountDepot);
+                            strongboxResource.modifyValue(strToResType(option.toLowerCase()), amountStrongbox);
+                        }
+                    } catch (Exception e) {
+                        errorPrint("Invalid input, retry");
+                        return null;
                     }
-                } catch (Exception e){
-                    errorPrint("Invalid input, retry");
-                    return null;
                 }
             }
-        }
 
-        request = new DevProductionRequest(cards, depotResource, strongboxResource);
+            request = new DevProductionRequest(cards, depotResource, strongboxResource);
+
+        } else {
+            errorPrint("You have to perform a basic production to use a development production");
+            request = null;
+        }
 
         return request;
     }
@@ -863,6 +877,13 @@ public class ClientCLI implements UserInterface {
             } catch (Exception e) {
                 System.out.println(ANSIColor.RED + "The number of white marbles does not match" + ANSIColor.RESET);
             }
+        }
+    }
+
+    @Override
+    public void updateActionDone(ProductionDoneUpdate update){
+        if(update.getActivePlayer().equals(this.nickname)){
+            this.productionDone = true;
         }
     }
 

@@ -168,4 +168,10 @@ public class RemoteView implements ModelObserver {
         connection.sendMessage(msg);
     }
 
+    @Override
+    public void setProductionDone(Game game){
+        Player activePlayer = game.getActivePlayer();
+        ServerUpdate msg = new ProductionDoneUpdate(activePlayer.getNickname());
+        connection.sendMessage(msg);
+    }
 }

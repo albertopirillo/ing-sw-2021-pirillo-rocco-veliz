@@ -194,4 +194,10 @@ public abstract class Game {
         for(ModelObserver observer : observers)
             observer.showTempMarbles(this, numWhiteMarbles);
     }
+
+    public void setProductionDone(){
+        //System.out.println("[MODEL] Setting turn action to true");
+        for(ModelObserver observer : observers)
+            observer.setProductionDone(this);
+    }
 }

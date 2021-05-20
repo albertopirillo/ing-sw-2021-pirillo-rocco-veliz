@@ -168,6 +168,11 @@ public class ClientGUI implements UserInterface {
     }
 
     @Override
+    public void updateActionDone(ProductionDoneUpdate update){
+
+    }
+
+    @Override
     public void updateGameOver(GameOverUpdate update){
 
     }

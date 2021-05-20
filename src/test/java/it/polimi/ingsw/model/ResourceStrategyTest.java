@@ -79,10 +79,10 @@ class ResourceStrategyTest {
         ability1.activate(player);
 
         Resource output = player.insertMarble(3);
-        Resource check = new Resource();
-        check.addResource(ResourceType.SHIELD, 1);
-        check.addResource(ResourceType.COIN, 1);
-        check.addResource(ResourceType.STONE, 1);
+        Resource check = new Resource(0,0,0,0);
+        check.modifyValue(ResourceType.SHIELD, 1);
+        check.modifyValue(ResourceType.COIN, 1);
+        check.modifyValue(ResourceType.STONE, 1);
 
         //  PURPLE  PURPLE  YELLOW  YELLOW
         //  GREY  GREY  BLUE  BLUE
@@ -103,7 +103,7 @@ class ResourceStrategyTest {
         ability2.activate(player);
 
         Resource output = player.insertMarble(4);
-        Resource check = new Resource();
+        Resource check = new Resource(0,0,0,0);
         check.addResource(ResourceType.ALL, 4);
         //  PURPLE  PURPLE  YELLOW  YELLOW
         //  GREY  GREY  BLUE  BLUE

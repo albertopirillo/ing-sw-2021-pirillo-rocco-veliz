@@ -11,14 +11,14 @@ import java.util.Map;
 //Attribute "mapping" is
 // instead of its full name
 //This way only one getter and one setter are needed
-public abstract class Depot {
+public abstract class Depot implements Cloneable {
 
     /**
      * <p>Map used to query a layer by its number</p>
      * <p>Only one getter and one setter are needed this way</p>
      * <p>mapping cannot contain more than 5 layers</p>
      */
-    private final Map<Integer, Layer> mapping = new HashMap<>();
+    private Map<Integer, Layer> mapping = new HashMap<>();
 
     /**
      * <p>Creates a standard 3 layers depot</p>
@@ -96,7 +96,7 @@ public abstract class Depot {
      * @return  true if no exceptions will be thrown, false otherwise
      * @throws InvalidLayerNumberException if layerNumber isn't between 1 and 5
      */
-    public boolean canInsert(List<DepotSetting> settings) throws InvalidLayerNumberException {
+    public boolean canInsertInLayer(List<DepotSetting> settings) throws InvalidLayerNumberException {
         for(DepotSetting setting: settings) {
             if (setting.getAmount() != 0) {
                 Layer layer = this.getLayer(setting.getLayerNumber());
@@ -228,16 +228,28 @@ public abstract class Depot {
     /**
      * Resets the content of the depot and sets it from the given List of DepotSetting
      * @param settings  the list of settings to rebase the Depot from
-     * @throws InvalidLayerNumberException if layerNumber isn't between 1 and 5
      * @throws WrongDepotInstructionsException if incorrect or no instructions at all where provided
-     * @throws CannotContainFaithException if faith is trying to be inserted
      */
-    public void setFromDepotSetting(List<DepotSetting> settings) throws InvalidLayerNumberException, WrongDepotInstructionsException, InvalidResourceException, LayerNotEmptyException, NotEnoughSpaceException, CannotContainFaithException, NegativeResAmountException {
-       if (settings == null || !canInsert(settings)) throw new WrongDepotInstructionsException();
-       for(DepotSetting setting: settings) {
-           Layer currentLayer = this.getLayer(setting.getLayerNumber());
-           currentLayer.resetLayer();
-           currentLayer.setResAndAmount(setting.getResType(), setting.getAmount());
-       }
+    public void setFromDepotSetting(List<DepotSetting> settings) throws WrongDepotInstructionsException, CloneNotSupportedException {
+        if (settings == null) throw new WrongDepotInstructionsException();
+        //Clone the current depot
+        Map<Integer, Layer> mapClone = new HashMap<>();
+        for(Integer layerNum: this.mapping.keySet()) {
+            mapClone.put(layerNum, (Layer) this.mapping.get(layerNum).clone());
+        }
+        //Empty the depot
+        for(Layer layer: this.mapping.values()) {
+            layer.resetLayer();
+        }
+        //Store the new resources
+        try {
+            for (DepotSetting setting : settings) {
+                this.modifyLayer(setting.getLayerNumber(), setting.getResType(), setting.getAmount());
+            }
+        } catch (Exception | InvalidResourceException | LayerNotEmptyException | NotEnoughSpaceException | InvalidLayerNumberException | CannotContainFaithException | AlreadyInAnotherLayerException e) {
+            //Restore the old depot
+            this.mapping = mapClone;
+            throw new WrongDepotInstructionsException();
+        }
     }
 }

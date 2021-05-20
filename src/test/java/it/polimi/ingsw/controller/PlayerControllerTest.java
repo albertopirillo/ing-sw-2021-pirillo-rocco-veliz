@@ -268,6 +268,32 @@ class PlayerControllerTest {
     }
 
     @Test
+    public void reorderDepotGUITest() throws FullCardDeckException, InvalidLayerNumberException, InvalidResourceException, LayerNotEmptyException, NotEnoughSpaceException, CannotContainFaithException, AlreadyInAnotherLayerException, NegativeResAmountException {
+        Game game = new MultiGame(true);
+        MasterController controller = new MasterController(game);
+        PlayerController playerController = controller.getPlayerController();
+        playerController.setTesting(true);
+        Player activePlayer = game.getActivePlayer();
+        activePlayer.setGame(game);
+
+        Depot depot = activePlayer.getPersonalBoard().getDepot();
+        ExtraSlot extraSlot = new ExtraSlot(ResourceType.SERVANT);
+        depot  = new ConcreteDepotDecorator(depot, extraSlot);
+        activePlayer.getPersonalBoard().upgradeDepot(depot);
+        depot.modifyLayer(2, ResourceType.COIN, 1);
+        depot.modifyLayer(3, ResourceType.SHIELD, 2);
+        depot.modifyLayer(4, ResourceType.SERVANT, 1);
+
+        List<DepotSetting> settings = new ArrayList<>();
+        settings.add(new DepotSetting(1, ResourceType.COIN, 1));
+        settings.add(new DepotSetting(2, ResourceType.SHIELD, 2));
+        settings.add(new DepotSetting(4, ResourceType.SERVANT, 1));
+        playerController.reorderDepot(settings);
+        assertEquals("Result: OK", controller.getError());
+        controller.resetException();
+    }
+
+    @Test
     public void useLeaderTest() throws FullCardDeckException {
         Game game = new MultiGame(true);
         MasterController controller = new MasterController(game);

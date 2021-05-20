@@ -127,7 +127,6 @@ public class PersonalBoardController {
             reorderButton.setText("End reorder");
             isReorderDepotPressed = true;
             canReorder = true;
-
         }
         else {
             reorderButton.setText("Reorder Depot");

@@ -8,7 +8,7 @@ import java.io.Serializable;
  * <p>Generic structure of a generic depot's layer</p>
  * <p>Layers cannot contain Faith</p>
  */
-public abstract class Layer implements Serializable {
+public abstract class Layer implements Serializable, Cloneable {
 
     /**
      * Check if the layer is empty or not
@@ -59,4 +59,13 @@ public abstract class Layer implements Serializable {
      * @return  true if it can be done, false otherwise
      */
     public abstract boolean canInsert(ResourceType resource, int amount);
+
+    /**
+     * Clones the Layer
+     * @return a new Object representing this cloned layer
+     */
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 }

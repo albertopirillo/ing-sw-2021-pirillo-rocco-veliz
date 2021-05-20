@@ -199,7 +199,7 @@ public class PlayerController {
             activePlayer.getPersonalBoard().getDepot().setFromDepotSetting(settings);
             controller.getGame().updateStorages();
             controller.resetException();
-        } catch (InvalidResourceException | WrongDepotInstructionsException | LayerNotEmptyException | InvalidLayerNumberException | NotEnoughSpaceException | CannotContainFaithException | NegativeResAmountException e) {
+        } catch (WrongDepotInstructionsException | CloneNotSupportedException e) {
             controller.setException(e);
             controller.getGame().updateClientError(controller.getClientError());
         } finally {

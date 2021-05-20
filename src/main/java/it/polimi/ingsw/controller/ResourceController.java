@@ -41,7 +41,7 @@ public class ResourceController {
             willBeDiscarded.modifyValue(key, - toDiscard.getValue(key));
         }
         Depot depot = player.getPersonalBoard().getDepot();
-        if (!checkRes.equals(willBeDiscarded) || !depot.canInsert(settings))
+        if (!checkRes.equals(willBeDiscarded) || !depot.canInsertInLayer(settings))
             throw new WrongDepotInstructionsException("You provided incorrect instructions to place those resources");
 
         //Discard those resources

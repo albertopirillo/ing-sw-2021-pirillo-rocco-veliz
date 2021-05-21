@@ -33,5 +33,6 @@ public interface UserInterface {
     void updateTempMarbles(TempMarblesUpdate tempMarblesUpdate);
     void updateGameOver(GameOverUpdate update);
     void changeNickname();
-    void updateActionDone(ProductionDoneUpdate productionDoneUpdate);
+    void updateProductionDone(ProductionDoneUpdate productionDoneUpdate);
+    void updateActionDone(MainActionDoneUpdate mainActionDoneUpdate);
 }

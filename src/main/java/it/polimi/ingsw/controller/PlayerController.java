@@ -21,7 +21,7 @@ public class PlayerController {
     /**
      * Set to false to make the player perform one action per turn, like the real game
      */
-    private boolean testing = true;
+    private boolean testing = false;
 
     public PlayerController(MasterController controller) {
         this.controller = controller;
@@ -39,6 +39,7 @@ public class PlayerController {
             activePlayer.basicProduction(input1, input2, output, fromDepot, fromStrongbox);
             controller.getGame().updateStorages();
             controller.getGame().setProductionDone();
+            controller.getGame().setMainActionDone();
             controller.resetException();
             if (!testing) this.mainActionDone = true;
         } catch (MainActionException | CostNotMatchingException | NotEnoughSpaceException | CannotContainFaithException | NotEnoughResException | NegativeResAmountException | InvalidKeyException e) {
@@ -80,6 +81,7 @@ public class PlayerController {
                 controller.getGame().updateStorages();
                 controller.getGame().updateTempRes();
             }
+            controller.getGame().setMainActionDone();
             controller.resetException();
             if (!testing) this.mainActionDone = true;
         } catch (NegativeResAmountException | InvalidKeyException | MainActionException e) {
@@ -119,6 +121,7 @@ public class PlayerController {
             controller.getGame().updateMarket();
             controller.getGame().updateDevSlots();
             controller.getGame().updateStorages();
+            controller.getGame().setMainActionDone();
             controller.resetException();
             if(!testing) this.mainActionDone = true;
         } catch (CannotContainFaithException | NotEnoughSpaceException | NegativeResAmountException | DeckEmptyException | CostNotMatchingException | NotEnoughResException | InvalidKeyException | NoLeaderAbilitiesException | InvalidAbilityChoiceException | DevSlotEmptyException | InvalidNumSlotException | MainActionException e) {
@@ -230,6 +233,7 @@ public class PlayerController {
             strongbox.retrieveRes(fromStrongbox);
             //controller.getGame().updateFaithTrack();
             controller.getGame().updateStorages();
+            controller.getGame().setMainActionDone();
             controller.resetException();
             if(!testing) this.mainActionDone = true;
         } catch (CostNotMatchingException | NotEnoughResException | NegativeResAmountException | InvalidKeyException | DevSlotEmptyException | NotEnoughSpaceException | CannotContainFaithException | MainActionException e) {

@@ -19,11 +19,14 @@ public class ClientCLI implements UserInterface {
     private final Client client;
     private final Scanner stdin;
     private Resource tempRes;
-    private boolean productionDone = false;
+    private boolean productionDone;
+    private boolean mainActionDone;
 
     public ClientCLI(Client client){
         this.client = client;
         this.stdin = new Scanner(System.in);
+        this.productionDone = false;
+        this.mainActionDone = false;
     }
 
     @Override
@@ -303,16 +306,16 @@ public class ClientCLI implements UserInterface {
             System.out.println("1: Show faith track");
             System.out.println("2: Show depot and strongbox");
             System.out.println("3: Show leader cards");
-            System.out.println("5: Show market development cards");
-            System.out.println("6: Show market marbles tray");
-            System.out.println("7: Show Development Slots");
-            System.out.println("8: Buy from marbles tray");
-            System.out.println("9: Buy a development card");
-            System.out.println("10: Activate a production");
-            System.out.println("13: Leader Card options");
-            System.out.println("17: Reorder depot");
-            System.out.println("19: End Turn");
-            System.out.println("20: Quit Game");
+            System.out.println("4: Show market development cards");
+            System.out.println("5: Show market marbles tray");
+            System.out.println("6: Show Development Slots");
+            System.out.println("7: Buy from marbles tray");
+            System.out.println("8: Buy a development card");
+            System.out.println("9: Activate a production");
+            System.out.println("10: Leader Card options");
+            System.out.println("11: Reorder depot");
+            System.out.println("12: End Turn");
+            System.out.println("13: Quit Game");
             System.out.println();
             try {
                 selection = Integer.parseInt(stdin.nextLine());
@@ -320,7 +323,7 @@ public class ClientCLI implements UserInterface {
                 selection = -1;
                 System.out.println("Invalid selection");
             }
-        } while (selection < 1 || selection > 20);
+        } while (selection < 1 || selection > 13);
 
         Request request = null;
         switch(selection) {
@@ -333,41 +336,50 @@ public class ClientCLI implements UserInterface {
             case 3:
                 request = new ShowLeaderCardsRequest();
                 break;
-            /*case 4:
-                request = new ShowTempResRequest();
-                break; TODO: fix order */
-            case 5:
+            case 4:
                 request = new ShowMarketRequest();
                 break;
-            case 6:
+            case 5:
                 request = new ShowMarketTrayRequest();
                 break;
-            case 7:
+            case 6:
                 request = new ShowDevSlotsRequest();
                 break;
+            case 7:
+                if (!mainActionDone) {
+                    int position = getPosition(0, 6);
+                    if (position != -1) {
+                        request = new InsertMarbleRequest(position);
+                    }
+                } else errorPrint("\nYou already performed an action this turn");
+                break;
             case 8:
-                int position = getPosition(0,6);
-                if (position != -1) {
-                    request = new InsertMarbleRequest(position);
+                if (!mainActionDone) {
+                    request = buyDevCardMenu();
                 }
+                else errorPrint("\nYou already performed an action this turn");
                 break;
             case 9:
-                request = buyDevCardMenu();
+                if (!mainActionDone) {
+                    request = productionMenu();
+                }
+                else errorPrint("\nYou already performed an action this turn");
                 break;
             case 10:
-                request = productionMenu();
-                break;
-            case 13:
                 request = UseLeaderMenu();
                 break;
-            case 17:
+            case 11:
                 request = reorderDepotMenu();
                 break;
-            case 19:
-                request = new EndTurnRequest();
-                this.productionDone = false;
+            case 12:
+                if (mainActionDone) {
+                    request = new EndTurnRequest();
+                    this.productionDone = false;
+                    this.mainActionDone = false;
+                }
+                else errorPrint("\nYou have to perform an action before ending the turn");
                 break;
-            case 20:
+            case 13:
                 request = new QuitGameRequest();
                 break;
         }
@@ -429,12 +441,16 @@ public class ClientCLI implements UserInterface {
         System.out.println("\nWhat type of production do you want to activate?");
         String selection = getStringSelection(selections, options);
 
-        if (selection.equals("b")) {
-            request = basicProductionMenu();
-        } else if (selection.equals("d")) {
-            request = devProductionMenu();
-        } else if (selection.equals("e")) {
-            request = extraProductionMenu();
+        switch (selection) {
+            case "b":
+                request = basicProductionMenu();
+                break;
+            case "d":
+                request = devProductionMenu();
+                break;
+            case "e":
+                request = extraProductionMenu();
+                break;
         }
         return request;
     }
@@ -514,7 +530,7 @@ public class ClientCLI implements UserInterface {
             }
 
         } else {
-            errorPrint("You have to use a basic productio before using a leader production");
+            errorPrint("You have to use a basic production before using a leader production");
             request = null;
         }
 
@@ -578,7 +594,6 @@ public class ClientCLI implements UserInterface {
         Request request = null;
 
         String[] firstActionOptions = {"1: Activate a leader card", "2: Discard a leader card", "3: Exit this menu"};
-        String[] firstSelections = {"a", "d", "q"};
         String[] leaderOptions = {"1: The first", "2: The second"};
 
         System.out.println("\nWhat do you want to do with you leader cards?");
@@ -882,9 +897,16 @@ public class ClientCLI implements UserInterface {
     }
 
     @Override
-    public void updateActionDone(ProductionDoneUpdate update){
+    public void updateProductionDone(ProductionDoneUpdate update){
         if(update.getActivePlayer().equals(this.nickname)){
             this.productionDone = true;
+        }
+    }
+
+    @Override
+    public void updateActionDone(MainActionDoneUpdate update){
+        if(update.getActivePlayer().equals(this.nickname)){
+            this.mainActionDone = true;
         }
     }
 

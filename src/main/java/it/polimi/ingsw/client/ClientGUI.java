@@ -168,7 +168,12 @@ public class ClientGUI implements UserInterface {
     }
 
     @Override
-    public void updateActionDone(ProductionDoneUpdate update){
+    public void updateProductionDone(ProductionDoneUpdate update){
+
+    }
+
+    @Override
+    public void updateActionDone(MainActionDoneUpdate mainActionDoneUpdate) {
 
     }
 

@@ -196,8 +196,14 @@ public abstract class Game {
     }
 
     public void setProductionDone(){
-        //System.out.println("[MODEL] Setting turn action to true");
+        //System.out.println("[MODEL] Setting production action to true");
         for(ModelObserver observer : observers)
             observer.setProductionDone(this);
+    }
+
+    public void setMainActionDone(){
+        //System.out.println("[MODEL] Setting turn action to true");
+        for(ModelObserver observer : observers)
+            observer.setMainActionDone(this);
     }
 }

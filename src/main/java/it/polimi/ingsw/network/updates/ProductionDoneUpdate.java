@@ -15,6 +15,6 @@ public class ProductionDoneUpdate extends ServerUpdate{
 
     @Override
     public void update(UserInterface userInterface) {
-        userInterface.updateActionDone(this);
+        userInterface.updateProductionDone(this);
     }
 }

@@ -37,7 +37,7 @@ public class RemoteView implements ModelObserver {
 
     @Override
     public String getPlayer() {
-        return null;
+        return this.player;
     }
 
     @Override
@@ -172,6 +172,13 @@ public class RemoteView implements ModelObserver {
     public void setProductionDone(Game game){
         Player activePlayer = game.getActivePlayer();
         ServerUpdate msg = new ProductionDoneUpdate(activePlayer.getNickname());
+        connection.sendMessage(msg);
+    }
+
+    @Override
+    public void setMainActionDone(Game game) {
+        Player activePlayer = game.getActivePlayer();
+        ServerUpdate msg = new MainActionDoneUpdate(activePlayer.getNickname());
         connection.sendMessage(msg);
     }
 }

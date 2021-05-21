@@ -7,15 +7,16 @@ import java.io.IOException;
 public class ServerMain {
 
     public static void main(String[] args) throws IOException {
-        Server server;
-        if (args.length == 1) {
-            int port = Integer.parseInt(args[0]);
-            server = new Server(port);
+        int port = 8080;
+        if (args.length == 1 && args[0].startsWith("-")) {
+            args[0] = (String) args[0].subSequence(1, args[0].length());
+            try {
+                port = Integer.parseInt(args[0]);
+            } catch (Exception e) {
+                port = 8080;
+            }
         }
-        else {
-            System.out.println("Using default port (8080)");
-            server = new Server();
-        }
+        Server server = new Server(port);
         server.run();
     }
 }

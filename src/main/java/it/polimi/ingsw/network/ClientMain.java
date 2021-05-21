@@ -4,34 +4,27 @@ import it.polimi.ingsw.client.Client;
 
 public class ClientMain {
 
-    public static void main(String[] args){
-        Client client;
+    public static void main(String[] args) {
         int port = 8080;
         boolean gui = false;
-        if (args.length > 0 && args.length <= 2) {
-            if (args[0].equalsIgnoreCase("gui")) {
-                gui = true;
-                System.out.println("Starting GUI...");
-            } else {
-                System.out.println("Using default UI (CLI)");
-            }
-            if (args.length == 2) {
-                try {
-                    port = Integer.parseInt(args[1]);
-                    System.out.println("Using port: " + port);
-                } catch (Exception e) {
-                    System.out.println("Using default port (8080)");
+        for (String command : args) {
+            if (command.startsWith("-")) {
+                if (command.equals("-gui")) {
+                    gui = true;
+                } else if (command.equals("-cli")) {
+                    gui = false;
+                } else {
+                    try {
+                        port = Integer.parseInt((String) command.subSequence(1, command.length()));
+                    } catch (NumberFormatException e) {
+                        port = 8080;
+                    }
                 }
             }
-            client = new Client(port, gui);
         }
-        else {
-            System.out.println("Using default port (8080)");
-            System.out.println("Using default UI (CLI)");
-            client = new Client();
-        }
-
+        System.out.println("Using port: " + port);
+        System.out.println("Starting " + (gui ? "GUI..." : "CLI..."));
+        Client client = new Client(port, gui);
         client.run();
-
     }
 }

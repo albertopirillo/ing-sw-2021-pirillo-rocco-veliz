@@ -4629,7 +4629,6 @@
 										"$ref": "AAAAAAF4NdQL5bQ7EMk="
 									},
 									"name": "contains",
-									"isStatic": true,
 									"parameters": [
 										{
 											"_type": "UMLParameter",
@@ -4908,7 +4907,6 @@
 										"$ref": "AAAAAAF4g4dZzxW0Imc="
 									},
 									"name": "getAllMarblesList",
-									"isStatic": true,
 									"parameters": [
 										{
 											"_type": "UMLParameter",
@@ -4937,7 +4935,6 @@
 										"$ref": "AAAAAAF4g4dZzxW0Imc="
 									},
 									"name": "getAllMarblesMap",
-									"isStatic": true,
 									"parameters": [
 										{
 											"_type": "UMLParameter",
@@ -20371,7 +20368,6 @@
 											"top": 2663,
 											"width": 257.4609375,
 											"height": 16,
-											"underline": true,
 											"text": "+contains(): boolean",
 											"horizontalAlignment": 0
 										}
@@ -20816,7 +20812,6 @@
 											"top": 2375,
 											"width": 426.4140625,
 											"height": 16,
-											"underline": true,
 											"text": "+getAllMarblesList(map: Map<MarbleColor-Integer>): List<>",
 											"horizontalAlignment": 0
 										},
@@ -20834,7 +20829,6 @@
 											"top": 2393,
 											"width": 426.4140625,
 											"height": 16,
-											"underline": true,
 											"text": "+getAllMarblesMap(): Map<MarbelColor- Integer>",
 											"horizontalAlignment": 0
 										}

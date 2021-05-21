@@ -109,7 +109,7 @@ class PlayerControllerTest {
     }
 
     @Test
-    public void changeMarbleTest() throws FullCardDeckException, TooManyLeaderAbilitiesException, NegativeResAmountException {
+    public void changeMarbleTest() throws FullCardDeckException, TooManyLeaderAbilitiesException, NegativeResAmountException, InvalidKeyException {
         Game game = new MultiGame(true);
         MasterController controller = new MasterController(game);
         PlayerController playerController = controller.getPlayerController();
@@ -139,9 +139,9 @@ class PlayerControllerTest {
 
         Request changeMarble = new ChangeMarblesRequest(3,1);
         changeMarble.activateRequest(controller);
-        Resource check2 = new Resource();
-        check2.addResource(ResourceType.SHIELD,3);
-        check2.addResource(ResourceType.COIN,1);
+        Resource check2 = new Resource(0,0,0,0);
+        check2.modifyValue(ResourceType.SHIELD,3);
+        check2.modifyValue(ResourceType.COIN,1);
         //System.out.println(output);
         assertEquals(check2, output);
 
@@ -152,7 +152,7 @@ class PlayerControllerTest {
 
         playerController.insertMarble(4);
         Resource output2 = controller.getResourceController().getTempRes().getToHandle();
-        Resource check3 = new Resource();
+        Resource check3 = new Resource(0,0,0,0);
         check3.addResource(ResourceType.ALL,3);
         assertEquals(check3, output2);
         assertEquals(1, activePlayer.getPlayerFaith());

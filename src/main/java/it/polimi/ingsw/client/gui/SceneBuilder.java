@@ -16,7 +16,6 @@ import java.util.Optional;
 public class SceneBuilder extends Application {
 
     private List<String> playerList;
-    /*private static ClientGUI clientGUI;*/
 
     public static void main(String[] args) {
         launch(args);
@@ -26,7 +25,10 @@ public class SceneBuilder extends Application {
     public void start(Stage stage) throws Exception {
         //Load FXML
         FXMLLoader loader = Util.loadFXML("main");
+        /*MainController mainController = new MainController(null);
+        loader.setController(mainController);*/
         Parent root = loader.load();
+
         stage.setResizable(false);
         Scene scene = new Scene(root);
         stage.setScene(scene);

@@ -1,6 +1,5 @@
 package it.polimi.ingsw.client.gui;
 
-import it.polimi.ingsw.client.ClientGUI;
 import it.polimi.ingsw.model.ResourceType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -19,7 +18,7 @@ public abstract class Util {
     /**
      * The mainClass of JavaFX, specified in pom.xml
      */
-    public static Class<ClientGUI> mainClass = ClientGUI.class;
+    public static Class<Launcher> mainClass = Launcher.class;
 
     /**
      * Wrapper to load an .fxml file
@@ -27,7 +26,7 @@ public abstract class Util {
      * @return  a FXMLLoader Object associated the loaded file
      */
     public static FXMLLoader loadFXML(String fileName) {
-       return new FXMLLoader(Launcher.class.getResource("/fxml/" + fileName + ".fxml"));
+       return new FXMLLoader(mainClass.getResource("/fxml/" + fileName + ".fxml"));
     }
 
     /**

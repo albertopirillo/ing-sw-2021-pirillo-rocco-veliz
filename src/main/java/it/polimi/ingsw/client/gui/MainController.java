@@ -1,6 +1,6 @@
 package it.polimi.ingsw.client.gui;
 
-import it.polimi.ingsw.client.Client;
+import it.polimi.ingsw.client.UserInterface;
 import it.polimi.ingsw.model.ResourceType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -45,17 +45,24 @@ public class MainController {
      */
     private TrayController trayController;
     /**
-     * The client this controller is associated with
+     * The UserInterface this controller is associated with
      */
-    private Client client;
+    private UserInterface userInterface;
 
     @FXML
-    Button trayPopup;
+    private Button trayPopup;
     @FXML
-    Button marketPopup;
+    private Button marketPopup;
     @FXML
-    TabPane tabPane;
+    private TabPane tabPane;
 
+    /**
+     * Initializes the associated Client only
+     * @param userInterface a UserInterface representing the associated Client
+     */
+    /*public MainController(UserInterface userInterface) {
+        this.userInterface = userInterface;
+    }*/
 
     /**
      * Gets the mapping between nicknames and PersonalBoardController
@@ -82,20 +89,20 @@ public class MainController {
     }
 
     /**
-     * Gets the Client the controller is associated with
-     * @return the Client
+     * Gets the UserInterface the controller is associated with
+     * @return the UserInterface
      */
-    public Client getClient() {
-        return client;
+    public UserInterface getUserInterface() {
+        return userInterface;
     }
 
     /**
-     * Sets the Client
-     * @param client the Client to associate with this controller
+     * Sets the UserInterface
+     * @param userInterface the UserInterface to associate with this controller
      */
-    public void setClient(Client client) {
-        this.client = client;
-    }
+    /*public void setUserInterface(UserInterface userInterface) {
+        this.userInterface = userInterface;
+    }*/
 
     /**
      * <p>Creates one tab for each player in the given playerList</p>

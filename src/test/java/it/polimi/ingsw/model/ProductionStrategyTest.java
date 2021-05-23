@@ -35,13 +35,14 @@ class ProductionStrategyTest {
 
         player.basicProduction(ResourceType.COIN, ResourceType.COIN, ResourceType.SERVANT, fromDepot, fromStrongbox);
         assertEquals(new Resource(0,0,0,0), depot.queryAllRes());
-        assertEquals(new Resource(3,3,3,4), strongbox.queryAllRes());
+        assertEquals(new Resource(0,0,0,1), strongbox.queryAllTempRes());
 
         depot.modifyLayer(2, ResourceType.SERVANT, 2);
         fromDepot = new Resource(0,0,0,1);
         fromStrongbox = new Resource(0,1,0,0);
 
         player.basicProduction(ResourceType.COIN, ResourceType.SERVANT, ResourceType.SERVANT, fromDepot, fromStrongbox);
+        strongbox.transferTempRes();
         assertEquals(new Resource(0,0,0,1), depot.queryAllRes());
         assertEquals(new Resource(3,2,3,5), strongbox.queryAllRes());
 
@@ -71,8 +72,9 @@ class ProductionStrategyTest {
         strongbox.addResources(new Resource(0, 2, 0, 0));
         depot.modifyLayer(3, ResourceType.SHIELD, 3);
 
-       player.extraProduction(AbilityChoice.FIRST, fromDepot, fromStrongbox, ResourceType.COIN);
+        player.extraProduction(AbilityChoice.FIRST, fromDepot, fromStrongbox, ResourceType.COIN);
 
+        strongbox.transferTempRes();
         assertEquals(new Resource(1,2,2,0), strongbox.queryAllRes());
         assertEquals(new Resource(0,0,0,0), depot.queryAllRes());
 
@@ -109,6 +111,7 @@ class ProductionStrategyTest {
 
         player.extraProduction(AbilityChoice.SECOND, fromDepot, fromStrongbox, ResourceType.COIN);
         assertEquals(new Resource(0,0,1,0), depot.queryAllRes());
+        strongbox.transferTempRes();
         assertEquals(new Resource(1,2,6,2), strongbox.queryAllRes());
     }
 }

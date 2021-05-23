@@ -51,7 +51,8 @@ public class ResourceTest {
         assertEquals(oldValue + addend, res.getValue(ResourceType.SHIELD));
         res.modifyValue(ResourceType.SERVANT, -4);
         assertEquals(2, res.getValue(ResourceType.SERVANT));
-        assertThrows(InvalidKeyException.class, () -> res.modifyValue(ResourceType.FAITH, 5));
+        //the following exception is not thrown anymore
+        //assertThrows(InvalidKeyException.class, () -> res.modifyValue(ResourceType.FAITH, 5));
         assertThrows(NegativeResAmountException.class, () -> res.modifyValue(ResourceType.COIN, -7));
     }
 

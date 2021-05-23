@@ -90,9 +90,16 @@ public class Resource implements Serializable {
      * @throws NegativeResAmountException   if this operation will make the resource have a negative value
      */
     public void modifyValue(ResourceType key, int value) throws InvalidKeyException, NegativeResAmountException {
-        if (!map.containsKey(key)) throw new InvalidKeyException();
+        if (!map.containsKey(key)) {
+            //we are not throwing an exception here anymore.
+            //throw new InvalidKeyException();
+            //instead, if the key doesn't exist we create it
+            map.put(key, 0);
+        }
         int newValue = map.get(key) + value;
-        if (newValue < 0) throw new NegativeResAmountException();
+        if (newValue < 0) {
+            throw new NegativeResAmountException();
+        }
         map.put(key, newValue);
     }
 

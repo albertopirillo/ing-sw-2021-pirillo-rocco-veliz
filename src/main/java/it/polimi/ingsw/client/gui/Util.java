@@ -18,7 +18,7 @@ public abstract class Util {
     /**
      * The mainClass of JavaFX, specified in pom.xml
      */
-    public static Class<Launcher> mainClass = Launcher.class;
+    public static Class<JavaFXMain> mainClass = JavaFXMain.class;
 
     /**
      * Wrapper to load an .fxml file
@@ -53,6 +53,7 @@ public abstract class Util {
      * @param image the image to get the ResourceType from
      * @return  a ResourceType if the image represent a ResourceType, null otherwise
      */
+    //TODO: throwing exceptions
     public static ResourceType imageToRes(Image image) {
         if (image == null) return null;
         String path = image.getUrl();

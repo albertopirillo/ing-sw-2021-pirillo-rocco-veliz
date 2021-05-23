@@ -4,6 +4,8 @@ import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.ResourceType;
 import it.polimi.ingsw.network.DepotSetting;
+import it.polimi.ingsw.network.requests.ReorderDepotGUIRequest;
+import it.polimi.ingsw.network.requests.Request;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -28,9 +30,21 @@ public class PersonalBoardController {
     @FXML
     Button reorderButton;
 
+    /**
+     * The location where the current drag started
+     */
     private ImageView dragSource;
+    /**
+     * Whether the ReorderButton was pressed before or not
+     */
     private boolean isReorderDepotPressed;
+    /**
+     * If it is currently possible to move a resource between depot's layers
+     */
     private boolean canReorder;
+    /**
+     * The corresponding MainController
+     */
     private MainController mainController;
 
     /**
@@ -133,8 +147,8 @@ public class PersonalBoardController {
             isReorderDepotPressed = false;
             canReorder = false;
             //Read the Depot and send a Request
-            /*Request request = new ReorderDepotGUIRequest(convertToDepotSetting());
-            this.mainController.getClient().sendMessage(request);*/
+            Request request = new ReorderDepotGUIRequest(convertToDepotSetting());
+            this.mainController.getClientGUI().getClient().sendMessage(request);
         }
     }
 

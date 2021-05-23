@@ -1,13 +1,19 @@
 package it.polimi.ingsw.client;
 
-import it.polimi.ingsw.client.gui.Launcher;
 import it.polimi.ingsw.client.gui.MainController;
 import it.polimi.ingsw.client.gui.PersonalBoardController;
 import it.polimi.ingsw.model.LeaderCard;
 import it.polimi.ingsw.model.Resource;
+import it.polimi.ingsw.model.ResourceType;
 import it.polimi.ingsw.network.DepotSetting;
+import it.polimi.ingsw.network.Processable;
+import it.polimi.ingsw.network.messages.GameSizeMessage;
+import it.polimi.ingsw.network.requests.ChooseLeaderRequest;
+import it.polimi.ingsw.network.requests.InitialResRequest;
 import it.polimi.ingsw.network.updates.*;
+import javafx.application.Platform;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,26 +21,18 @@ public class ClientGUI implements UserInterface {
 
     private String nickname;
     private final Client client;
-    private MainController guiController;
+    private final MainController mainController;
 
-    //TODO: Platform.runLater(() -> {});
-
-    public ClientGUI(Client client) {
+    public ClientGUI(Client client, MainController controller) {
         this.client = client;
-    }
-
-    public void setGuiController(MainController guiController) {
-        this.guiController = guiController;
-    }
-
-    public MainController getGuiController() {
-        return this.guiController;
+        this.mainController = controller;
     }
 
     @Override
     public void setup() {
-        System.out.println("Game is starting...\n");
-        Launcher.main(null);
+        System.out.println("[INFO] Game is starting...");
+        this.mainController.setClientGUI(this);
+        System.out.println("[INFO] MainController set: " + mainController);
     }
 
     @Override
@@ -65,28 +63,48 @@ public class ClientGUI implements UserInterface {
     }
 
     @Override
-    public String chooseNickname() {
-        return null;
+    public String chooseNickname() { //TODO
+        return "Player1";
     }
 
     @Override
-    public void getGameSize() {
-
+    public void getGameSize() { //TODO
+        int gameSize = 2;
+        Processable rsp = new GameSizeMessage(getNickname(), gameSize);
+        getClient().sendMessage(rsp);
     }
 
     @Override
-    public void viewInitialsLeaderCards(List<LeaderCard> cards) {
-
+    public void viewInitialsLeaderCards(List<LeaderCard> cards) { //TODO
+        ChooseLeaderRequest request = new ChooseLeaderRequest(0, 1);
+        request.setPlayer(getNickname());
+        getClient().sendMessage(request);
     }
 
     @Override
-    public void viewInitialResources(int numPlayer) {
-
+    public void viewInitialResources(int numPlayer) { //TODO
+        Map<ResourceType, Integer> res = new HashMap<>();
+        switch (numPlayer){
+            case 1:
+            case 2:
+                res.put(ResourceType.STONE, 1);
+                break;
+            case 3:
+                res.put(ResourceType.STONE, 1);
+                res.put(ResourceType.COIN, 1);
+                break;
+            default:
+                break;
+        }
+        InitialResRequest request = new InitialResRequest(res);
+        request.setNumPlayer(numPlayer);
+        request.setPlayer(getNickname());
+        getClient().sendMessage(request);
     }
 
     @Override
     public void gameMenu() {
-
+        //Nothing to be done here
     }
 
     @Override
@@ -106,15 +124,17 @@ public class ClientGUI implements UserInterface {
 
     @Override
     public void updateStorages(StorageUpdate update) {
-        System.out.println("Updating storages...");
-        Map<String, List<DepotSetting>> depotMap = update.getDepotMap();
-        Map<String, Resource> strongboxMap = update.getStrongboxMap();
-        Map<String, PersonalBoardController> controllerMap = guiController.getPersonalBoardControllerMap();
-        for(String playerNick: strongboxMap.keySet()) {
-            PersonalBoardController currentController = controllerMap.get(playerNick);
-            currentController.setDepot(depotMap.get(playerNick));
-            currentController.setStrongbox(strongboxMap.get(playerNick));
-        }
+        Platform.runLater(() -> {
+            System.out.println("Updating storages...");
+            Map<String, List<DepotSetting>> depotMap = update.getDepotMap();
+            Map<String, Resource> strongboxMap = update.getStrongboxMap();
+            Map<String, PersonalBoardController> controllerMap = mainController.getPersonalBoardControllerMap();
+            for(String playerNick: strongboxMap.keySet()) {
+                PersonalBoardController currentController = controllerMap.get(playerNick);
+                currentController.setDepot(depotMap.get(playerNick));
+                currentController.setStrongbox(strongboxMap.get(playerNick));
+            }
+        });
     }
 
     @Override

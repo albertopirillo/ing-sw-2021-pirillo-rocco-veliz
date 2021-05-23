@@ -2,6 +2,7 @@ package it.polimi.ingsw.client.gui;
 
 import it.polimi.ingsw.client.ClientGUI;
 import it.polimi.ingsw.model.ResourceType;
+import it.polimi.ingsw.network.requests.Request;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -108,12 +109,19 @@ public class MainController {
         initMarketPopup();
     }
 
+    /**
+     * Wrapper to easily send a Request from a controller class
+     * @param request   the request to be sent to the Server
+     */
+    public void sendMessage(Request request) {
+        this.clientGUI.getClient().sendMessage(request);
+    }
+
     private void addPlayers(List<String> playerList) throws IOException {
         for(String nickname: playerList) {
             FXMLLoader loader = Util.loadFXML("personal_board");
             Parent node = loader.load();
             PersonalBoardController personalBoardController = loader.getController();
-            personalBoardController.init();
             personalBoardController.setMainController(this);
             this.personalBoardControllerMap.put(nickname, personalBoardController);
 

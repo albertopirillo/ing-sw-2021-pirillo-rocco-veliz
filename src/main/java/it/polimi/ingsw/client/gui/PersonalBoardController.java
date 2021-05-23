@@ -8,18 +8,17 @@ import it.polimi.ingsw.network.requests.ReorderDepotGUIRequest;
 import it.polimi.ingsw.network.requests.Request;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.net.URL;
+import java.util.*;
 
-public class PersonalBoardController {
+public class PersonalBoardController implements Initializable {
 
     @FXML
     ImageView depot1_1, depot2_1, depot2_2, depot3_1, depot3_2, depot3_3;
@@ -60,9 +59,11 @@ public class PersonalBoardController {
     }
 
     /**
-     * Initializes @FXML fields, organizing them in multiple lists and then in a single map
+     * <p>Initializes @FXML fields, organizing them in multiple lists and then in a single map</p>
+     * <p>Called automatically when an entity is injected from FXML</p>
      */
-    public void init() {
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         List<ImageView> firstLayer = new ArrayList<>();
         firstLayer.add(depot1_1);
         this.layerMapping.put(1, firstLayer);
@@ -147,7 +148,7 @@ public class PersonalBoardController {
             canReorder = false;
             //Read the Depot and send a Request
             Request request = new ReorderDepotGUIRequest(convertToDepotSetting());
-            this.mainController.getClientGUI().getClient().sendMessage(request);
+            this.mainController.sendMessage(request);
         }
     }
 

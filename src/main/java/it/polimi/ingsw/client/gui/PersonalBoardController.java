@@ -46,11 +46,18 @@ public class PersonalBoardController {
      * The corresponding MainController
      */
     private MainController mainController;
-
     /**
      * A map to get a list of all the corresponding images from a given layer
      */
     private final Map<Integer, List<ImageView>> layerMapping = new HashMap<>();
+
+    /**
+     * Sets the MainController
+     * @param mainController  the MainController to associate with this controller
+     */
+    public void setMainController(MainController mainController) {
+        this.mainController = mainController;
+    }
 
     /**
      * Initializes @FXML fields, organizing them in multiple lists and then in a single map
@@ -76,14 +83,6 @@ public class PersonalBoardController {
         secondExtraLayer.add(extra2_1);
         secondExtraLayer.add(extra2_2);
         this.layerMapping.put(5, secondExtraLayer);
-    }
-
-    /**
-     * Sets the MainController
-     * @param mainController  the MainController to associate with this controller
-     */
-    public void setMainController(MainController mainController) {
-        this.mainController = mainController;
     }
 
     /**

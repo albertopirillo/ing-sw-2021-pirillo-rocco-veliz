@@ -53,10 +53,9 @@ public abstract class Util {
      * @param image the image to get the ResourceType from
      * @return  a ResourceType if the image represent a ResourceType, null otherwise
      */
-    //TODO: throwing exceptions
     public static ResourceType imageToRes(Image image) {
-        if (image == null) return null;
-        String path = image.getUrl();
+        if (image == null || image.getUrl() == null) return null;
+        String path = image.getUrl().toLowerCase();
         if (path.contains("stone")) return ResourceType.STONE;
         else if (path.contains("coin")) return ResourceType.COIN;
         else if (path.contains("shield")) return ResourceType.SHIELD;

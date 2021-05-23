@@ -112,9 +112,10 @@ public class MainController {
         for(String nickname: playerList) {
             FXMLLoader loader = Util.loadFXML("personal_board");
             Parent node = loader.load();
-            PersonalBoardController controller = loader.getController();
-            controller.init();
-            this.personalBoardControllerMap.put(nickname, controller);
+            PersonalBoardController personalBoardController = loader.getController();
+            personalBoardController.init();
+            personalBoardController.setMainController(this);
+            this.personalBoardControllerMap.put(nickname, personalBoardController);
 
             Tab tab = new Tab();
             tab.setText(nickname);

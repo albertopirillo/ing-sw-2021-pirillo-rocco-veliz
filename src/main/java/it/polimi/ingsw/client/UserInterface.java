@@ -5,6 +5,11 @@ import it.polimi.ingsw.network.updates.*;
 
 import java.util.List;
 
+/**
+ * <p>List of all the functionalities a Client implementation has to offer</p>
+ * <p>Should make the client able to send every request and receive every update</p>
+ * <p>Implemented by both the CLI and the GUI</p>
+ */
 public interface UserInterface {
 
     Client getClient();

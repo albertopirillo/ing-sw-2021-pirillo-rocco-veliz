@@ -4,15 +4,13 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
+@Deprecated
 public class SceneBuilder extends Application {
 
     private List<String> playerList;
@@ -67,22 +65,5 @@ public class SceneBuilder extends Application {
      */
     public void setPlayerList(List<String> playerList) {
         this.playerList = playerList;
-    }
-
-    /**
-     * Pop-up that warns the player before making him quit the game
-     * @param stage the stage that will be closed
-     */
-    public void quit(Stage stage) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Quit");
-        alert.setHeaderText("You're about to quit");
-        alert.setContentText("All data will be lost");
-        Optional<ButtonType> button = alert.showAndWait();
-        if (button.isPresent()) {
-            if (button.get() == ButtonType.OK) {
-                stage.close();
-            }
-        }
     }
 }

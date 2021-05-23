@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client.gui;
 
+import it.polimi.ingsw.client.ClientGUI;
 import it.polimi.ingsw.client.UserInterface;
 import it.polimi.ingsw.model.ResourceType;
 import javafx.event.ActionEvent;
@@ -47,7 +48,7 @@ public class MainController {
     /**
      * The UserInterface this controller is associated with
      */
-    private UserInterface userInterface;
+    private ClientGUI userInterface;
 
     @FXML
     private Button trayPopup;
@@ -55,14 +56,6 @@ public class MainController {
     private Button marketPopup;
     @FXML
     private TabPane tabPane;
-
-    /**
-     * Initializes the associated Client only
-     * @param userInterface a UserInterface representing the associated Client
-     */
-    /*public MainController(UserInterface userInterface) {
-        this.userInterface = userInterface;
-    }*/
 
     /**
      * Gets the mapping between nicknames and PersonalBoardController
@@ -95,14 +88,6 @@ public class MainController {
     public UserInterface getUserInterface() {
         return userInterface;
     }
-
-    /**
-     * Sets the UserInterface
-     * @param userInterface the UserInterface to associate with this controller
-     */
-    /*public void setUserInterface(UserInterface userInterface) {
-        this.userInterface = userInterface;
-    }*/
 
     /**
      * <p>Creates one tab for each player in the given playerList</p>
@@ -188,5 +173,13 @@ public class MainController {
         this.personalBoardControllerMap.get("Player 1").setLayer(1, ResourceType.SHIELD, 1);
         this.personalBoardControllerMap.get("Player 1").setLayer(3, ResourceType.STONE, 2);
         this.personalBoardControllerMap.get("Player 1").setLayer(4, ResourceType.COIN, 1);
+    }
+
+    /**
+     * Sets the UserInterface
+     * @param clientGUI the UserInterface to associate with this controller
+     */
+    public void setUserInterface(ClientGUI clientGUI) {
+        this.userInterface = clientGUI;
     }
 }

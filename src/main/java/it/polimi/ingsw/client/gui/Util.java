@@ -18,7 +18,7 @@ public abstract class Util {
     /**
      * The mainClass of JavaFX, specified in pom.xml
      */
-    public static Class<GUI> mainClass = GUI.class;
+    public static Class<JavaFXMain> mainClass = JavaFXMain.class;
 
     /**
      * Wrapper to load an .fxml file

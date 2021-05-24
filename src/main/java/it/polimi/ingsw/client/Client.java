@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client;
 
+import it.polimi.ingsw.client.gui.JavaFXMain;
 import it.polimi.ingsw.network.Processable;
 import it.polimi.ingsw.network.messages.LoginMessage;
 import it.polimi.ingsw.network.updates.ServerUpdate;
@@ -19,22 +20,45 @@ public class Client implements Runnable{
     private ObjectOutputStream socketOut;
     private final UserInterface userInterface;
 
+    /**
+     * <p>Constructor used in testing</p>
+     * <p>Puts everything at its default value</p>
+     * <p>localhost:8080, CLI</p>
+     */
     public Client() {
         this.port = 8080;
         this.ip = "127.0.0.1";
         this.userInterface = new ClientCLI(this);
     }
 
+    /**
+     * Creates a new Client instance
+     * @param port  the port used to communicate with the server
+     * @param gui   true if gui should be started, false if using cli
+     */
     public Client(int port, boolean gui) {
         this.port = port;
         this.ip = "127.0.0.1";
-        if (gui) this.userInterface = new ClientGUI(this);
-        else this.userInterface = new ClientCLI(this);
+        if (gui) {
+            JavaFXMain.startGUI();
+            while (JavaFXMain.getMainController() == null) System.out.println("[INFO] Waiting for GUI...");
+            this.userInterface = new ClientGUI(this, JavaFXMain.getMainController());
+        }
+        else {
+            this.userInterface = new ClientCLI(this);
+        }
+    }
+
+    /**
+     * Gets the UserInterface
+     * @return a UserInterface representing the corresponding Client
+     */
+    public UserInterface getUserInterface() {
+        return userInterface;
     }
 
     @Override
     public void run() {
-        //userInterface = new ClientCLI(this);
         userInterface.setup();
         startConnection();
         String nickname = userInterface.chooseNickname();

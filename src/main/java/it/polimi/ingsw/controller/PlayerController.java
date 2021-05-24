@@ -149,6 +149,9 @@ public class PlayerController {
 
     public void endTurn() {
         try { //Check exception and resource handling
+            //move the resources from the tempStrongbox to the Strongbox
+            controller.getGame().getActivePlayer().getPersonalBoard().transferResources();
+
             if (!controller.getResourceController().getTempRes().isEmpty()) {
                 throw new CannotEndTurnException("There are still resources to be placed");
             }

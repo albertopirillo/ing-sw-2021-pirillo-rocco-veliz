@@ -122,6 +122,10 @@ public class Player {
         return depotRes.sum(strongboxRes);
     }
 
+    public Resource getAllTempResources() {
+        return personalBoard.getStrongbox().queryAllTempRes();
+    }
+
     public Resource insertMarble(int position) throws NegativeResAmountException, InvalidKeyException {
         return this.resStrategy.insertMarble(this, position);
     }
@@ -145,7 +149,7 @@ public class Player {
 
     public void activateProduction(List<DevelopmentCard> cards) throws NegativeResAmountException, InvalidKeyException {
         for(DevelopmentCard devCard: cards){
-            getPersonalBoard().getStrongbox().addResources(devCard.getProdPower().getOutput());
+            getPersonalBoard().getStrongbox().addTempResources(devCard.getProdPower().getOutput());
         }
     }
 
@@ -173,7 +177,7 @@ public class Player {
         }
 }
 
-    public void discardRes(Resource resource) throws CannotContainFaithException, NegativeResAmountException, InvalidKeyException {
+    public void discardRes(Resource resource) throws CannotContainFaithException {
         this.personalBoard.getDepot().discardRes(this, resource);
     }
 

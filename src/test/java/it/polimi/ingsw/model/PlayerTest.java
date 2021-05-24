@@ -45,11 +45,16 @@ class PlayerTest {
         devs.add(dev1);
         devs.add(dev2);
         player.activateProduction(devs);
-        assertEquals(player.getAllResources(), new Resource(2, 4, 6, 2));
+        assertEquals(player.getAllTempResources(), new Resource(2, 4, 6, 2));
         ArrayList<DevelopmentCard> devs1 = new ArrayList<>();
         devs1.add(dev3);
         player.activateProduction(devs1);
+        assertEquals(player.getAllTempResources(), new Resource(3, 6, 9, 6));
+        //transfer the temp resources into the strongbox and check
+        Strongbox strongbox = player.getPersonalBoard().getStrongbox();
+        strongbox.transferTempRes();
         assertEquals(player.getAllResources(), new Resource(3, 6, 9, 6));
+
     }
 
     @Test

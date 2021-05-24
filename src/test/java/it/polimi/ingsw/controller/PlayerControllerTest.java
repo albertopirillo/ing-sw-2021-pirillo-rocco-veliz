@@ -68,6 +68,8 @@ class PlayerControllerTest {
         controller.resetException();
         playerController.extraProduction(AbilityChoice.FIRST,
                 new Resource(), new Resource(1,0,1,0), ResourceType.COIN);
+
+        activePlayer.getPersonalBoard().getStrongbox().transferTempRes();
         assertEquals("Result: OK", controller.getError());
         assertEquals(new Resource(2,4,2,3), activePlayer.getAllResources());
         assertEquals(1, activePlayer.getPlayerFaith());
@@ -356,7 +358,9 @@ class PlayerControllerTest {
                 new Resource(2,0,0,0),
                 numSlots);
         assertEquals("Result: OK", controller.getError());
-        assertEquals(activePlayer.getAllResources(), new Resource(0, 1, 1, 1));
+        assertEquals(activePlayer.getAllTempResources(), new Resource(0, 1, 1, 1));
+        assertEquals(activePlayer.getPersonalBoard().getStrongbox().queryAllTempRes(), new Resource(0, 1, 1, 1));
+        activePlayer.getPersonalBoard().getStrongbox().transferTempRes();
         assertEquals(activePlayer.getPersonalBoard().getStrongbox().queryAllRes(), new Resource(0, 1, 1, 1));
 
         //Test activate two devCards
@@ -393,6 +397,7 @@ class PlayerControllerTest {
         assertEquals("Result: OK", controller.getError());
 
         //Test strongbox after production
+        activePlayer.getPersonalBoard().getStrongbox().transferTempRes();
         assertEquals(activePlayer.getAllResources(), new Resource(0, 1, 1, 1));
         assertEquals(activePlayer.getPersonalBoard().getStrongbox().queryAllRes(), new Resource(0, 1, 1, 1));
         assertEquals(2, activePlayer.getPlayerFaith());
@@ -430,8 +435,8 @@ class PlayerControllerTest {
         assertEquals("Result: OK", controller.getError());
 
         //Test strongbox after production
-        assertEquals(activePlayer.getAllResources(), new Resource(1, 2, 1, 2));
-        assertEquals(activePlayer.getPersonalBoard().getStrongbox().queryAllRes(), new Resource(1, 2, 1, 2));
+        assertEquals(activePlayer.getAllResources(), new Resource(0, 1, 1, 1));
+        assertEquals(activePlayer.getPersonalBoard().getStrongbox().queryAllTempRes(), new Resource(1, 1, 0, 1));
         assertEquals(2, activePlayer.getPlayerFaith());
 
         //Card card = player.getGame().getMarket().getCard(1, CardColor.PURPLE);
@@ -448,8 +453,9 @@ class PlayerControllerTest {
 
         //TEST ACTIVATE ALL SLOTS
         //strongbox before activateProduction
-        assertEquals(activePlayer.getAllResources(), new Resource(1, 2, 3, 2));
-        assertEquals(activePlayer.getPersonalBoard().getStrongbox().queryAllRes(), new Resource(1, 2, 3, 2));
+        assertEquals(activePlayer.getAllResources(), new Resource(0, 1, 3, 1));
+        assertEquals(activePlayer.getAllTempResources(), new Resource(1, 1, 0, 1));
+        assertEquals(activePlayer.getPersonalBoard().getStrongbox().queryAllRes(), new Resource(0, 1, 3, 1));
         assertEquals(2, activePlayer.getPlayerFaith());
 
         ArrayList <Integer> all = new ArrayList<>();
@@ -472,7 +478,7 @@ class PlayerControllerTest {
                 all);
         assertEquals("The player hasn't got enough Resource to complete the action", controller.getError());
 
-        //Test not enough Resource passed to controller
+        //Test you did not provide enough resources to complete the action
         controller.resetException();
         playerController.activateProduction(
                 new Resource(0,0,0,0),
@@ -480,8 +486,18 @@ class PlayerControllerTest {
                 all);
         assertEquals("You did not provide enough resources to complete the action", controller.getError());
 
-        //Test correct, passed the correct Resource to controller
+        //Test The player hasn't got enough Resource
         controller.resetException();
+        playerController.activateProduction(
+                new Resource(0,0,0,0),
+                new Resource(1,1,2,0),
+                all);
+        assertEquals("The player hasn't got enough Resource to complete the action", controller.getError());
+
+        //Test ok
+        controller.resetException();
+        activePlayer.getPersonalBoard().getStrongbox().addResources(new Resource(1,0,0,0));
+        Resource tempRes = activePlayer.getPersonalBoard().getStrongbox().queryAllRes();
         playerController.activateProduction(
                 new Resource(0,0,0,0),
                 new Resource(1,1,2,0),
@@ -489,8 +505,9 @@ class PlayerControllerTest {
         assertEquals("Result: OK", controller.getError());
 
         //Strongbox after production
-        assertEquals(activePlayer.getAllResources(), new Resource(2, 2, 2, 4));
-        assertEquals(activePlayer.getPersonalBoard().getStrongbox().queryAllRes(), new Resource(2, 2, 2, 4));
+        activePlayer.getPersonalBoard().getStrongbox().transferTempRes();
+        assertEquals(activePlayer.getAllResources(), new Resource(3, 2, 2, 4));
+        assertEquals(activePlayer.getPersonalBoard().getStrongbox().queryAllRes(), new Resource(3, 2, 2, 4));
         assertEquals(4, activePlayer.getPlayerFaith());
     }
 }

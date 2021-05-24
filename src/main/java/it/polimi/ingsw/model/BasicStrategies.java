@@ -94,7 +94,7 @@ public abstract class BasicStrategies {
         //Give the resources to the player
         Resource outputRes = new Resource();
         outputRes.addResource(output, 1);
-        player.getPersonalBoard().getStrongbox().addResources(outputRes);
+        player.getPersonalBoard().getStrongbox().addTempResources(outputRes);
 
         //Remove those resources from the player
         depot.retrieveRes(fromDepot);

@@ -60,4 +60,17 @@ class StrongboxTest {
             assertEquals(checkRes.getValue(key), content.get(key));
         }
     }
+
+    @Test
+    public void setTempResources() throws NegativeResAmountException, InvalidKeyException {
+        Strongbox strongbox = new Strongbox(null);
+        strongbox.addResources(new Resource(2, 3, 4, 0));
+        strongbox.addTempResources(new Resource(1, 2, 3, 2));
+        strongbox.transferTempRes();
+        Resource checkRes = new Resource(3, 5, 7, 2);
+        Map<ResourceType, Integer> content = strongbox.queryAllRes().getMap();
+        for (ResourceType key: content.keySet()) {
+            assertEquals(checkRes.getValue(key), content.get(key));
+        }
+    }
 }

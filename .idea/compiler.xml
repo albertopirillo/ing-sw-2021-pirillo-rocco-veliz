@@ -9,7 +9,7 @@
         <module name="ing-sw-2021-pirillo-rocco-veliz" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
+    <bytecodeTargetLevel target="9">
       <module name="ing-sw-2021-pirillo-rocco-veliz" target="9" />
     </bytecodeTargetLevel>
   </component>

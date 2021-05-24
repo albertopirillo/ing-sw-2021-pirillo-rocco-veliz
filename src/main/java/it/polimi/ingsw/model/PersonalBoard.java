@@ -1,7 +1,9 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.DevSlotEmptyException;
+import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.InvalidNumSlotException;
+import it.polimi.ingsw.exceptions.NegativeResAmountException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +51,10 @@ public class PersonalBoard {
 
     public Strongbox getStrongbox() {
         return strongbox;
+    }
+
+    public void transferResources() throws NegativeResAmountException, InvalidKeyException {
+        strongbox.transferTempRes();
     }
 
     public List<DevelopmentCard> getAllCards() {

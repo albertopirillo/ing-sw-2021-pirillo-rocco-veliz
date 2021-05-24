@@ -79,7 +79,7 @@ public class ProductionStrategy {
         output.modifyValue(res, 1);
 
         //Give the resources to the player
-        player.getPersonalBoard().getStrongbox().addResources(output);
+        player.getPersonalBoard().getStrongbox().addTempResources(output);
 
         //Remove those resources from the player
         depot.retrieveRes(fromDepot);

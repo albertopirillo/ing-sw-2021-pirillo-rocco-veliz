@@ -360,10 +360,7 @@ public class ClientCLI implements UserInterface {
                 else errorPrint("\nYou already performed an action this turn");
                 break;
             case 9:
-                if (!mainActionDone) {
-                    request = productionMenu();
-                }
-                else errorPrint("\nYou already performed an action this turn");
+                request = productionMenu();
                 break;
             case 10:
                 request = UseLeaderMenu();
@@ -443,7 +440,10 @@ public class ClientCLI implements UserInterface {
 
         switch (selection) {
             case "b":
-                request = basicProductionMenu();
+                if (!mainActionDone) {
+                    request = basicProductionMenu();
+                }
+                else errorPrint("\nYou already performed an action this turn");
                 break;
             case "d":
                 request = devProductionMenu();

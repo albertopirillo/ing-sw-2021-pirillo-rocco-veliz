@@ -41,7 +41,7 @@ public class Client implements Runnable{
         this.ip = "127.0.0.1";
         if (gui) {
             JavaFXMain.startGUI();
-            while (JavaFXMain.getMainController() == null) System.out.println("[INFO] Waiting for GUI...");
+            waitForGUI();
             this.userInterface = new ClientGUI(this, JavaFXMain.getMainController());
         }
         else {
@@ -55,6 +55,20 @@ public class Client implements Runnable{
      */
     public UserInterface getUserInterface() {
         return userInterface;
+    }
+
+    private static void waitForGUI() {
+        synchronized (JavaFXMain.lock) {
+            while (JavaFXMain.getMainController() == null) {
+                try {
+                    System.out.println("[CLIENT] Waiting for GUI...");
+                    JavaFXMain.lock.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        System.out.println("[CLIENT] GUI is ready");
     }
 
     @Override

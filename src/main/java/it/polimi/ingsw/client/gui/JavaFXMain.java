@@ -25,6 +25,10 @@ public class JavaFXMain extends Application {
      * The controller associated with the main scene
      */
     private static MainController mainController;
+    /**
+     * Lock item to make other threads wait for GUI initialization
+     */
+    public final static Object lock = new Object();
 
     /**
      * Gets the corresponding MainController
@@ -60,9 +64,19 @@ public class JavaFXMain extends Application {
         stage.getIcons().add(icon);
 
         //Set the MainController
-        mainController = loader.getController();
-        System.out.println("[INFO] GUI started");
-        System.out.println("[INFO] Controller set: " + mainController);
+        synchronized (lock) {
+            mainController = loader.getController();
+            System.out.println("[JavaFX] GUI started");
+            System.out.println("[JavaFX] Controller set: " + mainController);
+
+            //Set and initialize the SetupController
+            SetupController setupController = (SetupController) setRoot("setup");
+            System.out.println("[JavaFX] SetupController set " + setupController);
+            mainController.setSetupController(setupController);
+            System.out.println("[JavaFX] SetupController in MainController " + mainController.getSetupController());
+            setupController.setMainController(mainController);
+            lock.notifyAll();
+        }
 
         //Temporary player list and initialization
         //TODO: init should be done in ClientGUI
@@ -72,6 +86,7 @@ public class JavaFXMain extends Application {
         //playerList.add("Player3");
 
         mainController.init(playerList);
+
 
         //TODO: remove
         //mainController.depotTest();
@@ -84,13 +99,16 @@ public class JavaFXMain extends Application {
     }
 
     /**
-     * Changes the main scene, by loading a .fxml
+     * <p>Changes the main scene, by loading a .fxml</p>
+     * <p>Returns the controller of that scene</p>
      * @param fxml  the file to get the new scene from
      * @throws IOException  if the specified .fxml doesnt exist
+     * @return  an Object representing the controller associated to the new scene
      */
-    public static void setRoot(String fxml) throws IOException {
-        FXMLLoader loader = Util.loadFXML("fxml");
+    public static Object setRoot(String fxml) throws IOException {
+        FXMLLoader loader = Util.loadFXML(fxml);
         scene.setRoot(loader.load());
+        return loader.getController();
     }
 
     private void quitPopup(Stage stage, Event event) {

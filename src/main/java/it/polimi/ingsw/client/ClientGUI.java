@@ -2,12 +2,11 @@ package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.client.gui.MainController;
 import it.polimi.ingsw.client.gui.PersonalBoardController;
+import it.polimi.ingsw.client.gui.SetupController;
 import it.polimi.ingsw.model.LeaderCard;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.ResourceType;
 import it.polimi.ingsw.network.DepotSetting;
-import it.polimi.ingsw.network.Processable;
-import it.polimi.ingsw.network.messages.GameSizeMessage;
 import it.polimi.ingsw.network.requests.ChooseLeaderRequest;
 import it.polimi.ingsw.network.requests.InitialResRequest;
 import it.polimi.ingsw.network.updates.*;
@@ -63,15 +62,26 @@ public class ClientGUI implements UserInterface {
     }
 
     @Override
-    public String chooseNickname() { //TODO
-        return "Player1";
+    public String chooseNickname() {
+        SetupController setupController = mainController.getSetupController();
+        synchronized (SetupController.lock) {
+            while(setupController.getNickname() == null) {
+                try {
+                    System.out.println("[CLIENT] Waiting for nickname...");
+                    SetupController.lock.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        String nickname = setupController.getNickname();
+        System.out.println("[CLIENT] Nickname set: " + nickname);
+        return nickname;
     }
 
     @Override
-    public void getGameSize() { //TODO
-        int gameSize = 2;
-        Processable rsp = new GameSizeMessage(getNickname(), gameSize);
-        getClient().sendMessage(rsp);
+    public void getGameSize() {
+        //Handled in SetupController
     }
 
     @Override

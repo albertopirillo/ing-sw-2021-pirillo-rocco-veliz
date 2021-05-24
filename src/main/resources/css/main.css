@@ -6,6 +6,12 @@
     -fx-background-color: "cyan";
 }
 
+#formatError {
+    -fx-font-size: 36;
+    -fx-font-family: "Blackadder ITC";
+    -fx-alignment: center;
+}
+
 .label{
     -fx-font-size: 23;
     -fx-font-family: "Blackadder ITC";

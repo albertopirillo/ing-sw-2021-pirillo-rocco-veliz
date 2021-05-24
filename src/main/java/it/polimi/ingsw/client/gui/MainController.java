@@ -2,7 +2,7 @@ package it.polimi.ingsw.client.gui;
 
 import it.polimi.ingsw.client.ClientGUI;
 import it.polimi.ingsw.model.ResourceType;
-import it.polimi.ingsw.network.requests.Request;
+import it.polimi.ingsw.network.Processable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -46,6 +46,10 @@ public class MainController {
      */
     private TrayController trayController;
     /**
+     * Reference to the actual SetupController
+     */
+    private SetupController setupController;
+    /**
      * The UserInterface this controller is associated with
      */
     private ClientGUI clientGUI;
@@ -82,6 +86,22 @@ public class MainController {
     }
 
     /**
+     * Gets the SetupController
+     * @return  the current SetupController
+     */
+    public SetupController getSetupController() {
+        return setupController;
+    }
+
+    /**
+     * Sets the SetupController
+     * @param setupController   the SetupController to set
+     */
+    public void setSetupController(SetupController setupController) {
+        this.setupController = setupController;
+    }
+
+    /**
      * Gets the ClientGUI the controller is associated with
      * @return a ClientGUI object representing the Client
      */
@@ -110,11 +130,11 @@ public class MainController {
     }
 
     /**
-     * Wrapper to easily send a Request from a controller class
-     * @param request   the request to be sent to the Server
+     * Wrapper to easily send a message from a controller class
+     * @param message   the message to be sent to the Server
      */
-    public void sendMessage(Request request) {
-        this.clientGUI.getClient().sendMessage(request);
+    public void sendMessage(Processable message) {
+        this.clientGUI.getClient().sendMessage(message);
     }
 
     private void addPlayers(List<String> playerList) throws IOException {

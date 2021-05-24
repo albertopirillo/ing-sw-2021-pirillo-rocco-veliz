@@ -15,12 +15,12 @@
             <Font size="36.0" />
          </font>
       </Text>
-      <Button fx:id="nameButton" layoutX="581.0" layoutY="256.0" mnemonicParsing="false" onAction="#confirmName" text="Confirm">
+      <Button fx:id="nameButton" layoutX="584.0" layoutY="243.0" mnemonicParsing="false" onAction="#confirmName" text="Confirm">
          <font>
             <Font size="24.0" />
          </font></Button>
       <ButtonBar layoutX="233.0" layoutY="360.0" prefHeight="40.0" prefWidth="200.0" />
-      <RadioButton layoutX="325.0" layoutY="535.0" mnemonicParsing="false" text="1">
+      <RadioButton layoutX="325.0" layoutY="535.0" mnemonicParsing="false" selected="true" text="1">
          <font>
             <Font size="32.0" />
          </font>
@@ -58,5 +58,10 @@
             <Font size="24.0" />
          </font>
       </Button>
+      <Label fx:id="formatError" layoutX="377.0" layoutY="294.0" prefHeight="54.0" prefWidth="529.0" text="Please choose a valid username" textAlignment="CENTER" textFill="RED">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

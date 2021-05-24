@@ -4,9 +4,7 @@ import it.polimi.ingsw.network.Processable;
 import it.polimi.ingsw.network.messages.GameSizeMessage;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Toggle;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,7 +12,11 @@ import java.util.ResourceBundle;
 public class SetupController implements Initializable {
 
     @FXML
+    private Button nameButton, playerAmountButton;
+    @FXML
     private TextField nameField;
+    @FXML
+    private Label formatError;
     @FXML
     private ToggleGroup playerAmountGroup;
     /**
@@ -46,17 +48,24 @@ public class SetupController implements Initializable {
         return nickname;
     }
 
-    //TODO: disable the input after
-
     /**
      * Gets and sets the selected name from the gui
      */
     public void confirmName() {
-        synchronized (lock) {
-            nickname = nameField.getText();
-            lock.notifyAll();
+        if (nameField.getText().matches("[a-zA-Z0-9]+")) {
+            synchronized (lock) {
+                nickname = nameField.getText();
+                lock.notifyAll();
+            }
+            formatError.setVisible(false);
+            System.out.println("Hello " + nickname + "!");
+            nameField.setDisable(true);
+            nameButton.setDisable(true);
+            playerAmountButton.setDisable(false);
         }
-        System.out.println("Hello " + nickname + "!");
+        else {
+            formatError.setVisible(true);
+        }
     }
 
     /**
@@ -68,6 +77,7 @@ public class SetupController implements Initializable {
         System.out.println("Number of players: " + playerAmount);
         Processable rsp = new GameSizeMessage(getNickname(), playerAmount);
         mainController.sendMessage(rsp);
+        playerAmountButton.setDisable(true);
     }
 
     /**
@@ -80,5 +90,7 @@ public class SetupController implements Initializable {
         for(Toggle toggle: playerAmountGroup.getToggles()) {
             toggle.setUserData(i++);
         }
+        playerAmountButton.setDisable(true);
+        formatError.setVisible(false);
     }
 }

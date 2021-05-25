@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client.gui;
 
+import it.polimi.ingsw.client.Client;
 import javafx.application.Application;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
@@ -82,8 +83,8 @@ public class JavaFXMain extends Application {
             SetupController setupController = (SetupController) setRoot("setup");
             System.out.println("[JavaFX] SetupController set " + setupController);
             mainController.setSetupController(setupController);
-            System.out.println("[JavaFX] SetupController in MainController " + mainController.getSetupController());
             setupController.setMainController(mainController);
+            //Notifies Client's constructor
             lock.notifyAll();
         }
 
@@ -91,7 +92,14 @@ public class JavaFXMain extends Application {
         //stage.setOnCloseRequest(event -> quitPopup(stage, event));
 
         myStage.centerOnScreen();
-        myStage.show();
+
+        //Wait to connect to the server before showing the GUI
+        synchronized (lock) {
+            while(Client.getSocket() == null) {
+                lock.wait();
+            }
+            myStage.show();
+        }
     }
 
     /**

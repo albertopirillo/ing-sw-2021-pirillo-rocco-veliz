@@ -9,12 +9,13 @@ import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.ConnectException;
 import java.net.Socket;
 
 public class Client implements Runnable{
 
     private static Socket socket; //TODO: static??
-    private final String ip;
+    private final String serverIP;
     private final int port;
     private ObjectInputStream socketIn;
     private ObjectOutputStream socketOut;
@@ -27,7 +28,7 @@ public class Client implements Runnable{
      */
     public Client() {
         this.port = 8080;
-        this.ip = "127.0.0.1";
+        this.serverIP = "127.0.0.1";
         this.userInterface = new ClientCLI(this);
     }
 
@@ -38,7 +39,7 @@ public class Client implements Runnable{
      */
     public Client(int port, boolean gui) {
         this.port = port;
-        this.ip = "127.0.0.1";
+        this.serverIP = "127.0.0.1";
         if (gui) {
             JavaFXMain.startGUI();
             waitForGUI();
@@ -55,6 +56,14 @@ public class Client implements Runnable{
      */
     public UserInterface getUserInterface() {
         return userInterface;
+    }
+
+    /**
+     * Gets the Socket to communicate with the Server
+     * @return the Socket
+     */
+    public static Socket getSocket() {
+        return socket;
     }
 
     private static void waitForGUI() {
@@ -96,11 +105,27 @@ public class Client implements Runnable{
 
     private void startConnection(){
         try {
-            socket = new Socket(ip, port);
-            System.out.println("Connected to localhost");
+            socket = new Socket(serverIP, port);
+            System.out.println("Connected to " + serverIP);
             socketOut = new ObjectOutputStream(socket.getOutputStream());
             socketIn = new ObjectInputStream(socket.getInputStream());
+            synchronized (JavaFXMain.lock) {
+                //GUI can be shown now, notify JavaFXMain
+                JavaFXMain.lock.notifyAll();
+            }
+        } catch (ConnectException e) {
+            tryToReconnect();
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void tryToReconnect() {
+        System.out.println("Server is unreachable, retrying in 5 seconds...");
+        try {
+            Thread.sleep(5000);
+            startConnection();
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }

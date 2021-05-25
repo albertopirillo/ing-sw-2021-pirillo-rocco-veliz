@@ -68,7 +68,6 @@ public class SetupController implements Initializable {
         else {
             formatError.setVisible(true);
         }
-        firstPlayerSetup();
     }
 
     /**

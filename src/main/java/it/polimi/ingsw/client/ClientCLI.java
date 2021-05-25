@@ -911,6 +911,17 @@ public class ClientCLI implements UserInterface {
     }
 
     @Override
+    public void startMainGame(EndOfInitialUpdate update) {
+        //Print leader cards and storages of all player
+        updateLeaderCards(update.getLeaderUpdate());
+        updateStorages(update.getStorageUpdate());
+        //Give the control to the main player
+        if (update.getActivePlayer().equals(this.nickname)) {
+            gameMenu();
+        }
+    }
+
+    @Override
     public void updateGameOver(GameOverUpdate update){
         int numPlayers = update.getScores().keySet().size();
         if(update.isWin()){

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client;
 
+import it.polimi.ingsw.client.gui.JavaFXMain;
 import it.polimi.ingsw.client.gui.MainController;
 import it.polimi.ingsw.client.gui.PersonalBoardController;
 import it.polimi.ingsw.client.gui.SetupController;
@@ -12,6 +13,7 @@ import it.polimi.ingsw.network.requests.InitialResRequest;
 import it.polimi.ingsw.network.updates.*;
 import javafx.application.Platform;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -81,7 +83,7 @@ public class ClientGUI implements UserInterface {
 
     @Override
     public void getGameSize() {
-        //Handled in SetupController
+        Platform.runLater(() -> mainController.getSetupController().firstPlayerSetup());
     }
 
     @Override
@@ -210,5 +212,17 @@ public class ClientGUI implements UserInterface {
     @Override
     public void updateGameOver(GameOverUpdate update){
 
+    }
+
+    @Override
+    public void startMainGame(EndOfInitialUpdate update) {
+        //Start the main scene
+        Platform.runLater(() -> {
+            List<String> playerList = new ArrayList<>(update.getStorageUpdate().getStrongboxMap().keySet());
+            JavaFXMain.initMainScene(playerList);
+        });
+        //Update the GUI with storages and leader cards of all players
+        updateStorages(update.getStorageUpdate());
+        //TODO: updateLeaderCards(update.getLeaderUpdate());
     }
 }

@@ -11,7 +11,6 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +20,14 @@ public class JavaFXMain extends Application {
      * The current main scene
      */
     private static Scene scene;
+    /**
+     * The current stage
+     */
+    private static Stage myStage;
+    /**
+     * The scene associated with the main.fxml file
+     */
+    private static Parent mainScene;
     /**
      * The controller associated with the main scene
      */
@@ -50,18 +57,20 @@ public class JavaFXMain extends Application {
         //Load FXML and set the scene
         FXMLLoader loader = Util.loadFXML("main");
         Parent root = loader.load();
+        mainScene = root;
         scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setResizable(false);
+        myStage = stage;
+        myStage.setScene(scene);
+        myStage.setResizable(false);
 
         //Load CSS
         String css = Util.getCSS("main");
         scene.getStylesheets().add(css);
 
         //Set window title and icon
-        stage.setTitle("Master of Renaissance");
+        myStage.setTitle("Master of Renaissance");
         Image icon = new Image("/png/generic/inkwell.png");
-        stage.getIcons().add(icon);
+        myStage.getIcons().add(icon);
 
         //Set the MainController
         synchronized (lock) {
@@ -78,24 +87,11 @@ public class JavaFXMain extends Application {
             lock.notifyAll();
         }
 
-        //Temporary player list and initialization
-        //TODO: init should be done in ClientGUI
-        List<String> playerList = new ArrayList<>();
-        playerList.add("Player1");
-        playerList.add("Player2");
-        //playerList.add("Player3");
-
-        mainController.init(playerList);
-
-
-        //TODO: remove
-        //mainController.depotTest();
-
         //Popup on quitting
         //stage.setOnCloseRequest(event -> quitPopup(stage, event));
 
-        stage.centerOnScreen();
-        stage.show();
+        myStage.centerOnScreen();
+        myStage.show();
     }
 
     /**
@@ -109,6 +105,27 @@ public class JavaFXMain extends Application {
         FXMLLoader loader = Util.loadFXML(fxml);
         scene.setRoot(loader.load());
         return loader.getController();
+    }
+
+    public static void initMainScene(List<String> playerList) {
+        scene.setRoot(mainScene);
+        resizeStage(1643, 862);
+        try {
+            mainController.init(playerList);
+        } catch (IOException e) {
+            System.out.println("fxml file not found");
+        }
+    }
+
+    /**
+     * Should be called after setRoot for better visuals
+     * @param width
+     * @param height
+     */
+    public static void resizeStage(double width, double height) {
+        myStage.setWidth(width);
+        myStage.setHeight(height);
+        myStage.centerOnScreen();
     }
 
     private void quitPopup(Stage stage, Event event) {

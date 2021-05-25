@@ -4,6 +4,7 @@ import it.polimi.ingsw.network.Processable;
 import it.polimi.ingsw.network.messages.GameSizeMessage;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
 
@@ -80,6 +81,12 @@ public class SetupController implements Initializable {
         Processable rsp = new GameSizeMessage(getNickname(), playerAmount);
         mainController.sendMessage(rsp);
         playerAmountButton.setDisable(true);
+        for(Toggle toggle: playerAmountGroup.getToggles()) {
+            Node node = (Node) toggle;
+            node.setDisable(true);
+        }
+        String text = (playerAmount == 1 ? " player" : " players");
+        firstPlayerLabel.setText("You selected " + playerAmount + text);
     }
 
     /**
@@ -92,6 +99,9 @@ public class SetupController implements Initializable {
         int i = 1;
         for(Toggle toggle: playerAmountGroup.getToggles()) {
             toggle.setUserData(i++);
+            Node node = (Node) toggle ;
+            node.setVisible(false);
+            playerAmountButton.setVisible(false);
         }
         playerAmountButton.setDisable(true);
         formatError.setVisible(false);
@@ -105,5 +115,10 @@ public class SetupController implements Initializable {
         firstPlayerText.setVisible(true);
         firstPlayerLabel.setText("Select the number of players");
         playerAmountButton.setDisable(false);
+        for(Toggle toggle: playerAmountGroup.getToggles()) {
+            Node node = (Node) toggle ;
+            node.setVisible(true);
+            playerAmountButton.setVisible(true);
+        }
     }
 }

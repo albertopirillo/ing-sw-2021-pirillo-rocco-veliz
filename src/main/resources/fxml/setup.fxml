@@ -10,7 +10,7 @@
             <Font size="36.0" />
          </font>
       </TextField>
-      <Text layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Insert your nickname:" textAlignment="CENTER" wrappingWidth="1280.0">
+      <Text layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your nickname" textAlignment="CENTER" wrappingWidth="1280.0">
          <font>
             <Font size="36.0" />
          </font>
@@ -58,7 +58,7 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <Label fx:id="firstPlayerLabel" layoutX="248.0" layoutY="451.0" prefHeight="54.0" prefWidth="784.0" text="The first player will select the number of players" textAlignment="CENTER">
+      <Label fx:id="firstPlayerLabel" layoutX="248.0" layoutY="451.0" prefHeight="54.0" prefWidth="784.0" text="The first player is selecting the number of players" textAlignment="CENTER">
          <font>
             <Font size="36.0" />
          </font>

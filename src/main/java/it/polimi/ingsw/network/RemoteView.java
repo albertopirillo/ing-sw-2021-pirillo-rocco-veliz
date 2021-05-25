@@ -68,13 +68,8 @@ public class RemoteView implements ModelObserver {
 
     @Override
     public void showLeaderCards(Game game){
-        Map<String, List<LeaderCard>> leaderCardsMap = new HashMap<>();
-        List<Player> players = game.getPlayersList();
-        for(Player player: players){
-            leaderCardsMap.put(player.getNickname(), player.getLeaderCards());
-        }
-        LeaderUpdate leaderUpdateMsg = new LeaderUpdate(game.getActivePlayer().getNickname(), leaderCardsMap);
-        connection.sendMessage(leaderUpdateMsg);
+       LeaderUpdate msg = buildLeaderUpdate(game);
+        connection.sendMessage(msg);
     }
 
     @Override
@@ -125,17 +120,9 @@ public class RemoteView implements ModelObserver {
         connection.sendMessage(msg);
     }
 
-
     @Override
     public void showStorages(Game game) {
-        Player activePlayer = game.getActivePlayer();
-        Map<String, List<DepotSetting>> depotMap = new HashMap<>();
-        Map<String, Resource> strongboxMap = new HashMap<>();
-        for(Player p: game.getPlayersList()) {
-            depotMap.put(p.getNickname(),p.getPersonalBoard().getDepot().toDepotSetting());
-            strongboxMap.put(p.getNickname(), p.getPersonalBoard().getStrongbox().queryAllRes());
-        }
-        ServerUpdate msg = new StorageUpdate(activePlayer.getNickname(), depotMap, strongboxMap);
+        ServerUpdate msg = buildStorageUpdate(game);
         connection.sendMessage(msg);
     }
 
@@ -184,24 +171,29 @@ public class RemoteView implements ModelObserver {
 
     @Override
     public void gameStateStart(Game game) {
-        Player activePlayer = game.getActivePlayer();
-        //Build a new StorageUpdate
+        //Build a EndOfInitialUpdate and send it
+        StorageUpdate storageUpdate = buildStorageUpdate(game);
+        LeaderUpdate leaderUpdate = buildLeaderUpdate(game);
+        ServerUpdate msg = new EndOfInitialUpdate(game.getActivePlayer().getNickname(), storageUpdate, leaderUpdate);
+        connection.sendMessage(msg);
+    }
+
+    private StorageUpdate buildStorageUpdate(Game game) {
         Map<String, List<DepotSetting>> depotMap = new HashMap<>();
         Map<String, Resource> strongboxMap = new HashMap<>();
         for(Player p: game.getPlayersList()) {
             depotMap.put(p.getNickname(),p.getPersonalBoard().getDepot().toDepotSetting());
             strongboxMap.put(p.getNickname(), p.getPersonalBoard().getStrongbox().queryAllRes());
         }
-        StorageUpdate storageUpdate = new StorageUpdate(activePlayer.getNickname(), depotMap, strongboxMap);
-        //Build a new LeaderUpdate
+        return new StorageUpdate(game.getActivePlayer().getNickname(), depotMap, strongboxMap);
+    }
+
+    private LeaderUpdate buildLeaderUpdate(Game game) {
         Map<String, List<LeaderCard>> leaderCardsMap = new HashMap<>();
         List<Player> players = game.getPlayersList();
         for(Player player: players){
             leaderCardsMap.put(player.getNickname(), player.getLeaderCards());
         }
-        LeaderUpdate leaderUpdate = new LeaderUpdate(activePlayer.getNickname(), leaderCardsMap);
-        //Build a EndOfInitialUpdate and send it
-        ServerUpdate msg = new EndOfInitialUpdate(activePlayer.getNickname(), storageUpdate, leaderUpdate);
-        connection.sendMessage(msg);
+        return new LeaderUpdate(game.getActivePlayer().getNickname(), leaderCardsMap);
     }
 }

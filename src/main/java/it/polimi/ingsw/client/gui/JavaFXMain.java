@@ -107,6 +107,12 @@ public class JavaFXMain extends Application {
         return loader.getController();
     }
 
+    /**
+     * <p>Initializes the main scene</p>
+     * <p>Creates a tab for each player</p>
+     * <p>Resizes the current stage</p>
+     * @param playerList  the list of the players of the game
+     */
     public static void initMainScene(List<String> playerList) {
         scene.setRoot(mainScene);
         resizeStage(1643, 862);
@@ -118,9 +124,10 @@ public class JavaFXMain extends Application {
     }
 
     /**
-     * Should be called after setRoot for better visuals
-     * @param width
-     * @param height
+     * <p>Used to resize the current windows</p>
+     * <p>Should be called after setRoot for better visuals</p>
+     * @param width the new width of the window
+     * @param height the new height of the window
      */
     public static void resizeStage(double width, double height) {
         myStage.setWidth(width);

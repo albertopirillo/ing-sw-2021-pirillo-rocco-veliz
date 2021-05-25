@@ -84,6 +84,7 @@ public class SetupController implements Initializable {
 
     /**
      * <p>Sets the corresponding player number to every toggle</p>
+     * <p>Disables all elements that only the first player should use</p>
      * <p>Called automatically when an entity is injected from FXML</p>
      */
     @Override
@@ -97,6 +98,9 @@ public class SetupController implements Initializable {
         firstPlayerText.setVisible(false);
     }
 
+    /**
+     * Gives the first player to ability to select the game size
+     */
     public void firstPlayerSetup() {
         firstPlayerText.setVisible(true);
         firstPlayerLabel.setText("Select the number of players");

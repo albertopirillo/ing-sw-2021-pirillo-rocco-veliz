@@ -1,7 +1,6 @@
 package it.polimi.ingsw.client.gui;
 
 import it.polimi.ingsw.client.ClientGUI;
-import it.polimi.ingsw.model.ResourceType;
 import it.polimi.ingsw.network.Processable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -102,14 +101,6 @@ public class MainController {
     }
 
     /**
-     * Gets the ClientGUI the controller is associated with
-     * @return a ClientGUI object representing the Client
-     */
-    public ClientGUI getClientGUI() {
-        return clientGUI;
-    }
-
-    /**
      * Sets the UserInterface
      * @param clientGUI the UserInterface to associate with this controller
      */
@@ -199,16 +190,5 @@ public class MainController {
             marketPopup.setText("Show Market Cards");
             this.marketPopUp.hide();
         }
-    }
-
-    //TODO: remove
-    public void depotTest() {
-        /*this.personalBoardControllerMap.get("Player 1").setStrongbox(new Resource(0,2,3,1));
-        this.personalBoardControllerMap.get("Player 2").setLayer(4, ResourceType.COIN, 2);
-        this.personalBoardControllerMap.get("Player 2").setLayer(3, ResourceType.SHIELD, 2);
-        this.personalBoardControllerMap.get("Player 2").setLayer(1, ResourceType.SERVANT, 1);*/
-        this.personalBoardControllerMap.get("Player1").setLayer(1, ResourceType.SHIELD, 1);
-        this.personalBoardControllerMap.get("Player1").setLayer(3, ResourceType.STONE, 2);
-        this.personalBoardControllerMap.get("Player1").setLayer(4, ResourceType.COIN, 1);
     }
 }

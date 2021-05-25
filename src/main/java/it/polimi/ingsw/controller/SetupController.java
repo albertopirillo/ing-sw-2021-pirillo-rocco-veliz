@@ -92,8 +92,6 @@ public class SetupController {
             e.printStackTrace();
         }
         if(game.getActivePlayer().getNickname().equals(firstPlayer)) {
-            //game.updateMarketTray();
-            //game.updateMarket();
             game.notifyEndOfInitialUpdates();
         } else {
             game.updateInitLeaderCards();

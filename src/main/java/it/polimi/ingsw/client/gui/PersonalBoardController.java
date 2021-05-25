@@ -136,6 +136,7 @@ public class PersonalBoardController implements Initializable {
         }
     }
 
+    //TODO: javadoc
     public void reorder(Event event) {
         if(!isReorderDepotPressed) {
             reorderButton.setText("End reorder");

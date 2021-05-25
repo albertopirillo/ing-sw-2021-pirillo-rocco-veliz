@@ -12,6 +12,12 @@
     -fx-alignment: center;
 }
 
+#firstPlayerLabel {
+    -fx-font-size: 36;
+    -fx-font-family: "System";
+    -fx-alignment: center;
+}
+
 .label{
     -fx-font-size: 23;
     -fx-font-family: "Blackadder ITC";

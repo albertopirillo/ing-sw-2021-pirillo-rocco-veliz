@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.*?>
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.SetupController">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.SetupController">
    <children>
       <TextField fx:id="nameField" layoutX="420.0" layoutY="146.0">
          <font>
@@ -28,14 +28,9 @@
             <ToggleGroup fx:id="playerAmountGroup" />
          </toggleGroup>
       </RadioButton>
-      <Text layoutX="3.0" layoutY="409.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You are the first player! " textAlignment="CENTER" wrappingWidth="1280.0">
+      <Text fx:id="firstPlayerText" layoutX="3.0" layoutY="409.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You are the first player! " textAlignment="CENTER" wrappingWidth="1280.0">
          <font>
             <Font size="24.0" />
-         </font>
-      </Text>
-      <Text layoutY="491.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select the number of players:" textAlignment="CENTER" wrappingWidth="1283.7999999999997">
-         <font>
-            <Font size="36.0" />
          </font>
       </Text>
       <RadioButton layoutX="514.0" layoutY="535.0" mnemonicParsing="false" text="2" toggleGroup="$playerAmountGroup">
@@ -59,6 +54,11 @@
          </font>
       </Button>
       <Label fx:id="formatError" layoutX="377.0" layoutY="294.0" prefHeight="54.0" prefWidth="529.0" text="Please choose a valid username" textAlignment="CENTER" textFill="RED">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <Label fx:id="firstPlayerLabel" layoutX="248.0" layoutY="451.0" prefHeight="54.0" prefWidth="784.0" text="The first player will select the number of players" textAlignment="CENTER">
          <font>
             <Font size="36.0" />
          </font>

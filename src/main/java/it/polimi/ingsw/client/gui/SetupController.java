@@ -5,6 +5,7 @@ import it.polimi.ingsw.network.messages.GameSizeMessage;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -12,11 +13,13 @@ import java.util.ResourceBundle;
 public class SetupController implements Initializable {
 
     @FXML
+    private Text firstPlayerText;
+    @FXML
     private Button nameButton, playerAmountButton;
     @FXML
     private TextField nameField;
     @FXML
-    private Label formatError;
+    private Label formatError, firstPlayerLabel;
     @FXML
     private ToggleGroup playerAmountGroup;
     /**
@@ -61,11 +64,11 @@ public class SetupController implements Initializable {
             System.out.println("Hello " + nickname + "!");
             nameField.setDisable(true);
             nameButton.setDisable(true);
-            playerAmountButton.setDisable(false);
         }
         else {
             formatError.setVisible(true);
         }
+        firstPlayerSetup();
     }
 
     /**
@@ -92,5 +95,12 @@ public class SetupController implements Initializable {
         }
         playerAmountButton.setDisable(true);
         formatError.setVisible(false);
+        firstPlayerText.setVisible(false);
+    }
+
+    public void firstPlayerSetup() {
+        firstPlayerText.setVisible(true);
+        firstPlayerLabel.setText("Select the number of players");
+        playerAmountButton.setDisable(false);
     }
 }

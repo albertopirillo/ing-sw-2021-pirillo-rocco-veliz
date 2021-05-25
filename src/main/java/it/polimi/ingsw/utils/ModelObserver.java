@@ -25,4 +25,5 @@ public interface ModelObserver {
     void showTempMarbles(Game game, int numWhiteMarbles);
     void setProductionDone(Game game);
     void setMainActionDone(Game game);
+    void gameStateStart(Game game);
 }

@@ -37,7 +37,9 @@ public interface UserInterface {
     void updateSoloTokens(ActionTokenUpdate actionTokenUpdate);
     void updateTempMarbles(TempMarblesUpdate tempMarblesUpdate);
     void updateGameOver(GameOverUpdate update);
+    void startMainGame(EndOfInitialUpdate update);
     void changeNickname();
     void updateProductionDone(ProductionDoneUpdate productionDoneUpdate);
     void updateActionDone(MainActionDoneUpdate mainActionDoneUpdate);
+
 }

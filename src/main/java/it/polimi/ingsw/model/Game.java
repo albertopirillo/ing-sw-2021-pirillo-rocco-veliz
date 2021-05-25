@@ -206,4 +206,11 @@ public abstract class Game {
         for(ModelObserver observer : observers)
             observer.setMainActionDone(this);
     }
+
+    public void notifyEndOfInitialUpdates() {
+        //System.out.println("[MODEL] Notifying listeners of the start of the game");
+        for(ModelObserver observer : observers)
+            observer.gameStateStart(this);
+    }
+
 }

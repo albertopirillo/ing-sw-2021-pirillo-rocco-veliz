@@ -181,4 +181,27 @@ public class RemoteView implements ModelObserver {
         ServerUpdate msg = new MainActionDoneUpdate(activePlayer.getNickname());
         connection.sendMessage(msg);
     }
+
+    @Override
+    public void gameStateStart(Game game) {
+        Player activePlayer = game.getActivePlayer();
+        //Build a new StorageUpdate
+        Map<String, List<DepotSetting>> depotMap = new HashMap<>();
+        Map<String, Resource> strongboxMap = new HashMap<>();
+        for(Player p: game.getPlayersList()) {
+            depotMap.put(p.getNickname(),p.getPersonalBoard().getDepot().toDepotSetting());
+            strongboxMap.put(p.getNickname(), p.getPersonalBoard().getStrongbox().queryAllRes());
+        }
+        StorageUpdate storageUpdate = new StorageUpdate(activePlayer.getNickname(), depotMap, strongboxMap);
+        //Build a new LeaderUpdate
+        Map<String, List<LeaderCard>> leaderCardsMap = new HashMap<>();
+        List<Player> players = game.getPlayersList();
+        for(Player player: players){
+            leaderCardsMap.put(player.getNickname(), player.getLeaderCards());
+        }
+        LeaderUpdate leaderUpdate = new LeaderUpdate(activePlayer.getNickname(), leaderCardsMap);
+        //Build a EndOfInitialUpdate and send it
+        ServerUpdate msg = new EndOfInitialUpdate(activePlayer.getNickname(), storageUpdate, leaderUpdate);
+        connection.sendMessage(msg);
+    }
 }

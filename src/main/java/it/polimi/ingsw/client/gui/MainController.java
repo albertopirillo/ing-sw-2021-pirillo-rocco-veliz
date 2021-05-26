@@ -9,10 +9,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
+import javafx.scene.control.*;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 
@@ -212,5 +209,17 @@ public class MainController {
                 Platform.exit();
             }
         }
+    }
+
+    /**
+     * Displays an alert to notify the Client that his last move wasn't valid
+     * @param errorMsg  a String representing the error to display
+     */
+    public void displayError(String errorMsg) {
+        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+        errorAlert.setTitle("Error");
+        errorAlert.setHeaderText("Received an error message from the server");
+        errorAlert.setContentText(errorMsg);
+        errorAlert.showAndWait();
     }
 }

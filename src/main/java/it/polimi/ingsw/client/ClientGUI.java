@@ -161,7 +161,8 @@ public class ClientGUI implements UserInterface {
 
     @Override
     public void displayError(ErrorUpdate update) {
-
+        Platform.runLater(() ->
+                mainController.displayError(update.getClientError().getError()));
     }
 
     @Override

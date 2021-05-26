@@ -84,7 +84,7 @@ public class Server implements Runnable {
             return;
         }
         if(!lobbyPlayers.isEmpty() && gameSize==0){
-            ServerUpdate msg = new ErrorMessage(nickname, "A game is being created. Please wait the host.");
+            ServerUpdate msg = new ErrorMessage(nickname, "A game is being created. Please wait for the host");
             connection.sendMessage(msg);
             return;
         }

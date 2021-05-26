@@ -23,7 +23,7 @@ public interface UserInterface {
     void viewInitialResources(int numPlayer);
     void viewInitialsLeaderCards(List<LeaderCard> cards);
     void gameMenu();
-    void errorPrint(String error);
+    void waitForHostError(String text);
     void loginMessage();
     void updateTempResource(TempResourceUpdate update);
     void updateStorages(StorageUpdate update);

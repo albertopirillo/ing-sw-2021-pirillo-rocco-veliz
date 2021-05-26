@@ -12,7 +12,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.ResourceBundle;
 
 public class LeaderCardSelectionController implements Initializable {
     @FXML
@@ -78,7 +81,7 @@ public class LeaderCardSelectionController implements Initializable {
 
     /**
      * Setter for mainController.
-     * @param mainController the MainCntroller instance
+     * @param mainController the MainController instance
      */
     public void setMainController(MainController mainController) {
         this.mainController = mainController;
@@ -123,7 +126,8 @@ public class LeaderCardSelectionController implements Initializable {
             mainController.sendMessage(request);
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setContentText("You must select 2 development cards.");
+            alert.setTitle("Warning");
+            alert.setHeaderText("You must select 2 development cards.");
             alert.show();
         }
     }

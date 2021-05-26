@@ -80,11 +80,11 @@ public class JavaFXMain extends Application {
         synchronized (lock) {
             mainController = loader.getController();
             System.out.println("[JavaFX] GUI started");
-            System.out.println("[JavaFX] Controller set: " + mainController);
+            System.out.println("[JavaFX] MainController ready");
 
             //Set and initialize the SetupController
             SetupController setupController = (SetupController) setRoot("setup");
-            System.out.println("[JavaFX] SetupController set " + setupController);
+            System.out.println("[JavaFX] SetupController ready");
             mainController.setSetupController(setupController);
             setupController.setMainController(mainController);
 
@@ -113,7 +113,7 @@ public class JavaFXMain extends Application {
 
     /**
      * <p>Changes the main scene, by loading a .fxml</p>
-     * <p>Returns the controller of that scene</p>
+     * <p>Returns the controller of that scene (explicit cast needed)</p>
      * @param fxml  the file to get the new scene from
      * @return  an Object representing the controller associated to the new scene
      */
@@ -121,8 +121,7 @@ public class JavaFXMain extends Application {
         try {
             FXMLLoader loader = Util.loadFXML(fxml);
             Parent root = loader.load();
-            Scene scene = new Scene(root);
-            myStage.setScene(scene);
+            scene.setRoot(root);
             return loader.getController();
         } catch(IOException e){
             e.printStackTrace();
@@ -138,7 +137,6 @@ public class JavaFXMain extends Application {
      */
     public static void initMainScene(List<String> playerList) {
         scene.setRoot(mainScene);
-        myStage.setScene(scene);
         resizeStage(1643, 862);
         try {
             mainController.init(playerList);

@@ -5,7 +5,8 @@ import it.polimi.ingsw.model.LeaderCard;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.ResourceType;
 import it.polimi.ingsw.network.DepotSetting;
-import it.polimi.ingsw.network.requests.ChooseLeaderRequest;
+import it.polimi.ingsw.network.Processable;
+import it.polimi.ingsw.network.messages.LoginMessage;
 import it.polimi.ingsw.network.requests.InitialResRequest;
 import it.polimi.ingsw.network.updates.*;
 import javafx.application.Platform;
@@ -30,7 +31,6 @@ public class ClientGUI implements UserInterface {
     public void setup() {
         System.out.println("[INFO] Game is starting...");
         this.mainController.setClientGUI(this);
-        System.out.println("[INFO] MainController set: " + mainController);
     }
 
     @Override
@@ -79,8 +79,42 @@ public class ClientGUI implements UserInterface {
     }
 
     @Override
+    public void changeNickname(){
+        System.out.println("[CLIENT] Nickname already in use");
+        Platform.runLater(() -> mainController.getSetupController().resetNickname(true));
+        //Wait for the nickname to be reset by the controller
+        synchronized (SetupController.lock) {
+            while(mainController.getSetupController().getNickname() != null) {
+                try {
+                    SetupController.lock.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            loginMessage();
+        }
+    }
+
+    @Override
+    public void loginMessage(){
+        String nickname = chooseNickname();
+        Processable login = new LoginMessage(nickname, nickname);
+        setNickname(nickname);
+        getClient().sendMessage(login);
+    }
+
+    @Override
     public void getGameSize() {
         Platform.runLater(() -> mainController.getSetupController().firstPlayerSetup());
+    }
+
+    @Override
+    public void waitForHostError(String text) {
+        System.out.println("[CLIENT] A game is being created. Please wait for the host");
+        Platform.runLater(() -> {
+            mainController.getSetupController().resetNickname();
+            mainController.getSetupController().waitForHostAlert(text);
+        });
     }
 
     @Override
@@ -90,7 +124,7 @@ public class ClientGUI implements UserInterface {
             LeaderCardSelectionController leaderCardSelectionController = (LeaderCardSelectionController)JavaFXMain.setRoot("leader_card_selection");
             leaderCardSelectionController.setNickname(nickname);
             leaderCardSelectionController.setLeaderCards(cards);
-            System.out.println("[JavaFX] LeaderCardSelectionController set " + leaderCardSelectionController);
+            guiLog("LeaderCardSelectionController ready");
             mainController.setLeaderCardSelectionController(leaderCardSelectionController);
             leaderCardSelectionController.setMainController(mainController);
         });
@@ -123,16 +157,6 @@ public class ClientGUI implements UserInterface {
     }
 
     @Override
-    public void errorPrint(String error) {
-
-    }
-
-    @Override
-    public void loginMessage() {
-
-    }
-
-    @Override
     public void updateTempResource(TempResourceUpdate update) {
 
     }
@@ -140,7 +164,7 @@ public class ClientGUI implements UserInterface {
     @Override
     public void updateStorages(StorageUpdate update) {
         Platform.runLater(() -> {
-            System.out.println("Updating storages...");
+            guiLog("Updating storages...");
             Map<String, List<DepotSetting>> depotMap = update.getDepotMap();
             Map<String, Resource> strongboxMap = update.getStrongboxMap();
             Map<String, PersonalBoardController> controllerMap = mainController.getPersonalBoardControllerMap();
@@ -150,6 +174,10 @@ public class ClientGUI implements UserInterface {
                 currentController.setStrongbox(strongboxMap.get(playerNick));
             }
         });
+    }
+
+    private void guiLog(String toPrint) {
+        System.out.println("[GUI] " + toPrint);
     }
 
     @Override
@@ -196,11 +224,6 @@ public class ClientGUI implements UserInterface {
     @Override
     public void updateTempMarbles(TempMarblesUpdate tempMarblesUpdate) {
         
-    }
-
-    @Override
-    public void changeNickname() {
-
     }
 
     @Override

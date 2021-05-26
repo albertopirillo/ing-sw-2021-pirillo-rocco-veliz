@@ -93,7 +93,7 @@ public class Client implements Runnable{
             try {
                 msg = receiveMessage();
             } catch(EOFException e){
-                System.out.println("\nQuitting game.");
+                System.out.println("\n[CLIENT] Quitting game.");
                 break;
             } catch (IOException e) {
                 e.printStackTrace();
@@ -106,7 +106,7 @@ public class Client implements Runnable{
     private void startConnection(){
         try {
             socket = new Socket(serverIP, port);
-            System.out.println("Connected to " + serverIP);
+            System.out.println("[CLIENT] Connected to " + serverIP);
             socketOut = new ObjectOutputStream(socket.getOutputStream());
             socketIn = new ObjectInputStream(socket.getInputStream());
             synchronized (JavaFXMain.lock) {
@@ -121,7 +121,7 @@ public class Client implements Runnable{
     }
 
     private void tryToReconnect() {
-        System.out.println("Server is unreachable, retrying in 5 seconds...");
+        System.out.println("[CLIENT] Server is unreachable, retrying in 5 seconds...");
         try {
             Thread.sleep(5000);
             startConnection();

@@ -57,22 +57,56 @@ public class SetupController implements Initializable {
     }
 
     /**
+     * Resets the nickname field
+     */
+    public void resetNickname() {
+        this.nickname = null;
+    }
+
+    /**
      * Gets and sets the selected name from the gui
      */
     public void confirmName() {
-        if (nameField.getText().matches("[a-zA-Z0-9]+")) {
-            synchronized (lock) {
-                nickname = nameField.getText();
-                lock.notifyAll();
+        if (nameField.getText() != null) {
+            if (nameField.getText().matches("[a-zA-Z0-9]+")) {
+                synchronized (lock) {
+                    nickname = nameField.getText();
+                    lock.notifyAll();
+                }
+                formatError.setVisible(false);
+                nameField.setDisable(true);
+                nameButton.setDisable(true);
             }
-            formatError.setVisible(false);
-            System.out.println("Hello " + nickname + "!");
-            nameField.setDisable(true);
-            nameButton.setDisable(true);
+            else {
+                formatError.setText("Please insert a valid nickname");
+                formatError.setVisible(true);
+            }
         }
-        else {
-            formatError.setVisible(true);
+    }
+
+    /**
+     * Resets the window layout when a player choose a nickname already in use
+     */
+    public void resetNickname(boolean changeText) {
+        synchronized (SetupController.lock) {
+            this.nickname = null;
+            SetupController.lock.notifyAll();
         }
+        formatError.setVisible(true);
+        if (changeText) formatError.setText("This nickname already exists");
+        else formatError.setVisible(false);
+        nameField.setDisable(false);
+        nameField.setText(null);
+        nameButton.setDisable(false);
+    }
+
+    public void waitForHostAlert(String text)
+    {
+        resetNickname(false);
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Warning");
+        alert.setHeaderText(text);
+        alert.showAndWait();
     }
 
     /**
@@ -81,7 +115,7 @@ public class SetupController implements Initializable {
      */
     public void confirmPlayerAmount() {
         int playerAmount = (int) playerAmountGroup.getSelectedToggle().getUserData();
-        System.out.println("Number of players: " + playerAmount);
+        System.out.println("[CLIENT] Number of players: " + playerAmount);
         Processable rsp = new GameSizeMessage(getNickname(), playerAmount);
         mainController.sendMessage(rsp);
         playerAmountButton.setDisable(true);

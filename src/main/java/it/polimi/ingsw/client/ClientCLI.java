@@ -387,9 +387,13 @@ public class ClientCLI implements UserInterface {
         }
     }
 
-    @Override
     public void errorPrint(String str) {
         System.out.println(ANSIColor.RED + str + ANSIColor.RESET);
+    }
+
+    @Override
+    public void waitForHostError(String text) {
+        errorPrint(text);
     }
 
     private Request buyDevCardMenu() {

@@ -14,7 +14,7 @@ public class ErrorMessage extends Message {
 
     @Override
     public void update(UserInterface userInterface) {
-        userInterface.errorPrint(text);
+        userInterface.waitForHostError(text);
         userInterface.loginMessage();
     }
 

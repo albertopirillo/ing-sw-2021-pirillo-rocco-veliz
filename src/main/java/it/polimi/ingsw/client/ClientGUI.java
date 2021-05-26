@@ -1,9 +1,6 @@
 package it.polimi.ingsw.client;
 
-import it.polimi.ingsw.client.gui.JavaFXMain;
-import it.polimi.ingsw.client.gui.MainController;
-import it.polimi.ingsw.client.gui.PersonalBoardController;
-import it.polimi.ingsw.client.gui.SetupController;
+import it.polimi.ingsw.client.gui.*;
 import it.polimi.ingsw.model.LeaderCard;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.ResourceType;
@@ -87,10 +84,16 @@ public class ClientGUI implements UserInterface {
     }
 
     @Override
-    public void viewInitialsLeaderCards(List<LeaderCard> cards) { //TODO
-        ChooseLeaderRequest request = new ChooseLeaderRequest(0, 1);
-        request.setPlayer(getNickname());
-        getClient().sendMessage(request);
+    public void viewInitialsLeaderCards(List<LeaderCard> cards) {
+        Platform.runLater(() -> {
+            //Set and initialize the LeaderCardSelectionController
+            LeaderCardSelectionController leaderCardSelectionController = (LeaderCardSelectionController)JavaFXMain.setRoot("leader_card_selection");
+            leaderCardSelectionController.setNickname(nickname);
+            leaderCardSelectionController.setLeaderCards(cards);
+            System.out.println("[JavaFX] LeaderCardSelectionController set " + leaderCardSelectionController);
+            mainController.setLeaderCardSelectionController(leaderCardSelectionController);
+            leaderCardSelectionController.setMainController(mainController);
+        });
     }
 
     @Override

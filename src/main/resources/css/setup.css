@@ -1,0 +1,11 @@
+#formatError {
+    -fx-font-size: 36;
+    -fx-font-family: "Blackadder ITC";
+    -fx-alignment: center;
+}
+
+#firstPlayerLabel {
+    -fx-font-size: 36;
+    -fx-font-family: "System";
+    -fx-alignment: center;
+}

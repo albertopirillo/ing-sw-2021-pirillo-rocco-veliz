@@ -20,9 +20,9 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * <p>Main JavaFX Controller</p>
- * <p>This is class initializes the tabs</p>
- * <p>Used as a gateway to all controllers</p>
+ * <p>Main JavaFX Controller for the file main.fxml</p>
+ * <p>This class initializes the player tabs</p>
+ * <p>Used as a gateway to all JavaFX controllers</p>
  */
 public class MainController {
 

@@ -65,8 +65,11 @@ public class JavaFXMain extends Application {
         myStage.setResizable(false);
 
         //Load CSS
-        String css = Util.getCSS("main");
-        scene.getStylesheets().add(css);
+        loadCSS("main");
+        loadCSS("market");
+        loadCSS("personalBoard");
+        loadCSS("setup");
+        loadCSS("tray");
 
         //Set window title and icon
         myStage.setTitle("Master of Renaissance");
@@ -100,6 +103,11 @@ public class JavaFXMain extends Application {
             }
             myStage.show();
         }
+    }
+
+    private void loadCSS(String fileName) {
+        String css = Util.getCSS(fileName);
+        scene.getStylesheets().add(css);
     }
 
     /**

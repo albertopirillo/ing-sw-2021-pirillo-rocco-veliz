@@ -1,0 +1,6 @@
+#sb_servant, #sb_stone, #sb_coin, #sb_shield{
+    -fx-font-size: 36;
+    -fx-font-family: "System";
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+}

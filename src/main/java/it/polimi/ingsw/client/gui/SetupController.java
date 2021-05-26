@@ -11,6 +11,10 @@ import javafx.scene.text.Text;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * <p>JavaFX controller for the file setup.fxml</p>
+ * <p>Handles nickname and player amount selection</p>
+ */
 public class SetupController implements Initializable {
 
     @FXML

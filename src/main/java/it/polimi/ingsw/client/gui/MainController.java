@@ -2,11 +2,15 @@ package it.polimi.ingsw.client.gui;
 
 import it.polimi.ingsw.client.ClientGUI;
 import it.polimi.ingsw.network.Processable;
+import it.polimi.ingsw.network.requests.QuitGameRequest;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.stage.Popup;
@@ -16,6 +20,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * <p>Main JavaFX Controller</p>
@@ -189,6 +194,23 @@ public class MainController {
         else {
             marketPopup.setText("Show Market Cards");
             this.marketPopUp.hide();
+        }
+    }
+
+    /**
+     * Show an alert before quitting the game
+     * @param event the event triggered by pressing the button
+     */
+    public void quitGame(Event event) {
+        event.consume();
+        QuitAlert alert = new QuitAlert();
+        Optional<ButtonType> button = alert.showAndWait();
+        if (button.isPresent()) {
+            if (button.get() == ButtonType.OK) {
+                QuitGameRequest req = new QuitGameRequest();
+                sendMessage(req);
+                Platform.exit();
+            }
         }
     }
 }

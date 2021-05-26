@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.*?>
-<AnchorPane prefHeight="825.0" prefWidth="1618.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.MainController">
+<AnchorPane prefHeight="825.0" prefWidth="1618.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.MainController">
    <children>
       <TabPane fx:id="tabPane" layoutX="269.0" layoutY="3.0" prefHeight="822.0" prefWidth="1360.0" tabClosingPolicy="UNAVAILABLE" />
       <MenuButton layoutX="33.0" layoutY="377.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="214.0" text="Activate leader">
@@ -28,7 +28,7 @@
          <font>
             <Font size="20.0" />
          </font></Button>
-      <Button layoutX="31.0" layoutY="715.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="214.0" text="Quit game">
+      <Button layoutX="31.0" layoutY="715.0" mnemonicParsing="false" onAction="#quitGame" prefHeight="30.0" prefWidth="214.0" text="Quit game">
          <font>
             <Font size="24.0" />
          </font></Button>

@@ -2,11 +2,11 @@ package it.polimi.ingsw.client.gui;
 
 import it.polimi.ingsw.client.Client;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
@@ -89,7 +89,7 @@ public class JavaFXMain extends Application {
         }
 
         //Popup on quitting
-        //stage.setOnCloseRequest(event -> quitPopup(stage, event));
+        //stage.setOnCloseRequest(this::quitPopup);
 
         myStage.centerOnScreen();
 
@@ -143,16 +143,13 @@ public class JavaFXMain extends Application {
         myStage.centerOnScreen();
     }
 
-    private void quitPopup(Stage stage, Event event) {
+    private void quitPopup(Event event) {
         event.consume();
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Quit");
-        alert.setHeaderText("You're about to quit");
-        alert.setContentText("All data will be lost");
+        QuitAlert alert = new QuitAlert();
         Optional<ButtonType> button = alert.showAndWait();
         if (button.isPresent()) {
             if (button.get() == ButtonType.OK) {
-                stage.close();
+                Platform.exit();
             }
         }
     }

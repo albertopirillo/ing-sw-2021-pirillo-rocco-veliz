@@ -1,7 +1,7 @@
 [
   {
     "id": 5,
-    "img": "leaderFront05.pdf",
+    "img": "leaderFront05.png",
     "type": "res",
     "cost": {
       "map": {
@@ -19,7 +19,7 @@
   },
   {
     "id": 6,
-    "img": "leaderFront06.pdf",
+    "img": "leaderFront06.png",
     "type": "res",
     "cost": {
       "map": {
@@ -37,7 +37,7 @@
   },
   {
     "id": 7,
-    "img": "leaderFront07.pdf",
+    "img": "leaderFront07.png",
     "type": "res",
     "cost": {
       "map": {
@@ -55,7 +55,7 @@
   },
   {
     "id": 8,
-    "img": "leaderFront08.pdf",
+    "img": "leaderFront08.png",
     "type": "res",
     "cost": {
       "map": {
@@ -73,7 +73,7 @@
   },
   {
     "id": 1,
-    "img": "leaderFront01.pdf",
+    "img": "leaderFront01.png",
     "type": "dev",
     "requires": [
       {
@@ -96,7 +96,7 @@
   },
   {
     "id": 2,
-    "img": "leaderFront02.pdf",
+    "img": "leaderFront02.png",
     "type": "dev",
     "requires": [
       {
@@ -119,7 +119,7 @@
   },
   {
     "id": 3,
-    "img": "leaderFront03.pdf",
+    "img": "leaderFront03.png",
     "type": "dev",
     "requires": [
       {
@@ -142,7 +142,7 @@
   },
   {
     "id": 4,
-    "img": "leaderFront04.pdf",
+    "img": "leaderFront04.png",
     "type": "dev",
     "requires": [
       {
@@ -165,7 +165,7 @@
   },
   {
     "id": 9,
-    "img": "leaderFront09.pdf",
+    "img": "leaderFront09.png",
     "type": "dev",
     "requires": [
       {
@@ -187,7 +187,7 @@
   },
   {
     "id": 10,
-    "img": "leaderFront10.pdf",
+    "img": "leaderFront10.png",
     "type": "dev",
     "requires": [
       {
@@ -209,7 +209,7 @@
   },
   {
     "id": 11,
-    "img": "leaderFront11.pdf",
+    "img": "leaderFront11.png",
     "type": "dev",
     "requires": [
       {
@@ -231,7 +231,7 @@
   },
   {
     "id": 12,
-    "img": "leaderFront12.pdf",
+    "img": "leaderFront12.png",
     "type": "dev",
     "requires": [
       {
@@ -253,7 +253,7 @@
   },
   {
     "id": 13,
-    "img": "leaderFront13.pdf",
+    "img": "leaderFront13.png",
     "type": "dev",
     "requires": [
       {
@@ -289,7 +289,7 @@
   },
   {
     "id": 14,
-    "img": "leaderFront14.pdf",
+    "img": "leaderFront14.png",
     "type": "dev",
     "requires": [
       {
@@ -325,7 +325,7 @@
   },
   {
     "id": 15,
-    "img": "leaderFront15.pdf",
+    "img": "leaderFront15.png",
     "type": "dev",
     "requires": [
       {
@@ -361,7 +361,7 @@
   },
   {
     "id": 16,
-    "img": "leaderFront16.pdf",
+    "img": "leaderFront16.png",
     "type": "dev",
     "requires": [
       {

@@ -51,6 +51,10 @@ public class MainController {
      */
     private SetupController setupController;
     /**
+     * Reference to the actual LeaderCardSelectionController
+     */
+    private LeaderCardSelectionController leaderCardSelectionController;
+    /**
      * The UserInterface this controller is associated with
      */
     private ClientGUI clientGUI;
@@ -95,11 +99,27 @@ public class MainController {
     }
 
     /**
+     * Gets the SetupController
+     * @return  the current SetupController
+     */
+    public LeaderCardSelectionController getLeaderCardSelectionController() {
+        return leaderCardSelectionController;
+    }
+
+    /**
      * Sets the SetupController
-     * @param setupController   the SetupController to set
+     * @param setupController the SetupController to set
      */
     public void setSetupController(SetupController setupController) {
         this.setupController = setupController;
+    }
+
+    /**
+     * Sets the LeaderCardSelectionController
+     * @param controller the LeaderCardSelectionController to set
+     */
+    public void setLeaderCardSelectionController(LeaderCardSelectionController controller) {
+        this.leaderCardSelectionController = controller;
     }
 
     /**

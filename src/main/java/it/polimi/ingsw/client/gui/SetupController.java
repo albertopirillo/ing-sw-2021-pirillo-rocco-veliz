@@ -87,11 +87,7 @@ public class SetupController implements Initializable {
     /**
      * Resets the window layout when a player choose a nickname already in use
      */
-    public void resetNickname(boolean changeText) {
-        synchronized (SetupController.lock) {
-            this.nickname = null;
-            SetupController.lock.notifyAll();
-        }
+    public void enableNicknameInput(boolean changeText) {
         formatError.setVisible(true);
         if (changeText) formatError.setText("This nickname already exists");
         else formatError.setVisible(false);
@@ -100,13 +96,15 @@ public class SetupController implements Initializable {
         nameButton.setDisable(false);
     }
 
-    public void waitForHostAlert(String text)
+    /**
+     * Informs the player that he must wait the host before entering the nickname
+     * @param text  the text to be displayed
+     */
+    public void waitForHostError(String text)
     {
-        resetNickname(false);
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Warning");
-        alert.setHeaderText(text);
-        alert.showAndWait();
+        enableNicknameInput(false);
+        formatError.setVisible(true);
+        formatError.setText(text);
     }
 
     /**

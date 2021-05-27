@@ -260,6 +260,7 @@ public class MainController implements Initializable {
         for(Tab tab: tabPane.getTabs()) {
             if(tab.getText().equals(nickname)) {
                 tabPane.getSelectionModel().select(tab);
+                //TODO: change style
             }
         }
     }

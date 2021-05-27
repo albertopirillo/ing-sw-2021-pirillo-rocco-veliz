@@ -20,7 +20,7 @@ public class ClientGUI implements UserInterface {
     private String nickname;
     private final Client client;
     private final MainController mainController;
-    private final boolean testing = true;
+    private final boolean testing = false;
 
     public ClientGUI(Client client, MainController controller) {
         this.client = client;
@@ -90,7 +90,8 @@ public class ClientGUI implements UserInterface {
     @Override
     public void changeNickname(){
         System.out.println("[CLIENT] Nickname already in use");
-        Platform.runLater(() -> mainController.getSetupController().resetNickname(true));
+        mainController.getSetupController().resetNickname();
+        Platform.runLater(() -> mainController.getSetupController().enableNicknameInput(true));
         //Wait for the nickname to be reset by the controller
         synchronized (SetupController.lock) {
             while(mainController.getSetupController().getNickname() != null) {
@@ -115,7 +116,8 @@ public class ClientGUI implements UserInterface {
     @Override
     public void getGameSize() {
         if (testing) {
-            Processable rsp = new GameSizeMessage(getNickname(), 2);
+            int playerAmountTesting = 2;
+            Processable rsp = new GameSizeMessage(getNickname(), playerAmountTesting);
             mainController.sendMessage(rsp);
         }
         else {
@@ -125,11 +127,9 @@ public class ClientGUI implements UserInterface {
 
     @Override
     public void waitForHostError(String text) {
+        mainController.getSetupController().resetNickname();
         System.out.println("[CLIENT] A game is being created. Please wait for the host");
-        Platform.runLater(() -> {
-            mainController.getSetupController().resetNickname();
-            mainController.getSetupController().waitForHostAlert(text);
-        });
+        Platform.runLater(() -> mainController.getSetupController().waitForHostError(text));
     }
 
     @Override

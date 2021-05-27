@@ -66,12 +66,12 @@ public class Server implements Runnable {
     private boolean checkUsernameExist(String nickname){
         for (Map<String, Connection> map : games) {
             for (String nick : map.keySet()) {
-                if (nick.equals(nickname))
+                if ((nick).equalsIgnoreCase(nickname))
                     return true;
             }
         }
         for (String nick : lobbyPlayers.keySet()){
-            if(nick.equals(nickname))
+            if(nick.equalsIgnoreCase(nickname))
                 return true;
         }
         return false;

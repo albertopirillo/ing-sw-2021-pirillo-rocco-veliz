@@ -144,7 +144,7 @@ public class ClientGUI implements UserInterface {
         else {
             Platform.runLater(() -> {
                 //Set and initialize the LeaderCardSelectionController
-                LeaderCardSelectionController leaderCardSelectionController = (LeaderCardSelectionController) JavaFXMain.setRoot("leader_card_selection");
+                LeaderCardSelectionController leaderCardSelectionController = (LeaderCardSelectionController) JavaFXMain.changeScene("leader_card_selection");
                 leaderCardSelectionController.setNickname(nickname);
                 leaderCardSelectionController.setLeaderCards(cards);
                 printLog("LeaderCardSelectionController ready");

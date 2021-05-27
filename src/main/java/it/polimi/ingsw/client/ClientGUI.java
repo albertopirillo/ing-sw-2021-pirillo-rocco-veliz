@@ -50,7 +50,9 @@ public class ClientGUI implements UserInterface {
 
     @Override
     public void endOfUpdate(EndOfUpdate update) {
-
+        printLog("The current active player is " + update.getActivePlayer());
+        //Activate the GUI only if this is the active player
+        mainController.disableGUI(!update.getActivePlayer().equals(this.nickname));
     }
 
     @Override
@@ -124,7 +126,7 @@ public class ClientGUI implements UserInterface {
             LeaderCardSelectionController leaderCardSelectionController = (LeaderCardSelectionController)JavaFXMain.setRoot("leader_card_selection");
             leaderCardSelectionController.setNickname(nickname);
             leaderCardSelectionController.setLeaderCards(cards);
-            guiLog("LeaderCardSelectionController ready");
+            printLog("LeaderCardSelectionController ready");
             mainController.setLeaderCardSelectionController(leaderCardSelectionController);
             leaderCardSelectionController.setMainController(mainController);
         });
@@ -164,7 +166,7 @@ public class ClientGUI implements UserInterface {
     @Override
     public void updateStorages(StorageUpdate update) {
         Platform.runLater(() -> {
-            guiLog("Updating storages...");
+            printLog("Updating storages...");
             Map<String, List<DepotSetting>> depotMap = update.getDepotMap();
             Map<String, Resource> strongboxMap = update.getStrongboxMap();
             Map<String, PersonalBoardController> controllerMap = mainController.getPersonalBoardControllerMap();
@@ -176,7 +178,7 @@ public class ClientGUI implements UserInterface {
         });
     }
 
-    private void guiLog(String toPrint) {
+    private void printLog(String toPrint) {
         System.out.println("[GUI] " + toPrint);
     }
 
@@ -192,8 +194,10 @@ public class ClientGUI implements UserInterface {
 
     @Override
     public void displayError(ErrorUpdate update) {
-        Platform.runLater(() ->
-                mainController.displayError(update.getClientError().getError()));
+        if(update.getActivePlayer().equals(this.nickname)) {
+            Platform.runLater(() ->
+                    mainController.displayError(update.getClientError().getError()));
+        }
     }
 
     @Override
@@ -243,10 +247,14 @@ public class ClientGUI implements UserInterface {
 
     @Override
     public void startMainGame(EndOfInitialUpdate update) {
+        printLog("Setting up main game...");
+        printLog("The first player is " + update.getActivePlayer());
         //Start the main scene
         Platform.runLater(() -> {
             List<String> playerList = new ArrayList<>(update.getStorageUpdate().getStrongboxMap().keySet());
             JavaFXMain.initMainScene(playerList);
+            mainController.switchToTab(this.nickname);
+            mainController.disableGUI(!update.getActivePlayer().equals(this.nickname));
         });
         //Update the GUI with storages and leader cards of all players
         updateStorages(update.getStorageUpdate());

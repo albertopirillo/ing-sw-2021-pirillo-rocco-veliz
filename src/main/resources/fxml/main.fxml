@@ -6,7 +6,7 @@
 <AnchorPane prefHeight="825.0" prefWidth="1618.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.MainController">
    <children>
       <TabPane fx:id="tabPane" layoutX="269.0" layoutY="3.0" prefHeight="822.0" prefWidth="1360.0" tabClosingPolicy="UNAVAILABLE" />
-      <MenuButton layoutX="33.0" layoutY="377.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="214.0" text="Activate leader">
+      <MenuButton fx:id="activateLeaderButton" layoutX="33.0" layoutY="377.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="214.0" text="Activate leader">
         <items>
           <MenuItem mnemonicParsing="false" text="Action 1" />
           <MenuItem mnemonicParsing="false" text="Action 2" />
@@ -15,7 +15,7 @@
             <Font size="20.0" />
          </font>
       </MenuButton>
-      <Button layoutX="31.0" layoutY="618.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="214.0" text="End turn" textAlignment="CENTER">
+      <Button fx:id="endTurnButton" layoutX="31.0" layoutY="618.0" mnemonicParsing="false" onAction="#endTurn" prefHeight="30.0" prefWidth="214.0" text="End turn" textAlignment="CENTER">
          <font>
             <Font size="24.0" />
          </font>
@@ -28,11 +28,11 @@
          <font>
             <Font size="20.0" />
          </font></Button>
-      <Button layoutX="31.0" layoutY="715.0" mnemonicParsing="false" onAction="#quitGame" prefHeight="30.0" prefWidth="214.0" text="Quit game">
+      <Button fx:id="quitButton" layoutX="31.0" layoutY="715.0" mnemonicParsing="false" onAction="#quitGame" prefHeight="30.0" prefWidth="214.0" text="Quit game">
          <font>
             <Font size="24.0" />
          </font></Button>
-      <MenuButton layoutX="33.0" layoutY="263.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="214.0" text="Activate production">
+      <MenuButton fx:id="prodButton" layoutX="33.0" layoutY="263.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="214.0" text="Activate production">
         <items>
           <MenuItem mnemonicParsing="false" text="Action 1" />
           <MenuItem mnemonicParsing="false" text="Action 2" />
@@ -41,7 +41,7 @@
             <Font size="18.0" />
          </font>
       </MenuButton>
-      <SplitMenuButton layoutX="33.0" layoutY="492.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="214.0" text="Discard leader">
+      <SplitMenuButton fx:id="discardLeaderButton" layoutX="33.0" layoutY="492.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="214.0" text="Discard leader">
         <items>
           <MenuItem mnemonicParsing="false" text="Action 1" />
           <MenuItem mnemonicParsing="false" text="Action 2" />

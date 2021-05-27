@@ -2,29 +2,31 @@ package it.polimi.ingsw.client.gui;
 
 import it.polimi.ingsw.client.ClientGUI;
 import it.polimi.ingsw.network.Processable;
+import it.polimi.ingsw.network.requests.EndTurnRequest;
 import it.polimi.ingsw.network.requests.QuitGameRequest;
+import it.polimi.ingsw.network.requests.Request;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.net.URL;
+import java.util.*;
 
 /**
  * <p>Main JavaFX Controller for the file main.fxml</p>
  * <p>This class initializes the player tabs</p>
  * <p>Used as a gateway to all JavaFX controllers</p>
  */
-public class MainController {
+public class MainController implements Initializable {
 
     /**
      * The popup used to show the market tray
@@ -58,13 +60,19 @@ public class MainController {
      * The UserInterface this controller is associated with
      */
     private ClientGUI clientGUI;
+    /**
+     * List of all elements to be disable when it isn't the player's turn
+     */
+    private final List<Node> buttonsList = new ArrayList<>();
 
     @FXML
-    private Button trayPopup;
-    @FXML
-    private Button marketPopup;
-    @FXML
     private TabPane tabPane;
+    @FXML
+    private Button trayPopup, marketPopup, endTurnButton, quitButton;
+    @FXML
+    private MenuButton activateLeaderButton, prodButton;
+    @FXML
+    private SplitMenuButton discardLeaderButton;
 
     /**
      * Gets the mapping between nicknames and PersonalBoardController
@@ -156,6 +164,7 @@ public class MainController {
             Parent node = loader.load();
             PersonalBoardController personalBoardController = loader.getController();
             personalBoardController.setMainController(this);
+            buttonsList.add(personalBoardController.getReorderButton());
             this.personalBoardControllerMap.put(nickname, personalBoardController);
 
             Tab tab = new Tab();
@@ -241,5 +250,46 @@ public class MainController {
         errorAlert.setHeaderText("Received an error message from the server");
         errorAlert.setContentText(errorMsg);
         errorAlert.showAndWait();
+    }
+
+    /**
+     * Selects the tab of the player corresponding to the given nickname
+     * @param nickname  the nickname of the player to display the tab
+     */
+    public void switchToTab(String nickname) {
+        for(Tab tab: tabPane.getTabs()) {
+            if(tab.getText().equals(nickname)) {
+                tabPane.getSelectionModel().select(tab);
+            }
+        }
+    }
+
+    /**
+     * Disables or enables all the buttons only the active player can interact with
+     * @param disable   whether the buttons should be disable or not
+     */
+    public void disableGUI(boolean disable) {
+        for(Node node: buttonsList) {
+            node.setDisable(disable);
+        }
+    }
+
+    /**
+     * Sends a EndTurnRequest to the Server
+     */
+    public void endTurn() {
+        Request request = new EndTurnRequest();
+        sendMessage(request);
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        buttonsList.add(trayPopup);
+        buttonsList.add(marketPopup);
+        buttonsList.add(endTurnButton);
+        buttonsList.add(activateLeaderButton);
+        buttonsList.add(prodButton);
+        buttonsList.add(discardLeaderButton);
+        buttonsList.add(quitButton);
     }
 }

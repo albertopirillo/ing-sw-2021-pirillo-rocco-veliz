@@ -21,13 +21,13 @@ import java.util.*;
 public class PersonalBoardController implements Initializable {
 
     @FXML
-    ImageView depot1_1, depot2_1, depot2_2, depot3_1, depot3_2, depot3_3;
+    private ImageView depot1_1, depot2_1, depot2_2, depot3_1, depot3_2, depot3_3;
     @FXML
-    ImageView extra1_1, extra1_2, extra2_1, extra2_2;
+    private ImageView extra1_1, extra1_2, extra2_1, extra2_2;
     @FXML
-    Label sb_stone, sb_servant, sb_shield, sb_coin;
+    private Label sb_stone, sb_servant, sb_shield, sb_coin;
     @FXML
-    Button reorderButton;
+    private Button reorderButton;
 
     /**
      * The location where the current drag started
@@ -49,6 +49,14 @@ public class PersonalBoardController implements Initializable {
      * A map to get a list of all the corresponding images from a given layer
      */
     private final Map<Integer, List<ImageView>> layerMapping = new HashMap<>();
+
+    /**
+     * Gets the ReorderButton
+     * @return  a Button representing the reorder button
+     */
+    public Button getReorderButton() {
+        return this.reorderButton;
+    }
 
     /**
      * Sets the MainController

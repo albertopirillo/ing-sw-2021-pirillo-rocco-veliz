@@ -14,6 +14,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 
@@ -170,6 +172,9 @@ public class MainController implements Initializable {
             Tab tab = new Tab();
             tab.setText(nickname);
             tab.setContent(node);
+            Image inkwell = new Image("/png/generic/inkwell.png", 22, 24, true, true);
+            tab.setGraphic(new ImageView(inkwell));
+            tab.getGraphic().setVisible(false);
             tabPane.getTabs().add(tab);
         }
     }
@@ -260,7 +265,10 @@ public class MainController implements Initializable {
         for(Tab tab: tabPane.getTabs()) {
             if(tab.getText().equals(nickname)) {
                 tabPane.getSelectionModel().select(tab);
-                //TODO: change style
+                tab.getGraphic().setVisible(true);
+            }
+            else {
+                tab.getGraphic().setVisible(false);
             }
         }
     }

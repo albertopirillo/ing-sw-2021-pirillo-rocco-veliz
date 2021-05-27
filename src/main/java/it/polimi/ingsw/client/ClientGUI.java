@@ -21,6 +21,7 @@ public class ClientGUI implements UserInterface {
     private final Client client;
     private final MainController mainController;
     private final boolean testing = false;
+    private final int playerAmountTesting = 2;
 
     public ClientGUI(Client client, MainController controller) {
         this.client = client;
@@ -51,9 +52,11 @@ public class ClientGUI implements UserInterface {
     @Override
     public void endOfUpdate(EndOfUpdate update) {
         printLog("The current active player is " + update.getActivePlayer());
-        mainController.switchToTab(update.getActivePlayer());
-        //Activate the GUI only if this is the active player
-        mainController.disableGUI(!update.getActivePlayer().equals(this.nickname));
+        Platform.runLater(() -> {
+            mainController.switchToTab(update.getActivePlayer());
+            //Activate the GUI only if this is the active player
+            mainController.disableGUI(!update.getActivePlayer().equals(this.nickname));
+        });
     }
 
     @Override
@@ -116,8 +119,7 @@ public class ClientGUI implements UserInterface {
     @Override
     public void getGameSize() {
         if (testing) {
-            int playerAmountTesting = 2;
-            Processable rsp = new GameSizeMessage(getNickname(), playerAmountTesting);
+            Processable rsp = new GameSizeMessage(getNickname(), this.playerAmountTesting);
             mainController.sendMessage(rsp);
         }
         else {
@@ -273,7 +275,7 @@ public class ClientGUI implements UserInterface {
         Platform.runLater(() -> {
             List<String> playerList = new ArrayList<>(update.getStorageUpdate().getStrongboxMap().keySet());
             JavaFXMain.initMainScene(playerList);
-            mainController.switchToTab(this.nickname);
+            mainController.switchToTab(update.getActivePlayer());
             mainController.disableGUI(!update.getActivePlayer().equals(this.nickname));
         });
         //Update the GUI with storages and leader cards of all players

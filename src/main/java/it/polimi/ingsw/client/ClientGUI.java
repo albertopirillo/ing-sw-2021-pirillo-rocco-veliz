@@ -6,21 +6,21 @@ import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.ResourceType;
 import it.polimi.ingsw.network.DepotSetting;
 import it.polimi.ingsw.network.Processable;
+import it.polimi.ingsw.network.messages.GameSizeMessage;
 import it.polimi.ingsw.network.messages.LoginMessage;
+import it.polimi.ingsw.network.requests.ChooseLeaderRequest;
 import it.polimi.ingsw.network.requests.InitialResRequest;
 import it.polimi.ingsw.network.updates.*;
 import javafx.application.Platform;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ClientGUI implements UserInterface {
 
     private String nickname;
     private final Client client;
     private final MainController mainController;
+    private final boolean testing = true;
 
     public ClientGUI(Client client, MainController controller) {
         this.client = client;
@@ -51,6 +51,7 @@ public class ClientGUI implements UserInterface {
     @Override
     public void endOfUpdate(EndOfUpdate update) {
         printLog("The current active player is " + update.getActivePlayer());
+        mainController.switchToTab(update.getActivePlayer());
         //Activate the GUI only if this is the active player
         mainController.disableGUI(!update.getActivePlayer().equals(this.nickname));
     }
@@ -64,20 +65,26 @@ public class ClientGUI implements UserInterface {
 
     @Override
     public String chooseNickname() {
-        SetupController setupController = mainController.getSetupController();
-        synchronized (SetupController.lock) {
-            while(setupController.getNickname() == null) {
-                try {
-                    System.out.println("[CLIENT] Waiting for nickname...");
-                    SetupController.lock.wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+        if (testing) {
+            Random random = new Random();
+            return "Player " + random.nextInt(1000);
+        }
+        else {
+            SetupController setupController = mainController.getSetupController();
+            synchronized (SetupController.lock) {
+                while (setupController.getNickname() == null) {
+                    try {
+                        System.out.println("[CLIENT] Waiting for nickname...");
+                        SetupController.lock.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
+            String nickname = setupController.getNickname();
+            System.out.println("[CLIENT] Nickname set: " + nickname);
+            return nickname;
         }
-        String nickname = setupController.getNickname();
-        System.out.println("[CLIENT] Nickname set: " + nickname);
-        return nickname;
     }
 
     @Override
@@ -107,7 +114,13 @@ public class ClientGUI implements UserInterface {
 
     @Override
     public void getGameSize() {
-        Platform.runLater(() -> mainController.getSetupController().firstPlayerSetup());
+        if (testing) {
+            Processable rsp = new GameSizeMessage(getNickname(), 2);
+            mainController.sendMessage(rsp);
+        }
+        else {
+            Platform.runLater(() -> mainController.getSetupController().firstPlayerSetup());
+        }
     }
 
     @Override
@@ -121,15 +134,22 @@ public class ClientGUI implements UserInterface {
 
     @Override
     public void viewInitialsLeaderCards(List<LeaderCard> cards) {
-        Platform.runLater(() -> {
-            //Set and initialize the LeaderCardSelectionController
-            LeaderCardSelectionController leaderCardSelectionController = (LeaderCardSelectionController)JavaFXMain.setRoot("leader_card_selection");
-            leaderCardSelectionController.setNickname(nickname);
-            leaderCardSelectionController.setLeaderCards(cards);
-            printLog("LeaderCardSelectionController ready");
-            mainController.setLeaderCardSelectionController(leaderCardSelectionController);
-            leaderCardSelectionController.setMainController(mainController);
-        });
+        if (testing) {
+            ChooseLeaderRequest request = new ChooseLeaderRequest(0, 1);
+            request.setPlayer(nickname);
+            mainController.sendMessage(request);
+        }
+        else {
+            Platform.runLater(() -> {
+                //Set and initialize the LeaderCardSelectionController
+                LeaderCardSelectionController leaderCardSelectionController = (LeaderCardSelectionController) JavaFXMain.setRoot("leader_card_selection");
+                leaderCardSelectionController.setNickname(nickname);
+                leaderCardSelectionController.setLeaderCards(cards);
+                printLog("LeaderCardSelectionController ready");
+                mainController.setLeaderCardSelectionController(leaderCardSelectionController);
+                leaderCardSelectionController.setMainController(mainController);
+            });
+        }
     }
 
     @Override

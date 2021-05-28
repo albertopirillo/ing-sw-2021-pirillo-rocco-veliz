@@ -1,5 +1,6 @@
 [
   {
+    "img": "devcard21",
     "cost": {
       "map": {
         "STONE": 0,
@@ -32,6 +33,7 @@
     "victoryPoints": 1
   },
   {
+    "img": "devcard2",
     "cost": {
       "map": {
         "STONE": 0,
@@ -63,6 +65,7 @@
     "victoryPoints": 3
   },
   {
+    "img": "devcard3",
     "cost": {
       "map": {
         "STONE": 0,
@@ -94,6 +97,7 @@
     "victoryPoints": 3
   },
   {
+    "img": "devcard4",
     "cost": {
       "map": {
         "STONE": 3,
@@ -125,6 +129,7 @@
     "victoryPoints": 3
   },
   {
+    "img": "devcard5",
     "cost": {
       "map": {
         "STONE": 0,
@@ -157,6 +162,7 @@
     "victoryPoints": 4
   },
   {
+    "img": "devcard6",
     "cost": {
       "map": {
         "STONE": 2,
@@ -189,6 +195,7 @@
     "victoryPoints": 4
   },
   {
+    "img": "devcard7",
     "cost": {
       "map": {
         "STONE": 0,
@@ -221,6 +228,7 @@
     "victoryPoints": 4
   },
   {
+    "img": "devcard8",
     "cost": {
       "map": {
         "STONE": 2,
@@ -253,6 +261,7 @@
     "victoryPoints": 4
   },
   {
+    "img": "devcard9",
     "cost": {
       "map": {
         "STONE": 0,
@@ -285,6 +294,7 @@
     "victoryPoints": 5
   },
   {
+    "img": "devcard10",
     "cost": {
       "map": {
         "STONE": 0,
@@ -317,6 +327,7 @@
     "victoryPoints": 5
   },
   {
+    "img": "devcard11",
     "cost": {
       "map": {
         "STONE": 0,
@@ -349,6 +360,7 @@
     "victoryPoints": 5
   },
   {
+    "img": "devcard12",
     "cost": {
       "map": {
         "STONE": 0,
@@ -381,6 +393,7 @@
     "victoryPoints": 1
   },
   {
+    "img": "devcard13",
     "cost": {
       "map": {
         "STONE": 4,
@@ -413,6 +426,7 @@
     "victoryPoints": 5
   },
   {
+    "img": "devcard14",
     "cost": {
       "map": {
         "STONE": 0,
@@ -444,6 +458,7 @@
     "victoryPoints": 6
   },
   {
+    "img": "devcard15",
     "cost": {
       "map": {
         "STONE": 0,
@@ -475,6 +490,7 @@
     "victoryPoints": 6
   },
   {
+    "img": "devcard16",
     "cost": {
       "map": {
         "STONE": 2,
@@ -506,6 +522,7 @@
     "victoryPoints": 6
   },
   {
+    "img": "devcard17",
     "cost": {
       "map": {
         "STONE": 3,
@@ -537,6 +554,7 @@
     "victoryPoints": 6
   },
   {
+    "img": "devcard18",
     "cost": {
       "map": {
         "STONE": 0,
@@ -569,6 +587,7 @@
     "victoryPoints": 7
   },
   {
+    "img": "devcard19",
     "cost": {
       "map": {
         "STONE": 0,
@@ -601,6 +620,7 @@
     "victoryPoints": 7
   },
   {
+    "img": "devcard20",
     "cost": {
       "map": {
         "STONE": 0,
@@ -633,6 +653,7 @@
     "victoryPoints": 7
   },
   {
+    "img": "devcard21",
     "cost": {
       "map": {
         "STONE": 5,
@@ -665,6 +686,7 @@
     "victoryPoints": 7
   },
   {
+    "img": "devcard22",
     "cost": {
       "map": {
         "STONE": 0,
@@ -697,6 +719,7 @@
     "victoryPoints": 8
   },
   {
+    "img": "devcard23",
     "cost": {
       "map": {
         "STONE": 0,
@@ -729,6 +752,7 @@
     "victoryPoints": 1
   },
   {
+    "img": "devcard24",
     "cost": {
       "map": {
         "STONE": 0,
@@ -761,7 +785,7 @@
     "victoryPoints": 8
   },
   {
-    "img": "devcard25.png",
+    "img": "devcard25",
     "cost": {
       "map": {
         "STONE": 3,
@@ -794,7 +818,7 @@
     "victoryPoints": 8
   },
   {
-    "img": "devcard26.png",
+    "img": "devcard26",
     "cost": {
       "map": {
         "STONE": 3,
@@ -827,7 +851,7 @@
     "victoryPoints": 8
   },
   {
-    "img": "devcard27.png",
+    "img": "devcard27",
     "cost": {
       "map": {
         "STONE": 0,
@@ -860,7 +884,7 @@
     "victoryPoints": 9
   },
   {
-    "img": "devcard28.png",
+    "img": "devcard28",
     "cost": {
       "map": {
         "STONE": 0,
@@ -893,7 +917,7 @@
     "victoryPoints": 9
   },
   {
-    "img": "devcard29.png",
+    "img": "devcard29",
     "cost": {
       "map": {
         "STONE": 0,
@@ -926,7 +950,7 @@
     "victoryPoints": 9
   },
   {
-    "img": "devcard30.png",
+    "img": "devcard30",
     "cost": {
       "map": {
         "STONE": 6,
@@ -959,7 +983,7 @@
     "victoryPoints": 9
   },
   {
-    "img": "devcard31.png",
+    "img": "devcard31",
     "cost": {
       "map": {
         "STONE": 0,
@@ -992,7 +1016,7 @@
     "victoryPoints": 10
   },
   {
-    "img": "devcard32.png",
+    "img": "devcard32",
     "cost": {
       "map": {
         "STONE": 0,
@@ -1025,7 +1049,7 @@
     "victoryPoints": 10
   },
   {
-    "img": "devcard33.png",
+    "img": "devcard33",
     "cost": {
       "map": {
         "STONE": 2,
@@ -1058,7 +1082,7 @@
     "victoryPoints": 10
   },
   {
-    "img": "devcard34.png",
+    "img": "devcard34",
     "cost": {
       "map": {
         "STONE": 2,
@@ -1091,7 +1115,7 @@
     "victoryPoints": 1
   },
   {
-    "img": "devcard35.png",
+    "img": "devcard35",
     "cost": {
       "map": {
         "STONE": 5,
@@ -1124,7 +1148,7 @@
     "victoryPoints": 10
   },
   {
-    "img": "devcard36.png",
+    "img": "devcard36",
     "cost": {
       "map": {
         "STONE": 0,
@@ -1157,7 +1181,7 @@
     "victoryPoints": 11
   },
   {
-    "img": "devcard37.png",
+    "img": "devcard37",
     "cost": {
       "map": {
         "STONE": 0,
@@ -1190,7 +1214,7 @@
     "victoryPoints": 11
   },
   {
-    "img": "devcard38.png",
+    "img": "devcard38",
     "cost": {
       "map": {
         "STONE": 0,
@@ -1223,7 +1247,7 @@
     "victoryPoints": 11
   },
   {
-    "img": "devcard39.png",
+    "img": "devcard39",
     "cost": {
       "map": {
         "STONE": 7,
@@ -1256,7 +1280,7 @@
     "victoryPoints": 11
   },
   {
-    "img": "devcard40.png",
+    "img": "devcard40",
     "cost": {
       "map": {
         "STONE": 0,
@@ -1288,7 +1312,7 @@
     "victoryPoints": 12
   },
   {
-    "img": "devcard41.png",
+    "img": "devcard41",
     "cost": {
       "map": {
         "STONE": 0,
@@ -1320,7 +1344,7 @@
     "victoryPoints": 12
   },
   {
-    "img": "devcard42.png",
+    "img": "devcard42",
     "cost": {
       "map": {
         "STONE": 4,
@@ -1352,7 +1376,7 @@
     "victoryPoints": 12
   },
   {
-    "img": "devcard43.png",
+    "img": "devcard43",
     "cost": {
       "map": {
         "STONE": 4,
@@ -1384,7 +1408,7 @@
     "victoryPoints": 12
   },
   {
-    "img": "devcard44.png",
+    "img": "devcard44",
     "cost": {
       "map": {
         "STONE": 1,
@@ -1416,7 +1440,7 @@
     "victoryPoints": 2
   },
   {
-    "img": "devcard45.png",
+    "img": "devcard45",
     "cost": {
       "map": {
         "STONE": 0,
@@ -1448,7 +1472,7 @@
     "victoryPoints": 2
   },
   {
-    "img": "devcard46.png",
+    "img": "devcard46",
     "cost": {
       "map": {
         "STONE": 1,
@@ -1480,7 +1504,7 @@
     "victoryPoints": 2
   },
   {
-    "img": "devcard47.png",
+    "img": "devcard47",
     "cost": {
       "map": {
         "STONE": 1,
@@ -1512,7 +1536,7 @@
     "victoryPoints": 2
   },
   {
-    "img": "devcard48.png",
+    "img": "devcard48",
     "cost": {
       "map": {
         "STONE": 0,

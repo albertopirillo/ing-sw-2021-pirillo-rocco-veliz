@@ -4,6 +4,7 @@ public class DevelopmentCard extends Card {
 
     private final Resource cost;
     private final CardColor type;
+    private final String img="";
     private final int level;
     private final ProductionPower prodPower;
 
@@ -18,6 +19,10 @@ public class DevelopmentCard extends Card {
     //check if the card(this) can be bought
     public boolean canBeBought(Resource playerResource){
         return playerResource.compare(this.cost);
+    }
+
+    public String getImg(){
+        return this.img;
     }
     //get level
     public int getLevel(){

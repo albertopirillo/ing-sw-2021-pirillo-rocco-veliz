@@ -229,8 +229,11 @@ public class ClientGUI implements UserInterface {
     }
 
     @Override
-    public void updateMarket(MarketUpdate marketUpdate) {
-
+    public void updateMarket(MarketUpdate update) {
+        Platform.runLater(() -> {
+            printLog("Updating market...");
+            mainController.getMarketController().updateMarket(update.getCardImgs());
+        });
     }
 
     @Override
@@ -287,6 +290,7 @@ public class ClientGUI implements UserInterface {
         //Update the GUI with storages and leader cards of all players
         updateStorages(update.getStorageUpdate());
         updateMarketTray(update.getMarketTrayUpdate());
+        updateMarket(update.getMarketUpdate());
         //TODO: updateLeaderCards(update.getLeaderUpdate());
     }
 }

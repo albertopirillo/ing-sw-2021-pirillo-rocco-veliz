@@ -4,6 +4,7 @@ import it.polimi.ingsw.client.UserInterface;
 import it.polimi.ingsw.model.DevelopmentCard;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MarketUpdate extends ServerUpdate {
     private final List<DevelopmentCard> devCardList;
@@ -15,6 +16,10 @@ public class MarketUpdate extends ServerUpdate {
 
     public List<DevelopmentCard> getDevCardList() {
         return devCardList;
+    }
+
+    public List<String> getCardImgs(){
+        return devCardList.stream().map(e -> e.getImg()).collect(Collectors.toList());
     }
 
     @Override

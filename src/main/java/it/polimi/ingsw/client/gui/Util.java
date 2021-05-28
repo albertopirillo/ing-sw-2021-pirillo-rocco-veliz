@@ -79,4 +79,9 @@ public abstract class Util {
         return new Image(Objects.requireNonNull(mainClass.getResourceAsStream(path)));
     }
 
+    public static Image getCardImg(String img){
+        String path = "/png/leader_cards/" + img + ".png";
+        return new Image(Objects.requireNonNull(mainClass.getResourceAsStream(path)));
+    }
+
 }

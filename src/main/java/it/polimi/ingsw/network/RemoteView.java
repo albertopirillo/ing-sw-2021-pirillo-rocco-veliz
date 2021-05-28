@@ -175,7 +175,8 @@ public class RemoteView implements ModelObserver {
         StorageUpdate storageUpdate = buildStorageUpdate(game);
         LeaderUpdate leaderUpdate = buildLeaderUpdate(game);
         MarketTrayUpdate marketTrayUpdate = buildMarketTrayUpdate(game);
-        ServerUpdate msg = new EndOfInitialUpdate(game.getActivePlayer().getNickname(), storageUpdate, leaderUpdate, marketTrayUpdate);
+        MarketUpdate marketUpdate = buildMarketUpdate(game);
+        ServerUpdate msg = new EndOfInitialUpdate(game.getActivePlayer().getNickname(), storageUpdate, leaderUpdate, marketTrayUpdate, marketUpdate);
         connection.sendMessage(msg);
     }
 
@@ -202,6 +203,11 @@ public class RemoteView implements ModelObserver {
         Player activePlayer = game.getActivePlayer();
         MarketTray marketTray = game.getMarket().getMarketTray();
         return new MarketTrayUpdate(activePlayer.getNickname(), marketTray.getMarketMarbles(), marketTray.getRemainingMarble());
+    }
 
+    private MarketUpdate buildMarketUpdate(Game game) {
+        Player activePlayer = game.getActivePlayer();
+        Market market = game.getMarket();
+        return new MarketUpdate(activePlayer.getNickname(), market.getAvailableCards());
     }
 }

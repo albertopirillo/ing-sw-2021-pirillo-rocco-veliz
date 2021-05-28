@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client.gui;
 
 import it.polimi.ingsw.exceptions.InvalidKeyException;
+import it.polimi.ingsw.model.FaithTrack;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.ResourceType;
 import it.polimi.ingsw.network.DepotSetting;
@@ -28,7 +29,20 @@ public class PersonalBoardController implements Initializable {
     private Label sb_stone, sb_servant, sb_shield, sb_coin;
     @FXML
     private Button reorderButton;
+    @FXML
+    private ImageView cell0, cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, cell9, cell10, cell11, cell12;
+    @FXML
+    private ImageView cell13, cell14, cell15, cell16, cell17, cell18, cell19, cell20, cell21, cell22, cell23, cell24;
+    @FXML
+    private ImageView popeFavor01, popeFavor02, popeFavor03;
 
+    /**
+     * The lists containing the relative cells of the faithtrack and the pope favor tiles
+     */
+    private final List<ImageView> faithTrackCells = new ArrayList<>();
+    private final List<ImageView> popeFavorTiles = new ArrayList<>();
+
+    private int playerFaith;
     /**
      * The location where the current drag started
      */
@@ -92,6 +106,8 @@ public class PersonalBoardController implements Initializable {
         secondExtraLayer.add(extra2_1);
         secondExtraLayer.add(extra2_2);
         this.layerMapping.put(5, secondExtraLayer);
+
+        initFaithTrack();
     }
 
     /**
@@ -221,5 +237,29 @@ public class PersonalBoardController implements Initializable {
     //Method to call when the drag finished successfully
     public void dragDone(DragEvent event) {
         System.out.println("DRAG DONE");
+    }
+
+    /**
+     * Initializes faith track cells
+     */
+    public void initFaithTrack(){
+        Collections.addAll(this.faithTrackCells, cell0, cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, cell9, cell10, cell11, cell12, cell13, cell14, cell15, cell16, cell17, cell18, cell19, cell20, cell21, cell22, cell23, cell24);
+        this.playerFaith = 0;
+        this.faithTrackCells.get(this.playerFaith).setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/png/faithtrack/faith.png"))));
+
+        Collections.addAll(this.popeFavorTiles, popeFavor01, popeFavor02, popeFavor03);
+        for (int i=1; i<=3; i++){
+            popeFavorTiles.get(i-1).setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/png/faithtrack/popeFavor0" + i + "_fd.png"))));
+        }
+    }
+
+    /**
+     * Updates the position of the cross on the player's personal board
+     * @param faithTrack the player's faithtrack object from the server update
+     */
+    public void updateFaithTrack(FaithTrack faithTrack){
+        faithTrackCells.get(this.playerFaith).setImage(null);
+        this.playerFaith = faithTrack.getPlayerFaith();
+        this.faithTrackCells.get(faithTrack.getPlayerFaith()).setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/png/faithtrack/faith.png"))));
     }
 }

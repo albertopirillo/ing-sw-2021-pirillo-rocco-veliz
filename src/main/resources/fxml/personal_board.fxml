@@ -110,8 +110,8 @@
       <ImageView id="cell22" fx:id="cell22" fitHeight="48.0" fitWidth="48.0" layoutX="1168.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView id="cell23" fx:id="cell23" fitHeight="48.0" fitWidth="48.0" layoutX="1222.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView id="cell24" fx:id="cell24" fitHeight="48.0" fitWidth="48.0" layoutX="1276.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="popeFavor01" fitHeight="83.0" fitWidth="83.0" layoutX="523.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="popeFavor02" fitHeight="83.0" fitWidth="83.0" layoutX="796.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="popeFavor03" fitHeight="83.0" fitWidth="83.0" layoutX="1123.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView id="popeFavor01" fx:id="popeFavor01" fitHeight="83.0" fitWidth="83.0" layoutX="523.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView id="popeFavor02" fx:id="popeFavor02" fitHeight="83.0" fitWidth="83.0" layoutX="796.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView id="popeFavor03" fx:id="popeFavor03" fitHeight="83.0" fitWidth="83.0" layoutX="1123.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

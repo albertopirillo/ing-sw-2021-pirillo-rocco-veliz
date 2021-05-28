@@ -319,5 +319,6 @@ public class PersonalBoardController implements Initializable {
         faithTrackCells.get(this.playerFaith).setImage(null);
         this.playerFaith = faithTrack.getPlayerFaith();
         this.faithTrackCells.get(faithTrack.getPlayerFaith()).setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/png/faithtrack/faith.png"))));
+        //TODO update pope tiles (lo sto a fa mo)
     }
 }

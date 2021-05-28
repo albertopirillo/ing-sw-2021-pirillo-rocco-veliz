@@ -210,6 +210,7 @@ public class PlayerController {
         } catch (WrongDepotInstructionsException | CloneNotSupportedException e) {
             controller.setException(e);
             controller.getGame().updateClientError(controller.getClientError());
+            controller.getGame().updateStorages();
         } finally {
             controller.getGame().notifyEndOfUpdates();
         }

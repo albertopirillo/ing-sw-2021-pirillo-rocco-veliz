@@ -85,6 +85,15 @@ public class MainController implements Initializable {
     }
 
     /**
+     * Gets the PersonalBoardController associated to the given nickname
+     * @param nickname the player to retrieve the controller
+     * @return a single PersonalBoardController
+     */
+    public PersonalBoardController getPersonalBoardController(String nickname) {
+        return personalBoardControllerMap.get(nickname);
+    }
+
+    /**
      * Gets the MarketController
      * @return  the current MarketController
      */

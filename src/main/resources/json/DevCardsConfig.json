@@ -46,7 +46,7 @@
       "input": {
         "map": {
           "STONE": 0,
-          "COIN": 1,
+          "COIN": 2,
           "SHIELD": 0,
           "SERVANT": 0
         }

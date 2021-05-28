@@ -1,9 +1,11 @@
 package it.polimi.ingsw.client.gui;
 
 import it.polimi.ingsw.exceptions.InvalidKeyException;
+import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.ResourceType;
 import it.polimi.ingsw.network.DepotSetting;
+import it.polimi.ingsw.network.requests.PlaceResourceRequest;
 import it.polimi.ingsw.network.requests.ReorderDepotGUIRequest;
 import it.polimi.ingsw.network.requests.Request;
 import javafx.fxml.FXML;
@@ -34,7 +36,9 @@ public class PersonalBoardController implements Initializable {
      * The location where the current drag started
      */
     private ImageView dragSource;
-
+    /**
+     * The fx:id of the source image of the drag
+     */
     private String dragSourceId;
     /**
      * Whether the ReorderButton was pressed before or not
@@ -60,8 +64,14 @@ public class PersonalBoardController implements Initializable {
      * List of all the corresponding images in tempResource
      */
     private final List<ImageView> tempResources = new ArrayList<>();
-
-    private final Depot model = new Depot();
+    /**
+     * The structure of the associated Depot
+     */
+    private final Depot depotModel = new Depot();
+    /**
+     * The data of the associated temporary resource
+     */
+    private List<ResourceType> tempResourceModel;
 
     /**
      * Gets the ReorderButton
@@ -109,7 +119,6 @@ public class PersonalBoardController implements Initializable {
         secondExtraLayer.add(depot5_2);
         depot5_2.setDisable(true);
         this.layerMapping.put(5, secondExtraLayer);
-        //TODO: disable extraLayer at the beginning
         resSupply.setVisible(false);
         this.tempResources.add(tempRes1);
         tempRes1.setDisable(true);
@@ -153,11 +162,11 @@ public class PersonalBoardController implements Initializable {
         for (ImageView slot: layer) {
             if (i < amount) {
                 slot.setImage(Util.resToImage(res));
-                model.setSlot(layerNumber, i + 1, res);
+                depotModel.setSlot(layerNumber, i + 1, res);
             }
             else {
                 slot.setImage(null);
-                model.setSlot(layerNumber, i + 1, null);
+                depotModel.setSlot(layerNumber, i + 1, null);
             }
             i++;
         }
@@ -188,9 +197,18 @@ public class PersonalBoardController implements Initializable {
             isReorderDepotPressed = false;
             canReorder = false;
             //Read the Depot and send a Request
-            Request request = new ReorderDepotGUIRequest(model.convertToDepotSetting());
+            Request request;
+            if(isPlacing) {
+                System.out.println("[GUI] Sending place resource request");
+                request = new PlaceResourceRequest(remainingRes(), depotModel.convertToDepotSetting(), true);
+                isPlacing = false;
+                resetResSupply();
+            }
+            else {
+                System.out.println("[GUI] Sending reorder request");
+                request = new ReorderDepotGUIRequest(depotModel.convertToDepotSetting());
+            }
             this.mainController.sendMessage(request);
-            if (isPlacing) resetResSupply();
         }
     }
 
@@ -217,45 +235,68 @@ public class PersonalBoardController implements Initializable {
 
     //Method to call when the entity is released
     public void dragDrop(DragEvent event) {
-        System.out.println("DRAG DROPPED");
-        ResourceType lastRes = null;
+        //System.out.println("DRAG DROPPED");
+        ResourceType lastRes;
         ImageView destination = (ImageView) event.getSource();
-        if (!dragSourceId.contains("tempRes")) {
-            lastRes = model.getSlot(this.dragSourceId);
-        }
+        //Save the source res
+        lastRes = getGenericSlot(dragSourceId);
+        //Set the source, if destination is full
         if (destination.getImage() != null) {
             this.dragSource.setImage(destination.getImage());
-            if (!dragSourceId.contains("tempRes")) {
-                ResourceType resourceType = model.getSlot(destination.getId());
-                model.setSlot(this.dragSourceId, resourceType);
-            }
+            ResourceType resType = getGenericSlot(destination.getId());
+            setGenericSlot(dragSourceId, resType);
         }
+        //Set the source, if destination is empty
         else {
             this.dragSource.setImage(null);
-            if (!dragSourceId.contains("tempRes")) {
-                model.setSlot(this.dragSourceId, null);
-            }
+            setGenericSlot(dragSourceId, null);
         }
+        //Set the destination
         Image img = event.getDragboard().getImage();
         destination.setImage(img);
-        if (!dragSourceId.contains("tempRes")) {
-            model.setSlot(destination.getId(), lastRes);
-        }
+        setGenericSlot(destination.getId(), lastRes);
     }
 
     //Method to call when the drag finished successfully
     public void dragDone() {
-        System.out.println("DRAG DONE");
+        //System.out.println("DRAG DONE");
     }
 
-    //TODO: clean this and take care of discarded res
+    private void setGenericSlot(String id, ResourceType resourceType) {
+        if (id.contains("tempRes")) {
+            int slot = Character.getNumericValue(id.charAt(id.length() - 1));
+            this.tempResourceModel.set(slot - 1, resourceType);
+        }
+        else {
+            this.depotModel.setSlot(id, resourceType);
+        }
+    }
+
+    private ResourceType getGenericSlot(String id) {
+        if (id.contains("tempRes")) {
+            int slot = Character.getNumericValue(id.charAt(id.length() - 1));
+            return this.tempResourceModel.get(slot - 1);
+        }
+        else {
+            return this.depotModel.getSlot(id);
+        }
+    }
+
+    /**
+     * <p>Process the update of the temporary resources</p>
+     * <p>Initializes the data structure to handle those resources</p>
+     * <p>Makes the player able to drag and drop his resources</p>
+     * @param tempRes   the new temporary resources
+     */
     public void updateTempResources(Resource tempRes) {
         resSupply.setVisible(true);
+        this.tempResourceModel = new ArrayList<>();
         int currentImage = 0;
         try {
             for (ResourceType res : tempRes.keySet()) {
                 int amount = tempRes.getValue(res);
                 for (int j = 0; j < amount; j++) {
+                    this.tempResourceModel.add(res);
                     ImageView imageView = tempResources.get(currentImage);
                     currentImage++;
                     imageView.setDisable(false);
@@ -270,6 +311,21 @@ public class PersonalBoardController implements Initializable {
         } catch (InvalidKeyException e) {
             System.out.println("Invalid key");
         }
+    }
+
+    private Resource remainingRes() {
+        Resource toDiscard = new Resource(0,0,0,0);
+        for(ResourceType resourceType: this.tempResourceModel) {
+            if (resourceType != null) {
+                try {
+                    toDiscard.modifyValue(resourceType, 1);
+                } catch (InvalidKeyException | NegativeResAmountException e) {
+                    System.out.println("Invalid key or amount");
+                }
+            }
+        }
+        System.out.println("[GUI] Discarding " + toDiscard.getTotalAmount() + " resources");
+        return toDiscard;
     }
 
     private void resetResSupply() {

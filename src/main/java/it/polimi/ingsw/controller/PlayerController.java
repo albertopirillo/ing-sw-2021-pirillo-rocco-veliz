@@ -21,7 +21,7 @@ public class PlayerController {
     /**
      * Set to false to make the player perform one action per turn, like the real game
      */
-    private boolean testing = true;
+    private boolean testing = false;
 
     public PlayerController(MasterController controller) {
         this.controller = controller;
@@ -54,8 +54,6 @@ public class PlayerController {
         try {
             Player activePlayer = controller.getGame().getActivePlayer();
             activePlayer.extraProduction(choice, fromDepot, fromStrongbox, res);
-            //controller.getGame().updateFaithTrack();
-            //controller.getGame().updateDevSlots();
             controller.resetException();
         } catch (CostNotMatchingException | InvalidAbilityChoiceException | NotEnoughSpaceException | NoLeaderAbilitiesException | CannotContainFaithException | NotEnoughResException | NegativeResAmountException | InvalidKeyException e) {
             controller.setException(e);
@@ -132,18 +130,18 @@ public class PlayerController {
         }
     }
     
-    public void placeResource(Resource toDiscard, List<DepotSetting> toPlace) {
+    public void placeResource(Resource toDiscard, List<DepotSetting> toPlace, boolean fullDepot) {
         try {
             controller.resetException();
-            controller.getResourceController().handleResource(toDiscard, toPlace);
+            controller.getResourceController().handleResource(toDiscard, toPlace, fullDepot);
             controller.getGame().updateFaithTrack();
             controller.getGame().updateStorages();
-            //controller.resetException();
             controller.getGame().notifyEndOfUpdates();
-        } catch (NotEnoughSpaceException | CannotContainFaithException | NegativeResAmountException | InvalidKeyException | InvalidResourceException | WrongDepotInstructionsException | LayerNotEmptyException | InvalidLayerNumberException | AlreadyInAnotherLayerException e) {
+        } catch (NotEnoughSpaceException | CannotContainFaithException | NegativeResAmountException | InvalidKeyException | InvalidResourceException | WrongDepotInstructionsException | LayerNotEmptyException | InvalidLayerNumberException | AlreadyInAnotherLayerException | CloneNotSupportedException e) {
             controller.setException(e);
             controller.getGame().updateClientError(controller.getClientError());
             controller.getGame().updateTempRes();
+            controller.getGame().updateStorages();
         }
     }
 

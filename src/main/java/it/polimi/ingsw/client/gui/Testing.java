@@ -15,7 +15,7 @@ public class Testing extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         //Load FXML and set the scene
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/setup.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/market_tray.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
         stage.setScene(scene);

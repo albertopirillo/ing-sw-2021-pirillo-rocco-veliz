@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="794.0" prefWidth="1364.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.PersonalBoardController">
    <children>
       <ImageView fitHeight="795.0" fitWidth="1119.0" layoutX="252.0" pickOnBounds="true" preserveRatio="true">
@@ -90,5 +94,33 @@
       <ImageView fx:id="tempRes2" fitHeight="51.0" fitWidth="56.0" layoutX="599.0" layoutY="726.0" onDragDetected="#dragDetection" onDragDone="#dragDone" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="tempRes3" fitHeight="51.0" fitWidth="56.0" layoutX="675.0" layoutY="726.0" onDragDetected="#dragDetection" onDragDone="#dragDone" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="tempRes4" fitHeight="51.0" fitWidth="56.0" layoutX="752.0" layoutY="726.0" onDragDetected="#dragDetection" onDragDone="#dragDone" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
+      <ImageView id="cell0" fx:id="cell0" fitHeight="48.0" fitWidth="48.0" layoutX="296.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView id="cell1" fx:id="cell1" fitHeight="48.0" fitWidth="48.0" layoutX="351.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView id="cell2" fx:id="cell2" fitHeight="48.0" fitWidth="48.0" layoutX="406.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView id="cell3" fx:id="cell3" fitHeight="48.0" fitWidth="48.0" layoutX="406.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView id="cell4" fx:id="cell4" fitHeight="48.0" fitWidth="48.0" layoutX="406.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView id="cell5" fx:id="cell5" fitHeight="48.0" fitWidth="48.0" layoutX="460.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView id="cell6" fx:id="cell6" fitHeight="48.0" fitWidth="48.0" layoutX="514.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView id="cell7" fx:id="cell7" fitHeight="48.0" fitWidth="48.0" layoutX="569.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView id="cell8" fx:id="cell8" fitHeight="48.0" fitWidth="48.0" layoutX="622.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView id="cell9" fx:id="cell9" fitHeight="48.0" fitWidth="48.0" layoutX="677.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView id="cell10" fx:id="cell10" fitHeight="48.0" fitWidth="48.0" layoutX="678.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView id="cell11" fx:id="cell11" fitHeight="48.0" fitWidth="48.0" layoutX="678.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView id="cell12" fx:id="cell12" fitHeight="48.0" fitWidth="48.0" layoutX="733.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView id="cell13" fx:id="cell13" fitHeight="48.0" fitWidth="48.0" layoutX="787.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView id="cell14" fx:id="cell14" fitHeight="48.0" fitWidth="48.0" layoutX="841.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView id="cell15" fx:id="cell15" fitHeight="48.0" fitWidth="48.0" layoutX="896.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView id="cell16" fx:id="cell16" fitHeight="48.0" fitWidth="48.0" layoutX="949.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView id="cell17" fx:id="cell17" fitHeight="48.0" fitWidth="48.0" layoutX="949.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView id="cell18" fx:id="cell18" fitHeight="48.0" fitWidth="48.0" layoutX="949.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView id="cell19" fx:id="cell19" fitHeight="48.0" fitWidth="48.0" layoutX="1004.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView id="cell20" fx:id="cell20" fitHeight="48.0" fitWidth="48.0" layoutX="1059.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView id="cell21" fx:id="cell21" fitHeight="48.0" fitWidth="48.0" layoutX="1113.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView id="cell22" fx:id="cell22" fitHeight="48.0" fitWidth="48.0" layoutX="1168.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView id="cell23" fx:id="cell23" fitHeight="48.0" fitWidth="48.0" layoutX="1222.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView id="cell24" fx:id="cell24" fitHeight="48.0" fitWidth="48.0" layoutX="1276.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="popeFavor01" fitHeight="83.0" fitWidth="83.0" layoutX="523.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="popeFavor02" fitHeight="83.0" fitWidth="83.0" layoutX="796.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="popeFavor03" fitHeight="83.0" fitWidth="83.0" layoutX="1123.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

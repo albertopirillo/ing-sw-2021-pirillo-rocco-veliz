@@ -18,15 +18,31 @@ public class TrayController implements Initializable {
     @FXML
     private ImageView tray_1, tray_2, tray_3, tray_4, tray_5, tray_6, tray_7, tray_8, tray_9, tray_10, tray_11, tray_12, tray_white;
 
+    /**
+     * The list of all twelve corresponding images of the Market Matrix
+     */
     private final List<ImageView> marketTray = new ArrayList<>();
+    /**
+     * The location of the remaining marble and where the current drag started
+     */
     private ImageView remaining;
-    private ImageView indexInsert;
+    /**
+     * The corresponding MainController
+     */
     private MainController mainController;
 
+    /**
+     * Sets the MainController
+     * @param mainController  the MainController to associate with this controller
+     */
     public void setMainController(MainController mainController) {
         this.mainController = mainController;
     }
 
+    /**
+     * Initializes @FXML fields, organizing the corresponding images of Market Matrix in one list<br>
+     * <p>Called automatically when an entity is injected from FXML</p>
+     */
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.marketTray.add(tray_1);
         this.marketTray.add(tray_2);
@@ -43,8 +59,12 @@ public class TrayController implements Initializable {
         this.remaining = tray_white;
     }
 
+    /**
+     * Update the Market Tray
+     * @param marbles contains the twelve marbles that compose the Market matrix
+     * @param remainingMarble the remaining marble
+     */
     public void updateMarketTray(MarblesColor[][] marbles, MarblesColor remainingMarble) {
-        if(this.indexInsert != null) this.indexInsert.setImage(null);
         for(int i=0; i<3; i++){
             for(int j=0; j<4; j++){
                 this.marketTray.get(4*i + j).setImage(Util.marbleToImage((marbles[i][j])));
@@ -56,26 +76,32 @@ public class TrayController implements Initializable {
     public void dragDetection(MouseEvent event) {
         Dragboard db = this.remaining.startDragAndDrop(TransferMode.ANY);
         ClipboardContent cb = new ClipboardContent();
-        cb.putImage(this.remaining.getImage());
+        //cb.putImage(this.remaining.getImage());
+        cb.putString("");
+        //db.setDragView(this.remaining.getImage());
         db.setContent(cb);
         event.consume();
     }
 
+    /**
+     * Send an InsertMarbleRequest to the server
+     * @param event The drop event
+     */
     public void dragDrop(DragEvent event) {
         System.out.println("DRAG DROPPED");
         ImageView destination = (ImageView) event.getSource();
-        if (destination.getImage() == null) {
-            destination.setImage(remaining.getImage());
-            this.indexInsert = destination;
-            Request request = new InsertMarbleRequest(Integer.parseInt(destination.getId().substring(destination.getId().length() - 1)));
-            this.mainController.sendMessage(request);
-        }
+        Request request = new InsertMarbleRequest(Integer.parseInt(destination.getId().substring(destination.getId().length() - 1)));
+        this.mainController.sendMessage(request);
     }
 
     public void dragOver(DragEvent event) {
         System.out.println("DRAGGING OVER");
-        if(event.getDragboard().hasImage()) {
-            event.acceptTransferModes(TransferMode.ANY);
-        }
+        event.acceptTransferModes(TransferMode.ANY);
+        ((ImageView)event.getSource()).setImage(this.remaining.getImage());
+        event.consume();
+    }
+
+    public void dragExit(DragEvent event) {
+        ((ImageView)event.getSource()).setImage(null);
     }
 }

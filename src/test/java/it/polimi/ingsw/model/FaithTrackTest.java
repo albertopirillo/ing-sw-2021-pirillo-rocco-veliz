@@ -57,7 +57,7 @@ class FaithTrackTest {
         assertTrue(players.get(2).getPersonalBoard().getFaithTrack().getPopeFavorBySection(VaticanReportSection.GROUP_THREE).isFaceUp());
         assertEquals(3, players.get(0).getVictoryPoints());
         assertEquals(6, players.get(1).getVictoryPoints());
-        assertEquals(29, players.get(2).getVictoryPoints());
+        assertEquals(9, players.get(2).getVictoryPoints());
     }
 }
 

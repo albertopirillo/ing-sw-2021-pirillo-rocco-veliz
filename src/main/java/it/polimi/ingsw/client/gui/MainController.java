@@ -184,6 +184,7 @@ public class MainController implements Initializable {
         FXMLLoader loader = Util.loadFXML("market_tray");
         Parent tray = loader.load();
         this.trayController = loader.getController();
+        this.trayController.setMainController(this);
         this.trayPopUp.getContent().add(tray);
     }
 

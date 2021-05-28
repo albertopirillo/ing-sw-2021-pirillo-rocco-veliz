@@ -5,11 +5,13 @@ import it.polimi.ingsw.client.UserInterface;
 public class EndOfInitialUpdate extends ServerUpdate {
     private final StorageUpdate storageUpdate;
     private final LeaderUpdate leaderUpdate;
+    private final MarketTrayUpdate marketTrayUpdate;
 
-    public EndOfInitialUpdate(String activePlayer, StorageUpdate storageUpdate, LeaderUpdate leaderUpdate) {
+    public EndOfInitialUpdate(String activePlayer, StorageUpdate storageUpdate, LeaderUpdate leaderUpdate, MarketTrayUpdate marketTrayUpdate) {
         super(activePlayer);
         this.storageUpdate = storageUpdate;
         this.leaderUpdate = leaderUpdate;
+        this.marketTrayUpdate = marketTrayUpdate;
     }
 
     public StorageUpdate getStorageUpdate() {
@@ -18,6 +20,10 @@ public class EndOfInitialUpdate extends ServerUpdate {
 
     public LeaderUpdate getLeaderUpdate() {
         return leaderUpdate;
+    }
+
+    public MarketTrayUpdate getMarketTrayUpdate() {
+        return marketTrayUpdate;
     }
 
     @Override

@@ -2,6 +2,7 @@ package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.client.gui.*;
 import it.polimi.ingsw.model.LeaderCard;
+import it.polimi.ingsw.model.MarblesColor;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.ResourceType;
 import it.polimi.ingsw.network.DepotSetting;
@@ -234,7 +235,12 @@ public class ClientGUI implements UserInterface {
 
     @Override
     public void updateMarketTray(MarketTrayUpdate update) {
-
+        Platform.runLater(() -> {
+            printLog("Updating market tray...");
+            MarblesColor[][] marbles = update.getMarketTray();
+            MarblesColor remainingMarble = update.getRemainingMarble();
+            mainController.getTrayController().updateMarketTray(marbles, remainingMarble);
+        });
     }
 
     @Override
@@ -280,6 +286,7 @@ public class ClientGUI implements UserInterface {
         });
         //Update the GUI with storages and leader cards of all players
         updateStorages(update.getStorageUpdate());
+        updateMarketTray(update.getMarketTrayUpdate());
         //TODO: updateLeaderCards(update.getLeaderUpdate());
     }
 }

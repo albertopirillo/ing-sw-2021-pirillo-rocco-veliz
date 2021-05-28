@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client.gui;
 
+import it.polimi.ingsw.model.MarblesColor;
 import it.polimi.ingsw.model.ResourceType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -72,4 +73,10 @@ public abstract class Util {
         Scene lastScene = ((Node)(event.getSource())).getScene();
         return (Stage)lastScene.getWindow();
     }
+
+    public static Image marbleToImage(MarblesColor marble) {
+        String path = "/png/market/" + marble.getName() + ".png";
+        return new Image(Objects.requireNonNull(mainClass.getResourceAsStream(path)));
+    }
+
 }

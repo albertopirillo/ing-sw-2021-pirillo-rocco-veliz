@@ -28,6 +28,25 @@ public enum MarblesColor {
         }
     }
 
+    public String getName(){
+        switch(this){
+            case BLUE:
+                return "shieldMarble";
+            case GREY:
+                return "stoneMarble";
+            case YELLOW:
+                return "coinMarble";
+            case PURPLE:
+                return "servantMarble";
+            case RED:
+                return "faithMarble";
+            case WHITE:
+                return "whiteMarble";
+            default:
+                return null;
+        }
+    }
+
     public static boolean contains(MarblesColor other) {
         for (MarblesColor res: MarblesColor.values())
             if (other == res) return true;

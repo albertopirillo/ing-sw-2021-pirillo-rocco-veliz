@@ -21,7 +21,7 @@ public class PlayerController {
     /**
      * Set to false to make the player perform one action per turn, like the real game
      */
-    private boolean testing = false;
+    private boolean testing = true;
 
     public PlayerController(MasterController controller) {
         this.controller = controller;

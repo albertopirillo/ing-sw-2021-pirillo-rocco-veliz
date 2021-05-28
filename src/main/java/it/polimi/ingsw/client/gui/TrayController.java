@@ -88,14 +88,14 @@ public class TrayController implements Initializable {
      * @param event The drop event
      */
     public void dragDrop(DragEvent event) {
-        System.out.println("DRAG DROPPED");
+        //System.out.println("DRAG DROPPED");
         ImageView destination = (ImageView) event.getSource();
         Request request = new InsertMarbleRequest(Integer.parseInt(destination.getId().substring(destination.getId().length() - 1)));
         this.mainController.sendMessage(request);
     }
 
     public void dragOver(DragEvent event) {
-        System.out.println("DRAGGING OVER");
+        //System.out.println("DRAGGING OVER");
         event.acceptTransferModes(TransferMode.ANY);
         ((ImageView)event.getSource()).setImage(this.remaining.getImage());
         event.consume();

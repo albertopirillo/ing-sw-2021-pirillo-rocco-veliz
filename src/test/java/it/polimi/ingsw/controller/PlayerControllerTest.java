@@ -12,8 +12,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 class PlayerControllerTest {
 
@@ -216,10 +215,16 @@ class PlayerControllerTest {
         settings.add(new DepotSetting(3, ResourceType.SHIELD, 3));
 
         //Error: instruction are correct but there is not enough space to insert them
-        playerController.placeResource(toDiscard, settings);
+        playerController.placeResource(toDiscard, settings, false);
         assertEquals("You provided incorrect instructions to place those resources", controller.getError());
         assertFalse(resourceController.getTempRes().isEmpty());
         assertEquals(new Resource(0,0,0,1), activePlayer.getPersonalBoard().getDepot().queryAllRes());
+
+        List<DepotSetting> settings2 = new ArrayList<>();
+        settings2.add(new DepotSetting(1, ResourceType.STONE, 1));
+        settings2.add(new DepotSetting(2, ResourceType.COIN, 2));
+        resourceController.getTempRes().setToHandle(new Resource(1,2,0,0));
+        assertDoesNotThrow(() -> playerController.placeResource(toDiscard, settings2, false));
     }
 
     @Test

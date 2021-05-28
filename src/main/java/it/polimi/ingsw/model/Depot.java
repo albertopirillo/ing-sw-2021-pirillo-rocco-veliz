@@ -8,9 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//Attribute "mapping" is
-// instead of its full name
-//This way only one getter and one setter are needed
 public abstract class Depot implements Cloneable {
 
     /**

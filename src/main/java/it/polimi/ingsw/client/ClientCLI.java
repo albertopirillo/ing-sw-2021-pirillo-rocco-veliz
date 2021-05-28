@@ -659,7 +659,7 @@ public class ClientCLI implements UserInterface {
         }   catch (Exception e) {
             System.out.println("Invalid input, retry");
         }
-        return new PlaceResourceRequest(toDiscard, toPlace);
+        return new PlaceResourceRequest(toDiscard, toPlace, false);
     }
 
     public ResourceType strToResType(String input){

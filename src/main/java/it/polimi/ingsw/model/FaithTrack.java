@@ -111,7 +111,7 @@ public class FaithTrack implements Serializable {
                 popeFavor = getPopeFavorBySection(VaticanReportSection.GROUP_THREE);
                 if(!popeFavor.isReported()) {
                     popeFavor.setReportedAndFlip(true);
-                    player.addVictoryPoints(24);
+                    player.addVictoryPoints(4);
                     vaticanReportOthers(VaticanReportSection.GROUP_THREE, players);
                     try {
                         player.getGame().lastTurn(true);

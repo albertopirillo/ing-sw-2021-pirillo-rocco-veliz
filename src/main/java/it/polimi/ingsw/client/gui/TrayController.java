@@ -18,7 +18,7 @@ public class TrayController implements Initializable {
     @FXML
     private ImageView tray_1, tray_2, tray_3, tray_4, tray_5, tray_6, tray_7, tray_8, tray_9, tray_10, tray_11, tray_12, tray_white;
 
-    private List<ImageView> marketTray = new ArrayList<>();
+    private final List<ImageView> marketTray = new ArrayList<>();
     private ImageView remaining;
     private ImageView indexInsert;
     private MainController mainController;

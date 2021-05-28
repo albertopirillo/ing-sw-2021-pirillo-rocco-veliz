@@ -20,11 +20,11 @@
             <Font size="24.0" />
          </font>
       </Button>
-      <Button fx:id="trayPopup" layoutX="31.0" layoutY="67.0" mnemonicParsing="false" onAction="#showTray" prefHeight="30.0" prefWidth="214.0" text="Show Market Tray" textAlignment="CENTER">
+      <Button fx:id="trayButton" layoutX="31.0" layoutY="67.0" mnemonicParsing="false" onAction="#showTray" prefHeight="30.0" prefWidth="214.0" text="Show Market Tray" textAlignment="CENTER">
          <font>
             <Font size="20.0" />
          </font></Button>
-      <Button fx:id="marketPopup" layoutX="33.0" layoutY="181.0" mnemonicParsing="false" onAction="#showMarket" prefHeight="30.0" prefWidth="214.0" text="Show Market Cards" textAlignment="CENTER">
+      <Button fx:id="marketButton" layoutX="33.0" layoutY="181.0" mnemonicParsing="false" onAction="#showMarket" prefHeight="30.0" prefWidth="214.0" text="Show Market Cards" textAlignment="CENTER">
          <font>
             <Font size="20.0" />
          </font></Button>

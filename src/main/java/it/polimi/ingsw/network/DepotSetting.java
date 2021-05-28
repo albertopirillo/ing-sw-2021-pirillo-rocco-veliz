@@ -28,4 +28,9 @@ public class DepotSetting implements Serializable {
     public int getAmount() {
         return amount;
     }
+
+    @Override
+    public String toString() {
+        return "Place " + amount + " " + resType + " in layer number " + layerNumber;
+    }
 }

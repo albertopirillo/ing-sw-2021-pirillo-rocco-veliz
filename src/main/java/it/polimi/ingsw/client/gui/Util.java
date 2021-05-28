@@ -78,5 +78,4 @@ public abstract class Util {
         String path = "/png/market/" + marble.getName() + ".png";
         return new Image(Objects.requireNonNull(mainClass.getResourceAsStream(path)));
     }
-
 }

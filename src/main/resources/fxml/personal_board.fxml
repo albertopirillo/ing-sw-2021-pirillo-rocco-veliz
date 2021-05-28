@@ -46,10 +46,10 @@
       <ImageView fx:id="depot2_2" fitHeight="51.0" fitWidth="56.0" layoutX="397.0" layoutY="407.0" onDragDetected="#dragDetection" onDragDone="#dragDone" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="depot2_1" fitHeight="51.0" fitWidth="56.0" layoutX="343.0" layoutY="407.0" onDragDetected="#dragDetection" onDragDone="#dragDone" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="depot1_1" fitHeight="51.0" fitWidth="56.0" layoutX="371.0" layoutY="335.0" onDragDetected="#dragDetection" onDragDone="#dragDone" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="extra2_2" fitHeight="51.0" fitWidth="56.0" layoutX="149.0" layoutY="721.0" onDragDetected="#dragDetection" onDragDone="#dragDone" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="extra2_1" fitHeight="51.0" fitWidth="56.0" layoutX="54.0" layoutY="721.0" onDragDetected="#dragDetection" onDragDone="#dragDone" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="extra1_1" fitHeight="51.0" fitWidth="56.0" layoutX="54.0" layoutY="307.0" onDragDetected="#dragDetection" onDragDone="#dragDone" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="extra1_2" fitHeight="51.0" fitWidth="56.0" layoutX="149.0" layoutY="307.0" onDragDetected="#dragDetection" onDragDone="#dragDone" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="depot5_2" fitHeight="51.0" fitWidth="56.0" layoutX="149.0" layoutY="721.0" onDragDetected="#dragDetection" onDragDone="#dragDone" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="depot5_1" fitHeight="51.0" fitWidth="56.0" layoutX="54.0" layoutY="721.0" onDragDetected="#dragDetection" onDragDone="#dragDone" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="depot4_1" fitHeight="51.0" fitWidth="56.0" layoutX="54.0" layoutY="307.0" onDragDetected="#dragDetection" onDragDone="#dragDone" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="depot4_2" fitHeight="51.0" fitWidth="56.0" layoutX="149.0" layoutY="307.0" onDragDetected="#dragDetection" onDragDone="#dragDone" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
       <ImageView fitHeight="51.0" fitWidth="56.0" layoutX="379.0" layoutY="661.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../png/res/coin.png" />
@@ -80,11 +80,20 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <Button fx:id="reorderButton" layoutX="274.0" layoutY="731.0" mnemonicParsing="false" onAction="#reorder" prefHeight="30.0" prefWidth="214.0" text="Reorder Depot" textAlignment="CENTER">
+      <Button fx:id="reorderButton" layoutX="277.0" layoutY="721.0" mnemonicParsing="false" onAction="#reorder" prefHeight="30.0" prefWidth="214.0" text="Reorder Depot" textAlignment="CENTER">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
+      <ImageView fx:id="resSupply" fitHeight="97.0" fitWidth="328.0" layoutX="499.0" layoutY="712.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../png/res/resource_suppy.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="tempRes1" fitHeight="51.0" fitWidth="56.0" layoutX="521.0" layoutY="726.0" onDragDetected="#dragDetection" onDragDone="#dragDone" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="tempRes2" fitHeight="51.0" fitWidth="56.0" layoutX="599.0" layoutY="726.0" onDragDetected="#dragDetection" onDragDone="#dragDone" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="tempRes3" fitHeight="51.0" fitWidth="56.0" layoutX="675.0" layoutY="726.0" onDragDetected="#dragDetection" onDragDone="#dragDone" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="tempRes4" fitHeight="51.0" fitWidth="56.0" layoutX="752.0" layoutY="726.0" onDragDetected="#dragDetection" onDragDone="#dragDone" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
       <ImageView id="cell0" fx:id="cell0" fitHeight="48.0" fitWidth="48.0" layoutX="296.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView id="cell1" fx:id="cell1" fitHeight="48.0" fitWidth="48.0" layoutX="351.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView id="cell2" fx:id="cell2" fitHeight="48.0" fitWidth="48.0" layoutX="406.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true" />

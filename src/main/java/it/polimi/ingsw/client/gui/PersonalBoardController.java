@@ -7,7 +7,6 @@ import it.polimi.ingsw.model.ResourceType;
 import it.polimi.ingsw.network.DepotSetting;
 import it.polimi.ingsw.network.requests.ReorderDepotGUIRequest;
 import it.polimi.ingsw.network.requests.Request;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -24,9 +23,11 @@ public class PersonalBoardController implements Initializable {
     @FXML
     private ImageView depot1_1, depot2_1, depot2_2, depot3_1, depot3_2, depot3_3;
     @FXML
-    private ImageView extra1_1, extra1_2, extra2_1, extra2_2;
+    private ImageView depot4_1, depot4_2, depot5_1, depot5_2;
     @FXML
     private Label sb_stone, sb_servant, sb_shield, sb_coin;
+    @FXML
+    private ImageView resSupply, tempRes1, tempRes2, tempRes3, tempRes4;
     @FXML
     private Button reorderButton;
     @FXML
@@ -47,6 +48,8 @@ public class PersonalBoardController implements Initializable {
      * The location where the current drag started
      */
     private ImageView dragSource;
+
+    private String dragSourceId;
     /**
      * Whether the ReorderButton was pressed before or not
      */
@@ -56,6 +59,10 @@ public class PersonalBoardController implements Initializable {
      */
     private boolean canReorder;
     /**
+     * If the player is placing the temp resources
+     */
+    private boolean isPlacing;
+    /**
      * The corresponding MainController
      */
     private MainController mainController;
@@ -63,6 +70,12 @@ public class PersonalBoardController implements Initializable {
      * A map to get a list of all the corresponding images from a given layer
      */
     private final Map<Integer, List<ImageView>> layerMapping = new HashMap<>();
+    /**
+     * List of all the corresponding images in tempResource
+     */
+    private final List<ImageView> tempResources = new ArrayList<>();
+
+    private final Depot model = new Depot();
 
     /**
      * Gets the ReorderButton
@@ -99,13 +112,28 @@ public class PersonalBoardController implements Initializable {
         thirdLayer.add(depot3_3);
         this.layerMapping.put(3, thirdLayer);
         List<ImageView> firstExtraLayer = new ArrayList<>();
-        firstExtraLayer.add(extra1_1);
-        firstExtraLayer.add(extra1_2);
+        firstExtraLayer.add(depot4_1);
+        depot4_1.setDisable(true);
+        firstExtraLayer.add(depot4_2);
+        depot4_2.setDisable(true);
         this.layerMapping.put(4, firstExtraLayer);
         List<ImageView> secondExtraLayer = new ArrayList<>();
-        secondExtraLayer.add(extra2_1);
-        secondExtraLayer.add(extra2_2);
+        secondExtraLayer.add(depot5_1);
+        depot5_1.setDisable(true);
+        secondExtraLayer.add(depot5_2);
+        depot5_2.setDisable(true);
         this.layerMapping.put(5, secondExtraLayer);
+
+        //TODO: disable extraLayer at the beginning
+        resSupply.setVisible(false);
+        this.tempResources.add(tempRes1);
+        tempRes1.setDisable(true);
+        this.tempResources.add(tempRes2);
+        tempRes2.setDisable(true);
+        this.tempResources.add(tempRes3);
+        tempRes3.setDisable(true);
+        this.tempResources.add(tempRes4);
+        tempRes4.setDisable(true);
 
         initFaithTrack();
     }
@@ -142,11 +170,13 @@ public class PersonalBoardController implements Initializable {
         for (ImageView slot: layer) {
             if (i < amount) {
                 slot.setImage(Util.resToImage(res));
-                i++;
+                model.setSlot(layerNumber, i + 1, res);
             }
             else {
                 slot.setImage(null);
+                model.setSlot(layerNumber, i + 1, null);
             }
+            i++;
         }
     }
 
@@ -160,8 +190,11 @@ public class PersonalBoardController implements Initializable {
         }
     }
 
-    //TODO: javadoc
-    public void reorder(Event event) {
+    /**
+     * <p>When called, the player can start reordering is depot</p>
+     * <p>When the button is pressed again, reads the depot and sends a Request </p>
+     */
+    public void reorder() {
         if(!isReorderDepotPressed) {
             reorderButton.setText("End reorder");
             isReorderDepotPressed = true;
@@ -172,36 +205,17 @@ public class PersonalBoardController implements Initializable {
             isReorderDepotPressed = false;
             canReorder = false;
             //Read the Depot and send a Request
-            Request request = new ReorderDepotGUIRequest(convertToDepotSetting());
+            Request request = new ReorderDepotGUIRequest(model.convertToDepotSetting());
             this.mainController.sendMessage(request);
+            if (isPlacing) resetResSupply();
         }
-    }
-
-    private List<DepotSetting> convertToDepotSetting() {
-        List<DepotSetting> settings = new ArrayList<>();
-        for(Integer layerNum: layerMapping.keySet()) {
-            List<ImageView> currentLayer = layerMapping.get(layerNum);
-            ResourceType lastRes = Util.imageToRes(currentLayer.get(0).getImage());
-            int amount = 0;
-            for(ImageView slot: currentLayer) {
-                ResourceType checkRes = Util.imageToRes(slot.getImage());
-                if (checkRes != null && checkRes != lastRes) {
-                    //Invalid setting, abort
-                    return null;
-                }
-                else {
-                    amount++;
-                }
-            }
-            settings.add(new DepotSetting(layerNum, lastRes, amount));
-        }
-        return settings;
     }
 
     //Method that makes an entity draggable
     public void dragDetection(MouseEvent event) {
         if (canReorder) {
             this.dragSource = (ImageView) event.getSource();
+            this.dragSourceId = this.dragSource.getId();
             Dragboard db = this.dragSource.startDragAndDrop(TransferMode.ANY);
             ClipboardContent cb = new ClipboardContent();
             cb.putImage(this.dragSource.getImage());
@@ -210,10 +224,9 @@ public class PersonalBoardController implements Initializable {
         }
     }
 
-    //TODO: useless?
     //Method to call when an entity is hovering on the drop area
     public void dragOver(DragEvent event) {
-        System.out.println("DRAGGING OVER");
+        //System.out.println("DRAGGING OVER");
         if(event.getDragboard().hasImage()) {
             event.acceptTransferModes(TransferMode.ANY);
         }
@@ -222,21 +235,66 @@ public class PersonalBoardController implements Initializable {
     //Method to call when the entity is released
     public void dragDrop(DragEvent event) {
         System.out.println("DRAG DROPPED");
+        ResourceType lastRes = null;
         ImageView destination = (ImageView) event.getSource();
+        if (!dragSourceId.contains("tempRes")) {
+            lastRes = model.getSlot(this.dragSourceId);
+        }
         if (destination.getImage() != null) {
             this.dragSource.setImage(destination.getImage());
+            if (!dragSourceId.contains("tempRes")) {
+                ResourceType resourceType = model.getSlot(destination.getId());
+                model.setSlot(this.dragSourceId, resourceType);
+            }
         }
         else {
             this.dragSource.setImage(null);
+            if (!dragSourceId.contains("tempRes")) {
+                model.setSlot(this.dragSourceId, null);
+            }
         }
         Image img = event.getDragboard().getImage();
         destination.setImage(img);
+        if (!dragSourceId.contains("tempRes")) {
+            model.setSlot(destination.getId(), lastRes);
+        }
     }
 
-    //TODO: useless?
     //Method to call when the drag finished successfully
-    public void dragDone(DragEvent event) {
+    public void dragDone() {
         System.out.println("DRAG DONE");
+    }
+
+    //TODO: clean this and take care of discarded res
+    public void updateTempResources(Resource tempRes) {
+        resSupply.setVisible(true);
+        int currentImage = 0;
+        try {
+            for (ResourceType res : tempRes.keySet()) {
+                int amount = tempRes.getValue(res);
+                for (int j = 0; j < amount; j++) {
+                    ImageView imageView = tempResources.get(currentImage);
+                    currentImage++;
+                    imageView.setDisable(false);
+                    imageView.setImage(Util.resToImage(res));
+                }
+            }
+            //Now placement can start
+            reorderButton.setText("End placement");
+            isReorderDepotPressed = true;
+            canReorder = true;
+            isPlacing = true;
+        } catch (InvalidKeyException e) {
+            System.out.println("Invalid key");
+        }
+    }
+
+    private void resetResSupply() {
+        for(ImageView imageView: this.tempResources) {
+            imageView.setImage(null);
+            imageView.setDisable(true);
+        }
+        resSupply.setVisible(false);
     }
 
     /**

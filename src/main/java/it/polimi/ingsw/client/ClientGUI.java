@@ -180,13 +180,17 @@ public class ClientGUI implements UserInterface {
 
     @Override
     public void updateTempResource(TempResourceUpdate update) {
-
+        printLog("Updating TempResource...");
+        Platform.runLater(() -> {
+            PersonalBoardController personalBoardController = mainController.getPersonalBoardController(update.getActivePlayer());
+            personalBoardController.updateTempResources(update.getResource());
+        });
     }
 
     @Override
     public void updateStorages(StorageUpdate update) {
+        printLog("Updating storages...");
         Platform.runLater(() -> {
-            printLog("Updating storages...");
             Map<String, List<DepotSetting>> depotMap = update.getDepotMap();
             Map<String, Resource> strongboxMap = update.getStrongboxMap();
             Map<String, PersonalBoardController> controllerMap = mainController.getPersonalBoardControllerMap();

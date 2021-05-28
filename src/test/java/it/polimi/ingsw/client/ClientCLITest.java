@@ -69,23 +69,23 @@ public class ClientCLITest {
         DevelopmentSlot slot1 = new DevelopmentSlot();
         slot1.addCard(new DevelopmentCard(1,
                 new Resource(0, 1, 2, 3),
-                CardColor.GREEN,1, prodPower));
+                CardColor.GREEN,1, prodPower, ""));
         slot1.addCard(new DevelopmentCard(3,
                 new Resource(0, 1, 2, 3),
-                CardColor.GREEN,2, prodPower));
+                CardColor.GREEN,2, prodPower, ""));
         slot1.addCard(new DevelopmentCard(3,
                 new Resource(0, 1, 2, 3),
-                CardColor.GREEN,3, prodPower));
+                CardColor.GREEN,3, prodPower, ""));
 
         DevelopmentSlot slot2 = new DevelopmentSlot();
         slot2.addCard(new DevelopmentCard(2,
                 new Resource(1,2,3,4),
-                CardColor.PURPLE, 1, prodPower));
+                CardColor.PURPLE, 1, prodPower, ""));
 
         DevelopmentSlot slot3 = new DevelopmentSlot();
         slot3.addCard(new DevelopmentCard(3,
                 new Resource(0, 1, 2, 3),
-                CardColor.BLUE,1, prodPower));
+                CardColor.BLUE,1, prodPower, ""));
 
         List<DevelopmentSlot> devSlotList1 = new ArrayList<>();
         devSlotList1.add(slot1);
@@ -112,7 +112,7 @@ public class ClientCLITest {
 
         System.out.println(new DevelopmentCard(1,
                 new Resource(0, 1, 2, 3),
-                CardColor.GREEN,1, prodPower));
+                CardColor.GREEN,1, prodPower, ""));
     }
 
     @Test

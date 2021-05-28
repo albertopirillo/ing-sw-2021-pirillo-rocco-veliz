@@ -19,12 +19,12 @@ class DevelopmentSlotTest {
         res1.addResource(ResourceType.SHIELD,2);
         res2.addResource(ResourceType.FAITH, 1);
         res3.addResource(ResourceType.COIN,1);
-        DevelopmentCard dev1 = new DevelopmentCard(1, res1, CardColor.GREEN, 3, new ProductionPower(res2, res3));
+        DevelopmentCard dev1 = new DevelopmentCard(1, res1, CardColor.GREEN, 3, new ProductionPower(res2, res3), "");
         //copy of dev1
-        DevelopmentCard test = new DevelopmentCard(1, res1, CardColor.GREEN, 3, new ProductionPower(res2, res3));
+        DevelopmentCard test = new DevelopmentCard(1, res1, CardColor.GREEN, 3, new ProductionPower(res2, res3), "");
 
-        DevelopmentCard dev2 = new DevelopmentCard(1, res1, CardColor.GREEN, 2, new ProductionPower(res2, res3));
-        DevelopmentCard dev3 = new DevelopmentCard(1, res1, CardColor.GREEN, 1, new ProductionPower(res2, res3));
+        DevelopmentCard dev2 = new DevelopmentCard(1, res1, CardColor.GREEN, 2, new ProductionPower(res2, res3), "");
+        DevelopmentCard dev3 = new DevelopmentCard(1, res1, CardColor.GREEN, 1, new ProductionPower(res2, res3), "");
         DevelopmentSlot devSlot = new DevelopmentSlot();
         devSlot.addCard(dev1);
         devSlot.addCard(dev2);
@@ -43,9 +43,9 @@ class DevelopmentSlotTest {
         res1.addResource(ResourceType.SHIELD,2);
         res2.addResource(ResourceType.FAITH, 1);
         res3.addResource(ResourceType.COIN,1);
-        DevelopmentCard dev1 = new DevelopmentCard(1, res1, CardColor.GREEN, 2, new ProductionPower(res2, res3));
-        DevelopmentCard dev2 = new DevelopmentCard(1, res1, CardColor.GREEN, 2, new ProductionPower(res2, res3));
-        DevelopmentCard dev3 = new DevelopmentCard(1, res1, CardColor.GREEN, 2, new ProductionPower(res2, res3));
+        DevelopmentCard dev1 = new DevelopmentCard(1, res1, CardColor.GREEN, 2, new ProductionPower(res2, res3), "");
+        DevelopmentCard dev2 = new DevelopmentCard(1, res1, CardColor.GREEN, 2, new ProductionPower(res2, res3), "");
+        DevelopmentCard dev3 = new DevelopmentCard(1, res1, CardColor.GREEN, 2, new ProductionPower(res2, res3), "");
 
         DevelopmentSlot devSlot = new DevelopmentSlot();
         assertEquals(0, devSlot.getCards().size());
@@ -62,9 +62,9 @@ class DevelopmentSlotTest {
         res1.addResource(ResourceType.SHIELD,2);
         res2.addResource(ResourceType.FAITH, 1);
         res3.addResource(ResourceType.COIN,1);
-        DevelopmentCard dev1 = new DevelopmentCard(1, res1, CardColor.GREEN, 3, new ProductionPower(res2, res3));
-        DevelopmentCard dev2 = new DevelopmentCard(1, res1, CardColor.GREEN, 2, new ProductionPower(res2, res3));
-        DevelopmentCard dev3 = new DevelopmentCard(1, res1, CardColor.GREEN, 1, new ProductionPower(res2, res3));
+        DevelopmentCard dev1 = new DevelopmentCard(1, res1, CardColor.GREEN, 3, new ProductionPower(res2, res3), "");
+        DevelopmentCard dev2 = new DevelopmentCard(1, res1, CardColor.GREEN, 2, new ProductionPower(res2, res3), "");
+        DevelopmentCard dev3 = new DevelopmentCard(1, res1, CardColor.GREEN, 1, new ProductionPower(res2, res3), "");
         DevelopmentSlot devSlot = new DevelopmentSlot();
         assertThrows(DevSlotEmptyException.class, devSlot::getLevelSlot);
         devSlot.addCard(dev1);
@@ -80,12 +80,12 @@ class DevelopmentSlotTest {
         res1.addResource(ResourceType.SHIELD,2);
         res2.addResource(ResourceType.FAITH, 1);
         res3.addResource(ResourceType.COIN,1);
-        DevelopmentCard dev1 = new DevelopmentCard(1, res1, CardColor.GREEN, 3, new ProductionPower(res2, res3));
+        DevelopmentCard dev1 = new DevelopmentCard(1, res1, CardColor.GREEN, 3, new ProductionPower(res2, res3), "");
         //copy of dev1
-        DevelopmentCard test = new DevelopmentCard(1, res1, CardColor.GREEN, 3, new ProductionPower(res2, res3));
+        DevelopmentCard test = new DevelopmentCard(1, res1, CardColor.GREEN, 3, new ProductionPower(res2, res3), "");
 
-        DevelopmentCard dev2 = new DevelopmentCard(1, res1, CardColor.GREEN, 2, new ProductionPower(res2, res3));
-        DevelopmentCard dev3 = new DevelopmentCard(1, res1, CardColor.GREEN, 1, new ProductionPower(res2, res3));
+        DevelopmentCard dev2 = new DevelopmentCard(1, res1, CardColor.GREEN, 2, new ProductionPower(res2, res3), "");
+        DevelopmentCard dev3 = new DevelopmentCard(1, res1, CardColor.GREEN, 1, new ProductionPower(res2, res3), "");
         DevelopmentSlot devSlot = new DevelopmentSlot();
         assertThrows(DevSlotEmptyException.class, devSlot::getLevelSlot);
         assertThrows(DevSlotEmptyException.class, devSlot::getTopCard);
@@ -104,9 +104,9 @@ class DevelopmentSlotTest {
         res1.addResource(ResourceType.SHIELD,2);
         res2.addResource(ResourceType.FAITH, 1);
         res3.addResource(ResourceType.COIN,1);
-        DevelopmentCard dev1 = new DevelopmentCard(1, res1, CardColor.GREEN, 3, new ProductionPower(res2, res3));
-        DevelopmentCard dev2 = new DevelopmentCard(1, res1, CardColor.GREEN, 2, new ProductionPower(res2, res3));
-        DevelopmentCard dev3 = new DevelopmentCard(1, res1, CardColor.GREEN, 1, new ProductionPower(res2, res3));
+        DevelopmentCard dev1 = new DevelopmentCard(1, res1, CardColor.GREEN, 3, new ProductionPower(res2, res3), "");
+        DevelopmentCard dev2 = new DevelopmentCard(1, res1, CardColor.GREEN, 2, new ProductionPower(res2, res3), "");
+        DevelopmentCard dev3 = new DevelopmentCard(1, res1, CardColor.GREEN, 1, new ProductionPower(res2, res3), "");
         DevelopmentSlot devSlot = new DevelopmentSlot();
 
         assertThrows(DevSlotEmptyException.class, () -> devSlot.canBeAdded(dev1));

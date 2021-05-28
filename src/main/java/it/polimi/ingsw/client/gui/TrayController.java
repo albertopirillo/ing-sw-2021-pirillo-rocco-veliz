@@ -20,7 +20,6 @@ public class TrayController implements Initializable {
 
     private List<ImageView> marketTray = new ArrayList<>();
     private ImageView remaining;
-    private ImageView indexInsert;
     private MainController mainController;
 
     public void setMainController(MainController mainController) {
@@ -44,7 +43,6 @@ public class TrayController implements Initializable {
     }
 
     public void updateMarketTray(MarblesColor[][] marbles, MarblesColor remainingMarble) {
-        if(this.indexInsert != null) this.indexInsert.setImage(null);
         for(int i=0; i<3; i++){
             for(int j=0; j<4; j++){
                 this.marketTray.get(4*i + j).setImage(Util.marbleToImage((marbles[i][j])));
@@ -56,7 +54,9 @@ public class TrayController implements Initializable {
     public void dragDetection(MouseEvent event) {
         Dragboard db = this.remaining.startDragAndDrop(TransferMode.ANY);
         ClipboardContent cb = new ClipboardContent();
-        cb.putImage(this.remaining.getImage());
+        //cb.putImage(this.remaining.getImage());
+        cb.putString("");
+        //db.setDragView(this.remaining.getImage());
         db.setContent(cb);
         event.consume();
     }
@@ -64,18 +64,18 @@ public class TrayController implements Initializable {
     public void dragDrop(DragEvent event) {
         System.out.println("DRAG DROPPED");
         ImageView destination = (ImageView) event.getSource();
-        if (destination.getImage() == null) {
-            destination.setImage(remaining.getImage());
-            this.indexInsert = destination;
-            Request request = new InsertMarbleRequest(Integer.parseInt(destination.getId().substring(destination.getId().length() - 1)));
-            this.mainController.sendMessage(request);
-        }
+        Request request = new InsertMarbleRequest(Integer.parseInt(destination.getId().substring(destination.getId().length() - 1)));
+        this.mainController.sendMessage(request);
     }
 
     public void dragOver(DragEvent event) {
         System.out.println("DRAGGING OVER");
-        if(event.getDragboard().hasImage()) {
-            event.acceptTransferModes(TransferMode.ANY);
-        }
+        event.acceptTransferModes(TransferMode.ANY);
+        ((ImageView)event.getSource()).setImage(this.remaining.getImage());
+        event.consume();
+    }
+
+    public void dragExit(DragEvent event) {
+        ((ImageView)event.getSource()).setImage(null);
     }
 }

@@ -59,28 +59,6 @@ public class FaithTrack implements Serializable {
             case 24:
                 vaticanReport(player, players);
                 break;
-            case 3:
-                player.addPlayerFaith(1);
-                break;
-            case 6:
-                player.addPlayerFaith(2);
-                break;
-            case 9:
-                player.addPlayerFaith(4);
-                break;
-            case 12:
-                player.addPlayerFaith(6);
-                break;
-            case 15:
-                player.addPlayerFaith(9);
-                break;
-            case 18:
-                player.addPlayerFaith(12);
-                break;
-            case 21:
-                player.addPlayerFaith(16);
-                break;
-            //TODO Add cells that give points
         }
     }
 
@@ -133,7 +111,7 @@ public class FaithTrack implements Serializable {
                 popeFavor = getPopeFavorBySection(VaticanReportSection.GROUP_THREE);
                 if(!popeFavor.isReported()) {
                     popeFavor.setReportedAndFlip(true);
-                    player.addVictoryPoints(24);
+                    player.addVictoryPoints(4);
                     vaticanReportOthers(VaticanReportSection.GROUP_THREE, players);
                     try {
                         player.getGame().lastTurn(true);

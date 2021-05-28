@@ -4,20 +4,26 @@ public class DevelopmentCard extends Card {
 
     private final Resource cost;
     private final CardColor type;
+    private final String img;
     private final int level;
     private final ProductionPower prodPower;
 
-    public DevelopmentCard(int victoryPoints, Resource cost, CardColor type, int level, ProductionPower prodPower) {
+    public DevelopmentCard(int victoryPoints, Resource cost, CardColor type, int level, ProductionPower prodPower, String img) {
         super(victoryPoints);
         this.cost = cost;
         this.type = type;
         this.level = level;
         this.prodPower = prodPower;
+        this.img = img;
     }
 
     //check if the card(this) can be bought
     public boolean canBeBought(Resource playerResource){
         return playerResource.compare(this.cost);
+    }
+
+    public String getImg(){
+        return this.img;
     }
     //get level
     public int getLevel(){

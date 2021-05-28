@@ -13,9 +13,9 @@ class CardDeckTest {
         CardDeck deck = new CardDeck();
         assertEquals(deck.getNumbersOfCards(), 0);
         //stub
-        deck.addCard(new DevelopmentCard(1, new Resource(), CardColor.BLUE, 1, new ProductionPower(new Resource(), new Resource())));
-        deck.addCard(new DevelopmentCard(2, new Resource(), CardColor.GREEN, 2, new ProductionPower(new Resource(), new Resource())));
-        deck.addCard(new DevelopmentCard(3, new Resource(), CardColor.YELLOW, 3, new ProductionPower(new Resource(), new Resource())));
+        deck.addCard(new DevelopmentCard(1, new Resource(), CardColor.BLUE, 1, new ProductionPower(new Resource(), new Resource()), ""));
+        deck.addCard(new DevelopmentCard(2, new Resource(), CardColor.GREEN, 2, new ProductionPower(new Resource(), new Resource()), ""));
+        deck.addCard(new DevelopmentCard(3, new Resource(), CardColor.YELLOW, 3, new ProductionPower(new Resource(), new Resource()), ""));
         assertEquals(deck.getNumbersOfCards(), 3);
     }
 
@@ -27,10 +27,10 @@ class CardDeckTest {
         Resource res1 = new Resource(1,2,3,4);
         Resource res2 = new Resource(4,3,2,1);
         Resource res3 = new Resource(2,4,1,3);
-        DevelopmentCard dev1 = new DevelopmentCard(1, res1, CardColor.BLUE, 2, new ProductionPower(res1, res2));
-        DevelopmentCard dev2 = new DevelopmentCard(2, res2, CardColor.BLUE, 2, new ProductionPower(res1, res2));
-        DevelopmentCard dev3 = new DevelopmentCard(3, res3, CardColor.BLUE, 2, new ProductionPower(res1, res2));
-        DevelopmentCard dev4 = new DevelopmentCard(3, res1, CardColor.BLUE, 2, new ProductionPower(res1, res2));
+        DevelopmentCard dev1 = new DevelopmentCard(1, res1, CardColor.BLUE, 2, new ProductionPower(res1, res2), "");
+        DevelopmentCard dev2 = new DevelopmentCard(2, res2, CardColor.BLUE, 2, new ProductionPower(res1, res2), "");
+        DevelopmentCard dev3 = new DevelopmentCard(3, res3, CardColor.BLUE, 2, new ProductionPower(res1, res2), "");
+        DevelopmentCard dev4 = new DevelopmentCard(3, res1, CardColor.BLUE, 2, new ProductionPower(res1, res2), "");
         deck.addCard(dev1);
         deck.addCard(dev2);
         deck.addCard(dev3);
@@ -52,7 +52,7 @@ class CardDeckTest {
     public void LevelTest() throws FullCardDeckException, DeckEmptyException {
         CardDeck deck = new CardDeck();
         assertThrows(DeckEmptyException.class, deck::getLevel);
-        DevelopmentCard devCard = new DevelopmentCard(5, new Resource(), CardColor.BLUE, 2, new ProductionPower(new Resource(), new Resource()));
+        DevelopmentCard devCard = new DevelopmentCard(5, new Resource(), CardColor.BLUE, 2, new ProductionPower(new Resource(), new Resource()), "");
         deck.addCard(devCard);
         assertEquals(deck.getLevel(), 2);
     }
@@ -63,7 +63,7 @@ class CardDeckTest {
         assertNull(deck.getCard());
         Resource res = new Resource(1,2,3,4);
         Resource res1 = new Resource(1,2,3,2);
-        deck.addCard(new DevelopmentCard( 10, res, CardColor.BLUE, 1, new ProductionPower(res, res1)));
+        deck.addCard(new DevelopmentCard( 10, res, CardColor.BLUE, 1, new ProductionPower(res, res1), ""));
         DevelopmentCard card = deck.removeCard();
         //return the card
         assertEquals(card.getType(), CardColor.BLUE);
@@ -83,10 +83,10 @@ class CardDeckTest {
         Resource res2 = new Resource(4,3,2,1);
         Resource res3 = new Resource(2,4,1,3);
         Resource res4 = new Resource(1,4,1,1);
-        DevelopmentCard dev1 = new DevelopmentCard(2, res1, CardColor.BLUE, 2, new ProductionPower(res1, res2));
-        DevelopmentCard dev2 = new DevelopmentCard(3, res2, CardColor.BLUE, 2, new ProductionPower(res1, res2));
-        DevelopmentCard dev3 = new DevelopmentCard(4, res3, CardColor.BLUE, 2, new ProductionPower(res1, res2));
-        DevelopmentCard dev4 = new DevelopmentCard(4, res4, CardColor.BLUE, 2, new ProductionPower(res1, res2));
+        DevelopmentCard dev1 = new DevelopmentCard(2, res1, CardColor.BLUE, 2, new ProductionPower(res1, res2), "");
+        DevelopmentCard dev2 = new DevelopmentCard(3, res2, CardColor.BLUE, 2, new ProductionPower(res1, res2), "");
+        DevelopmentCard dev3 = new DevelopmentCard(4, res3, CardColor.BLUE, 2, new ProductionPower(res1, res2), "");
+        DevelopmentCard dev4 = new DevelopmentCard(4, res4, CardColor.BLUE, 2, new ProductionPower(res1, res2), "");
         deck.addCard(dev1);
         deck.addCard(dev2);
         deck.addCard(dev3);

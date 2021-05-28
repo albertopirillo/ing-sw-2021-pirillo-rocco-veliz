@@ -157,13 +157,13 @@ class DevLeaderCardTest {
         //stub devCards
         Resource res1 = new Resource(1,2,3,4);
         Resource res2 = new Resource(1,2,3,1);
-        DevelopmentCard dev1 = new DevelopmentCard(10, res1, CardColor.BLUE, 1, new ProductionPower(res1, res2));
-        DevelopmentCard dev2 = new DevelopmentCard(10, res1, CardColor.BLUE, 2, new ProductionPower(res1, res2));
-        DevelopmentCard dev3 = new DevelopmentCard(11, res2, CardColor.BLUE, 1, new ProductionPower(res2, res1));
-        DevelopmentCard dev4 = new DevelopmentCard(11, res2, CardColor.YELLOW, 2, new ProductionPower(res2, res1));
-        DevelopmentCard dev5 = new DevelopmentCard(11, res2, CardColor.GREEN, 3, new ProductionPower(res2, res1));
-        DevelopmentCard dev6 = new DevelopmentCard(11, res2, CardColor.GREEN, 3, new ProductionPower(res1, res2));
-        DevelopmentCard dev7 = new DevelopmentCard(11, res2, CardColor.YELLOW, 1, new ProductionPower(res2, res1));
+        DevelopmentCard dev1 = new DevelopmentCard(10, res1, CardColor.BLUE, 1, new ProductionPower(res1, res2), "");
+        DevelopmentCard dev2 = new DevelopmentCard(10, res1, CardColor.BLUE, 2, new ProductionPower(res1, res2), "");
+        DevelopmentCard dev3 = new DevelopmentCard(11, res2, CardColor.BLUE, 1, new ProductionPower(res2, res1), "");
+        DevelopmentCard dev4 = new DevelopmentCard(11, res2, CardColor.YELLOW, 2, new ProductionPower(res2, res1), "");
+        DevelopmentCard dev5 = new DevelopmentCard(11, res2, CardColor.GREEN, 3, new ProductionPower(res2, res1), "");
+        DevelopmentCard dev6 = new DevelopmentCard(11, res2, CardColor.GREEN, 3, new ProductionPower(res1, res2), "");
+        DevelopmentCard dev7 = new DevelopmentCard(11, res2, CardColor.YELLOW, 1, new ProductionPower(res2, res1), "");
 
         Player player = new Player("pippo");
         PersonalBoard p = player.getPersonalBoard();

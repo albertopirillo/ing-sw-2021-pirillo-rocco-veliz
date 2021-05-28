@@ -78,4 +78,10 @@ public abstract class Util {
         String path = "/png/market/" + marble.getName() + ".png";
         return new Image(Objects.requireNonNull(mainClass.getResourceAsStream(path)));
     }
+
+    public static Image getDevCardImg(String img){
+        String path = "/png/development_cards/" + img + ".png";
+        return new Image(Objects.requireNonNull(mainClass.getResourceAsStream(path)));
+    }
+
 }

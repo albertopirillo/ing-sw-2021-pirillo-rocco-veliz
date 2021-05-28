@@ -1,10 +1,7 @@
 package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.client.gui.*;
-import it.polimi.ingsw.model.LeaderCard;
-import it.polimi.ingsw.model.MarblesColor;
-import it.polimi.ingsw.model.Resource;
-import it.polimi.ingsw.model.ResourceType;
+import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.network.DepotSetting;
 import it.polimi.ingsw.network.Processable;
 import it.polimi.ingsw.network.messages.GameSizeMessage;
@@ -228,13 +225,24 @@ public class ClientGUI implements UserInterface {
     }
 
     @Override
-    public void updateFaithTrack(FaithTrackUpdate faithTrackUpdate) {
-
+    public void updateFaithTrack(FaithTrackUpdate update) {
+        Platform.runLater(() -> {
+            printLog("Updating faith track...");
+            Map<String, FaithTrack> map = update.getFaithTrackInfoMap();
+            Map<String, PersonalBoardController> controllerMap = mainController.getPersonalBoardControllerMap();
+            for(Map.Entry<String, FaithTrack> entry: map.entrySet()){
+                PersonalBoardController currentController = controllerMap.get(entry.getKey());
+                currentController.updateFaithTrack(entry.getValue());
+            }
+        });
     }
 
     @Override
-    public void updateMarket(MarketUpdate marketUpdate) {
-
+    public void updateMarket(MarketUpdate update) {
+        Platform.runLater(() -> {
+            printLog("Updating market...");
+            mainController.getMarketController().updateMarket(update.getCardImgs());
+        });
     }
 
     @Override
@@ -291,6 +299,7 @@ public class ClientGUI implements UserInterface {
         //Update the GUI with storages and leader cards of all players
         updateStorages(update.getStorageUpdate());
         updateMarketTray(update.getMarketTrayUpdate());
+        updateMarket(update.getMarketUpdate());
         //TODO: updateLeaderCards(update.getLeaderUpdate());
     }
 }

@@ -1,3 +1,6 @@
 #marketRoot { /*This entry can be removed*/
     -fx-background-image: url("../png/generic/background_paper.jpg");
 }
+.selection:hover{
+    -fx-effect: dropshadow(three-pass-box, rgba(255, 206, 0, 1), 30, 0, 0, 0);
+}

@@ -3,6 +3,7 @@ package it.polimi.ingsw.client.gui;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -58,4 +59,35 @@ public class MarketController implements Initializable {
         }
     }
 
+    public void buyCard(MouseEvent mouseEvent) {
+        System.out.println("Non so cosa minchia fare per mandare la BuyDevCard Request");
+        String id = ((ImageView) mouseEvent.getSource()).getId();
+        switch (id.substring(7)){
+            case "1": //verde livello 3
+                break;
+            case "2":
+                break;
+            case "3":
+                break;
+            case "4":
+                break;
+            case "5":
+                break;
+            case "6":
+                break;
+            case "7":
+                break;
+            case "8":
+                break;
+            case "9":
+                break;
+            case "10":
+                break;
+            case "11":
+                break;
+            case "12": //viola livello 1
+                break;
+        }
+
+    }
 }

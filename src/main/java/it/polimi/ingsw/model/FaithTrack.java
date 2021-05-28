@@ -25,6 +25,8 @@ public class FaithTrack implements Serializable {
         }
     }
 
+    public List<PopeFavorCard> getPopeFavorCards() { return this.popeCards; }
+
     /**
      * Player's faith is stored in his own faith track
      * Used to calculate it's position on the track

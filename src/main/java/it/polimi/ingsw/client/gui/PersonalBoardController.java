@@ -3,6 +3,7 @@ package it.polimi.ingsw.client.gui;
 import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import it.polimi.ingsw.model.FaithTrack;
+import it.polimi.ingsw.model.PopeFavorCard;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.ResourceType;
 import it.polimi.ingsw.network.DepotSetting;
@@ -360,8 +361,8 @@ public class PersonalBoardController implements Initializable {
         this.faithTrackCells.get(this.playerFaith).setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/png/faithtrack/faith.png"))));
 
         Collections.addAll(this.popeFavorTiles, popeFavor01, popeFavor02, popeFavor03);
-        for (int i=1; i<=3; i++){
-            popeFavorTiles.get(i-1).setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/png/faithtrack/popeFavor0" + i + "_fd.png"))));
+        for (int i=0; i<3; i++){
+            popeFavorTiles.get(i).setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/png/faithtrack/popeFavor0" + i + "_fd.png"))));
         }
     }
 
@@ -373,6 +374,11 @@ public class PersonalBoardController implements Initializable {
         faithTrackCells.get(this.playerFaith).setImage(null);
         this.playerFaith = faithTrack.getPlayerFaith();
         this.faithTrackCells.get(faithTrack.getPlayerFaith()).setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/png/faithtrack/faith.png"))));
-        //TODO update pope tiles (lo sto a fa mo)
+        List<PopeFavorCard> popeCards = faithTrack.getPopeFavorCards();
+        for (int i=0; i<3; i++){
+            if(popeCards.get(i).isFaceUp()){
+                popeFavorTiles.get(i).setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/png/faithtrack/popeFavor0" + i + "_fu.png"))));
+            }
+        }
     }
 }

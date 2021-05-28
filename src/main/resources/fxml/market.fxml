@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -42,17 +43,53 @@
             <Font name="System Bold Italic" size="48.0" />
          </font>
       </Text>
-      <ImageView fx:id="imgCard1" fitHeight="195.0" fitWidth="130.0" layoutX="180.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="imgCard5" fitHeight="195.0" fitWidth="130.0" layoutX="180.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="imgCard9" fitHeight="195.0" fitWidth="130.0" layoutX="180.0" layoutY="461.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="imgCard2" fitHeight="195.0" fitWidth="130.0" layoutX="362.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="imgCard3" fitHeight="195.0" fitWidth="130.0" layoutX="520.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="imgCard4" fitHeight="195.0" fitWidth="130.0" layoutX="680.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="imgCard6" fitHeight="195.0" fitWidth="130.0" layoutX="362.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="imgCard10" fitHeight="195.0" fitWidth="130.0" layoutX="362.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="imgCard7" fitHeight="195.0" fitWidth="130.0" layoutX="520.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="imgCard11" fitHeight="195.0" fitWidth="130.0" layoutX="520.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="imgCard8" fitHeight="195.0" fitWidth="130.0" layoutX="680.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="imgCard12" fitHeight="195.0" fitWidth="130.0" layoutX="680.0" layoutY="461.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imgCard1" fitHeight="195.0" fitWidth="130.0" layoutX="180.0" layoutY="65.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></ImageView>
+      <ImageView fx:id="imgCard5" fitHeight="195.0" fitWidth="130.0" layoutX="180.0" layoutY="260.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></ImageView>
+      <ImageView fx:id="imgCard9" fitHeight="195.0" fitWidth="130.0" layoutX="180.0" layoutY="461.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></ImageView>
+      <ImageView fx:id="imgCard2" fitHeight="195.0" fitWidth="130.0" layoutX="362.0" layoutY="65.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></ImageView>
+      <ImageView fx:id="imgCard3" fitHeight="195.0" fitWidth="130.0" layoutX="520.0" layoutY="65.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></ImageView>
+      <ImageView fx:id="imgCard4" fitHeight="195.0" fitWidth="130.0" layoutX="680.0" layoutY="65.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></ImageView>
+      <ImageView fx:id="imgCard6" fitHeight="195.0" fitWidth="130.0" layoutX="362.0" layoutY="260.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></ImageView>
+      <ImageView fx:id="imgCard10" fitHeight="195.0" fitWidth="130.0" layoutX="362.0" layoutY="460.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></ImageView>
+      <ImageView fx:id="imgCard7" fitHeight="195.0" fitWidth="130.0" layoutX="520.0" layoutY="260.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></ImageView>
+      <ImageView fx:id="imgCard11" fitHeight="195.0" fitWidth="130.0" layoutX="520.0" layoutY="460.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></ImageView>
+      <ImageView fx:id="imgCard8" fitHeight="195.0" fitWidth="130.0" layoutX="680.0" layoutY="260.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></ImageView>
+      <ImageView fx:id="imgCard12" fitHeight="195.0" fitWidth="130.0" layoutX="680.0" layoutY="461.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="s">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></ImageView>
    </children>
 </AnchorPane>

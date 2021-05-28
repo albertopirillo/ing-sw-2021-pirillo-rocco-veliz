@@ -157,6 +157,7 @@ public class PlayerController {
                 throw new MainActionException("You have to perform an action before ending the turn");
             }
             this.mainActionDone = false;
+            controller.getGame().getActivePlayer().getPersonalBoard().updateFaithTrack(controller.getGame().getPlayersList());
             controller.getGame().nextTurn();
             controller.resetException();
         } catch (CannotEndTurnException | NegativeResAmountException | InvalidKeyException | MainActionException e) {

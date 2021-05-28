@@ -10,14 +10,16 @@ public class PlaceResourceRequest extends Request {
 
     private final Resource toDiscard;
     private final List<DepotSetting> toPlace;
+    private final boolean fullDepot;
 
-    public PlaceResourceRequest(Resource toDiscard, List<DepotSetting> toPlace) {
+    public PlaceResourceRequest(Resource toDiscard, List<DepotSetting> toPlace, boolean fullDepot) {
         super();
         this.toDiscard = toDiscard;
         this.toPlace = toPlace;
+        this.fullDepot = fullDepot;
     }
 
     public void activateRequest(MasterController masterController) {
-        masterController.getPlayerController().placeResource(toDiscard, toPlace);
+        masterController.getPlayerController().placeResource(toDiscard, toPlace, fullDepot);
     }
 }

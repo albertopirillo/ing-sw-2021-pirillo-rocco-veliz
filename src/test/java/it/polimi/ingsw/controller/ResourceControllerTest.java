@@ -25,7 +25,7 @@ class ResourceControllerTest {
     }
 
     @Test
-    public void handleResourceOKTest() throws FullCardDeckException, InvalidResourceException, WrongDepotInstructionsException, LayerNotEmptyException, NotEnoughSpaceException, InvalidLayerNumberException, CannotContainFaithException, AlreadyInAnotherLayerException, InvalidKeyException, NegativeResAmountException {
+    public void handleResourceOKTest() throws FullCardDeckException, InvalidResourceException, WrongDepotInstructionsException, LayerNotEmptyException, NotEnoughSpaceException, InvalidLayerNumberException, CannotContainFaithException, AlreadyInAnotherLayerException, InvalidKeyException, NegativeResAmountException, CloneNotSupportedException {
         Game game = new MultiGame(true);
         MasterController masterController = new MasterController(game);
         Player activePlayer = masterController.getGame().getActivePlayer();
@@ -42,7 +42,7 @@ class ResourceControllerTest {
         settings.add(new DepotSetting(2, ResourceType.COIN, 1));
         settings.add(new DepotSetting(3, ResourceType.SHIELD, 3));
 
-        resourceController.handleResource(toDiscard, settings);
+        resourceController.handleResource(toDiscard, settings, false);
         assertTrue(resourceController.getTempRes().isEmpty());
         assertEquals(toPlace, activePlayer.getPersonalBoard().getDepot().queryAllRes());
     }
@@ -64,12 +64,40 @@ class ResourceControllerTest {
         settings.add(new DepotSetting(1, ResourceType.STONE, 1));
         settings.add(new DepotSetting(3, ResourceType.SHIELD, 3));
 
-        assertThrows(WrongDepotInstructionsException.class, () -> resourceController.handleResource(toDiscard, settings));
+        assertThrows(WrongDepotInstructionsException.class, () -> resourceController.handleResource(toDiscard, settings, false));
 
         Resource toHandle2 = new Resource(1,1,3,1);
         resourceController.getTempRes().setToHandle(toHandle2);
 
         assertThrows(WrongDepotInstructionsException.class,
-                () -> resourceController.handleResource(new Resource(0,0,0,1), settings));
-       }
+                () -> resourceController.handleResource(new Resource(0,0,0,1), settings, false));
+    }
+
+    @Test
+    public void fullDepotTest() throws FullCardDeckException {
+        Game game = new MultiGame(true);
+        MasterController masterController = new MasterController(game);
+        Player activePlayer = masterController.getGame().getActivePlayer();
+        ResourceController resourceController = masterController.getResourceController();
+        activePlayer.setGame(game);
+
+        Resource toDiscard = new Resource(0,1,2,0);
+        Resource toHandle = new Resource(0,1,2,0);
+        resourceController.getTempRes().setToHandle(toHandle);
+
+        List<DepotSetting> settings = new ArrayList<>();
+        settings.add(new DepotSetting(1, ResourceType.STONE, 1));
+        settings.add(new DepotSetting(3, ResourceType.SHIELD, 2));
+
+        assertThrows(WrongDepotInstructionsException.class, () -> resourceController.handleResource(toDiscard, settings, true));
+
+        Resource toHandle2 = new Resource(1,1,3,1);
+        resourceController.getTempRes().setToHandle(toHandle2);
+
+        List<DepotSetting> settings2 = new ArrayList<>();
+        settings2.add(new DepotSetting(1, ResourceType.STONE, 1));
+        settings2.add(new DepotSetting(2, ResourceType.COIN, 1));
+
+        assertDoesNotThrow(() -> resourceController.handleResource(new Resource(0,0,3,1), settings2, true));
+    }
 }

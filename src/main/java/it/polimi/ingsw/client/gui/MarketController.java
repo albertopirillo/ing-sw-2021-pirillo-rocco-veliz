@@ -54,7 +54,7 @@ public class MarketController implements Initializable {
 
     public void updateMarket(List<String> imgs) {
         for(int i=0; i<imgs.size(); i++){
-            devCards.get(i).setImage(Util.getCardImg(imgs.get(i)));
+            devCards.get(i).setImage(Util.getDevCardImg((imgs.get(i))));
         }
     }
 

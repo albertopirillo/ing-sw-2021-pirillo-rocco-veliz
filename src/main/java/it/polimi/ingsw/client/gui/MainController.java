@@ -70,7 +70,7 @@ public class MainController implements Initializable {
     @FXML
     private TabPane tabPane;
     @FXML
-    private Button trayPopup, marketPopup, endTurnButton, quitButton;
+    private Button trayButton, marketButton, endTurnButton, quitButton;
     @FXML
     private MenuButton activateLeaderButton, prodButton;
     @FXML
@@ -180,23 +180,30 @@ public class MainController implements Initializable {
     }
 
     private void initTrayPopup() throws IOException {
-        this.trayPopup.setText("Show Market Tray");
+        this.trayButton.setText("Show Market Tray");
         FXMLLoader loader = Util.loadFXML("market_tray");
         Parent tray = loader.load();
         this.trayController = loader.getController();
         this.trayController.setMainController(this);
         this.trayPopUp.getContent().add(tray);
+        this.trayPopUp.setX(1000);
+        this.trayPopUp.setY(200);
+        this.trayPopUp.setAutoHide(true);
+        this.trayPopUp.setOnAutoHide(event -> this.trayButton.setText("Show Market Tray"));
     }
 
     private void initMarketPopup() throws IOException {
-        this.marketPopup.setText("Show Market Cards");
+        this.marketButton.setText("Show Market Cards");
         FXMLLoader loader = Util.loadFXML("market");
         Parent tray = loader.load();
         this.marketController = loader.getController();
         this.marketPopUp.getContent().add(tray);
+        this.marketPopUp.setX(500);
+        this.marketPopUp.setY(200);
+        this.marketPopUp.setAutoHide(true);
+        this.marketPopUp.setOnAutoHide(event -> this.marketButton.setText("Show Market Cards"));
     }
 
-    //TODO: popups show above all windows
     /**
      * Shows and hides the tray popup, changing also the text of the button
      * @param event the event triggered when the button is pressed
@@ -204,11 +211,11 @@ public class MainController implements Initializable {
     public void showTray(ActionEvent event) {
         Stage stage = Util.getStageFromEvent(event);
         if (!this.trayPopUp.isShowing()) {
-            trayPopup.setText("Back to Personal Board");
+            trayButton.setText("Back to Personal Board");
             this.trayPopUp.show(stage);
         }
         else {
-            trayPopup.setText("Show Market Tray");
+            trayButton.setText("Show Market Tray");
             this.trayPopUp.hide();
         }
     }
@@ -220,11 +227,11 @@ public class MainController implements Initializable {
     public void showMarket(ActionEvent event) {
         Stage stage = Util.getStageFromEvent(event);
         if (!this.marketPopUp.isShowing()) {
-            marketPopup.setText("Back to Personal Board");
+            marketButton.setText("Back to Personal Board");
             this.marketPopUp.show(stage);
         }
         else {
-            marketPopup.setText("Show Market Cards");
+            marketButton.setText("Show Market Cards");
             this.marketPopUp.hide();
         }
     }
@@ -294,8 +301,8 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        buttonsList.add(trayPopup);
-        buttonsList.add(marketPopup);
+        buttonsList.add(trayButton);
+        buttonsList.add(marketButton);
         buttonsList.add(endTurnButton);
         buttonsList.add(activateLeaderButton);
         buttonsList.add(prodButton);

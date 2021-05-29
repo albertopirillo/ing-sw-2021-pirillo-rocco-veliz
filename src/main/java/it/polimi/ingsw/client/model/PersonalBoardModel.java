@@ -44,4 +44,19 @@ public class PersonalBoardModel {
     public void saveLeaderCards(LeaderUpdate update) {
         this.leaderMap = update.getLeaderMap();
     }
+
+    public DevSlotsUpdate buildDevSlotsUpdate() {
+        String nickname = clientModel.getNickname();
+        return new DevSlotsUpdate(nickname, devSlotMap);
+    }
+
+    public FaithTrackUpdate buildFaithTrackUpdate() {
+        String nickname = clientModel.getNickname();
+        return new FaithTrackUpdate(nickname, faithTrackInfoMap);
+    }
+
+    public LeaderUpdate buildLeaderUpdate() {
+        String nickname = clientModel.getNickname();
+        return new LeaderUpdate(nickname, leaderMap);
+    }
 }

@@ -40,4 +40,14 @@ public class StorageModel {
     public void saveTempRes(TempResourceUpdate update) {
         this.tempResource = update.getResource();
     }
+
+    public StorageUpdate buildStorageUpdate() {
+        String nickname = clientModel.getNickname();
+        return new StorageUpdate(nickname, depotMap, strongboxMap);
+    }
+
+    public TempResourceUpdate buildTempResourceUpdate() {
+        String nickname = clientModel.getNickname();
+        return new TempResourceUpdate(nickname, tempResource);
+    }
 }

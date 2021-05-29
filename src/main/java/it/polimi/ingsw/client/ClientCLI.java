@@ -50,6 +50,7 @@ public class ClientCLI implements UserInterface {
     @Override
     public void setNickname(String nickname) {
         this.nickname = nickname;
+        this.clientModel.setNickname(nickname);
     }
 
     @Override
@@ -285,7 +286,7 @@ public class ClientCLI implements UserInterface {
     public int getPosition(int min, int max){
         int position;
         do {
-            System.out.print("Choose num of position : [MIN : "+ min + " MAX: " + max + "] ");
+            System.out.print("\nChoose num of position : [MIN : "+ min + " MAX: " + max + "] ");
             System.out.println("(Press q to abort)");
             String input = stdin.nextLine();
             if (input.equals("q")) return - 1;
@@ -326,39 +327,26 @@ public class ClientCLI implements UserInterface {
         Request request = null;
         switch(selection) {
             case 1:
-                Map<String, FaithTrack> faithContent = clientModel.getPersonalBoardModel().getFaithTrackInfoMap();
-                FaithTrackUpdate update1 = new FaithTrackUpdate(nickname, faithContent);
-                updateFaithTrack(update1);
+                updateFaithTrack(clientModel.getPersonalBoardModel().buildFaithTrackUpdate());
                 break;
             case 2:
-                Map<String, List<DepotSetting>> depotContent = clientModel.getStoragesModel().getDepotMap();
-                Map<String, Resource> strongboxContent = clientModel.getStoragesModel().getStrongboxMap();
-                StorageUpdate update2 = new StorageUpdate(nickname, depotContent, strongboxContent);
-                updateStorages(update2);
+                updateStorages(clientModel.getStoragesModel().buildStorageUpdate());
                 break;
             case 3:
-                Map<String, List<LeaderCard>> leaderContent = clientModel.getPersonalBoardModel().getLeaderMap();
-                LeaderUpdate update3 = new LeaderUpdate(nickname, leaderContent);
-                updateLeaderCards(update3);
+                updateLeaderCards(clientModel.getPersonalBoardModel().buildLeaderUpdate());
                 break;
             case 4:
-                List<DevelopmentCard> marketContent = clientModel.getMarketModel().getDevCardList();
-                MarketUpdate update4 = new MarketUpdate(nickname, marketContent);
-                updateMarket(update4);
+                updateMarket(clientModel.getMarketModel().buildMarketUpdate());
                 break;
             case 5:
-                MarblesColor[][] trayContent = clientModel.getMarketModel().getMarketTray();
-                MarblesColor remainingContent = clientModel.getMarketModel().getRemainingMarble();
-                MarketTrayUpdate update5 = new MarketTrayUpdate(nickname, trayContent, remainingContent);
-                updateMarketTray(update5);
+                updateMarketTray(clientModel.getMarketModel().buildMarketTrayUpdate());
                 break;
             case 6:
-                Map<String, List<DevelopmentSlot>> devSlotsContent = clientModel.getPersonalBoardModel().getDevSlotMap();
-                DevSlotsUpdate update6 = new DevSlotsUpdate(nickname, devSlotsContent);
-                updateDevSlots(update6);
+                updateDevSlots(clientModel.getPersonalBoardModel().buildDevSlotsUpdate());
                 break;
             case 7:
                 if (!mainActionDone) {
+                    updateMarketTray(clientModel.getMarketModel().buildMarketTrayUpdate());
                     int position = getPosition(0, 6);
                     if (position != -1) {
                         request = new InsertMarbleRequest(position);
@@ -894,6 +882,8 @@ public class ClientCLI implements UserInterface {
         updateStorages(update.getStorageUpdate());
         updateMarket(update.getMarketUpdate());
         updateMarketTray(update.getMarketTrayUpdate());
+        updateFaithTrack(update.getFaithTrackUpdate());
+        updateDevSlots(update.getDevSlotsUpdate());
         //Give the control to the main player
         if (update.getActivePlayer().equals(this.nickname)) {
             gameMenu();

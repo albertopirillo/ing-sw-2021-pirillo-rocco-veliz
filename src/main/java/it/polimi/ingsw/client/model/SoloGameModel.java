@@ -32,4 +32,14 @@ public class SoloGameModel {
     public void saveDiscardedCards(DiscardedCardsUpdate update) {
         this.discardedCards = update.getCardList();
     }
+
+    public ActionTokenUpdate buildActionTokenUpdate() {
+        String nickname = clientModel.getNickname();
+        return new ActionTokenUpdate(nickname, nextToken);
+    }
+
+    public DiscardedCardsUpdate buildDiscardedCardsUpdate() {
+        String nickname = clientModel.getNickname();
+        return new DiscardedCardsUpdate(nickname, discardedCards);
+    }
 }

@@ -58,5 +58,18 @@ public class MarketModel {
         this.tempMarbles = update.getResources();
     }
 
+    public MarketTrayUpdate buildMarketTrayUpdate() {
+        String nickname = clientModel.getNickname();
+        return new MarketTrayUpdate(nickname, marketTray, remainingMarble);
+    }
 
+    public MarketUpdate buildMarketUpdate() {
+        String nickname = clientModel.getNickname();
+        return new MarketUpdate(nickname, devCardList);
+    }
+
+    public TempMarblesUpdate buildTempMarblesUpdate() {
+        String nickname = clientModel.getNickname();
+        return new TempMarblesUpdate(nickname, numWhiteMarbles, tempMarbles);
+    }
 }

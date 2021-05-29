@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client;
 
+import it.polimi.ingsw.client.model.ClientModel;
 import it.polimi.ingsw.model.LeaderCard;
 import it.polimi.ingsw.network.updates.*;
 
@@ -30,16 +31,17 @@ public interface UserInterface {
     void updateLeaderCards(LeaderUpdate update);
     void updateDevSlots(DevSlotsUpdate update);
     void displayError(ErrorUpdate update);
-    void updateFaithTrack(FaithTrackUpdate faithTrackUpdate);
-    void updateMarket(MarketUpdate marketUpdate);
+    void updateFaithTrack(FaithTrackUpdate update);
+    void updateMarket(MarketUpdate update);
     void updateMarketTray(MarketTrayUpdate update);
     void updateDiscardedCards(DiscardedCardsUpdate update);
-    void updateSoloTokens(ActionTokenUpdate actionTokenUpdate);
-    void updateTempMarbles(TempMarblesUpdate tempMarblesUpdate);
+    void updateSoloTokens(ActionTokenUpdate update);
+    void updateTempMarbles(TempMarblesUpdate update);
     void updateGameOver(GameOverUpdate update);
     void startMainGame(EndOfInitialUpdate update);
     void changeNickname();
-    void updateProductionDone(ProductionDoneUpdate productionDoneUpdate);
-    void updateActionDone(MainActionDoneUpdate mainActionDoneUpdate);
+    void updateProductionDone(ProductionDoneUpdate update);
+    void updateActionDone(MainActionDoneUpdate update);
+    ClientModel getClientModel();
 
 }

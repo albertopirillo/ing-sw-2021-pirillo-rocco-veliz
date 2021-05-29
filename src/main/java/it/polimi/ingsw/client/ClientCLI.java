@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client;
 
+import it.polimi.ingsw.client.model.ClientModel;
 import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import it.polimi.ingsw.model.*;
@@ -18,6 +19,7 @@ public class ClientCLI implements UserInterface {
     private String nickname;
     private final Client client;
     private final Scanner stdin;
+    private final ClientModel clientModel;
     private Resource tempRes;
     private boolean productionDone;
     private boolean mainActionDone;
@@ -25,8 +27,14 @@ public class ClientCLI implements UserInterface {
     public ClientCLI(Client client){
         this.client = client;
         this.stdin = new Scanner(System.in);
+        this.clientModel = new ClientModel();
         this.productionDone = false;
         this.mainActionDone = false;
+    }
+
+    @Override
+    public ClientModel getClientModel() {
+        return clientModel;
     }
 
     @Override
@@ -42,6 +50,7 @@ public class ClientCLI implements UserInterface {
     @Override
     public void setNickname(String nickname) {
         this.nickname = nickname;
+        this.clientModel.setNickname(nickname);
     }
 
     @Override
@@ -62,16 +71,6 @@ public class ClientCLI implements UserInterface {
     @Override
     public void setup(){
         System.out.println("Game is starting...\n");
-    }
-
-    public String getIP(){
-        System.out.println("Choose ip address: ");
-        return stdin.next();
-    }
-
-    public int getPort(){
-        System.out.println("Choose socket port: ");
-        return stdin.nextInt();
     }
 
     @Override
@@ -287,7 +286,7 @@ public class ClientCLI implements UserInterface {
     public int getPosition(int min, int max){
         int position;
         do {
-            System.out.print("Choose num of position : [MIN : "+ min + " MAX: " + max + "] ");
+            System.out.print("\nChoose num of position : [MIN : "+ min + " MAX: " + max + "] ");
             System.out.println("(Press q to abort)");
             String input = stdin.nextLine();
             if (input.equals("q")) return - 1;
@@ -328,25 +327,26 @@ public class ClientCLI implements UserInterface {
         Request request = null;
         switch(selection) {
             case 1:
-                request = new ShowFaithTrackRequest();
+                updateFaithTrack(clientModel.getPersonalBoardModel().buildFaithTrackUpdate());
                 break;
             case 2:
-                request = new ShowStoragesRequest();
+                updateStorages(clientModel.getStoragesModel().buildStorageUpdate());
                 break;
             case 3:
-                request = new ShowLeaderCardsRequest();
+                updateLeaderCards(clientModel.getPersonalBoardModel().buildLeaderUpdate());
                 break;
             case 4:
-                request = new ShowMarketRequest();
+                updateMarket(clientModel.getMarketModel().buildMarketUpdate());
                 break;
             case 5:
-                request = new ShowMarketTrayRequest();
+                updateMarketTray(clientModel.getMarketModel().buildMarketTrayUpdate());
                 break;
             case 6:
-                request = new ShowDevSlotsRequest();
+                updateDevSlots(clientModel.getPersonalBoardModel().buildDevSlotsUpdate());
                 break;
             case 7:
                 if (!mainActionDone) {
+                    updateMarketTray(clientModel.getMarketModel().buildMarketTrayUpdate());
                     int position = getPosition(0, 6);
                     if (position != -1) {
                         request = new InsertMarbleRequest(position);
@@ -363,7 +363,7 @@ public class ClientCLI implements UserInterface {
                 request = productionMenu();
                 break;
             case 10:
-                request = UseLeaderMenu();
+                request = useLeaderMenu();
                 break;
             case 11:
                 request = reorderDepotMenu();
@@ -594,7 +594,7 @@ public class ClientCLI implements UserInterface {
         return request;
     }
 
-    private Request UseLeaderMenu() {
+    private Request useLeaderMenu() {
         Request request = null;
 
         String[] firstActionOptions = {"1: Activate a leader card", "2: Discard a leader card", "3: Exit this menu"};
@@ -618,6 +618,7 @@ public class ClientCLI implements UserInterface {
     @Override
     public void updateTempResource(TempResourceUpdate update) {
         //Calling selectPlayerList() is not needed
+        clientModel.getStoragesModel().saveTempRes(update);
         Resource resource = update.getResource();
         if (resource == null || resource.getActualSize() == 0) {
             this.tempRes = null;
@@ -711,6 +712,7 @@ public class ClientCLI implements UserInterface {
 
     @Override
     public void updateStorages(StorageUpdate update) {
+        clientModel.getStoragesModel().saveStorages(update);
         Set<String> toPrint = this.selectPlayerList(update.getStrongboxMap().keySet(), update.getActivePlayer());
         Map<String, List<DepotSetting>> depotMap = update.getDepotMap();
         Map<String, Resource> strongboxMap = update.getStrongboxMap();
@@ -730,6 +732,7 @@ public class ClientCLI implements UserInterface {
 
     @Override
     public void updateLeaderCards(LeaderUpdate update) {
+        clientModel.getPersonalBoardModel().saveLeaderCards(update);
         Set<String> toPrint = this.selectPlayerList(update.getLeaderMap().keySet(), update.getActivePlayer());
         Map<String, List<LeaderCard>> leaderMap = update.getLeaderMap();
         for(String playerNick: toPrint) {
@@ -756,6 +759,7 @@ public class ClientCLI implements UserInterface {
 
     @Override
     public void updateDevSlots(DevSlotsUpdate update) {
+        clientModel.getPersonalBoardModel().saveDevSlots(update);
         Set<String> toPrint = this.selectPlayerList(update.getDevSlotMap().keySet(), update.getActivePlayer());
         Map<String, List<DevelopmentSlot>> devSlotList = update.getDevSlotMap();
         for(String playerNick: toPrint) {
@@ -773,55 +777,6 @@ public class ClientCLI implements UserInterface {
         }
     }
 
-    public void updateDevSlotsPretty(DevSlotsUpdate update) {
-        Set<String> toPrint = this.selectPlayerList(update.getDevSlotMap().keySet(), update.getActivePlayer());
-        Map<String, List<DevelopmentSlot>> devSlotList = update.getDevSlotMap();
-        for(String playerNick: toPrint) {
-            List<DevelopmentSlot> currentSlots = devSlotList.get(playerNick);
-            System.out.println("Showing " + playerNick + "'s development slots:");
-            System.out.println("\t\t\t\tSlot number 1:\t\t\t\t\t\t\t\t\t\tSlot number2:\t\t\t\t\t\t\t\t\t\t\tSlot number3:");
-            for (int layer = 0; layer < 3; layer++) {
-                for(int slot = 0; slot < 3; slot++) {
-                    if (currentSlots.get(slot).numberOfElements() > layer)
-                        System.out.print("  > Cost: " + currentSlots.get(slot).getCards().get(layer).getCost() + "\t\t\t\t");
-                    else System.out.print("\t\t\t\t\t\t\t\t\t\t\t");
-                }
-                System.out.print("\n\t");
-                for(int slot = 0; slot < 3; slot++) {
-                    if (currentSlots.get(slot).numberOfElements() > layer)
-                        System.out.print("Color: " + currentSlots.get(slot).getCards().get(layer).getType() + "\t\t\t\t\t\t\t\t\t\t");
-                    else System.out.print("\t\t\t\t\t\t\t\t\t\t\t\t\t");
-                }
-                System.out.print("\n\t");
-                for(int slot = 0; slot < 3; slot++) {
-                    if (currentSlots.get(slot).numberOfElements() > layer)
-                        System.out.print("Level: " + currentSlots.get(slot).getCards().get(layer).getLevel() + "\t\t\t\t\t\t\t\t\t\t\t");
-                    else System.out.print("\t\t\t\t\t\t\t\t\t\t\t\t\t");
-                }
-                System.out.print("\n\t");
-                for(int slot = 0; slot < 3; slot++) {
-                    if (currentSlots.get(slot).numberOfElements() > layer)
-                        System.out.print("Production power: " + "\t\t\t\t\t\t\t\t\t");
-                    else System.out.print("\t\t\t\t\t\t\t\t\t\t\t\t\t");
-                }
-                System.out.print("\n\t");
-                for(int slot = 0; slot < 3; slot++) {
-                    if (currentSlots.get(slot).numberOfElements() > layer)
-                        System.out.print("\tInput : " + currentSlots.get(slot).getCards().get(layer).getProdPower().getInput() + "\t\t\t");
-                     else System.out.print("\t\t\t\t\t\t\t\t\t\t\t\t\t");
-                }
-                System.out.print("\n\t");
-                for(int slot = 0; slot < 3; slot++) {
-                    if (currentSlots.get(slot).numberOfElements() > layer)
-                        System.out.print("\tOutput: " + currentSlots.get(slot).getCards().get(layer).getProdPower().getOutput() + "\t");
-                    else System.out.print("\t\t\t\t\t\t\t\t\t\t\t\t\t");
-                }
-                System.out.println("\n");
-            }
-            System.out.println();
-        }
-    }
-
     @Override
     public void displayError(ErrorUpdate update) {
         if(update.getActivePlayer().equals(this.getNickname())) {
@@ -831,8 +786,9 @@ public class ClientCLI implements UserInterface {
     }
 
     @Override
-    public void updateFaithTrack(FaithTrackUpdate faithTrackUpdate) {
-        Map<String, FaithTrack> map = faithTrackUpdate.getFaithTrackInfoMap();
+    public void updateFaithTrack(FaithTrackUpdate update) {
+        clientModel.getPersonalBoardModel().saveFaithTrack(update);
+        Map<String, FaithTrack> map = update.getFaithTrackInfoMap();
         System.out.println("\nFaith track information: ");
         for(Map.Entry<String, FaithTrack> entry: map.entrySet()){
             System.out.println("\nPlayer: " + entry.getKey());
@@ -842,6 +798,7 @@ public class ClientCLI implements UserInterface {
 
     @Override
     public void updateMarket(MarketUpdate update) {
+        clientModel.getMarketModel().saveMarket(update);
         List<DevelopmentCard> devCards = update.getDevCardList();
         int index = 0;
         for(DevelopmentCard devCard: devCards){
@@ -853,12 +810,14 @@ public class ClientCLI implements UserInterface {
 
     @Override
     public void updateMarketTray(MarketTrayUpdate update) {
+        clientModel.getMarketModel().saveTray(update);
         System.out.println("\nShowing Market tray: ");
         System.out.println(update);
     }
 
     @Override
     public void updateDiscardedCards(DiscardedCardsUpdate update) {
+        clientModel.getSoloGameModel().saveDiscardedCards(update);
         int index = 1;
         System.out.print("\nLorenzo discarded the following cards: ");
         for(DevelopmentCard devCard: update.getCardList()){
@@ -868,17 +827,19 @@ public class ClientCLI implements UserInterface {
     }
 
     @Override
-    public void updateSoloTokens(ActionTokenUpdate actionTokenUpdate) {
+    public void updateSoloTokens(ActionTokenUpdate update) {
+        clientModel.getSoloGameModel().saveSoloTokens(update);
         System.out.println("\nAction tokens have been updated, the next one on the list is:");
-        System.out.println(actionTokenUpdate.getNextToken());
+        System.out.println(update.getNextToken());
     }
 
     @Override
-    public void updateTempMarbles(TempMarblesUpdate tempMarblesUpdate) {
+    public void updateTempMarbles(TempMarblesUpdate update) {
+        clientModel.getMarketModel().saveTempMarbles(update);
         //No need to call selectPlayerList() here
-        if(tempMarblesUpdate.getActivePlayer().equals(this.getNickname())) {
-            System.out.println(tempMarblesUpdate);
-            Request request = toChangeMarble(tempMarblesUpdate.getResources().get(0), tempMarblesUpdate.getResources().get(1), tempMarblesUpdate.getNumWhiteMarbles());
+        if(update.getActivePlayer().equals(this.getNickname())) {
+            System.out.println(update);
+            Request request = toChangeMarble(update.getResources().get(0), update.getResources().get(1), update.getNumWhiteMarbles());
             getClient().sendMessage(request);
         }
     }
@@ -919,6 +880,10 @@ public class ClientCLI implements UserInterface {
         //Print leader cards and storages of all player
         updateLeaderCards(update.getLeaderUpdate());
         updateStorages(update.getStorageUpdate());
+        updateMarket(update.getMarketUpdate());
+        updateMarketTray(update.getMarketTrayUpdate());
+        updateFaithTrack(update.getFaithTrackUpdate());
+        updateDevSlots(update.getDevSlotsUpdate());
         //Give the control to the main player
         if (update.getActivePlayer().equals(this.nickname)) {
             gameMenu();

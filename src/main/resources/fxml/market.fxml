@@ -96,7 +96,7 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></ImageView>
-      <Pane fx:id="buyPanel" layoutX="14.0" layoutY="58.0" prefHeight="581.0" prefWidth="335.0" visible="false">
+      <Pane fx:id="buyPanel" layoutX="14.0" layoutY="58.0" prefHeight="581.0" prefWidth="335.0">
          <children>
             <Text layoutX="67.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Depot' resources">
                <font>

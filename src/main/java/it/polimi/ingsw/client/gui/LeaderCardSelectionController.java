@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -36,6 +37,8 @@ public class LeaderCardSelectionController implements Initializable {
     private CheckBox chkCard3;
     @FXML
     private CheckBox chkCard4;
+    @FXML
+    private Label topLabel;
 
     private final List<ImageView> imageViews = new ArrayList<>();
     private final List<CheckBox> checkBoxes = new ArrayList<>();
@@ -65,14 +68,15 @@ public class LeaderCardSelectionController implements Initializable {
         imageViews.add(imgCard2);
         imageViews.add(imgCard3);
         imageViews.add(imgCard4);
-        chkCard1.getStyleClass().add("big-check-box");
+        chkCard1.getStyleClass().add("bigCheckBox");
         checkBoxes.add(chkCard1);
-        chkCard2.getStyleClass().add("big-check-box");
+        chkCard2.getStyleClass().add("bigCheckBox");
         checkBoxes.add(chkCard2);
-        chkCard3.getStyleClass().add("big-check-box");
+        chkCard3.getStyleClass().add("bigCheckBox");
         checkBoxes.add(chkCard3);
-        chkCard4.getStyleClass().add("big-check-box");
+        chkCard4.getStyleClass().add("bigCheckBox");
         checkBoxes.add(chkCard4);
+        topLabel.getStyleClass().add("customMenuLabel");
     }
 
     /**

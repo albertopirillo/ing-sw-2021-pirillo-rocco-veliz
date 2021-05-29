@@ -70,7 +70,8 @@ public class JavaFXMain extends Application {
         loadCSS("personalBoard");
         loadCSS("setup");
         loadCSS("tray");
-        loadCSS("big-check-box");
+        loadCSS("bigCheckBox");
+        loadCSS("customMenuLabel");
 
         //Set window title and icon
         myStage.setTitle("Master of Renaissance");

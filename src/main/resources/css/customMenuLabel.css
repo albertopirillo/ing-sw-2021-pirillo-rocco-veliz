@@ -1,0 +1,5 @@
+.outline.label .text {
+    -fx-fill: black;  /* This sets the text color */
+    -fx-stroke: white; /* This sets the outline color (to improve readability on background) */
+    -fx-stroke-width: 2px; /* This sets the outline width */
+}

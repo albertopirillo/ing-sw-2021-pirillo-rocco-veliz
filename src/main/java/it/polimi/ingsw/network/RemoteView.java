@@ -57,19 +57,14 @@ public class RemoteView implements ModelObserver {
 
     @Override
     public void showFaithTrack(Game game){
-        Map<String, FaithTrack> faithTrackInfoMap = new HashMap<>();
-        List<Player> players = game.getPlayersList();
-        for(Player player: players){
-            faithTrackInfoMap.put(player.getNickname(), player.getPersonalBoard().getFaithTrack());
-        }
-        FaithTrackUpdate faithTrackMsg = new FaithTrackUpdate(game.getActivePlayer().getNickname(), faithTrackInfoMap);
-        connection.sendMessage(faithTrackMsg);
+        ServerUpdate msg = buildFaithTrackUpdate(game);
+        connection.sendMessage(msg);
     }
 
     @Override
     public void showLeaderCards(Game game){
-       LeaderUpdate msg = buildLeaderUpdate(game);
-        connection.sendMessage(msg);
+       ServerUpdate msg = buildLeaderUpdate(game);
+       connection.sendMessage(msg);
     }
 
     @Override
@@ -111,12 +106,7 @@ public class RemoteView implements ModelObserver {
 
     @Override
     public void showDevSlots(Game game) {
-        Player activePlayer = game.getActivePlayer();
-        Map<String, List<DevelopmentSlot>> map = new HashMap<>();
-        for(Player p: game.getPlayersList()) {
-            map.put(p.getNickname(), Arrays.asList(p.getPersonalBoard().getDevSlots()));
-        }
-        ServerUpdate msg = new DevSlotsUpdate(activePlayer.getNickname(), map);
+        ServerUpdate msg = buildDevSlotsUpdate(game);
         connection.sendMessage(msg);
     }
 
@@ -176,8 +166,28 @@ public class RemoteView implements ModelObserver {
         LeaderUpdate leaderUpdate = buildLeaderUpdate(game);
         MarketTrayUpdate marketTrayUpdate = buildMarketTrayUpdate(game);
         MarketUpdate marketUpdate = buildMarketUpdate(game);
-        ServerUpdate msg = new EndOfInitialUpdate(game.getActivePlayer().getNickname(), storageUpdate, leaderUpdate, marketTrayUpdate, marketUpdate);
+        FaithTrackUpdate faithTrackUpdate = buildFaithTrackUpdate(game);
+        DevSlotsUpdate devSlotsUpdate = buildDevSlotsUpdate(game);
+        ServerUpdate msg = new EndOfInitialUpdate(game.getActivePlayer().getNickname(), storageUpdate, leaderUpdate, marketTrayUpdate, marketUpdate, faithTrackUpdate, devSlotsUpdate);
         connection.sendMessage(msg);
+    }
+
+    private DevSlotsUpdate buildDevSlotsUpdate(Game game) {
+        Player activePlayer = game.getActivePlayer();
+        Map<String, List<DevelopmentSlot>> map = new HashMap<>();
+        for(Player p: game.getPlayersList()) {
+            map.put(p.getNickname(), Arrays.asList(p.getPersonalBoard().getDevSlots()));
+        }
+        return new DevSlotsUpdate(activePlayer.getNickname(), map);
+    }
+
+    private FaithTrackUpdate buildFaithTrackUpdate(Game game) {
+        Map<String, FaithTrack> faithTrackInfoMap = new HashMap<>();
+        List<Player> players = game.getPlayersList();
+        for(Player player: players){
+            faithTrackInfoMap.put(player.getNickname(), player.getPersonalBoard().getFaithTrack());
+        }
+        return new FaithTrackUpdate(game.getActivePlayer().getNickname(), faithTrackInfoMap);
     }
 
     private StorageUpdate buildStorageUpdate(Game game) {
@@ -210,4 +220,5 @@ public class RemoteView implements ModelObserver {
         Market market = game.getMarket();
         return new MarketUpdate(activePlayer.getNickname(), market.getAvailableCards());
     }
+
 }

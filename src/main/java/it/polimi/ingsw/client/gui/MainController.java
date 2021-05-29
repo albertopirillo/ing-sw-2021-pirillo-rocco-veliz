@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client.gui;
 
 import it.polimi.ingsw.client.ClientGUI;
+import it.polimi.ingsw.client.model.ClientModel;
 import it.polimi.ingsw.network.Processable;
 import it.polimi.ingsw.network.requests.EndTurnRequest;
 import it.polimi.ingsw.network.requests.QuitGameRequest;
@@ -75,6 +76,14 @@ public class MainController implements Initializable {
     private MenuButton activateLeaderButton, prodButton;
     @FXML
     private SplitMenuButton discardLeaderButton;
+
+    /**
+     * Gets the Model stored in the Client
+     * @return a reference to the main class of the model
+     */
+    public ClientModel getClientModel() {
+        return clientGUI.getClientModel();
+    }
 
     /**
      * Gets the mapping between nicknames and PersonalBoardController

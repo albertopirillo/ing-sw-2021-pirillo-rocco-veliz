@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.client.gui.*;
+import it.polimi.ingsw.client.model.ClientModel;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.network.DepotSetting;
 import it.polimi.ingsw.network.Processable;
@@ -18,12 +19,19 @@ public class ClientGUI implements UserInterface {
     private String nickname;
     private final Client client;
     private final MainController mainController;
+    private final ClientModel clientModel;
     private final boolean testing = false;
     private final int playerAmountTesting = 2;
 
     public ClientGUI(Client client, MainController controller) {
         this.client = client;
+        this.clientModel = new ClientModel();
         this.mainController = controller;
+    }
+
+    @Override
+    public ClientModel getClientModel() {
+        return clientModel;
     }
 
     @Override
@@ -45,6 +53,7 @@ public class ClientGUI implements UserInterface {
     @Override
     public void setNickname(String nickname) {
         this.nickname = nickname;
+        this.clientModel.setNickname(nickname);
     }
 
     @Override
@@ -180,6 +189,7 @@ public class ClientGUI implements UserInterface {
 
     @Override
     public void updateTempResource(TempResourceUpdate update) {
+        clientModel.getStoragesModel().saveTempRes(update);
         printLog("Updating TempResource...");
         Platform.runLater(() -> {
             PersonalBoardController personalBoardController = mainController.getPersonalBoardController(update.getActivePlayer());
@@ -189,6 +199,7 @@ public class ClientGUI implements UserInterface {
 
     @Override
     public void updateStorages(StorageUpdate update) {
+        clientModel.getStoragesModel().saveStorages(update);
         printLog("Updating storages...");
         Platform.runLater(() -> {
             Map<String, List<DepotSetting>> depotMap = update.getDepotMap();
@@ -208,11 +219,13 @@ public class ClientGUI implements UserInterface {
 
     @Override
     public void updateLeaderCards(LeaderUpdate update) {
+        clientModel.getPersonalBoardModel().saveLeaderCards(update);
 
     }
 
     @Override
     public void updateDevSlots(DevSlotsUpdate update) {
+        clientModel.getPersonalBoardModel().saveDevSlots(update);
 
     }
 
@@ -226,6 +239,7 @@ public class ClientGUI implements UserInterface {
 
     @Override
     public void updateFaithTrack(FaithTrackUpdate update) {
+        clientModel.getPersonalBoardModel().saveFaithTrack(update);
         Platform.runLater(() -> {
             printLog("Updating faith track...");
             Map<String, FaithTrack> map = update.getFaithTrackInfoMap();
@@ -239,6 +253,7 @@ public class ClientGUI implements UserInterface {
 
     @Override
     public void updateMarket(MarketUpdate update) {
+        clientModel.getMarketModel().saveMarket(update);
         Platform.runLater(() -> {
             printLog("Updating market...");
             mainController.getMarketController().updateMarket(update.getCardImgs());
@@ -247,6 +262,7 @@ public class ClientGUI implements UserInterface {
 
     @Override
     public void updateMarketTray(MarketTrayUpdate update) {
+        clientModel.getMarketModel().saveTray(update);
         Platform.runLater(() -> {
             printLog("Updating market tray...");
             MarblesColor[][] marbles = update.getMarketTray();
@@ -257,16 +273,19 @@ public class ClientGUI implements UserInterface {
 
     @Override
     public void updateDiscardedCards(DiscardedCardsUpdate update) {
+        clientModel.getSoloGameModel().saveDiscardedCards(update);
 
     }
 
     @Override
-    public void updateSoloTokens(ActionTokenUpdate actionTokenUpdate) {
+    public void updateSoloTokens(ActionTokenUpdate update) {
+        clientModel.getSoloGameModel().saveSoloTokens(update);
 
     }
 
     @Override
-    public void updateTempMarbles(TempMarblesUpdate tempMarblesUpdate) {
+    public void updateTempMarbles(TempMarblesUpdate update) {
+        clientModel.getMarketModel().saveTempMarbles(update);
         
     }
 
@@ -276,7 +295,7 @@ public class ClientGUI implements UserInterface {
     }
 
     @Override
-    public void updateActionDone(MainActionDoneUpdate mainActionDoneUpdate) {
+    public void updateActionDone(MainActionDoneUpdate update) {
 
     }
 

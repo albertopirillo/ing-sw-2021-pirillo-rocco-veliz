@@ -326,22 +326,36 @@ public class ClientCLI implements UserInterface {
         Request request = null;
         switch(selection) {
             case 1:
-                request = new ShowFaithTrackRequest();
+                Map<String, FaithTrack> faithContent = clientModel.getPersonalBoardModel().getFaithTrackInfoMap();
+                FaithTrackUpdate update1 = new FaithTrackUpdate(nickname, faithContent);
+                updateFaithTrack(update1);
                 break;
             case 2:
-                request = new ShowStoragesRequest();
+                Map<String, List<DepotSetting>> depotContent = clientModel.getStoragesModel().getDepotMap();
+                Map<String, Resource> strongboxContent = clientModel.getStoragesModel().getStrongboxMap();
+                StorageUpdate update2 = new StorageUpdate(nickname, depotContent, strongboxContent);
+                updateStorages(update2);
                 break;
             case 3:
-                request = new ShowLeaderCardsRequest();
+                Map<String, List<LeaderCard>> leaderContent = clientModel.getPersonalBoardModel().getLeaderMap();
+                LeaderUpdate update3 = new LeaderUpdate(nickname, leaderContent);
+                updateLeaderCards(update3);
                 break;
             case 4:
-                request = new ShowMarketRequest();
+                List<DevelopmentCard> marketContent = clientModel.getMarketModel().getDevCardList();
+                MarketUpdate update4 = new MarketUpdate(nickname, marketContent);
+                updateMarket(update4);
                 break;
             case 5:
-                request = new ShowMarketTrayRequest();
+                MarblesColor[][] trayContent = clientModel.getMarketModel().getMarketTray();
+                MarblesColor remainingContent = clientModel.getMarketModel().getRemainingMarble();
+                MarketTrayUpdate update5 = new MarketTrayUpdate(nickname, trayContent, remainingContent);
+                updateMarketTray(update5);
                 break;
             case 6:
-                request = new ShowDevSlotsRequest();
+                Map<String, List<DevelopmentSlot>> devSlotsContent = clientModel.getPersonalBoardModel().getDevSlotMap();
+                DevSlotsUpdate update6 = new DevSlotsUpdate(nickname, devSlotsContent);
+                updateDevSlots(update6);
                 break;
             case 7:
                 if (!mainActionDone) {
@@ -878,6 +892,8 @@ public class ClientCLI implements UserInterface {
         //Print leader cards and storages of all player
         updateLeaderCards(update.getLeaderUpdate());
         updateStorages(update.getStorageUpdate());
+        updateMarket(update.getMarketUpdate());
+        updateMarketTray(update.getMarketTrayUpdate());
         //Give the control to the main player
         if (update.getActivePlayer().equals(this.nickname)) {
             gameMenu();

@@ -22,8 +22,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class Server implements Runnable {
 
@@ -33,7 +31,6 @@ public class Server implements Runnable {
     private static final List<Connection> connections = new ArrayList<>();
     private final Map<String,Connection> lobbyPlayers = new HashMap<>();
     private final List<Map<String,Connection> > games = new ArrayList<>();
-    private final ExecutorService executor = Executors.newFixedThreadPool(128);
     private String firstPlayer;
     private int gameSize = 0;
 
@@ -203,7 +200,7 @@ public class Server implements Runnable {
     private void newConnection(Socket socket) {
         Connection connection = new Connection(socket, this);
         registerConnection(connection);
-        executor.submit(connection);
+        new Thread(connection).start();
     }
 
     private synchronized void registerConnection(Connection connection) {

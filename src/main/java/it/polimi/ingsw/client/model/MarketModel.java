@@ -10,6 +10,8 @@ import it.polimi.ingsw.network.updates.TempMarblesUpdate;
 import java.util.List;
 
 public class MarketModel {
+    private final ClientModel clientModel;
+
     private MarblesColor[][] marketTray;
     private MarblesColor remainingMarble;
 
@@ -17,6 +19,10 @@ public class MarketModel {
 
     private int numWhiteMarbles;
     private List<ResourceType> tempMarbles;
+
+    public MarketModel(ClientModel clientModel) {
+        this.clientModel = clientModel;
+    }
 
     public MarblesColor[][] getMarketTray() {
         return marketTray;
@@ -51,5 +57,6 @@ public class MarketModel {
         this.numWhiteMarbles = update.getNumWhiteMarbles();
         this.tempMarbles = update.getResources();
     }
+
 
 }

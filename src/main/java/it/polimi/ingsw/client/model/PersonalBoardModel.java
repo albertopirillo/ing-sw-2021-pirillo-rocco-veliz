@@ -11,9 +11,15 @@ import java.util.List;
 import java.util.Map;
 
 public class PersonalBoardModel {
+    private final ClientModel clientModel;
+
     private Map<String, List<DevelopmentSlot>> devSlotMap;
     private Map<String, FaithTrack> faithTrackInfoMap;
     private Map<String, List<LeaderCard>> leaderMap;
+
+    public PersonalBoardModel(ClientModel clientModel) {
+        this.clientModel = clientModel;
+    }
 
     public Map<String, List<DevelopmentSlot>> getDevSlotMap() {
         return devSlotMap;

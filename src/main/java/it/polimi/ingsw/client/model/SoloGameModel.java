@@ -8,8 +8,14 @@ import it.polimi.ingsw.network.updates.DiscardedCardsUpdate;
 import java.util.List;
 
 public class SoloGameModel {
+    private final ClientModel clientModel;
+
     private SoloActionToken nextToken;
     private List<DevelopmentCard> discardedCards;
+
+    public SoloGameModel(ClientModel clientModel) {
+        this.clientModel = clientModel;
+    }
 
     public SoloActionToken getNextToken() {
         return nextToken;

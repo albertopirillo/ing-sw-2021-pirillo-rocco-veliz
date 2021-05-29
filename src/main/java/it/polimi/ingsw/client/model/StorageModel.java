@@ -9,10 +9,16 @@ import java.util.List;
 import java.util.Map;
 
 public class StorageModel {
+    private final ClientModel clientModel;
+
     private Map<String, List<DepotSetting>> depotMap;
     private Map<String, Resource> strongboxMap;
 
     private Resource tempResource;
+
+    public StorageModel(ClientModel clientModel) {
+        this.clientModel = clientModel;
+    }
 
     public Map<String, List<DepotSetting>> getDepotMap() {
         return depotMap;

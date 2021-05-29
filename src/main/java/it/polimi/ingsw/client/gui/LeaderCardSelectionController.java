@@ -162,5 +162,6 @@ public class LeaderCardSelectionController implements Initializable {
         LeaderCard card = this.leaderCards.get(index);
         String img = card.getImg();
         imageViews.get(index).setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/png/leader_cards/" + img))));
+        imageViews.get(index).getStyleClass().add("imgShadow");
     }
 }

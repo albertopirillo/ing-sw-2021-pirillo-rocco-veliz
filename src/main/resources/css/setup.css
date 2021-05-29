@@ -17,17 +17,7 @@
     -fx-alignment: center;
 }
 
-#firstPlayerText {
-    -fx-font-size: 50;
-    -fx-font-family: "Brush Script MT";
-    -fx-fill: #eae0c2;  /* This sets the text color */
-    -fx-stroke: black; /* This sets the outline color (to improve readability on background) */
-    -fx-stroke-width: 0.5px; /* This sets the outline width */
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
-    -fx-alignment: center;
-}
-
-#enterNickname {
+.enterNickname.label .text {
     -fx-font-size: 70;
     -fx-font-family: "Brush Script MT";
     -fx-fill: #eae0c2;  /* This sets the text color */

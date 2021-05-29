@@ -24,11 +24,7 @@
             <Font size="36.0" />
          </font>
       </TextField>
-      <Text id="enterNickname" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your nickname" textAlignment="CENTER" wrappingWidth="1280.0">
-         <font>
-            <Font size="36.0" />
-         </font>
-      </Text>
+      <Label fx:id="enterNickname" layoutX="270.0" layoutY="21.0" prefHeight="54.0" prefWidth="742.0" text="Enter your nickname" textAlignment="CENTER" />
       <Button fx:id="nameButton" layoutX="584.0" layoutY="243.0" mnemonicParsing="false" onAction="#confirmName" text="Confirm">
          <font>
             <Font size="24.0" />
@@ -42,11 +38,7 @@
             <ToggleGroup fx:id="playerAmountGroup" />
          </toggleGroup>
       </RadioButton>
-      <Text fx:id="firstPlayerText" layoutX="3.0" layoutY="385.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You are the first player! " textAlignment="CENTER" wrappingWidth="1280.0">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Text>
+      <Label fx:id="firstPlayerText" layoutX="270.0" layoutY="325.0" prefHeight="54.0" prefWidth="742.0" text="You are the first player! " textAlignment="CENTER"  />
       <RadioButton layoutX="514.0" layoutY="535.0" mnemonicParsing="false" text="2" toggleGroup="$playerAmountGroup">
          <font>
             <Font size="32.0" />

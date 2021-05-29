@@ -1,95 +1,173 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="marketRoot" prefHeight="665.0" prefWidth="854.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.MarketController">
+<AnchorPane fx:id="marketRoot" accessibleRole="BUTTON" prefHeight="665.0" prefWidth="1026.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.MarketController">
    <children>
-      <Text layoutX="381.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Blu">
+      <Text layoutX="572.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Blu">
          <font>
             <Font name="System Bold Italic" size="48.0" />
          </font>
       </Text>
-      <Text layoutX="686.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Viola">
+      <Text layoutX="877.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Viola">
          <font>
             <Font name="System Bold Italic" size="48.0" />
          </font>
       </Text>
-      <Text layoutX="508.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Giallo">
+      <Text layoutX="699.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Giallo">
          <font>
             <Font name="System Bold Italic" size="48.0" />
          </font>
       </Text>
-      <Text layoutX="24.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liv 3">
+      <Text layoutX="215.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liv 3">
          <font>
             <Font name="System Bold Italic" size="48.0" />
          </font>
       </Text>
-      <Text layoutX="180.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Verde">
+      <Text layoutX="371.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Verde">
          <font>
             <Font name="System Bold Italic" size="48.0" />
          </font>
       </Text>
-      <Text layoutX="24.0" layoutY="387.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liv 2">
+      <Text layoutX="215.0" layoutY="391.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liv 2">
          <font>
             <Font name="System Bold Italic" size="48.0" />
          </font>
       </Text>
-      <Text layoutX="24.0" layoutY="575.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liv 1">
+      <Text layoutX="215.0" layoutY="579.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liv 1">
          <font>
             <Font name="System Bold Italic" size="48.0" />
          </font>
       </Text>
-      <ImageView fx:id="imgCard1" fitHeight="195.0" fitWidth="130.0" layoutX="180.0" layoutY="65.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
+      <ImageView fx:id="imgCard1" fitHeight="195.0" fitWidth="130.0" layoutX="371.0" layoutY="69.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></ImageView>
-      <ImageView fx:id="imgCard5" fitHeight="195.0" fitWidth="130.0" layoutX="180.0" layoutY="260.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
+      <ImageView fx:id="imgCard5" fitHeight="195.0" fitWidth="130.0" layoutX="371.0" layoutY="264.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></ImageView>
-      <ImageView fx:id="imgCard9" fitHeight="195.0" fitWidth="130.0" layoutX="180.0" layoutY="461.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
+      <ImageView fx:id="imgCard9" fitHeight="195.0" fitWidth="130.0" layoutX="371.0" layoutY="465.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></ImageView>
-      <ImageView fx:id="imgCard2" fitHeight="195.0" fitWidth="130.0" layoutX="362.0" layoutY="65.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
+      <ImageView fx:id="imgCard2" fitHeight="195.0" fitWidth="130.0" layoutX="553.0" layoutY="69.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></ImageView>
-      <ImageView fx:id="imgCard3" fitHeight="195.0" fitWidth="130.0" layoutX="520.0" layoutY="65.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
+      <ImageView fx:id="imgCard3" fitHeight="195.0" fitWidth="130.0" layoutX="711.0" layoutY="69.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></ImageView>
-      <ImageView fx:id="imgCard4" fitHeight="195.0" fitWidth="130.0" layoutX="680.0" layoutY="65.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
+      <ImageView fx:id="imgCard4" fitHeight="195.0" fitWidth="130.0" layoutX="871.0" layoutY="69.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></ImageView>
-      <ImageView fx:id="imgCard6" fitHeight="195.0" fitWidth="130.0" layoutX="362.0" layoutY="260.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
+      <ImageView fx:id="imgCard6" fitHeight="195.0" fitWidth="130.0" layoutX="553.0" layoutY="264.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></ImageView>
-      <ImageView fx:id="imgCard10" fitHeight="195.0" fitWidth="130.0" layoutX="362.0" layoutY="460.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
+      <ImageView fx:id="imgCard10" fitHeight="195.0" fitWidth="130.0" layoutX="553.0" layoutY="464.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></ImageView>
-      <ImageView fx:id="imgCard7" fitHeight="195.0" fitWidth="130.0" layoutX="520.0" layoutY="260.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
+      <ImageView fx:id="imgCard7" fitHeight="195.0" fitWidth="130.0" layoutX="711.0" layoutY="264.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></ImageView>
-      <ImageView fx:id="imgCard11" fitHeight="195.0" fitWidth="130.0" layoutX="520.0" layoutY="460.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
+      <ImageView fx:id="imgCard11" fitHeight="195.0" fitWidth="130.0" layoutX="711.0" layoutY="464.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></ImageView>
-      <ImageView fx:id="imgCard8" fitHeight="195.0" fitWidth="130.0" layoutX="680.0" layoutY="260.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
+      <ImageView fx:id="imgCard8" fitHeight="195.0" fitWidth="130.0" layoutX="871.0" layoutY="264.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></ImageView>
-      <ImageView fx:id="imgCard12" fitHeight="195.0" fitWidth="130.0" layoutX="680.0" layoutY="461.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="s">
+      <ImageView fx:id="imgCard12" fitHeight="195.0" fitWidth="130.0" layoutX="871.0" layoutY="465.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></ImageView>
+      <Pane fx:id="buyPanel" layoutX="14.0" layoutY="58.0" prefHeight="581.0" prefWidth="335.0" visible="false">
+         <children>
+            <Text layoutX="67.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Depot' resources">
+               <font>
+                  <Font name="System Bold Italic" size="26.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="97.0" fitWidth="328.0" layoutX="4.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../png/res/resource_suppy.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="r_stone" fitHeight="51.0" fitWidth="56.0" layoutX="24.0" layoutY="90.0" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="r_servant" fitHeight="51.0" fitWidth="56.0" layoutX="106.0" layoutY="90.0" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="r_shield" fitHeight="51.0" fitWidth="56.0" layoutX="177.0" layoutY="90.0" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="r_coin" fitHeight="51.0" fitWidth="56.0" layoutX="256.0" layoutY="90.0" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="d_stone" layoutX="23.0" layoutY="157.0" text="x0" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+            <Label fx:id="d_servant" layoutX="106.0" layoutY="157.0" text="x0" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+            <Label fx:id="d_shield" layoutX="184.0" layoutY="157.0" text="x0" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+            <Label fx:id="d_coin" layoutX="264.0" layoutY="157.0" text="x0" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+            <Text layoutX="45.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Strongbox resources">
+               <font>
+                  <Font name="System Bold Italic" size="26.0" />
+               </font>
+            </Text>
+            <ImageView fx:id="resSupply" fitHeight="97.0" fitWidth="328.0" layoutX="4.0" layoutY="283.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../png/res/resource_suppy.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="51.0" fitWidth="56.0" layoutX="25.0" layoutY="295.0" onDragDetected="#dragDetection" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../png/res/stone.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="51.0" fitWidth="56.0" layoutX="106.0" layoutY="295.0" onDragDetected="#dragDetection" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../png/res/servant.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="51.0" fitWidth="56.0" layoutX="183.0" layoutY="295.0" onDragDetected="#dragDetection" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../png/res/shield.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="51.0" fitWidth="56.0" layoutX="260.0" layoutY="296.0" onDragDetected="#dragDetection" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../png/res/coin.png" />
+               </image>
+            </ImageView>
+            <Spinner fx:id="stone" layoutX="25.0" layoutY="375.0" prefHeight="26.0" prefWidth="54.0" />
+            <Spinner fx:id="servant" layoutX="107.0" layoutY="375.0" prefHeight="26.0" prefWidth="54.0" />
+            <Spinner fx:id="shield" layoutX="178.0" layoutY="375.0" prefHeight="26.0" prefWidth="54.0" />
+            <Spinner fx:id="coin" layoutX="261.0" layoutY="375.0" prefHeight="26.0" prefWidth="54.0" />
+            <Button layoutX="196.0" layoutY="484.0" mnemonicParsing="false" onAction="#buildRequest" prefHeight="48.0" prefWidth="119.0" text="Buy Card" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

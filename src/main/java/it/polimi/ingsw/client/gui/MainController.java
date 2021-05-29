@@ -246,6 +246,7 @@ public class MainController implements Initializable {
     public void showMarket(ActionEvent event) {
         Stage stage = Util.getStageFromEvent(event);
         if (!this.marketPopUp.isShowing()) {
+            this.marketController.closeBuyPanel();
             marketButton.setText("Back to Personal Board");
             this.marketPopUp.show(stage);
         }

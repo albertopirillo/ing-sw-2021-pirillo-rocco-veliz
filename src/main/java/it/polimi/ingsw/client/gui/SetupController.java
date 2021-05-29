@@ -123,7 +123,6 @@ public class SetupController implements Initializable {
         }
         String text = (playerAmount == 1 ? " player" : " players");
         firstPlayerLabel.setText("You selected " + playerAmount + text);
-        firstPlayerLabel.getStyleClass().add("firstPlayerLabel");
     }
 
     /**
@@ -152,7 +151,6 @@ public class SetupController implements Initializable {
     public void firstPlayerSetup() {
         firstPlayerText.setVisible(true);
         firstPlayerLabel.setText("Select the number of players");
-        firstPlayerLabel.getStyleClass().add("firstPlayerLabel");
         playerAmountButton.setDisable(false);
         for(Toggle toggle: playerAmountGroup.getToggles()) {
             Node node = (Node) toggle ;

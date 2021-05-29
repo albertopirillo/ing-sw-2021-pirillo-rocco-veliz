@@ -76,7 +76,8 @@ public class LeaderCardSelectionController implements Initializable {
         checkBoxes.add(chkCard3);
         chkCard4.getStyleClass().add("bigCheckBox");
         checkBoxes.add(chkCard4);
-        topLabel.getStyleClass().add("customMenuLabel");
+        topLabel.getStyleClass().add("customInitLeaderLabel");
+        btnContinue.getStyleClass().add("customButton");
     }
 
     /**

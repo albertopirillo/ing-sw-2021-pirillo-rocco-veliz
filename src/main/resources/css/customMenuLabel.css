@@ -1,5 +1,23 @@
-.outline.label .text {
+.customInitLeaderLabel.label .text {
+    -fx-font-family: "Brush Script MT";
     -fx-fill: black;  /* This sets the text color */
     -fx-stroke: white; /* This sets the outline color (to improve readability on background) */
-    -fx-stroke-width: 2px; /* This sets the outline width */
+    -fx-stroke-width: 0.08px; /* This sets the outline width */
+}
+
+.customButton{
+    -fx-font-size: 30;
+    -fx-font-family: "Brush Script MT";
+    -fx-background-radius: 5px;
+    -fx-alignment: center;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-background-color: linear-gradient(to bottom, #eae0c2 5%, #ccc2a6 100%);
+    -fx-padding:5 5 5 5;
+}
+
+.customButton:hover {
+    -fx-background-color:linear-gradient(to bottom, #ccc2a6 5%, #eae0c2 100%);
+}
+.customButton:pressed {
+    -fx-background-color:linear-gradient(to bottom, #a1926a 5%, #ccc2a6 100%);
 }

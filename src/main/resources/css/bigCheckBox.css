@@ -1,11 +1,11 @@
-.big-check-box > .box {
+.bigCheckBox > .box {
     -fx-padding: 5.7em 2.4em 4em 4em ;
     -fx-focus-color: transparent;
     -fx-box-color: transparent;
     -fx-background-color: transparent;
     -fx-mark-color: yellow;
 }
-.big-check-box > .box > .mark {
+.bigCheckBox > .box > .mark {
     -fx-padding: 11.4em 4.8em 8em 8em;
     -fx-focus-color: yellow;
     -fx-box-color: transparent;

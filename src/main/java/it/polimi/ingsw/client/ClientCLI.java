@@ -64,16 +64,6 @@ public class ClientCLI implements UserInterface {
         System.out.println("Game is starting...\n");
     }
 
-    public String getIP(){
-        System.out.println("Choose ip address: ");
-        return stdin.next();
-    }
-
-    public int getPort(){
-        System.out.println("Choose socket port: ");
-        return stdin.nextInt();
-    }
-
     @Override
     public void loginMessage(){
         String nickname = chooseNickname();
@@ -770,55 +760,6 @@ public class ClientCLI implements UserInterface {
                 slotNumber++;
             }
             System.out.println("\n");
-        }
-    }
-
-    public void updateDevSlotsPretty(DevSlotsUpdate update) {
-        Set<String> toPrint = this.selectPlayerList(update.getDevSlotMap().keySet(), update.getActivePlayer());
-        Map<String, List<DevelopmentSlot>> devSlotList = update.getDevSlotMap();
-        for(String playerNick: toPrint) {
-            List<DevelopmentSlot> currentSlots = devSlotList.get(playerNick);
-            System.out.println("Showing " + playerNick + "'s development slots:");
-            System.out.println("\t\t\t\tSlot number 1:\t\t\t\t\t\t\t\t\t\tSlot number2:\t\t\t\t\t\t\t\t\t\t\tSlot number3:");
-            for (int layer = 0; layer < 3; layer++) {
-                for(int slot = 0; slot < 3; slot++) {
-                    if (currentSlots.get(slot).numberOfElements() > layer)
-                        System.out.print("  > Cost: " + currentSlots.get(slot).getCards().get(layer).getCost() + "\t\t\t\t");
-                    else System.out.print("\t\t\t\t\t\t\t\t\t\t\t");
-                }
-                System.out.print("\n\t");
-                for(int slot = 0; slot < 3; slot++) {
-                    if (currentSlots.get(slot).numberOfElements() > layer)
-                        System.out.print("Color: " + currentSlots.get(slot).getCards().get(layer).getType() + "\t\t\t\t\t\t\t\t\t\t");
-                    else System.out.print("\t\t\t\t\t\t\t\t\t\t\t\t\t");
-                }
-                System.out.print("\n\t");
-                for(int slot = 0; slot < 3; slot++) {
-                    if (currentSlots.get(slot).numberOfElements() > layer)
-                        System.out.print("Level: " + currentSlots.get(slot).getCards().get(layer).getLevel() + "\t\t\t\t\t\t\t\t\t\t\t");
-                    else System.out.print("\t\t\t\t\t\t\t\t\t\t\t\t\t");
-                }
-                System.out.print("\n\t");
-                for(int slot = 0; slot < 3; slot++) {
-                    if (currentSlots.get(slot).numberOfElements() > layer)
-                        System.out.print("Production power: " + "\t\t\t\t\t\t\t\t\t");
-                    else System.out.print("\t\t\t\t\t\t\t\t\t\t\t\t\t");
-                }
-                System.out.print("\n\t");
-                for(int slot = 0; slot < 3; slot++) {
-                    if (currentSlots.get(slot).numberOfElements() > layer)
-                        System.out.print("\tInput : " + currentSlots.get(slot).getCards().get(layer).getProdPower().getInput() + "\t\t\t");
-                     else System.out.print("\t\t\t\t\t\t\t\t\t\t\t\t\t");
-                }
-                System.out.print("\n\t");
-                for(int slot = 0; slot < 3; slot++) {
-                    if (currentSlots.get(slot).numberOfElements() > layer)
-                        System.out.print("\tOutput: " + currentSlots.get(slot).getCards().get(layer).getProdPower().getOutput() + "\t");
-                    else System.out.print("\t\t\t\t\t\t\t\t\t\t\t\t\t");
-                }
-                System.out.println("\n");
-            }
-            System.out.println();
         }
     }
 

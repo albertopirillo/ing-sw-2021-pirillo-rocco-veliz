@@ -92,6 +92,8 @@ public class TrayController implements Initializable {
         ImageView destination = (ImageView) event.getSource();
         Request request = new InsertMarbleRequest(Integer.parseInt(destination.getId().substring(destination.getId().length() - 1)));
         this.mainController.sendMessage(request);
+        this.mainController.closeTray();
+
     }
 
     public void dragOver(DragEvent event) {

@@ -256,6 +256,22 @@ public class MainController implements Initializable {
     }
 
     /**
+     * Hide the tray popup and also change the text of the button
+     */
+    public void closeTray(){
+        trayButton.setText("Show Market Tray");
+        this.trayPopUp.hide();
+    }
+
+    /**
+     * Hide the market popup and also change the text of the button
+     */
+    public void closeMarket(){
+        marketButton.setText("Show Market Cards");
+        this.marketPopUp.hide();
+    }
+
+    /**
      * Show an alert before quitting the game
      * @param event the event triggered by pressing the button
      */

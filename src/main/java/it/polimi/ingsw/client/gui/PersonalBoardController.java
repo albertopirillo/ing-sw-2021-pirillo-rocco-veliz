@@ -2,10 +2,7 @@ package it.polimi.ingsw.client.gui;
 
 import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
-import it.polimi.ingsw.model.FaithTrack;
-import it.polimi.ingsw.model.PopeFavorCard;
-import it.polimi.ingsw.model.Resource;
-import it.polimi.ingsw.model.ResourceType;
+import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.network.DepotSetting;
 import it.polimi.ingsw.network.requests.PlaceResourceRequest;
 import it.polimi.ingsw.network.requests.ReorderDepotGUIRequest;
@@ -39,6 +36,8 @@ public class PersonalBoardController implements Initializable {
     private ImageView cell13, cell14, cell15, cell16, cell17, cell18, cell19, cell20, cell21, cell22, cell23, cell24;
     @FXML
     private ImageView popeFavor01, popeFavor02, popeFavor03;
+    @FXML
+    private ImageView leaderCard0, leaderCard1;
 
     /**
      * The lists containing the relative cells of the faithtrack and the pope favor tiles
@@ -380,5 +379,12 @@ public class PersonalBoardController implements Initializable {
                 popeFavorTiles.get(i).setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/png/faithtrack/popeFavor0" + i + "_fu.png"))));
             }
         }
+    }
+
+    public void updateLeaderCards(List<LeaderCard> playerCards) {
+        String img0 = playerCards.get(0).getImg();
+        leaderCard0.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/png/leader_cards/" + img0))));
+        String img1 = playerCards.get(0).getImg();
+        leaderCard1.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/png/leader_cards/" + img1))));
     }
 }

@@ -144,7 +144,7 @@ public class ClientGUI implements UserInterface {
                 //Set and initialize the LeaderCardSelectionController
                 LeaderCardSelectionController leaderCardSelectionController = (LeaderCardSelectionController) JavaFXMain.changeScene("leader_card_selection");
                 leaderCardSelectionController.setNickname(nickname);
-                leaderCardSelectionController.setLeaderCards(cards);
+                leaderCardSelectionController.setInitialLeaderCards(cards);
                 printLog("LeaderCardSelectionController ready");
                 mainController.setLeaderCardSelectionController(leaderCardSelectionController);
                 leaderCardSelectionController.setMainController(mainController);
@@ -208,7 +208,15 @@ public class ClientGUI implements UserInterface {
 
     @Override
     public void updateLeaderCards(LeaderUpdate update) {
-
+        Platform.runLater(() -> {
+            printLog("Updating leader cards...");
+            Map<String, List<LeaderCard>> map = update.getLeaderMap();
+            Map<String, PersonalBoardController> controllerMap = mainController.getPersonalBoardControllerMap();
+            for(Map.Entry<String, List<LeaderCard>> entry: map.entrySet()){
+                PersonalBoardController currentController = controllerMap.get(entry.getKey());
+                currentController.updateLeaderCards(entry.getValue());
+            }
+        });
     }
 
     @Override

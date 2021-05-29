@@ -151,7 +151,7 @@ public class LeaderCardSelectionController implements Initializable {
         return ret;
     }
 
-    public void setLeaderCards(List<LeaderCard> cards) {
+    public void setInitialLeaderCards(List<LeaderCard> cards) {
         this.leaderCards = cards;
         for(int i = 0; i < cards.size(); i++){
             setImage(i);

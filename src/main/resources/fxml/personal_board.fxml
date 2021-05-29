@@ -15,12 +15,12 @@
             <Image url="@../png/personal_board/personal_board.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="390.0" fitWidth="252.0" layoutY="414.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="leaderCard1" fitHeight="390.0" fitWidth="252.0" layoutY="414.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../png/leader_cards/test_card.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="396.0" fitWidth="252.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="leaderCard0" fitHeight="396.0" fitWidth="252.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../png/leader_cards/test_card.png" />
          </image>

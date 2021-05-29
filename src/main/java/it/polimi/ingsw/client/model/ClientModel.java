@@ -1,16 +1,16 @@
 package it.polimi.ingsw.client.model;
 
-public class ModelMain {
+public class ClientModel {
     private final MarketModel marketModel;
     private final PersonalBoardModel personalBoardModel;
     private final SoloGameModel soloGameModel;
-    private final StoragesModel storagesModel;
+    private final StorageModel storageModel;
 
-    public ModelMain(MarketModel marketModel, PersonalBoardModel personalBoardModel, SoloGameModel soloGameModel, StoragesModel storagesModel) {
+    public ClientModel(MarketModel marketModel, PersonalBoardModel personalBoardModel, SoloGameModel soloGameModel, StorageModel storageModel) {
         this.marketModel = marketModel;
         this.personalBoardModel = personalBoardModel;
         this.soloGameModel = soloGameModel;
-        this.storagesModel = storagesModel;
+        this.storageModel = storageModel;
     }
 
     public MarketModel getMarketModel() {
@@ -25,7 +25,8 @@ public class ModelMain {
         return soloGameModel;
     }
 
-    public StoragesModel getStoragesModel() {
-        return storagesModel;
+    public StorageModel getStoragesModel() {
+        return storageModel;
     }
+
 }

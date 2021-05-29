@@ -113,34 +113,26 @@ public class PersonalBoardController implements Initializable {
         firstLayer.add(depot1_1);
         this.layerMapping.put(1, firstLayer);
         List<ImageView> secondLayer = new ArrayList<>();
-        secondLayer.add(depot2_1);
-        secondLayer.add(depot2_2);
+        Collections.addAll(secondLayer, depot2_1, depot2_2);
         this.layerMapping.put(2, secondLayer);
         List<ImageView> thirdLayer = new ArrayList<>();
-        thirdLayer.add(depot3_1);
-        thirdLayer.add(depot3_2);
-        thirdLayer.add(depot3_3);
+        Collections.addAll(thirdLayer, depot3_1, depot3_2, depot3_3);
         this.layerMapping.put(3, thirdLayer);
         List<ImageView> firstExtraLayer = new ArrayList<>();
-        firstExtraLayer.add(depot4_1);
+        Collections.addAll(firstExtraLayer, depot4_1, depot4_2);
         depot4_1.setDisable(true);
-        firstExtraLayer.add(depot4_2);
         depot4_2.setDisable(true);
         this.layerMapping.put(4, firstExtraLayer);
         List<ImageView> secondExtraLayer = new ArrayList<>();
-        secondExtraLayer.add(depot5_1);
+        Collections.addAll(secondExtraLayer, depot5_1, depot5_2);
         depot5_1.setDisable(true);
-        secondExtraLayer.add(depot5_2);
         depot5_2.setDisable(true);
         this.layerMapping.put(5, secondExtraLayer);
+        Collections.addAll(tempResources, tempRes1, tempRes2, tempRes3, tempRes4);
         resSupply.setVisible(false);
-        this.tempResources.add(tempRes1);
         tempRes1.setDisable(true);
-        this.tempResources.add(tempRes2);
         tempRes2.setDisable(true);
-        this.tempResources.add(tempRes3);
         tempRes3.setDisable(true);
-        this.tempResources.add(tempRes4);
         tempRes4.setDisable(true);
         initFaithTrack();
     }
@@ -250,11 +242,10 @@ public class PersonalBoardController implements Initializable {
 
     //Method to call when the entity is released
     public void dragDrop(DragEvent event) {
-        //System.out.println("DRAG DROPPED");
-        ResourceType lastRes;
+        ResourceType sourceRes;
         ImageView destination = (ImageView) event.getSource();
         //Save the source res
-        lastRes = getGenericSlot(dragSourceId);
+        sourceRes = getGenericSlot(dragSourceId);
         //Set the source, if destination is full
         if (destination.getImage() != null) {
             this.dragSource.setImage(destination.getImage());
@@ -269,12 +260,7 @@ public class PersonalBoardController implements Initializable {
         //Set the destination
         Image img = event.getDragboard().getImage();
         destination.setImage(img);
-        setGenericSlot(destination.getId(), lastRes);
-    }
-
-    //Method to call when the drag finished successfully
-    public void dragDone() {
-        //System.out.println("DRAG DONE");
+        setGenericSlot(destination.getId(), sourceRes);
     }
 
     private void setGenericSlot(String id, ResourceType resourceType) {

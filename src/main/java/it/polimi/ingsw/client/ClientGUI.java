@@ -324,10 +324,12 @@ public class ClientGUI implements UserInterface {
             mainController.switchToTab(update.getActivePlayer());
             mainController.disableGUI(!update.getActivePlayer().equals(this.nickname));
         });
-        //Update the GUI with storages and leader cards of all players
+        //Initialize the client model
         updateStorages(update.getStorageUpdate());
         updateMarketTray(update.getMarketTrayUpdate());
         updateMarket(update.getMarketUpdate());
-        //TODO: updateLeaderCards(update.getLeaderUpdate());
+        updateLeaderCards(update.getLeaderUpdate());
+        updateFaithTrack(update.getFaithTrackUpdate());
+        updateDevSlots(update.getDevSlotsUpdate());
     }
 }

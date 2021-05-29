@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.client.gui.*;
+import it.polimi.ingsw.client.model.ClientModel;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.network.DepotSetting;
 import it.polimi.ingsw.network.Processable;
@@ -18,12 +19,19 @@ public class ClientGUI implements UserInterface {
     private String nickname;
     private final Client client;
     private final MainController mainController;
+    private final ClientModel clientModel;
     private final boolean testing = false;
     private final int playerAmountTesting = 2;
 
     public ClientGUI(Client client, MainController controller) {
         this.client = client;
+        this.clientModel = new ClientModel();
         this.mainController = controller;
+    }
+
+    @Override
+    public ClientModel getClientModel() {
+        return clientModel;
     }
 
     @Override

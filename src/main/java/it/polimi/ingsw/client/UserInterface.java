@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client;
 
+import it.polimi.ingsw.client.model.ClientModel;
 import it.polimi.ingsw.model.LeaderCard;
 import it.polimi.ingsw.network.updates.*;
 
@@ -41,5 +42,6 @@ public interface UserInterface {
     void changeNickname();
     void updateProductionDone(ProductionDoneUpdate productionDoneUpdate);
     void updateActionDone(MainActionDoneUpdate mainActionDoneUpdate);
+    ClientModel getClientModel();
 
 }

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client;
 
+import it.polimi.ingsw.client.model.ClientModel;
 import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import it.polimi.ingsw.model.*;
@@ -18,6 +19,7 @@ public class ClientCLI implements UserInterface {
     private String nickname;
     private final Client client;
     private final Scanner stdin;
+    private final ClientModel clientModel;
     private Resource tempRes;
     private boolean productionDone;
     private boolean mainActionDone;
@@ -25,8 +27,14 @@ public class ClientCLI implements UserInterface {
     public ClientCLI(Client client){
         this.client = client;
         this.stdin = new Scanner(System.in);
+        this.clientModel = new ClientModel();
         this.productionDone = false;
         this.mainActionDone = false;
+    }
+
+    @Override
+    public ClientModel getClientModel() {
+        return clientModel;
     }
 
     @Override

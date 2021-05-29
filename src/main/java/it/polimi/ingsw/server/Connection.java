@@ -56,6 +56,7 @@ public class Connection implements Runnable {
                     socketOut.writeObject(message);
                     System.out.println("[CONNECTION] Sent message " + message.getClass().getSimpleName());
                     socketOut.flush();
+                    socketOut.reset();
                 }
             } catch (IOException ex) {
                 System.out.println(ex.getMessage());

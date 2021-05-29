@@ -136,6 +136,7 @@ public class Client implements Runnable{
             //System.out.println("[CLIENT] Sending request " + message.getClass().getSimpleName());
             socketOut.writeObject(message);
             socketOut.flush();
+            socketOut.reset();
         } catch (IOException e){
             System.err.println(e.getMessage());
         }

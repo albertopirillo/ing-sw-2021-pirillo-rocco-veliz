@@ -1,15 +1,25 @@
 .label{
     -fx-font-size: 23;
-    -fx-font-family: "Blackadder ITC";
+    -fx-font-family: "Brush Script MT";
     -fx-alignment: center;
 }
 
 .button{
-    -fx-font-size: 23;
-    -fx-font-family: "Blackadder ITC";
+    -fx-font-size: 30;
+    -fx-font-family: "Brush Script MT";
+    -fx-background-radius: 5px;
     -fx-alignment: center;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-background-color: linear-gradient(to bottom, #eae0c2 5%, #ccc2a6 100%);
+    -fx-padding:5 5 5 5;
 }
 
+.button:hover {
+    -fx-background-color:linear-gradient(to bottom, #ccc2a6 5%, #eae0c2 100%);
+}
+.button:pressed {
+    -fx-background-color:linear-gradient(to bottom, #a1926a 5%, #ccc2a6 100%);
+}
 .tab .tab-label {
     -fx-alignment: CENTER;
     -fx-text-fill: black;
@@ -24,4 +34,8 @@
 
 .tab-pane {
     -fx-tab-min-width:120px;
+}
+
+.imgShadow{
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
 }

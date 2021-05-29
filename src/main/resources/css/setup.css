@@ -1,11 +1,61 @@
 #formatError {
-    -fx-font-size: 36;
-    -fx-font-family: "Blackadder ITC";
+    -fx-font-size: 50;
+    -fx-font-family: "Brush Script MT";
+    -fx-stroke: black; /* This sets the outline color (to improve readability on background) */
+    -fx-stroke-width: 0.5px; /* This sets the outline width */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
     -fx-alignment: center;
 }
 
-#firstPlayerLabel {
-    -fx-font-size: 36;
-    -fx-font-family: "System";
+.firstPlayerLabel.label .text {
+    -fx-font-size: 50;
+    -fx-font-family: "Brush Script MT";
+    -fx-fill: #eae0c2;  /* This sets the text color */
+    -fx-stroke: black; /* This sets the outline color (to improve readability on background) */
+    -fx-stroke-width: 0.5px; /* This sets the outline width */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
     -fx-alignment: center;
+}
+
+#firstPlayerText {
+    -fx-font-size: 50;
+    -fx-font-family: "Brush Script MT";
+    -fx-fill: #eae0c2;  /* This sets the text color */
+    -fx-stroke: black; /* This sets the outline color (to improve readability on background) */
+    -fx-stroke-width: 0.5px; /* This sets the outline width */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-alignment: center;
+}
+
+#enterNickname {
+    -fx-font-size: 70;
+    -fx-font-family: "Brush Script MT";
+    -fx-fill: #eae0c2;  /* This sets the text color */
+    -fx-stroke: black; /* This sets the outline color (to improve readability on background) */
+    -fx-stroke-width: 0.5px; /* This sets the outline width */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-alignment: center;
+}
+
+#nameField {
+    -fx-background-radius: 5px;
+    -fx-focus-color: transparent;
+}
+
+.radio-button {
+    -fx-font-size: 32;
+    -fx-font-family: "Brush Script MT";
+    -fx-text-fill: #eae0c2;  /* This sets the text color */
+    -fx-text-stroke: black; /* This sets the outline color (to improve readability on background) */
+    -fx-text-stroke-width: 0.5px; /* This sets the outline width */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+.radio-button:hover {
+    -fx-font-size: 32;
+    -fx-font-family: "Brush Script MT";
+    -fx-text-fill: #eae0c2;  /* This sets the text color */
+    -fx-text-stroke: black; /* This sets the outline color (to improve readability on background) */
+    -fx-text-stroke-width: 0.5px; /* This sets the outline width */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
 }

@@ -1,8 +1,12 @@
 .customInitLeaderLabel.label .text {
     -fx-font-family: "Brush Script MT";
-    -fx-fill: black;  /* This sets the text color */
-    -fx-stroke: white; /* This sets the outline color (to improve readability on background) */
-    -fx-stroke-width: 0.08px; /* This sets the outline width */
+    /*-fx-fill: black;  /* This sets the text color */
+    /*-fx-stroke: white; /* This sets the outline color (to improve readability on background) */
+    /*-fx-stroke-width: 0.08px; /* This sets the outline width */
+    -fx-fill: #eae0c2;  /* This sets the text color */
+    -fx-stroke: black; /* This sets the outline color (to improve readability on background) */
+    -fx-stroke-width: 0.35px; /* This sets the outline width */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
 }
 
 .customButton{

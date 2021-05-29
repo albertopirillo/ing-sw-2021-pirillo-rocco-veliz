@@ -6,11 +6,11 @@ public class ClientModel {
     private final SoloGameModel soloGameModel;
     private final StorageModel storageModel;
 
-    public ClientModel(MarketModel marketModel, PersonalBoardModel personalBoardModel, SoloGameModel soloGameModel, StorageModel storageModel) {
-        this.marketModel = marketModel;
-        this.personalBoardModel = personalBoardModel;
-        this.soloGameModel = soloGameModel;
-        this.storageModel = storageModel;
+    public ClientModel() {
+        this.marketModel = new MarketModel();
+        this.personalBoardModel = new PersonalBoardModel();
+        this.soloGameModel = new SoloGameModel();
+        this.storageModel = new StorageModel();
     }
 
     public MarketModel getMarketModel() {

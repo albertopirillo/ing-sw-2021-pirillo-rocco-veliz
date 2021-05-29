@@ -5,18 +5,29 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.image.Image?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="674.0" prefWidth="1082.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.LeaderCardSelectionController">
+<Pane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.LeaderCardSelectionController">
    <children>
-      <ImageView fx:id="imgCard1" fitHeight="390.0" fitWidth="252.0" layoutX="34.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="imgCard2" fitHeight="390.0" fitWidth="252.0" layoutX="287.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="imgCard3" fitHeight="390.0" fitWidth="252.0" layoutX="542.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="imgCard4" fitHeight="390.0" fitWidth="252.0" layoutX="797.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true" />
-      <CheckBox fx:id="chkCard1" layoutX="151.0" layoutY="482.0" mnemonicParsing="false" onAction="#onClickChkCard1" prefHeight="18.0" prefWidth="17.0" />
-      <CheckBox fx:id="chkCard2" layoutX="404.0" layoutY="482.0" mnemonicParsing="false" onAction="#onClickChkCard2" prefHeight="18.0" prefWidth="17.0" />
-      <CheckBox fx:id="chkCard3" layoutX="659.0" layoutY="482.0" mnemonicParsing="false" onAction="#onClickChkCard3" prefHeight="18.0" prefWidth="17.0" />
-      <CheckBox fx:id="chkCard4" layoutX="914.0" layoutY="482.0" mnemonicParsing="false" onAction="#onClickChkCard4" prefHeight="18.0" prefWidth="17.0" />
-      <Button fx:id="btnContinue" layoutX="476.0" layoutY="563.0" mnemonicParsing="false" onAction="#onClickContinue" prefHeight="26.0" prefWidth="131.0" text="Continue" />
-      <Label layoutX="480.0" layoutY="25.0" text="Select two leader cards" />
+      <ImageView fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true">
+          <image>
+             <Image url="/png/generic/background_wall.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgCard1" fitHeight="390.0" fitWidth="252.0" layoutX="54.4" layoutY="131.0" pickOnBounds="true" preserveRatio="true" />
+      <CheckBox fx:id="chkCard1" layoutX="55.0" layoutY="131.3" mnemonicParsing="false" onAction="#onClickChkCard1" prefHeight="18.0" prefWidth="17.0" />
+      <ImageView fx:id="imgCard2" fitHeight="390.0" fitWidth="252.0" layoutX="360.8" layoutY="131.0" pickOnBounds="true" preserveRatio="true" />
+      <CheckBox fx:id="chkCard2" layoutX="361.4" layoutY="131.3" mnemonicParsing="false" onAction="#onClickChkCard2" prefHeight="18.0" prefWidth="17.0" />
+      <ImageView fx:id="imgCard3" fitHeight="390.0" fitWidth="252.0" layoutX="667.2" layoutY="131.0" pickOnBounds="true" preserveRatio="true" />
+      <CheckBox fx:id="chkCard3" layoutX="667.8" layoutY="131.3" mnemonicParsing="false" onAction="#onClickChkCard3" prefHeight="18.0" prefWidth="17.0" />
+      <ImageView fx:id="imgCard4" fitHeight="390.0" fitWidth="252.0" layoutX="973.6" layoutY="131.0" pickOnBounds="true" preserveRatio="true" />
+      <CheckBox fx:id="chkCard4" layoutX="974.1" layoutY="131.3" mnemonicParsing="false" onAction="#onClickChkCard4" prefHeight="18.0" prefWidth="17.0" />
+      <Button fx:id="btnContinue" alignment="CENTER" layoutX="576.0" layoutY="610.0" mnemonicParsing="false" onAction="#onClickContinue" prefHeight="26.0" prefWidth="131.0" text="Continue" textAlignment="CENTER" />
+      <Label alignment="CENTER" layoutX="520.0" layoutY="25.0" text="Select two leader cards" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold Italic" size="36.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

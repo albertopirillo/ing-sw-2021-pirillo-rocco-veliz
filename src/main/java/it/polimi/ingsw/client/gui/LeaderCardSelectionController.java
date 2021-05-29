@@ -65,9 +65,13 @@ public class LeaderCardSelectionController implements Initializable {
         imageViews.add(imgCard2);
         imageViews.add(imgCard3);
         imageViews.add(imgCard4);
+        chkCard1.getStyleClass().add("big-check-box");
         checkBoxes.add(chkCard1);
+        chkCard2.getStyleClass().add("big-check-box");
         checkBoxes.add(chkCard2);
+        chkCard3.getStyleClass().add("big-check-box");
         checkBoxes.add(chkCard3);
+        chkCard4.getStyleClass().add("big-check-box");
         checkBoxes.add(chkCard4);
     }
 
@@ -127,7 +131,7 @@ public class LeaderCardSelectionController implements Initializable {
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning");
-            alert.setHeaderText("You must select 2 development cards.");
+            alert.setHeaderText("You must select 2 leader cards.");
             alert.show();
         }
     }

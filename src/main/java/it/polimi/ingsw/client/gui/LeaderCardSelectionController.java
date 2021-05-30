@@ -43,19 +43,20 @@ public class LeaderCardSelectionController implements Initializable {
     private final List<ImageView> imageViews = new ArrayList<>();
     private final List<CheckBox> checkBoxes = new ArrayList<>();
 
-    private List<LeaderCard> leaderCards;
-
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
+    /**
+     * The nickname of the current player..
+     */
     private String nickname;
 
     /**
      * The reference to the mainController.
      */
     private MainController mainController = null;
+
+    /**
+     * Holds the list of the four leader cards initially sent to the client.
+     */
+    private List<LeaderCard> leaderCards;
 
     /**
      * An array storing the selected cards.
@@ -78,6 +79,14 @@ public class LeaderCardSelectionController implements Initializable {
         checkBoxes.add(chkCard4);
         topLabel.getStyleClass().add("customInitLeaderLabel");
         btnContinue.getStyleClass().add("customButton");
+    }
+
+    /**
+     * Setter for nickname
+     * @param nickname the nickname
+     */
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     /**
@@ -128,6 +137,10 @@ public class LeaderCardSelectionController implements Initializable {
         return selectedCards;
     }
 
+    /**
+     * Event handler for btnContinue.
+     * @param actionEvent the actionEvent.
+     */
     public void onClickContinue(ActionEvent actionEvent) {
         if(countSelected() == 2){
             ChooseLeaderRequest request = new ChooseLeaderRequest(selectedCards.get(0), selectedCards.get(1));

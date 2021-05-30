@@ -155,15 +155,28 @@ public class ClientGUI implements UserInterface {
                 leaderCardSelectionController.setNickname(nickname);
                 leaderCardSelectionController.setInitialLeaderCards(cards);
                 printLog("LeaderCardSelectionController ready");
-                mainController.setLeaderCardSelectionController(leaderCardSelectionController);
                 leaderCardSelectionController.setMainController(mainController);
             });
         }
     }
 
     @Override
-    public void viewInitialResources(int numPlayer) { //TODO
+    public void viewInitialResources(int numPlayer) {
         Map<ResourceType, Integer> res = new HashMap<>();
+        if(numPlayer > 0){
+            Platform.runLater(() -> {
+                ResourceSelectionController resourceSelectionController = (ResourceSelectionController)JavaFXMain.changeScene("resource_selection");
+                resourceSelectionController.setNickname(nickname);
+                resourceSelectionController.setNumPlayer(numPlayer);
+                printLog("ResourceSelectionController ready");
+                resourceSelectionController.setMainController(mainController);
+            });
+        } else {
+            InitialResRequest request = new InitialResRequest(res);
+            request.setNumPlayer(numPlayer);
+            request.setPlayer(getNickname());
+            getClient().sendMessage(request);
+        }
         switch (numPlayer){
             case 1:
             case 2:
@@ -176,10 +189,6 @@ public class ClientGUI implements UserInterface {
             default:
                 break;
         }
-        InitialResRequest request = new InitialResRequest(res);
-        request.setNumPlayer(numPlayer);
-        request.setPlayer(getNickname());
-        getClient().sendMessage(request);
     }
 
     @Override

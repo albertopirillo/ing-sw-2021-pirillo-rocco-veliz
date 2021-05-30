@@ -86,6 +86,14 @@ public class MainController implements Initializable {
     }
 
     /**
+     * Gets the nickname of the associated player
+     * @return a String representing the nickname
+     */
+    public String getNickname() {
+        return clientGUI.getNickname();
+    }
+
+    /**
      * Gets the mapping between nicknames and PersonalBoardController
      * @return  a map of nicknames and PersonalBoardControllers
      */
@@ -184,6 +192,7 @@ public class MainController implements Initializable {
             Parent node = loader.load();
             PersonalBoardController personalBoardController = loader.getController();
             personalBoardController.setMainController(this);
+            personalBoardController.setStorageModel(getClientModel().getStoragesModel());
             buttonsList.add(personalBoardController.getReorderButton());
             this.personalBoardControllerMap.put(nickname, personalBoardController);
 

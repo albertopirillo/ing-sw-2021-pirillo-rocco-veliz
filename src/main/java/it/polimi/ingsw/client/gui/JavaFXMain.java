@@ -95,7 +95,7 @@ public class JavaFXMain extends Application {
         }
 
         //Popup on quitting
-        //stage.setOnCloseRequest(this::quitPopup);
+        stage.setOnCloseRequest(this::quitPopup);
 
         myStage.centerOnScreen();
 
@@ -143,7 +143,7 @@ public class JavaFXMain extends Application {
         try {
             mainController.init(playerList);
         } catch (IOException e) {
-            System.out.println("fxml file not found");
+            e.printStackTrace();
         }
     }
 

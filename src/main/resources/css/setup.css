@@ -1,8 +1,8 @@
-#formatError {
+.formatError.label .text {
     -fx-font-size: 50;
     -fx-font-family: "Brush Script MT";
     -fx-stroke: black; /* This sets the outline color (to improve readability on background) */
-    -fx-stroke-width: 1px; /* This sets the outline width */
+    -fx-stroke-width: 0.3px; /* This sets the outline width */
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
     -fx-alignment: center;
 }

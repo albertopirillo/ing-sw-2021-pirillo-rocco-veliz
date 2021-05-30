@@ -144,6 +144,7 @@ public class SetupController implements Initializable {
         firstPlayerText.getStyleClass().add("firstPlayerLabel");
         firstPlayerText.setVisible(false);
         firstPlayerLabel.getStyleClass().add("firstPlayerLabel");
+        formatError.getStyleClass().add("formatError");
     }
 
     /**

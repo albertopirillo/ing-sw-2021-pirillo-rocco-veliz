@@ -9,19 +9,30 @@
     -fx-box-color: transparent;
     -fx-mark-color: #e6ad12;
 }
-/*
+
 .resourceCheckBox > .box {
-    -fx-padding: 5.7em 2.4em 4em 4em ;
+    -fx-padding: 0.5em, 0.5em, 1em, 1em;
     -fx-focus-color: transparent;
-    -fx-box-color: transparent;
-    -fx-background-color: transparent;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-box-color: linear-gradient(to bottom, #eae0c2 5%, #ccc2a6 100%);
+    -fx-background-color: linear-gradient(to bottom, #eae0c2 5%, #ccc2a6 100%);
 }
 .resourceCheckBox > .box > .mark {
-    -fx-padding: 11.4em 4.8em 8em 8em;
-    -fx-box-color: transparent;
-    -fx-mark-color: #e6ad12;
+    -fx-padding: 1em, 1em, 2em, 2em;
+    -fx-mark-color: black;
 }
-*/
+
+.resourceCheckBox:selected > .box{
+    -fx-padding: 0.5em, 0.5em, 1em, 1em;
+    -fx-focus-color: transparent;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-box-color: linear-gradient(to bottom, #ccc2a6 5%, #eae0c2 100%);
+    -fx-background-color: linear-gradient(to bottom, #ccc2a6 5%, #eae0c2 100%);
+}
+
+.resourceDropShadow {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
 
 .resourceRadio > .radio {
     -fx-padding: 3em;

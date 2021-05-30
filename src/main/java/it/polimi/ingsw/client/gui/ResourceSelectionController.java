@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 
 import java.net.URL;
 import java.util.HashMap;
@@ -44,6 +45,8 @@ public class ResourceSelectionController implements Initializable {
     private CheckBox chkServant2;
     @FXML
     private ToggleGroup toggleGroup;
+    @FXML
+    private ImageView stoneRes, coinRes, shieldRes, servantRes;
 
     /**
      * The map of selected resources.
@@ -83,14 +86,18 @@ public class ResourceSelectionController implements Initializable {
         rbShield.getStyleClass().add("resourceRadio");
         rbCoin.getStyleClass().add("resourceRadio");
         rbServant.getStyleClass().add("resourceRadio");
-        /*chkCoin1.getStyleClass().add("resourceCheckBox");
+        chkCoin1.getStyleClass().add("resourceCheckBox");
         chkCoin2.getStyleClass().add("resourceCheckBox");
         chkServant1.getStyleClass().add("resourceCheckBox");
         chkServant2.getStyleClass().add("resourceCheckBox");
         chkShield1.getStyleClass().add("resourceCheckBox");
         chkShield2.getStyleClass().add("resourceCheckBox");
         chkStone1.getStyleClass().add("resourceCheckBox");
-        chkStone2.getStyleClass().add("resourceCheckBox");*/
+        chkStone2.getStyleClass().add("resourceCheckBox");
+        stoneRes.getStyleClass().add("resourceDropShadow");
+        servantRes.getStyleClass().add("resourceDropShadow");
+        coinRes.getStyleClass().add("resourceDropShadow");
+        shieldRes.getStyleClass().add("resourceDropShadow");
         initResources();
     }
 
@@ -252,6 +259,7 @@ public class ResourceSelectionController implements Initializable {
             request.setNumPlayer(numPlayer);
             request.setPlayer(nickname);
             mainController.sendMessage(request);
+            hideOnContinue();
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning");
@@ -261,4 +269,26 @@ public class ResourceSelectionController implements Initializable {
         }
     }
 
+    private void hideOnContinue(){
+        lblMessage.setText("Waiting for the other player's choice");
+        lblMessage.setLayoutY(320);
+        lblMessage.setLayoutX(510);
+        rbStone.setVisible(false);
+        rbCoin.setVisible(false);
+        rbShield.setVisible(false);
+        rbServant.setVisible(false);
+        chkStone1.setVisible(false);
+        chkStone2.setVisible(false);
+        chkCoin1.setVisible(false);
+        chkCoin2.setVisible(false);
+        chkShield1.setVisible(false);
+        chkShield2.setVisible(false);
+        chkServant1.setVisible(false);
+        chkServant2.setVisible(false);
+        coinRes.setVisible(false);
+        shieldRes.setVisible(false);
+        servantRes.setVisible(false);
+        stoneRes.setVisible(false);
+        btnContinue.setVisible(false);
+    }
 }

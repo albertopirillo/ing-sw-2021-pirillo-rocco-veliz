@@ -21,17 +21,17 @@
             <Image url="@../png/leader_cards/test_card.png" />
          </image>
       </ImageView>
-      <Text layoutX="57.0" layoutY="406.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Leader Cards" textAlignment="CENTER">
+      <Label fx:id="leaderLabel" layoutX="75.0" layoutY="380.0" scaleX="2" scaleY="1.5" text="Leader Cards" textAlignment="CENTER">
          <font>
-            <Font name="Blackadder ITC" size="30.0" />
+            <Font size="30.0" />
          </font>
-      </Text>
+      </Label>
       <ImageView fitHeight="51.0" fitWidth="56.0" layoutX="291.0" layoutY="590.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../png/res/stone.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="51.0" fitWidth="56.0" layoutX="296.0" layoutY="659.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="51.0" fitWidth="56.0" layoutX="291.0" layoutY="659.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../png/res/shield.png" />
          </image>
@@ -46,12 +46,12 @@
       <ImageView fx:id="depot5_1" fitHeight="51.0" fitWidth="56.0" layoutX="54.0" layoutY="721.0" onDragDetected="#dragDetection" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="depot4_1" fitHeight="51.0" fitWidth="56.0" layoutX="54.0" layoutY="307.0" onDragDetected="#dragDetection" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="depot4_2" fitHeight="51.0" fitWidth="56.0" layoutX="149.0" layoutY="307.0" onDragDetected="#dragDetection" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fitHeight="51.0" fitWidth="56.0" layoutX="379.0" layoutY="661.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="51.0" fitWidth="56.0" layoutX="379.0" layoutY="659.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../png/res/coin.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="51.0" fitWidth="56.0" layoutX="381.0" layoutY="591.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="51.0" fitWidth="56.0" layoutX="379.0" layoutY="590.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../png/res/servant.png" />
          </image>

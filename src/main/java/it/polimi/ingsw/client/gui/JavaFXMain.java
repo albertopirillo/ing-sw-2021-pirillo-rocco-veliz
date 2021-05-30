@@ -70,7 +70,7 @@ public class JavaFXMain extends Application {
         loadCSS("personalBoard");
         loadCSS("setup");
         loadCSS("tray");
-        loadCSS("bigCheckBox");
+        loadCSS("customCheckBox");
         loadCSS("customMenuLabel");
 
         //Set window title and icon

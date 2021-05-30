@@ -26,7 +26,7 @@ public class PersonalBoardController implements Initializable {
     @FXML
     private ImageView depot4_1, depot4_2, depot5_1, depot5_2;
     @FXML
-    private Label sb_stone, sb_servant, sb_shield, sb_coin;
+    private Label sb_stone, sb_servant, sb_shield, sb_coin, leaderLabel;
     @FXML
     private ImageView resSupply, tempRes1, tempRes2, tempRes3, tempRes4;
     @FXML
@@ -148,6 +148,7 @@ public class PersonalBoardController implements Initializable {
         tempRes3.setDisable(true);
         tempRes4.setDisable(true);
         initFaithTrack();
+        leaderLabel.getStyleClass().add("customInitLeaderLabel");
     }
 
     /**

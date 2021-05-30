@@ -23,7 +23,7 @@
       <ImageView fx:id="imgCard4" fitHeight="390.0" fitWidth="252.0" layoutX="973.6" layoutY="131.0" pickOnBounds="true" preserveRatio="true" />
       <CheckBox fx:id="chkCard4" layoutX="974.1" layoutY="131.3" mnemonicParsing="false" onAction="#onClickChkCard4" prefHeight="18.0" prefWidth="17.0" />
       <Button fx:id="btnContinue" alignment="CENTER" layoutX="576.0" layoutY="620.0" mnemonicParsing="false" onAction="#onClickContinue" prefHeight="26.0" prefWidth="131.0" text="Continue" textAlignment="CENTER" />
-      <Label fx:id="topLabel" alignment="TOP_CENTER" layoutX="587.0" layoutY="48.0" scaleX="3" scaleY="3" text="Select two leader cards" textAlignment="CENTER" textFill="WHITE">
+      <Label fx:id="topLabel" alignment="TOP_CENTER" layoutX="587.0" layoutY="48.0" scaleX="3" scaleY="3" text="Select two leader cards" textAlignment="CENTER">
          <font>
             <Font size="80" />
          </font>

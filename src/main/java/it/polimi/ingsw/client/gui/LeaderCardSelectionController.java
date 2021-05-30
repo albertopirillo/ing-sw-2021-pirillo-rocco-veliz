@@ -69,13 +69,13 @@ public class LeaderCardSelectionController implements Initializable {
         imageViews.add(imgCard2);
         imageViews.add(imgCard3);
         imageViews.add(imgCard4);
-        chkCard1.getStyleClass().add("bigCheckBox");
+        chkCard1.getStyleClass().add("leaderCheckBox");
         checkBoxes.add(chkCard1);
-        chkCard2.getStyleClass().add("bigCheckBox");
+        chkCard2.getStyleClass().add("leaderCheckBox");
         checkBoxes.add(chkCard2);
-        chkCard3.getStyleClass().add("bigCheckBox");
+        chkCard3.getStyleClass().add("leaderCheckBox");
         checkBoxes.add(chkCard3);
-        chkCard4.getStyleClass().add("bigCheckBox");
+        chkCard4.getStyleClass().add("leaderCheckBox");
         checkBoxes.add(chkCard4);
         topLabel.getStyleClass().add("customInitLeaderLabel");
         btnContinue.getStyleClass().add("customButton");
@@ -83,6 +83,7 @@ public class LeaderCardSelectionController implements Initializable {
 
     /**
      * Setter for nickname
+     *
      * @param nickname the nickname
      */
     public void setNickname(String nickname) {
@@ -91,6 +92,7 @@ public class LeaderCardSelectionController implements Initializable {
 
     /**
      * Getter for main controller.
+     *
      * @return mainController
      */
     public MainController getMainController() {
@@ -99,18 +101,19 @@ public class LeaderCardSelectionController implements Initializable {
 
     /**
      * Setter for mainController.
+     *
      * @param mainController the MainController instance
      */
     public void setMainController(MainController mainController) {
         this.mainController = mainController;
     }
 
-    private void checkAndSet(Integer index){
+    private void checkAndSet(Integer index) {
         CheckBox chkCard = checkBoxes.get(index);
-        if(countSelected() > 2){
+        if (countSelected() > 2) {
             chkCard.setSelected(false);
         }
-        if(chkCard.isSelected()){
+        if (chkCard.isSelected()) {
             selectedCards.add(index);
         } else {
             selectedCards.remove(index);
@@ -133,19 +136,21 @@ public class LeaderCardSelectionController implements Initializable {
         checkAndSet(3);
     }
 
-    public List<Integer> getSelectedCards(){
+    public List<Integer> getSelectedCards() {
         return selectedCards;
     }
 
     /**
      * Event handler for btnContinue.
+     *
      * @param actionEvent the actionEvent.
      */
     public void onClickContinue(ActionEvent actionEvent) {
-        if(countSelected() == 2){
+        if (countSelected() == 2) {
             ChooseLeaderRequest request = new ChooseLeaderRequest(selectedCards.get(0), selectedCards.get(1));
             request.setPlayer(nickname);
             mainController.sendMessage(request);
+            othersAreChosing();
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning");
@@ -154,7 +159,7 @@ public class LeaderCardSelectionController implements Initializable {
         }
     }
 
-    private int countSelected(){
+    private int countSelected() {
         int ret = 0;
         for (CheckBox checkBox : checkBoxes) {
             if (checkBox.isSelected()) {
@@ -166,15 +171,28 @@ public class LeaderCardSelectionController implements Initializable {
 
     public void setInitialLeaderCards(List<LeaderCard> cards) {
         this.leaderCards = cards;
-        for(int i = 0; i < cards.size(); i++){
+        for (int i = 0; i < cards.size(); i++) {
             setImage(i);
         }
     }
 
-    private void setImage(int index){
+    private void setImage(int index) {
         LeaderCard card = this.leaderCards.get(index);
         String img = card.getImg();
         imageViews.get(index).setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/png/leader_cards/" + img))));
         imageViews.get(index).getStyleClass().add("imgShadow");
+    }
+
+    private void othersAreChosing(){
+        topLabel.setText("The other players are choosing their cards");
+        topLabel.setLayoutY(330);
+        topLabel.setLayoutX(510);
+        for (CheckBox checkBox : checkBoxes){
+            checkBox.setVisible(false);
+        }
+        for (ImageView imageView : imageViews){
+            imageView.setVisible(false);
+        }
+        btnContinue.setVisible(false);
     }
 }

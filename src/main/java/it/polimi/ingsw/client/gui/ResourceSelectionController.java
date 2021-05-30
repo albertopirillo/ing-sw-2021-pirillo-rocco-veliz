@@ -6,7 +6,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
 import java.util.HashMap;
@@ -78,6 +77,20 @@ public class ResourceSelectionController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        lblMessage.getStyleClass().add("customInitLeaderLabel");
+        btnContinue.getStyleClass().add("customButton");
+        rbStone.getStyleClass().add("resourceRadio");
+        rbShield.getStyleClass().add("resourceRadio");
+        rbCoin.getStyleClass().add("resourceRadio");
+        rbServant.getStyleClass().add("resourceRadio");
+        /*chkCoin1.getStyleClass().add("resourceCheckBox");
+        chkCoin2.getStyleClass().add("resourceCheckBox");
+        chkServant1.getStyleClass().add("resourceCheckBox");
+        chkServant2.getStyleClass().add("resourceCheckBox");
+        chkShield1.getStyleClass().add("resourceCheckBox");
+        chkShield2.getStyleClass().add("resourceCheckBox");
+        chkStone1.getStyleClass().add("resourceCheckBox");
+        chkStone2.getStyleClass().add("resourceCheckBox");*/
         initResources();
     }
 
@@ -102,7 +115,7 @@ public class ResourceSelectionController implements Initializable {
      */
     public void setNumPlayer(int numPlayer) {
         this.numPlayer = numPlayer;
-        selectionAmount = (numPlayer == 3 ? 2 : 1);
+        selectionAmount = (numPlayer == 3 ? 2 : 1); //if ==3 then 2 else 1
         lblMessage.setText(selectionAmount == 1 ? "Select a resource" : "Select two resources");
         rbStone.setVisible(selectionAmount == 1);
         rbCoin.setVisible(selectionAmount == 1);

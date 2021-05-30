@@ -37,9 +37,9 @@ public class Client implements Runnable{
      * @param port  the port used to communicate with the server
      * @param gui   true if gui should be started, false if using cli
      */
-    public Client(int port, boolean gui) {
+    public Client(boolean gui, int port, String serverIP) {
         this.port = port;
-        this.serverIP = "127.0.0.1";
+        this.serverIP = serverIP;
         if (gui) {
             JavaFXMain.startGUI();
             waitForGUI();

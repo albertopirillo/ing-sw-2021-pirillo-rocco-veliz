@@ -174,20 +174,8 @@ public class ClientGUI implements UserInterface {
         } else {
             InitialResRequest request = new InitialResRequest(res);
             request.setNumPlayer(numPlayer);
-            request.setPlayer(getNickname());
+            request.setPlayer(nickname);
             getClient().sendMessage(request);
-        }
-        switch (numPlayer){
-            case 1:
-            case 2:
-                res.put(ResourceType.STONE, 1);
-                break;
-            case 3:
-                res.put(ResourceType.STONE, 1);
-                res.put(ResourceType.COIN, 1);
-                break;
-            default:
-                break;
         }
     }
 

@@ -35,11 +35,15 @@ public class SetupController {
     }
 
     public void placeInitialResource(Map<ResourceType, Integer> res, int numPlayer, String nickname) {
-        //Player activePlayer = controller.getGame().getPlayer(nickname);
         Player activePlayer = controller.getGame().getActivePlayer();
         if(!activePlayer.getNickname().equals(nickname)) return;
         try {
-            List<ResourceType> resources = new ArrayList<>(res.keySet());
+            List<ResourceType> resources = new ArrayList<>();
+            for(Map.Entry<ResourceType, Integer> entry: res.entrySet()){
+                if(entry.getValue() > 0){
+                    resources.add(entry.getKey());
+                }
+            }
             switch (numPlayer){
                 case 1:
                     activePlayer.getPersonalBoard().getDepot().modifyLayer(1, resources.get(0),1);
@@ -49,9 +53,9 @@ public class SetupController {
                     activePlayer.addPlayerFaith(1);
                     break;
                 case 3:
-                    if(resources.size()==1) {
+                    if(resources.size() == 1) {
                         activePlayer.getPersonalBoard().getDepot().modifyLayer(2, resources.get(0), 2);
-                    }else{
+                    } else {
                         activePlayer.getPersonalBoard().getDepot().modifyLayer(1, resources.get(0), 1);
                         activePlayer.getPersonalBoard().getDepot().modifyLayer(2, resources.get(1), 1);
                     }

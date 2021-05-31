@@ -41,6 +41,10 @@
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
 }
 
+.radio-button > .radio{
+    -fx-background-color: linear-gradient(to bottom, #eae0c2 5%, #ccc2a6 100%);/*transparent;*/
+}
+
 .radio-button:hover {
     -fx-font-size: 32;
     -fx-font-family: "Brush Script MT";

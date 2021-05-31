@@ -8,10 +8,7 @@ import it.polimi.ingsw.network.requests.Request;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Spinner;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
@@ -39,7 +36,7 @@ public class MarketController implements Initializable {
     @FXML
     private ChoiceBox comboBox;
     @FXML
-    private Spinner stone, servant, shield, coin;
+    private Spinner<Integer> stone, servant, shield, coin;
     @FXML
     private Button buyButton;
     @FXML
@@ -50,7 +47,7 @@ public class MarketController implements Initializable {
      */
     private ImageView selectedCard;
 
-    private int slot;
+    private ImageView slot;
 
     private ImageView source;
 
@@ -89,6 +86,13 @@ public class MarketController implements Initializable {
         this.devCards.add(imgCard10);
         this.devCards.add(imgCard11);
         this.devCards.add(imgCard12);
+        labelGreen.getStyleClass().add("customInitLeaderLabel");
+        labelBlue.getStyleClass().add("customInitLeaderLabel");
+        labelYellow.getStyleClass().add("customInitLeaderLabel");
+        labelPurple.getStyleClass().add("customInitLeaderLabel");
+        labelLv1.getStyleClass().add("customInitLeaderLabel");
+        labelLv2.getStyleClass().add("customInitLeaderLabel");
+        labelLv3.getStyleClass().add("customInitLeaderLabel");
         this.buyPanel.setVisible(false);
         comboBox.getItems().clear();
         comboBox.getItems().addAll("No ability", "First Ability", "Second Ability", "Both Ability");
@@ -112,12 +116,11 @@ public class MarketController implements Initializable {
         this.d_servant.setText("x0");
         this.d_shield.setText("x0");
         this.d_coin.setText("x0");
-        if(selectedCard != null) {
-            this.selectedCard.getStyleClass().remove("selected-card");
-        }
         this.buyPanel.setVisible(false);
         this.slots.setVisible(false);
         this.depot.setVisible(true);
+        if(selectedCard != null) this.selectedCard.getStyleClass().remove("selected-card");
+        if(slot != null) this.slot.getStyleClass().remove("selected-card");
     }
 
     private void loadStorages() {
@@ -130,10 +133,10 @@ public class MarketController implements Initializable {
         depot3_3.setImage(imgs.get(5));
         Resource strongbox = this.mainController.getClientModel().getStoragesModel().getStrongboxMap().get(this.mainController.getNickname());
         try {
-            this.stone = new Spinner(0, strongbox.getValue(ResourceType.STONE),0);
-            this.servant = new Spinner(0, strongbox.getValue(ResourceType.SERVANT),0);
-            this.shield = new Spinner(0, strongbox.getValue(ResourceType.SHIELD),0);
-            this.coin = new Spinner(0, strongbox.getValue(ResourceType.COIN),0);
+            this.stone.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, strongbox.getValue(ResourceType.STONE)));
+            this.servant.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, strongbox.getValue(ResourceType.SERVANT)));
+            this.shield.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, strongbox.getValue(ResourceType.SHIELD)));
+            this.coin.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, strongbox.getValue(ResourceType.COIN)));
         } catch (InvalidKeyException e) {
             e.printStackTrace();
         }
@@ -146,9 +149,7 @@ public class MarketController implements Initializable {
     }
 
     public void buyCard(MouseEvent mouseEvent) {
-        if(this.selectedCard != null) {
-            this.selectedCard.getStyleClass().remove("selected-card");
-        }
+        if(this.selectedCard != null) this.selectedCard.getStyleClass().remove("selected-card");
         this.selectedCard = ((ImageView) mouseEvent.getSource());
         selectedCard.getStyleClass().add("selected-card");
         this.buyPanel.setVisible(true);
@@ -197,7 +198,9 @@ public class MarketController implements Initializable {
     }
 
     public void selectSlot(MouseEvent mouseEvent) {
-        this.slot = Integer.parseInt(((ImageView) mouseEvent.getSource()).getId().substring(4));
+        if(slot!=null) this.slot.getStyleClass().remove("selected-card");
+        this.slot = (ImageView) mouseEvent.getSource();
+        this.slot.getStyleClass().add("selected-card");
         this.buyButton.setText("Buy Card");
         this.buyButton.setDisable(false);
     }
@@ -219,11 +222,10 @@ public class MarketController implements Initializable {
                 depot.modifyValue(ResourceType.SERVANT, Integer.parseInt(d_servant.getText().substring(1)));
                 depot.modifyValue(ResourceType.SHIELD, Integer.parseInt(d_shield.getText().substring(1)));
                 depot.modifyValue(ResourceType.COIN, Integer.parseInt(d_coin.getText().substring(1)));
-                strongbox.modifyValue(ResourceType.STONE, (int) stone.getValue());
-                strongbox.modifyValue(ResourceType.SERVANT, (int) servant.getValue());
-                strongbox.modifyValue(ResourceType.SHIELD, (int) shield.getValue());
-                strongbox.modifyValue(ResourceType.COIN, (int) coin.getValue());
-                System.out.println(stone.getValue());
+                strongbox.modifyValue(ResourceType.STONE, stone.getValue());
+                strongbox.modifyValue(ResourceType.SERVANT, servant.getValue());
+                strongbox.modifyValue(ResourceType.SHIELD, shield.getValue());
+                strongbox.modifyValue(ResourceType.COIN, coin.getValue());
             } catch (InvalidKeyException | NegativeResAmountException e) {
                 e.printStackTrace();
             }
@@ -231,8 +233,9 @@ public class MarketController implements Initializable {
             DevelopmentCard card = this.mainController.getClientModel().getMarketModel().getDevCardList().get(index);
             int level = card.getLevel();
             CardColor color = card.getType();
+            int numSlot = Integer.parseInt(this.slot.getId().substring(4));
             AbilityChoice choice = getAbilityChoice(comboBox.getSelectionModel().getSelectedIndex());
-            Request request = new BuyDevCardRequest(level, color, choice, depot, strongbox, this.slot - 1);
+            Request request = new BuyDevCardRequest(level, color, choice, depot, strongbox, numSlot - 1);
             this.mainController.sendMessage(request);
         }
     }

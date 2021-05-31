@@ -2,6 +2,7 @@ package it.polimi.ingsw.network.requests;
 
 import it.polimi.ingsw.controller.MasterController;
 
+@Deprecated
 public class ShowDevSlotsRequest extends Request {
 
     @Override

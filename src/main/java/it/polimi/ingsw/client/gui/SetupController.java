@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -145,6 +144,7 @@ public class SetupController implements Initializable {
         firstPlayerText.getStyleClass().add("firstPlayerLabel");
         firstPlayerText.setVisible(false);
         firstPlayerLabel.getStyleClass().add("firstPlayerLabel");
+        formatError.getStyleClass().add("formatError");
     }
 
     /**

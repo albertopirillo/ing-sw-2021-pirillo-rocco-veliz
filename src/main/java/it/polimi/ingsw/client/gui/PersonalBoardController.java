@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client.gui;
 
+import it.polimi.ingsw.client.model.StorageModel;
 import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import it.polimi.ingsw.model.*;
@@ -25,7 +26,7 @@ public class PersonalBoardController implements Initializable {
     @FXML
     private ImageView depot4_1, depot4_2, depot5_1, depot5_2;
     @FXML
-    private Label sb_stone, sb_servant, sb_shield, sb_coin;
+    private Label sb_stone, sb_servant, sb_shield, sb_coin, leaderLabel;
     @FXML
     private ImageView resSupply, tempRes1, tempRes2, tempRes3, tempRes4;
     @FXML
@@ -81,11 +82,15 @@ public class PersonalBoardController implements Initializable {
     /**
      * The structure of the associated Depot
      */
-    private final Depot depotModel = new Depot();
+    private final TempDepot tempDepot = new TempDepot();
     /**
      * The data of the associated temporary resource
      */
-    private List<ResourceType> tempResourceModel;
+    private List<ResourceType> tempResAsList;
+    /**
+     * Reference to the Model in the client
+     */
+    private StorageModel storageModel;
 
     /**
      * Gets the ReorderButton
@@ -101,6 +106,14 @@ public class PersonalBoardController implements Initializable {
      */
     public void setMainController(MainController mainController) {
         this.mainController = mainController;
+    }
+
+    /**
+     * Sets the StorageModel
+     * @param storageModel the reference to the StorageModel in the Client
+     */
+    public void setStorageModel(StorageModel storageModel) {
+        this.storageModel = storageModel;
     }
 
     /**
@@ -135,6 +148,7 @@ public class PersonalBoardController implements Initializable {
         tempRes3.setDisable(true);
         tempRes4.setDisable(true);
         initFaithTrack();
+        leaderLabel.getStyleClass().add("customInitLeaderLabel");
     }
 
     /**
@@ -142,8 +156,10 @@ public class PersonalBoardController implements Initializable {
      * @param resource the resources to update the strongbox with
      */
     public void setStrongbox(Resource resource) {
+        Resource myStrongbox = storageModel.getStrongboxMap().get(mainController.getNickname());
         for(ResourceType key: resource.keySet()) {
             try {
+                myStrongbox.modifyValue(key, resource.getValue(key));
                 switch (key) {
                     case STONE: sb_stone.setText("x" + resource.getValue(key)); break;
                     case SERVANT: sb_servant.setText("x" + resource.getValue(key)); break;
@@ -151,8 +167,8 @@ public class PersonalBoardController implements Initializable {
                     case COIN: sb_coin.setText("x" + resource.getValue(key)); break;
                     default: break;
                 }
-            } catch (InvalidKeyException e) {
-                System.out.println("Invalid key");
+            } catch (InvalidKeyException | NegativeResAmountException e) {
+                System.out.println("Invalid key or amount");
             }
         }
     }
@@ -169,11 +185,11 @@ public class PersonalBoardController implements Initializable {
         for (ImageView slot: layer) {
             if (i < amount) {
                 slot.setImage(Util.resToImage(res));
-                depotModel.setSlot(layerNumber, i + 1, res);
+                tempDepot.setSlot(layerNumber, i + 1, res);
             }
             else {
                 slot.setImage(null);
-                depotModel.setSlot(layerNumber, i + 1, null);
+                tempDepot.setSlot(layerNumber, i + 1, null);
             }
             i++;
         }
@@ -207,13 +223,13 @@ public class PersonalBoardController implements Initializable {
             Request request;
             if(isPlacing) {
                 System.out.println("[GUI] Sending place resource request");
-                request = new PlaceResourceRequest(remainingRes(), depotModel.convertToDepotSetting(), true);
+                request = new PlaceResourceRequest(remainingRes(), tempDepot.convertToDepotSetting(), true);
                 isPlacing = false;
                 resetResSupply();
             }
             else {
                 System.out.println("[GUI] Sending reorder request");
-                request = new ReorderDepotGUIRequest(depotModel.convertToDepotSetting());
+                request = new ReorderDepotGUIRequest(tempDepot.convertToDepotSetting());
             }
             this.mainController.sendMessage(request);
         }
@@ -266,20 +282,20 @@ public class PersonalBoardController implements Initializable {
     private void setGenericSlot(String id, ResourceType resourceType) {
         if (id.contains("tempRes")) {
             int slot = Character.getNumericValue(id.charAt(id.length() - 1));
-            this.tempResourceModel.set(slot - 1, resourceType);
+            this.tempResAsList.set(slot - 1, resourceType);
         }
         else {
-            this.depotModel.setSlot(id, resourceType);
+            this.tempDepot.setSlot(id, resourceType);
         }
     }
 
     private ResourceType getGenericSlot(String id) {
         if (id.contains("tempRes")) {
             int slot = Character.getNumericValue(id.charAt(id.length() - 1));
-            return this.tempResourceModel.get(slot - 1);
+            return this.tempResAsList.get(slot - 1);
         }
         else {
-            return this.depotModel.getSlot(id);
+            return this.tempDepot.getSlot(id);
         }
     }
 
@@ -291,13 +307,13 @@ public class PersonalBoardController implements Initializable {
      */
     public void updateTempResources(Resource tempRes) {
         resSupply.setVisible(true);
-        this.tempResourceModel = new ArrayList<>();
+        this.tempResAsList = new ArrayList<>();
         int currentImage = 0;
         try {
             for (ResourceType res : tempRes.keySet()) {
                 int amount = tempRes.getValue(res);
                 for (int j = 0; j < amount; j++) {
-                    this.tempResourceModel.add(res);
+                    this.tempResAsList.add(res);
                     ImageView imageView = tempResources.get(currentImage);
                     currentImage++;
                     imageView.setDisable(false);
@@ -316,7 +332,7 @@ public class PersonalBoardController implements Initializable {
 
     private Resource remainingRes() {
         Resource toDiscard = new Resource(0,0,0,0);
-        for(ResourceType resourceType: this.tempResourceModel) {
+        for(ResourceType resourceType: this.tempResAsList) {
             if (resourceType != null) {
                 try {
                     toDiscard.modifyValue(resourceType, 1);

@@ -12,7 +12,7 @@ import java.util.Map;
  * <p>Simple implementation of the Depot, to be used in the Client</p>
  * <p>Items can be accessed by id or by the couple layer-slot</p>
  */
-public class Depot {
+public class TempDepot {
     /**
      * A map that contains all the needed references to handle this Depot
      */
@@ -21,7 +21,7 @@ public class Depot {
     /**
      * Constructs a new Depot, initializing its structure according to the size of its slots
      */
-    public Depot() {
+    public TempDepot() {
         List<ResourceType> firstLayer = new ArrayList<>();
         firstLayer.add(null);
         this.layers.put(1, firstLayer);

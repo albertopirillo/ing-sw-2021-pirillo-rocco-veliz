@@ -56,10 +56,6 @@ public class MainController implements Initializable {
      */
     private SetupController setupController;
     /**
-     * Reference to the actual LeaderCardSelectionController
-     */
-    private LeaderCardSelectionController leaderCardSelectionController;
-    /**
      * The UserInterface this controller is associated with
      */
     private ClientGUI clientGUI;
@@ -83,6 +79,14 @@ public class MainController implements Initializable {
      */
     public ClientModel getClientModel() {
         return clientGUI.getClientModel();
+    }
+
+    /**
+     * Gets the nickname of the associated player
+     * @return a String representing the nickname
+     */
+    public String getNickname() {
+        return clientGUI.getNickname();
     }
 
     /**
@@ -127,27 +131,11 @@ public class MainController implements Initializable {
     }
 
     /**
-     * Gets the SetupController
-     * @return  the current SetupController
-     */
-    public LeaderCardSelectionController getLeaderCardSelectionController() {
-        return leaderCardSelectionController;
-    }
-
-    /**
      * Sets the SetupController
      * @param setupController the SetupController to set
      */
     public void setSetupController(SetupController setupController) {
         this.setupController = setupController;
-    }
-
-    /**
-     * Sets the LeaderCardSelectionController
-     * @param controller the LeaderCardSelectionController to set
-     */
-    public void setLeaderCardSelectionController(LeaderCardSelectionController controller) {
-        this.leaderCardSelectionController = controller;
     }
 
     /**
@@ -184,6 +172,7 @@ public class MainController implements Initializable {
             Parent node = loader.load();
             PersonalBoardController personalBoardController = loader.getController();
             personalBoardController.setMainController(this);
+            personalBoardController.setStorageModel(getClientModel().getStoragesModel());
             buttonsList.add(personalBoardController.getReorderButton());
             this.personalBoardControllerMap.put(nickname, personalBoardController);
 

@@ -3,18 +3,17 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.image.Image?>
 
 <Pane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.LeaderCardSelectionController">
    <children>
-      <ImageView fitHeight="720.0" fitWidth="1285.0" pickOnBounds="true" >
-          <image>
-             <Image url="/png/generic/background_wall.png" />
-         </image>
-      </ImageView>
+      <ImageView fitHeight="720.0" fitWidth="1285.0" pickOnBounds="true">
+         <image>
+            <Image url="@../png/generic/background_wall.png" />
+         </image></ImageView>
       <ImageView fx:id="imgCard1" fitHeight="390.0" fitWidth="252.0" layoutX="54.4" layoutY="131.0" pickOnBounds="true" preserveRatio="true" />
       <CheckBox fx:id="chkCard1" layoutX="55.0" layoutY="131.3" mnemonicParsing="false" onAction="#onClickChkCard1" prefHeight="18.0" prefWidth="17.0" />
       <ImageView fx:id="imgCard2" fitHeight="390.0" fitWidth="252.0" layoutX="360.8" layoutY="131.0" pickOnBounds="true" preserveRatio="true" />
@@ -23,8 +22,8 @@
       <CheckBox fx:id="chkCard3" layoutX="667.8" layoutY="131.3" mnemonicParsing="false" onAction="#onClickChkCard3" prefHeight="18.0" prefWidth="17.0" />
       <ImageView fx:id="imgCard4" fitHeight="390.0" fitWidth="252.0" layoutX="973.6" layoutY="131.0" pickOnBounds="true" preserveRatio="true" />
       <CheckBox fx:id="chkCard4" layoutX="974.1" layoutY="131.3" mnemonicParsing="false" onAction="#onClickChkCard4" prefHeight="18.0" prefWidth="17.0" />
-      <Button fx:id="btnContinue" alignment="CENTER" layoutX="576.0" layoutY="610.0" mnemonicParsing="false" onAction="#onClickContinue" prefHeight="26.0" prefWidth="131.0" text="Continue" textAlignment="CENTER" />
-      <Label fx:id="topLabel" alignment="TOP_CENTER" scaleX="3" scaleY="3" layoutX="555.0" layoutY="36.0" text="Select two leader cards" textAlignment="CENTER">
+      <Button fx:id="btnContinue" alignment="CENTER" layoutX="576.0" layoutY="620.0" mnemonicParsing="false" onAction="#onClickContinue" prefHeight="26.0" prefWidth="131.0" text="Continue" textAlignment="CENTER" />
+      <Label fx:id="topLabel" alignment="TOP_CENTER" layoutX="587.0" layoutY="48.0" scaleX="3" scaleY="3" text="Select two leader cards" textAlignment="CENTER">
          <font>
             <Font size="80" />
          </font>

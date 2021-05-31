@@ -5,6 +5,7 @@ import it.polimi.ingsw.network.DepotSetting;
 import it.polimi.ingsw.network.updates.StorageUpdate;
 import it.polimi.ingsw.network.updates.TempResourceUpdate;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +38,10 @@ public class StorageModel {
     }
     public void saveTempRes(TempResourceUpdate update) {
         this.tempResource = update.getResource();
+    }
+
+    public List<DepotSetting> getDepot(String nickname){
+        return new ArrayList<>(depotMap.get(nickname));
     }
 
     //Build new updates

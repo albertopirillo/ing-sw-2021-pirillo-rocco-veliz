@@ -24,9 +24,9 @@ public class InsertMarbleTest {
         //  GREY  GREY  BLUE  BLUE
         //  WHITE  WHITE  WHITE  WHITE
         //  Remaining marble = RED
-        ChangeWhiteMarbles changeWhiteMarbles = new ChangeWhiteMarbles(ResourceType.SHIELD);
+        ChangeWhiteMarblesAbility changeWhiteMarbles = new ChangeWhiteMarblesAbility(ResourceType.SHIELD);
         changeWhiteMarbles.activate(activePlayer);
-        ChangeWhiteMarbles changeWhiteMarbles2 = new ChangeWhiteMarbles(ResourceType.COIN);
+        ChangeWhiteMarblesAbility changeWhiteMarbles2 = new ChangeWhiteMarblesAbility(ResourceType.COIN);
         changeWhiteMarbles2.activate(activePlayer);
 
         playerController.insertMarble(0);

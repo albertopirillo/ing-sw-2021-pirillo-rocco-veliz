@@ -28,7 +28,7 @@ public class ExtraLayer extends Layer  {
      * Creates a new empty layer from a leader ability
      * @param extraSlot the leader ability to create the layer from
      */
-    public ExtraLayer(ExtraSlot extraSlot) {
+    public ExtraLayer(ExtraSlotAbility extraSlot) {
         this.resource = extraSlot.getResource();
         this.amount = 0;
     }

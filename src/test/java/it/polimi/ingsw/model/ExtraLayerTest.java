@@ -6,10 +6,10 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ExtraLayerTest {
-    ExtraSlot extraSlot1 = new ExtraSlot(ResourceType.SERVANT);
-    ExtraSlot extraSlot2 = new ExtraSlot(ResourceType.COIN);
-    ExtraSlot extraSlot3 = new ExtraSlot(ResourceType.SHIELD);
-    ExtraSlot extraSlot4 = new ExtraSlot(ResourceType.STONE);
+    ExtraSlotAbility extraSlot1 = new ExtraSlotAbility(ResourceType.SERVANT);
+    ExtraSlotAbility extraSlot2 = new ExtraSlotAbility(ResourceType.COIN);
+    ExtraSlotAbility extraSlot3 = new ExtraSlotAbility(ResourceType.SHIELD);
+    ExtraSlotAbility extraSlot4 = new ExtraSlotAbility(ResourceType.STONE);
 
 
     @Test

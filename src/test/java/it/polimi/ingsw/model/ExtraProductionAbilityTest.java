@@ -5,17 +5,17 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class DiscountTest {
+class ExtraProductionAbilityTest {
 
     @Test
     void activate() throws TooManyLeaderAbilitiesException, InvalidLayerNumberException, LeaderAbilityAlreadyActive, NegativeResAmountException, InvalidKeyException, CostNotMatchingException {
         //stub game = null
-        Player player = new Player("abc");
+        Player player = new Player( "abc");
         Resource resource1 = new Resource(0,0,0,0);
-        LeaderAbility ability = new Discount(ResourceType.COIN, 2);
-        ResLeaderCard res1 = new ResLeaderCard(2, ability ,resource1);
+        Resource resource2 = new Resource(0,0,0,0);
+        LeaderAbility ability = new ExtraProductionAbility(new ProductionPower(resource1, resource2));
+        ResLeaderCard res1 = new ResLeaderCard(1, ability ,resource1);
         ResLeaderCard res2 = new ResLeaderCard(3, ability ,resource1);
-        ResLeaderCard res3 = new ResLeaderCard(1, ability ,resource1);
 
         player.addLeaderCard(res1);
         player.addLeaderCard(res2);
@@ -39,7 +39,5 @@ class DiscountTest {
         assertEquals(2, player.getActiveLeaderAbilities().size());
         assertEquals(ability, player.getActiveLeaderAbilities().get(1));
 
-        player.setLeaderCard(0, res3);
-        assertThrows(TooManyLeaderAbilitiesException.class, () -> player.useLeader(0, LeaderAction.USE_ABILITY));
     }
 }

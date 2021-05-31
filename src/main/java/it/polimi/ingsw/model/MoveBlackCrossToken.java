@@ -1,8 +1,15 @@
 package it.polimi.ingsw.model;
 
-public class MoveBlackCross extends SoloActionToken {
+/**
+ * Action Token implementation that moves the black cross by 2 spaces
+ */
+public class MoveBlackCrossToken extends SoloActionToken {
 
-    public MoveBlackCross(SoloGame game) {
+    /**
+     * Constructs a new MoveBlackCross Action Token
+     * @param game the associated game
+     */
+    public MoveBlackCrossToken(SoloGame game) {
         super(game);
     }
 

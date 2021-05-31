@@ -11,7 +11,7 @@ public class ProductionStrategy {
     /**
      * Array of the player's active extra production abilities
      */
-    private final ExtraProduction[] productions;
+    private final ExtraProductionAbility[] productions;
     /**
      * Amount of active leader abilities
      */
@@ -25,7 +25,7 @@ public class ProductionStrategy {
      * Initializes the array, leaving it empty for now
      */
     public ProductionStrategy() {
-        this.productions = new ExtraProduction[2];
+        this.productions = new ExtraProductionAbility[2];
         this.size = 0;
     }
 
@@ -42,7 +42,7 @@ public class ProductionStrategy {
      * @param ability   the ability to be added
      * @throws TooManyLeaderAbilitiesException if more than 2 abilities are already present
      */
-    public void addAbility(ExtraProduction ability) throws TooManyLeaderAbilitiesException {
+    public void addAbility(ExtraProductionAbility ability) throws TooManyLeaderAbilitiesException {
         if (size > MAX - 1) throw new TooManyLeaderAbilitiesException();
         this.productions[size] = ability;
         size++;

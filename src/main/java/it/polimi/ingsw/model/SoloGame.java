@@ -16,11 +16,18 @@ import java.io.FileReader;
 import java.lang.reflect.Type;
 import java.util.*;
 
+/**
+ * Game implementation used for single player games
+ */
 public class SoloGame extends Game {
 
     private List<SoloActionToken> soloTokens;
     private int blackCrossPosition;
 
+    /**
+     * Constructs a new object and initializes the action tokens and the market
+     * @param player the player of the SoloGame
+     */
     public SoloGame(Player player) throws FullCardDeckException {
         //player gets no resources nor faith points in solo game
         super();
@@ -35,8 +42,14 @@ public class SoloGame extends Game {
         startGame();
     }
 
+    /**
+     * <p>Constructor used for testing</p>
+     * <p>Sets a fake nickname for the only player</p>
+     * @param testing true if this is used, as intended, for testing
+     */
     public SoloGame(boolean testing) throws FullCardDeckException {
         super();
+        System.out.println("Testing: "+ testing);
         Player player = new Player("nickname");
         this.setActivePlayer(player);
         this.setMarket(new Market(true));
@@ -63,14 +76,20 @@ public class SoloGame extends Game {
         if(this.blackCrossPosition >= 20) this.lastTurn(false);
     }
 
+    /**
+     * Notifies the observers that Lorenzo discarded two development cards
+     * @param cardList a list with the two cards that were discarded
+     */
     public void updateDiscardedCards(List<DevelopmentCard> cardList){
-        //System.out.println("[MODEL] Notifying listeners of card discarded by Lorenzo");
         for(ModelObserver observer : getObservers())
             observer.showDiscardedCards(this, cardList);
     }
 
+    /**
+     * Notifies the observer that the action tokens have been updated
+     * @param nextToken the next action token on the queue
+     */
     public void updateNextActionToken(SoloActionToken nextToken) {
-        //System.out.println("[MODEL] Notifying listeners of solo action token update");
         for(ModelObserver observer : getObservers())
             observer.showNextActionToken(this, nextToken);
     }
@@ -95,6 +114,7 @@ public class SoloGame extends Game {
         }
     }
 
+    @Override
     public void startGame() {
         //init leader cards and give them to player
         GsonBuilder builder = new GsonBuilder();
@@ -127,29 +147,41 @@ public class SoloGame extends Game {
 
     private void initSoloTokens(boolean testing) {
         this.soloTokens = new LinkedList<>();
-        this.soloTokens.add(new MoveBlackCross(this));
-        this.soloTokens.add(new MoveAndShuffle(this));
+        this.soloTokens.add(new MoveBlackCrossToken(this));
+        this.soloTokens.add(new MoveAndShuffleToken(this));
         for(CardColor color: CardColor.values()){
-            this.soloTokens.add(new DiscardDevCards(this, color));
+            this.soloTokens.add(new DiscardDevCardsToken(this, color));
         }
         if (!testing) {
             shuffleSoloTokens();
         }
     }
 
+    /**
+     * Shuffles the current action token queue
+     */
     public void shuffleSoloTokens() {
         Collections.shuffle(this.soloTokens);
     }
-
-    //This should be used only in testing
-    public ArrayList<SoloActionToken> getSoloTokens() {
+    /**
+     * <p>Gets the solo tokens queue</p>
+     * <p>Should be used only for testing</p>
+     * @return the action tokens queue
+     */
+    protected ArrayList<SoloActionToken> getSoloTokens() {
         return new ArrayList<>(this.soloTokens);
     }
-
+    /**
+     * Gets the position of the black cross, aka Lorenzo's marker
+     * @return an int representing the position
+     */
     public int getBlackCrossPosition() {
         return blackCrossPosition;
     }
-
+    /**
+     * Moves the black cross forward by the specified number of spaces
+     * @param amount the number of spaces
+     */
     public void moveBlackCross(int amount) {
         this.blackCrossPosition = this.blackCrossPosition + amount;
     }

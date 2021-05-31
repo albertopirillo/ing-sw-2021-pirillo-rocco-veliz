@@ -87,7 +87,7 @@ class GameTest {
         depot.modifyLayer(3, ResourceType.STONE, 2);
         strongbox.addResources(new Resource(5, 5, 3, 2));
 
-        LeaderAbility ability = new Discount(ResourceType.SHIELD, 1);
+        LeaderAbility ability = new DiscountAbility(ResourceType.SHIELD, 1);
         Resource cost = new Resource(2,2,2,2);
         LeaderCard leader = new ResLeaderCard(5, ability, cost);
         player.addLeaderCard(leader);

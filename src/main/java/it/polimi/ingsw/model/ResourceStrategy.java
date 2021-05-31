@@ -14,7 +14,7 @@ public class ResourceStrategy {
     /**
      * Array of the player's active change color leader abilities
      */
-    private final ChangeWhiteMarbles[] resTypes;
+    private final ChangeWhiteMarblesAbility[] resTypes;
     /**
      * Amount of the active abilities
      */
@@ -28,7 +28,7 @@ public class ResourceStrategy {
      * Initializes the array, leaving it empty for now
      */
     public ResourceStrategy() {
-        this.resTypes = new ChangeWhiteMarbles[MAX];
+        this.resTypes = new ChangeWhiteMarblesAbility[MAX];
         this.size = 0;
     }
 
@@ -56,7 +56,7 @@ public class ResourceStrategy {
      * @param ability   the ability to be added
      * @throws TooManyLeaderAbilitiesException if more than 2 abilities are already present
      */
-    public void addAbility(ChangeWhiteMarbles ability) throws TooManyLeaderAbilitiesException {
+    public void addAbility(ChangeWhiteMarblesAbility ability) throws TooManyLeaderAbilitiesException {
         if (size > MAX - 1) throw new TooManyLeaderAbilitiesException();
         this.resTypes[size] = ability;
         size++;

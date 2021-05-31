@@ -18,7 +18,7 @@ public class ConcreteDepotDecorator extends DepotDecorator {
      * @param extraSlot the slot to add
      * @throws InvalidLayerNumberException  if the maximum number of layers (5) is already reached
      */
-    public ConcreteDepotDecorator(Depot depot, ExtraSlot extraSlot) throws InvalidLayerNumberException {
+    public ConcreteDepotDecorator(Depot depot, ExtraSlotAbility extraSlot) throws InvalidLayerNumberException {
         super(depot);
         Map<Integer, Layer> copy = this.depot.getMapCopy();
         for (int key: copy.keySet()) {

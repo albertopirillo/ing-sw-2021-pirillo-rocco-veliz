@@ -7,7 +7,7 @@ class ResLeaderCardTest {
     @Test
     void canBeActivated() {
         Resource resource1 = new Resource(1,2,3,4);
-        LeaderAbility ability = new Discount(ResourceType.COIN, 2);
+        LeaderAbility ability = new DiscountAbility(ResourceType.COIN, 2);
         ResLeaderCard res = new ResLeaderCard(2, ability ,resource1);
         //stub
         Resource player1 = new Resource(0,1,1,0);

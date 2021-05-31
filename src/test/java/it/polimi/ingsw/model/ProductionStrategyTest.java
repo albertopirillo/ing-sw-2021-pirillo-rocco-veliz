@@ -14,7 +14,7 @@ class ProductionStrategyTest {
         Resource input = new Resource(0,2,3,0);
         Resource output = new Resource(1,1,2,0);
         ProductionPower productionPower = new ProductionPower(input, output);
-        ExtraProduction extraProduction = new ExtraProduction(productionPower);
+        ExtraProductionAbility extraProduction = new ExtraProductionAbility(productionPower);
 
         player.addProductionStrategy(extraProduction);
         player.addProductionStrategy(extraProduction);
@@ -58,7 +58,7 @@ class ProductionStrategyTest {
         Resource input = new Resource(0,2,3,0);
         Resource output = new Resource(1,1,2,0);
         ProductionPower productionPower = new ProductionPower(input, output);
-        ExtraProduction extraProduction = new ExtraProduction(productionPower);
+        ExtraProductionAbility extraProduction = new ExtraProductionAbility(productionPower);
 
         Depot depot = player.getPersonalBoard().getDepot();
         Strongbox strongbox = player.getPersonalBoard().getStrongbox();
@@ -90,12 +90,12 @@ class ProductionStrategyTest {
         Resource input1 = new Resource(0,2,3,0);
         Resource output1 = new Resource(1,1,2,0);
         ProductionPower productionPower1 = new ProductionPower(input1, output1);
-        ExtraProduction extraProduction1 = new ExtraProduction(productionPower1);
+        ExtraProductionAbility extraProduction1 = new ExtraProductionAbility(productionPower1);
 
         Resource input2 = new Resource(0,1,1,3);
         Resource output2 = new Resource(1,0,4,0);
         ProductionPower productionPower2 = new ProductionPower(input2, output2);
-        ExtraProduction extraProduction2 = new ExtraProduction(productionPower2);
+        ExtraProductionAbility extraProduction2 = new ExtraProductionAbility(productionPower2);
 
         player.addProductionStrategy(extraProduction1);
         player.addProductionStrategy(extraProduction2);

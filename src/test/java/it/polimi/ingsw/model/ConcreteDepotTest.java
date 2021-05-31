@@ -202,7 +202,7 @@ public class ConcreteDepotTest {
     @Test
     public void takeTest() throws NegativeResAmountException, InvalidResourceException, LayerNotEmptyException, NotEnoughSpaceException, InvalidLayerNumberException, CannotContainFaithException, AlreadyInAnotherLayerException, NotEnoughResException, InvalidKeyException {
         Depot depot = new ConcreteDepot();
-        ExtraSlot extraSlot = new ExtraSlot(ResourceType.COIN);
+        ExtraSlotAbility extraSlot = new ExtraSlotAbility(ResourceType.COIN);
         depot = new ConcreteDepotDecorator(depot, extraSlot);
         depot.modifyLayer(3, ResourceType.COIN, 2);
         depot.modifyLayer(4, ResourceType.COIN, 2);
@@ -262,7 +262,7 @@ public class ConcreteDepotTest {
         assertNull(settings.get(1).getResType());
         assertEquals(ResourceType.SHIELD, settings.get(2).getResType());
 
-        ExtraSlot extraSlot = new ExtraSlot(ResourceType.COIN);
+        ExtraSlotAbility extraSlot = new ExtraSlotAbility(ResourceType.COIN);
         depot = new ConcreteDepotDecorator(depot, extraSlot);
         depot.modifyLayer(4, ResourceType.COIN, 2);
         settings = depot.toDepotSetting();
@@ -316,7 +316,7 @@ public class ConcreteDepotTest {
     @Test
     public void setFromSettingsOKTest() throws InvalidLayerNumberException, InvalidResourceException, LayerNotEmptyException, NotEnoughSpaceException, CannotContainFaithException, AlreadyInAnotherLayerException, NegativeResAmountException, WrongDepotInstructionsException, CloneNotSupportedException {
         Depot depot = new ConcreteDepot();
-        ExtraSlot extraSlot = new ExtraSlot(ResourceType.SERVANT);
+        ExtraSlotAbility extraSlot = new ExtraSlotAbility(ResourceType.SERVANT);
         depot = new ConcreteDepotDecorator(depot, extraSlot);
         depot.modifyLayer(2, ResourceType.COIN, 1);
         depot.modifyLayer(3, ResourceType.SHIELD, 2);

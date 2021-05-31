@@ -15,15 +15,26 @@ import java.io.FileReader;
 import java.lang.reflect.Type;
 import java.util.*;
 
+/**
+ * Game implementation used for Multiplayer games
+ */
 public class MultiGame extends Game {
 
     private boolean lastTurn;
 
+    /**
+     * Constructs a new object, setting the corresponding Market
+     */
     public MultiGame() throws FullCardDeckException {
         super();
         this.setMarket(new Market());
     }
 
+    /**
+     * Constructs a new object, setting the corresponding Market and other infos
+     * @param playerAmount the amount of players in this game
+     * @param players a list of users that will play in this game
+     */
     public MultiGame(int playerAmount, List<Player> players) throws FullCardDeckException {
         super();
         this.setPlayerAmount(playerAmount);
@@ -33,6 +44,12 @@ public class MultiGame extends Game {
         startGame();
     }
 
+    /**
+     * <p>Constructor used in testing</p>
+     * <p>Sets the player amount to 4</p>
+     * <p>Gives fake names to the player and adds them to the list</p>
+     * @param testing true if this is used as intended for testing
+     */
     public MultiGame(boolean testing) throws FullCardDeckException {
         super();
         this.setPlayerAmount(4);
@@ -74,7 +91,12 @@ public class MultiGame extends Game {
         }
     }
 
-    //Returns a list with the player ranks, first element is the winner
+    /**
+     * <p>Computes the final scores of the players</p>
+     * <p>The first element of the returned list is the winner</p>
+     * @param finalScores a map with players as keys and final scores as values
+     * @return a list with the ranks of all players
+     */
     public List<Player> computeRanks(Map<Player, Integer> finalScores) {
         List<Player> sortedPlayers = new ArrayList<>();
         Player maxPlayer = null;
@@ -101,6 +123,7 @@ public class MultiGame extends Game {
         this.lastTurn = true;
     }
 
+    @Override
     public void startGame() {
         //init leader cards and give them to players
         GsonBuilder builder = new GsonBuilder();
@@ -153,6 +176,7 @@ public class MultiGame extends Game {
         giveInkwell();
     }
 
+    @Override
     public String giveInkwell() {
         //First player is chosen randomly
         int numPlayer = new Random().nextInt(this.getPlayerAmount());

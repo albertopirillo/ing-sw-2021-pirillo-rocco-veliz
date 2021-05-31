@@ -69,7 +69,7 @@ class DevCardsStrategyTest {
         Card card = player.getGame().getMarket().getCard(1, CardColor.PURPLE);
         //DevelopmentCard{cost={{SERVANT=3}}, type=PURPLE, level=1, prodPower={input={{COIN=1}}, output={{STONE=1, SHIELD=1, COIN=0, SERVANT=1}}}}
 
-        Discount discount = new Discount(ResourceType.SERVANT, 2);
+        DiscountAbility discount = new DiscountAbility(ResourceType.SERVANT, 2);
         discount.activate(player);
         strongbox.addResources(new Resource(0,0,0,2));
         player.buyDevCard(1, CardColor.PURPLE, 0, AbilityChoice.FIRST,

@@ -7,16 +7,17 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class MoveBlackCrossTest {
+class MoveAndShuffleTokenTest {
 
     @Test
-    void reveal() throws FullCardDeckException, NegativeResAmountException, InvalidKeyException {
+    public void revealTest() throws FullCardDeckException, NegativeResAmountException, InvalidKeyException {
         SoloGame game = new SoloGame(new Player("a"));
-        SoloActionToken token = new MoveBlackCross(game);
+        SoloActionToken token = new MoveAndShuffleToken(game);
         assertEquals(0, game.getBlackCrossPosition());
         token.reveal();
-        assertEquals(2, game.getBlackCrossPosition());
+        assertEquals(1, game.getBlackCrossPosition());
         token.reveal();
-        assertEquals(4, game.getBlackCrossPosition());
+        assertEquals(2, game.getBlackCrossPosition());
     }
+
 }

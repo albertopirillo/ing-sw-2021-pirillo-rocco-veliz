@@ -1,5 +1,8 @@
-#marketRoot { /*This entry can be removed*/
+#cards { /*This entry can be removed*/
     -fx-background-image: url("../png/generic/background_paper.jpg");
+}
+#buyPanel { /*This entry can be removed*/
+    -fx-background-image: url("../png/generic/background_wall.png");
 }
 .selection:hover{
     -fx-effect: dropshadow(three-pass-box, rgba(255, 206, 0, 1), 30, 0, 0, 0);

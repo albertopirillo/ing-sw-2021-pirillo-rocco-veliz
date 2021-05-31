@@ -2,6 +2,7 @@ package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.client.gui.*;
 import it.polimi.ingsw.client.model.ClientModel;
+import it.polimi.ingsw.client.model.MarketModel;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.network.DepotSetting;
 import it.polimi.ingsw.network.Processable;
@@ -288,11 +289,12 @@ public class ClientGUI implements UserInterface {
 
     @Override
     public void updateMarketTray(MarketTrayUpdate update) {
-        clientModel.getMarketModel().saveTray(update);
+        MarketModel marketModel = clientModel.getMarketModel();
+        marketModel.saveTray(update);
         Platform.runLater(() -> {
             printLog("Updating market tray...");
-            MarblesColor[][] marbles = update.getMarketTray();
-            MarblesColor remainingMarble = update.getRemainingMarble();
+            MarblesColor[][] marbles = marketModel.getMarketTray();
+            MarblesColor remainingMarble = marketModel.getRemainingMarble();
             mainController.getTrayController().updateMarketTray(marbles, remainingMarble);
         });
     }

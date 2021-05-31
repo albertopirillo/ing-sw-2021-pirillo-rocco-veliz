@@ -300,7 +300,7 @@ public class PersonalBoardController implements Initializable {
         }
     }
 
-    private ResourceType getGenericSlot(String id) {
+    public ResourceType getGenericSlot(String id) {
         if (id.contains("tempRes")) {
             int slot = Character.getNumericValue(id.charAt(id.length() - 1));
             return this.tempResAsList.get(slot - 1);
@@ -407,5 +407,9 @@ public class PersonalBoardController implements Initializable {
                 leaderCard1.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/png/leader_cards/" + img1))));
             }
         }
+    }
+
+    public TempDepot getTempDepot(){
+        return this.tempDepot;
     }
 }

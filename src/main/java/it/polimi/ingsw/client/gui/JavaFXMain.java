@@ -66,10 +66,10 @@ public class JavaFXMain extends Application {
 
         //Load CSS
         loadCSS("main");
-        loadCSS("market");
+        //loadCSS("market");
         loadCSS("personalBoard");
         loadCSS("setup");
-        loadCSS("tray");
+        //loadCSS("tray");
         loadCSS("solo");
         loadCSS("customCheckBox");
         loadCSS("customMenuLabel");

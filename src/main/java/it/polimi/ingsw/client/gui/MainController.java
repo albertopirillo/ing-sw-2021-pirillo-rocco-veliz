@@ -239,6 +239,7 @@ public class MainController implements Initializable {
         this.soloController = loader.getController();
         this.soloController.setMainController(this);
         this.soloPopUp.getContent().add(solo);
+        this.soloPopUp.setAutoHide(true);
     }
 
     public void switchSoloPopup() {

@@ -104,15 +104,15 @@ public class Player {
         return new ArrayList<>(this.leaderCards);
     }
 
-    public void addResourceStrategy(ChangeWhiteMarbles newStrategy) throws TooManyLeaderAbilitiesException {
+    public void addResourceStrategy(ChangeWhiteMarblesAbility newStrategy) throws TooManyLeaderAbilitiesException {
         this.resStrategy.addAbility(newStrategy);
     }
 
-    public void addDevCardsStrategy(Discount newStrategy) throws TooManyLeaderAbilitiesException {
+    public void addDevCardsStrategy(DiscountAbility newStrategy) throws TooManyLeaderAbilitiesException {
         this.devStrategy.addAbility(newStrategy);
     }
 
-    public void addProductionStrategy(ExtraProduction newStrategy) throws TooManyLeaderAbilitiesException {
+    public void addProductionStrategy(ExtraProductionAbility newStrategy) throws TooManyLeaderAbilitiesException {
         this.prodStrategy.addAbility(newStrategy);
     }
 

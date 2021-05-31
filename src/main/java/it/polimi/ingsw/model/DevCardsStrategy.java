@@ -14,7 +14,7 @@ public class DevCardsStrategy {
     /**
      * Array of the player's active discount leader abilities
      */
-    private final Discount[] discounts;
+    private final DiscountAbility[] discounts;
     /**
      * Amount of active abilities
      */
@@ -28,7 +28,7 @@ public class DevCardsStrategy {
      * Initializes the array, leaving it empty for now
      */
     public DevCardsStrategy() {
-        this.discounts = new Discount[MAX];
+        this.discounts = new DiscountAbility[MAX];
         this.size = 0;
     }
 
@@ -45,7 +45,7 @@ public class DevCardsStrategy {
      * @param ability   the ability to be added
      * @throws TooManyLeaderAbilitiesException if more than 2 abilities are already present
      */
-    public void addAbility(Discount ability) throws TooManyLeaderAbilitiesException {
+    public void addAbility(DiscountAbility ability) throws TooManyLeaderAbilitiesException {
         if (size > MAX - 1) throw new TooManyLeaderAbilitiesException();
         this.discounts[size] = ability;
         size++;

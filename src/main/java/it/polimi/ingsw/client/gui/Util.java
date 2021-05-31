@@ -84,4 +84,8 @@ public abstract class Util {
         return new Image(Objects.requireNonNull(mainClass.getResourceAsStream(path)));
     }
 
+    public static Image getActionToken(String id) {
+        String path = "/png/solo_game/soloToken" + id + ".png";
+        return new Image(Objects.requireNonNull(mainClass.getResourceAsStream(path)));
+    }
 }

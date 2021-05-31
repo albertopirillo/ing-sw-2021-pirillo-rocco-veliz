@@ -7,12 +7,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class DiscardDevCardsTest {
+class DiscardDevCardsTokenTest {
 
     @Test
     void revealTest() throws FullCardDeckException, NegativeResAmountException, InvalidKeyException {
         SoloGame game = new SoloGame(new Player("a"));
-        SoloActionToken token = new DiscardDevCards(game, CardColor.GREEN);
+        SoloActionToken token = new DiscardDevCardsToken(game, CardColor.GREEN);
         Market market = game.getMarket();
         assertFalse(market.isDeckEmpty(1, CardColor.GREEN));
         token.reveal();
@@ -30,7 +30,7 @@ class DiscardDevCardsTest {
     @Test
     public void countTest() throws FullCardDeckException, NegativeResAmountException, InvalidKeyException {
         SoloGame game = new SoloGame(new Player("a"));
-        SoloActionToken token = new DiscardDevCards(game, CardColor.BLUE);
+        SoloActionToken token = new DiscardDevCardsToken(game, CardColor.BLUE);
         Market market = game.getMarket();
         assertEquals(12, market.getAvailableCards().size());
         token.reveal();
@@ -43,7 +43,7 @@ class DiscardDevCardsTest {
     @Test
     public void sideEffectsTest() throws FullCardDeckException, NegativeResAmountException, InvalidKeyException {
         SoloGame game = new SoloGame(new Player("a"));
-        SoloActionToken token = new DiscardDevCards(game, CardColor.YELLOW);
+        SoloActionToken token = new DiscardDevCardsToken(game, CardColor.YELLOW);
         Market market = game.getMarket();
         token.reveal();
         token.reveal();
@@ -56,8 +56,8 @@ class DiscardDevCardsTest {
     @Test
     public void discardButLoseTest() throws FullCardDeckException, NegativeResAmountException, InvalidKeyException {
         SoloGame game = new SoloGame(new Player("a"));
-        SoloActionToken token1 = new DiscardDevCards(game, CardColor.PURPLE);
-        SoloActionToken token2 = new DiscardDevCards(game, CardColor.PURPLE);
+        SoloActionToken token1 = new DiscardDevCardsToken(game, CardColor.PURPLE);
+        SoloActionToken token2 = new DiscardDevCardsToken(game, CardColor.PURPLE);
 
         //Discard level 1 cards
         token1.reveal();

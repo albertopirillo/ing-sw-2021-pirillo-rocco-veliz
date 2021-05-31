@@ -63,7 +63,7 @@ class PlayerTest {
         assertThrows(NoLeaderAbilitiesException.class, () -> player.useLeader(-1, LeaderAction.USE_ABILITY));
         assertThrows(NoLeaderAbilitiesException.class, () -> player.useLeader(2, LeaderAction.DISCARD));
 
-        ChangeWhiteMarbles ability1 = new ChangeWhiteMarbles(ResourceType.COIN);
+        ChangeWhiteMarblesAbility ability1 = new ChangeWhiteMarblesAbility(ResourceType.COIN);
         LeaderCard leader1 = new ResLeaderCard(2, ability1, new Resource(0,1,2,2));
         player.addLeaderCard(leader1);
         //assertThrows(CostNotMatchingException.class, () -> player.useLeader(0, LeaderAction.USE_ABILITY));
@@ -77,7 +77,7 @@ class PlayerTest {
     @Test
     public void resLeaderTest() throws InvalidResourceException, LayerNotEmptyException, NotEnoughSpaceException, InvalidLayerNumberException, CannotContainFaithException, AlreadyInAnotherLayerException, NegativeResAmountException, InvalidKeyException, TooManyLeaderAbilitiesException, CostNotMatchingException, NoLeaderAbilitiesException, LeaderAbilityAlreadyActive {
         Player player = new Player( "abc");
-        ChangeWhiteMarbles ability1 = new ChangeWhiteMarbles(ResourceType.COIN);
+        ChangeWhiteMarblesAbility ability1 = new ChangeWhiteMarblesAbility(ResourceType.COIN);
         LeaderCard leader1 = new ResLeaderCard(2, ability1, new Resource(0,1,2,2));
         player.addLeaderCard(leader1);
 

@@ -19,7 +19,7 @@ class ResourceStrategyTest {
     @Test
     void addAbility() throws TooManyLeaderAbilitiesException {
         Player player = new Player( "abc");
-        ChangeWhiteMarbles changeWhiteMarbles = new ChangeWhiteMarbles(ResourceType.COIN);
+        ChangeWhiteMarblesAbility changeWhiteMarbles = new ChangeWhiteMarblesAbility(ResourceType.COIN);
 
         player.addResourceStrategy(changeWhiteMarbles);
         player.addResourceStrategy(changeWhiteMarbles);
@@ -75,7 +75,7 @@ class ResourceStrategyTest {
         Player player = new Player( "abc");
         Game game = new MultiGame(true);
         player.setGame(game);
-        ChangeWhiteMarbles ability1 = new ChangeWhiteMarbles(ResourceType.STONE);
+        ChangeWhiteMarblesAbility ability1 = new ChangeWhiteMarblesAbility(ResourceType.STONE);
         ability1.activate(player);
 
         Resource output = player.insertMarble(3);
@@ -97,8 +97,8 @@ class ResourceStrategyTest {
         Player player = new Player( "abc");
         Game game = new MultiGame(true);
         player.setGame(game);
-        ChangeWhiteMarbles ability1 = new ChangeWhiteMarbles(ResourceType.COIN);
-        ChangeWhiteMarbles ability2 = new ChangeWhiteMarbles(ResourceType.SHIELD);
+        ChangeWhiteMarblesAbility ability1 = new ChangeWhiteMarblesAbility(ResourceType.COIN);
+        ChangeWhiteMarblesAbility ability2 = new ChangeWhiteMarblesAbility(ResourceType.SHIELD);
         ability1.activate(player);
         ability2.activate(player);
 

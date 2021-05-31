@@ -25,13 +25,13 @@ public class LeaderAbilityDeserializer implements JsonDeserializer<LeaderAbility
             String type = json.getAsJsonObject().get("type").getAsString();
             switch(type) {
                 case "dis":
-                    return context.deserialize(json, Discount.class);
+                    return context.deserialize(json, DiscountAbility.class);
                 case "extra":
-                    return context.deserialize(json, ExtraSlot.class);
+                    return context.deserialize(json, ExtraSlotAbility.class);
                 case "prod":
-                    return context.deserialize(json, ExtraProduction.class);
+                    return context.deserialize(json, ExtraProductionAbility.class);
                 case "change":
-                    return context.deserialize(json, ChangeWhiteMarbles.class);
+                    return context.deserialize(json, ChangeWhiteMarblesAbility.class);
                 default:
                     throw new IllegalArgumentException("Invalid LeaderAbility type");
             }

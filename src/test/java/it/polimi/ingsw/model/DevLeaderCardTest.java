@@ -149,7 +149,7 @@ class DevLeaderCardTest {
         requires1.add(new LeaderDevCost(CardColor.BLUE, 1, 1));
 
         //leaders card
-        LeaderCard leaderCard = new DevLeaderCard(4, new ExtraProduction(
+        LeaderCard leaderCard = new DevLeaderCard(4, new ExtraProductionAbility(
                 new ProductionPower(r, r1)),
                 requires1);
 
@@ -180,7 +180,7 @@ class DevLeaderCardTest {
         //Test require amount = 2
         ArrayList<LeaderDevCost> requires2 = new ArrayList<>();
         requires2.add(new LeaderDevCost(CardColor.GREEN, 3, 2));
-        LeaderCard leader2 = new DevLeaderCard(4, new ExtraProduction(
+        LeaderCard leader2 = new DevLeaderCard(4, new ExtraProductionAbility(
                 new ProductionPower(r, r1)),
                 requires2);
 
@@ -193,7 +193,7 @@ class DevLeaderCardTest {
         ArrayList<LeaderDevCost> requires3 = new ArrayList<>();
         requires3.add(new LeaderDevCost(CardColor.YELLOW, 2));
         requires3.add(new LeaderDevCost(CardColor.GREEN, 1));
-        LeaderCard leader3 = new DevLeaderCard(4, new ExtraProduction(
+        LeaderCard leader3 = new DevLeaderCard(4, new ExtraProductionAbility(
                 new ProductionPower(r, r1)),
                 requires3);
         assertFalse(leader3.canBeActivated(player));

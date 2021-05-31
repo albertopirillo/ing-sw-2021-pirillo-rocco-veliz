@@ -58,7 +58,7 @@ class PlayerControllerTest {
         ProductionPower productionPower = new ProductionPower(
                 new Resource(1,0,1,0),
                 res);
-        ExtraProduction extraProduction = new ExtraProduction(productionPower);
+        ExtraProductionAbility extraProduction = new ExtraProductionAbility(productionPower);
         extraProduction.activate(activePlayer);
 
         activePlayer.getPersonalBoard().getStrongbox().addResources(new Resource(3,3,3,3));
@@ -91,7 +91,7 @@ class PlayerControllerTest {
         //  WHITE  WHITE  WHITE  WHITE
         //  Remaining marble = RED
 
-        ChangeWhiteMarbles changeWhiteMarbles = new ChangeWhiteMarbles(ResourceType.SHIELD);
+        ChangeWhiteMarblesAbility changeWhiteMarbles = new ChangeWhiteMarblesAbility(ResourceType.SHIELD);
         changeWhiteMarbles.activate(activePlayer);
         controller.resetException();
         playerController.insertMarble(1);
@@ -101,7 +101,7 @@ class PlayerControllerTest {
         //  GREY  WHITE  BLUE  BLUE
         //  WHITE  RED  WHITE  WHITE
         //  Remaining marble = PURPLE
-        ChangeWhiteMarbles changeWhiteMarbles2 = new ChangeWhiteMarbles(ResourceType.COIN);
+        ChangeWhiteMarblesAbility changeWhiteMarbles2 = new ChangeWhiteMarblesAbility(ResourceType.COIN);
         changeWhiteMarbles2.activate(activePlayer);
 
         playerController.insertMarble(0);
@@ -118,9 +118,9 @@ class PlayerControllerTest {
         playerController.setTesting(true);
         activePlayer.setGame(game);
 
-        ChangeWhiteMarbles changeWhiteMarbles = new ChangeWhiteMarbles(ResourceType.SHIELD);
+        ChangeWhiteMarblesAbility changeWhiteMarbles = new ChangeWhiteMarblesAbility(ResourceType.SHIELD);
         changeWhiteMarbles.activate(activePlayer);
-        ChangeWhiteMarbles changeWhiteMarbles2 = new ChangeWhiteMarbles(ResourceType.COIN);
+        ChangeWhiteMarblesAbility changeWhiteMarbles2 = new ChangeWhiteMarblesAbility(ResourceType.COIN);
         changeWhiteMarbles2.activate(activePlayer);
 
         playerController.insertMarble(4);
@@ -246,7 +246,7 @@ class PlayerControllerTest {
         playerController.buyDevCard(1, CardColor.BLUE, 0, AbilityChoice.FIRST, null, null);
         assertEquals("The player has no leader ability of that type already active", controller.getError());
 
-        Discount discount = new Discount(ResourceType.COIN, 2);
+        DiscountAbility discount = new DiscountAbility(ResourceType.COIN, 2);
         discount.activate(activePlayer);
         activePlayer.getPersonalBoard().getStrongbox().addResources(new Resource(0,1,0,0));
         controller.resetException();
@@ -284,7 +284,7 @@ class PlayerControllerTest {
         activePlayer.setGame(game);
 
         Depot depot = activePlayer.getPersonalBoard().getDepot();
-        ExtraSlot extraSlot = new ExtraSlot(ResourceType.SERVANT);
+        ExtraSlotAbility extraSlot = new ExtraSlotAbility(ResourceType.SERVANT);
         depot  = new ConcreteDepotDecorator(depot, extraSlot);
         activePlayer.getPersonalBoard().upgradeDepot(depot);
         depot.modifyLayer(2, ResourceType.COIN, 1);

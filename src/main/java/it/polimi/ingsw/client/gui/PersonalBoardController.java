@@ -180,18 +180,25 @@ public class PersonalBoardController implements Initializable {
      * @param amount    the amount of resources to be stored in the layer
      */
     public void setLayer(int layerNumber, ResourceType res, int amount) {
-        int i = 0;
         List<ImageView> layer = this.layerMapping.get(layerNumber);
-        for (ImageView slot: layer) {
-            if (i < amount) {
-                slot.setImage(Util.resToImage(res));
-                tempDepot.setSlot(layerNumber, i + 1, res);
-            }
-            else {
+        if(res == null) {
+            for(ImageView slot: layer) {
                 slot.setImage(null);
-                tempDepot.setSlot(layerNumber, i + 1, null);
+                tempDepot.setSlot(slot.getId(), null);
             }
-            i++;
+        }
+        else if (amount != 0) {
+            int i = 0;
+            for (ImageView slot : layer) {
+                if (i < amount) {
+                    slot.setImage(Util.resToImage(res));
+                    tempDepot.setSlot(slot.getId(), res);
+                    i++;
+                } else {
+                    slot.setImage(null);
+                    tempDepot.setSlot(slot.getId(), null);
+                }
+            }
         }
     }
 
@@ -200,6 +207,10 @@ public class PersonalBoardController implements Initializable {
      * @param settings  a list of DepotSetting with instructions to update the Depot
      */
     public void setDepot(List<DepotSetting> settings) {
+        //System.out.println("Received settings of " + settings.size() + " elements");
+        //for(DepotSetting setting: settings) {
+        //    System.out.println(setting);
+        //}
         for(DepotSetting setting: settings) {
             setLayer(setting.getLayerNumber(), setting.getResType(), setting.getAmount());
         }

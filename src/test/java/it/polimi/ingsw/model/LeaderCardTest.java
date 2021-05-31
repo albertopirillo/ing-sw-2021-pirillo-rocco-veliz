@@ -20,13 +20,13 @@ class LeaderCardTest {
         r7.addResource(ResourceType.SERVANT,5);
         Resource r8 = new Resource();
         r8.addResource(ResourceType.SHIELD,5);
-        leader.add(new ResLeaderCard(3, new ExtraSlot(ResourceType.STONE),
+        leader.add(new ResLeaderCard(3, new ExtraSlotAbility(ResourceType.STONE),
                 r5));
-        leader.add(new ResLeaderCard(3, new ExtraSlot(ResourceType.SERVANT),
+        leader.add(new ResLeaderCard(3, new ExtraSlotAbility(ResourceType.SERVANT),
                 r6));
-        leader.add(new ResLeaderCard(3, new ExtraSlot(ResourceType.SHIELD),
+        leader.add(new ResLeaderCard(3, new ExtraSlotAbility(ResourceType.SHIELD),
                 r7));
-        leader.add(new ResLeaderCard(3, new ExtraSlot(ResourceType.COIN),
+        leader.add(new ResLeaderCard(3, new ExtraSlotAbility(ResourceType.COIN),
                 r8));
     }
 }

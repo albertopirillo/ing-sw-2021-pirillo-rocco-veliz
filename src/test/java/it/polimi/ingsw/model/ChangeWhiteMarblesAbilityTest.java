@@ -5,17 +5,16 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ExtraProductionTest {
+class ChangeWhiteMarblesAbilityTest {
 
     @Test
     void activate() throws TooManyLeaderAbilitiesException, InvalidLayerNumberException, LeaderAbilityAlreadyActive, NegativeResAmountException, InvalidKeyException, CostNotMatchingException {
         //stub game = null
         Player player = new Player( "abc");
         Resource resource1 = new Resource(0,0,0,0);
-        Resource resource2 = new Resource(0,0,0,0);
-        LeaderAbility ability = new ExtraProduction(new ProductionPower(resource1, resource2));
+        LeaderAbility ability = new ChangeWhiteMarblesAbility(ResourceType.FAITH);
         ResLeaderCard res1 = new ResLeaderCard(1, ability ,resource1);
-        ResLeaderCard res2 = new ResLeaderCard(3, ability ,resource1);
+        ResLeaderCard res2 = new ResLeaderCard(2, ability ,resource1);
 
         player.addLeaderCard(res1);
         player.addLeaderCard(res2);
@@ -38,6 +37,5 @@ class ExtraProductionTest {
         }
         assertEquals(2, player.getActiveLeaderAbilities().size());
         assertEquals(ability, player.getActiveLeaderAbilities().get(1));
-
     }
 }

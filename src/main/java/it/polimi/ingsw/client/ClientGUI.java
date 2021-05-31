@@ -164,19 +164,39 @@ public class ClientGUI implements UserInterface {
     @Override
     public void viewInitialResources(int numPlayer) {
         Map<ResourceType, Integer> res = new HashMap<>();
-        if(numPlayer > 0){
-            Platform.runLater(() -> {
-                ResourceSelectionController resourceSelectionController = (ResourceSelectionController)JavaFXMain.changeScene("resource_selection");
-                resourceSelectionController.setNickname(nickname);
-                resourceSelectionController.setNumPlayer(numPlayer);
-                printLog("ResourceSelectionController ready");
-                resourceSelectionController.setMainController(mainController);
-            });
-        } else {
+        if (testing) {
+            switch (numPlayer){
+                case 1:
+                case 2:
+                    res.put(ResourceType.STONE, 1);
+                    break;
+                case 3:
+                    res.put(ResourceType.STONE, 1);
+                    res.put(ResourceType.COIN, 1);
+                    break;
+                default:
+                    break;
+            }
             InitialResRequest request = new InitialResRequest(res);
             request.setNumPlayer(numPlayer);
-            request.setPlayer(nickname);
+            request.setPlayer(getNickname());
             getClient().sendMessage(request);
+        }
+        else {
+            if (numPlayer > 0) {
+                Platform.runLater(() -> {
+                    ResourceSelectionController resourceSelectionController = (ResourceSelectionController) JavaFXMain.changeScene("resource_selection");
+                    resourceSelectionController.setNickname(nickname);
+                    resourceSelectionController.setNumPlayer(numPlayer);
+                    printLog("ResourceSelectionController ready");
+                    resourceSelectionController.setMainController(mainController);
+                });
+            } else {
+                InitialResRequest request = new InitialResRequest(res);
+                request.setNumPlayer(numPlayer);
+                request.setPlayer(nickname);
+                getClient().sendMessage(request);
+            }
         }
     }
 
@@ -281,13 +301,21 @@ public class ClientGUI implements UserInterface {
 
     @Override
     public void updateDiscardedCards(DiscardedCardsUpdate update) {
+        printLog("Updating discarded cards...");
         clientModel.getSoloGameModel().saveDiscardedCards(update);
-
+        SoloController soloController = mainController.getSoloController();
+        Platform.runLater(() -> soloController.updateDiscardedCards(update.getCardList()));
     }
 
     @Override
     public void updateSoloTokens(ActionTokenUpdate update) {
+        printLog("Updating action tokens...");
         clientModel.getSoloGameModel().saveSoloTokens(update);
+        SoloController soloController = mainController.getSoloController();
+        Platform.runLater(() -> {
+            mainController.switchSoloPopup();
+            soloController.updateTokens(update.getNextToken());
+        });
 
     }
 

@@ -1,8 +1,15 @@
 package it.polimi.ingsw.model;
 
-public class MoveAndShuffle extends SoloActionToken {
+/**
+ * Action Token implementation that moves the black cross by 1 space and shuffles all the tokens
+ */
+public class MoveAndShuffleToken extends SoloActionToken {
 
-    public MoveAndShuffle(SoloGame game) {
+    /**
+     * Constructs a new MoveAndShuffle Action Token
+     * @param game the associated game
+     */
+    public MoveAndShuffleToken(SoloGame game) {
         super(game);
     }
 
@@ -17,5 +24,10 @@ public class MoveAndShuffle extends SoloActionToken {
     @Override
     public String toString() {
         return "Move the black cross by 1 space and shuffle the tokens";
+    }
+
+    @Override
+    public String getID() {
+        return "Move&Shuffle";
     }
 }

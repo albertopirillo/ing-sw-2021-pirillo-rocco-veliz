@@ -70,6 +70,7 @@ public class JavaFXMain extends Application {
         loadCSS("personalBoard");
         loadCSS("setup");
         //loadCSS("tray");
+        loadCSS("solo");
         loadCSS("customCheckBox");
         loadCSS("customMenuLabel");
 

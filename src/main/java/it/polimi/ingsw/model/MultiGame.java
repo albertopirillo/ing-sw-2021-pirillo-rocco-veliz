@@ -118,7 +118,7 @@ public class MultiGame extends Game {
     }
 
     @Override
-    //the argument win is only used for solo game
+    //the parameter win is only used for solo game
     public void lastTurn(boolean win) {
         this.lastTurn = true;
     }

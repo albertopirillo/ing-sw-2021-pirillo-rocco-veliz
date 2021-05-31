@@ -14,39 +14,26 @@
 
 <AnchorPane fx:id="market" accessibleRole="BUTTON" prefHeight="700.0" prefWidth="1026.0" stylesheets="@../css/market.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.MarketController">
    <children>
-      <Pane fx:id="cards" layoutX="353.0" prefHeight="700.0" prefWidth="673.0">
+      <Pane fx:id="cards" layoutX="350.0" prefHeight="700.0" prefWidth="673.0">
          <children>
-            <Text layoutX="102.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Verde">
-               <font>
-                  <Font name="System Bold Italic" size="48.0" />
-               </font>
-            </Text>
-            <Text layoutX="285.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Blu">
-               <font>
-                  <Font name="System Bold Italic" size="48.0" />
-               </font>
-            </Text>
-            <Text layoutX="393.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Giallo">
-               <font>
-                  <Font name="System Bold Italic" size="48.0" />
-               </font>
-            </Text>
-            <Text layoutX="551.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Viola">
-               <font>
-                  <Font name="System Bold Italic" size="48.0" />
-               </font>
-            </Text>
-            <Text layoutX="6.0" layoutY="606.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liv 1">
-               <font>
-                  <Font name="System Bold Italic" size="48.0" />
-               </font>
-            </Text>
+            <ImageView fitHeight="700.0" fitWidth="673.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../png/generic/resourceBackgroundRight.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="labelGreen" layoutX="155.0" layoutY="25.0" scaleX="2" scaleY="2" text="Verde" textAlignment="CENTER" />
+            <Label fx:id="labelBlue" layoutX="305.0" layoutY="25.0" scaleX="2" scaleY="2" text="Blu" textAlignment="CENTER" />
+            <Label fx:id="labelYellow" layoutX="438.0" layoutY="25.0" scaleX="2" scaleY="2" text="Giallo" textAlignment="CENTER" />
+            <Label fx:id="labelPurple" layoutX="580.0" layoutY="25.0" scaleX="2" scaleY="2" text="Viola" textAlignment="CENTER" />
+            <Label fx:id="labelLv1" layoutX="35" layoutY="565.0" scaleX="2" scaleY="2" text="Liv 1" textAlignment="CENTER" />
+            <Label fx:id="labelLv2" layoutX="35" layoutY="365.0" scaleX="2" scaleY="2" text="Liv 2" textAlignment="CENTER" />
+            <Label fx:id="labelLv3" layoutX="35" layoutY="145.0" scaleX="2" scaleY="2" text="Liv 3" textAlignment="CENTER" />
             <ImageView fx:id="imgCard1" fitHeight="195.0" fitWidth="130.0" layoutX="113.0" layoutY="73.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="imgCard5" fitHeight="195.0" fitWidth="130.0" layoutX="113.0" layoutY="286.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
+            <ImageView fx:id="imgCard5" fitHeight="195.0" fitWidth="130.0" layoutX="113.0" layoutY="281.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -71,7 +58,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="imgCard6" fitHeight="195.0" fitWidth="130.0" layoutX="258.0" layoutY="286.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
+            <ImageView fx:id="imgCard6" fitHeight="195.0" fitWidth="130.0" layoutX="258.0" layoutY="281.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -81,7 +68,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="imgCard7" fitHeight="195.0" fitWidth="130.0" layoutX="396.0" layoutY="286.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
+            <ImageView fx:id="imgCard7" fitHeight="195.0" fitWidth="130.0" layoutX="396.0" layoutY="281.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -91,7 +78,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="imgCard8" fitHeight="195.0" fitWidth="130.0" layoutX="533.0" layoutY="279.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
+            <ImageView fx:id="imgCard8" fitHeight="195.0" fitWidth="130.0" layoutX="533.0" layoutY="281.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -101,20 +88,15 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <Text layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liv 3">
-               <font>
-                  <Font name="System Bold Italic" size="48.0" />
-               </font>
-            </Text>
-            <Text layoutY="396.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liv 2">
-               <font>
-                  <Font name="System Bold Italic" size="48.0" />
-               </font>
-            </Text>
          </children>
       </Pane>
       <Pane fx:id="buyPanel" prefHeight="700.0" prefWidth="353.0">
          <children>
+            <ImageView fitHeight="700.0" fitWidth="353.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../png/generic/resourceBackgroundLeft.png" />
+               </image>
+            </ImageView>
             <Text layoutX="76.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Depot' resources">
                <font>
                   <Font name="System Bold Italic" size="26.0" />

@@ -39,3 +39,39 @@
 .imgShadow{
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
 }
+/* CUSTOM UNIVERSAL MENUBUTTON */
+.menu-button{
+    -fx-font-family: "Brush Script MT";
+    -fx-alignment: LEFT;
+    -fx-font-size: 30;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-background-color: linear-gradient(to bottom, #eae0c2 5%, #ccc2a6 100%);
+}
+.menu-button:hover{
+    -fx-background-color:linear-gradient(to bottom, #ccc2a6 5%, #eae0c2 100%);
+}
+.menu-button:pressed{
+    -fx-background-color:linear-gradient(to bottom, #a1926a 5%, #ccc2a6 100%);
+}
+.menu-item, .menu-item:hover{
+    -fx-background-color: transparent;
+}
+.menu-item:pressed{
+    -fx-background-color:linear-gradient(to bottom, #a1926a 5%, #ccc2a6 100%);
+}
+.context-menu {
+    -fx-font-family: "Brush Script MT";
+    -fx-text-alignment: LEFT;
+    -fx-font-size: 30;
+    -fx-skin: "com.sun.javafx.scene.control.skin.ContextMenuSkin";
+    -fx-background-color: linear-gradient(to bottom, #eae0c2 5%, #ccc2a6 100%);
+}
+.choice-box{
+    -fx-font-family: "Brush Script MT";
+    -fx-text-alignment: LEFT;
+    -fx-font-size: 30;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-background-color: linear-gradient(to bottom, #eae0c2 5%, #ccc2a6 100%);
+}

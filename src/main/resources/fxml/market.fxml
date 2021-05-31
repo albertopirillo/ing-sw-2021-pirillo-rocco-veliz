@@ -21,13 +21,13 @@
                   <Image url="@../png/generic/resourceBackgroundRight.png" />
                </image>
             </ImageView>
-            <Label fx:id="labelGreen" layoutX="155.0" layoutY="25.0" scaleX="2" scaleY="2" text="Verde" textAlignment="CENTER" />
-            <Label fx:id="labelBlue" layoutX="305.0" layoutY="25.0" scaleX="2" scaleY="2" text="Blu" textAlignment="CENTER" />
-            <Label fx:id="labelYellow" layoutX="438.0" layoutY="25.0" scaleX="2" scaleY="2" text="Giallo" textAlignment="CENTER" />
-            <Label fx:id="labelPurple" layoutX="580.0" layoutY="25.0" scaleX="2" scaleY="2" text="Viola" textAlignment="CENTER" />
-            <Label fx:id="labelLv1" layoutX="35" layoutY="565.0" scaleX="2" scaleY="2" text="Liv 1" textAlignment="CENTER" />
-            <Label fx:id="labelLv2" layoutX="35" layoutY="365.0" scaleX="2" scaleY="2" text="Liv 2" textAlignment="CENTER" />
-            <Label fx:id="labelLv3" layoutX="35" layoutY="145.0" scaleX="2" scaleY="2" text="Liv 3" textAlignment="CENTER" />
+            <Label fx:id="labelGreen" styleClass="customInitLeaderLabel" layoutX="155.0" layoutY="25.0" scaleX="2" scaleY="2" text="Verde" textAlignment="CENTER" />
+            <Label fx:id="labelBlue" styleClass="customInitLeaderLabel" layoutX="305.0" layoutY="25.0" scaleX="2" scaleY="2" text="Blu" textAlignment="CENTER" />
+            <Label fx:id="labelYellow" styleClass="customInitLeaderLabel" layoutX="438.0" layoutY="25.0" scaleX="2" scaleY="2" text="Giallo" textAlignment="CENTER" />
+            <Label fx:id="labelPurple" styleClass="customInitLeaderLabel" layoutX="580.0" layoutY="25.0" scaleX="2" scaleY="2" text="Viola" textAlignment="CENTER" />
+            <Label fx:id="labelLv1" styleClass="customInitLeaderLabel" layoutX="35" layoutY="565.0" scaleX="2" scaleY="2" text="Liv 1" textAlignment="CENTER" />
+            <Label fx:id="labelLv2" styleClass="customInitLeaderLabel" layoutX="35" layoutY="365.0" scaleX="2" scaleY="2" text="Liv 2" textAlignment="CENTER" />
+            <Label fx:id="labelLv3" styleClass="customInitLeaderLabel" layoutX="35" layoutY="145.0" scaleX="2" scaleY="2" text="Liv 3" textAlignment="CENTER" />
             <ImageView fx:id="imgCard1" fitHeight="195.0" fitWidth="130.0" layoutX="113.0" layoutY="73.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -181,8 +181,8 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ChoiceBox fx:id="comboBox" layoutX="167.0" layoutY="14.0" prefWidth="150.0" />
-            <Label layoutX="45.0" layoutY="9.0" prefHeight="35.0" prefWidth="82.0" text="Choice ability" />
+            <ChoiceBox fx:id="comboBox" layoutX="195.0" layoutY="14.0" prefWidth="150.0" />
+            <Label layoutX="15.0" layoutY="20.0" prefHeight="35.0" prefWidth="150.0" scaleX="1.5" scaleY="1.5" styleClass="customInitLeaderLabel" text="Choice ability" />
             <Pane fx:id="depot" layoutX="190.0" layoutY="426.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;">
                <children>
                   <ImageView fx:id="depot1_1" fitHeight="51.0" fitWidth="56.0" layoutX="74.0" layoutY="7.0" onDragDetected="#dragDetection" pickOnBounds="true" preserveRatio="true" />

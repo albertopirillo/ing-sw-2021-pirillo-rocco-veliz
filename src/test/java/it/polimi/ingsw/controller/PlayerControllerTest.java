@@ -447,7 +447,7 @@ class PlayerControllerTest {
         //Card card = player.getGame().getMarket().getCard(1, CardColor.PURPLE);
         //DevelopmentCard{cost={{STONE=0, COIN=0, SHIELD=0, SERVANT=3}}, type=PURPLE, level=1,
         //      prodPower={
-        //              input={{STONE=0, COIN=1, SHIELD=0, SERVANT=0}},
+        //              input={{STONE=0, COIN=2, SHIELD=0, SERVANT=0}},
         //              output={{STONE=1, COIN=0, SHIELD=1, SERVANT=1}}}}
         activePlayer.getPersonalBoard().getStrongbox().addResources(new Resource(0,0,2,3));
         controller.resetException();
@@ -472,7 +472,7 @@ class PlayerControllerTest {
         //              output={{STONE=1, COIN=1, SHIELD=0, SERVANT=1}}}}
         //input slot 1: input={{STONE=1, COIN=0, SHIELD=0, SERVANT=0}},
         //              output={{STONE=0, COIN=0, SHIELD=0, SERVANT=0, FAITH=2}}}}
-        //slot 2: input={{STONE=0, COIN=1, SHIELD=0, SERVANT=0}},
+        //slot 2: input={{STONE=0, COIN=2, SHIELD=0, SERVANT=0}},
         //        output={{STONE=1, COIN=0, SHIELD=1, SERVANT=1}}}}
 
         //Test not enough Resource in the strongbox
@@ -501,11 +501,11 @@ class PlayerControllerTest {
 
         //Test ok
         controller.resetException();
-        activePlayer.getPersonalBoard().getStrongbox().addResources(new Resource(1,0,0,0));
+        activePlayer.getPersonalBoard().getStrongbox().addResources(new Resource(1,1,0,0));
         Resource tempRes = activePlayer.getPersonalBoard().getStrongbox().queryAllRes();
         playerController.activateProduction(
                 new Resource(0,0,0,0),
-                new Resource(1,1,2,0),
+                new Resource(1,2,2,0),
                 all);
         assertEquals("Result: OK", controller.getError());
 

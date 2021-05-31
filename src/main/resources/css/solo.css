@@ -1,0 +1,29 @@
+#mainText.label .text{
+    -fx-font-size: 75;
+    -fx-font-family: "Brush Script MT";
+    -fx-fill: #eae0c2;  /* This sets the text color */
+    -fx-stroke: black; /* This sets the outline color (to improve readability on background) */
+    -fx-stroke-width: 1px; /* This sets the outline width */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-alignment: center;
+}
+
+#lastTokenLabel.label .text {
+    -fx-font-size: 55;
+    -fx-font-family: "Brush Script MT";
+    -fx-fill: #eae0c2;  /* This sets the text color */
+    -fx-stroke: black; /* This sets the outline color (to improve readability on background) */
+    -fx-stroke-width: 1px; /* This sets the outline width */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-alignment: center;
+}
+
+ #nextTokenLabel.label .text {
+    -fx-font-size: 60;
+    -fx-font-family: "Brush Script MT";
+    -fx-fill: #eae0c2;  /* This sets the text color */
+    -fx-stroke: black; /* This sets the outline color (to improve readability on background) */
+    -fx-stroke-width: 1px; /* This sets the outline width */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-alignment: center;
+}

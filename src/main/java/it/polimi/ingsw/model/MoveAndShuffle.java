@@ -18,4 +18,9 @@ public class MoveAndShuffle extends SoloActionToken {
     public String toString() {
         return "Move the black cross by 1 space and shuffle the tokens";
     }
+
+    @Override
+    public String getID() {
+        return "Move&Shuffle";
+    }
 }

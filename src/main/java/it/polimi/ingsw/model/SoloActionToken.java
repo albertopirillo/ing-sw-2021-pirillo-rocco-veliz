@@ -18,4 +18,6 @@ public abstract class SoloActionToken implements Serializable {
     }
 
     public abstract void reveal() throws NegativeResAmountException, InvalidKeyException;
+
+    public abstract String getID();
 }

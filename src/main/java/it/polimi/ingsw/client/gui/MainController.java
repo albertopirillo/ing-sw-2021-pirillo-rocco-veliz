@@ -34,11 +34,15 @@ public class MainController implements Initializable {
     /**
      * The popup used to show the market tray
      */
-    private final Popup trayPopUp = new Popup();
+    private final Popup trayPopup = new Popup();
     /**
      * The popup used to show the market
      */
-    private final Popup marketPopUp = new Popup();
+    private final Popup marketPopup = new Popup();
+    /**
+     * The popup used to show solo game updates
+     */
+    private final Popup soloPopUp = new Popup();
     /**
      * A map to get get the right PersonalBoardController from a nickname
      */
@@ -47,6 +51,10 @@ public class MainController implements Initializable {
      * Reference to the actual MarketController
      */
     private MarketController marketController;
+    /**
+     * Reference to the actual SoloController
+     */
+    private SoloController soloController;
     /**
      * Reference to the actual TrayController
      */
@@ -63,6 +71,10 @@ public class MainController implements Initializable {
      * List of all elements to be disable when it isn't the player's turn
      */
     private final List<Node> buttonsList = new ArrayList<>();
+    /**
+     * Reference to the actual stage
+     */
+    private Stage stage;
 
     @FXML
     private TabPane tabPane;
@@ -131,6 +143,14 @@ public class MainController implements Initializable {
     }
 
     /**
+     * Gets the SoloController
+     * @return the current SoloController
+     */
+    public SoloController getSoloController() {
+        return soloController;
+    }
+
+    /**
      * Sets the SetupController
      * @param setupController the SetupController to set
      */
@@ -156,6 +176,7 @@ public class MainController implements Initializable {
         addPlayers(playerList);
         initTrayPopup();
         initMarketPopup();
+        initSoloPopup();
     }
 
     /**
@@ -192,24 +213,41 @@ public class MainController implements Initializable {
         Parent tray = loader.load();
         this.trayController = loader.getController();
         this.trayController.setMainController(this);
-        this.trayPopUp.getContent().add(tray);
-        this.trayPopUp.setX(1000);
-        this.trayPopUp.setY(200);
-        this.trayPopUp.setAutoHide(true);
-        this.trayPopUp.setOnAutoHide(event -> this.trayButton.setText("Show Market Tray"));
+        this.trayPopup.getContent().add(tray);
+        this.trayPopup.setX(1000);
+        this.trayPopup.setY(200);
+        this.trayPopup.setAutoHide(true);
+        this.trayPopup.setOnAutoHide(event -> this.trayButton.setText("Show Market Tray"));
     }
 
     private void initMarketPopup() throws IOException {
         this.marketButton.setText("Show Market Cards");
         FXMLLoader loader = Util.loadFXML("market");
-        Parent tray = loader.load();
+        Parent market = loader.load();
         this.marketController = loader.getController();
         this.marketController.setMainController(this);
-        this.marketPopUp.getContent().add(tray);
-        this.marketPopUp.setX(500);
-        this.marketPopUp.setY(200);
-        this.marketPopUp.setAutoHide(true);
-        this.marketPopUp.setOnAutoHide(event -> this.marketButton.setText("Show Market Cards"));
+        this.marketPopup.getContent().add(market);
+        this.marketPopup.setX(500);
+        this.marketPopup.setY(200);
+        this.marketPopup.setAutoHide(true);
+        this.marketPopup.setOnAutoHide(event -> this.marketButton.setText("Show Market Cards"));
+    }
+
+    private void initSoloPopup() throws IOException {
+        FXMLLoader loader = Util.loadFXML("solo");
+        Parent solo = loader.load();
+        this.soloController = loader.getController();
+        this.soloController.setMainController(this);
+        this.soloPopUp.getContent().add(solo);
+    }
+
+    public void switchSoloPopup() {
+        if (!this.soloPopUp.isShowing()) {
+            this.soloPopUp.show(stage);
+        }
+        else {
+            this.soloPopUp.hide();
+        }
     }
 
     /**
@@ -218,13 +256,14 @@ public class MainController implements Initializable {
      */
     public void showTray(ActionEvent event) {
         Stage stage = Util.getStageFromEvent(event);
-        if (!this.trayPopUp.isShowing()) {
+        this.stage = stage;
+        if (!this.trayPopup.isShowing()) {
             trayButton.setText("Back to Personal Board");
-            this.trayPopUp.show(stage);
+            this.trayPopup.show(stage);
         }
         else {
             trayButton.setText("Show Market Tray");
-            this.trayPopUp.hide();
+            this.trayPopup.hide();
         }
     }
 
@@ -234,14 +273,14 @@ public class MainController implements Initializable {
      */
     public void showMarket(ActionEvent event) {
         Stage stage = Util.getStageFromEvent(event);
-        if (!this.marketPopUp.isShowing()) {
+        if (!this.marketPopup.isShowing()) {
             this.marketController.closeBuyPanel();
             marketButton.setText("Back to Personal Board");
-            this.marketPopUp.show(stage);
+            this.marketPopup.show(stage);
         }
         else {
             marketButton.setText("Show Market Cards");
-            this.marketPopUp.hide();
+            this.marketPopup.hide();
         }
     }
 
@@ -250,7 +289,7 @@ public class MainController implements Initializable {
      */
     public void closeTray(){
         trayButton.setText("Show Market Tray");
-        this.trayPopUp.hide();
+        this.trayPopup.hide();
     }
 
     /**
@@ -258,7 +297,7 @@ public class MainController implements Initializable {
      */
     public void closeMarket(){
         marketButton.setText("Show Market Cards");
-        this.marketPopUp.hide();
+        this.marketPopup.hide();
     }
 
     /**

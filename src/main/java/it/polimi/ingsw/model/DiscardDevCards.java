@@ -46,6 +46,11 @@ public class DiscardDevCards extends SoloActionToken {
     }
 
     @Override
+    public String getID() {
+        return color.name();
+    }
+
+    @Override
     public String toString() {
         return "Discard 2 development cards of " + this.color + " color";
     }

@@ -299,13 +299,21 @@ public class ClientGUI implements UserInterface {
 
     @Override
     public void updateDiscardedCards(DiscardedCardsUpdate update) {
+        printLog("Updating discarded cards...");
         clientModel.getSoloGameModel().saveDiscardedCards(update);
-
+        SoloController soloController = mainController.getSoloController();
+        Platform.runLater(() -> soloController.updateDiscardedCards(update.getCardList()));
     }
 
     @Override
     public void updateSoloTokens(ActionTokenUpdate update) {
+        printLog("Updating action tokens...");
         clientModel.getSoloGameModel().saveSoloTokens(update);
+        SoloController soloController = mainController.getSoloController();
+        Platform.runLater(() -> {
+            mainController.switchSoloPopup();
+            soloController.updateTokens(update.getNextToken());
+        });
 
     }
 

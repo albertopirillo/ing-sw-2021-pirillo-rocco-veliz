@@ -16,4 +16,9 @@ public class MoveBlackCross extends SoloActionToken {
     public String toString() {
         return "Move the black cross by 2 spaces";
     }
+
+    @Override
+    public String getID() {
+        return "Move2";
+    }
 }

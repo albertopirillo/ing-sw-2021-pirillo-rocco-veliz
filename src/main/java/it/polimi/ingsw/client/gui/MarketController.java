@@ -90,7 +90,6 @@ public class MarketController implements Initializable {
         comboBox.getItems().clear();
         comboBox.getItems().addAll("No ability", "First Ability", "Second Ability", "Both Ability");
         comboBox.getSelectionModel().select("No ability");
-        //loadDepot();
     }
 
     /**
@@ -197,15 +196,6 @@ public class MarketController implements Initializable {
         return null;
     }
     public void buildRequest(ActionEvent actionEvent){
-        System.out.println(comboBox.getValue());
-        System.out.println(comboBox.getSelectionModel().getSelectedIndex());
-        System.out.println("ok");
-        System.out.println("Carta selezione è " + this.selectedCard.getId());
-        System.out.println("Risorse dal depot");
-        System.out.println("Stone " + this.d_stone.getText());
-        System.out.println("Servant" + this.d_servant.getText());
-        System.out.println("Shield" + this.d_shield.getText());
-        System.out.println("Coin" + this.d_coin.getText());
         Resource depot = new Resource(0,0,0,0);
         Resource strongbox = new Resource(0,0,0,0);
         try {
@@ -213,6 +203,10 @@ public class MarketController implements Initializable {
             depot.modifyValue(ResourceType.SERVANT, Integer.parseInt(d_servant.getText().substring(1)));
             depot.modifyValue(ResourceType.SHIELD, Integer.parseInt(d_shield.getText().substring(1)));
             depot.modifyValue(ResourceType.COIN,Integer.parseInt(d_coin.getText().substring(1)));
+            //strongbox.modifyValue(ResourceType.STONE,Integer.parseInt(d_stone.getText().substring(1)));
+            //strongbox.modifyValue(ResourceType.SERVANT, Integer.parseInt(d_servant.getText().substring(1)));
+            //strongbox.modifyValue(ResourceType.SHIELD, Integer.parseInt(d_shield.getText().substring(1)));
+            //strongbox.modifyValue(ResourceType.COIN,Integer.parseInt(d_coin.getText().substring(1)));
         } catch (InvalidKeyException | NegativeResAmountException e) {
             e.printStackTrace();
         int index = Integer.parseInt(this.selectedCard.getId().substring(7));
@@ -243,6 +237,7 @@ public class MarketController implements Initializable {
     public void selectSlot(MouseEvent mouseEvent) {
         //selectedCard.getStyleClass().add("selected-card");
         this.slot = Integer.parseInt(((ImageView) mouseEvent.getSource()).getId().substring(4));
+        this.buyButton.setText("Buy Card");
         this.buyButton.setDisable(false);
     }
 }

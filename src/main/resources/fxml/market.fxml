@@ -102,7 +102,7 @@
                   <Font name="System Bold Italic" size="26.0" />
                </font>
             </Text>
-            <ImageView fitHeight="97.0" fitWidth="328.0" layoutX="13.0" layoutY="116.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="97.0" fitWidth="328.0" layoutX="13.0" layoutY="116.0" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../png/res/resource_supply.png" />
                </image>
@@ -165,25 +165,29 @@
             <Spinner fx:id="servant" layoutX="100.0" layoutY="375.0" prefHeight="26.0" prefWidth="54.0" />
             <Spinner fx:id="shield" layoutX="178.0" layoutY="375.0" prefHeight="26.0" prefWidth="54.0" />
             <Spinner fx:id="coin" layoutX="262.0" layoutY="375.0" prefHeight="26.0" prefWidth="54.0" />
-            <Button fx:id="buyButton" disable="true" layoutX="110.0" layoutY="632.0" mnemonicParsing="false" onAction="#buildRequest" prefHeight="48.0" prefWidth="119.0" text="Buy Card" />
-            <ImageView fx:id="slot1" fitHeight="146.25" fitWidth="97.5" layoutX="15.0" layoutY="453.0" onMouseClicked="#selectSlot" pickOnBounds="true" preserveRatio="true" styleClass="selection">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </ImageView>
-            <ImageView fx:id="slot2" fitHeight="146.25" fitWidth="97.5" layoutX="119.0" layoutY="453.0" onMouseClicked="#selectSlot" pickOnBounds="true" preserveRatio="true" styleClass="selection">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </ImageView>
-            <ImageView fx:id="slot3" fitHeight="146.25" fitWidth="97.5" layoutX="219.0" layoutY="453.0" onMouseClicked="#selectSlot" pickOnBounds="true" preserveRatio="true" styleClass="selection">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </ImageView>
+            <Button fx:id="buyButton" layoutX="110.0" layoutY="638.0" mnemonicParsing="false" onAction="#buildRequest" prefHeight="48.0" prefWidth="119.0" text="Select Slot" />
             <ChoiceBox fx:id="comboBox" layoutX="167.0" layoutY="14.0" prefWidth="150.0" />
             <Label layoutX="45.0" layoutY="9.0" prefHeight="35.0" prefWidth="82.0" text="Choice ability" />
-            <Pane fx:id="depot" layoutX="190.0" layoutY="426.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;">
+            <Pane fx:id="slots" layoutX="15.0" layoutY="431.0" prefHeight="200.0" prefWidth="328.0" visible="false">
+               <children>
+                  <ImageView fx:id="slot1" fitHeight="146.25" fitWidth="97.5" layoutX="14.0" layoutY="27.0" onMouseClicked="#selectSlot" pickOnBounds="true" preserveRatio="true" styleClass="selection">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+                  <ImageView fx:id="slot3" fitHeight="146.25" fitWidth="97.5" layoutX="216.0" layoutY="27.0" onMouseClicked="#selectSlot" pickOnBounds="true" preserveRatio="true" styleClass="selection">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+                  <ImageView fx:id="slot2" fitHeight="146.25" fitWidth="97.5" layoutX="125.0" layoutY="27.0" onMouseClicked="#selectSlot" pickOnBounds="true" preserveRatio="true" styleClass="selection">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="depot" layoutX="70.0" layoutY="415.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;">
                <children>
                   <ImageView fx:id="depot1_1" fitHeight="51.0" fitWidth="56.0" layoutX="74.0" layoutY="7.0" onDragDetected="#dragDetection" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="depot2_1" fitHeight="51.0" fitWidth="56.0" layoutX="37.0" layoutY="75.0" onDragDetected="#dragDetection" pickOnBounds="true" preserveRatio="true" />

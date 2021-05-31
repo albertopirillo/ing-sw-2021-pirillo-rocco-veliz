@@ -2,7 +2,6 @@ package it.polimi.ingsw.client.gui;
 
 import it.polimi.ingsw.client.ClientGUI;
 import it.polimi.ingsw.client.model.ClientModel;
-import it.polimi.ingsw.network.DepotSetting;
 import it.polimi.ingsw.network.Processable;
 import it.polimi.ingsw.network.requests.EndTurnRequest;
 import it.polimi.ingsw.network.requests.QuitGameRequest;
@@ -276,7 +275,7 @@ public class MainController implements Initializable {
     public void showMarket(ActionEvent event) {
         Stage stage = Util.getStageFromEvent(event);
         if (!this.marketPopup.isShowing()) {
-            this.marketController.closeBuyPanel();
+            this.marketController.loadPanes();
             marketButton.setText("Back to Personal Board");
             this.marketPopup.show(stage);
         }
@@ -365,8 +364,9 @@ public class MainController implements Initializable {
         sendMessage(request);
     }
 
-    public List<DepotSetting> getDepot(){
-        return getClientModel().getStoragesModel().getDepot(this.clientGUI.getNickname());
+
+    public PersonalBoardController getPersonalBoardController(){
+        return getPersonalBoardController(getNickname());
     }
 
     @Override

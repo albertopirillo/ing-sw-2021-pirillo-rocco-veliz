@@ -43,12 +43,12 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="imgCard2" fitHeight="195.0" fitWidth="130.0" layoutX="258.0" layoutY="73.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
+            <ImageView fx:id="imgCard2" fitHeight="195.0" fitWidth="130.0" layoutX="253.0" layoutY="73.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="imgCard3" fitHeight="195.0" fitWidth="130.0" layoutX="396.0" layoutY="73.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
+            <ImageView fx:id="imgCard3" fitHeight="195.0" fitWidth="130.0" layoutX="393.0" layoutY="73.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -58,22 +58,22 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="imgCard6" fitHeight="195.0" fitWidth="130.0" layoutX="258.0" layoutY="281.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
+            <ImageView fx:id="imgCard6" fitHeight="195.0" fitWidth="130.0" layoutX="253.0" layoutY="281.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="imgCard10" fitHeight="195.0" fitWidth="130.0" layoutX="258.0" layoutY="489.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
+            <ImageView fx:id="imgCard10" fitHeight="195.0" fitWidth="130.0" layoutX="253.0" layoutY="489.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="imgCard7" fitHeight="195.0" fitWidth="130.0" layoutX="396.0" layoutY="281.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
+            <ImageView fx:id="imgCard7" fitHeight="195.0" fitWidth="130.0" layoutX="393.0" layoutY="281.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="imgCard11" fitHeight="195.0" fitWidth="130.0" layoutX="396.0" layoutY="489.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
+            <ImageView fx:id="imgCard11" fitHeight="195.0" fitWidth="130.0" layoutX="393.0" layoutY="489.0" onMouseClicked="#buyCard" pickOnBounds="true" preserveRatio="true" styleClass="selection">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

@@ -1,8 +1,15 @@
 package it.polimi.ingsw.client.gui;
 
+import it.polimi.ingsw.exceptions.InvalidKeyException;
+import it.polimi.ingsw.exceptions.NegativeResAmountException;
+import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.network.requests.BuyDevCardRequest;
+import it.polimi.ingsw.network.requests.Request;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
@@ -25,11 +32,17 @@ public class MarketController implements Initializable {
     private Label d_stone, d_servant, d_shield, d_coin;
     @FXML
     private Pane buyPanel;
+    @FXML
+    private ChoiceBox comboBox;
+    @FXML
+    private Button buyButton;
+
     /**
      * The ImageView that contains the select image card
      */
-    private ImageView cardSelected;
+    private ImageView selectedCard;
 
+    private int slot;
 
     /**
      * The list of all sixteen corresponding images of the Developement Cards
@@ -67,6 +80,9 @@ public class MarketController implements Initializable {
         this.devCards.add(imgCard11);
         this.devCards.add(imgCard12);
         this.buyPanel.setVisible(false);
+        comboBox.getItems().clear();
+        comboBox.getItems().addAll("No ability", "First Ability", "Second Ability", "Both Ability");
+        comboBox.getSelectionModel().select("No ability");
     }
 
     /**
@@ -82,7 +98,7 @@ public class MarketController implements Initializable {
         this.d_servant.setText("x0");
         this.d_shield.setText("x0");
         this.d_coin.setText("x0");
-        if(cardSelected != null) this.cardSelected.getStyleClass().clear();
+        if(selectedCard != null) this.selectedCard.getStyleClass().clear();
     }
 
     public void updateMarket(List<String> imgs) {
@@ -93,41 +109,13 @@ public class MarketController implements Initializable {
 
     public void buyCard(MouseEvent mouseEvent) {
         System.out.println("Non so cosa minchia fare per mandare la BuyDevCard Request");
-        if(cardSelected != null) {
+        if(selectedCard != null) {
             closeBuyPanel();
-            this.cardSelected.getStyleClass().clear();
+            this.selectedCard.getStyleClass().clear();
         }
-        this.cardSelected = ((ImageView) mouseEvent.getSource());
-        cardSelected.getStyleClass().add("selected-card");
+        this.selectedCard = ((ImageView) mouseEvent.getSource());
+        selectedCard.getStyleClass().add("selected-card");
         this.buyPanel.setVisible(true);
-        /*String id = ((ImageView) mouseEvent.getSource()).getId();
-        switch (id.substring(7)){
-            case "1": //verde livello 3
-                break;
-            case "2":
-                break;
-            case "3":
-                break;
-            case "4":
-                break;
-            case "5":
-                break;
-            case "6":
-                break;
-            case "7":
-                break;
-            case "8":
-                break;
-            case "9":
-                break;
-            case "10":
-                break;
-            case "11":
-                break;
-            case "12": //viola livello 1
-                break;
-        }*/
-
     }
 
     public void dragDrop(DragEvent dragEvent) {
@@ -160,39 +148,41 @@ public class MarketController implements Initializable {
         }
     }
 
-    public void buildRequest(ActionEvent actionEvent) {
+    private AbilityChoice getAbilityChoice(int index){
+        switch (index){
+            case 0: return AbilityChoice.STANDARD;
+            case 1: return AbilityChoice.FIRST;
+            case 2: return AbilityChoice.SECOND;
+            case 3: return AbilityChoice.BOTH;
+        }
+        return null;
+    }
+    public void buildRequest(ActionEvent actionEvent){
+        System.out.println(comboBox.getValue());
+        System.out.println(comboBox.getSelectionModel().getSelectedIndex());
         System.out.println("ok");
-        System.out.println("Carta selezione è " + this.cardSelected.getId());
+        System.out.println("Carta selezione è " + this.selectedCard.getId());
         System.out.println("Risorse dal depot");
         System.out.println("Stone " + this.d_stone.getText());
         System.out.println("Servant" + this.d_servant.getText());
         System.out.println("Shield" + this.d_shield.getText());
         System.out.println("Coin" + this.d_coin.getText());
-        switch (this.cardSelected.getId().substring(7)){
-            case "1": //verde livello 3
-                break;
-            case "2":
-                break;
-            case "3":
-                break;
-            case "4":
-                break;
-            case "5":
-                break;
-            case "6":
-                break;
-            case "7":
-                break;
-            case "8":
-                break;
-            case "9":
-                break;
-            case "10":
-                break;
-            case "11":
-                break;
-            case "12": //viola livello 1
-                break;
+        Resource depot = new Resource(0,0,0,0);
+        Resource strongbox = new Resource(0,0,0,0);
+        try {
+            depot.modifyValue(ResourceType.STONE,Integer.parseInt(d_stone.getText().substring(1)));
+            depot.modifyValue(ResourceType.SERVANT, Integer.parseInt(d_servant.getText().substring(1)));
+            depot.modifyValue(ResourceType.SHIELD, Integer.parseInt(d_shield.getText().substring(1)));
+            depot.modifyValue(ResourceType.COIN,Integer.parseInt(d_coin.getText().substring(1)));
+        } catch (InvalidKeyException | NegativeResAmountException e) {
+            e.printStackTrace();
+        int index = Integer.parseInt(this.selectedCard.getId().substring(7));
+        DevelopmentCard card = this.mainController.getClientModel().getMarketModel().getDevCardList().get(index);
+        int level = card.getLevel();
+        CardColor color = card.getType();
+        AbilityChoice choice = getAbilityChoice(comboBox.getSelectionModel().getSelectedIndex());
+        Request request = new BuyDevCardRequest(level, color, choice, depot, strongbox, this.slot - 1);
+        this.mainController.sendMessage(request);
         }
     }
 
@@ -209,5 +199,11 @@ public class MarketController implements Initializable {
         dragEvent.acceptTransferModes(TransferMode.ANY);
         ((ImageView)dragEvent.getSource()).setImage(dragEvent.getDragboard().getImage());
         dragEvent.consume();
+    }
+
+    public void selectSlot(MouseEvent mouseEvent) {
+        selectedCard.getStyleClass().add("selected-card");
+        this.slot = Integer.parseInt(((ImageView) mouseEvent.getSource()).getId().substring(4));
+        this.buyButton.setDisable(false);
     }
 }

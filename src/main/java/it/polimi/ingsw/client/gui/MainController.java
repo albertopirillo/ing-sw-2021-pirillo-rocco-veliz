@@ -2,6 +2,7 @@ package it.polimi.ingsw.client.gui;
 
 import it.polimi.ingsw.client.ClientGUI;
 import it.polimi.ingsw.client.model.ClientModel;
+import it.polimi.ingsw.network.DepotSetting;
 import it.polimi.ingsw.network.Processable;
 import it.polimi.ingsw.network.requests.EndTurnRequest;
 import it.polimi.ingsw.network.requests.QuitGameRequest;
@@ -362,6 +363,10 @@ public class MainController implements Initializable {
     public void endTurn() {
         Request request = new EndTurnRequest();
         sendMessage(request);
+    }
+
+    public List<DepotSetting> getDepot(){
+        return getClientModel().getStoragesModel().getDepot(this.clientGUI.getNickname());
     }
 
     @Override

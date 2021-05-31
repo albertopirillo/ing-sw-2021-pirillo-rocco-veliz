@@ -83,7 +83,7 @@ public class MainController implements Initializable {
     @FXML
     private MenuButton activateLeaderButton, prodButton;
     @FXML
-    private SplitMenuButton discardLeaderButton;
+    private MenuButton discardLeaderButton;
 
     /**
      * Gets the Model stored in the Client

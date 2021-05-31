@@ -73,6 +73,7 @@ public class JavaFXMain extends Application {
         loadCSS("solo");
         loadCSS("customCheckBox");
         loadCSS("customMenuLabel");
+        loadCSS("market");
 
         //Set window title and icon
         myStage.setTitle("Master of Renaissance");

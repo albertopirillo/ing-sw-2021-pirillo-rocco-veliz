@@ -9,6 +9,9 @@ import javax.management.openmbean.KeyAlreadyExistsException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Contains data and logic to take resources from the Market
+ */
 public class ResourceStrategy {
 
     /**
@@ -67,7 +70,7 @@ public class ResourceStrategy {
      * @param player    the player that wants to perform the action
      * @param amount1   the amount of white marbles to exchange using the first ability
      * @param amount2   the amount of white marbles to exchange using the second ability
-     * @param toHandle  where the exchanged resources will be placed
+     * @param toHandle  reference to the temporary resources taken from the market
      * @throws NoLeaderAbilitiesException if the player has no leader abilities
      */
     public void changeWhiteMarbles(Player player, int amount1, int amount2, Resource toHandle) throws InvalidKeyException, NegativeResAmountException, NoLeaderAbilitiesException {

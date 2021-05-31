@@ -21,6 +21,7 @@ public enum CardColor {
         }
         return null;
     }
+
     public int getNumberColumn(){
         switch(this){
             case GREEN:

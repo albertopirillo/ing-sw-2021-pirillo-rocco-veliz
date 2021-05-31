@@ -89,13 +89,6 @@ public class MarketController implements Initializable {
         this.devCards.add(imgCard10);
         this.devCards.add(imgCard11);
         this.devCards.add(imgCard12);
-        labelGreen.getStyleClass().add("customInitLeaderLabel");
-        labelBlue.getStyleClass().add("customInitLeaderLabel");
-        labelYellow.getStyleClass().add("customInitLeaderLabel");
-        labelPurple.getStyleClass().add("customInitLeaderLabel");
-        labelLv1.getStyleClass().add("customInitLeaderLabel");
-        labelLv2.getStyleClass().add("customInitLeaderLabel");
-        labelLv3.getStyleClass().add("customInitLeaderLabel");
         this.buyPanel.setVisible(false);
         comboBox.getItems().clear();
         comboBox.getItems().addAll("No ability", "First Ability", "Second Ability", "Both Ability");

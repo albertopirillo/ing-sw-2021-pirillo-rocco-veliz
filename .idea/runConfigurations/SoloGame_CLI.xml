@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="SoloGameGui" type="CompoundRunConfigurationType">
+  <configuration default="false" name="SoloGame CLI" type="CompoundRunConfigurationType">
     <toRun name="ServerMain" type="Application" />
-    <toRun name="GUI Client1" type="Application" />
+    <toRun name="ClientMain1" type="Application" />
     <method v="2" />
   </configuration>
 </component>

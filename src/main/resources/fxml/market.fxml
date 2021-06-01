@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="market" accessibleRole="BUTTON" prefHeight="700.0" prefWidth="1026.0" stylesheets="@../css/market.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.MarketController">
+<AnchorPane accessibleRole="BUTTON" prefHeight="700.0" prefWidth="1026.0" stylesheets="@../css/market.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.MarketController">
    <children>
       <Pane layoutX="350.0" prefHeight="700.0" prefWidth="673.0">
          <children>
@@ -166,7 +166,7 @@
             <Spinner fx:id="shield" layoutX="178.0" layoutY="375.0" prefHeight="26.0" prefWidth="54.0" />
             <Spinner fx:id="coin" layoutX="262.0" layoutY="375.0" prefHeight="26.0" prefWidth="54.0" />
             <ChoiceBox fx:id="comboBox" layoutX="195.0" layoutY="14.0" prefWidth="150.0" />
-            <Label layoutX="15.0" layoutY="20.0" prefHeight="35.0" prefWidth="150.0" scaleX="1.5" scaleY="1.5" styleClass="customInitLeaderLabel" text="Choice ability" />
+            <Label layoutX="15.0" layoutY="20.0" prefHeight="35.0" prefWidth="150.0" scaleX="1.5" scaleY="1.5" styleClass="customInitLeaderLabel" text="Choice ability" alignment="CENTER" />
             <Button fx:id="buyButton" layoutX="110.0" layoutY="638.0" mnemonicParsing="false" onAction="#buildRequest" prefHeight="48.0" prefWidth="119.0" text="Select Slot" />
             <Pane fx:id="slots" layoutX="14.0" layoutY="443.0" prefHeight="200.0" prefWidth="328.0">
                <children>
@@ -203,12 +203,12 @@
                         <Image url="@../png/personal_board/depot.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="depot1_1" fitHeight="51.0" fitWidth="56.0" layoutX="75.0" layoutY="7.0" onDragDetected="#dragDetection" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="depot1_1" fitHeight="51.0" fitWidth="56.0" layoutX="73.0" layoutY="2.0" onDragDetected="#dragDetection" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="depot2_1" fitHeight="51.0" fitWidth="56.0" layoutX="37.0" layoutY="67.0" onDragDetected="#dragDetection" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="depot2_2" fitHeight="51.0" fitWidth="56.0" layoutX="108.0" layoutY="67.0" onDragDetected="#dragDetection" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="depot2_2" fitHeight="51.0" fitWidth="56.0" layoutX="105.0" layoutY="67.0" onDragDetected="#dragDetection" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="depot3_1" fitHeight="51.0" fitWidth="56.0" layoutX="18.0" layoutY="135.0" onDragDetected="#dragDetection" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="depot3_2" fitHeight="51.0" fitWidth="56.0" layoutX="74.0" layoutY="135.0" onDragDetected="#dragDetection" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="depot3_3" fitHeight="51.0" fitWidth="56.0" layoutX="136.0" layoutY="135.0" onDragDetected="#dragDetection" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="depot3_3" fitHeight="51.0" fitWidth="56.0" layoutX="134.0" layoutY="135.0" onDragDetected="#dragDetection" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
          </children>

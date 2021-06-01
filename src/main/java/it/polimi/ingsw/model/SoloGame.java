@@ -22,7 +22,6 @@ import java.util.*;
 public class SoloGame extends Game {
 
     private List<SoloActionToken> soloTokens;
-    private int blackCrossPosition;
 
     /**
      * Constructs a new object and initializes the action tokens and the market
@@ -37,7 +36,6 @@ public class SoloGame extends Game {
         List<Player> playerList = new ArrayList<>();
         playerList.add(player);
         this.setPlayersList(playerList);
-        this.blackCrossPosition = 0;
         initSoloTokens(false);
         startGame();
     }
@@ -57,7 +55,6 @@ public class SoloGame extends Game {
         List<Player> playerList = new ArrayList<>();
         playerList.add(player);
         this.setPlayersList(playerList);
-        this.blackCrossPosition = 0;
         this.soloTokens = new LinkedList<>();
         initSoloTokens(true);
     }
@@ -73,7 +70,7 @@ public class SoloGame extends Game {
 
     @Override
     public void checkEndGame() throws NegativeResAmountException, InvalidKeyException {
-        if(this.blackCrossPosition >= 20) this.lastTurn(false);
+        if( getActivePlayer().getPersonalBoard().getFaithTrack().getBlackCrossPosition() >= 20) this.lastTurn(false);
     }
 
     /**
@@ -143,6 +140,7 @@ public class SoloGame extends Game {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        moveBlackCross(1);
     }
 
     private void initSoloTokens(boolean testing) {
@@ -176,13 +174,14 @@ public class SoloGame extends Game {
      * @return an int representing the position
      */
     public int getBlackCrossPosition() {
-        return blackCrossPosition;
+        return getActivePlayer().getPersonalBoard().getFaithTrack().getBlackCrossPosition();
     }
     /**
      * Moves the black cross forward by the specified number of spaces
      * @param amount the number of spaces
      */
     public void moveBlackCross(int amount) {
-        this.blackCrossPosition = this.blackCrossPosition + amount;
+        Player player = getPlayersList().get(0);
+        player.getPersonalBoard().getFaithTrack().moveBlackCross(amount);
     }
 }

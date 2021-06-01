@@ -8,12 +8,14 @@ import java.util.List;
 public class FaithTrack implements Serializable {
     private int playerFaith;
     private final List<PopeFavorCard> popeCards;
+    private int blackCrossPosition;
 
 
     public FaithTrack() {
         this.playerFaith = 0;
         this.popeCards = new ArrayList<>();
         initPopeCards();
+        blackCrossPosition = -1;
     }
 
     /**
@@ -170,7 +172,20 @@ public class FaithTrack implements Serializable {
         }
         return null;
     }
-
+    /**
+     * Moves the black cross forward by the specified number of spaces
+     * @param amount the number of spaces
+     */
+    public void moveBlackCross(int amount) {
+        this.blackCrossPosition = this.blackCrossPosition + amount;
+    }
+    /**
+     * Gets the position of the black cross, aka Lorenzo's marker
+     * @return an int representing the position
+     */
+    public int getBlackCrossPosition(){
+        return this.blackCrossPosition;
+    }
 
     public String toString(){
         StringBuilder sb = new StringBuilder();
@@ -178,7 +193,12 @@ public class FaithTrack implements Serializable {
         sb.append("\n\t\tEmptyTile = |-|");
         sb.append("\n\t\tPopeTile = |" + ANSIColor.YELLOW + "P" + ANSIColor.RESET + "|");
         sb.append("\n\t\tPlayerMarker = |" + ANSIColor.MAGENTA + "X" +ANSIColor.RESET + "|");
-        sb.append("\n\t\tVaticanReportSection = " + ANSIColor.BLUE + "SECTION_ONE " + ANSIColor.RESET + ", " + ANSIColor.RED + "SECTION_TWO " + ANSIColor.RESET + ", " + ANSIColor.GREEN + "SECTION THREE " + ANSIColor.RESET + "\n\n\t");
+        sb.append("\n\t\tVaticanReportSection = " + ANSIColor.BLUE + "SECTION_ONE " + ANSIColor.RESET + ", " + ANSIColor.RED + "SECTION_TWO " + ANSIColor.RESET + ", " + ANSIColor.GREEN + "SECTION THREE " + ANSIColor.RESET);
+        if (blackCrossPosition > -1){
+            sb.append("\n\t\tLorenzoMarker = |" + ANSIColor.CYAN + "+" + ANSIColor.RESET + "|");
+        }
+        sb.append("\n\n\t");
+
 
         for (int i = 1; i < 25; i++) {
             if (4<i && i<9){
@@ -193,6 +213,8 @@ public class FaithTrack implements Serializable {
                 sb.append(ANSIColor.MAGENTA + "X" + ANSIColor.RESET);
             } else if (i==8 || i==16 || i==24) {
                 sb.append(ANSIColor.YELLOW + "P" + ANSIColor.RESET);
+            } else if (blackCrossPosition > -1 && i == blackCrossPosition){
+                sb.append(ANSIColor.CYAN + "+" + ANSIColor.RESET);
             } else { sb.append("-"); }
 
             if (4<i && i<9){

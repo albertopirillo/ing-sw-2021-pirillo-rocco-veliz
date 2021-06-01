@@ -38,7 +38,6 @@ public class SoloGame extends Game {
         this.setPlayersList(playerList);
         initSoloTokens(false);
         startGame();
-        moveBlackCross(1);
     }
 
     /**
@@ -142,6 +141,7 @@ public class SoloGame extends Game {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        moveBlackCross(1);
     }
 
     private void initSoloTokens(boolean testing) {

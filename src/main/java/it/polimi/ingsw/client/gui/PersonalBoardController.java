@@ -56,7 +56,7 @@ public class PersonalBoardController implements Initializable {
     private final List<ImageView> faithTrackCells = new ArrayList<>();
     private final List<ImageView> popeFavorTiles = new ArrayList<>();
 
-    private int playerFaith;
+    private int playerFaith, blackCrossPosition;
     /**
      * The location where the current drag started
      */
@@ -400,6 +400,22 @@ public class PersonalBoardController implements Initializable {
         for (int i=0; i<3; i++){
             if(popeCards.get(i).isFaceUp()){
                 popeFavorTiles.get(i).setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/png/faithtrack/popeFavor0" + i + "_fu.png"))));
+            }
+        }
+
+        int tempBlackCrossPosition = faithTrack.getBlackCrossPosition();
+        if (tempBlackCrossPosition > -1){
+            if (tempBlackCrossPosition == this.playerFaith){
+                if (this.blackCrossPosition > -1){
+                    faithTrackCells.get(this.blackCrossPosition).setImage(null);
+                }
+                faithTrackCells.get(this.playerFaith).setImage(null);
+                this.faithTrackCells.get(faithTrack.getPlayerFaith()).setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/png/solo_game/black_and_faith.png"))));
+                this.blackCrossPosition = tempBlackCrossPosition;
+            } else {
+                faithTrackCells.get(this.blackCrossPosition).setImage(null);
+                this.blackCrossPosition = tempBlackCrossPosition;
+                this.faithTrackCells.get(this.blackCrossPosition).setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/png/solo_game/black_cross.png"))));
             }
         }
     }

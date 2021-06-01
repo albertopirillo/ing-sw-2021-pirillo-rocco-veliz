@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import it.polimi.ingsw.utils.ModelObserver;
 
@@ -102,7 +101,7 @@ public abstract class Game {
      * Computes the final score of all players, at the end of the game
      * @return a map that contains players as keys and the final score as values
      */
-    public Map<Player, Integer> computeFinalScore() throws NegativeResAmountException, InvalidKeyException {
+    public Map<Player, Integer> computeFinalScore() throws NegativeResAmountException {
         Map<Player, Integer> finalScores = new HashMap<>();
         for(Player p: this.getPlayersList()) {
             p.addVictoryPoints(finalPositionVP(p.getPlayerFaith()));
@@ -140,15 +139,15 @@ public abstract class Game {
      * When called, it ends the game
      * @param win used in SoloGame to specify if the player won or not
      */
-    public abstract void lastTurn(boolean win) throws NegativeResAmountException, InvalidKeyException;
+    public abstract void lastTurn(boolean win) throws NegativeResAmountException;
     /**
      * Sets the next active player, updating actionToken if in SoloGame
      */
-    public abstract void nextTurn() throws NegativeResAmountException, InvalidKeyException;
+    public abstract void nextTurn() throws NegativeResAmountException;
     /**
      * Checks if a condition to end the game is met, if so notifies the observers
      */
-    public abstract void checkEndGame() throws NegativeResAmountException, InvalidKeyException;
+    public abstract void checkEndGame() throws NegativeResAmountException;
     /**
      * <p>Setup method to initialize the game</p>
      * <p>Deserializes development cards and leader cards from their json files</p>

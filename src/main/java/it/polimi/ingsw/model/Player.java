@@ -244,7 +244,7 @@ public class Player {
      * Gets all the resources the player has in the strongbox and in the depot
      * @return a Resource object that contains all the resources
      */
-    public Resource getAllResources() throws NegativeResAmountException, InvalidKeyException {
+    public Resource getAllResources() throws NegativeResAmountException {
         Resource depotRes = personalBoard.getDepot().queryAllRes();
         Resource strongboxRes = personalBoard.getStrongbox().queryAllRes();
         return depotRes.sum(strongboxRes);
@@ -264,7 +264,7 @@ public class Player {
      * @param amount2 the amount of marbles to change using the first ability
      * @param toHandle reference to the temporary resources taken from the market
      */
-    public void changeWhiteMarbles(int amount1, int amount2, Resource toHandle) throws InvalidKeyException, NegativeResAmountException, CostNotMatchingException, NoLeaderAbilitiesException {
+    public void changeWhiteMarbles(int amount1, int amount2, Resource toHandle) throws NegativeResAmountException, NoLeaderAbilitiesException {
         this.resStrategy.changeWhiteMarbles(this, amount1, amount2, toHandle);
     }
 
@@ -305,7 +305,7 @@ public class Player {
      * @param fromDepot the amount of resources the player is paying from the depot
      * @param fromStrongbox the amount of resources the player is paying from the strongbox
      */
-    public void basicProduction(ResourceType input1, ResourceType input2, ResourceType output, Resource fromDepot, Resource fromStrongbox) throws CostNotMatchingException, NotEnoughSpaceException, CannotContainFaithException, NotEnoughResException, NegativeResAmountException, InvalidKeyException {
+    public void basicProduction(ResourceType input1, ResourceType input2, ResourceType output, Resource fromDepot, Resource fromStrongbox) throws CostNotMatchingException, NotEnoughSpaceException, CannotContainFaithException, NotEnoughResException, NegativeResAmountException {
         BasicStrategies.basicProduction(this, input1, input2, output, fromDepot, fromStrongbox);
     }
 
@@ -316,7 +316,7 @@ public class Player {
      * @param fromStrongbox the amount of resources the player is paying from the strongbox
      * @param res the resource type the player wants to receive
      */
-    public void extraProduction(AbilityChoice choice, Resource fromDepot, Resource fromStrongbox, ResourceType res) throws NoLeaderAbilitiesException, InvalidAbilityChoiceException, CostNotMatchingException, NotEnoughSpaceException, CannotContainFaithException, NotEnoughResException, NegativeResAmountException, InvalidKeyException {
+    public void extraProduction(AbilityChoice choice, Resource fromDepot, Resource fromStrongbox, ResourceType res) throws NoLeaderAbilitiesException, InvalidAbilityChoiceException, CostNotMatchingException, NotEnoughSpaceException, CannotContainFaithException, NotEnoughResException, NegativeResAmountException {
         this.prodStrategy.extraProduction(this, choice, fromDepot, fromStrongbox, res);
     }
 
@@ -324,7 +324,7 @@ public class Player {
      * Actives the production power of the specified dev cards and places the outputs in the strongbox
      * @param cards a list of the dev cards to activate the production power
      */
-    public void activateProduction(List<DevelopmentCard> cards) throws NegativeResAmountException, InvalidKeyException {
+    public void activateProduction(List<DevelopmentCard> cards) throws NegativeResAmountException {
         for(DevelopmentCard devCard: cards){
             getPersonalBoard().getStrongbox().addTempResources(devCard.getProdPower().getOutput());
         }
@@ -338,7 +338,7 @@ public class Player {
      * @throws CostNotMatchingException if the player doesnt met the requirements to active the ability
      * @throws NoLeaderAbilitiesException if the selected leader card doesnt exist
      */
-    public void useLeader(int index, LeaderAction choice) throws TooManyLeaderAbilitiesException, LeaderAbilityAlreadyActive, InvalidLayerNumberException, NegativeResAmountException, InvalidKeyException, CostNotMatchingException, NoLeaderAbilitiesException {
+    public void useLeader(int index, LeaderAction choice) throws TooManyLeaderAbilitiesException, LeaderAbilityAlreadyActive, InvalidLayerNumberException, NegativeResAmountException, CostNotMatchingException, NoLeaderAbilitiesException {
         if (index < 0 || index >= leaderCards.size()) {
             throw new NoLeaderAbilitiesException("The selected leader card does not exist");
         }

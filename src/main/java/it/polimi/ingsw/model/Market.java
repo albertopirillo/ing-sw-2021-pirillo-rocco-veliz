@@ -96,8 +96,4 @@ public class Market {
         return this.marketTray;
     }
 
-    public void endgame() {
-
-    }
-
 }

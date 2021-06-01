@@ -226,7 +226,7 @@ public class MarketController implements Initializable {
                 strongbox.modifyValue(ResourceType.SERVANT, servant.getValue());
                 strongbox.modifyValue(ResourceType.SHIELD, shield.getValue());
                 strongbox.modifyValue(ResourceType.COIN, coin.getValue());
-            } catch (InvalidKeyException | NegativeResAmountException e) {
+            } catch (NegativeResAmountException e) {
                 e.printStackTrace();
             }
             int index = Integer.parseInt(this.selectedCard.getId().substring(7));

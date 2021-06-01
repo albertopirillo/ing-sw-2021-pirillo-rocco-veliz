@@ -1,7 +1,6 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.DevSlotEmptyException;
-import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.InvalidNumSlotException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 
@@ -12,7 +11,7 @@ public class PersonalBoard {
 
     private DevelopmentSlot[] devSlots;
     private Depot depot;
-    private Strongbox strongbox;
+    private final Strongbox strongbox;
     private final FaithTrack faithTrack;
 
     public PersonalBoard(Player player) {
@@ -53,7 +52,7 @@ public class PersonalBoard {
         return strongbox;
     }
 
-    public void transferResources() throws NegativeResAmountException, InvalidKeyException {
+    public void transferResources() throws NegativeResAmountException {
         strongbox.transferTempRes();
     }
 

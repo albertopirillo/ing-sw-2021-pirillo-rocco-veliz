@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ExtraSlotAbilityTest {
 
     @Test
-    public void activate() throws AlreadyInAnotherLayerException, InvalidResourceException, CannotContainFaithException, NotEnoughSpaceException, NegativeResAmountException, LayerNotEmptyException, InvalidLayerNumberException, LeaderAbilityAlreadyActive, TooManyLeaderAbilitiesException, InvalidKeyException, CostNotMatchingException {
+    public void activate() throws AlreadyInAnotherLayerException, InvalidResourceException, CannotContainFaithException, NotEnoughSpaceException, NegativeResAmountException, LayerNotEmptyException, InvalidLayerNumberException, LeaderAbilityAlreadyActive, TooManyLeaderAbilitiesException, CostNotMatchingException {
         Player player = new Player( "abc");
         Depot depot = player.getPersonalBoard().getDepot();
         assertInstanceOf(ConcreteDepot.class, depot);

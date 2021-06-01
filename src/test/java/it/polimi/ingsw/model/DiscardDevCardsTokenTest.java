@@ -1,7 +1,6 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.FullCardDeckException;
-import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class DiscardDevCardsTokenTest {
 
     @Test
-    void revealTest() throws FullCardDeckException, NegativeResAmountException, InvalidKeyException {
+    void revealTest() throws FullCardDeckException, NegativeResAmountException {
         SoloGame game = new SoloGame(new Player("a"));
         SoloActionToken token = new DiscardDevCardsToken(game, CardColor.GREEN);
         Market market = game.getMarket();
@@ -28,7 +27,7 @@ class DiscardDevCardsTokenTest {
     }
 
     @Test
-    public void countTest() throws FullCardDeckException, NegativeResAmountException, InvalidKeyException {
+    public void countTest() throws FullCardDeckException, NegativeResAmountException {
         SoloGame game = new SoloGame(new Player("a"));
         SoloActionToken token = new DiscardDevCardsToken(game, CardColor.BLUE);
         Market market = game.getMarket();
@@ -41,7 +40,7 @@ class DiscardDevCardsTokenTest {
     }
 
     @Test
-    public void sideEffectsTest() throws FullCardDeckException, NegativeResAmountException, InvalidKeyException {
+    public void sideEffectsTest() throws FullCardDeckException, NegativeResAmountException {
         SoloGame game = new SoloGame(new Player("a"));
         SoloActionToken token = new DiscardDevCardsToken(game, CardColor.YELLOW);
         Market market = game.getMarket();
@@ -54,7 +53,7 @@ class DiscardDevCardsTokenTest {
     }
 
     @Test
-    public void discardButLoseTest() throws FullCardDeckException, NegativeResAmountException, InvalidKeyException {
+    public void discardButLoseTest() throws FullCardDeckException, NegativeResAmountException {
         SoloGame game = new SoloGame(new Player("a"));
         SoloActionToken token1 = new DiscardDevCardsToken(game, CardColor.PURPLE);
         SoloActionToken token2 = new DiscardDevCardsToken(game, CardColor.PURPLE);

@@ -1,7 +1,6 @@
 package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.client.model.ClientModel;
-import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.network.DepotSetting;
@@ -490,7 +489,7 @@ public class ClientCLI implements UserInterface {
                 strongboxResource.modifyValue(input2, 1);
             }
             request = new BasicProductionRequest(input1, input2, output, depotResource, strongboxResource);
-        } catch (InvalidKeyException | NegativeResAmountException e) {
+        } catch (NegativeResAmountException e) {
             System.out.println("Invalid input, retry");
         }
         return request;

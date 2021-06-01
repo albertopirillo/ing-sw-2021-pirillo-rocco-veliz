@@ -3,7 +3,10 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 
-import java.util.*;
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
 
 public class Marbles {
     private final Map<MarblesColor, Integer> marbles;
@@ -61,7 +64,7 @@ public class Marbles {
         }
     }
 
-    public Resource getResources() throws NegativeResAmountException, InvalidKeyException {
+    public Resource getResources() throws NegativeResAmountException {
         Resource res = new Resource();
         for(MarblesColor marble : marbles.keySet()){
             if(marble != MarblesColor.WHITE)  res.addResource(marble.getResourceType() , marbles.get(marble));

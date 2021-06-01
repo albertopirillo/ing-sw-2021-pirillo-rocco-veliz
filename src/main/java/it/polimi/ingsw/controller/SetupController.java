@@ -73,7 +73,7 @@ public class SetupController {
             } else {
                 game.updateInitResources(numPlayer+1);
             }
-        } catch (NegativeResAmountException | CannotContainFaithException | LayerNotEmptyException | NotEnoughSpaceException | InvalidLayerNumberException | AlreadyInAnotherLayerException | InvalidResourceException | InvalidKeyException e) {
+        } catch (NegativeResAmountException | CannotContainFaithException | LayerNotEmptyException | NotEnoughSpaceException | InvalidLayerNumberException | AlreadyInAnotherLayerException | InvalidResourceException e) {
             controller.setException(e);
             controller.getGame().updateClientError(controller.getClientError());
             controller.getGame().notifyEndOfUpdates();
@@ -92,7 +92,7 @@ public class SetupController {
             if(game.getPlayerAmount() > 1){
                 game.nextTurn();
             }
-        } catch (NegativeResAmountException | InvalidKeyException e) {
+        } catch (NegativeResAmountException e) {
             e.printStackTrace();
         }
         if(game.getActivePlayer().getNickname().equals(firstPlayer)) {

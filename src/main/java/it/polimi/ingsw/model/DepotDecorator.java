@@ -9,7 +9,7 @@ public abstract class DepotDecorator extends Depot {
     /**
      * The depot to be decorated
      */
-    protected Depot depot;
+    protected final Depot depot;
 
     /**
      * Takes a depot and applies a generic decorator

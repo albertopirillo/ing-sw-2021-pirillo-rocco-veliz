@@ -32,7 +32,7 @@ class StrongboxTest {
     }
 
     @Test
-    public void faithTest() throws InvalidKeyException, NegativeResAmountException, FullCardDeckException {
+    public void faithTest() throws NegativeResAmountException, FullCardDeckException {
         Player player = new Player( "abc");
         Game game = new MultiGame(true);
         player.setGame(game);

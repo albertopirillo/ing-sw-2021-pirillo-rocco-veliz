@@ -1,7 +1,6 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.FullCardDeckException;
-import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
@@ -80,7 +79,7 @@ public class MultiGameTest {
     }
 
     @RepeatedTest(5)
-    public void nextTurnTest() throws FullCardDeckException, NegativeResAmountException, InvalidKeyException {
+    public void nextTurnTest() throws FullCardDeckException, NegativeResAmountException {
         int playerAmount = 4;
         Player player1 = new Player("a");
         Player player2 = new Player("b");

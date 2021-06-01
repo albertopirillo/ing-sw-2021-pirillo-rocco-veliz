@@ -59,11 +59,9 @@ public class DevelopmentCard extends Card {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("\tCost: ").append(cost.toString());
-        sb.append("\n\tColor: ").append(type);
-        sb.append("\n\tLevel: ").append(level);
-        sb.append("\n\tProduction power: ").append(prodPower);
-        return sb.toString();
+        return "\tCost: " + cost.toString() +
+                "\n\tColor: " + type +
+                "\n\tLevel: " + level +
+                "\n\tProduction power: " + prodPower;
     }
 }

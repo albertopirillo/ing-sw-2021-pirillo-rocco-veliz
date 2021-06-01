@@ -5,7 +5,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import it.polimi.ingsw.exceptions.FullCardDeckException;
-import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import it.polimi.ingsw.utils.LeaderAbilityDeserializer;
 import it.polimi.ingsw.utils.LeaderCardJsonDeserializer;
@@ -61,7 +60,7 @@ public class SoloGame extends Game {
     }
 
     @Override
-    public synchronized void nextTurn() throws NegativeResAmountException, InvalidKeyException {
+    public synchronized void nextTurn() throws NegativeResAmountException {
         SoloActionToken currentToken = this.soloTokens.remove(0);
         currentToken.reveal();
         this.soloTokens.add(currentToken);
@@ -70,7 +69,7 @@ public class SoloGame extends Game {
     }
 
     @Override
-    public void checkEndGame() throws NegativeResAmountException, InvalidKeyException {
+    public void checkEndGame() throws NegativeResAmountException {
         if( getActivePlayer().getPersonalBoard().getFaithTrack().getBlackCrossPosition() == 24) this.lastTurn(false);
     }
 
@@ -103,7 +102,7 @@ public class SoloGame extends Game {
     }
 
     @Override
-    public void lastTurn(boolean win) throws NegativeResAmountException, InvalidKeyException {
+    public void lastTurn(boolean win) throws NegativeResAmountException {
         //In solo mode, the game ends immediately
         if (win) {
             Map<Player, Integer> map = this.computeFinalScore();

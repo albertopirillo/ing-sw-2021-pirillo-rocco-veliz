@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class PlayerControllerTest {
 
     @Test
-    public void basicProductionTest() throws FullCardDeckException, NegativeResAmountException, InvalidKeyException {
+    public void basicProductionTest() throws FullCardDeckException, NegativeResAmountException {
         Game game = new MultiGame(true);
         MasterController controller = new MasterController(game);
         PlayerController playerController = controller.getPlayerController();
@@ -42,7 +42,7 @@ class PlayerControllerTest {
     }
 
     @Test
-    public void extraProductionTest() throws TooManyLeaderAbilitiesException, FullCardDeckException, NegativeResAmountException, InvalidKeyException {
+    public void extraProductionTest() throws TooManyLeaderAbilitiesException, FullCardDeckException, NegativeResAmountException {
         Game game = new MultiGame(true);
         MasterController controller = new MasterController(game);
         PlayerController playerController = controller.getPlayerController();
@@ -110,7 +110,7 @@ class PlayerControllerTest {
     }
 
     @Test
-    public void changeMarbleTest() throws FullCardDeckException, TooManyLeaderAbilitiesException, NegativeResAmountException, InvalidKeyException {
+    public void changeMarbleTest() throws FullCardDeckException, TooManyLeaderAbilitiesException, NegativeResAmountException {
         Game game = new MultiGame(true);
         MasterController controller = new MasterController(game);
         PlayerController playerController = controller.getPlayerController();
@@ -194,7 +194,7 @@ class PlayerControllerTest {
     }
 
     @Test
-    public void placeResourceTest() throws FullCardDeckException, InvalidResourceException, LayerNotEmptyException, NotEnoughSpaceException, InvalidLayerNumberException, CannotContainFaithException, AlreadyInAnotherLayerException, NegativeResAmountException, InvalidKeyException {
+    public void placeResourceTest() throws FullCardDeckException, InvalidResourceException, LayerNotEmptyException, NotEnoughSpaceException, InvalidLayerNumberException, CannotContainFaithException, AlreadyInAnotherLayerException, NegativeResAmountException {
         Game game = new MultiGame(true);
         MasterController controller = new MasterController(game);
         PlayerController playerController = controller.getPlayerController();
@@ -228,7 +228,7 @@ class PlayerControllerTest {
     }
 
     @Test
-    public void buyDevCardTest() throws FullCardDeckException, TooManyLeaderAbilitiesException, NegativeResAmountException, InvalidKeyException {
+    public void buyDevCardTest() throws FullCardDeckException, TooManyLeaderAbilitiesException, NegativeResAmountException {
         Game game = new MultiGame(true);
         MasterController controller = new MasterController(game);
         PlayerController playerController = controller.getPlayerController();
@@ -321,7 +321,7 @@ class PlayerControllerTest {
     }
 
     @Test
-    public void activateProductionTest() throws FullCardDeckException, NegativeResAmountException, InvalidKeyException{
+    public void activateProductionTest() throws FullCardDeckException, NegativeResAmountException {
         Game game = new MultiGame(true);
         MasterController controller = new MasterController(game);
         PlayerController playerController = controller.getPlayerController();

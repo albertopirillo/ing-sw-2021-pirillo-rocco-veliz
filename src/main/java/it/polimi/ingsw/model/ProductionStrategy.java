@@ -56,13 +56,12 @@ public class ProductionStrategy {
      * @param fromDepot resources paid from the depot
      * @param fromStrongbox resources paid from the strongbox
      * @param res   the resource type the player wants to receive
-     * @throws InvalidKeyException if trying to pay with faith
      * @throws NoLeaderAbilitiesException  if the player has no leader abilities
      * @throws InvalidAbilityChoiceException  the player hasn't got the selected ability
      * @throws NotEnoughResException if the player hasn't got the provided the resources
      * @throws CostNotMatchingException  the player hasn't provide the correct amount of resources
      */
-    public void extraProduction(Player player, AbilityChoice choice, Resource fromDepot, Resource fromStrongbox, ResourceType res) throws NegativeResAmountException, InvalidKeyException, CannotContainFaithException, NoLeaderAbilitiesException, InvalidAbilityChoiceException, NotEnoughResException, CostNotMatchingException, NotEnoughSpaceException {
+    public void extraProduction(Player player, AbilityChoice choice, Resource fromDepot, Resource fromStrongbox, ResourceType res) throws NegativeResAmountException, CannotContainFaithException, NoLeaderAbilitiesException, InvalidAbilityChoiceException, NotEnoughResException, CostNotMatchingException, NotEnoughSpaceException {
       if (this.size == 0) throw new NoLeaderAbilitiesException();
         if ((this.size == 1 && choice == AbilityChoice.SECOND) || (choice == AbilityChoice.BOTH))
             throw new InvalidAbilityChoiceException();

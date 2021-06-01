@@ -22,7 +22,7 @@ class ProductionStrategyTest {
     }
 
     @Test
-    public void standardAbilityTest() throws InvalidResourceException, LayerNotEmptyException, NotEnoughSpaceException, InvalidLayerNumberException, CannotContainFaithException, AlreadyInAnotherLayerException, NegativeResAmountException, InvalidKeyException, CostNotMatchingException, NotEnoughResException {
+    public void standardAbilityTest() throws InvalidResourceException, LayerNotEmptyException, NotEnoughSpaceException, InvalidLayerNumberException, CannotContainFaithException, AlreadyInAnotherLayerException, NegativeResAmountException, CostNotMatchingException, NotEnoughResException {
         Player player = new Player( "abc");
         Depot depot = player.getPersonalBoard().getDepot();
         Strongbox strongbox = player.getPersonalBoard().getStrongbox();
@@ -53,7 +53,7 @@ class ProductionStrategyTest {
     }
 
     @Test
-    public void oneAbilityTest() throws TooManyLeaderAbilitiesException, CannotContainFaithException, NegativeResAmountException, InvalidKeyException, InvalidResourceException, LayerNotEmptyException, NotEnoughSpaceException, InvalidLayerNumberException, AlreadyInAnotherLayerException, CostNotMatchingException, InvalidAbilityChoiceException, NoLeaderAbilitiesException, NotEnoughResException {
+    public void oneAbilityTest() throws TooManyLeaderAbilitiesException, CannotContainFaithException, NegativeResAmountException, InvalidResourceException, LayerNotEmptyException, NotEnoughSpaceException, InvalidLayerNumberException, AlreadyInAnotherLayerException, CostNotMatchingException, InvalidAbilityChoiceException, NoLeaderAbilitiesException, NotEnoughResException {
         Player player = new Player( "abc");
         Resource input = new Resource(0,2,3,0);
         Resource output = new Resource(1,1,2,0);
@@ -85,7 +85,7 @@ class ProductionStrategyTest {
     }
 
     @Test
-    public void twoAbilitiesTest() throws TooManyLeaderAbilitiesException, CostNotMatchingException, InvalidAbilityChoiceException, NotEnoughSpaceException, NoLeaderAbilitiesException, CannotContainFaithException, NotEnoughResException, NegativeResAmountException, InvalidKeyException, InvalidResourceException, LayerNotEmptyException, InvalidLayerNumberException, AlreadyInAnotherLayerException {
+    public void twoAbilitiesTest() throws TooManyLeaderAbilitiesException, CostNotMatchingException, InvalidAbilityChoiceException, NotEnoughSpaceException, NoLeaderAbilitiesException, CannotContainFaithException, NotEnoughResException, NegativeResAmountException, InvalidResourceException, LayerNotEmptyException, InvalidLayerNumberException, AlreadyInAnotherLayerException {
         Player player = new Player( "abc");
         Resource input1 = new Resource(0,2,3,0);
         Resource output1 = new Resource(1,1,2,0);

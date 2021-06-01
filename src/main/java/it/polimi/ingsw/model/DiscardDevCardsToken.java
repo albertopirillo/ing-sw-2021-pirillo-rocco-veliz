@@ -1,7 +1,6 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.DeckEmptyException;
-import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 
 import java.util.ArrayList;
@@ -31,7 +30,7 @@ public class DiscardDevCardsToken extends SoloActionToken {
      * <p>In those cases, the player lost the game</p>
      */
     @Override
-    public void reveal() throws NegativeResAmountException, InvalidKeyException {
+    public void reveal() throws NegativeResAmountException {
         System.out.println("[SOLO_ACTION_TOKEN] Discard cards: " + this.color.toString());
         SoloGame game = this.getGame();
         Market market = game.getMarket();

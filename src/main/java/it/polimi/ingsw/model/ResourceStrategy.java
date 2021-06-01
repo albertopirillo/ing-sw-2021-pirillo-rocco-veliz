@@ -73,7 +73,7 @@ public class ResourceStrategy {
      * @param toHandle  reference to the temporary resources taken from the market
      * @throws NoLeaderAbilitiesException if the player has no leader abilities
      */
-    public void changeWhiteMarbles(Player player, int amount1, int amount2, Resource toHandle) throws InvalidKeyException, NegativeResAmountException, NoLeaderAbilitiesException {
+    public void changeWhiteMarbles(Player player, int amount1, int amount2, Resource toHandle) throws NegativeResAmountException, NoLeaderAbilitiesException {
         if (this.size == 0) throw new NoLeaderAbilitiesException();
         try {
             toHandle.addResource(resTypes[0].getResourceType(), amount1);
@@ -130,11 +130,7 @@ public class ResourceStrategy {
                 player.getGame().updateFaithTrack();
             }
             else {
-                try {
-                    finalRes.modifyValue(key, outputRes.getValue(key));
-                } catch (InvalidKeyException e) {
-                    finalRes.addResource(key, outputRes.getValue(key));
-                }
+                finalRes.modifyValue(key, outputRes.getValue(key));
             }
         }
         return finalRes;

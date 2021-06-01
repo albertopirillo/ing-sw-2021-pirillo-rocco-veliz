@@ -50,7 +50,7 @@ public abstract class BasicStrategies {
      * @throws CostNotMatchingException if the player has enough resources but didnt provide the exact amount
      * @throws InvalidNumSlotException  if the player has chosen a dev slot that doesnt exist
      */
-    public static void buyDevCard(Player player, int level, CardColor color, int numSlot, Resource cardCost, Resource fromDepot, Resource fromStrongbox) throws NotEnoughResException, DeckEmptyException, NegativeResAmountException, InvalidKeyException, NotEnoughSpaceException, CannotContainFaithException, CostNotMatchingException, DevSlotEmptyException, InvalidNumSlotException {
+    public static void buyDevCard(Player player, int level, CardColor color, int numSlot, Resource cardCost, Resource fromDepot, Resource fromStrongbox) throws NotEnoughResException, DeckEmptyException, NegativeResAmountException, NotEnoughSpaceException, CannotContainFaithException, CostNotMatchingException, DevSlotEmptyException, InvalidNumSlotException {
         Market market = player.getGame().getMarket();
         Depot depot = player.getPersonalBoard().getDepot();
         Strongbox strongbox = player.getPersonalBoard().getStrongbox();
@@ -81,7 +81,7 @@ public abstract class BasicStrategies {
      * @throws CostNotMatchingException if the player hasn't provided the exact amount of resources
      * @throws CannotContainFaithException  if the player is trying to get faith in output
      */
-    public static void basicProduction(Player player, ResourceType input1, ResourceType input2, ResourceType output, Resource fromDepot, Resource fromStrongbox) throws NotEnoughResException, NegativeResAmountException, InvalidKeyException, CostNotMatchingException, CannotContainFaithException, NotEnoughSpaceException {
+    public static void basicProduction(Player player, ResourceType input1, ResourceType input2, ResourceType output, Resource fromDepot, Resource fromStrongbox) throws NotEnoughResException, NegativeResAmountException, CostNotMatchingException, CannotContainFaithException, NotEnoughSpaceException {
         if(output == ResourceType.FAITH || output == ResourceType.ALL) throw new CannotContainFaithException();
         Depot depot = player.getPersonalBoard().getDepot();
         Strongbox strongbox = player.getPersonalBoard().getStrongbox();
@@ -108,11 +108,10 @@ public abstract class BasicStrategies {
      * @param fromDepot the resources paid from the depot
      * @param fromStrongbox the resources paid from the strongbox
      * @param expectedRes   the resources required to complete the action
-     * @throws InvalidKeyException  if the player has provided faith instead of storable resources
      * @throws NotEnoughResException   if the player hasn't got the provided resources
      * @throws CostNotMatchingException if the provided resources aren't enough to complete the action
      */
-    public static void checkAndCompare(Depot depot, Strongbox strongbox, Resource fromDepot, Resource fromStrongbox, Resource expectedRes) throws NegativeResAmountException, InvalidKeyException, NotEnoughResException, CostNotMatchingException {
+    public static void checkAndCompare(Depot depot, Strongbox strongbox, Resource fromDepot, Resource fromStrongbox, Resource expectedRes) throws NegativeResAmountException, NotEnoughResException, CostNotMatchingException {
         //Check if the player really has those resources
         if (!depot.queryAllRes().compare(fromDepot) || !strongbox.queryAllRes().compare(fromStrongbox))
             throw new NotEnoughResException();

@@ -1,7 +1,6 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.CannotContainFaithException;
-import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import it.polimi.ingsw.exceptions.NotEnoughResException;
 
@@ -65,7 +64,7 @@ public class Strongbox {
     /**
      * Transfers the resources stored into the tempResource into the resource
      */
-    public void transferTempRes() throws NegativeResAmountException, InvalidKeyException {
+    public void transferTempRes() throws NegativeResAmountException {
         Resource resource = queryAllTempRes();
         addResources(resource);
         resetTempRes();
@@ -76,9 +75,8 @@ public class Strongbox {
      * Adds resources into the strongbox, and converts faith automatically.
      * @param resource  the resources you want to add
      * @throws NegativeResAmountException   if a resource will end up with a negative value
-     * @throws InvalidKeyException  if a resource different from faith or the storable ones is passed
      */
-    public void addResources(Resource resource) throws NegativeResAmountException, InvalidKeyException {
+    public void addResources(Resource resource) throws NegativeResAmountException {
         Map<ResourceType, Integer> copy = resource.getMap();
 
         for (ResourceType key: copy.keySet()) {
@@ -94,9 +92,8 @@ public class Strongbox {
      * Adds temp resources into the strongbox
      * @param resource  the resources you want to add as temp resources
      * @throws NegativeResAmountException  if a resource will end up with a negative value
-     * @throws InvalidKeyException  if a resource different from faith or the storable ones is passed
      */
-    public void addTempResources(Resource resource) throws InvalidKeyException, NegativeResAmountException {
+    public void addTempResources(Resource resource) throws NegativeResAmountException {
         Map<ResourceType, Integer> copy = resource.getMap();
         for (ResourceType key: copy.keySet()) {
             this.tempResource.modifyValue(key, copy.get(key));
@@ -109,9 +106,8 @@ public class Strongbox {
      * @throws CannotContainFaithException  if faith is trying to be taken
      * @throws NotEnoughResException    if the strongbox hasn't got the requested resources
      * @throws NegativeResAmountException   if a resource will end up with a negative value
-     * @throws InvalidKeyException  if a resource different from faith or the storable ones is passed
      */
-    public void retrieveRes(Resource resource) throws CannotContainFaithException, NotEnoughResException, NegativeResAmountException, InvalidKeyException {
+    public void retrieveRes(Resource resource) throws CannotContainFaithException, NotEnoughResException, NegativeResAmountException {
         Map<ResourceType, Integer> toTake = resource.getMap();
         if ((toTake.get(ResourceType.FAITH) != null)) throw new CannotContainFaithException();
 

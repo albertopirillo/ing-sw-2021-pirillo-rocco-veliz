@@ -105,7 +105,7 @@ public class TempDepot {
                 }
             }
             if (layerRes != null) {
-                 //Layer is not empty, count how many resources
+                //Layer is not empty, count how many resources
                 int amount = 0;
                 for(ResourceType resType: currentLayer) {
                     if (resType != null) {

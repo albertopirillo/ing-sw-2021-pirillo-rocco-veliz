@@ -10,9 +10,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DevelopmentSlotTest {
     //stub
-    Resource res1 = new Resource();
-    Resource res2 = new Resource();
-    Resource res3 = new Resource();
+    final Resource res1 = new Resource();
+    final Resource res2 = new Resource();
+    final Resource res3 = new Resource();
 
     @Test
     void getCards() throws NegativeResAmountException {

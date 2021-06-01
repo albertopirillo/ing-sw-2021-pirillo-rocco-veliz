@@ -7,18 +7,9 @@ public class DevLeaderCard extends LeaderCard implements Serializable {
 
     private final List<LeaderDevCost> requires;
 
-    public DevLeaderCard(int id, String img, int victoryPoints, LeaderAbility specialAbility, List<LeaderDevCost> requires) {
-        super(id, img, victoryPoints, specialAbility);
-        this.requires = requires;
-    }
-
     public DevLeaderCard(int victoryPoints, LeaderAbility specialAbility, List<LeaderDevCost> requires) {
         super(victoryPoints, specialAbility);
         this.requires = requires;
-    }
-
-    public List<LeaderDevCost> getRequires() {
-        return requires;
     }
 
     public boolean canBeActivated(Player player) {

@@ -2,7 +2,6 @@ package it.polimi.ingsw.server;
 
 import it.polimi.ingsw.controller.MasterController;
 import it.polimi.ingsw.exceptions.FullCardDeckException;
-import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MultiGame;
@@ -152,7 +151,7 @@ public class Server implements Runnable {
             System.out.println("[SERVER] The first player is : "+game.getActivePlayer().getNickname());
             try {
                 game.nextTurn();
-            } catch (NegativeResAmountException | InvalidKeyException e) {
+            } catch (NegativeResAmountException e) {
                 e.printStackTrace();
             }
             sendInitialResources(1, game.getActivePlayer().getNickname());

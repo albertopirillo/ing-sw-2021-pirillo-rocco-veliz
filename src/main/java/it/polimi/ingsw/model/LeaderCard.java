@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 
 import java.io.Serializable;
@@ -49,5 +48,5 @@ public abstract class LeaderCard extends Card implements Serializable {
         return specialAbility;
     }
 
-    public abstract boolean canBeActivated(Player player) throws NegativeResAmountException, InvalidKeyException;
+    public abstract boolean canBeActivated(Player player) throws NegativeResAmountException;
 }

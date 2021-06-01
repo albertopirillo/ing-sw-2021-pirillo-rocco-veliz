@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import it.polimi.ingsw.exceptions.DevSlotEmptyException;
-import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.InvalidNumSlotException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import it.polimi.ingsw.utils.LeaderAbilityDeserializer;
@@ -33,7 +32,7 @@ class DevLeaderCardTest {
 
     }
     @Test
-    void canBeActivated() throws NegativeResAmountException, InvalidKeyException, InvalidNumSlotException, DevSlotEmptyException {
+    void canBeActivated() throws NegativeResAmountException, InvalidNumSlotException, DevSlotEmptyException {
 
         //parse GSON
         /*

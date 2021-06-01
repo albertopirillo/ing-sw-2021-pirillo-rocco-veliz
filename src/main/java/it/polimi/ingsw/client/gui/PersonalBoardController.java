@@ -196,7 +196,7 @@ public class PersonalBoardController implements Initializable {
                     case COIN: sb_coin.setText("x" + resource.getValue(key)); break;
                     default: break;
                 }
-            } catch (InvalidKeyException | NegativeResAmountException e) {
+            } catch (NegativeResAmountException | InvalidKeyException e) {
                 System.out.println("Invalid key or amount");
             }
         }
@@ -376,7 +376,7 @@ public class PersonalBoardController implements Initializable {
             if (resourceType != null) {
                 try {
                     toDiscard.modifyValue(resourceType, 1);
-                } catch (InvalidKeyException | NegativeResAmountException e) {
+                } catch (NegativeResAmountException e) {
                     System.out.println("Invalid key or amount");
                 }
             }

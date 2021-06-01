@@ -42,7 +42,7 @@ public class PlayerController {
             controller.getGame().setMainActionDone();
             controller.resetException();
             if (!testing) this.mainActionDone = true;
-        } catch (MainActionException | CostNotMatchingException | NotEnoughSpaceException | CannotContainFaithException | NotEnoughResException | NegativeResAmountException | InvalidKeyException e) {
+        } catch (MainActionException | CostNotMatchingException | NotEnoughSpaceException | CannotContainFaithException | NotEnoughResException | NegativeResAmountException e) {
             controller.setException(e);
             controller.getGame().updateClientError(controller.getClientError());
         } finally {
@@ -55,7 +55,7 @@ public class PlayerController {
             Player activePlayer = controller.getGame().getActivePlayer();
             activePlayer.extraProduction(choice, fromDepot, fromStrongbox, res);
             controller.resetException();
-        } catch (CostNotMatchingException | InvalidAbilityChoiceException | NotEnoughSpaceException | NoLeaderAbilitiesException | CannotContainFaithException | NotEnoughResException | NegativeResAmountException | InvalidKeyException e) {
+        } catch (CostNotMatchingException | InvalidAbilityChoiceException | NotEnoughSpaceException | NoLeaderAbilitiesException | CannotContainFaithException | NotEnoughResException | NegativeResAmountException e) {
             controller.setException(e);
             controller.getGame().updateClientError(controller.getClientError());
         } finally {
@@ -160,7 +160,7 @@ public class PlayerController {
             controller.getGame().getActivePlayer().getPersonalBoard().updateFaithTrack(controller.getGame().getPlayersList());
             controller.getGame().nextTurn();
             controller.resetException();
-        } catch (CannotEndTurnException | NegativeResAmountException | InvalidKeyException | MainActionException e) {
+        } catch (CannotEndTurnException | NegativeResAmountException | MainActionException e) {
             controller.setException(e);
             controller.getGame().updateClientError(controller.getClientError());
         } finally {
@@ -178,7 +178,7 @@ public class PlayerController {
                 game.updateFaithTrack();
             }
             controller.resetException();
-        } catch (TooManyLeaderAbilitiesException | CostNotMatchingException | InvalidLayerNumberException | NoLeaderAbilitiesException | NegativeResAmountException | InvalidKeyException | LeaderAbilityAlreadyActive e) {
+        } catch (TooManyLeaderAbilitiesException | CostNotMatchingException | InvalidLayerNumberException | NoLeaderAbilitiesException | NegativeResAmountException | LeaderAbilityAlreadyActive e) {
             controller.setException(e);
             game.updateClientError(controller.getClientError());
         } finally {
@@ -239,7 +239,7 @@ public class PlayerController {
             controller.getGame().setMainActionDone();
             controller.resetException();
             if(!testing) this.mainActionDone = true;
-        } catch (CostNotMatchingException | NotEnoughResException | NegativeResAmountException | InvalidKeyException | DevSlotEmptyException | NotEnoughSpaceException | CannotContainFaithException | MainActionException e) {
+        } catch (CostNotMatchingException | NotEnoughResException | NegativeResAmountException | DevSlotEmptyException | NotEnoughSpaceException | CannotContainFaithException | MainActionException e) {
             controller.setException(e);
             controller.getGame().updateClientError(controller.getClientError());
         } finally {

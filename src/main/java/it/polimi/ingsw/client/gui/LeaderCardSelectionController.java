@@ -61,7 +61,7 @@ public class LeaderCardSelectionController implements Initializable {
     /**
      * An array storing the selected cards.
      */
-    List<Integer> selectedCards = new ArrayList<>();
+    final List<Integer> selectedCards = new ArrayList<>();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

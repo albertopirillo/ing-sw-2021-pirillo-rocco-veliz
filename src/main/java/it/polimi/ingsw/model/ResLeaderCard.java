@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 
 import java.io.Serializable;
@@ -20,20 +19,14 @@ public class ResLeaderCard extends LeaderCard implements Serializable {
         this.cost = cost;
     }
 
-    public boolean canBeActivated(Player player) throws NegativeResAmountException, InvalidKeyException {
+    public boolean canBeActivated(Player player) throws NegativeResAmountException {
         return player.getAllResources().compare(this.cost);
     }
 
-    public Resource getCost() {
-        return cost;
-    }
-
     public String toString(){
-        StringBuilder sb = new StringBuilder();
-        sb.append("\tCost: ").append(cost.toString());
-        sb.append("\n\tAbility");
-        sb.append(getSpecialAbility().toString());
-        sb.append("\n\tVictoryPoints: ").append(getVictoryPoints());
-        return sb.toString();
+        return "\tCost: " + cost.toString() +
+                "\n\tAbility" +
+                getSpecialAbility().toString() +
+                "\n\tVictoryPoints: " + getVictoryPoints();
     }
 }

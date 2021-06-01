@@ -51,7 +51,7 @@ public class ResourceSelectionController implements Initializable {
     /**
      * The map of selected resources.
      */
-    private Map<ResourceType, Integer> res = new HashMap<>();
+    private final Map<ResourceType, Integer> res = new HashMap<>();
 
     /**
      * The nickname of the current player..

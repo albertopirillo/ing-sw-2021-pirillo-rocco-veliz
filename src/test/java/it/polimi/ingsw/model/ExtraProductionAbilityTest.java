@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ExtraProductionAbilityTest {
 
     @Test
-    void activate() throws TooManyLeaderAbilitiesException, InvalidLayerNumberException, LeaderAbilityAlreadyActive, NegativeResAmountException, InvalidKeyException, CostNotMatchingException {
+    void activate() throws TooManyLeaderAbilitiesException, InvalidLayerNumberException, LeaderAbilityAlreadyActive, NegativeResAmountException, CostNotMatchingException {
         //stub game = null
         Player player = new Player( "abc");
         Resource resource1 = new Resource(0,0,0,0);

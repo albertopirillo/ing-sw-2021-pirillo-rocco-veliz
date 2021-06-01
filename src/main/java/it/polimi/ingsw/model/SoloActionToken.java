@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 
 import java.io.Serializable;
@@ -30,7 +29,7 @@ public abstract class SoloActionToken implements Serializable {
     /**
      * Activates the effects of this action token
      */
-    public abstract void reveal() throws NegativeResAmountException, InvalidKeyException;
+    public abstract void reveal() throws NegativeResAmountException;
     /**
      * Gets the ID of the token, used to be displayed in the GUI
      * @return a String representing the ID of the token

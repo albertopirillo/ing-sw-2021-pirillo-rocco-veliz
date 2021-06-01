@@ -24,7 +24,6 @@ public class ClientGUI implements UserInterface {
     private boolean mainActionDone;
     private boolean productionDone;
     private final boolean testing = false;
-    private final int playerAmountTesting = 2;
 
     public ClientGUI(Client client, MainController controller) {
         this.client = client;
@@ -147,7 +146,8 @@ public class ClientGUI implements UserInterface {
     @Override
     public void getGameSize() {
         if (testing) {
-            Processable rsp = new GameSizeMessage(getNickname(), this.playerAmountTesting);
+            int playerAmountTesting = 2;
+            Processable rsp = new GameSizeMessage(getNickname(), playerAmountTesting);
             mainController.sendMessage(rsp);
         }
         else {

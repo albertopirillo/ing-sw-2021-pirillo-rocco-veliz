@@ -104,7 +104,7 @@ class ConcreteDepotDecoratorTest {
     }
 
     @Test
-    public void realTest() throws AlreadyInAnotherLayerException, CannotContainFaithException, NotEnoughSpaceException, NegativeResAmountException, LayerNotEmptyException, InvalidLayerNumberException, NotEnoughResException, InvalidKeyException, InvalidResourceException {
+    public void realTest() throws AlreadyInAnotherLayerException, CannotContainFaithException, NotEnoughSpaceException, NegativeResAmountException, LayerNotEmptyException, InvalidLayerNumberException, NotEnoughResException, InvalidResourceException {
         Depot depot = new ConcreteDepot();
         depot.modifyLayer(2, ResourceType.COIN, 1);
         depot.moveResources(2, 1, 1);

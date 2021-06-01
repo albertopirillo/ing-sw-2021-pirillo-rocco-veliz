@@ -86,10 +86,9 @@ public class Resource implements Serializable {
      * Use this method both to add or subtract to an already existing resource
      * @param key   the resource you want the value to be modified
      * @param value the amount of that resource that you want to add or subtract
-     * @throws InvalidKeyException  if the resource isn't present in the map
      * @throws NegativeResAmountException   if this operation will make the resource have a negative value
      */
-    public void modifyValue(ResourceType key, int value) throws InvalidKeyException, NegativeResAmountException {
+    public void modifyValue(ResourceType key, int value) throws NegativeResAmountException {
         if (!map.containsKey(key)) {
             //we are not throwing an exception here anymore.
             //throw new InvalidKeyException();

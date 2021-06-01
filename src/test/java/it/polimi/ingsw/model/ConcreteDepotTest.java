@@ -200,7 +200,7 @@ public class ConcreteDepotTest {
     }
 
     @Test
-    public void takeTest() throws NegativeResAmountException, InvalidResourceException, LayerNotEmptyException, NotEnoughSpaceException, InvalidLayerNumberException, CannotContainFaithException, AlreadyInAnotherLayerException, NotEnoughResException, InvalidKeyException {
+    public void takeTest() throws NegativeResAmountException, InvalidResourceException, LayerNotEmptyException, NotEnoughSpaceException, InvalidLayerNumberException, CannotContainFaithException, AlreadyInAnotherLayerException, NotEnoughResException {
         Depot depot = new ConcreteDepot();
         ExtraSlotAbility extraSlot = new ExtraSlotAbility(ResourceType.COIN);
         depot = new ConcreteDepotDecorator(depot, extraSlot);
@@ -217,7 +217,7 @@ public class ConcreteDepotTest {
     }
 
     @Test
-    public void discardTest() throws FullCardDeckException, CannotContainFaithException, NegativeResAmountException, InvalidKeyException {
+    public void discardTest() throws FullCardDeckException, CannotContainFaithException, NegativeResAmountException {
         Player player1 = new Player("a");
         Player player2 = new Player("b");
         Player player3 = new Player("c");

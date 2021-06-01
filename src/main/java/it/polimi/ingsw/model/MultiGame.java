@@ -5,7 +5,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import it.polimi.ingsw.exceptions.FullCardDeckException;
-import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import it.polimi.ingsw.utils.LeaderAbilityDeserializer;
 import it.polimi.ingsw.utils.LeaderCardJsonDeserializer;
@@ -67,14 +66,14 @@ public class MultiGame extends Game {
 
     //Selects the new active Player
     @Override
-    public synchronized void  nextTurn() throws NegativeResAmountException, InvalidKeyException {
+    public synchronized void  nextTurn() throws NegativeResAmountException {
         int index = this.getPlayersList().indexOf(this.getActivePlayer());
         this.setActivePlayer(this.getPlayersList().get((index + 1) % getPlayerAmount()));
         checkEndGame();
     }
 
     @Override
-    public void checkEndGame() throws NegativeResAmountException, InvalidKeyException {
+    public void checkEndGame() throws NegativeResAmountException {
         //Every player until the first one have to play their last turn
         if (lastTurn && this.getActivePlayer().getInkwell()) {
             Map<Player, Integer> finalScores = computeFinalScore();

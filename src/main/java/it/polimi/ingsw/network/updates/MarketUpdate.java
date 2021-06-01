@@ -19,7 +19,7 @@ public class MarketUpdate extends ServerUpdate {
     }
 
     public List<String> getCardImgs(){
-        return devCardList.stream().map(e -> e.getImg()).collect(Collectors.toList());
+        return devCardList.stream().map(DevelopmentCard::getImg).collect(Collectors.toList());
     }
 
     @Override

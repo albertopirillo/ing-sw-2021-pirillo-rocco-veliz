@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class GameTest {
 
     @Test
-    public void emptyScoreTest() throws FullCardDeckException, NegativeResAmountException, InvalidKeyException {
+    public void emptyScoreTest() throws FullCardDeckException, NegativeResAmountException {
         Game game = new MultiGame(true);
         Map<Player, Integer> finalScores = game.computeFinalScore();
         for(Player p: finalScores.keySet())
@@ -20,7 +20,7 @@ class GameTest {
     }
 
     @Test
-    public void scoreMultiTest() throws FullCardDeckException, NegativeResAmountException, InvalidKeyException, InvalidResourceException, LayerNotEmptyException, NotEnoughSpaceException, InvalidLayerNumberException, CannotContainFaithException, AlreadyInAnotherLayerException {
+    public void scoreMultiTest() throws FullCardDeckException, NegativeResAmountException, InvalidResourceException, LayerNotEmptyException, NotEnoughSpaceException, InvalidLayerNumberException, CannotContainFaithException, AlreadyInAnotherLayerException {
         Player player1 = new Player("a");
         player1.addVictoryPoints(15);
         player1.addPlayerFaith(18);
@@ -73,7 +73,7 @@ class GameTest {
     }
 
     @Test
-    public void scoreSoloTest() throws FullCardDeckException, InvalidResourceException, LayerNotEmptyException, NotEnoughSpaceException, InvalidLayerNumberException, CannotContainFaithException, AlreadyInAnotherLayerException, NegativeResAmountException, TooManyLeaderAbilitiesException, CostNotMatchingException, NoLeaderAbilitiesException, InvalidKeyException, LeaderAbilityAlreadyActive {
+    public void scoreSoloTest() throws FullCardDeckException, InvalidResourceException, LayerNotEmptyException, NotEnoughSpaceException, InvalidLayerNumberException, CannotContainFaithException, AlreadyInAnotherLayerException, NegativeResAmountException, TooManyLeaderAbilitiesException, CostNotMatchingException, NoLeaderAbilitiesException, LeaderAbilityAlreadyActive {
         Player player = new Player("a");
         Game game = new SoloGame(player);
         player.setGame(game);

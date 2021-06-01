@@ -31,7 +31,7 @@ class PlayerTest {
     }
 
     @Test
-    public void activateProductionTest() throws NegativeResAmountException, InvalidKeyException {
+    public void activateProductionTest() throws NegativeResAmountException {
         Player player = new Player( "abc");
         //Depot and StrongBox empty
         assertEquals(player.getAllResources(), new Resource(0, 0, 0, 0));
@@ -58,7 +58,7 @@ class PlayerTest {
     }
 
     @Test
-    public void useLeaderTest() throws TooManyLeaderAbilitiesException, CostNotMatchingException, InvalidLayerNumberException, NoLeaderAbilitiesException, NegativeResAmountException, InvalidKeyException, LeaderAbilityAlreadyActive {
+    public void useLeaderTest() throws TooManyLeaderAbilitiesException, CostNotMatchingException, InvalidLayerNumberException, NoLeaderAbilitiesException, NegativeResAmountException, LeaderAbilityAlreadyActive {
         Player player = new Player( "abc");
         assertThrows(NoLeaderAbilitiesException.class, () -> player.useLeader(-1, LeaderAction.USE_ABILITY));
         assertThrows(NoLeaderAbilitiesException.class, () -> player.useLeader(2, LeaderAction.DISCARD));
@@ -75,7 +75,7 @@ class PlayerTest {
     }
 
     @Test
-    public void resLeaderTest() throws InvalidResourceException, LayerNotEmptyException, NotEnoughSpaceException, InvalidLayerNumberException, CannotContainFaithException, AlreadyInAnotherLayerException, NegativeResAmountException, InvalidKeyException, TooManyLeaderAbilitiesException, CostNotMatchingException, NoLeaderAbilitiesException, LeaderAbilityAlreadyActive {
+    public void resLeaderTest() throws InvalidResourceException, LayerNotEmptyException, NotEnoughSpaceException, InvalidLayerNumberException, CannotContainFaithException, AlreadyInAnotherLayerException, NegativeResAmountException, TooManyLeaderAbilitiesException, CostNotMatchingException, NoLeaderAbilitiesException, LeaderAbilityAlreadyActive {
         Player player = new Player( "abc");
         ChangeWhiteMarblesAbility ability1 = new ChangeWhiteMarblesAbility(ResourceType.COIN);
         LeaderCard leader1 = new ResLeaderCard(2, ability1, new Resource(0,1,2,2));

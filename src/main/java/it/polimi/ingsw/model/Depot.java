@@ -153,7 +153,7 @@ public abstract class Depot implements Cloneable {
      *  Returns a map with all the resources stored in the depot
      * @return  a Resource object with all the resources
      */
-    public Resource queryAllRes() throws NegativeResAmountException, InvalidKeyException {
+    public Resource queryAllRes() throws NegativeResAmountException {
         Resource res = new Resource(0, 0, 0, 0);
         for (Layer layer: mapping.values()) {
             ResourceType resType = layer.getResource();
@@ -167,7 +167,7 @@ public abstract class Depot implements Cloneable {
      * @param res   the resources to be taken
      * @throws NotEnoughResException    if the depot doesnt contain that resources
      */
-    public void retrieveRes(Resource res) throws NegativeResAmountException, InvalidKeyException, NotEnoughResException, NotEnoughSpaceException {
+    public void retrieveRes(Resource res) throws NegativeResAmountException, NotEnoughResException, NotEnoughSpaceException {
         if (!this.queryAllRes().compare(res)) throw new NotEnoughResException();
         Map<ResourceType, Integer> toTake = res.getMap();
 

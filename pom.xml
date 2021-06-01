@@ -101,7 +101,7 @@
             <archive>
               <manifest>
                 <addClasspath>true</addClasspath>
-                <mainClass>it.polimi.ingsw.network.ClientMain</mainClass>
+                <mainClass>it.polimi.ingsw.client.ClientMain</mainClass>
               </manifest>
             </archive>
           </configuration>
@@ -125,7 +125,7 @@
                 <transformers>
                   <transformer implementation=
                                        "org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                    <mainClass>it.polimi.ingsw.network.ClientMain</mainClass>
+                    <mainClass>it.polimi.ingsw.client.ClientMain</mainClass>
                   </transformer>
                 </transformers>
               </configuration>

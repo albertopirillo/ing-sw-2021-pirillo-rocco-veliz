@@ -1,6 +1,4 @@
-package it.polimi.ingsw.network;
-
-import it.polimi.ingsw.client.Client;
+package it.polimi.ingsw.client;
 
 public class ClientMain {
 

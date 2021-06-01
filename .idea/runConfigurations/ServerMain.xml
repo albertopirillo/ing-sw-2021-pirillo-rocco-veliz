@@ -1,10 +1,10 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="ServerMain" type="Application" factoryName="Application">
-    <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.network.ServerMain" />
+    <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.server.ServerMain" />
     <module name="ing-sw-2021-pirillo-rocco-veliz" />
     <extension name="coverage">
       <pattern>
-        <option name="PATTERN" value="it.polimi.ingsw.network.*" />
+        <option name="PATTERN" value="it.polimi.ingsw.client.*" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>

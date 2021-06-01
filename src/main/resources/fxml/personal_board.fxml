@@ -21,7 +21,7 @@
             <Image url="@../png/leader_cards/test_card.png" />
          </image>
       </ImageView>
-      <Label fx:id="leaderLabel" layoutX="75.0" layoutY="380.0" scaleX="2" scaleY="1.5" text="Leader Cards" textAlignment="CENTER">
+      <Label fx:id="leaderLabel" layoutX="75.0" layoutY="380.0" scaleX="2" scaleY="1.5" styleClass="customInitLeaderLabel" alignment="CENTER" text="Leader Cards" textAlignment="CENTER">
          <font>
             <Font size="23.0" />
          </font>

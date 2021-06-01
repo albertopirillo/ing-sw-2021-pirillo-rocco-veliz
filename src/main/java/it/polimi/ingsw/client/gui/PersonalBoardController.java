@@ -165,7 +165,6 @@ public class PersonalBoardController implements Initializable {
         tempRes4.setDisable(true);
         initFaithTrack();
         initDevSlots();
-        leaderLabel.getStyleClass().add("customInitLeaderLabel");
     }
 
     private void initDevSlots() {

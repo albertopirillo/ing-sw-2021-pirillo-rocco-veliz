@@ -2,10 +2,12 @@ package it.polimi.ingsw.client.gui;
 
 import it.polimi.ingsw.client.ClientGUI;
 import it.polimi.ingsw.client.model.ClientModel;
+import it.polimi.ingsw.model.LeaderAction;
 import it.polimi.ingsw.network.Processable;
 import it.polimi.ingsw.network.requests.EndTurnRequest;
 import it.polimi.ingsw.network.requests.QuitGameRequest;
 import it.polimi.ingsw.network.requests.Request;
+import it.polimi.ingsw.network.requests.UseLeaderRequest;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -84,6 +86,8 @@ public class MainController implements Initializable {
     private MenuButton activateLeaderButton, prodButton;
     @FXML
     private MenuButton discardLeaderButton;
+    @FXML
+    private MenuItem discard02;
 
     /**
      * Gets the Model stored in the Client
@@ -364,6 +368,15 @@ public class MainController implements Initializable {
         sendMessage(request);
     }
 
+    public void discardRequest01(){
+        Request request = new UseLeaderRequest(0, LeaderAction.DISCARD);
+        sendMessage(request);
+    }
+
+    public void discardRequest02(){
+        Request request = new UseLeaderRequest(1, LeaderAction.DISCARD);
+        sendMessage(request);
+    }
 
     public PersonalBoardController getPersonalBoardController(){
         return getPersonalBoardController(getNickname());

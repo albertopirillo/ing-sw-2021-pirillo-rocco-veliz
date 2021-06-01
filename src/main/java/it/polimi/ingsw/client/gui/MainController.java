@@ -123,6 +123,38 @@ public class MainController implements Initializable {
     }
 
     /**
+     * Helper to get the mainActionDone flag of the Client
+     * @return true if action was already performed this turn
+     */
+    public boolean isMainActionDone() {
+        return this.clientGUI.isMainActionDone();
+    }
+
+    /**
+     * Helper to get the productionDone flag of the Client
+     * @return true if a production was already activated this turn
+     */
+    public boolean isProductionDone() {
+        return this.clientGUI.isProductionDone();
+    }
+
+    /**
+     * Helper to set the mainActionDone flag of the Client
+     * @param mainActionDone the value to set the flag at
+     */
+    public void setMainActionDone(Boolean mainActionDone) {
+        this.clientGUI.setMainActionDone(mainActionDone);
+    }
+
+    /**
+     * Helper to set the productionDone flag of the Client
+     * @param productionDone the value to set the flag at
+     */
+    public void setProductionDone(Boolean productionDone) {
+        this.clientGUI.setProductionDone(productionDone);
+    }
+
+    /**
      * Gets the MarketController
      * @return  the current MarketController
      */
@@ -327,10 +359,7 @@ public class MainController implements Initializable {
      * @param errorMsg  a String representing the error to display
      */
     public void displayError(String errorMsg) {
-        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-        errorAlert.setTitle("Error");
-        errorAlert.setHeaderText("Received an error message from the server");
-        errorAlert.setContentText(errorMsg);
+        ErrorAlert errorAlert = new ErrorAlert(errorMsg);
         errorAlert.showAndWait();
     }
 
@@ -366,6 +395,8 @@ public class MainController implements Initializable {
     public void endTurn() {
         Request request = new EndTurnRequest();
         sendMessage(request);
+        this.setMainActionDone(false);
+        this.setProductionDone(false);
     }
 
     public void discardRequest01(){

@@ -57,14 +57,63 @@ public class FaithTrack implements Serializable {
      * @param players the list of players in the current game
      */
     public void checkPopeTile(Player player, List<Player> players) {
-        switch (player.getPlayerFaith()) {
-            case 8:
-            case 16:
-            case 24:
-                vaticanReport(player, players);
-                break;
+        if (!checkBlackCross(players)){
+            switch (player.getPlayerFaith()) {
+                case 8:
+                case 16:
+                case 24:
+                    vaticanReport(player, players);
+                    break;
+            }
         }
     }
+
+    /**
+     * This method check if the black cross is activating a vatican report
+     * @param players the list of players (in solo game contains only the soloPlayer)
+     * @return true if vatican report has been activated
+     */
+    private boolean checkBlackCross(List<Player> players){
+        if (blackCrossPosition > 4){
+            switch (blackCrossPosition) {
+                case 8:
+                    blackVaticanReport(VaticanReportSection.GROUP_ONE, players);
+                    return true;
+                case 16:
+                    blackVaticanReport(VaticanReportSection.GROUP_TWO, players);
+                    return true;
+                case 24:
+                    blackVaticanReport(VaticanReportSection.GROUP_THREE, players);
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * When a Vatican Report is activated by the black cross, based on the soloPlayer position this
+     * method flips his card and gives him the report points
+     * Otherwise, according to the rules, the Vatican Report section get deactivated and the
+     * player loses the opportunity to get those extra points
+     * @param section the currently activated region of the Vatican Report
+     * @param players the list of players (in solo game contains only the soloPlayer)
+     */
+    private void blackVaticanReport(VaticanReportSection section, List<Player> players){
+        Player soloPlayer = players.get(0);
+        PopeFavorCard popeFavor = soloPlayer.getPersonalBoard().getFaithTrack().getPopeFavorBySection(section);
+        if (soloPlayer.getPersonalBoard().getFaithTrack().inProximityOfVaticanReport(soloPlayer, section)){
+            //if pl IS report section assign points and flip card
+            popeFavor.setReportedAndFlip(true);
+            switch(section){
+                case GROUP_ONE: soloPlayer.addVictoryPoints(2); break;
+                case GROUP_TWO: soloPlayer.addVictoryPoints(3); break;
+                case GROUP_THREE: soloPlayer.addVictoryPoints(4); break;
+            }
+        } else {
+            //if pl is NOT in report section, deactivate his card
+            popeFavor.setReportedAndFlip(false); }
+    }
+
 
     /**
      * This method is used to check if a player is within the last activated Vatican Report

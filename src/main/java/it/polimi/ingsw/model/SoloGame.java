@@ -38,6 +38,7 @@ public class SoloGame extends Game {
         this.setPlayersList(playerList);
         initSoloTokens(false);
         startGame();
+        moveBlackCross(1);
     }
 
     /**
@@ -57,6 +58,7 @@ public class SoloGame extends Game {
         this.setPlayersList(playerList);
         this.soloTokens = new LinkedList<>();
         initSoloTokens(true);
+        moveBlackCross(1);
     }
 
     @Override
@@ -70,7 +72,7 @@ public class SoloGame extends Game {
 
     @Override
     public void checkEndGame() throws NegativeResAmountException, InvalidKeyException {
-        if( getActivePlayer().getPersonalBoard().getFaithTrack().getBlackCrossPosition() >= 20) this.lastTurn(false);
+        if( getActivePlayer().getPersonalBoard().getFaithTrack().getBlackCrossPosition() == 24) this.lastTurn(false);
     }
 
     /**
@@ -140,7 +142,6 @@ public class SoloGame extends Game {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        moveBlackCross(1);
     }
 
     private void initSoloTokens(boolean testing) {

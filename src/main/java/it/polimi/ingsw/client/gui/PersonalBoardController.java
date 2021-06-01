@@ -38,6 +38,8 @@ public class PersonalBoardController implements Initializable {
     @FXML
     private ImageView popeFavor01, popeFavor02, popeFavor03;
     @FXML
+    private ImageView slot1_1, slot1_2, slot1_3, slot2_1, slot2_2, slot2_3, slot3_1, slot3_2, slot3_3;
+    @FXML
     private ImageView leaderCard0, leaderCard1;
 
     /**
@@ -85,6 +87,10 @@ public class PersonalBoardController implements Initializable {
      * A map to get a list of all the corresponding images from a given layer
      */
     private final Map<Integer, List<ImageView>> layerMapping = new HashMap<>();
+    /**
+     * A map to get a list of all the corresponding images in a given development slot
+     */
+    private final Map<Integer, List<ImageView>> devSlotsMapping = new HashMap<>();
     /**
      * List of all the corresponding images in tempResource
      */
@@ -158,7 +164,20 @@ public class PersonalBoardController implements Initializable {
         tempRes3.setDisable(true);
         tempRes4.setDisable(true);
         initFaithTrack();
+        initDevSlots();
         leaderLabel.getStyleClass().add("customInitLeaderLabel");
+    }
+
+    private void initDevSlots() {
+        List<ImageView> firstSlot = new ArrayList<>();
+        Collections.addAll(firstSlot, slot1_1, slot1_2, slot1_3);
+        this.devSlotsMapping.put(1, firstSlot);
+        List<ImageView> secondSlot = new ArrayList<>();
+        Collections.addAll(secondSlot, slot2_1, slot2_2, slot2_3);
+        this.devSlotsMapping.put(2, secondSlot);
+        List<ImageView> thirdSlot = new ArrayList<>();
+        Collections.addAll(thirdSlot, slot3_1, slot3_2, slot3_3);
+        this.devSlotsMapping.put(3, thirdSlot);
     }
 
     /**
@@ -421,5 +440,18 @@ public class PersonalBoardController implements Initializable {
 
     public TempDepot getTempDepot(){
         return this.tempDepot;
+    }
+
+    public void updateDevSlots(List<DevelopmentSlot> developmentSlots) {
+        int i = 1;
+        for(DevelopmentSlot devSlot: developmentSlots) {
+            List<ImageView> currentSlot = this.devSlotsMapping.get(i);
+            int j = 0;
+            for(DevelopmentCard card: devSlot.getCards()) {
+                currentSlot.get(j).setImage(Util.getDevCardImg(card.getImg()));
+                j++;
+            }
+            i++;
+        }
     }
 }

@@ -15,15 +15,15 @@
             <Image url="@../png/generic/background_wall.png" />
          </image></ImageView>
       <ImageView fx:id="imgCard1" fitHeight="390.0" fitWidth="252.0" layoutX="54.4" layoutY="131.0" pickOnBounds="true" preserveRatio="true" />
-      <CheckBox fx:id="chkCard1" layoutX="55.0" layoutY="131.3" mnemonicParsing="false" onAction="#onClickChkCard1" prefHeight="18.0" prefWidth="17.0" />
+      <CheckBox fx:id="chkCard1" styleClass="leaderCheckBox" layoutX="55.0" layoutY="131.3" mnemonicParsing="false" onAction="#onClickChkCard1" prefHeight="18.0" prefWidth="17.0" />
       <ImageView fx:id="imgCard2" fitHeight="390.0" fitWidth="252.0" layoutX="360.8" layoutY="131.0" pickOnBounds="true" preserveRatio="true" />
-      <CheckBox fx:id="chkCard2" layoutX="361.4" layoutY="131.3" mnemonicParsing="false" onAction="#onClickChkCard2" prefHeight="18.0" prefWidth="17.0" />
+      <CheckBox fx:id="chkCard2" styleClass="leaderCheckBox" layoutX="361.4" layoutY="131.3" mnemonicParsing="false" onAction="#onClickChkCard2" prefHeight="18.0" prefWidth="17.0" />
       <ImageView fx:id="imgCard3" fitHeight="390.0" fitWidth="252.0" layoutX="667.2" layoutY="131.0" pickOnBounds="true" preserveRatio="true" />
-      <CheckBox fx:id="chkCard3" layoutX="667.8" layoutY="131.3" mnemonicParsing="false" onAction="#onClickChkCard3" prefHeight="18.0" prefWidth="17.0" />
+      <CheckBox fx:id="chkCard3" styleClass="leaderCheckBox" layoutX="667.8" layoutY="131.3" mnemonicParsing="false" onAction="#onClickChkCard3" prefHeight="18.0" prefWidth="17.0" />
       <ImageView fx:id="imgCard4" fitHeight="390.0" fitWidth="252.0" layoutX="973.6" layoutY="131.0" pickOnBounds="true" preserveRatio="true" />
-      <CheckBox fx:id="chkCard4" layoutX="974.1" layoutY="131.3" mnemonicParsing="false" onAction="#onClickChkCard4" prefHeight="18.0" prefWidth="17.0" />
-      <Button fx:id="btnContinue" alignment="CENTER" layoutX="576.0" layoutY="620.0" mnemonicParsing="false" onAction="#onClickContinue" prefHeight="26.0" prefWidth="131.0" text="Continue" textAlignment="CENTER" />
-      <Label fx:id="topLabel" alignment="TOP_CENTER" layoutX="587.0" layoutY="48.0" scaleX="3" scaleY="3" text="Select two leader cards" textAlignment="CENTER">
+      <CheckBox fx:id="chkCard4" styleClass="leaderCheckBox" layoutX="974.1" layoutY="131.3" mnemonicParsing="false" onAction="#onClickChkCard4" prefHeight="18.0" prefWidth="17.0" />
+      <Button fx:id="btnContinue" styleClass="customButton" alignment="CENTER" layoutX="576.0" layoutY="620.0" mnemonicParsing="false" onAction="#onClickContinue" prefHeight="26.0" prefWidth="131.0" text="Continue" textAlignment="CENTER" />
+      <Label fx:id="topLabel" styleClass="customInitLeaderLabel" alignment="TOP_CENTER" layoutX="587.0" layoutY="48.0" scaleX="3" scaleY="3" text="Select two leader cards" textAlignment="CENTER">
          <font>
             <Font size="80" />
          </font>

@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
 public class SetupController implements Initializable {
 
     @FXML
-    private Label firstPlayerText, enterNickname;
+    private Label firstPlayerText;
     @FXML
     private Button nameButton, playerAmountButton;
     @FXML
@@ -131,7 +131,6 @@ public class SetupController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        enterNickname.getStyleClass().add("enterNickname");
         int i = 1;
         for(Toggle toggle: playerAmountGroup.getToggles()) {
             toggle.setUserData(i++);
@@ -141,10 +140,7 @@ public class SetupController implements Initializable {
         }
         playerAmountButton.setDisable(true);
         formatError.setVisible(false);
-        firstPlayerText.getStyleClass().add("firstPlayerLabel");
         firstPlayerText.setVisible(false);
-        firstPlayerLabel.getStyleClass().add("firstPlayerLabel");
-        formatError.getStyleClass().add("formatError");
     }
 
     /**

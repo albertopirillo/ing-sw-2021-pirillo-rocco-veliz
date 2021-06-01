@@ -24,7 +24,7 @@
             <Font size="36.0" />
          </font>
       </TextField>
-      <Label fx:id="enterNickname" layoutX="270.0" layoutY="21.0" prefHeight="54.0" prefWidth="742.0" text="Enter your nickname" textAlignment="CENTER" />
+      <Label id="enterNickname" layoutX="270.0" layoutY="21.0" prefHeight="54.0" prefWidth="742.0" text="Enter your nickname" styleClass="enterNickname" textAlignment="CENTER" />
       <Button fx:id="nameButton" layoutX="584.0" layoutY="243.0" mnemonicParsing="false" onAction="#confirmName" text="Confirm">
          <font>
             <Font size="24.0" />
@@ -38,7 +38,7 @@
             <ToggleGroup fx:id="playerAmountGroup" />
          </toggleGroup>
       </RadioButton>
-      <Label fx:id="firstPlayerText" layoutX="270.0" layoutY="325.0" prefHeight="54.0" prefWidth="742.0" text="You are the first player! " textAlignment="CENTER"  />
+      <Label fx:id="firstPlayerText" layoutX="270.0" layoutY="325.0" prefHeight="54.0" prefWidth="742.0" text="You are the first player!" styleClass="firstPlayerLabel" textAlignment="CENTER"  />
       <RadioButton layoutX="514.0" layoutY="535.0" mnemonicParsing="false" text="2" toggleGroup="$playerAmountGroup">
          <font>
             <Font size="32.0" />
@@ -55,11 +55,11 @@
             <Font size="24.0" />
          </font>
       </Button>
-      <Label fx:id="formatError" layoutX="272.0" layoutY="308.0" prefHeight="54.0" prefWidth="742.0" text="Please choose a valid username" textAlignment="CENTER" textFill="crimson">
+      <Label fx:id="formatError" layoutX="272.0" layoutY="308.0" prefHeight="54.0" prefWidth="742.0" text="Please choose a valid username" styleClass="formatError" textAlignment="CENTER" textFill="crimson">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <Label fx:id="firstPlayerLabel" layoutX="248.0" layoutY="429.0" prefHeight="54.0" prefWidth="784.0" text="First player is selecting the n° of players" textAlignment="CENTER" />
+      <Label fx:id="firstPlayerLabel" layoutX="248.0" layoutY="429.0" prefHeight="54.0" prefWidth="784.0" text="First player is selecting the n° of players" styleClass="firstPlayerLabel" textAlignment="CENTER" />
    </children>
 </AnchorPane>

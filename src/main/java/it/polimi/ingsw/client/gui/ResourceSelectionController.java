@@ -80,24 +80,6 @@ public class ResourceSelectionController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        lblMessage.getStyleClass().add("customInitLeaderLabel");
-        btnContinue.getStyleClass().add("customButton");
-        rbStone.getStyleClass().add("resourceRadio");
-        rbShield.getStyleClass().add("resourceRadio");
-        rbCoin.getStyleClass().add("resourceRadio");
-        rbServant.getStyleClass().add("resourceRadio");
-        chkCoin1.getStyleClass().add("resourceCheckBox");
-        chkCoin2.getStyleClass().add("resourceCheckBox");
-        chkServant1.getStyleClass().add("resourceCheckBox");
-        chkServant2.getStyleClass().add("resourceCheckBox");
-        chkShield1.getStyleClass().add("resourceCheckBox");
-        chkShield2.getStyleClass().add("resourceCheckBox");
-        chkStone1.getStyleClass().add("resourceCheckBox");
-        chkStone2.getStyleClass().add("resourceCheckBox");
-        stoneRes.getStyleClass().add("resourceDropShadow");
-        servantRes.getStyleClass().add("resourceDropShadow");
-        coinRes.getStyleClass().add("resourceDropShadow");
-        shieldRes.getStyleClass().add("resourceDropShadow");
         initResources();
     }
 

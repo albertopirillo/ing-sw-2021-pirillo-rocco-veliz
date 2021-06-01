@@ -196,10 +196,15 @@
                   </ImageView>
                </children>
             </Pane>
-            <Pane fx:id="depot" layoutX="70.0" layoutY="415.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;">
+            <Pane fx:id="depot" layoutX="70.0" layoutY="415.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: transparent;">
                <children>
-                  <ImageView fx:id="depot1_1" fitHeight="51.0" fitWidth="56.0" layoutX="74.0" layoutY="7.0" onDragDetected="#dragDetection" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="depot2_1" fitHeight="51.0" fitWidth="56.0" layoutX="37.0" layoutY="75.0" onDragDetected="#dragDetection" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" styleClass="imgShadow">
+                     <image>
+                        <Image url="@../png/personal_board/depot.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="depot1_1" fitHeight="51.0" fitWidth="56.0" layoutX="75.0" layoutY="7.0" onDragDetected="#dragDetection" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="depot2_1" fitHeight="51.0" fitWidth="56.0" layoutX="37.0" layoutY="67.0" onDragDetected="#dragDetection" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="depot2_2" fitHeight="51.0" fitWidth="56.0" layoutX="108.0" layoutY="67.0" onDragDetected="#dragDetection" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="depot3_1" fitHeight="51.0" fitWidth="56.0" layoutX="18.0" layoutY="135.0" onDragDetected="#dragDetection" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="depot3_2" fitHeight="51.0" fitWidth="56.0" layoutX="74.0" layoutY="135.0" onDragDetected="#dragDetection" pickOnBounds="true" preserveRatio="true" />

@@ -12,12 +12,12 @@
             <Image url="@../png/generic/background_wall.png" />
          </image>
       </ImageView>
-      <Label fx:id="nextTokenLabel" alignment="CENTER" layoutX="1.0" layoutY="540.0" prefHeight="54.0" prefWidth="848.0" styleClass="customInitLeaderLabel" text="The following token have been activated:" textAlignment="CENTER">
+      <Label fx:id="nextTokenLabel" alignment="CENTER" layoutX="150.0" layoutY="600.0" prefHeight="54.0" prefWidth="400.0" styleClass="customInitLeaderLabel" text="Activated Token:" textAlignment="CENTER">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <ImageView fx:id="nextToken" fitHeight="207.0" fitWidth="200.0" layoutX="324.0" layoutY="631.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="nextToken" fitHeight="153.0" fitWidth="150.0" layoutX="550.0" layoutY="580.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="firstCard" fitHeight="362.0" fitWidth="239.0" layoutX="142.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true" />
       <Label fx:id="lastTokenLabel" alignment="CENTER" layoutY="90.0" prefHeight="47.0" prefWidth="848.0" styleClass="customInitLeaderLabel" text="Label" textAlignment="CENTER">
          <font>

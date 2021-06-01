@@ -35,14 +35,14 @@
        </MenuButton>
        <MenuButton fx:id="activateLeaderButton" layoutX="33.0" layoutY="374.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="214.0" text="Activate leader">
            <items>
-               <MenuItem mnemonicParsing="false" text="Top leader" />
-               <MenuItem mnemonicParsing="false" text="Bottom leader" />
+               <MenuItem onAction="#useLeaderRequest01" mnemonicParsing="false" text="Top leader" />
+               <MenuItem onAction="#useLeaderRequest02" mnemonicParsing="false" text="Bottom leader" />
            </items>
        </MenuButton>
        <MenuButton fx:id="discardLeaderButton" layoutX="33.0" layoutY="477.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="214.0" text="Discard leader">
            <items>
-               <MenuItem onAction="#discardRequest01" mnemonicParsing="false" text="Top leader" />
-               <MenuItem fx:id="discard02" onAction="#discardRequest02" mnemonicParsing="false" text="Bottom leader" />
+               <MenuItem onAction="#discardLeaderRequest01" mnemonicParsing="false" text="Top leader" />
+               <MenuItem onAction="#discardLeaderRequest02" mnemonicParsing="false" text="Bottom leader" />
            </items>
        </MenuButton>
        <Button fx:id="endTurnButton" layoutX="31.0" layoutY="580.0" mnemonicParsing="false" onAction="#endTurn" prefHeight="30.0" prefWidth="214.0" text="End turn" textAlignment="CENTER">

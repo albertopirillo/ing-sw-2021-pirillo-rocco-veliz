@@ -3,21 +3,21 @@ package it.polimi.ingsw.client.gui;
 import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import it.polimi.ingsw.model.*;
-import it.polimi.ingsw.network.DepotSetting;
 import it.polimi.ingsw.network.requests.BuyDevCardRequest;
 import it.polimi.ingsw.network.requests.Request;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.Pane;
 
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
 
 public class MarketController implements Initializable {
 
@@ -32,13 +32,11 @@ public class MarketController implements Initializable {
     @FXML
     private Label d_stone, d_servant, d_shield, d_coin;
     @FXML
-    private Pane buyPanel;
-    @FXML
-    private Pane cards;
-    @FXML
-    private Pane depot;
+    private Pane buyPanel, depot, slots;
     @FXML
     private ChoiceBox comboBox;
+    @FXML
+    private Spinner<Integer> stone, servant, shield, coin;
     @FXML
     private Button buyButton;
     @FXML
@@ -49,9 +47,9 @@ public class MarketController implements Initializable {
      */
     private ImageView selectedCard;
 
-    private int slot;
+    private ImageView slot;
 
-    private final Map<Integer, List<ImageView>> layerMapping = new HashMap<>();
+    private ImageView source;
 
     /**
      * The list of all sixteen corresponding images of the Developement Cards
@@ -92,13 +90,17 @@ public class MarketController implements Initializable {
         comboBox.getItems().clear();
         comboBox.getItems().addAll("No ability", "First Ability", "Second Ability", "Both Ability");
         comboBox.getSelectionModel().select("No ability");
-        //loadDepot();
+    }
+
+    public void loadPanes() {
+        closeBuyPanel();
+        loadStorages();
     }
 
     /**
      * Reset the Buy Panel to the default
      */
-    public void closeBuyPanel(){
+    private void closeBuyPanel(){
         this.r_stone.setImage(null);
         this.r_servant.setImage(null);
         this.r_shield.setImage(null);
@@ -107,10 +109,30 @@ public class MarketController implements Initializable {
         this.d_servant.setText("x0");
         this.d_shield.setText("x0");
         this.d_coin.setText("x0");
-        if(selectedCard != null) {
-            this.selectedCard.getStyleClass().remove("selected-card");
-        }
         this.buyPanel.setVisible(false);
+        this.slots.setVisible(false);
+        this.depot.setVisible(true);
+        if(selectedCard != null) this.selectedCard.getStyleClass().remove("selected-card");
+        if(slot != null) this.slot.getStyleClass().remove("selected-card");
+    }
+
+    private void loadStorages() {
+        List<Image> imgs = this.mainController.getPersonalBoardController().getDepotImgs();
+        depot1_1.setImage(imgs.get(0));
+        depot2_1.setImage(imgs.get(1));
+        depot2_2.setImage(imgs.get(2));
+        depot3_1.setImage(imgs.get(3));
+        depot3_2.setImage(imgs.get(4));
+        depot3_3.setImage(imgs.get(5));
+        Resource strongbox = this.mainController.getClientModel().getStoragesModel().getStrongboxMap().get(this.mainController.getNickname());
+        try {
+            this.stone.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, strongbox.getValue(ResourceType.STONE)));
+            this.servant.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, strongbox.getValue(ResourceType.SERVANT)));
+            this.shield.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, strongbox.getValue(ResourceType.SHIELD)));
+            this.coin.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, strongbox.getValue(ResourceType.COIN)));
+        } catch (InvalidKeyException e) {
+            e.printStackTrace();
+        }
     }
 
     public void updateMarket(List<String> imgs) {
@@ -120,72 +142,94 @@ public class MarketController implements Initializable {
     }
 
     public void buyCard(MouseEvent mouseEvent) {
-        if(this.selectedCard != null) {
-            this.selectedCard.getStyleClass().remove("selected-card");
-        }
+        if(this.selectedCard != null) this.selectedCard.getStyleClass().remove("selected-card");
         this.selectedCard = ((ImageView) mouseEvent.getSource());
         selectedCard.getStyleClass().add("selected-card");
         this.buyPanel.setVisible(true);
     }
 
-    public void loadDepot() {
-        List<ImageView> firstLayer = new ArrayList<>();
-        firstLayer.add(depot1_1);
-        this.layerMapping.put(1, firstLayer);
-        List<ImageView> secondLayer = new ArrayList<>();
-        Collections.addAll(secondLayer, depot2_1, depot2_2);
-        this.layerMapping.put(2, secondLayer);
-        List<ImageView> thirdLayer = new ArrayList<>();
-        Collections.addAll(thirdLayer, depot3_1, depot3_2, depot3_3);
-        this.layerMapping.put(3, thirdLayer);
+    public void dragDetection(MouseEvent mouseEvent) {
+        this.source = (ImageView) mouseEvent.getSource();
+        Dragboard db = this.source.startDragAndDrop(TransferMode.ANY);
+        ClipboardContent cb = new ClipboardContent();
+        cb.putImage(this.source.getImage());
+        db.setContent(cb);
+        mouseEvent.consume();
+    }
 
-        List <DepotSetting> settings = this.mainController.getDepot();
-        int i;
-        for(DepotSetting setting: settings) {
-            i = 0;
-            List<ImageView> layer = this.layerMapping.get(setting.getLayerNumber());
-            for (ImageView slot: layer) {
-                if (i < setting.getAmount()) {
-                    slot.setImage(Util.resToImage(setting.getResType()));
-                }
-                else {
-                    slot.setImage(null);
-                }
-                i++;
-            }
-
-
+    public void dragOver(DragEvent dragEvent) {
+        if(dragEvent.getDragboard().hasImage()) {
+            dragEvent.acceptTransferModes(TransferMode.ANY);
         }
     }
 
     public void dragDrop(DragEvent dragEvent) {
-        ImageView destination = (ImageView) dragEvent.getSource();
-        Dragboard db = dragEvent.getDragboard();
-        System.out.println(d_stone.getText().substring(1));
-        int newValue;
-        //Resource Type source = this.mainController.getPersonalBoardController().getGenericSlot(db)
-        if(destination.getImage() != null || destination.getImage() == db.getImage()) {
-            destination.setImage(db.getImage());
-            switch (destination.getId()) {
-                case "r_stone":
-                    newValue = Integer.parseInt(d_stone.getText().substring(1)) + 1;
-                    d_stone.setText("x" + newValue);
-                    break;
-                case "r_servant":
-                    newValue = Integer.parseInt(d_servant.getText().substring(1)) + 1;
-                    d_servant.setText("x" + newValue);
-                    break;
-                case "r_shield":
-                    newValue = Integer.parseInt(d_shield.getText().substring(1)) + 1;
-                    d_shield.setText("x" + newValue);
-                    break;
-                case "r_coin":
-                    newValue = Integer.parseInt(d_coin.getText().substring(1)) + 1;
-                    d_coin.setText("x" + newValue);
-                    break;
-                default:
-                    break;
+        String sourceId = this.source.getId();
+        switch (this.mainController.getPersonalBoardController().getGenericSlot(sourceId)){
+            case STONE:
+                addRes(r_stone, ResourceType.STONE, d_stone);
+                break;
+            case SERVANT:
+                addRes(r_servant, ResourceType.SERVANT, d_servant);
+                break;
+            case SHIELD:
+                addRes(r_shield, ResourceType.SHIELD, d_shield);
+                break;
+            case COIN:
+                addRes(r_coin, ResourceType.COIN, d_coin);
+                break;
+            default:
+                break;
+        }
+        this.source.setImage(null);
+    }
+
+    private void addRes(ImageView id, ResourceType res, Label d){
+        if(id.getImage()==null) id.setImage(Util.resToImage(res));
+        int newValue = Integer.parseInt(d.getText().substring(1)) + 1;
+        d.setText("x" + newValue);
+    }
+
+    public void selectSlot(MouseEvent mouseEvent) {
+        if(slot!=null) this.slot.getStyleClass().remove("selected-card");
+        this.slot = (ImageView) mouseEvent.getSource();
+        this.slot.getStyleClass().add("selected-card");
+        this.buyButton.setText("Buy Card");
+        this.buyButton.setDisable(false);
+    }
+
+    public void buildRequest(ActionEvent actionEvent){
+        if(this.depot.isVisible()){
+            this.depot.setVisible(false);
+            this.slots.setVisible(true);
+            this.buyButton.setDisable(true);
+        }
+        else {
+            this.slots.setVisible(false);
+            this.depot.setVisible(true);
+            this.buyButton.setText("Select Slot");
+            Resource depot = new Resource(0, 0, 0, 0);
+            Resource strongbox = new Resource(0, 0, 0, 0);
+            try {
+                depot.modifyValue(ResourceType.STONE, Integer.parseInt(d_stone.getText().substring(1)));
+                depot.modifyValue(ResourceType.SERVANT, Integer.parseInt(d_servant.getText().substring(1)));
+                depot.modifyValue(ResourceType.SHIELD, Integer.parseInt(d_shield.getText().substring(1)));
+                depot.modifyValue(ResourceType.COIN, Integer.parseInt(d_coin.getText().substring(1)));
+                strongbox.modifyValue(ResourceType.STONE, stone.getValue());
+                strongbox.modifyValue(ResourceType.SERVANT, servant.getValue());
+                strongbox.modifyValue(ResourceType.SHIELD, shield.getValue());
+                strongbox.modifyValue(ResourceType.COIN, coin.getValue());
+            } catch (InvalidKeyException | NegativeResAmountException e) {
+                e.printStackTrace();
             }
+            int index = Integer.parseInt(this.selectedCard.getId().substring(7));
+            DevelopmentCard card = this.mainController.getClientModel().getMarketModel().getDevCardList().get(index);
+            int level = card.getLevel();
+            CardColor color = card.getType();
+            int numSlot = Integer.parseInt(this.slot.getId().substring(4));
+            AbilityChoice choice = getAbilityChoice(comboBox.getSelectionModel().getSelectedIndex());
+            Request request = new BuyDevCardRequest(level, color, choice, depot, strongbox, numSlot - 1);
+            this.mainController.sendMessage(request);
         }
     }
 
@@ -197,54 +241,5 @@ public class MarketController implements Initializable {
             case 3: return AbilityChoice.BOTH;
         }
         return null;
-    }
-    public void buildRequest(ActionEvent actionEvent){
-        System.out.println(comboBox.getValue());
-        System.out.println(comboBox.getSelectionModel().getSelectedIndex());
-        System.out.println("ok");
-        System.out.println("Carta selezione è " + this.selectedCard.getId());
-        System.out.println("Risorse dal depot");
-        System.out.println("Stone " + this.d_stone.getText());
-        System.out.println("Servant" + this.d_servant.getText());
-        System.out.println("Shield" + this.d_shield.getText());
-        System.out.println("Coin" + this.d_coin.getText());
-        Resource depot = new Resource(0,0,0,0);
-        Resource strongbox = new Resource(0,0,0,0);
-        try {
-            depot.modifyValue(ResourceType.STONE,Integer.parseInt(d_stone.getText().substring(1)));
-            depot.modifyValue(ResourceType.SERVANT, Integer.parseInt(d_servant.getText().substring(1)));
-            depot.modifyValue(ResourceType.SHIELD, Integer.parseInt(d_shield.getText().substring(1)));
-            depot.modifyValue(ResourceType.COIN,Integer.parseInt(d_coin.getText().substring(1)));
-        } catch (InvalidKeyException | NegativeResAmountException e) {
-            e.printStackTrace();
-        int index = Integer.parseInt(this.selectedCard.getId().substring(7));
-        DevelopmentCard card = this.mainController.getClientModel().getMarketModel().getDevCardList().get(index);
-        int level = card.getLevel();
-        CardColor color = card.getType();
-        AbilityChoice choice = getAbilityChoice(comboBox.getSelectionModel().getSelectedIndex());
-        Request request = new BuyDevCardRequest(level, color, choice, depot, strongbox, this.slot - 1);
-        this.mainController.sendMessage(request);
-        }
-    }
-
-    public void dragDetection(MouseEvent mouseEvent) {
-        ImageView start = (ImageView) mouseEvent.getSource();
-        Dragboard db = start.startDragAndDrop(TransferMode.ANY);
-        ClipboardContent cb = new ClipboardContent();
-        cb.putImage(start.getImage());
-        db.setContent(cb);
-        mouseEvent.consume();
-    }
-
-    public void dragOver(DragEvent dragEvent) {
-        dragEvent.acceptTransferModes(TransferMode.ANY);
-        ((ImageView)dragEvent.getSource()).setImage(dragEvent.getDragboard().getImage());
-        dragEvent.consume();
-    }
-
-    public void selectSlot(MouseEvent mouseEvent) {
-        //selectedCard.getStyleClass().add("selected-card");
-        this.slot = Integer.parseInt(((ImageView) mouseEvent.getSource()).getId().substring(4));
-        this.buyButton.setDisable(false);
     }
 }

@@ -2,7 +2,6 @@ package it.polimi.ingsw.client.gui;
 
 import it.polimi.ingsw.client.ClientGUI;
 import it.polimi.ingsw.client.model.ClientModel;
-import it.polimi.ingsw.network.DepotSetting;
 import it.polimi.ingsw.network.Processable;
 import it.polimi.ingsw.network.requests.EndTurnRequest;
 import it.polimi.ingsw.network.requests.QuitGameRequest;
@@ -209,7 +208,7 @@ public class MainController implements Initializable {
     }
 
     private void initTrayPopup() throws IOException {
-        this.trayButton.setText("Show Market Tray");
+        this.trayButton.setText("Market Tray");
         FXMLLoader loader = Util.loadFXML("market_tray");
         Parent tray = loader.load();
         this.trayController = loader.getController();
@@ -218,11 +217,11 @@ public class MainController implements Initializable {
         this.trayPopup.setX(1000);
         this.trayPopup.setY(200);
         this.trayPopup.setAutoHide(true);
-        this.trayPopup.setOnAutoHide(event -> this.trayButton.setText("Show Market Tray"));
+        this.trayPopup.setOnAutoHide(event -> this.trayButton.setText("Market Tray"));
     }
 
     private void initMarketPopup() throws IOException {
-        this.marketButton.setText("Show Market Cards");
+        this.marketButton.setText("Market Cards");
         FXMLLoader loader = Util.loadFXML("market");
         Parent market = loader.load();
         this.marketController = loader.getController();
@@ -231,7 +230,7 @@ public class MainController implements Initializable {
         this.marketPopup.setX(500);
         this.marketPopup.setY(200);
         this.marketPopup.setAutoHide(true);
-        this.marketPopup.setOnAutoHide(event -> this.marketButton.setText("Show Market Cards"));
+        this.marketPopup.setOnAutoHide(event -> this.marketButton.setText("Market Cards"));
     }
 
     private void initSoloPopup() throws IOException {
@@ -260,11 +259,11 @@ public class MainController implements Initializable {
         Stage stage = Util.getStageFromEvent(event);
         this.stage = stage;
         if (!this.trayPopup.isShowing()) {
-            trayButton.setText("Back to Personal Board");
+            trayButton.setText("Back");
             this.trayPopup.show(stage);
         }
         else {
-            trayButton.setText("Show Market Tray");
+            trayButton.setText("Market Tray");
             this.trayPopup.hide();
         }
     }
@@ -276,12 +275,12 @@ public class MainController implements Initializable {
     public void showMarket(ActionEvent event) {
         Stage stage = Util.getStageFromEvent(event);
         if (!this.marketPopup.isShowing()) {
-            this.marketController.closeBuyPanel();
-            marketButton.setText("Back to Personal Board");
+            this.marketController.loadPanes();
+            marketButton.setText("Back");
             this.marketPopup.show(stage);
         }
         else {
-            marketButton.setText("Show Market Cards");
+            marketButton.setText("Market Cards");
             this.marketPopup.hide();
         }
     }
@@ -290,7 +289,7 @@ public class MainController implements Initializable {
      * Hide the tray popup and also change the text of the button
      */
     public void closeTray(){
-        trayButton.setText("Show Market Tray");
+        trayButton.setText("Market Tray");
         this.trayPopup.hide();
     }
 
@@ -298,7 +297,7 @@ public class MainController implements Initializable {
      * Hide the market popup and also change the text of the button
      */
     public void closeMarket(){
-        marketButton.setText("Show Market Cards");
+        marketButton.setText("Market Cards");
         this.marketPopup.hide();
     }
 
@@ -365,8 +364,9 @@ public class MainController implements Initializable {
         sendMessage(request);
     }
 
-    public List<DepotSetting> getDepot(){
-        return getClientModel().getStoragesModel().getDepot(this.clientGUI.getNickname());
+
+    public PersonalBoardController getPersonalBoardController(){
+        return getPersonalBoardController(getNickname());
     }
 
     @Override

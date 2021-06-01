@@ -18,49 +18,41 @@
            </image>
        </ImageView>
       <TabPane fx:id="tabPane" layoutX="269.0" layoutY="3.0" prefHeight="822.0" prefWidth="1360.0" tabClosingPolicy="UNAVAILABLE" />
-      <MenuButton fx:id="activateLeaderButton" layoutX="33.0" layoutY="377.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="214.0" text="Activate leader">
-        <items>
-          <MenuItem mnemonicParsing="false" text="Action 1" />
-          <MenuItem mnemonicParsing="false" text="Action 2" />
-        </items>
+      <Button fx:id="trayButton" layoutX="31.0" layoutY="65.0" mnemonicParsing="false" onAction="#showTray" prefHeight="30.0" prefWidth="214.0" text="Market Tray" textAlignment="CENTER">
          <font>
             <Font size="20.0" />
-         </font>
-      </MenuButton>
-      <Button fx:id="endTurnButton" layoutX="31.0" layoutY="618.0" mnemonicParsing="false" onAction="#endTurn" prefHeight="30.0" prefWidth="214.0" text="End turn" textAlignment="CENTER">
+         </font></Button>
+      <Button fx:id="marketButton" layoutX="33.0" layoutY="168.0" mnemonicParsing="false" onAction="#showMarket" prefHeight="30.0" prefWidth="214.0" text="Market Cards" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font></Button>
+       <MenuButton fx:id="prodButton" layoutX="33.0" layoutY="271.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="214.0" text="Use production">
+           <items>
+               <MenuItem mnemonicParsing="false" text="Basic" />
+               <MenuItem mnemonicParsing="false" text="Development" />
+               <MenuItem mnemonicParsing="false" text="Leader" />
+           </items>
+       </MenuButton>
+       <MenuButton fx:id="activateLeaderButton" layoutX="33.0" layoutY="374.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="214.0" text="Activate leader">
+           <items>
+               <MenuItem mnemonicParsing="false" text="Top leader" />
+               <MenuItem mnemonicParsing="false" text="Bottom leader" />
+           </items>
+       </MenuButton>
+       <MenuButton fx:id="discardLeaderButton" layoutX="33.0" layoutY="477.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="214.0" text="Discard leader">
+           <items>
+               <MenuItem mnemonicParsing="false" text="Top leader" />
+               <MenuItem mnemonicParsing="false" text="Bottom leader" />
+           </items>
+       </MenuButton>
+       <Button fx:id="endTurnButton" layoutX="31.0" layoutY="580.0" mnemonicParsing="false" onAction="#endTurn" prefHeight="30.0" prefWidth="214.0" text="End turn" textAlignment="CENTER">
+           <font>
+               <Font size="24.0" />
+           </font>
+       </Button>
+      <Button fx:id="quitButton" layoutX="31.0" layoutY="683.0" mnemonicParsing="false" onAction="#quitGame" prefHeight="30.0" prefWidth="214.0" text="Quit game">
          <font>
             <Font size="24.0" />
-         </font>
-      </Button>
-      <Button fx:id="trayButton" layoutX="31.0" layoutY="67.0" mnemonicParsing="false" onAction="#showTray" prefHeight="30.0" prefWidth="214.0" text="Show Market Tray" textAlignment="CENTER">
-         <font>
-            <Font size="20.0" />
          </font></Button>
-      <Button fx:id="marketButton" layoutX="33.0" layoutY="181.0" mnemonicParsing="false" onAction="#showMarket" prefHeight="30.0" prefWidth="214.0" text="Show Market Cards" textAlignment="CENTER">
-         <font>
-            <Font size="20.0" />
-         </font></Button>
-      <Button fx:id="quitButton" layoutX="31.0" layoutY="715.0" mnemonicParsing="false" onAction="#quitGame" prefHeight="30.0" prefWidth="214.0" text="Quit game">
-         <font>
-            <Font size="24.0" />
-         </font></Button>
-      <MenuButton fx:id="prodButton" layoutX="33.0" layoutY="263.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="214.0" text="Activate production">
-        <items>
-          <MenuItem mnemonicParsing="false" text="Action 1" />
-          <MenuItem mnemonicParsing="false" text="Action 2" />
-        </items>
-         <font>
-            <Font size="18.0" />
-         </font>
-      </MenuButton>
-      <MenuButton fx:id="discardLeaderButton" layoutX="33.0" layoutY="492.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="214.0" text="Discard leader">
-        <items>
-          <MenuItem mnemonicParsing="false" text="Action 1" />
-          <MenuItem mnemonicParsing="false" text="Action 2" />
-        </items>
-         <font>
-            <Font size="20.0" />
-         </font>
-      </MenuButton>
    </children>
 </AnchorPane>

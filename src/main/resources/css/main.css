@@ -1,7 +1,6 @@
 .label{
-    -fx-font-size: 23;
+    /*-fx-font-size: 23;*/
     -fx-font-family: "Brush Script MT";
-    -fx-alignment: center;
 }
 
 .button{
@@ -42,11 +41,15 @@
 /* CUSTOM UNIVERSAL MENUBUTTON */
 .menu-button{
     -fx-font-family: "Brush Script MT";
-    -fx-alignment: center-left;
-    -fx-font-size: 30;
+    -fx-alignment: center;
+    -fx-text-alignment: CENTER;
+    -fx-font-size: 28;
     -fx-background-radius: 5px;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
     -fx-background-color: linear-gradient(to bottom, #eae0c2 5%, #ccc2a6 100%);
+}
+.menu-button .arrow {
+    -fx-background-color: transparent;
 }
 .menu-button:hover{
     -fx-background-color:linear-gradient(to bottom, #ccc2a6 5%, #eae0c2 100%);
@@ -62,16 +65,23 @@
 }
 .context-menu {
     -fx-font-family: "Brush Script MT";
-    -fx-text-alignment: center-left;
-    -fx-font-size: 30;
-    -fx-skin: "com.sun.javafx.scene.control.skin.ContextMenuSkin";
+    -fx-text-alignment: center;
+    -fx-font-size: 25;
+    -fx-background-radius: 5px;
+    /*-fx-skin: "com.sun.javafx.scene.control.skin.ContextMenuSkin";*/
     -fx-background-color: linear-gradient(to bottom, #eae0c2 5%, #ccc2a6 100%);
 }
 .choice-box{
     -fx-font-family: "Brush Script MT";
-    -fx-text-alignment: center-left;
-    -fx-font-size: 30;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+    -fx-font-size: 25;
     -fx-background-radius: 5px;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
     -fx-background-color: linear-gradient(to bottom, #eae0c2 5%, #ccc2a6 100%);
+    -fx-mark-color: transparent;
+    -fx-focused-mark-color: transparent;
+}
+.choice-box .arrow {
+    -fx-background-color: transparent;
 }

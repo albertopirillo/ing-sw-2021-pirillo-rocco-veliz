@@ -1,5 +1,5 @@
 .label{
-    -fx-font-size: 23;
+    /*-fx-font-size: 23;*/
     -fx-font-family: "Brush Script MT";
 }
 
@@ -42,7 +42,8 @@
 .menu-button{
     -fx-font-family: "Brush Script MT";
     -fx-alignment: center;
-    -fx-font-size: 30;
+    -fx-text-alignment: CENTER;
+    -fx-font-size: 28;
     -fx-background-radius: 5px;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
     -fx-background-color: linear-gradient(to bottom, #eae0c2 5%, #ccc2a6 100%);
@@ -64,17 +65,17 @@
 }
 .context-menu {
     -fx-font-family: "Brush Script MT";
-    -fx-text-alignment: center-left;
-    -fx-font-size: 30;
+    -fx-text-alignment: center;
+    -fx-font-size: 25;
     -fx-background-radius: 5px;
-    -fx-skin: "com.sun.javafx.scene.control.skin.ContextMenuSkin";
+    /*-fx-skin: "com.sun.javafx.scene.control.skin.ContextMenuSkin";*/
     -fx-background-color: linear-gradient(to bottom, #eae0c2 5%, #ccc2a6 100%);
 }
 .choice-box{
     -fx-font-family: "Brush Script MT";
     -fx-alignment: center;
-    -fx-text-alignment: center-left;
-    -fx-font-size: 30;
+    -fx-text-alignment: center;
+    -fx-font-size: 25;
     -fx-background-radius: 5px;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
     -fx-background-color: linear-gradient(to bottom, #eae0c2 5%, #ccc2a6 100%);

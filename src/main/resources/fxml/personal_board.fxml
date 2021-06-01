@@ -23,7 +23,7 @@
       </ImageView>
       <Label fx:id="leaderLabel" layoutX="75.0" layoutY="380.0" scaleX="2" scaleY="1.5" text="Leader Cards" textAlignment="CENTER">
          <font>
-            <Font size="30.0" />
+            <Font size="23.0" />
          </font>
       </Label>
       <ImageView fitHeight="51.0" fitWidth="56.0" layoutX="291.0" layoutY="590.0" pickOnBounds="true" preserveRatio="true">

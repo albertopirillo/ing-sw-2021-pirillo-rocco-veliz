@@ -341,7 +341,7 @@ public class ClientGUI implements UserInterface {
         SoloController soloController = mainController.getSoloController();
         Platform.runLater(() -> {
             mainController.switchSoloPopup();
-            soloController.updateTokens(update.getNextToken());
+            soloController.updateTokens(update.getLastToken());
         });
 
     }

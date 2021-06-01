@@ -829,7 +829,7 @@ public class ClientCLI implements UserInterface {
     public void updateSoloTokens(ActionTokenUpdate update) {
         clientModel.getSoloGameModel().saveSoloTokens(update);
         System.out.println("\nThe following action token has been activated:");
-        System.out.println(update.getNextToken());
+        System.out.println(update.getLastToken());
     }
 
     @Override

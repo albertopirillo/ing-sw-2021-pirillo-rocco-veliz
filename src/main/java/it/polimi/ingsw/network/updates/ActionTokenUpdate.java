@@ -5,15 +5,15 @@ import it.polimi.ingsw.model.SoloActionToken;
 
 public class ActionTokenUpdate extends ServerUpdate {
 
-    private final SoloActionToken nextToken;
+    private final SoloActionToken lastToken;
 
-    public ActionTokenUpdate(String activePlayer, SoloActionToken nextToken) {
+    public ActionTokenUpdate(String activePlayer, SoloActionToken lastToken) {
         super(activePlayer);
-        this.nextToken = nextToken;
+        this.lastToken = lastToken;
     }
 
-    public SoloActionToken getNextToken() {
-        return nextToken;
+    public SoloActionToken getLastToken() {
+        return lastToken;
     }
 
     @Override

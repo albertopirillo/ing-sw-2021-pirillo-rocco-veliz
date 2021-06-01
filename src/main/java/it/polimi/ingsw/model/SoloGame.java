@@ -61,10 +61,10 @@ public class SoloGame extends Game {
 
     @Override
     public synchronized void nextTurn() throws NegativeResAmountException {
-        this.updateLastActionToken(this.soloTokens.get(0));
         SoloActionToken currentToken = this.soloTokens.remove(0);
         currentToken.reveal();
         this.soloTokens.add(currentToken);
+        this.updateLastActionToken(currentToken);
         checkEndGame();
     }
 
@@ -89,8 +89,10 @@ public class SoloGame extends Game {
      * @param lastToken the next action token on the queue
      */
     public void updateLastActionToken(SoloActionToken lastToken) {
-        for(ModelObserver observer : getObservers())
+        for(ModelObserver observer : getObservers()) {
             observer.showLastActionToken(this, lastToken);
+            observer.showFaithTrack(this);
+        }
     }
 
     @Override

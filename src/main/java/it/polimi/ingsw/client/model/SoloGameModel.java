@@ -10,15 +10,15 @@ import java.util.List;
 public class SoloGameModel {
     private final ClientModel clientModel;
 
-    private SoloActionToken nextToken;
+    private SoloActionToken lastToken;
     private List<DevelopmentCard> discardedCards;
 
     public SoloGameModel(ClientModel clientModel) {
         this.clientModel = clientModel;
     }
 
-    public SoloActionToken getNextToken() {
-        return nextToken;
+    public SoloActionToken getLastToken() {
+        return lastToken;
     }
 
     public List<DevelopmentCard> getDiscardedCards() {
@@ -26,7 +26,7 @@ public class SoloGameModel {
     }
 
     public void saveSoloTokens(ActionTokenUpdate update) {
-        this.nextToken = update.getNextToken();
+        this.lastToken = update.getLastToken();
     }
 
     public void saveDiscardedCards(DiscardedCardsUpdate update) {
@@ -35,7 +35,7 @@ public class SoloGameModel {
 
     public ActionTokenUpdate buildActionTokenUpdate() {
         String nickname = clientModel.getNickname();
-        return new ActionTokenUpdate(nickname, nextToken);
+        return new ActionTokenUpdate(nickname, lastToken);
     }
 
     public DiscardedCardsUpdate buildDiscardedCardsUpdate() {

@@ -802,7 +802,7 @@ public class ClientCLI implements UserInterface {
         List<DevelopmentCard> devCards = update.getDevCardList();
         int index = 0;
         for(DevelopmentCard devCard: devCards){
-            System.out.println("\nCard " + index++ + " (url.pdf) ");
+            System.out.println("\nCard " + index++ + " (" + devCard.getImg() + ".png) ");
             System.out.println(devCard);
         }
         System.out.println();

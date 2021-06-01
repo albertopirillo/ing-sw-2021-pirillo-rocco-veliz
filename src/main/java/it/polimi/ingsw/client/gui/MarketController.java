@@ -230,7 +230,7 @@ public class MarketController implements Initializable {
                 e.printStackTrace();
             }
             int index = Integer.parseInt(this.selectedCard.getId().substring(7));
-            DevelopmentCard card = this.mainController.getClientModel().getMarketModel().getDevCardList().get(index);
+            DevelopmentCard card = this.mainController.getClientModel().getMarketModel().getDevCardList().get(index-1);
             int level = card.getLevel();
             CardColor color = card.getType();
             int numSlot = Integer.parseInt(this.slot.getId().substring(4));

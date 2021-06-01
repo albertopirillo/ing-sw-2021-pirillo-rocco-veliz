@@ -118,5 +118,14 @@
       <ImageView id="popeFavor01" fx:id="popeFavor01" fitHeight="83.0" fitWidth="83.0" layoutX="523.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView id="popeFavor02" fx:id="popeFavor02" fitHeight="83.0" fitWidth="83.0" layoutX="796.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView id="popeFavor03" fx:id="popeFavor03" fitHeight="83.0" fitWidth="83.0" layoutX="1123.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="slot1_1" fitHeight="293.0" fitWidth="187.0" layoutX="686.0" layoutY="463.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="slot1_2" fitHeight="293.0" fitWidth="187.0" layoutX="686.0" layoutY="411.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="slot1_3" fitHeight="293.0" fitWidth="187.0" layoutX="686.0" layoutY="359.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="slot2_1" fitHeight="293.0" fitWidth="187.0" layoutX="900.0" layoutY="463.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="slot2_2" fitHeight="293.0" fitWidth="187.0" layoutX="900.0" layoutY="411.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="slot2_3" fitHeight="293.0" fitWidth="187.0" layoutX="900.0" layoutY="359.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="slot3_1" fitHeight="293.0" fitWidth="187.0" layoutX="1119.0" layoutY="463.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="slot3_2" fitHeight="293.0" fitWidth="187.0" layoutX="1119.0" layoutY="411.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="slot3_3" fitHeight="293.0" fitWidth="187.0" layoutX="1119.0" layoutY="359.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

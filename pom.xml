@@ -97,24 +97,17 @@
         <plugin>
           <artifactId>maven-jar-plugin</artifactId>
           <version>3.0.2</version>
-        </plugin>
-
-        <plugin>
-          <artifactId>maven-install-plugin</artifactId>
-          <version>2.5.2</version>
-        </plugin>
-
-        <!--JavaFX maven plugin-->
-        <plugin>
-          <groupId>org.openjfx</groupId>
-          <artifactId>javafx-maven-plugin</artifactId>
-          <version>0.0.6</version>
           <configuration>
-            <mainClass>it.polimi.ingsw.client.gui.JavaFXMain</mainClass>
+            <archive>
+              <manifest>
+                <addClasspath>true</addClasspath>
+                <mainClass>it.polimi.ingsw.network.ClientMain</mainClass>
+              </manifest>
+            </archive>
           </configuration>
         </plugin>
 
-        <!--JavaFX configuration-->
+        <!--JAR generation configuration-->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-shade-plugin</artifactId>
@@ -132,12 +125,27 @@
                 <transformers>
                   <transformer implementation=
                                        "org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                    <mainClass>it.polimi.ingsw.client.gui.JavaFXMain</mainClass>
+                    <mainClass>it.polimi.ingsw.network.ClientMain</mainClass>
                   </transformer>
                 </transformers>
               </configuration>
             </execution>
           </executions>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>2.5.2</version>
+        </plugin>
+
+        <!--JavaFX maven plugin-->
+        <plugin>
+          <groupId>org.openjfx</groupId>
+          <artifactId>javafx-maven-plugin</artifactId>
+          <version>0.0.6</version>
+          <configuration>
+            <mainClass>it.polimi.ingsw.client.gui.JavaFXMain</mainClass>
+          </configuration>
         </plugin>
 
         <plugin>

@@ -4,7 +4,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="trayRoot" prefHeight="655.0" prefWidth="504.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.TrayController">
+<AnchorPane fx:id="trayRoot" prefHeight="655.0" prefWidth="504.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 20, 0, 0, 0)" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.TrayController">
    <children>
       <ImageView fitHeight="328.0" fitWidth="366.0" layoutX="70.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
          <image>

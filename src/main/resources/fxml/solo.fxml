@@ -5,9 +5,9 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-<AnchorPane prefHeight="820.0" prefWidth="847.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.SoloController">
+<AnchorPane prefHeight="840.0" prefWidth="847.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 20, 0, 0, 0)" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.SoloController">
    <children>
-      <ImageView fitHeight="926.0" fitWidth="849.0" opacity="0.95" pickOnBounds="true">
+      <ImageView fitHeight="840.0" fitWidth="849.0" opacity="0.95" pickOnBounds="true" style="-fx-background-radius: 10">
          <image>
             <Image url="@../png/generic/background_wall.png" />
          </image>

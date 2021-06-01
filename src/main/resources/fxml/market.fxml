@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane accessibleRole="BUTTON" prefHeight="700.0" prefWidth="1026.0" stylesheets="@../css/market.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.MarketController">
+<AnchorPane accessibleRole="BUTTON" prefHeight="700.0" prefWidth="1026.0" stylesheets="@../css/market.css" style="-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 20, 0, 0, 0)" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.MarketController">
    <children>
       <Pane layoutX="350.0" prefHeight="700.0" prefWidth="673.0">
          <children>

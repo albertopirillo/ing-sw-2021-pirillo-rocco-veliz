@@ -113,6 +113,10 @@ public class MainController implements Initializable {
         return personalBoardControllerMap;
     }
 
+    public PersonalBoardController getPersonalBoardController(){
+        return getPersonalBoardController(getNickname());
+    }
+
     /**
      * Gets the PersonalBoardController associated to the given nickname
      * @param nickname the player to retrieve the controller
@@ -399,18 +403,24 @@ public class MainController implements Initializable {
         this.setProductionDone(false);
     }
 
-    public void discardRequest01(){
+    public void discardLeaderRequest01(){
         Request request = new UseLeaderRequest(0, LeaderAction.DISCARD);
         sendMessage(request);
     }
 
-    public void discardRequest02(){
+    public void discardLeaderRequest02(){
         Request request = new UseLeaderRequest(1, LeaderAction.DISCARD);
         sendMessage(request);
     }
 
-    public PersonalBoardController getPersonalBoardController(){
-        return getPersonalBoardController(getNickname());
+    public void useLeaderRequest01(){
+        Request request = new UseLeaderRequest(0, LeaderAction.USE_ABILITY);
+        sendMessage(request);
+    }
+
+    public void useLeaderRequest02(){
+        Request request = new UseLeaderRequest(1, LeaderAction.USE_ABILITY);
+        sendMessage(request);
     }
 
     @Override

@@ -81,8 +81,10 @@ public class SoloGame extends Game {
      * @param cardList a list with the two cards that were discarded
      */
     public void updateDiscardedCards(List<DevelopmentCard> cardList){
-        for(ModelObserver observer : getObservers())
+        for(ModelObserver observer : getObservers()) {
             observer.showDiscardedCards(this, cardList);
+            observer.showMarket(this);
+        }
     }
 
     /**

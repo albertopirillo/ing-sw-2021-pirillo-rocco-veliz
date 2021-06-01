@@ -273,6 +273,15 @@ public class ClientGUI implements UserInterface {
     @Override
     public void updateDevSlots(DevSlotsUpdate update) {
         clientModel.getPersonalBoardModel().saveDevSlots(update);
+        printLog("Updating Development Slots...");
+        Platform.runLater(() -> {
+            Map<String, List<DevelopmentSlot>> devSlotsMap = update.getDevSlotMap();
+            Map<String, PersonalBoardController> controllerMap = mainController.getPersonalBoardControllerMap();
+            for(String playerNick: devSlotsMap.keySet()) {
+                PersonalBoardController currentController = controllerMap.get(playerNick);
+                currentController.updateDevSlots(devSlotsMap.get(playerNick));
+            }
+        });
 
     }
 
@@ -301,10 +310,8 @@ public class ClientGUI implements UserInterface {
     @Override
     public void updateMarket(MarketUpdate update) {
         clientModel.getMarketModel().saveMarket(update);
-        Platform.runLater(() -> {
-            printLog("Updating market...");
-            mainController.getMarketController().updateMarket(update.getCardImgs());
-        });
+        printLog("Updating market...");
+        Platform.runLater(() -> mainController.getMarketController().updateMarket(update.getCardImgs()));
     }
 
     @Override

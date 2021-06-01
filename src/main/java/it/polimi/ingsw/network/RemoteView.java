@@ -139,9 +139,9 @@ public class RemoteView implements ModelObserver {
     }
 
     @Override
-    public void showNextActionToken(SoloGame soloGame, SoloActionToken nextToken) {
+    public void showLastActionToken(SoloGame soloGame, SoloActionToken lastToken) {
         Player activePlayer = soloGame.getActivePlayer();
-        ServerUpdate msg = new ActionTokenUpdate(activePlayer.getNickname(), nextToken);
+        ServerUpdate msg = new ActionTokenUpdate(activePlayer.getNickname(), lastToken);
         connection.sendMessage(msg);
     }
 

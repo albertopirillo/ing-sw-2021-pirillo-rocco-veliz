@@ -280,6 +280,7 @@ public class MainController implements Initializable {
         this.soloController.setMainController(this);
         this.soloPopUp.getContent().add(solo);
         this.soloPopUp.setAutoHide(true);
+        this.soloPopUp.setOnAutoHide(event -> this.soloController.hideCards());
     }
 
     public void switchSoloPopup() {

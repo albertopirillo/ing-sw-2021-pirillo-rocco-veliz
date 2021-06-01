@@ -19,7 +19,7 @@ public interface ModelObserver {
     void showDevSlots(Game game);
     void showTempRes(Game game);
     void showDiscardedCards(SoloGame soloGame, List<DevelopmentCard> cardList);
-    void showNextActionToken(SoloGame soloGame, SoloActionToken nextToken);
+    void showLastActionToken(SoloGame soloGame, SoloActionToken lastToken);
     void quitGame();
     String getPlayer();
     void showTempMarbles(Game game, int numWhiteMarbles);

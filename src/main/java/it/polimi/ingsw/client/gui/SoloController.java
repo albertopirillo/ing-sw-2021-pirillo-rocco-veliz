@@ -30,6 +30,10 @@ public class SoloController implements Initializable {
 
     public void continueGame() {
         mainController.switchSoloPopup();
+        hideCards();
+    }
+
+    public void hideCards() {
         lastTokenLabel.setText("Lorenzo did not discard any card");
         firstCard.setVisible(false);
         secondCard.setVisible(false);
@@ -45,8 +49,6 @@ public class SoloController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        lastTokenLabel.setText("Lorenzo did not discard any card");
-        firstCard.setVisible(false);
-        secondCard.setVisible(false);
+        hideCards();
     }
 }

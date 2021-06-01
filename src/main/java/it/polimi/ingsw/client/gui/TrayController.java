@@ -74,13 +74,20 @@ public class TrayController implements Initializable {
     }
 
     public void dragDetection(MouseEvent event) {
-        Dragboard db = this.remaining.startDragAndDrop(TransferMode.ANY);
-        ClipboardContent cb = new ClipboardContent();
-        //cb.putImage(this.remaining.getImage());
-        cb.putString("");
-        //db.setDragView(this.remaining.getImage());
-        db.setContent(cb);
-        event.consume();
+        if (!mainController.isMainActionDone()) {
+            Dragboard db = this.remaining.startDragAndDrop(TransferMode.ANY);
+            ClipboardContent cb = new ClipboardContent();
+            //cb.putImage(this.remaining.getImage());
+            cb.putString("");
+            //db.setDragView(this.remaining.getImage());
+            db.setContent(cb);
+            event.consume();
+        }
+        else {
+            String errorMsg = "You already performed an action this turn";
+            ErrorAlert errorAlert = new ErrorAlert(errorMsg);
+            errorAlert.showAndWait();
+        }
     }
 
     /**
@@ -93,7 +100,6 @@ public class TrayController implements Initializable {
         Request request = new InsertMarbleRequest(Integer.parseInt(destination.getId().substring(destination.getId().length() - 1)));
         this.mainController.sendMessage(request);
         this.mainController.closeTray();
-
     }
 
     public void dragOver(DragEvent event) {

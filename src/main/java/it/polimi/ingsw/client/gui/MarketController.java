@@ -142,10 +142,17 @@ public class MarketController implements Initializable {
     }
 
     public void buyCard(MouseEvent mouseEvent) {
-        if(this.selectedCard != null) this.selectedCard.getStyleClass().remove("selected-card");
-        this.selectedCard = ((ImageView) mouseEvent.getSource());
-        selectedCard.getStyleClass().add("selected-card");
-        this.buyPanel.setVisible(true);
+        if(mainController.isMainActionDone()) {
+            String errorMsg = "You already performed an action this turn";
+            ErrorAlert errorAlert = new ErrorAlert(errorMsg);
+            errorAlert.showAndWait();
+        }
+        else {
+            if (this.selectedCard != null) this.selectedCard.getStyleClass().remove("selected-card");
+            this.selectedCard = ((ImageView) mouseEvent.getSource());
+            selectedCard.getStyleClass().add("selected-card");
+            this.buyPanel.setVisible(true);
+        }
     }
 
     public void dragDetection(MouseEvent mouseEvent) {

@@ -21,6 +21,8 @@ public class ClientGUI implements UserInterface {
     private final Client client;
     private final MainController mainController;
     private final ClientModel clientModel;
+    private boolean mainActionDone;
+    private boolean productionDone;
     private final boolean testing = false;
     private final int playerAmountTesting = 2;
 
@@ -28,6 +30,24 @@ public class ClientGUI implements UserInterface {
         this.client = client;
         this.clientModel = new ClientModel();
         this.mainController = controller;
+        this.mainActionDone = false;
+        this.productionDone = false;
+    }
+
+    public boolean isMainActionDone() {
+        return this.mainActionDone;
+    }
+
+    public boolean isProductionDone() {
+        return this.productionDone;
+    }
+
+    public void setMainActionDone(Boolean mainActionDone) {
+        this.mainActionDone = mainActionDone;
+    }
+
+    public void setProductionDone(Boolean productionDone) {
+        this.productionDone = productionDone;
     }
 
     @Override
@@ -327,12 +347,16 @@ public class ClientGUI implements UserInterface {
 
     @Override
     public void updateProductionDone(ProductionDoneUpdate update){
-
+        if(update.getActivePlayer().equals(this.nickname)){
+            this.productionDone = true;
+        }
     }
 
     @Override
     public void updateActionDone(MainActionDoneUpdate update) {
-
+        if(update.getActivePlayer().equals(this.nickname)){
+            this.mainActionDone = true;
+        }
     }
 
     @Override

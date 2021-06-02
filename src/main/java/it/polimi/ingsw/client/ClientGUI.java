@@ -349,7 +349,9 @@ public class ClientGUI implements UserInterface {
     @Override
     public void updateTempMarbles(TempMarblesUpdate update) {
         clientModel.getMarketModel().saveTempMarbles(update);
-        
+        Platform.runLater(() -> {
+            mainController.getTrayController().updateTempMarbles();
+        });
     }
 
     @Override

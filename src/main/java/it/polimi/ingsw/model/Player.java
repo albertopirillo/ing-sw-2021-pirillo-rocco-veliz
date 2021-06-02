@@ -104,7 +104,6 @@ public class Player {
      */
     public void addPlayerFaith(int amount) {
         this.getPersonalBoard().getFaithTrack().addPlayerFaith(amount);
-        this.getPersonalBoard().updateFaithTrack(this.game.getPlayersList());
     }
 
     /**

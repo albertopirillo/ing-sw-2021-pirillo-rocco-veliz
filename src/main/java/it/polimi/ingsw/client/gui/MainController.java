@@ -273,8 +273,8 @@ public class MainController implements Initializable {
         this.trayController = loader.getController();
         this.trayController.setMainController(this);
         this.trayPopup.getContent().add(tray);
-        this.trayPopup.setX(1000);
-        this.trayPopup.setY(200);
+        this.trayPopup.setX(800);
+        this.trayPopup.setY(120);
         this.trayPopup.setAutoHide(true);
         this.trayPopup.setOnAutoHide(event -> this.trayButton.setText("Market Tray"));
     }
@@ -286,8 +286,8 @@ public class MainController implements Initializable {
         this.marketController = loader.getController();
         this.marketController.setMainController(this);
         this.marketPopup.getContent().add(market);
-        this.marketPopup.setX(500);
-        this.marketPopup.setY(200);
+        this.marketPopup.setX(650);
+        this.marketPopup.setY(120);
         this.marketPopup.setAutoHide(true);
         this.marketPopup.setOnAutoHide(event -> this.marketButton.setText("Market Cards"));
     }
@@ -308,7 +308,8 @@ public class MainController implements Initializable {
         this.basicProductionController = loader.getController();
         this.basicProductionController.setMainController(this);
         this.basicPopUp.getContent().add(basic);
-        this.basicPopUp.setX(700);
+        this.basicPopUp.setX(900);
+        this.basicPopUp.setY(120);
         this.basicPopUp.setAutoHide(true);
         this.basicPopUp.setOnAutoHide(event -> prodButton.setText("Use production"));
     }

@@ -38,10 +38,12 @@ public class PlayerController {
             Player activePlayer = controller.getGame().getActivePlayer();
             activePlayer.basicProduction(input1, input2, output, fromDepot, fromStrongbox);
             controller.getGame().updateStorages();
-            controller.getGame().setProductionDone();
-            controller.getGame().setMainActionDone();
             controller.resetException();
-            if (!testing) this.mainActionDone = true;
+            if (!testing) {
+                this.mainActionDone = true;
+                controller.getGame().setProductionDone();
+                controller.getGame().setMainActionDone();
+            }
         } catch (MainActionException | CostNotMatchingException | NotEnoughSpaceException | CannotContainFaithException | NotEnoughResException | NegativeResAmountException e) {
             controller.setException(e);
             controller.getGame().updateClientError(controller.getClientError());
@@ -80,9 +82,11 @@ public class PlayerController {
                 controller.getGame().updateStorages();
                 controller.getGame().updateTempRes();
             }
-            controller.getGame().setMainActionDone();
             controller.resetException();
-            if (!testing) this.mainActionDone = true;
+            if (!testing) {
+                this.mainActionDone = true;
+                controller.getGame().setMainActionDone();
+            }
         } catch (NegativeResAmountException | InvalidKeyException | MainActionException e) {
             controller.setException(e);
             controller.getGame().updateClientError(controller.getClientError());
@@ -120,9 +124,11 @@ public class PlayerController {
             controller.getGame().updateMarket();
             controller.getGame().updateDevSlots();
             controller.getGame().updateStorages();
-            controller.getGame().setMainActionDone();
             controller.resetException();
-            if(!testing) this.mainActionDone = true;
+            if(!testing)  {
+                this.mainActionDone = true;
+                controller.getGame().setMainActionDone();
+            }
         } catch (CannotContainFaithException | NotEnoughSpaceException | NegativeResAmountException | DeckEmptyException | CostNotMatchingException | NotEnoughResException | InvalidKeyException | NoLeaderAbilitiesException | InvalidAbilityChoiceException | DevSlotEmptyException | InvalidNumSlotException | MainActionException e) {
             controller.setException(e);
             controller.getGame().updateClientError(controller.getClientError());
@@ -237,9 +243,11 @@ public class PlayerController {
             strongbox.retrieveRes(fromStrongbox);
             //controller.getGame().updateFaithTrack();
             controller.getGame().updateStorages();
-            controller.getGame().setMainActionDone();
             controller.resetException();
-            if(!testing) this.mainActionDone = true;
+            if(!testing) {
+                this.mainActionDone = true;
+                controller.getGame().setMainActionDone();
+            }
         } catch (CostNotMatchingException | NotEnoughResException | NegativeResAmountException | DevSlotEmptyException | NotEnoughSpaceException | CannotContainFaithException | MainActionException e) {
             controller.setException(e);
             controller.getGame().updateClientError(controller.getClientError());

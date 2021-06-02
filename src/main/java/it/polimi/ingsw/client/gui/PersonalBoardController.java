@@ -94,7 +94,7 @@ public class PersonalBoardController implements Initializable {
     /**
      * List of all the corresponding images in tempResource
      */
-    private final List<ImageView> tempResources = new ArrayList<>();
+    private final List<ImageView> tempResAsImage = new ArrayList<>();
     /**
      * The structure of the associated Depot
      */
@@ -102,7 +102,7 @@ public class PersonalBoardController implements Initializable {
     /**
      * The data of the associated temporary resource
      */
-    private List<ResourceType> tempResAsList;
+    private final List<ResourceType> tempResAsList = new ArrayList<>();
     /**
      * Reference to the Model in the client
      */
@@ -157,7 +157,7 @@ public class PersonalBoardController implements Initializable {
         depot5_1.setDisable(true);
         depot5_2.setDisable(true);
         this.layerMapping.put(5, secondExtraLayer);
-        Collections.addAll(tempResources, tempRes1, tempRes2, tempRes3, tempRes4);
+        Collections.addAll(tempResAsImage, tempRes1, tempRes2, tempRes3, tempRes4);
         resSupply.setVisible(false);
         tempRes1.setDisable(true);
         tempRes2.setDisable(true);
@@ -346,17 +346,16 @@ public class PersonalBoardController implements Initializable {
      */
     public void updateTempResources(Resource tempRes) {
         resSupply.setVisible(true);
-        this.tempResAsList = new ArrayList<>();
         int currentImage = 0;
         try {
             for (ResourceType res : tempRes.keySet()) {
                 int amount = tempRes.getValue(res);
                 for (int j = 0; j < amount; j++) {
                     this.tempResAsList.add(res);
-                    ImageView imageView = tempResources.get(currentImage);
-                    currentImage++;
+                    ImageView imageView = tempResAsImage.get(currentImage);
                     imageView.setDisable(false);
                     imageView.setImage(Util.resToImage(res));
+                    currentImage++;
                 }
             }
             //Now placement can start
@@ -385,11 +384,12 @@ public class PersonalBoardController implements Initializable {
     }
 
     private void resetResSupply() {
-        for(ImageView imageView: this.tempResources) {
+        for(ImageView imageView: this.tempResAsImage) {
             imageView.setImage(null);
             imageView.setDisable(true);
         }
         resSupply.setVisible(false);
+        this.tempResAsList.clear();
     }
 
     /**
@@ -441,10 +441,10 @@ public class PersonalBoardController implements Initializable {
     public void updateLeaderCards(List<LeaderCard> playerCards) {
         if (playerCards.size() > 0){
             String img0 = playerCards.get(0).getImg();
-            leaderCard0.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/png/leader_cards/" + img0))));
+            leaderCard0.setImage(Util.getLeaderImg(img0));
             if (playerCards.size() > 1){
                 String img1 = playerCards.get(1).getImg();
-                leaderCard1.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/png/leader_cards/" + img1))));
+                leaderCard1.setImage(Util.getLeaderImg(img1));
             } else {
                 leaderCard1.setImage(null);
             }

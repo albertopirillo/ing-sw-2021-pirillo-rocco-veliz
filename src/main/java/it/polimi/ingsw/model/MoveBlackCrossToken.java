@@ -26,6 +26,6 @@ public class MoveBlackCrossToken extends SoloActionToken {
 
     @Override
     public String getID() {
-        return "Move2";
+        return "move2";
     }
 }

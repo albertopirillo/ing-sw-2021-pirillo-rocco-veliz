@@ -36,7 +36,6 @@ class DiscardDevCardsTokenTest {
         assertEquals(12, market.getAvailableCards().size());
         token.reveal();
         assertTrue(market.isDeckEmpty(1, CardColor.BLUE));
-        assertEquals(11, market.getAvailableCards().size());
     }
 
     @Test

@@ -104,13 +104,14 @@ public class Player {
      */
     public void addPlayerFaith(int amount) {
         this.getPersonalBoard().getFaithTrack().addPlayerFaith(amount);
+        this.getPersonalBoard().updateFaithTrack(this.game.getPlayersList());
     }
 
     /**
      * Gets the current victory points of the player
      * @return an int representing the victory points
      */
-    public int getVictoryPoints() {return victoryPoints;}
+    public int getVictoryPoints() {return this.victoryPoints;}
 
     /**
      * Adds victory points to the player

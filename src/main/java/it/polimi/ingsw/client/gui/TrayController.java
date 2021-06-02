@@ -3,11 +3,19 @@ package it.polimi.ingsw.client.gui;
 import it.polimi.ingsw.model.MarblesColor;
 import it.polimi.ingsw.network.requests.InsertMarbleRequest;
 import it.polimi.ingsw.network.requests.Request;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,12 +39,17 @@ public class TrayController implements Initializable {
      */
     private MainController mainController;
 
+    private TempMarblesController tempMarblesController;
+
+    private Stage tempMarbles = new Stage();
+
     /**
      * Sets the MainController
      * @param mainController  the MainController to associate with this controller
      */
     public void setMainController(MainController mainController) {
         this.mainController = mainController;
+        this.tempMarblesController.setMainController(this.mainController);
     }
 
     /**
@@ -57,6 +70,18 @@ public class TrayController implements Initializable {
         this.marketTray.add(tray_11);
         this.marketTray.add(tray_12);
         this.remaining = tray_white;
+
+        FXMLLoader loader = Util.loadFXML("temp_marbles");
+        try {
+            Parent temp = loader.load();
+            this.tempMarbles.setScene(new Scene(temp));
+            this.tempMarbles.initModality(Modality.APPLICATION_MODAL);
+            this.tempMarbles.initStyle(StageStyle.UNDECORATED);
+            this.tempMarblesController = loader.getController();
+            this.tempMarbles.setOnCloseRequest(event -> event.consume());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -111,5 +136,23 @@ public class TrayController implements Initializable {
 
     public void dragExit(DragEvent event) {
         ((ImageView)event.getSource()).setImage(null);
+    }
+
+    public void change(ActionEvent actionEvent) {
+        System.out.println("ok");
+    }
+
+    public void updateTempMarbles() {
+        this.tempMarblesController.updateTemMarbles();
+        switchTempStage();
+    }
+
+    public void switchTempStage() {
+        if (!this.tempMarbles.isShowing()) {
+            this.tempMarbles.show();
+        }
+        else {
+            this.tempMarbles.close();
+        }
     }
 }

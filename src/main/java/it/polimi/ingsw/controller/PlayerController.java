@@ -74,6 +74,7 @@ public class PlayerController {
             ResourceController resourceController = controller.getResourceController();
             resourceController.getTempRes().setToHandle(output);
             if(output.hasAllResources()){
+                controller.getGame().updateMarketTray();
                 controller.getGame().updateTempMarbles(output.getValue(ResourceType.ALL));
             }
             else {

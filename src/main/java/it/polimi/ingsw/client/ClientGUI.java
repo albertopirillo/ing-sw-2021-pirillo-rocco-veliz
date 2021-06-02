@@ -247,6 +247,7 @@ public class ClientGUI implements UserInterface {
                 PersonalBoardController currentController = controllerMap.get(playerNick);
                 currentController.setDepot(depotMap.get(playerNick));
                 currentController.setStrongbox(strongboxMap.get(playerNick));
+                this.mainController.getMarketController().loadStorages();
             }
         });
     }
@@ -280,6 +281,7 @@ public class ClientGUI implements UserInterface {
             for(String playerNick: devSlotsMap.keySet()) {
                 PersonalBoardController currentController = controllerMap.get(playerNick);
                 currentController.updateDevSlots(devSlotsMap.get(playerNick));
+                this.mainController.getMarketController().loadSlots();
             }
         });
 
@@ -311,7 +313,7 @@ public class ClientGUI implements UserInterface {
     public void updateMarket(MarketUpdate update) {
         clientModel.getMarketModel().saveMarket(update);
         printLog("Updating market...");
-        Platform.runLater(() -> mainController.getMarketController().updateMarket(update.getCardImgs()));
+        Platform.runLater(() -> mainController.getMarketController().updateMarket());
     }
 
     @Override
@@ -349,7 +351,9 @@ public class ClientGUI implements UserInterface {
     @Override
     public void updateTempMarbles(TempMarblesUpdate update) {
         clientModel.getMarketModel().saveTempMarbles(update);
-        
+        Platform.runLater(() -> {
+            mainController.getTrayController().updateTempMarbles();
+        });
     }
 
     @Override

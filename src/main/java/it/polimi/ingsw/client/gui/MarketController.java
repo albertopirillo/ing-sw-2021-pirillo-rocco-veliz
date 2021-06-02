@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client.gui;
 
+import it.polimi.ingsw.exceptions.DevSlotEmptyException;
 import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import it.polimi.ingsw.model.*;
@@ -16,19 +17,20 @@ import javafx.scene.layout.Pane;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class MarketController implements Initializable {
 
     @FXML
-    private ImageView imgCard1, imgCard2, imgCard3, imgCard4, imgCard5, imgCard6, imgCard7, imgCard8;
-    @FXML
-    private ImageView imgCard9, imgCard10, imgCard11, imgCard12;
+    private ImageView imgCard1, imgCard2, imgCard3, imgCard4, imgCard5, imgCard6, imgCard7, imgCard8, imgCard9, imgCard10, imgCard11, imgCard12;
     @FXML
     private ImageView r_stone, r_servant, r_shield, r_coin;
     @FXML
     private ImageView depot1_1, depot2_1, depot2_2, depot3_1, depot3_2, depot3_3;
+    @FXML
+    private ImageView slot1, slot2, slot3;
     @FXML
     private Label d_stone, d_servant, d_shield, d_coin;
     @FXML
@@ -50,6 +52,8 @@ public class MarketController implements Initializable {
     private ImageView slot;
 
     private ImageView source;
+
+    private final List<ImageView> slotList = new ArrayList<>();
 
     /**
      * The list of all sixteen corresponding images of the Developement Cards
@@ -86,21 +90,22 @@ public class MarketController implements Initializable {
         this.devCards.add(imgCard10);
         this.devCards.add(imgCard11);
         this.devCards.add(imgCard12);
+        Collections.addAll(this.slotList, slot1, slot2, slot3);
         this.buyPanel.setVisible(false);
         comboBox.getItems().clear();
         comboBox.getItems().addAll("No ability", "First Ability", "Second Ability", "Both Ability");
         comboBox.getSelectionModel().select("No ability");
+        this.stone.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 0));
+        this.servant.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 0));
+        this.shield.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 0));
+        this.coin.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 0));
     }
 
-    public void loadPanes() {
-        closeBuyPanel();
-        loadStorages();
-    }
 
     /**
      * Reset the Buy Panel to the default
      */
-    private void closeBuyPanel(){
+    public void closeBuyPanel(){
         this.r_stone.setImage(null);
         this.r_servant.setImage(null);
         this.r_shield.setImage(null);
@@ -116,7 +121,7 @@ public class MarketController implements Initializable {
         if(slot != null) this.slot.getStyleClass().remove("selected-card");
     }
 
-    private void loadStorages() {
+    public void loadStorages() {
         List<Image> imgs = this.mainController.getPersonalBoardController().getDepotImgs();
         depot1_1.setImage(imgs.get(0));
         depot2_1.setImage(imgs.get(1));
@@ -126,18 +131,37 @@ public class MarketController implements Initializable {
         depot3_3.setImage(imgs.get(5));
         Resource strongbox = this.mainController.getClientModel().getStoragesModel().getStrongboxMap().get(this.mainController.getNickname());
         try {
-            this.stone.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, strongbox.getValue(ResourceType.STONE)));
-            this.servant.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, strongbox.getValue(ResourceType.SERVANT)));
-            this.shield.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, strongbox.getValue(ResourceType.SHIELD)));
-            this.coin.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, strongbox.getValue(ResourceType.COIN)));
+            ((SpinnerValueFactory.IntegerSpinnerValueFactory)this.stone.getValueFactory()).setMax(strongbox.getValue(ResourceType.STONE));
+            ((SpinnerValueFactory.IntegerSpinnerValueFactory)this.stone.getValueFactory()).setMax(strongbox.getValue(ResourceType.STONE));
+            ((SpinnerValueFactory.IntegerSpinnerValueFactory)this.stone.getValueFactory()).setMax(strongbox.getValue(ResourceType.STONE));
+            ((SpinnerValueFactory.IntegerSpinnerValueFactory)this.stone.getValueFactory()).setMax(strongbox.getValue(ResourceType.STONE));
         } catch (InvalidKeyException e) {
             e.printStackTrace();
         }
     }
 
-    public void updateMarket(List<String> imgs) {
-        for(int i=0; i<imgs.size(); i++){
-            devCards.get(i).setImage(Util.getDevCardImg((imgs.get(i))));
+    public void loadSlots(){
+        List<DevelopmentSlot> slots = this.mainController.getClientModel().getPersonalBoardModel().getDevSlotMap().get(this.mainController.getNickname());
+        int i = 0;
+        for (DevelopmentSlot slot : slots){
+            try {
+                slotList.get(i).setImage(Util.getDevCardImg(slot.getTopCard().getImg()));
+            } catch (DevSlotEmptyException e) {
+                slotList.get(i).setImage(Util.getGenericImg("emptyCard"));
+            }
+            finally {
+                i++;
+            }
+        }
+    }
+
+    public void updateMarket() {
+        List<DevelopmentCard> cards = this.mainController.getClientModel().getMarketModel().getDevCardList();
+        for(int i=0; i<devCards.size(); i++){
+            if(cards.get(i)!=null)
+                devCards.get(i).setImage(Util.getDevCardImg(cards.get(i).getImg()));
+            else
+                devCards.get(i).setImage(Util.getGenericImg("emptyCard"));
         }
     }
 
@@ -152,6 +176,10 @@ public class MarketController implements Initializable {
             this.selectedCard = ((ImageView) mouseEvent.getSource());
             selectedCard.getStyleClass().add("selected-card");
             this.buyPanel.setVisible(true);
+            this.slots.setVisible(false);
+            this.depot.setVisible(true);
+            this.buyButton.setText("Select Slot");
+            this.buyButton.setDisable(false);
         }
     }
 
@@ -237,16 +265,17 @@ public class MarketController implements Initializable {
             AbilityChoice choice = getAbilityChoice(comboBox.getSelectionModel().getSelectedIndex());
             Request request = new BuyDevCardRequest(level, color, choice, depot, strongbox, numSlot - 1);
             this.mainController.sendMessage(request);
+            this.mainController.closeMarket();
         }
     }
 
     private AbilityChoice getAbilityChoice(int index){
-        switch (index){
-            case 0: return AbilityChoice.STANDARD;
-            case 1: return AbilityChoice.FIRST;
-            case 2: return AbilityChoice.SECOND;
-            case 3: return AbilityChoice.BOTH;
-        }
-        return null;
+        return switch (index) {
+            case 0 -> AbilityChoice.STANDARD;
+            case 1 -> AbilityChoice.FIRST;
+            case 2 -> AbilityChoice.SECOND;
+            case 3 -> AbilityChoice.BOTH;
+            default -> null;
+        };
     }
 }

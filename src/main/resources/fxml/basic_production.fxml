@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="645.0" prefWidth="675.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 20, 0, 0, 0)" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.BasicProductionController">
+   <!--BACKGROUND-->
+   <ImageView fitHeight="645.0" fitWidth="675.0" pickOnBounds="true">
+      <Image url="@../png/generic/backBasic.png" />
+   </ImageView>
+   <!--INPUTRESOURCES-->
+   <Label alignment="CENTER" layoutX="168.0" layoutY="33.0" prefHeight="30.0" prefWidth="73.0" scaleX="4.5" scaleY="4.5" styleClass="customInitLeaderLabel" stylesheets="@../css/customMenuLabel.css" text="Input Resources" />
+   <!--INPUT 01-->
+   <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="58.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../png/res/stone.png" />
+   </ImageView>
+   <RadioButton fx:id="rdIN1_1" layoutX="72.0" layoutY="172.0" mnemonicParsing="false" onAction="#onClickStone1" scaleX="0.7" scaleY="0.7" stylesheets="@../css/setup.css">
+      <toggleGroup>
+         <ToggleGroup fx:id="toggleGroupIN1" />
+      </toggleGroup>
+   </RadioButton>
+   <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="331.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../png/res/servant.png" />
+   </ImageView>
+   <RadioButton fx:id="rdIN1_2" layoutX="163.0" layoutY="172.0" mnemonicParsing="false" onAction="#onClickShield1" scaleX="0.7" scaleY="0.7" stylesheets="@../css/setup.css" toggleGroup="$toggleGroupIN1" />
+   <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="150.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../png/res/shield.png" />
+   </ImageView>
+   <RadioButton fx:id="rdIN1_3" layoutX="251.0" layoutY="172.0" mnemonicParsing="false" onAction="#onClickCoin1" scaleX="0.7" scaleY="0.7" stylesheets="@../css/setup.css" toggleGroup="$toggleGroupIN1" />
+   <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="239.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../png/res/coin.png" />
+   </ImageView>
+   <RadioButton fx:id="rdIN1_4" layoutX="342.0" layoutY="172.0" mnemonicParsing="false" onAction="#onClickServant1" scaleX="0.7" scaleY="0.7" stylesheets="@../css/setup.css" toggleGroup="$toggleGroupIN1" />
+   <ChoiceBox fx:id="choiceBox1" layoutX="459.0" layoutY="123.0" prefWidth="150.0" stylesheets="@../css/main.css" />
+   <!--INPUT 02-->
+   <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="58.0" layoutY="256.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../png/res/stone.png" />
+   </ImageView>
+   <RadioButton fx:id="rdIN2_1" layoutX="72.0" layoutY="325.0" mnemonicParsing="false" onAction="#onClickStone2" scaleX="0.7" scaleY="0.7" stylesheets="@../css/setup.css">
+      <toggleGroup>
+         <ToggleGroup fx:id="toggleGroupIN2" />
+      </toggleGroup>
+   </RadioButton>
+   <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="331.0" layoutY="256.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../png/res/servant.png" />
+   </ImageView>
+   <RadioButton fx:id="rdIN2_2" layoutX="163.0" layoutY="325.0" mnemonicParsing="false" onAction="#onClickShield2" scaleX="0.7" scaleY="0.7" stylesheets="@../css/setup.css" toggleGroup="$toggleGroupIN2" />
+   <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="150.0" layoutY="256.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../png/res/shield.png" />
+   </ImageView>
+   <RadioButton fx:id="rdIN2_3" layoutX="251.0" layoutY="325.0" mnemonicParsing="false" onAction="#onClickCoin2" scaleX="0.7" scaleY="0.7" stylesheets="@../css/setup.css" toggleGroup="$toggleGroupIN2" />
+   <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="239.0" layoutY="256.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../png/res/coin.png" />
+   </ImageView>
+   <RadioButton fx:id="rdIN2_4" layoutX="342.0" layoutY="325.0" mnemonicParsing="false" onAction="#onClickServant2" scaleX="0.7" scaleY="0.7" stylesheets="@../css/setup.css" toggleGroup="$toggleGroupIN2" />
+   <ChoiceBox fx:id="choiceBox2" layoutX="459.0" layoutY="276.0" prefWidth="150.0" stylesheets="@../css/main.css" />
+   <!--OUTPUTRESOURCES-->
+   <Label alignment="CENTER" layoutX="185.0" layoutY="432.0" prefHeight="30.0" prefWidth="75.0" scaleX="4.5" scaleY="4.5" styleClass="customInitLeaderLabel" stylesheets="@../css/customMenuLabel.css" text="Output Resources" textAlignment="CENTER" />
+   <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="58.0" layoutY="498.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../png/res/stone.png" />
+   </ImageView>
+   <RadioButton fx:id="rdOUT_1" layoutX="72.0" layoutY="567.0" mnemonicParsing="false" onAction="#onClickStone3" scaleX="0.7" scaleY="0.7" stylesheets="@../css/setup.css">
+      <toggleGroup>
+         <ToggleGroup fx:id="toggleGroupOUT" />
+      </toggleGroup>
+   </RadioButton>
+   <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="331.0" layoutY="498.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../png/res/servant.png" />
+   </ImageView>
+   <RadioButton fx:id="rdOUT_2" layoutX="163.0" layoutY="567.0" mnemonicParsing="false" onAction="#onClickShield3" scaleX="0.7" scaleY="0.7" stylesheets="@../css/setup.css" toggleGroup="$toggleGroupOUT" />
+   <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="150.0" layoutY="498.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../png/res/shield.png" />
+   </ImageView>
+   <RadioButton fx:id="rdOUT_3" layoutX="251.0" layoutY="567.0" mnemonicParsing="false" onAction="#onClickCoin3" scaleX="0.7" scaleY="0.7" stylesheets="@../css/setup.css" toggleGroup="$toggleGroupOUT" />
+   <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="239.0" layoutY="498.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../png/res/coin.png" />
+   </ImageView>
+   <RadioButton fx:id="rdOUT_4" layoutX="342.0" layoutY="567.0" mnemonicParsing="false" onAction="#onClickServant3" scaleX="0.7" scaleY="0.7" stylesheets="@../css/setup.css" toggleGroup="$toggleGroupOUT" />
+   <!--CONFIRM-->
+   <Button fx:id="btnConfirm" layoutX="474.0" layoutY="505.0" mnemonicParsing="false" onAction="#onBtnConfirm" prefHeight="50.0" prefWidth="119.0" scaleX="1.3" scaleY="1.3" styleClass="customButton" stylesheets="@../css/customMenuLabel.css" text="Confirm" />
+</AnchorPane>

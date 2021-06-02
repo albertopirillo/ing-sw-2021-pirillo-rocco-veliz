@@ -12,9 +12,7 @@
 <AnchorPane prefHeight="825.0" prefWidth="1618.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.MainController">
    <children>
        <ImageView fitHeight="825.0" fitWidth="1630.0" pickOnBounds="true">
-           <image>
-               <Image url="@../png/generic/background_wall.png" />
-           </image>
+           <Image url="@../png/generic/background_wall.png"/>
        </ImageView>
       <TabPane fx:id="tabPane" layoutX="269.0" layoutY="3.0" prefHeight="822.0" prefWidth="1360.0" tabClosingPolicy="UNAVAILABLE" />
       <Button fx:id="trayButton" layoutX="31.0" layoutY="65.0" mnemonicParsing="false" onAction="#showTray" prefHeight="30.0" prefWidth="214.0" text="Market Tray" textAlignment="CENTER">
@@ -27,7 +25,7 @@
          </font></Button>
        <MenuButton fx:id="prodButton" layoutX="33.0" layoutY="271.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="214.0" text="Use production">
            <items>
-               <MenuItem mnemonicParsing="false" text="Basic" />
+               <MenuItem mnemonicParsing="false" text="Basic" onAction="#showBasic"/>
                <MenuItem mnemonicParsing="false" text="Development" />
                <MenuItem mnemonicParsing="false" text="Leader" />
            </items>

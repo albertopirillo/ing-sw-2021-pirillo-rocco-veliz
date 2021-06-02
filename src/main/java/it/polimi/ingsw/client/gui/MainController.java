@@ -16,6 +16,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -46,6 +47,10 @@ public class MainController implements Initializable {
      */
     private final Popup soloPopUp = new Popup();
     /**
+     * The popup used to perform the basic production
+     */
+    private final Popup basicPopUp = new Popup();
+    /**
      * A map to get get the right PersonalBoardController from a nickname
      */
     private final Map<String, PersonalBoardController> personalBoardControllerMap = new HashMap<>();
@@ -65,6 +70,10 @@ public class MainController implements Initializable {
      * Reference to the actual SetupController
      */
     private SetupController setupController;
+    /**
+     * Reference to the actual basicProductionController
+     */
+    private BasicProductionController basicProductionController;
     /**
      * The UserInterface this controller is associated with
      */
@@ -86,8 +95,17 @@ public class MainController implements Initializable {
     private MenuButton activateLeaderButton, prodButton;
     @FXML
     private MenuButton discardLeaderButton;
-    @FXML
-    private MenuItem discard02;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        buttonsList.add(trayButton);
+        buttonsList.add(marketButton);
+        buttonsList.add(endTurnButton);
+        buttonsList.add(activateLeaderButton);
+        buttonsList.add(prodButton);
+        buttonsList.add(discardLeaderButton);
+        buttonsList.add(quitButton);
+    }
 
     /**
      * Gets the Model stored in the Client
@@ -217,6 +235,7 @@ public class MainController implements Initializable {
         initTrayPopup();
         initMarketPopup();
         initSoloPopup();
+        initBasicPopup();
     }
 
     /**
@@ -283,6 +302,17 @@ public class MainController implements Initializable {
         this.soloPopUp.setOnAutoHide(event -> this.soloController.hideCards());
     }
 
+    private void initBasicPopup() throws IOException {
+        FXMLLoader loader = Util.loadFXML("basic_production");
+        Parent basic = loader.load();
+        this.basicProductionController = loader.getController();
+        this.basicProductionController.setMainController(this);
+        this.basicPopUp.getContent().add(basic);
+        this.basicPopUp.setX(700);
+        this.basicPopUp.setAutoHide(true);
+        this.basicPopUp.setOnAutoHide(event -> prodButton.setText("Use production"));
+    }
+
     public void switchSoloPopup() {
         if (!this.soloPopUp.isShowing()) {
             this.soloPopUp.show(stage);
@@ -328,6 +358,24 @@ public class MainController implements Initializable {
     }
 
     /**
+     * Shows and hides the basicProduction popup, changing also the text of the button
+     * @param event the event triggered when the button is pressed
+     */
+    public void showBasic(ActionEvent event) {
+        Stage stage = (Stage)((MenuItem)event.getTarget()).getParentPopup().getOwnerWindow();
+
+        this.stage = stage;
+        if (!this.basicPopUp.isShowing()) {
+            prodButton.setText("Back");
+            this.basicPopUp.show(stage);
+        }
+        else {
+            prodButton.setText("Use production");
+            this.basicPopUp.hide();
+        }
+    }
+
+    /**
      * Hide the tray popup and also change the text of the button
      */
     public void closeTray(){
@@ -341,6 +389,14 @@ public class MainController implements Initializable {
     public void closeMarket(){
         marketButton.setText("Market Cards");
         this.marketPopup.hide();
+    }
+
+    /**
+     * Hide the basic production popup and also change the text of the button
+     */
+    public void closeBasic(){
+        prodButton.setText("Use production");
+        this.basicPopUp.hide();
     }
 
     /**
@@ -423,16 +479,5 @@ public class MainController implements Initializable {
     public void useLeaderRequest02(){
         Request request = new UseLeaderRequest(1, LeaderAction.USE_ABILITY);
         sendMessage(request);
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        buttonsList.add(trayButton);
-        buttonsList.add(marketButton);
-        buttonsList.add(endTurnButton);
-        buttonsList.add(activateLeaderButton);
-        buttonsList.add(prodButton);
-        buttonsList.add(discardLeaderButton);
-        buttonsList.add(quitButton);
     }
 }

@@ -214,9 +214,7 @@ public class ResourceSelectionController implements Initializable {
     public void onClickShield1(ActionEvent actionEvent) {
         onClickChk1(chkShield1, chkShield2, ResourceType.SHIELD);
     }
-    public void onClickServant1(ActionEvent actionEvent) {
-        onClickChk1(chkServant1, chkServant2, ResourceType.SERVANT);
-    }
+    public void onClickServant1(ActionEvent actionEvent) { onClickChk1(chkServant1, chkServant2, ResourceType.SERVANT); }
     public void onClickStone2(ActionEvent actionEvent) {
         onClickChk2(chkStone1, chkStone2, ResourceType.STONE);
     }
@@ -226,9 +224,7 @@ public class ResourceSelectionController implements Initializable {
     public void onClickShield2(ActionEvent actionEvent) {
         onClickChk2(chkShield1, chkShield2, ResourceType.SHIELD);
     }
-    public void onClickServant2(ActionEvent actionEvent) {
-        onClickChk2(chkServant1, chkServant2, ResourceType.SERVANT);
-    }
+    public void onClickServant2(ActionEvent actionEvent) { onClickChk2(chkServant1, chkServant2, ResourceType.SERVANT); }
 
 
     /**

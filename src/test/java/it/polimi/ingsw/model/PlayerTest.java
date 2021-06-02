@@ -4,6 +4,7 @@ import it.polimi.ingsw.exceptions.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -58,8 +59,12 @@ class PlayerTest {
     }
 
     @Test
-    public void useLeaderTest() throws TooManyLeaderAbilitiesException, CostNotMatchingException, InvalidLayerNumberException, NoLeaderAbilitiesException, NegativeResAmountException, LeaderAbilityAlreadyActive {
+    public void useLeaderTest() throws FullCardDeckException, TooManyLeaderAbilitiesException, CostNotMatchingException, InvalidLayerNumberException, NoLeaderAbilitiesException, NegativeResAmountException, LeaderAbilityAlreadyActive {
+
+        Game game = new SoloGame(true);
         Player player = new Player( "abc");
+        player.setGame(game);
+
         assertThrows(NoLeaderAbilitiesException.class, () -> player.useLeader(-1, LeaderAction.USE_ABILITY));
         assertThrows(NoLeaderAbilitiesException.class, () -> player.useLeader(2, LeaderAction.DISCARD));
 

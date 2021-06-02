@@ -22,23 +22,9 @@ class GameTest {
     @Test
     public void scoreMultiTest() throws FullCardDeckException, NegativeResAmountException, InvalidResourceException, LayerNotEmptyException, NotEnoughSpaceException, InvalidLayerNumberException, CannotContainFaithException, AlreadyInAnotherLayerException {
         Player player1 = new Player("a");
-        player1.addVictoryPoints(15);
-        player1.addPlayerFaith(18);
         Player player2 = new Player("b");
-        Depot depot2 = player2.getPersonalBoard().getDepot();
-        depot2.modifyLayer(1, ResourceType.COIN, 1);
-        depot2.modifyLayer(2, ResourceType.SHIELD, 2);
         Player player3 = new Player("c");
-        player3.addVictoryPoints(2);
-        player3.addPlayerFaith(0);
-        Depot depot3 = player3.getPersonalBoard().getDepot();
-        depot3.modifyLayer(1, ResourceType.COIN, 1);
-        depot3.modifyLayer(2, ResourceType.SHIELD, 2);
-        depot3.modifyLayer(3, ResourceType.SERVANT, 3);
         Player player4 = new Player("d");
-        player4.addPlayerFaith(7);
-        Strongbox strongbox4 = player4.getPersonalBoard().getStrongbox();
-        strongbox4.addResources(new Resource(5,10,4,3));
 
         List<Player> playerList = new ArrayList<>();
         playerList.add(player1);
@@ -46,6 +32,26 @@ class GameTest {
         playerList.add(player3);
         playerList.add(player4);
         Game game = new MultiGame(4, playerList);
+        player1.setGame(game);
+        player2.setGame(game);
+        player3.setGame(game);
+        player4.setGame(game);
+
+
+        player1.addVictoryPoints(15);
+        player1.addPlayerFaith(18);
+        Depot depot2 = player2.getPersonalBoard().getDepot();
+        depot2.modifyLayer(1, ResourceType.COIN, 1);
+        depot2.modifyLayer(2, ResourceType.SHIELD, 2);
+        player3.addVictoryPoints(2);
+        player3.addPlayerFaith(0);
+        Depot depot3 = player3.getPersonalBoard().getDepot();
+        depot3.modifyLayer(1, ResourceType.COIN, 1);
+        depot3.modifyLayer(2, ResourceType.SHIELD, 2);
+        depot3.modifyLayer(3, ResourceType.SERVANT, 3);
+        player4.addPlayerFaith(7);
+        Strongbox strongbox4 = player4.getPersonalBoard().getStrongbox();
+        strongbox4.addResources(new Resource(5,10,4,3));
 
         Map<Player, Integer> finalScores = game.computeFinalScore();
         assertEquals(27, finalScores.get(player1));

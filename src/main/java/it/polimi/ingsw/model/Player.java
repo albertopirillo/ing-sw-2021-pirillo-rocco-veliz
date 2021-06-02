@@ -340,7 +340,7 @@ public class Player {
      * @throws NoLeaderAbilitiesException if the selected leader card doesnt exist
      */
     public void useLeader(int index, LeaderAction choice) throws TooManyLeaderAbilitiesException, LeaderAbilityAlreadyActive, InvalidLayerNumberException, NegativeResAmountException, CostNotMatchingException, NoLeaderAbilitiesException {
-        if (index < 0 || index >= leaderCards.size()) {
+        if (index < 0 || index > leaderCards.size()) {
             throw new NoLeaderAbilitiesException("The selected leader card does not exist");
         }
 

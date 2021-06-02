@@ -229,6 +229,8 @@ public class ConcreteDepotTest {
 
         Game game = new MultiGame(3, playerList);
         player1.setGame(game);
+        player2.setGame(game);
+        player3.setGame(game);
         Depot depot1 = player1.getPersonalBoard().getDepot();
 
         Resource KO = new Resource();

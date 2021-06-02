@@ -17,17 +17,12 @@ import java.util.Objects;
 public abstract class Util {
 
     /**
-     * The mainClass of JavaFX, specified in pom.xml
-     */
-    public static final Class<JavaFXMain> mainClass = JavaFXMain.class;
-
-    /**
      * Wrapper to load an .fxml file
      * @param fileName  the name of the file, with no path or extension
      * @return  a FXMLLoader Object associated the loaded file
      */
     public static FXMLLoader loadFXML(String fileName) {
-       return new FXMLLoader(mainClass.getResource("/fxml/" + fileName + ".fxml"));
+       return new FXMLLoader(JavaFXMain.class.getResource("/fxml/" + fileName + ".fxml"));
     }
 
     /**
@@ -36,7 +31,7 @@ public abstract class Util {
      * @return  a String representing the correct file path
      */
     public static String getCSS(String fileName) {
-        return Objects.requireNonNull(mainClass.getResource("/css/" + fileName + ".css")).toExternalForm();
+        return Objects.requireNonNull(JavaFXMain.class.getResource("/css/" + fileName + ".css")).toExternalForm();
     }
 
     /**
@@ -45,8 +40,8 @@ public abstract class Util {
      * @return  an Image object of the requested resource type
      */
     public static Image resToImage(ResourceType resourceType) {
-        String path = "/png/res/" + resourceType.name() + ".png";
-        return new Image(Objects.requireNonNull(mainClass.getResourceAsStream(path)));
+        String path = "/png/res/" + resourceType.name().toLowerCase() + ".png";
+        return new Image(Objects.requireNonNull(JavaFXMain.class.getResourceAsStream(path)));
     }
 
     /**
@@ -76,16 +71,21 @@ public abstract class Util {
 
     public static Image marbleToImage(MarblesColor marble) {
         String path = "/png/market/" + marble.getName() + ".png";
-        return new Image(Objects.requireNonNull(mainClass.getResourceAsStream(path)));
+        return new Image(Objects.requireNonNull(JavaFXMain.class.getResourceAsStream(path)));
     }
 
     public static Image getDevCardImg(String img){
         String path = "/png/development_cards/" + img + ".png";
-        return new Image(Objects.requireNonNull(mainClass.getResourceAsStream(path)));
+        return new Image(Objects.requireNonNull(JavaFXMain.class.getResourceAsStream(path)));
     }
 
     public static Image getActionToken(String id) {
-        String path = "/png/solo_game/soloToken" + id + ".png";
-        return new Image(Objects.requireNonNull(mainClass.getResourceAsStream(path)));
+        String path = "/png/solo_game/soloToken" + "_" + id + ".png";
+        return new Image(Objects.requireNonNull(JavaFXMain.class.getResourceAsStream(path)));
+    }
+
+    public static Image getLeaderImg(String img) {
+        String path = "/png/leader_cards/" + img;
+        return  new Image(Objects.requireNonNull(JavaFXMain.class.getResourceAsStream(path)));
     }
 }

@@ -3,15 +3,14 @@ package it.polimi.ingsw.model;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
 import it.polimi.ingsw.exceptions.FullCardDeckException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import it.polimi.ingsw.utils.LeaderAbilityDeserializer;
 import it.polimi.ingsw.utils.LeaderCardJsonDeserializer;
 import it.polimi.ingsw.utils.ModelObserver;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.lang.reflect.Type;
 import java.util.*;
 
@@ -124,26 +123,22 @@ public class SoloGame extends Game {
         builder.registerTypeAdapter(LeaderCard.class, new LeaderCardJsonDeserializer());
         Gson gson = builder.create();
         Type listType = new TypeToken<List<LeaderCard>>(){}.getType();
-        try {
-            JsonReader reader = new JsonReader(new FileReader("src/main/resources/json/LeaderCardsConfig.json"));
-            List<LeaderCard> leaderCards = gson.fromJson(reader, listType);
-            //select 4 leadersCards. We must make sure to select four different cards
-            Player player = getPlayersList().get(0);
-            List<LeaderCard> chosenCards = new ArrayList<>();
-            Set<Integer> selectedIndexes = new HashSet<>();
-            while(selectedIndexes.size() < 4){
-                Random rnd = new Random();
-                selectedIndexes.add(rnd.nextInt(leaderCards.size()));
-            }
-            for(int id: selectedIndexes){
-                LeaderCard chosenCard = leaderCards.get(id);
-                chosenCards.add(chosenCard);
-            }
-            //assign the player the four leader cards he will use for making the selection
-            player.setLeaderCards(chosenCards);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        Reader reader = new InputStreamReader(Objects.requireNonNull(getClass().getResourceAsStream("/json/LeaderCardsConfig.json")));
+        List<LeaderCard> leaderCards = gson.fromJson(reader, listType);
+        //select 4 leadersCards. We must make sure to select four different cards
+        Player player = getPlayersList().get(0);
+        List<LeaderCard> chosenCards = new ArrayList<>();
+        Set<Integer> selectedIndexes = new HashSet<>();
+        while(selectedIndexes.size() < 4){
+            Random rnd = new Random();
+            selectedIndexes.add(rnd.nextInt(leaderCards.size()));
         }
+        for(int id: selectedIndexes){
+            LeaderCard chosenCard = leaderCards.get(id);
+            chosenCards.add(chosenCard);
+        }
+        //assign the player the four leader cards he will use for making the selection
+        player.setLeaderCards(chosenCards);
         moveBlackCross(1);
     }
 

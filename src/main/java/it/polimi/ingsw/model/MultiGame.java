@@ -3,14 +3,13 @@ package it.polimi.ingsw.model;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
 import it.polimi.ingsw.exceptions.FullCardDeckException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import it.polimi.ingsw.utils.LeaderAbilityDeserializer;
 import it.polimi.ingsw.utils.LeaderCardJsonDeserializer;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.lang.reflect.Type;
 import java.util.*;
 
@@ -132,45 +131,40 @@ public class MultiGame extends Game {
         Gson gson = builder.create();
         Type listType = new TypeToken<List<LeaderCard>>(){}.getType();
 
-        try {
-            JsonReader reader = new JsonReader(new FileReader("src/main/resources/json/LeaderCardsConfig.json"));
-            List<LeaderCard> leaderCards = gson.fromJson(reader, listType);
+        Reader reader = new InputStreamReader(Objects.requireNonNull(getClass().getResourceAsStream("/json/LeaderCardsConfig.json")));
+        List<LeaderCard> leaderCards = gson.fromJson(reader, listType);
 
-            //select 4 leadersCards. We must make sure to select four different cards
-            List<LeaderCard> finalDeckLeaderCards = new ArrayList<>(leaderCards);
-            for (Player player : this.getPlayersList()) {
-                List<LeaderCard> chosenCards = new ArrayList<>();
-                Set<Integer> chosenIds = new HashSet<>();
-                Set<Integer> selectedIndexes = new HashSet<>();
-                if(finalDeckLeaderCards.size() > 4){
-                    while(selectedIndexes.size() < 4){
-                        Random rnd = new Random();
-                        selectedIndexes.add(rnd.nextInt(finalDeckLeaderCards.size()));
-                    }
-                    for(int id: selectedIndexes){
-                        LeaderCard chosenCard = finalDeckLeaderCards.get(id);
-                        chosenCards.add(chosenCard);
-                        chosenIds.add(chosenCard.getId());
-                    }
-                    //remove from finalDeckLeaderCards the selected cards
-                    finalDeckLeaderCards = new ArrayList<>();
-                    for(LeaderCard card: leaderCards){
-                        Integer id = card.getId();
-                        if(!chosenIds.contains(id)){
-                            finalDeckLeaderCards.add(card);
-                        }
-                    }
-                } else {
-                    //finalDeckLeaderCards contains the last 4 cards
-                    chosenCards.addAll(finalDeckLeaderCards);
+        //select 4 leadersCards. We must make sure to select four different cards
+        List<LeaderCard> finalDeckLeaderCards = new ArrayList<>(leaderCards);
+        for (Player player : this.getPlayersList()) {
+            List<LeaderCard> chosenCards = new ArrayList<>();
+            Set<Integer> chosenIds = new HashSet<>();
+            Set<Integer> selectedIndexes = new HashSet<>();
+            if(finalDeckLeaderCards.size() > 4){
+                while(selectedIndexes.size() < 4){
+                    Random rnd = new Random();
+                    selectedIndexes.add(rnd.nextInt(finalDeckLeaderCards.size()));
                 }
-                //assign the player the four leader cards he will use for making the selection
-                player.setLeaderCards(chosenCards);
-           }
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+                for(int id: selectedIndexes){
+                    LeaderCard chosenCard = finalDeckLeaderCards.get(id);
+                    chosenCards.add(chosenCard);
+                    chosenIds.add(chosenCard.getId());
+                }
+                //remove from finalDeckLeaderCards the selected cards
+                finalDeckLeaderCards = new ArrayList<>();
+                for(LeaderCard card: leaderCards){
+                    Integer id = card.getId();
+                    if(!chosenIds.contains(id)){
+                        finalDeckLeaderCards.add(card);
+                    }
+                }
+            } else {
+                //finalDeckLeaderCards contains the last 4 cards
+                chosenCards.addAll(finalDeckLeaderCards);
+            }
+            //assign the player the four leader cards he will use for making the selection
+            player.setLeaderCards(chosenCards);
+       }
 
         giveInkwell();
     }

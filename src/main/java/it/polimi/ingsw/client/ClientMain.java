@@ -1,7 +1,6 @@
 package it.polimi.ingsw.client;
 
 public class ClientMain {
-
     public static void main(String[] args) {
         int port = 8080;
         String serverIP = "localhost";

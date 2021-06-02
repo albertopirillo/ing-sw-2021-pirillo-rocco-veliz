@@ -120,7 +120,7 @@ public class Server implements Runnable {
             RemoteView remoteView = new RemoteView(connection, keys.get(0));
             connection.setRemoteView(remoteView);
             game.addObserver(remoteView);
-            remoteView.addController(masterController);
+            remoteView.addController(masterController.getRequestController());
             masterController.getSetupController().setupGame(keys, gameSize);
             System.out.println("[SERVER] Starting solo game for player " + nickname);
             sendInitialResources(0, nickname);
@@ -143,7 +143,7 @@ public class Server implements Runnable {
                 connections.get(i).setRemoteView(remoteView);
                 remoteViews.add(remoteView);
                 game.addObserver(remoteView);
-                remoteView.addController(masterController);
+                remoteView.addController(masterController.getRequestController());
             }
             masterController.getSetupController().setupGame(keys, gameSize);
             System.out.println("[SERVER] Have fun :)");

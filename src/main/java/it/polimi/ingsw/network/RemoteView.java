@@ -1,6 +1,6 @@
 package it.polimi.ingsw.network;
 
-import it.polimi.ingsw.controller.MasterController;
+import it.polimi.ingsw.controller.RequestController;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.network.requests.Request;
 import it.polimi.ingsw.network.updates.*;
@@ -10,7 +10,7 @@ import it.polimi.ingsw.utils.ModelObserver;
 import java.util.*;
 
 public class RemoteView implements ModelObserver {
-    private MasterController masterController;
+    private RequestController requestController;
     private final Connection connection;
     private final String player;
 
@@ -21,14 +21,14 @@ public class RemoteView implements ModelObserver {
 
     public void processRequest(Request request){
         System.out.println("[REMOTE VIEW] from player " + player);
-        this.masterController.processRequest(request);
+        this.requestController.processRequest(request);
     }
 
-    public MasterController getMasterController() {
-        return masterController;
+    public RequestController getRequestController() {
+        return requestController;
     }
 
-    public void addController(MasterController masterController){ this.masterController = masterController; }
+    public void addController(RequestController requestController){ this.requestController = requestController; }
 
     @Override
     public void quitGame() {
@@ -119,7 +119,7 @@ public class RemoteView implements ModelObserver {
     @Override
     public void showTempRes(Game game) {
         Player activePlayer = game.getActivePlayer();
-        Resource tempRes = getMasterController().getResourceController().getTempRes().getToHandle();
+        Resource tempRes = getRequestController().getMasterController().getResourceController().getTempRes().getToHandle();
         ServerUpdate msg = new TempResourceUpdate(activePlayer.getNickname(), tempRes);
         connection.sendMessage(msg);
     }

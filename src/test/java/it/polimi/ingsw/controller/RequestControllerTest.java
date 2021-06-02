@@ -19,8 +19,9 @@ class RequestControllerTest {
         Game game = new MultiGame(true);
         MasterController masterController = new MasterController(game);
         RequestController requestController = masterController.getRequestController();
-        masterController.processRequest(request);
+        requestController.processRequest(request);
 
+        assertEquals(masterController, requestController.getMasterController());
         Resource output = masterController.getResourceController().getTempRes().getToHandle();
         assertEquals(new Resource(0,1,1,0), output);
         assertEquals(0, game.getActivePlayer().getPlayerFaith());

@@ -3,7 +3,6 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.model.ClientError;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.TempResource;
-import it.polimi.ingsw.network.requests.Request;
 import it.polimi.ingsw.utils.ANSIColor;
 
 public class MasterController {
@@ -62,8 +61,4 @@ public class MasterController {
         return game;
     }
 
-    public void processRequest(Request request) {
-        request.activateRequest(this);
-       // this.getGame().updateClientModel();
-    }
 }

@@ -88,4 +88,9 @@ public abstract class Util {
         String path = "/png/leader_cards/" + img;
         return  new Image(Objects.requireNonNull(JavaFXMain.class.getResourceAsStream(path)));
     }
+
+    public static Image getGenericImg(String img) {
+        String path = "/png/generic/" + img + ".png";
+        return  new Image(Objects.requireNonNull(JavaFXMain.class.getResourceAsStream(path)));
+    }
 }

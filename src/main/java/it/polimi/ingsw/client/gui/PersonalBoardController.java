@@ -45,16 +45,6 @@ public class PersonalBoardController implements Initializable {
     /**
      * The lists containing the relative cells of the faithtrack and the pope favor tiles
      */
-    public List<Image> getDepotImgs(){
-        List<Image> imgs = new ArrayList<>();
-        imgs.add(depot1_1.getImage());
-        imgs.add(depot2_1.getImage());
-        imgs.add(depot2_2.getImage());
-        imgs.add(depot3_1.getImage());
-        imgs.add(depot3_2.getImage());
-        imgs.add(depot3_3.getImage());
-        return imgs;
-    }
     private final List<ImageView> faithTrackCells = new ArrayList<>();
     private final List<ImageView> popeFavorTiles = new ArrayList<>();
 
@@ -453,10 +443,6 @@ public class PersonalBoardController implements Initializable {
         }
     }
 
-    public TempDepot getTempDepot(){
-        return this.tempDepot;
-    }
-
     public void updateDevSlots(List<DevelopmentSlot> developmentSlots) {
         int i = 1;
         for(DevelopmentSlot devSlot: developmentSlots) {
@@ -469,4 +455,16 @@ public class PersonalBoardController implements Initializable {
             i++;
         }
     }
+
+    public List<Image> getDepotImgs(){
+        List<Image> imgs = new ArrayList<>();
+        imgs.add(depot1_1.getImage());
+        imgs.add(depot2_1.getImage());
+        imgs.add(depot2_2.getImage());
+        imgs.add(depot3_1.getImage());
+        imgs.add(depot3_2.getImage());
+        imgs.add(depot3_3.getImage());
+        return imgs;
+    }
+
 }

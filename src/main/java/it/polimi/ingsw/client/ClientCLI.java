@@ -273,13 +273,13 @@ public class ClientCLI implements UserInterface {
     }
 
     private AbilityChoice parseToAbility(int choice){
-        switch (choice){
-            case 1: return AbilityChoice.STANDARD;
-            case 2: return AbilityChoice.FIRST;
-            case 3: return AbilityChoice.SECOND;
-            case 4: return AbilityChoice.BOTH;
-        }
-        return null;
+        return switch (choice) {
+            case 1 -> AbilityChoice.STANDARD;
+            case 2 -> AbilityChoice.FIRST;
+            case 3 -> AbilityChoice.SECOND;
+            case 4 -> AbilityChoice.BOTH;
+            default -> null;
+        };
     }
 
     public int getPosition(int min, int max){
@@ -663,13 +663,13 @@ public class ClientCLI implements UserInterface {
     }
 
     public ResourceType strToResType(String input){
-        switch (input) {
-            case "stone": return ResourceType.STONE;
-            case "coin": return ResourceType.COIN;
-            case "shield": return ResourceType.SHIELD;
-            case "servant": return ResourceType.SERVANT;
-            default: return null;
-        }
+        return switch (input) {
+            case "stone" -> ResourceType.STONE;
+            case "coin" -> ResourceType.COIN;
+            case "shield" -> ResourceType.SHIELD;
+            case "servant" -> ResourceType.SERVANT;
+            default -> null;
+        };
     }
 
     private ReorderDepotRequest reorderDepotMenu() {
@@ -801,8 +801,13 @@ public class ClientCLI implements UserInterface {
         List<DevelopmentCard> devCards = update.getDevCardList();
         int index = 0;
         for(DevelopmentCard devCard: devCards){
-            System.out.println("\nCard " + index++ + " (" + devCard.getImg() + ".png) ");
-            System.out.println(devCard);
+            if(devCard!=null) {
+                System.out.println("\nCard " + index++ + " (" + devCard.getImg() + ".png) ");
+                System.out.println(devCard);
+            }else{
+                index++;
+                System.out.println("\nEmpty Column");
+            }
         }
         System.out.println();
     }

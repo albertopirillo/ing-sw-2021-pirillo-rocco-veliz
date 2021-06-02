@@ -62,7 +62,7 @@ public class Market {
         List<DevelopmentCard> availableCards = new ArrayList<>();
         for(int i=0; i<3; i++){
             for (int j=0; j<4; j++){
-                if (this.cards[i][j].getCard() != null)
+                //if (this.cards[i][j].getCard() != null)
                     availableCards.add(this.cards[i][j].getCard());
             }
         }

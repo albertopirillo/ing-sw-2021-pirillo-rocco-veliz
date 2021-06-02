@@ -1,26 +1,16 @@
 package it.polimi.ingsw.client;
 
 public class ClientMain {
-
-    public static void main(String[] args) {
+    public static void main(String[] args, boolean gui) {
         int port = 8080;
         String serverIP = "localhost";
-        boolean gui = false;
         for (String command : args) {
-            if (command.startsWith("-")) {
-                if (command.equals("-gui")) {
-                    gui = true;
-                } else if (command.equals("-cli")) {
-                    gui = false;
-                } else {
-                    try {
-                        int separator = command.lastIndexOf(":");
-                        serverIP = (String) command.subSequence(1, separator);
-                        port = Integer.parseInt((String) command.subSequence(separator + 1, command.length()));
-                    } catch (NumberFormatException e) {
-                        port = 8080;
-                    }
-                }
+            try {
+                int separator = command.lastIndexOf(":");
+                serverIP = (String) command.subSequence(1, separator);
+                port = Integer.parseInt((String) command.subSequence(separator + 1, command.length()));
+            } catch (NumberFormatException e) {
+                port = 8080;
             }
         }
         System.out.println("Server IP: " + serverIP);

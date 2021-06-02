@@ -20,8 +20,8 @@ public class Launcher {
         int selection = Integer.parseInt(stdin.nextLine());
         switch (selection) {
             case 1 -> ServerMain.main(args);
-            case 2 -> ClientMain.main(args);
-            case 3 -> ClientMain.main(args);
+            case 2 -> ClientMain.main(args, false);
+            case 3 -> ClientMain.main(args, true);
             default -> System.out.println("Invalid selection");
         }
     }

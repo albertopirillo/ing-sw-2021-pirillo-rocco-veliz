@@ -9,13 +9,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class LeaderCardSelectionController implements Initializable {
@@ -173,7 +171,7 @@ public class LeaderCardSelectionController implements Initializable {
     private void setImage(int index) {
         LeaderCard card = this.leaderCards.get(index);
         String img = card.getImg();
-        imageViews.get(index).setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/png/leader_cards/" + img))));
+        imageViews.get(index).setImage(Util.getLeaderImg(img));
         imageViews.get(index).getStyleClass().add("imgShadow");
     }
 

@@ -441,10 +441,10 @@ public class PersonalBoardController implements Initializable {
     public void updateLeaderCards(List<LeaderCard> playerCards) {
         if (playerCards.size() > 0){
             String img0 = playerCards.get(0).getImg();
-            leaderCard0.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/png/leader_cards/" + img0))));
+            leaderCard0.setImage(Util.getLeaderImg(img0));
             if (playerCards.size() > 1){
                 String img1 = playerCards.get(1).getImg();
-                leaderCard1.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/png/leader_cards/" + img1))));
+                leaderCard1.setImage(Util.getLeaderImg(img1));
             } else {
                 leaderCard1.setImage(null);
             }

@@ -28,6 +28,6 @@ public class MoveAndShuffleToken extends SoloActionToken {
 
     @Override
     public String getID() {
-        return "Move&Shuffle";
+        return "move&shuffle";
     }
 }

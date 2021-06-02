@@ -8,17 +8,21 @@ import java.util.Scanner;
 
 public class Launcher {
     public static void main(String[] args) throws IOException {
-        System.out.println("Select the game mode");
+        System.out.println("\n********************************");
+        System.out.println("Welcome to Master of Renaissance");
+        System.out.println("Please select the game mode:");
         System.out.println("1: Server");
         System.out.println("2: Client CLI");
         System.out.println("3: Client GUI");
+        System.out.println("********************************");
+        System.out.print("Game mode: ");
         Scanner stdin = new Scanner(System.in);
         int selection = Integer.parseInt(stdin.nextLine());
         switch (selection) {
-            case 1: ServerMain.main(args); break;
-            case 2: ClientMain.main(args); break;
-            case 3: ClientMain.main(args); break;
-            default: System.out.println("Invalid selection");
+            case 1 -> ServerMain.main(args);
+            case 2 -> ClientMain.main(args);
+            case 3 -> ClientMain.main(args);
+            default -> System.out.println("Invalid selection");
         }
     }
 }

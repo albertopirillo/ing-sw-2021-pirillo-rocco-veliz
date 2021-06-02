@@ -60,7 +60,7 @@ public class DiscardDevCardsToken extends SoloActionToken {
 
     @Override
     public String getID() {
-        return color.name();
+        return color.name().toLowerCase();
     }
 
     @Override

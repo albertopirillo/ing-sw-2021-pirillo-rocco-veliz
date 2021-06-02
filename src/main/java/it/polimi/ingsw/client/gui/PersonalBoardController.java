@@ -461,10 +461,10 @@ public class PersonalBoardController implements Initializable {
         int i = 1;
         for(DevelopmentSlot devSlot: developmentSlots) {
             List<ImageView> currentSlot = this.devSlotsMapping.get(i);
-            int j = 0;
+            int cardsAmount = devSlot.numberOfElements();
             for(DevelopmentCard card: devSlot.getCards()) {
-                currentSlot.get(j).setImage(Util.getDevCardImg(card.getImg()));
-                j++;
+                currentSlot.get(cardsAmount - 1).setImage(Util.getDevCardImg(card.getImg()));
+                cardsAmount--;
             }
             i++;
         }

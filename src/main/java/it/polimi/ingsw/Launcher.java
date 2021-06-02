@@ -18,11 +18,19 @@ public class Launcher {
         System.out.print("Game mode: ");
         Scanner stdin = new Scanner(System.in);
         int selection = Integer.parseInt(stdin.nextLine());
-        switch (selection) {
-            case 1 -> ServerMain.main(args);
-            case 2 -> ClientMain.main(args, false);
-            case 3 -> ClientMain.main(args, true);
-            default -> System.out.println("Invalid selection");
+        if (selection == 1) {
+            ServerMain.main(args);
+        }
+        else if (selection == 2 || selection == 3) {
+            int length = args.length;
+            String[] newArgs = new String[length + 1];
+            System.arraycopy(args, 0, newArgs, 0, length);
+            if (selection == 2) newArgs[length] = "-cli";
+            else newArgs[length] = "-gui";
+            ClientMain.main(newArgs);
+        }
+        else {
+            System.out.println("Invalid selection");
         }
     }
 }

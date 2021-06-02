@@ -2,26 +2,27 @@ package it.polimi.ingsw.model;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
 import it.polimi.ingsw.exceptions.DeckEmptyException;
 import it.polimi.ingsw.exceptions.FullCardDeckException;
 import org.junit.jupiter.api.Test;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class MarketTest {
 
     @Test
-    public void parserTest() throws FileNotFoundException {
+    public void parserTest() {
 
         Type listType = new TypeToken<ArrayList<DevelopmentCard>>(){}.getType();
-        List<DevelopmentCard> devs = new Gson().fromJson(new JsonReader(new FileReader("src/main/resources/json/DevCardsConfig.json")), listType);
+        Reader reader = new InputStreamReader(Objects.requireNonNull(getClass().getResourceAsStream("/json/DevCardsConfig.json")));
+        List<DevelopmentCard> devs = new Gson().fromJson(reader, listType);
         //parser JSON
         /*devs.add(new DevelopmentCard(1, new Resource().addResource(ResourceType.SHIELD, 2),
                 CardColor.GREEN, 1, new ProductionPower(

@@ -52,7 +52,6 @@ public class Connection implements Runnable {
         if (isActive()) {
             try {
                 synchronized (outLock) {
-                    socketOut.reset();
                     socketOut.writeObject(message);
                     System.out.println("[CONNECTION] Sent message " + message.getClass().getSimpleName());
                     socketOut.flush();

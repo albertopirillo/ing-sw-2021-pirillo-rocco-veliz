@@ -132,7 +132,6 @@ public class Client implements Runnable{
 
     public synchronized void sendMessage(Processable message){
         try {
-            socketOut.reset();
             //System.out.println("[CLIENT] Sending request " + message.getClass().getSimpleName());
             socketOut.writeObject(message);
             socketOut.flush();

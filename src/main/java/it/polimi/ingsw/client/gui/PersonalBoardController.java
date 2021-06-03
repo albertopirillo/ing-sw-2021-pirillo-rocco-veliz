@@ -174,10 +174,8 @@ public class PersonalBoardController implements Initializable {
      * @param resource the resources to update the strongbox with
      */
     public void setStrongbox(Resource resource) {
-        Resource myStrongbox = storageModel.getStrongboxMap().get(mainController.getNickname());
         for(ResourceType key: resource.keySet()) {
             try {
-                myStrongbox.modifyValue(key, resource.getValue(key));
                 switch (key) {
                     case STONE: sb_stone.setText("x" + resource.getValue(key)); break;
                     case SERVANT: sb_servant.setText("x" + resource.getValue(key)); break;
@@ -185,7 +183,7 @@ public class PersonalBoardController implements Initializable {
                     case COIN: sb_coin.setText("x" + resource.getValue(key)); break;
                     default: break;
                 }
-            } catch (NegativeResAmountException | InvalidKeyException e) {
+            } catch (InvalidKeyException e) {
                 System.out.println("Invalid key or amount");
             }
         }

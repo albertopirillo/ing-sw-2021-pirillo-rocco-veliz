@@ -17,19 +17,21 @@ public class Launcher {
         System.out.println("********************************");
         System.out.print("Game mode: ");
         Scanner stdin = new Scanner(System.in);
-        int selection = Integer.parseInt(stdin.nextLine());
-        if (selection == 1) {
-            ServerMain.main(args);
-        }
-        else if (selection == 2 || selection == 3) {
-            int length = args.length;
-            String[] newArgs = new String[length + 1];
-            System.arraycopy(args, 0, newArgs, 0, length);
-            if (selection == 2) newArgs[length] = "-cli";
-            else newArgs[length] = "-gui";
-            ClientMain.main(newArgs);
-        }
-        else {
+        try {
+            int selection = Integer.parseInt(stdin.nextLine());
+            if (selection == 1) {
+                ServerMain.main(args);
+            } else if (selection == 2 || selection == 3) {
+                int length = args.length;
+                String[] newArgs = new String[length + 1];
+                System.arraycopy(args, 0, newArgs, 0, length);
+                if (selection == 2) newArgs[length] = "-cli";
+                else newArgs[length] = "-gui";
+                ClientMain.main(newArgs);
+            } else {
+                System.out.println("Invalid selection");
+            }
+        }  catch (NumberFormatException e) {
             System.out.println("Invalid selection");
         }
     }

@@ -16,7 +16,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -105,6 +104,14 @@ public class MainController implements Initializable {
         buttonsList.add(prodButton);
         buttonsList.add(discardLeaderButton);
         buttonsList.add(quitButton);
+    }
+
+    /**
+     * Sets a reference to the actual stage
+     * @param stage the actual stage
+     */
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 
     /**
@@ -329,7 +336,6 @@ public class MainController implements Initializable {
      */
     public void showTray(ActionEvent event) {
         Stage stage = Util.getStageFromEvent(event);
-        this.stage = stage;
         if (!this.trayPopup.isShowing()) {
             trayButton.setText("Back");
             this.trayPopup.show(stage);
@@ -346,7 +352,6 @@ public class MainController implements Initializable {
      */
     public void showMarket(ActionEvent event) {
         Stage stage = Util.getStageFromEvent(event);
-        this.stage = stage;
         if (!this.marketPopup.isShowing()) {
             this.marketController.closeBuyPanel();
             marketButton.setText("Back");

@@ -87,6 +87,7 @@ public class JavaFXMain extends Application {
             //Set and initialize the SetupController
             SetupController setupController = (SetupController) changeScene("setup");
             System.out.println("[JavaFX] SetupController ready");
+            mainController.setStage(myStage);
             mainController.setSetupController(setupController);
             setupController.setMainController(mainController);
 

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client;
 
+
 public class ClientMain {
     public static void main(String[] args) {
         int port = 8080;
@@ -18,6 +19,9 @@ public class ClientMain {
                         port = Integer.parseInt((String) command.subSequence(separator + 1, command.length()));
                     } catch (NumberFormatException e) {
                         port = 8080;
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println("Required format: -server_ip:port");
+                        return;
                     }
                 }
             }

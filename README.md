@@ -11,8 +11,8 @@
 [comment]: <> (_TODO_)
 
 ## Documentation
-[comment]: <> (### JavaDoc)
-[comment]: <> (_TODO_)
+### JavaDoc
+Available [here](deliveries/javadoc.zip)
 
 [comment]: <> (## Execution instructions)
 [comment]: <> (_TODO_)
@@ -24,7 +24,9 @@
 - [Client and Server](deliveries/UML%20pdf/client%20and%20server.pdf)
 
 ## Test coverage
-[comment]: <> ( [HTML]&#40;deliveries/coverage&#41;)
+
+[comment]: <> (Available [here]&#40;deliveries/coverage.zip&#41;)
+
 ![Coverage report](deliveries/coverage%20report.png)
 
 [comment]: <> (## Software )

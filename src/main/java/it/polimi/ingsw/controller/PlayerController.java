@@ -8,6 +8,11 @@ import it.polimi.ingsw.network.requests.ChangeMarblesRequest;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <p>The controller that handles all the actions a player can perform</p>
+ * <p>Every action has its own method</p>
+ * <p>Ensures that the player isn't performing more than one main action per turn</p>
+ */
 public class PlayerController {
 
     /**
@@ -23,15 +28,32 @@ public class PlayerController {
      */
     private boolean testing = false;
 
+    /**
+     * Constructs a new PlayerController
+     * @param controller the associated MainController
+     */
     public PlayerController(MasterController controller) {
         this.controller = controller;
         this.mainActionDone = false;
     }
 
+    /**
+     * <p>Activates the testing mode of an already existing controller</p>
+     * <p>Should be used only in testing</p>
+     * @param testing true to activate the testing mode
+     */
     public void setTesting(boolean testing) {
         this.testing = testing;
     }
 
+    /**
+     * Performs a basic production and places its output in the strongbox
+     * @param input1 the first resource type paid
+     * @param input2 the second resource type paid
+     * @param output the wanted output resource type
+     * @param fromDepot the amount of resources the player is paying from the depot
+     * @param fromStrongbox the amount of resources the player is paying from the strongbox
+     */
     public void basicProduction(ResourceType input1, ResourceType input2, ResourceType output, Resource fromDepot, Resource fromStrongbox) {
         try {
             if (this.mainActionDone) throw new MainActionException();
@@ -52,6 +74,14 @@ public class PlayerController {
         }
     }
 
+    /**
+     * <p>Performs an extra production (from a leader card ability)</p>
+     * <p>Places its output into the strongbox</p>
+     * @param choice – specifies which leader ability should be used
+     * @param fromDepot – the amount of resources the player is paying from the depot
+     * @param fromStrongbox – the amount of resources the player is paying from the strongbox
+     * @param res – the resource type the player wants to receive
+     */
     public void extraProduction(AbilityChoice choice, Resource fromDepot, Resource fromStrongbox, ResourceType res) {
         try {
             Player activePlayer = controller.getGame().getActivePlayer();
@@ -65,7 +95,12 @@ public class PlayerController {
         }
     }
 
-    //Calls the player method and then DepotController to handle the resource placement in the depot
+    /**
+     * <p>Takes resources from the Market tray</p>
+     * <p>Places those resources into TempResource, to be handled by ResourceController</p>
+     * <p>If the player has two ChangeWhiteMarbleAbility activated, asks him instructions</p>
+     * @param position  the position of the grid where the remaining marble should be inserted
+     */
     public void insertMarble(int position) {
         try {
             if (this.mainActionDone) throw new MainActionException();
@@ -94,6 +129,12 @@ public class PlayerController {
         }
     }
 
+    /**
+     * <p>If two ChangeWhiteMarbleAbility are active, changes the white marbles into new marbles</p>
+     * <p>Uses instructions provided with a Client Request</p>
+     * <p>Updates TempResource accordingly</p>
+     * @param changeMarblesRequest the Client Request with the instructions
+     */
     public void changeWhiteMarbles(ChangeMarblesRequest changeMarblesRequest){
         ResourceController resourceController = controller.getResourceController();
         Resource toHandle = resourceController.getTempRes().getToHandle();
@@ -116,6 +157,16 @@ public class PlayerController {
         }
     }
 
+    /**
+     * <p>Buys a card from the Market and places it into a development slot</p>
+     * <p>If the player bought its 7th card, ends the game</p>
+     * @param level the level of the card to buy
+     * @param color the color of the card to buy
+     * @param numSlot the number of the dev slot where the player wants to place the card
+     * @param choice which leader abilities should be used, if any
+     * @param fromDepot the amount of resources the player is paying from the depot
+     * @param fromStrongbox the amount of resources the player is paying from the strongbox
+     */
     public void buyDevCard(int level, CardColor color, int numSlot, AbilityChoice choice, Resource fromDepot, Resource fromStrongbox) {
         try {
             if (this.mainActionDone) throw new MainActionException();
@@ -136,7 +187,14 @@ public class PlayerController {
             controller.getGame().notifyEndOfUpdates();
         }
     }
-    
+
+    /**
+     * <p>Places into the Depot the resources taken from the market</p>
+     * <p>Calls ResourceController's methods</p>
+     * @param toDiscard – all the resources that player want to discards
+     * @param toPlace – data structure that tell where to place the taken resources
+     * @param fullDepot – whether the request is coming from a CLI or a GUI
+     */
     public void placeResource(Resource toDiscard, List<DepotSetting> toPlace, boolean fullDepot) {
         try {
             controller.resetException();
@@ -152,9 +210,14 @@ public class PlayerController {
         }
     }
 
+    /**
+     * <p>Ends the turn, updating the active player</p>
+     * <p>Checks if the player performed its main action</p>
+     * <p>Checks if there are TempResources to be placed</p>
+     * <p>Moves the resources from the tempStrongbox to the Strongbox</p>
+     */
     public void endTurn() {
-        try { //Check exception and resource handling
-            //move the resources from the tempStrongbox to the Strongbox
+        try {
             controller.getGame().getActivePlayer().getPersonalBoard().transferResources();
 
             if (!controller.getResourceController().getTempRes().isEmpty()) {
@@ -175,6 +238,11 @@ public class PlayerController {
         }
     }
 
+    /**
+     * Activates a leader ability or discards a leader card
+     * @param index which leader card should be activated/discarded
+     * @param choice whether the card should be activated or discarded
+     */
     public void useLeader(int index, LeaderAction choice) {
         Game game = controller.getGame();
         try {
@@ -193,6 +261,12 @@ public class PlayerController {
         }
     }
 
+    /**
+     * Reorders the content of the depot, swapping resources from its layers
+     * @param fromLayer the layer to take the resources from
+     * @param toLayer the layer to put the resources in
+     * @param amount the amount of resources to move
+     */
     public void reorderDepot(int fromLayer, int toLayer, int amount) {
         try {
             Player activePlayer = controller.getGame().getActivePlayer();
@@ -207,6 +281,10 @@ public class PlayerController {
         }
     }
 
+    /**
+     * Reorganizes the content of the Depot, swapping resources from its layers
+     * @param settings the list of settings to rebase the Depot from
+     */
     public void reorderDepot(List<DepotSetting> settings) {
         try {
             Player activePlayer = controller.getGame().getActivePlayer();
@@ -222,6 +300,13 @@ public class PlayerController {
         }
     }
 
+    /**
+     * <p>Actives the production power of the specified dev cards</p>
+     * <p>Places the outputs into the strongbox</p>
+     * @param fromDepot the resources the player wants to pay from the depot
+     * @param fromStrongbox the resources the player wants to pay from the strongbox
+     * @param numSlots a list of index of slots to activate the production from
+     */
     public void activateProduction(Resource fromDepot, Resource fromStrongbox, List<Integer> numSlots) {
         Player activePlayer = controller.getGame().getActivePlayer();
         PersonalBoard personalBoard = activePlayer.getPersonalBoard();
@@ -231,8 +316,8 @@ public class PlayerController {
         Strongbox strongbox = personalBoard.getStrongbox();
         DevelopmentCard card;
         try {
-            if(this.mainActionDone) throw new MainActionException();
-            for(Integer i : numSlots){
+            if (this.mainActionDone) throw new MainActionException();
+            for (Integer i : numSlots){
                 card = personalBoard.getSlot(i).getTopCard();
                 devCards.add(card);
                 total = total.sum(card.getProdPower().getInput());
@@ -255,5 +340,4 @@ public class PlayerController {
             controller.getGame().notifyEndOfUpdates();
         }
     }
-
 }

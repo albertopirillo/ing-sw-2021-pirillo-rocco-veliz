@@ -260,7 +260,7 @@ public class Player {
     }
 
     /**
-     * If a ChangeWhiteMarbleAbility is active, changes the white marbles into new marbles
+     * If two ChangeWhiteMarbleAbility are active, changes the white marbles into new marbles
      * @param amount1 the amount of marbles to change using the first ability
      * @param amount2 the amount of marbles to change using the first ability
      * @param toHandle reference to the temporary resources taken from the market
@@ -332,7 +332,7 @@ public class Player {
     }
 
     /**
-     * Activates a leader abilities or discards a leader card
+     * Activates a leader ability or discards a leader card
      * @param index which leader card should be activated/discarded
      * @param choice whether the card should be activated or discarded
      * @throws LeaderAbilityAlreadyActive if the selected leader card is already active

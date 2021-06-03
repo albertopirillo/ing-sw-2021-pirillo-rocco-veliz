@@ -7,47 +7,18 @@ import it.polimi.ingsw.network.updates.ServerUpdate;
 
 import java.io.EOFException;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.ConnectException;
-import java.net.Socket;
 
-public class Client implements Runnable{
+public abstract class Client implements Runnable{
 
-    private static Socket socket; //TODO: static??
-    private final String serverIP;
-    private final int port;
-    private ObjectInputStream socketIn;
-    private ObjectOutputStream socketOut;
-    private final UserInterface userInterface;
+    private UserInterface userInterface;
+    private static boolean connectionReady;
 
-    /**
-     * <p>Constructor used in testing</p>
-     * <p>Puts everything at its default value</p>
-     * <p>localhost:8080, CLI</p>
-     */
-    public Client() {
-        this.port = 8080;
-        this.serverIP = "127.0.0.1";
-        this.userInterface = new ClientCLI(this);
+    public static boolean isConnectionReady() {
+        return connectionReady;
     }
 
-    /**
-     * Creates a new Client instance
-     * @param port  the port used to communicate with the server
-     * @param gui   true if gui should be started, false if using cli
-     */
-    public Client(boolean gui, int port, String serverIP) {
-        this.port = port;
-        this.serverIP = serverIP;
-        if (gui) {
-            JavaFXMain.startGUI();
-            waitForGUI();
-            this.userInterface = new ClientGUI(this, JavaFXMain.getMainController());
-        }
-        else {
-            this.userInterface = new ClientCLI(this);
-        }
+    public static void setConnectionReady(boolean ready) {
+        connectionReady = ready;
     }
 
     /**
@@ -58,15 +29,11 @@ public class Client implements Runnable{
         return userInterface;
     }
 
-    /**
-     * Gets the Socket to communicate with the Server
-     * @return the Socket
-     */
-    public static Socket getSocket() {
-        return socket;
+    public void setUserInterface(UserInterface userInterface) {
+        this.userInterface = userInterface;
     }
 
-    private static void waitForGUI() {
+    public static void waitForGUI() {
         synchronized (JavaFXMain.lock) {
             while (JavaFXMain.getMainController() == null) {
                 try {
@@ -103,52 +70,7 @@ public class Client implements Runnable{
         }
     }
 
-    private void startConnection(){
-        try {
-            socket = new Socket(serverIP, port);
-            System.out.println("[CLIENT] Connected to " + serverIP);
-            socketOut = new ObjectOutputStream(socket.getOutputStream());
-            socketIn = new ObjectInputStream(socket.getInputStream());
-            synchronized (JavaFXMain.lock) {
-                //GUI can be shown now, notify JavaFXMain
-                JavaFXMain.lock.notifyAll();
-            }
-        } catch (ConnectException e) {
-            tryToReconnect();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void tryToReconnect() {
-        System.out.println("[CLIENT] Server is unreachable, retrying in 5 seconds...");
-        try {
-            Thread.sleep(5000);
-            startConnection();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public synchronized void sendMessage(Processable message){
-        try {
-            //System.out.println("[CLIENT] Sending request " + message.getClass().getSimpleName());
-            socketOut.writeObject(message);
-            socketOut.flush();
-            socketOut.reset();
-        } catch (IOException e){
-            System.err.println(e.getMessage());
-        }
-    }
-
-    private ServerUpdate receiveMessage() throws IOException{
-        ServerUpdate message = null;
-        try{
-            message = (ServerUpdate) socketIn.readObject();
-            //System.out.println("[CLIENT] Receiving message " + message.getClass().getSimpleName());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        return message;
-    }
+    public abstract void sendMessage(Processable message);
+    protected abstract ServerUpdate receiveMessage() throws IOException;
+    protected abstract void startConnection();
 }

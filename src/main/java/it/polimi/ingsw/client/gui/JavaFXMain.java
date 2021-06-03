@@ -102,7 +102,7 @@ public class JavaFXMain extends Application {
 
         //Wait to connect to the server before showing the GUI
         synchronized (lock) {
-            while(Client.getSocket() == null) {
+            while(!Client.isConnectionReady()) {
                 lock.wait();
             }
             myStage.show();

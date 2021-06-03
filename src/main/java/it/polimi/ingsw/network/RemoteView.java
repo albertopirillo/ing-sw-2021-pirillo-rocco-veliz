@@ -195,7 +195,8 @@ public class RemoteView implements ModelObserver {
         Map<String, Resource> strongboxMap = new HashMap<>();
         for(Player p: game.getPlayersList()) {
             depotMap.put(p.getNickname(),p.getPersonalBoard().getDepot().toDepotSetting());
-            strongboxMap.put(p.getNickname(), p.getPersonalBoard().getStrongbox().queryAllRes());
+            Strongbox strongbox = p.getPersonalBoard().getStrongbox();
+            strongboxMap.put(p.getNickname(), (strongbox.queryAllRes()).sum(strongbox.queryAllTempRes()));
         }
         return new StorageUpdate(game.getActivePlayer().getNickname(), depotMap, strongboxMap);
     }

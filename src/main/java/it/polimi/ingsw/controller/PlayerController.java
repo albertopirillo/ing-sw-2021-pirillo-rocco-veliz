@@ -86,6 +86,7 @@ public class PlayerController {
         try {
             Player activePlayer = controller.getGame().getActivePlayer();
             activePlayer.extraProduction(choice, fromDepot, fromStrongbox, res);
+            controller.getGame().updateStorages();
             controller.resetException();
         } catch (CostNotMatchingException | InvalidAbilityChoiceException | NotEnoughSpaceException | NoLeaderAbilitiesException | CannotContainFaithException | NotEnoughResException | NegativeResAmountException e) {
             controller.setException(e);

@@ -6,7 +6,7 @@ import it.polimi.ingsw.exceptions.TooManyLeaderAbilitiesException;
 /**
  * Implements a generic leader ability
  */
-public abstract class LeaderAbility {
+public abstract class LeaderAbility implements Cloneable {
 
     /**
      * Activates the leader ability, executing its effects
@@ -14,4 +14,15 @@ public abstract class LeaderAbility {
      * @throws TooManyLeaderAbilitiesException if the player already has two leader abilities
      */
     public abstract void activate(Player player) throws TooManyLeaderAbilitiesException, InvalidLayerNumberException;
+
+    @Override
+    public LeaderAbility clone() {
+        LeaderAbility clone = null;
+        try {
+            clone = (LeaderAbility) super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return clone;
+    }
 }

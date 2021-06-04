@@ -11,7 +11,7 @@ import java.io.Serializable;
  */
 public class ExtraProductionAbility extends LeaderAbility implements Serializable {
 
-    private final ProductionPower production;
+    private ProductionPower production;
 
     /**
      * Constructs a new object
@@ -39,5 +39,13 @@ public class ExtraProductionAbility extends LeaderAbility implements Serializabl
         return "\n\t\tType: " + "PRODUCTION" +
                 "\n\t\tInput: " + production.getInput().toString() +
                 "\n\t\tOutput: " + production.getOutput().toString();
+    }
+
+    @Override
+    public ExtraProductionAbility clone() {
+        ExtraProductionAbility clone;
+        clone = (ExtraProductionAbility) super.clone();
+        clone.production = this.production.clone();
+        return clone;
     }
 }

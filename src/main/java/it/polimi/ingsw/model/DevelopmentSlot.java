@@ -8,11 +8,9 @@ import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 
-public class DevelopmentSlot implements Serializable {
+public class DevelopmentSlot implements Serializable, Cloneable {
 
     private final Deque<DevelopmentCard> cards;
-
-    private transient boolean isProductionActive; //TODO: might be useless at all
 
     public DevelopmentSlot() {
         this.cards = new LinkedList<>();
@@ -41,15 +39,21 @@ public class DevelopmentSlot implements Serializable {
         return cards.peek();
     }
 
-    public boolean isProductionActive() {
-        return isProductionActive;
-    }
-
-    public void setProductionActive(boolean productionActive) {
-        isProductionActive = productionActive;
-    }
-
     public boolean canBeAdded(DevelopmentCard card) throws DevSlotEmptyException {
         return cards.isEmpty() && card.getLevel()==1 || cards.size()<3 && getLevelSlot() + 1 == card.getLevel();
+    }
+
+    @Override
+    public DevelopmentSlot clone() {
+        DevelopmentSlot clone = null;
+        try {
+             clone = (DevelopmentSlot) super.clone();
+             for(DevelopmentCard card: this.getCards()) {
+                 clone.getCards().add(card.clone());
+             }
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return clone;
     }
 }

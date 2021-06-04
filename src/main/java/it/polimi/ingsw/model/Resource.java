@@ -18,7 +18,7 @@ public class Resource implements Serializable, Cloneable {
     /**
      * The map containing all the associated resources
      */
-    private final Map<ResourceType, Integer> map;
+    private Map<ResourceType, Integer> map;
 
     /**
      *  Default constructor: creates an empty map
@@ -207,11 +207,18 @@ public class Resource implements Serializable, Cloneable {
     }
 
     /**
-     * Clones the current object
-     * @return a new Object with the same data
+     * Makes a deep copy of the object
+     * @return a new Resource
      */
     @Override
-    public Resource clone() throws CloneNotSupportedException {
-        return (Resource) super.clone();
+    public Resource clone() {
+        Resource clone = null;
+        try {
+           clone = (Resource) super.clone();
+           clone.map = new HashMap<>(this.map);
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return clone;
     }
 }

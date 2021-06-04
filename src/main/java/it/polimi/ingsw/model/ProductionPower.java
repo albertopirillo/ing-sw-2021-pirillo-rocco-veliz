@@ -2,10 +2,10 @@ package it.polimi.ingsw.model;
 
 import java.io.Serializable;
 
-public class ProductionPower implements Serializable {
+public class ProductionPower implements Serializable, Cloneable {
 
-    private final Resource input;
-    private final Resource output;
+    private Resource input;
+    private Resource output;
 
     public ProductionPower(Resource input, Resource output) {
         this.input = input;
@@ -24,5 +24,18 @@ public class ProductionPower implements Serializable {
     public String toString() {
         return "\n\t\tInput:  " + input +
                 "\n\t\tOutput: " + output;
+    }
+
+    @Override
+    public ProductionPower clone() {
+        ProductionPower clone = null;
+        try {
+            clone = (ProductionPower) super.clone();
+            clone.input = this.input.clone();
+            clone.output = this.output.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return clone;
     }
 }

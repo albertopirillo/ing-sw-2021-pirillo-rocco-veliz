@@ -1,6 +1,6 @@
 package it.polimi.ingsw.model;
 
-public class PopeFavorCard extends Card {
+public class PopeFavorCard extends Card implements Cloneable {
 
     private boolean faceUp;
     private boolean reported;
@@ -12,6 +12,7 @@ public class PopeFavorCard extends Card {
         this.reported = false;
         assignSection(i);
     }
+
     public PopeFavorCard(int i) {
         super(0);
         this.faceUp = false;
@@ -20,10 +21,10 @@ public class PopeFavorCard extends Card {
     }
 
     private void assignSection(int i) {
-        switch(i){
-            case 1: this.section = VaticanReportSection.GROUP_ONE; break;
-            case 2: this.section = VaticanReportSection.GROUP_TWO; break;
-            case 3: this.section = VaticanReportSection.GROUP_THREE; break;
+        switch (i) {
+            case 1 -> this.section = VaticanReportSection.GROUP_ONE;
+            case 2 -> this.section = VaticanReportSection.GROUP_TWO;
+            case 3 -> this.section = VaticanReportSection.GROUP_THREE;
         }
     }
 
@@ -41,5 +42,16 @@ public class PopeFavorCard extends Card {
 
     public VaticanReportSection getSection(){
         return this.section;
+    }
+
+    @Override
+    public PopeFavorCard clone() {
+        PopeFavorCard popeFavorCard = null;
+        try {
+            popeFavorCard = (PopeFavorCard) super.clone();
+        } catch(CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return popeFavorCard;
     }
 }

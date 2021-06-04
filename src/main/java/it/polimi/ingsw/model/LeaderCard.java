@@ -4,11 +4,11 @@ import it.polimi.ingsw.exceptions.NegativeResAmountException;
 
 import java.io.Serializable;
 
-public abstract class LeaderCard extends Card implements Serializable {
+public abstract class LeaderCard extends Card implements Serializable, Cloneable {
 
     private final int id;
     private final String img ;
-    private final LeaderAbility specialAbility;
+    private LeaderAbility specialAbility;
     private boolean isActive;
 
     //json initialization
@@ -49,4 +49,16 @@ public abstract class LeaderCard extends Card implements Serializable {
     }
 
     public abstract boolean canBeActivated(Player player) throws NegativeResAmountException;
+
+    @Override
+    public LeaderCard clone() {
+        LeaderCard clone = null;
+        try {
+            clone = (LeaderCard) super.clone();
+            clone.specialAbility = this.specialAbility.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return clone;
+    }
 }

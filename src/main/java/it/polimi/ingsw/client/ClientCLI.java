@@ -677,7 +677,7 @@ public class ClientCLI implements UserInterface {
         while(true) {
             try {
                 System.out.println("Move resources FROM which layer? (Press q to abort)");
-                String input = stdin.next();
+                String input = stdin.nextLine();
                 if (input.equals("q")) return null;
                 fromLayer = Integer.parseInt(input);
                 System.out.println("Move resources TO which layer?");

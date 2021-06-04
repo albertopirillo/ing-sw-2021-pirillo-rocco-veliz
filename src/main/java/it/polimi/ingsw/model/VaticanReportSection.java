@@ -5,6 +5,5 @@ public enum VaticanReportSection {
     GROUP_TWO ("Group_TWO is from 12 to 16"),
     GROUP_THREE ("Group_TWO is from 18 to 24");
 
-    VaticanReportSection(String string){
-    }
+    VaticanReportSection(String string){ }
 }

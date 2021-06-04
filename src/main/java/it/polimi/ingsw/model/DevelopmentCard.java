@@ -1,12 +1,12 @@
 package it.polimi.ingsw.model;
 
-public class DevelopmentCard extends Card {
+public class DevelopmentCard extends Card implements Cloneable {
 
-    private final Resource cost;
+    private Resource cost;
     private final CardColor type;
     private final String img;
     private final int level;
-    private final ProductionPower prodPower;
+    private ProductionPower prodPower;
 
     public DevelopmentCard(int victoryPoints, Resource cost, CardColor type, int level, ProductionPower prodPower, String img) {
         super(victoryPoints);
@@ -63,5 +63,18 @@ public class DevelopmentCard extends Card {
                 "\n\tColor: " + type +
                 "\n\tLevel: " + level +
                 "\n\tProduction power: " + prodPower;
+    }
+
+    @Override
+    public DevelopmentCard clone() {
+        DevelopmentCard clone = null;
+        try {
+            clone = (DevelopmentCard) super.clone();
+            clone.cost = this.cost.clone();
+            clone.prodPower = this.prodPower.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return clone;
     }
 }

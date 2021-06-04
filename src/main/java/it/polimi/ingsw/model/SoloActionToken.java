@@ -41,7 +41,13 @@ public abstract class SoloActionToken implements Serializable, Cloneable {
      * @return a new Object with the same data
      */
     @Override
-    public SoloActionToken clone() throws CloneNotSupportedException {
-        return (SoloActionToken) super.clone();
+    public SoloActionToken clone() {
+        SoloActionToken clone = null;
+        try {
+            clone = (SoloActionToken) super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return clone;
     }
 }

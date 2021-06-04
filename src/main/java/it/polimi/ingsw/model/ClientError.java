@@ -41,12 +41,15 @@ public class ClientError implements Serializable, Cloneable {
         return this.exception != null ? this.exception.getMessage() : "Result: OK";
     }
 
-    /**
-     * Clones the current object
-     * @return a new Object with the same data
-     */
     @Override
-    public ClientError clone() throws CloneNotSupportedException {
-        return (ClientError) super.clone();
+    public ClientError clone() {
+        ClientError clone = null;
+        try {
+            clone = (ClientError) super.clone();
+            clone.exception = this.exception;
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return clone;
     }
 }

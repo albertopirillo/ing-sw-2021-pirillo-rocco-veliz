@@ -8,9 +8,8 @@ import java.util.List;
 
 public class FaithTrack implements Serializable, Cloneable {
     private int playerFaith;
-    private final List<PopeFavorCard> popeCards;
+    private List<PopeFavorCard> popeCards;
     private int blackCrossPosition;
-
 
     public FaithTrack() {
         this.playerFaith = 0;
@@ -60,11 +59,7 @@ public class FaithTrack implements Serializable, Cloneable {
     public void checkPopeTile(Player player, List<Player> players) {
         if (!checkBlackCross(players)){
             switch (player.getPlayerFaith()) {
-                case 8:
-                case 16:
-                case 24:
-                    vaticanReport(player, players);
-                    break;
+                case 8, 16, 24 -> vaticanReport(player, players);
             }
         }
     }
@@ -77,15 +72,18 @@ public class FaithTrack implements Serializable, Cloneable {
     private boolean checkBlackCross(List<Player> players){
         if (blackCrossPosition > 4){
             switch (blackCrossPosition) {
-                case 8:
+                case 8 -> {
                     blackVaticanReport(VaticanReportSection.GROUP_ONE, players);
                     return true;
-                case 16:
+                }
+                case 16 -> {
                     blackVaticanReport(VaticanReportSection.GROUP_TWO, players);
                     return true;
-                case 24:
+                }
+                case 24 -> {
                     blackVaticanReport(VaticanReportSection.GROUP_THREE, players);
                     return true;
+                }
             }
         }
         return false;
@@ -105,10 +103,10 @@ public class FaithTrack implements Serializable, Cloneable {
         if (soloPlayer.getPersonalBoard().getFaithTrack().inProximityOfVaticanReport(soloPlayer, section)){
             //if pl IS report section assign points and flip card
             popeFavor.setReportedAndFlip(true);
-            switch(section){
-                case GROUP_ONE: soloPlayer.addVictoryPoints(2); break;
-                case GROUP_TWO: soloPlayer.addVictoryPoints(3); break;
-                case GROUP_THREE: soloPlayer.addVictoryPoints(4); break;
+            switch (section) {
+                case GROUP_ONE -> soloPlayer.addVictoryPoints(2);
+                case GROUP_TWO -> soloPlayer.addVictoryPoints(3);
+                case GROUP_THREE -> soloPlayer.addVictoryPoints(4);
             }
         } else {
             //if pl is NOT in report section, deactivate his card
@@ -124,15 +122,11 @@ public class FaithTrack implements Serializable, Cloneable {
      * @return True if player is in the region according to the rules
      */
     private boolean inProximityOfVaticanReport(Player player, VaticanReportSection section) {
-        switch (section) {
-            case GROUP_ONE:
-                return player.getPlayerFaith() >= 5;
-            case GROUP_TWO:
-                return player.getPlayerFaith() >= 12;
-            case GROUP_THREE:
-                return player.getPlayerFaith() >= 19 && player.getPlayerFaith() <= 23;
-        }
-        return false;
+        return switch (section) {
+            case GROUP_ONE -> player.getPlayerFaith() >= 5;
+            case GROUP_TWO -> player.getPlayerFaith() >= 12;
+            case GROUP_THREE -> player.getPlayerFaith() >= 19 && player.getPlayerFaith() <= 23;
+        };
     }
 
     /**
@@ -145,25 +139,26 @@ public class FaithTrack implements Serializable, Cloneable {
         // Triggered by checkPopeTile
         // gives points according to group value and changes hasReportHappened
         PopeFavorCard popeFavor;
-        switch(player.getPlayerFaith()){
-            case 8:
+        switch (player.getPlayerFaith()) {
+            case 8 -> {
                 popeFavor = getPopeFavorBySection(VaticanReportSection.GROUP_ONE);
-                if(!popeFavor.isReported()) {
+                if (!popeFavor.isReported()) {
                     popeFavor.setReportedAndFlip(true);
                     player.addVictoryPoints(2);
                     vaticanReportOthers(VaticanReportSection.GROUP_ONE, players);
                 }
-                break;
-            case 16:
+            }
+            case 16 -> {
                 popeFavor = getPopeFavorBySection(VaticanReportSection.GROUP_TWO);
                 if (!popeFavor.isReported()) {
                     popeFavor.setReportedAndFlip(true);
                     player.addVictoryPoints(3);
                     vaticanReportOthers(VaticanReportSection.GROUP_TWO, players);
-                } break;
-            case 24:
+                }
+            }
+            case 24 -> {
                 popeFavor = getPopeFavorBySection(VaticanReportSection.GROUP_THREE);
-                if(!popeFavor.isReported()) {
+                if (!popeFavor.isReported()) {
                     popeFavor.setReportedAndFlip(true);
                     player.addVictoryPoints(4);
                     vaticanReportOthers(VaticanReportSection.GROUP_THREE, players);
@@ -172,7 +167,8 @@ public class FaithTrack implements Serializable, Cloneable {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                } break;
+                }
+            }
         }
     }
 
@@ -195,10 +191,10 @@ public class FaithTrack implements Serializable, Cloneable {
                     if(pl.getPersonalBoard().getFaithTrack().inProximityOfVaticanReport(pl, section)){
                         //if pl IS report section assign points and flip card
                         popeFavor.setReportedAndFlip(true);
-                        switch(section){
-                            case GROUP_ONE: pl.addVictoryPoints(2); break;
-                            case GROUP_TWO: pl.addVictoryPoints(3); break;
-                            case GROUP_THREE: pl.addVictoryPoints(4); break;
+                        switch (section) {
+                            case GROUP_ONE -> pl.addVictoryPoints(2);
+                            case GROUP_TWO -> pl.addVictoryPoints(3);
+                            case GROUP_THREE -> pl.addVictoryPoints(4);
                         }
                     } else {
                         //if pl is NOT in report section, deactivate his card
@@ -303,8 +299,18 @@ public class FaithTrack implements Serializable, Cloneable {
      * @return a new Object with the same data
      */
     @Override
-    public FaithTrack clone() throws CloneNotSupportedException {
-        return (FaithTrack) super.clone();
+    public synchronized FaithTrack clone() {
+        FaithTrack clone = null;
+        try {
+            clone = (FaithTrack) super.clone();
+            List<PopeFavorCard> newList = new ArrayList<>();
+            for (PopeFavorCard popeCard : this.getPopeFavorCards()) {
+                newList.add(popeCard.clone());
+            }
+            clone.popeCards = newList;
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return clone;
     }
-
 }

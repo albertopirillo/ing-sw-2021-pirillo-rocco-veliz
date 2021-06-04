@@ -7,7 +7,10 @@ import it.polimi.ingsw.network.updates.*;
 import it.polimi.ingsw.server.Connection;
 import it.polimi.ingsw.utils.ModelObserver;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class RemoteView implements ModelObserver {
     private RequestController requestController;
@@ -50,8 +53,11 @@ public class RemoteView implements ModelObserver {
     public void showInitLeaderCards(Game game){
         //Prepare message with initial Leader Cards
         Player activePlayer = game.getActivePlayer();
-        List<LeaderCard> cards = new ArrayList<>(activePlayer.getLeaderCards());
-        ServerUpdate msg = new InitialLeaderUpdate(activePlayer.getNickname(), cards);
+        List<LeaderCard> clonedList = new ArrayList<>();
+        for(LeaderCard card: activePlayer.getLeaderCards()) {
+            clonedList.add(card.clone());
+        }
+        ServerUpdate msg = new InitialLeaderUpdate(activePlayer.getNickname(), clonedList);
         connection.sendMessage(msg);
     }
 
@@ -85,12 +91,8 @@ public class RemoteView implements ModelObserver {
     @Override
     public void showClientError(Game game, ClientError clientError) {
         String nickname = game.getActivePlayer().getNickname();
-        try {
-            ServerUpdate msg = new ErrorUpdate(nickname, clientError.clone());
-            connection.sendMessage(msg);
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        ServerUpdate msg = new ErrorUpdate(nickname, clientError.clone());
+        connection.sendMessage(msg);
     }
 
     @Override
@@ -121,12 +123,8 @@ public class RemoteView implements ModelObserver {
     public void showTempRes(Game game) {
         String nickname = game.getActivePlayer().getNickname();
         Resource tempRes = getRequestController().getMasterController().getResourceController().getTempRes().getToHandle();
-        try {
-            ServerUpdate msg = new TempResourceUpdate(nickname, tempRes.clone());
-            connection.sendMessage(msg);
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        ServerUpdate msg = new TempResourceUpdate(nickname, tempRes.clone());
+        connection.sendMessage(msg);
     }
 
     @Override
@@ -140,19 +138,19 @@ public class RemoteView implements ModelObserver {
     @Override
     public void showDiscardedCards(SoloGame soloGame, List<DevelopmentCard> cardList) {
         String nickname = soloGame.getActivePlayer().getNickname();
-        ServerUpdate msg = new DiscardedCardsUpdate(nickname, new ArrayList<>(cardList));
+        List<DevelopmentCard> clonedList = new ArrayList<>();
+        for(DevelopmentCard card: cardList) {
+            clonedList.add(card.clone());
+        }
+        ServerUpdate msg = new DiscardedCardsUpdate(nickname, clonedList);
         connection.sendMessage(msg);
     }
 
     @Override
     public void showLastActionToken(SoloGame soloGame, SoloActionToken lastToken) {
         String nickname = soloGame.getActivePlayer().getNickname();
-        try {
-            ServerUpdate msg = new ActionTokenUpdate(nickname, lastToken.clone());
-            connection.sendMessage(msg);
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        ServerUpdate msg = new ActionTokenUpdate(nickname, lastToken.clone());
+        connection.sendMessage(msg);
     }
 
     @Override
@@ -187,23 +185,23 @@ public class RemoteView implements ModelObserver {
         String nickname = game.getActivePlayer().getNickname();
         Map<String, List<DevelopmentSlot>> map = new HashMap<>();
         for(Player p: game.getPlayersList()) {
-            map.put(p.getNickname(), Arrays.asList(p.getPersonalBoard().getDevSlots()));
+            DevelopmentSlot[] devSlots = p.getPersonalBoard().getDevSlots();
+            List<DevelopmentSlot> clonedList = new ArrayList<>();
+            for(DevelopmentSlot slot: devSlots) {
+                clonedList.add(slot.clone());
+            }
+            map.put(p.getNickname(), clonedList);
         }
-        return new DevSlotsUpdate(nickname, new HashMap<>(map));
+        return new DevSlotsUpdate(nickname, map);
     }
 
     private FaithTrackUpdate buildFaithTrackUpdate(Game game) {
         String nickname = game.getActivePlayer().getNickname();
-        Map<String, FaithTrack> faithTrackInfoMap = new HashMap<>();
-        List<Player> players = game.getPlayersList();
-        try {
-            for (Player player : players) {
-                faithTrackInfoMap.put(player.getNickname(), player.getPersonalBoard().getFaithTrack().clone());
-            }
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
+        Map<String, FaithTrack> map = new HashMap<>();
+        for (Player player : game.getPlayersList()) {
+            map.put(player.getNickname(), player.getPersonalBoard().getFaithTrack().clone());
         }
-        return new FaithTrackUpdate(nickname, faithTrackInfoMap);
+        return new FaithTrackUpdate(nickname, map);
     }
 
     private StorageUpdate buildStorageUpdate(Game game) {
@@ -212,18 +210,23 @@ public class RemoteView implements ModelObserver {
         for(Player p: game.getPlayersList()) {
             depotMap.put(p.getNickname(),p.getPersonalBoard().getDepot().toDepotSetting());
             Strongbox strongbox = p.getPersonalBoard().getStrongbox();
-            strongboxMap.put(p.getNickname(), (strongbox.queryAllRes()).sum(strongbox.queryAllTempRes()));
+            Resource strongboxContent = (strongbox.queryAllRes()).sum(strongbox.queryAllTempRes());
+            strongboxMap.put(p.getNickname(), strongboxContent.clone());
         }
-        return new StorageUpdate(game.getActivePlayer().getNickname(), new HashMap<>(depotMap), new HashMap<>(strongboxMap));
+        return new StorageUpdate(game.getActivePlayer().getNickname(), depotMap, strongboxMap);
     }
 
     private LeaderUpdate buildLeaderUpdate(Game game) {
         Map<String, List<LeaderCard>> leaderCardsMap = new HashMap<>();
         List<Player> players = game.getPlayersList();
         for(Player player: players){
-            leaderCardsMap.put(player.getNickname(), player.getLeaderCards());
+            List<LeaderCard> clonedList = new ArrayList<>();
+            for(LeaderCard card: player.getLeaderCards()) {
+                clonedList.add(card.clone());
+            }
+            leaderCardsMap.put(player.getNickname(), clonedList);
         }
-        return new LeaderUpdate(game.getActivePlayer().getNickname(), new HashMap<>(leaderCardsMap));
+        return new LeaderUpdate(game.getActivePlayer().getNickname(), leaderCardsMap);
     }
 
     private MarketTrayUpdate buildMarketTrayUpdate(Game game) {
@@ -237,7 +240,10 @@ public class RemoteView implements ModelObserver {
     private MarketUpdate buildMarketUpdate(Game game) {
         String nickname = game.getActivePlayer().getNickname();
         Market market = game.getMarket();
-        return new MarketUpdate(nickname, new ArrayList<>(market.getAvailableCards()));
+        List<DevelopmentCard> clonedList = new ArrayList<>();
+        for(DevelopmentCard card: market.getAvailableCards()) {
+            clonedList.add(card.clone());
+        }
+         return new MarketUpdate(nickname, clonedList);
     }
-
 }

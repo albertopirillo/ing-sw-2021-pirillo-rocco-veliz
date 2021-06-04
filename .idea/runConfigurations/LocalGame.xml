@@ -1,9 +1,6 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="LocalGame" type="Application" factoryName="Application">
-    <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.client.LocalGameMain" />
-    <module name="ing-sw-2021-pirillo-rocco-veliz" />
-    <method v="2">
-      <option name="Make" enabled="true" />
-    </method>
+  <configuration default="false" name="LocalGame" type="CompoundRunConfigurationType">
+    <toRun name="LocalGame" type="Application" />
+    <method v="2" />
   </configuration>
 </component>

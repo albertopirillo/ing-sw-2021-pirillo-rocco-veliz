@@ -1,6 +1,7 @@
 package it.polimi.ingsw;
 
 import it.polimi.ingsw.client.ClientMain;
+import it.polimi.ingsw.client.LocalGameMain;
 import it.polimi.ingsw.server.ServerMain;
 
 import java.io.IOException;
@@ -14,6 +15,7 @@ public class Launcher {
         System.out.println("1: Server");
         System.out.println("2: Client CLI");
         System.out.println("3: Client GUI");
+        System.out.println("4: Local Solo Game");
         System.out.println("********************************");
         System.out.print("Game mode: ");
         Scanner stdin = new Scanner(System.in);
@@ -28,6 +30,8 @@ public class Launcher {
                 if (selection == 2) newArgs[length] = "-cli";
                 else newArgs[length] = "-gui";
                 ClientMain.main(newArgs);
+            } else if (selection == 4) {
+                LocalGameMain.main(args);
             } else {
                 System.out.println("Invalid selection");
             }

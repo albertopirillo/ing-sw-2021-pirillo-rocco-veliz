@@ -2,16 +2,16 @@ package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.client.gui.JavaFXMain;
 import it.polimi.ingsw.network.Processable;
+import it.polimi.ingsw.network.messages.LoginMessage;
 import it.polimi.ingsw.network.updates.ServerUpdate;
-import it.polimi.ingsw.server.Connection;
-
-import java.io.IOException;
+import it.polimi.ingsw.server.LocalConnection;
 
 public class LocalClient extends Client {
 
-    private Connection connection;
+    private final LocalConnection connection;
 
-    public LocalClient(boolean gui) {
+    public LocalClient(boolean gui, LocalConnection connection) {
+        this.connection = connection;
         if (gui) {
             JavaFXMain.startGUI();
             waitForGUI();
@@ -22,28 +22,37 @@ public class LocalClient extends Client {
         }
     }
 
-    public Connection getConnection() {
+    public LocalConnection getConnection() {
         return connection;
     }
 
-    public void setConnection(Connection connection) {
-        this.connection = connection;
+    @Override
+    public void run() {
+        getUserInterface().setup();
+        startConnection();
+        String nickname = getUserInterface().chooseNickname();
+        Processable login = new LoginMessage(nickname, nickname);
+        getUserInterface().setNickname(nickname);
+        sendMessage(login);
     }
-
-    //Only one is needed between send and receive
 
     @Override
     public synchronized void sendMessage(Processable message) {
-        //connection.receiveMessage();
+        System.out.println("\n[CONNECTION] Received request " + message.getClass().getSimpleName());
+        message.process(connection.getServer(), connection);
     }
 
     @Override
-    protected ServerUpdate receiveMessage() throws IOException {
+    protected ServerUpdate receiveMessage() {
         return null;
     }
 
     @Override
     protected void startConnection() {
-
+        synchronized (JavaFXMain.lock) {
+            //GUI can be show now, notify JavaFXMain
+            setConnectionReady(true);
+            JavaFXMain.lock.notifyAll();
+        }
     }
 }

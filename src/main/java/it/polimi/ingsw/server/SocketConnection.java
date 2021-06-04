@@ -50,8 +50,7 @@ public class SocketConnection extends Connection {
         }
     }
 
-    @Override
-    public synchronized void closeConnection(){
+    private synchronized void closeConnection(){
         if (isActive()) {
             try {
                 socket.close();
@@ -63,7 +62,6 @@ public class SocketConnection extends Connection {
 
     }
 
-    @Override
     public void close(){
         closeConnection();
         System.out.println("Unregistering client...");

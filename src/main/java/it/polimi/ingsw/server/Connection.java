@@ -16,7 +16,7 @@ public abstract class Connection implements Runnable {
         System.out.println("[SERVER] Client connection established.");
     }
 
-    protected Server getServer() {return server;}
+    public Server getServer() {return server;}
     public void setRemoteView(RemoteView remoteView){ this.remoteView = remoteView; }
     public RemoteView getRemoteView(){ return this.remoteView; }
     protected synchronized boolean isActive(){
@@ -27,6 +27,5 @@ public abstract class Connection implements Runnable {
     @Override
     public abstract void run();
     public abstract void sendMessage(ServerUpdate message);
-    public abstract void closeConnection();
     public abstract void close();
 }

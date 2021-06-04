@@ -2,8 +2,10 @@ package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.client.gui.JavaFXMain;
 import it.polimi.ingsw.network.Processable;
+import it.polimi.ingsw.network.messages.LoginMessage;
 import it.polimi.ingsw.network.updates.ServerUpdate;
 
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -46,6 +48,29 @@ public class SocketClient extends Client {
     }
 
     @Override
+    public void run() {
+        getUserInterface().setup();
+        startConnection();
+        String nickname = getUserInterface().chooseNickname();
+        Processable login = new LoginMessage(nickname, nickname);
+        getUserInterface().setNickname(nickname);
+        sendMessage(login);
+        while(!Thread.currentThread().isInterrupted()) {
+            ServerUpdate msg;
+            try {
+                msg = receiveMessage();
+            } catch(EOFException e){
+                System.out.println("\n[CLIENT] Quitting game.");
+                break;
+            } catch (IOException e) {
+                e.printStackTrace();
+                break;
+            }
+            getUserInterface().readUpdate(msg);
+        }
+    }
+
+    @Override
     protected void startConnection(){
         try {
             Socket socket = new Socket(serverIP, port);
@@ -53,7 +78,7 @@ public class SocketClient extends Client {
             socketOut = new ObjectOutputStream(socket.getOutputStream());
             socketIn = new ObjectInputStream(socket.getInputStream());
             synchronized (JavaFXMain.lock) {
-                //GUI can be shown now, notify JavaFXMain
+                //GUI can be show now, notify JavaFXMain
                 setConnectionReady(true);
                 JavaFXMain.lock.notifyAll();
             }

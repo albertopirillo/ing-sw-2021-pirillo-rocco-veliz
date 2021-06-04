@@ -91,5 +91,4 @@ public class Market {
     public MarketTray getMarketTray() {
         return this.marketTray;
     }
-
 }

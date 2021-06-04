@@ -13,7 +13,7 @@ import java.util.Set;
  * Implements a map to easily pass any type of resource between entities
  * @see ResourceType See the avaliable keys
  */
-public class Resource implements Serializable {
+public class Resource implements Serializable, Cloneable {
 
     /**
      * The map containing all the associated resources
@@ -204,5 +204,14 @@ public class Resource implements Serializable {
             }
         }
         return sb.toString();
+    }
+
+    /**
+     * Clones the current object
+     * @return a new Object with the same data
+     */
+    @Override
+    public Resource clone() throws CloneNotSupportedException {
+        return (Resource) super.clone();
     }
 }

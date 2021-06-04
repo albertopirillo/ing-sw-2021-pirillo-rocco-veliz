@@ -1,11 +1,12 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.utils.ANSIColor;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FaithTrack implements Serializable {
+public class FaithTrack implements Serializable, Cloneable {
     private int playerFaith;
     private final List<PopeFavorCard> popeCards;
     private int blackCrossPosition;
@@ -295,6 +296,15 @@ public class FaithTrack implements Serializable {
         if(!flag) sb.append("You have no cards face up");
 
         return sb.toString();
+    }
+
+    /**
+     * Clones the current object
+     * @return a new Object with the same data
+     */
+    @Override
+    public FaithTrack clone() throws CloneNotSupportedException {
+        return (FaithTrack) super.clone();
     }
 
 }

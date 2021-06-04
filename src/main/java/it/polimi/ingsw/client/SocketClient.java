@@ -64,16 +64,6 @@ public class SocketClient extends Client {
         }
     }
 
-    private void tryToReconnect() {
-        System.out.println("[CLIENT] Server is unreachable, retrying in 5 seconds...");
-        try {
-            Thread.sleep(5000);
-            startConnection();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
     @Override
     public synchronized void sendMessage(Processable message){
         try {
@@ -96,5 +86,15 @@ public class SocketClient extends Client {
             e.printStackTrace();
         }
         return message;
+    }
+
+    private void tryToReconnect() {
+        System.out.println("[CLIENT] Server is unreachable, retrying in 5 seconds...");
+        try {
+            Thread.sleep(5000);
+            startConnection();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

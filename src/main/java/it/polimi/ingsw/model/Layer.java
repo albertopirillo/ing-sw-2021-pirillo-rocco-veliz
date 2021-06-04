@@ -65,7 +65,7 @@ public abstract class Layer implements Serializable, Cloneable {
      * @return a new Object representing this cloned layer
      */
     @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
+    public Layer clone() throws CloneNotSupportedException {
+        return (Layer) super.clone();
     }
 }

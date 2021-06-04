@@ -19,7 +19,6 @@ public class ClientCLI implements UserInterface {
     private final Client client;
     private final Scanner stdin;
     private final ClientModel clientModel;
-    private Resource tempRes;
     private boolean productionDone;
     private boolean mainActionDone;
 
@@ -620,14 +619,12 @@ public class ClientCLI implements UserInterface {
         clientModel.getStoragesModel().saveTempRes(update);
         Resource resource = update.getResource();
         if (resource == null || resource.getActualSize() == 0) {
-            this.tempRes = null;
             System.out.println("\nThere are no resources from the market that need to be placed");
             this.gameMenu();
         }
         else {
             System.out.println("\nResources obtained from the Market that need to be placed: ");
             System.out.println(resource);
-            this.tempRes = resource;
             Request request = this.placeResourceMenu();
             this.getClient().sendMessage(request);
         }
@@ -637,8 +634,9 @@ public class ClientCLI implements UserInterface {
         int amountSelection, layerSelection;
         List<DepotSetting> toPlace = new ArrayList<>();
         Resource toDiscard = new Resource(0,0,0,0);
+        Resource tempRes = clientModel.getStoragesModel().getTempResource();
         try {
-            for(ResourceType key: this.tempRes.keySet()) {
+            for(ResourceType key: tempRes.keySet()) {
                 if (tempRes.getValue(key) != 0) {
                     System.out.println("\nYou have " + key + "x" + tempRes.getValue(key));
                     System.out.println("How many resources to discard?");

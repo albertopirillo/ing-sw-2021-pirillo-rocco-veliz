@@ -12,39 +12,25 @@ public enum MarblesColor {
 
     //Parsing to ResourceType from Marbles(no WHITE)
     public ResourceType getResourceType(){
-        switch(this){
-            case BLUE:
-                return ResourceType.SHIELD;
-            case GREY:
-                return ResourceType.STONE;
-            case YELLOW:
-                return ResourceType.COIN;
-            case PURPLE:
-                return ResourceType.SERVANT;
-            case RED:
-                return ResourceType.FAITH;
-            default:
-                throw new IllegalArgumentException();
-        }
+        return switch (this) {
+            case BLUE -> ResourceType.SHIELD;
+            case GREY -> ResourceType.STONE;
+            case YELLOW -> ResourceType.COIN;
+            case PURPLE -> ResourceType.SERVANT;
+            case RED -> ResourceType.FAITH;
+            default -> throw new IllegalArgumentException();
+        };
     }
 
     public String getName(){
-        switch(this){
-            case BLUE:
-                return "shieldMarble";
-            case GREY:
-                return "stoneMarble";
-            case YELLOW:
-                return "coinMarble";
-            case PURPLE:
-                return "servantMarble";
-            case RED:
-                return "faithMarble";
-            case WHITE:
-                return "whiteMarble";
-            default:
-                return null;
-        }
+        return switch (this) {
+            case BLUE -> "shieldMarble";
+            case GREY -> "stoneMarble";
+            case YELLOW -> "coinMarble";
+            case PURPLE -> "servantMarble";
+            case RED -> "faithMarble";
+            case WHITE -> "whiteMarble";
+        };
     }
 
     public static boolean contains(MarblesColor other) {
@@ -55,15 +41,14 @@ public enum MarblesColor {
 
     @Override
     public String toString() {
-        String color = null;
-        switch (this) {
-            case WHITE: color = "WHITE"; break;
-            case BLUE: color = ANSIColor.BLUE + "BLUE"; break;
-            case GREY: color = ANSIColor.GREY + "GREY";break;
-            case YELLOW :color = ANSIColor.BRIGHT_YELLOW + "YELLOW";break;
-            case PURPLE: color = ANSIColor.MAGENTA + "PURPLE";break;
-            case RED: color = ANSIColor.BRIGHT_RED + "RED";break;
-        }
+        String color = switch (this) {
+            case WHITE -> "WHITE";
+            case BLUE -> ANSIColor.BLUE + "BLUE";
+            case GREY -> ANSIColor.GREY + "GREY";
+            case YELLOW -> ANSIColor.BRIGHT_YELLOW + "YELLOW";
+            case PURPLE -> ANSIColor.MAGENTA + "PURPLE";
+            case RED -> ANSIColor.BRIGHT_RED + "RED";
+        };
         return color.concat(ANSIColor.RESET);
     }
 }

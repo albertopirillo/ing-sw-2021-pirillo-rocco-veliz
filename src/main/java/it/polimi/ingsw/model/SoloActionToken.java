@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * Generic implementation of an action token, used in single player only
  */
-public abstract class SoloActionToken implements Serializable {
+public abstract class SoloActionToken implements Serializable, Cloneable {
 
     private transient final SoloGame game;
 
@@ -35,4 +35,13 @@ public abstract class SoloActionToken implements Serializable {
      * @return a String representing the ID of the token
      */
     public abstract String getID();
+
+    /**
+     * Clones the current object
+     * @return a new Object with the same data
+     */
+    @Override
+    public SoloActionToken clone() throws CloneNotSupportedException {
+        return (SoloActionToken) super.clone();
+    }
 }

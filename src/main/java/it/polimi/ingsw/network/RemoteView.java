@@ -77,30 +77,31 @@ public class RemoteView implements ModelObserver {
 
     @Override
     public void notifyGameOver(Game game, boolean win, List<String> ranking, Map<String, Integer> scores) {
-        ServerUpdate msg = new GameOverUpdate(game.getActivePlayer().getNickname(), win, ranking, scores);
+        String nickname = game.getActivePlayer().getNickname();
+        ServerUpdate msg = new GameOverUpdate(nickname, win, new ArrayList<>(ranking), new HashMap<>(scores));
         connection.sendMessage(msg);
     }
 
     @Override
     public void showClientError(Game game, ClientError clientError) {
-        Player activePlayer = game.getActivePlayer();
-        ServerUpdate msg = new ErrorUpdate(activePlayer.getNickname(), clientError);
-        connection.sendMessage(msg);
+        String nickname = game.getActivePlayer().getNickname();
+        try {
+            ServerUpdate msg = new ErrorUpdate(nickname, clientError.clone());
+            connection.sendMessage(msg);
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void showMarketTray(Game game){
-        Player activePlayer = game.getActivePlayer();
-        MarketTray marketTray = game.getMarket().getMarketTray();
-        ServerUpdate msg = new MarketTrayUpdate(activePlayer.getNickname(), marketTray.getMarketMarbles(), marketTray.getRemainingMarble());
+        ServerUpdate msg = buildMarketTrayUpdate(game);
         connection.sendMessage(msg);
     }
 
     @Override
     public void showMarket(Game game){
-        Player activePlayer = game.getActivePlayer();
-        Market market = game.getMarket();
-        ServerUpdate msg = new MarketUpdate(activePlayer.getNickname(), market.getAvailableCards());
+        ServerUpdate msg = buildMarketUpdate(game);
         connection.sendMessage(msg);
     }
 
@@ -118,76 +119,91 @@ public class RemoteView implements ModelObserver {
 
     @Override
     public void showTempRes(Game game) {
-        Player activePlayer = game.getActivePlayer();
+        String nickname = game.getActivePlayer().getNickname();
         Resource tempRes = getRequestController().getMasterController().getResourceController().getTempRes().getToHandle();
-        ServerUpdate msg = new TempResourceUpdate(activePlayer.getNickname(), tempRes);
-        connection.sendMessage(msg);
+        try {
+            ServerUpdate msg = new TempResourceUpdate(nickname, tempRes.clone());
+            connection.sendMessage(msg);
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void showTempMarbles(Game game, int numWhiteMarbles) {
         Player activePlayer = game.getActivePlayer();
-        ServerUpdate msg = new TempMarblesUpdate(activePlayer.getNickname(), numWhiteMarbles, activePlayer.getResTypesAbility());
+        String nickname = activePlayer.getNickname();
+        ServerUpdate msg = new TempMarblesUpdate(nickname, numWhiteMarbles, new ArrayList<>(activePlayer.getResTypesAbility()));
         connection.sendMessage(msg);
     }
 
     @Override
     public void showDiscardedCards(SoloGame soloGame, List<DevelopmentCard> cardList) {
-        Player activePlayer = soloGame.getActivePlayer();
-        ServerUpdate msg = new DiscardedCardsUpdate(activePlayer.getNickname(), cardList);
+        String nickname = soloGame.getActivePlayer().getNickname();
+        ServerUpdate msg = new DiscardedCardsUpdate(nickname, new ArrayList<>(cardList));
         connection.sendMessage(msg);
     }
 
     @Override
     public void showLastActionToken(SoloGame soloGame, SoloActionToken lastToken) {
-        Player activePlayer = soloGame.getActivePlayer();
-        ServerUpdate msg = new ActionTokenUpdate(activePlayer.getNickname(), lastToken);
-        connection.sendMessage(msg);
+        String nickname = soloGame.getActivePlayer().getNickname();
+        try {
+            ServerUpdate msg = new ActionTokenUpdate(nickname, lastToken.clone());
+            connection.sendMessage(msg);
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void setProductionDone(Game game){
-        Player activePlayer = game.getActivePlayer();
-        ServerUpdate msg = new ProductionDoneUpdate(activePlayer.getNickname());
+        String nickname = game.getActivePlayer().getNickname();
+        ServerUpdate msg = new ProductionDoneUpdate(nickname);
         connection.sendMessage(msg);
     }
 
     @Override
     public void setMainActionDone(Game game) {
-        Player activePlayer = game.getActivePlayer();
-        ServerUpdate msg = new MainActionDoneUpdate(activePlayer.getNickname());
+        String nickname = game.getActivePlayer().getNickname();
+        ServerUpdate msg = new MainActionDoneUpdate(nickname);
         connection.sendMessage(msg);
     }
 
     @Override
     public void gameStateStart(Game game) {
         //Build a EndOfInitialUpdate and send it
+        String nickname = game.getActivePlayer().getNickname();
         StorageUpdate storageUpdate = buildStorageUpdate(game);
         LeaderUpdate leaderUpdate = buildLeaderUpdate(game);
         MarketTrayUpdate marketTrayUpdate = buildMarketTrayUpdate(game);
         MarketUpdate marketUpdate = buildMarketUpdate(game);
         FaithTrackUpdate faithTrackUpdate = buildFaithTrackUpdate(game);
         DevSlotsUpdate devSlotsUpdate = buildDevSlotsUpdate(game);
-        ServerUpdate msg = new EndOfInitialUpdate(game.getActivePlayer().getNickname(), storageUpdate, leaderUpdate, marketTrayUpdate, marketUpdate, faithTrackUpdate, devSlotsUpdate);
+        ServerUpdate msg = new EndOfInitialUpdate(nickname, storageUpdate, leaderUpdate, marketTrayUpdate, marketUpdate, faithTrackUpdate, devSlotsUpdate);
         connection.sendMessage(msg);
     }
 
     private DevSlotsUpdate buildDevSlotsUpdate(Game game) {
-        Player activePlayer = game.getActivePlayer();
+        String nickname = game.getActivePlayer().getNickname();
         Map<String, List<DevelopmentSlot>> map = new HashMap<>();
         for(Player p: game.getPlayersList()) {
             map.put(p.getNickname(), Arrays.asList(p.getPersonalBoard().getDevSlots()));
         }
-        return new DevSlotsUpdate(activePlayer.getNickname(), map);
+        return new DevSlotsUpdate(nickname, new HashMap<>(map));
     }
 
     private FaithTrackUpdate buildFaithTrackUpdate(Game game) {
+        String nickname = game.getActivePlayer().getNickname();
         Map<String, FaithTrack> faithTrackInfoMap = new HashMap<>();
         List<Player> players = game.getPlayersList();
-        for(Player player: players){
-            faithTrackInfoMap.put(player.getNickname(), player.getPersonalBoard().getFaithTrack());
+        try {
+            for (Player player : players) {
+                faithTrackInfoMap.put(player.getNickname(), player.getPersonalBoard().getFaithTrack().clone());
+            }
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
         }
-        return new FaithTrackUpdate(game.getActivePlayer().getNickname(), faithTrackInfoMap);
+        return new FaithTrackUpdate(nickname, faithTrackInfoMap);
     }
 
     private StorageUpdate buildStorageUpdate(Game game) {
@@ -198,7 +214,7 @@ public class RemoteView implements ModelObserver {
             Strongbox strongbox = p.getPersonalBoard().getStrongbox();
             strongboxMap.put(p.getNickname(), (strongbox.queryAllRes()).sum(strongbox.queryAllTempRes()));
         }
-        return new StorageUpdate(game.getActivePlayer().getNickname(), depotMap, strongboxMap);
+        return new StorageUpdate(game.getActivePlayer().getNickname(), new HashMap<>(depotMap), new HashMap<>(strongboxMap));
     }
 
     private LeaderUpdate buildLeaderUpdate(Game game) {
@@ -207,19 +223,21 @@ public class RemoteView implements ModelObserver {
         for(Player player: players){
             leaderCardsMap.put(player.getNickname(), player.getLeaderCards());
         }
-        return new LeaderUpdate(game.getActivePlayer().getNickname(), leaderCardsMap);
+        return new LeaderUpdate(game.getActivePlayer().getNickname(), new HashMap<>(leaderCardsMap));
     }
 
     private MarketTrayUpdate buildMarketTrayUpdate(Game game) {
-        Player activePlayer = game.getActivePlayer();
+        String nickname = game.getActivePlayer().getNickname();
         MarketTray marketTray = game.getMarket().getMarketTray();
-        return new MarketTrayUpdate(activePlayer.getNickname(), marketTray.getMarketMarbles(), marketTray.getRemainingMarble());
+        MarblesColor[][] tray = new MarblesColor[3][4];
+        System.arraycopy(marketTray.getMarketMarbles(), 0, tray, 0, marketTray.getMarketMarbles().length);
+        return new MarketTrayUpdate(nickname, tray, marketTray.getRemainingMarble());
     }
 
     private MarketUpdate buildMarketUpdate(Game game) {
-        Player activePlayer = game.getActivePlayer();
+        String nickname = game.getActivePlayer().getNickname();
         Market market = game.getMarket();
-        return new MarketUpdate(activePlayer.getNickname(), market.getAvailableCards());
+        return new MarketUpdate(nickname, new ArrayList<>(market.getAvailableCards()));
     }
 
 }

@@ -109,6 +109,12 @@ public class PlayerController {
             Resource output = activePlayer.insertMarble(position);
             ResourceController resourceController = controller.getResourceController();
             resourceController.getTempRes().setToHandle(output);
+            //TODO: resetting the exception before the end of try block might not be safe
+            controller.resetException();
+            if (!testing) {
+                this.mainActionDone = true;
+                controller.getGame().setMainActionDone();
+            }
             if(output.hasAllResources()){
                 controller.getGame().updateMarketTray();
                 controller.getGame().updateTempMarbles(output.getValue(ResourceType.ALL));
@@ -117,11 +123,6 @@ public class PlayerController {
                 controller.getGame().updateMarketTray();
                 controller.getGame().updateStorages();
                 controller.getGame().updateTempRes();
-            }
-            controller.resetException();
-            if (!testing) {
-                this.mainActionDone = true;
-                controller.getGame().setMainActionDone();
             }
         } catch (NegativeResAmountException | InvalidKeyException | MainActionException e) {
             controller.setException(e);

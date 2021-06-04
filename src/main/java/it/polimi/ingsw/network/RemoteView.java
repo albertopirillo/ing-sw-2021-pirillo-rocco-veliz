@@ -121,12 +121,8 @@ public class RemoteView implements ModelObserver {
     public void showTempRes(Game game) {
         String nickname = game.getActivePlayer().getNickname();
         Resource tempRes = getRequestController().getMasterController().getResourceController().getTempRes().getToHandle();
-        try {
-            ServerUpdate msg = new TempResourceUpdate(nickname, tempRes.clone());
-            connection.sendMessage(msg);
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        ServerUpdate msg = new TempResourceUpdate(nickname, new Resource(tempRes.getMap()));
+        connection.sendMessage(msg);
     }
 
     @Override

@@ -14,34 +14,18 @@ import it.polimi.ingsw.network.messages.NicknameErrorMessage;
 import it.polimi.ingsw.network.updates.InitialResourcesUpdate;
 import it.polimi.ingsw.network.updates.ServerUpdate;
 
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Server implements Runnable {
+public abstract class Server implements Runnable {
 
-    private final int port;
-    private final ServerSocket serverSocket;
     private MasterController masterController;
     private static final List<Connection> connections = new ArrayList<>();
     private final Map<String,Connection> lobbyPlayers = new HashMap<>();
     private final List<Map<String,Connection> > games = new ArrayList<>();
-    private String firstPlayer;
     private int gameSize = 0;
-
-    public Server() throws IOException {
-        this.port = 8080;
-        this.serverSocket = new ServerSocket(8080);
-    }
-
-    public Server(int port) throws IOException {
-        this.port = port;
-        this.serverSocket = new ServerSocket(port);
-    }
 
     public synchronized void addToLobby(String nickname, Connection connection){
         lobbyPlayers.put(nickname, connection);
@@ -59,7 +43,7 @@ public class Server implements Runnable {
         }
     }
 
-    private boolean checkUsernameExist(String nickname){
+    protected boolean checkUsernameExist(String nickname){
         for (Map<String, Connection> map : games) {
             for (String nick : map.keySet()) {
                 if ((nick).equalsIgnoreCase(nickname))
@@ -182,31 +166,13 @@ public class Server implements Runnable {
     }
 
     @Override
-    public void run() {
-        System.out.println("[SERVER] Server is listening on port: " + port);
-        while(!Thread.currentThread().isInterrupted()){
-            try {
-                Socket socket = serverSocket.accept();
-                System.out.println("[SERVER] New client connected");
-                newConnection(socket);
-            } catch (IOException e) {
-                System.out.println("Connection Error");
-                e.printStackTrace();
-            }
-        }
-    }
+    public abstract void run();
 
-    private void newConnection(Socket socket) {
-        Connection connection = new SocketConnection(socket, this);
-        registerConnection(connection);
-        new Thread(connection).start();
-    }
-
-    private synchronized void registerConnection(Connection connection) {
+    protected synchronized void registerConnection(Connection connection) {
         connections.add(connection);
     }
 
-    private synchronized void deregisterConnection(Connection connection) {
+    protected synchronized void deregisterConnection(Connection connection) {
         connections.remove(connection);
     }
 

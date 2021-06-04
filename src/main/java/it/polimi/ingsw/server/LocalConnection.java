@@ -7,7 +7,7 @@ public class LocalConnection extends Connection{
 
     private final LocalClient client;
 
-    public LocalConnection(Server server, LocalClient client) {
+    public LocalConnection(LocalServer server, LocalClient client) {
         super(server);
         this.client = client;
     }

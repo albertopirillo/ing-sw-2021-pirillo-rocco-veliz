@@ -12,7 +12,7 @@
 
 ## Documentation
 ### JavaDoc
-Available [here](deliveries/javadoc.zip)
+ZIP available [here](deliveries/javadoc.zip)
 
 [comment]: <> (## Execution instructions)
 [comment]: <> (_TODO_)
@@ -25,7 +25,7 @@ Available [here](deliveries/javadoc.zip)
 
 ## Test coverage
 
-[comment]: <> (Available [here]&#40;deliveries/coverage.zip&#41;)
+[comment]: <> (ZIP available [here]&#40;deliveries/coverage.zip&#41;)
 
 ![Coverage report](deliveries/coverage%20report.png)
 

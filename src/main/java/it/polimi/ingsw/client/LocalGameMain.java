@@ -1,5 +1,8 @@
 package it.polimi.ingsw.client;
 
+import it.polimi.ingsw.server.LocalServer;
+import it.polimi.ingsw.server.Server;
+
 import java.util.Scanner;
 
 public class LocalGameMain {
@@ -22,9 +25,10 @@ public class LocalGameMain {
                 }
             }
             System.out.println("Starting " + (gui ? "GUI..." : "CLI..."));
-            //Server server = new Server()
-            //Client client = new LocalClient(gui);
-            //client.run();
+            LocalClient client = new LocalClient(gui);
+            Server server = new LocalServer(client);
+            server.run();
+            client.run();
         }  catch (NumberFormatException e) {
             System.out.println("Invalid selection");
         }

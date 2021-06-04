@@ -16,8 +16,9 @@ public class LocalServer extends Server {
     }
 
     private void newConnection() {
-        Connection connection = new LocalConnection(this, client);
+        LocalConnection connection = new LocalConnection(this, client);
         registerConnection(connection);
+        this.client.setConnection(connection);
         new Thread(connection).start();
     }
 }

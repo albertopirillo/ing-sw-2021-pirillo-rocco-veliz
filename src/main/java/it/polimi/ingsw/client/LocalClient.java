@@ -8,10 +8,9 @@ import it.polimi.ingsw.server.LocalConnection;
 
 public class LocalClient extends Client {
 
-    private final LocalConnection connection;
+    private LocalConnection connection;
 
-    public LocalClient(boolean gui, LocalConnection connection) {
-        this.connection = connection;
+    public LocalClient(boolean gui) {
         if (gui) {
             JavaFXMain.startGUI();
             waitForGUI();
@@ -24,6 +23,9 @@ public class LocalClient extends Client {
 
     public LocalConnection getConnection() {
         return connection;
+    }
+    public void setConnection(LocalConnection connection) {
+        this.connection = connection;
     }
 
     @Override

@@ -197,7 +197,7 @@ public class Server implements Runnable {
     }
 
     private void newConnection(Socket socket) {
-        Connection connection = new Connection(socket, this);
+        Connection connection = new SocketConnection(socket, this);
         registerConnection(connection);
         new Thread(connection).start();
     }

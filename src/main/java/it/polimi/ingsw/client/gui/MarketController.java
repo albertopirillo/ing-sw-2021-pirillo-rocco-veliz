@@ -132,9 +132,9 @@ public class MarketController implements Initializable {
         Resource strongbox = this.mainController.getClientModel().getStoragesModel().getStrongboxMap().get(this.mainController.getNickname());
         try {
             ((SpinnerValueFactory.IntegerSpinnerValueFactory)this.stone.getValueFactory()).setMax(strongbox.getValue(ResourceType.STONE));
-            ((SpinnerValueFactory.IntegerSpinnerValueFactory)this.stone.getValueFactory()).setMax(strongbox.getValue(ResourceType.STONE));
-            ((SpinnerValueFactory.IntegerSpinnerValueFactory)this.stone.getValueFactory()).setMax(strongbox.getValue(ResourceType.STONE));
-            ((SpinnerValueFactory.IntegerSpinnerValueFactory)this.stone.getValueFactory()).setMax(strongbox.getValue(ResourceType.STONE));
+            ((SpinnerValueFactory.IntegerSpinnerValueFactory)this.servant.getValueFactory()).setMax(strongbox.getValue(ResourceType.SERVANT));
+            ((SpinnerValueFactory.IntegerSpinnerValueFactory)this.shield.getValueFactory()).setMax(strongbox.getValue(ResourceType.SHIELD));
+            ((SpinnerValueFactory.IntegerSpinnerValueFactory)this.coin.getValueFactory()).setMax(strongbox.getValue(ResourceType.COIN));
         } catch (InvalidKeyException e) {
             e.printStackTrace();
         }

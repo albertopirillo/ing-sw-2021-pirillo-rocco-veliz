@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="LocalGame" type="CompoundRunConfigurationType">
-    <toRun name="LocalGame" type="Application" />
+    <toRun name="Local Game" type="Application" />
     <method v="2" />
   </configuration>
 </component>

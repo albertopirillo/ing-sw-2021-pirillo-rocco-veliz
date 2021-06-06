@@ -1,7 +1,6 @@
 package it.polimi.ingsw;
 
 import it.polimi.ingsw.client.ClientMain;
-import it.polimi.ingsw.client.LocalGameMain;
 import it.polimi.ingsw.server.ServerMain;
 
 import java.io.IOException;
@@ -32,7 +31,7 @@ public class Launcher {
                 else newArgs[length] = "-gui";
                 ClientMain.main(newArgs);
             } else if (selection == 4) {
-                LocalGameMain.main(args);
+                LocalGameLauncher.main(args);
             } else {
                 System.out.println("Invalid selection");
             }

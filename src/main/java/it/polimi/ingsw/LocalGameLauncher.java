@@ -1,13 +1,15 @@
-package it.polimi.ingsw.client;
+package it.polimi.ingsw;
 
+import it.polimi.ingsw.client.LocalClient;
 import it.polimi.ingsw.server.LocalServer;
 import it.polimi.ingsw.server.Server;
 
 import java.util.Scanner;
 
-public class LocalGameMain {
+public class LocalGameLauncher {
     public static void main(String[] args) {
         boolean gui;
+        System.out.println("\n********************************");
         System.out.println("Please select the desired interface:");
         System.out.println("1: CLI");
         System.out.println("2: GUI");
@@ -16,6 +18,7 @@ public class LocalGameMain {
         Scanner stdin = new Scanner(System.in);
         try {
             int selection = Integer.parseInt(stdin.nextLine());
+            System.out.println();
             switch (selection) {
                 case 1 -> gui = false;
                 case 2 -> gui = true;

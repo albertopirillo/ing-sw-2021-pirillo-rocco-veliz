@@ -32,8 +32,18 @@
 }
 
 .tab-pane {
-    -fx-tab-min-width:120px;
+    -fx-tab-min-width:150px;
 }
+
+/*Set the background image of the tabs*/
+/*.tab {
+    -fx-background-image: url("/png/generic/backBasic.png");
+}*/
+
+/*Sets the background image of the white area below the tabs*/
+/*.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-image: url("/png/generic/backBasic.png");
+}*/
 
 .imgShadow{
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);

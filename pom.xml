@@ -94,7 +94,7 @@
           <archive>
             <manifest>
               <addClasspath>true</addClasspath>
-              <mainClass>it.polimi.ingsw.Launcher</mainClass>
+              <mainClass>it.polimi.ingsw.ServerLauncher</mainClass>
             </manifest>
           </archive>
         </configuration>
@@ -106,23 +106,91 @@
         <artifactId>maven-shade-plugin</artifactId>
         <version>3.2.4</version>
         <executions>
+
+          <!--Server JAR-->
           <execution>
+            <id>server</id>
             <phase>package</phase>
             <goals>
               <goal>shade</goal>
             </goals>
             <configuration>
+              <filters>
+                <filter>
+                  <artifact>*:*</artifact>
+                  <excludes>
+                    <exclude>META-INF/**</exclude>
+                  </excludes>
+                </filter>
+              </filters>
               <shadedArtifactAttached>true</shadedArtifactAttached>
               <shadedClassifierName>project-classifier</shadedClassifierName>
-              <outputFile>shade\${project.artifactId}.jar</outputFile>
+              <outputFile>shade\server.jar</outputFile>
               <transformers>
                 <transformer implementation=
                                      "org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                  <mainClass>it.polimi.ingsw.Launcher</mainClass>
+                  <mainClass>it.polimi.ingsw.ServerLauncher</mainClass>
                 </transformer>
               </transformers>
             </configuration>
           </execution>
+
+          <!--Client JAR-->
+          <execution>
+            <id>client</id>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <filters>
+                <filter>
+                  <artifact>*:*</artifact>
+                  <excludes>
+                    <exclude>META-INF/**</exclude>
+                  </excludes>
+                </filter>
+              </filters>
+              <shadedArtifactAttached>true</shadedArtifactAttached>
+              <shadedClassifierName>project-classifier</shadedClassifierName>
+              <outputFile>shade\client.jar</outputFile>
+              <transformers>
+                <transformer implementation=
+                                     "org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                  <mainClass>it.polimi.ingsw.ClientLauncher</mainClass>
+                </transformer>
+              </transformers>
+            </configuration>
+          </execution>
+
+<!--          LocalGame JAR-->
+<!--          <execution>-->
+<!--            <id>local_game</id>-->
+<!--            <phase>package</phase>-->
+<!--            <goals>-->
+<!--              <goal>shade</goal>-->
+<!--            </goals>-->
+<!--            <configuration>-->
+<!--              <filters>-->
+<!--                <filter>-->
+<!--                  <artifact>*:*</artifact>-->
+<!--                  <excludes>-->
+<!--                    <exclude>META-INF/**</exclude>-->
+<!--                  </excludes>-->
+<!--                </filter>-->
+<!--              </filters>-->
+<!--              <shadedArtifactAttached>true</shadedArtifactAttached>-->
+<!--              <shadedClassifierName>project-classifier</shadedClassifierName>-->
+<!--              <outputFile>shade\local_game.jar</outputFile>-->
+<!--              <transformers>-->
+<!--                <transformer implementation=-->
+<!--                                     "org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">-->
+<!--                  <mainClass>it.polimi.ingsw.LocalGameLauncher</mainClass>-->
+<!--                </transformer>-->
+<!--              </transformers>-->
+<!--            </configuration>-->
+<!--          </execution>-->
+
         </executions>
       </plugin>
 

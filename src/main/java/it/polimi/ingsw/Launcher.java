@@ -21,6 +21,7 @@ public class Launcher {
         Scanner stdin = new Scanner(System.in);
         try {
             int selection = Integer.parseInt(stdin.nextLine());
+            System.out.println();
             if (selection == 1) {
                 ServerMain.main(args);
             } else if (selection == 2 || selection == 3) {

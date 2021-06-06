@@ -115,6 +115,14 @@
               <goal>shade</goal>
             </goals>
             <configuration>
+              <filters>
+                <filter>
+                  <artifact>*:*</artifact>
+                  <excludes>
+                    <exclude>META-INF/**</exclude>
+                  </excludes>
+                </filter>
+              </filters>
               <shadedArtifactAttached>true</shadedArtifactAttached>
               <shadedClassifierName>project-classifier</shadedClassifierName>
               <outputFile>shade\server.jar</outputFile>
@@ -135,6 +143,14 @@
               <goal>shade</goal>
             </goals>
             <configuration>
+              <filters>
+                <filter>
+                  <artifact>*:*</artifact>
+                  <excludes>
+                    <exclude>META-INF/**</exclude>
+                  </excludes>
+                </filter>
+              </filters>
               <shadedArtifactAttached>true</shadedArtifactAttached>
               <shadedClassifierName>project-classifier</shadedClassifierName>
               <outputFile>shade\client.jar</outputFile>
@@ -147,7 +163,7 @@
             </configuration>
           </execution>
 
-          <!--LocalGame JAR-->
+<!--          LocalGame JAR-->
 <!--          <execution>-->
 <!--            <id>local_game</id>-->
 <!--            <phase>package</phase>-->
@@ -155,6 +171,14 @@
 <!--              <goal>shade</goal>-->
 <!--            </goals>-->
 <!--            <configuration>-->
+<!--              <filters>-->
+<!--                <filter>-->
+<!--                  <artifact>*:*</artifact>-->
+<!--                  <excludes>-->
+<!--                    <exclude>META-INF/**</exclude>-->
+<!--                  </excludes>-->
+<!--                </filter>-->
+<!--              </filters>-->
 <!--              <shadedArtifactAttached>true</shadedArtifactAttached>-->
 <!--              <shadedClassifierName>project-classifier</shadedClassifierName>-->
 <!--              <outputFile>shade\local_game.jar</outputFile>-->

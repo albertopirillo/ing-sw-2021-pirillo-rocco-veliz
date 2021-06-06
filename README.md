@@ -12,22 +12,22 @@
 
 ## Documentation
 ### JavaDoc
-ZIP available [here](deliveries/javadoc.zip)
+ZIP available [here](deliverables/javadoc.zip)
 
 [comment]: <> (## Execution instructions)
 [comment]: <> (_TODO_)
 
 ### UML
-- [Model](deliveries/UML%20pdf/model.pdf)
-- [Controller](deliveries/UML%20pdf/controller.pdf)
-- [Network](deliveries/UML%20pdf/network.pdf)
-- [Client and Server](deliveries/UML%20pdf/client%20and%20server.pdf)
+- [Model](deliverables/UML%20pdf/model.pdf)
+- [Controller](deliverables/UML%20pdf/controller.pdf)
+- [Network](deliverables/UML%20pdf/network.pdf)
+- [Client and Server](deliverables/UML%20pdf/client%20and%20server.pdf)
 
 ## Test coverage
 
-[comment]: <> (ZIP available [here]&#40;deliveries/coverage.zip&#41;)
+[comment]: <> (ZIP available [here]&#40;deliverables/coverage.zip&#41;)
 
-![Coverage report](deliveries/coverage%20report.png)
+![Coverage report](deliverables/coverage%20report.png)
 
 [comment]: <> (## Software )
 [comment]: <> (_TODO_)

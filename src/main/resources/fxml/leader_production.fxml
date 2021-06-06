@@ -24,7 +24,7 @@
          <Cursor fx:constant="HAND" />
       </cursor>
    </ImageView>
-   <ImageView fx:id="imgCard2" fitHeight="195.0" fitWidth="130.0" layoutX="560.0" layoutY="150.0" onMouseClicked="#useCard2" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.5" scaleZ="0.0" styleClass="selection">
+   <ImageView fx:id="imgCard2" fitHeight="195.0" fitWidth="130.0" layoutX="560.0" layoutY="150.0" onMouseClicked="#useCard2" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.5" styleClass="selection">
       <cursor>
          <Cursor fx:constant="HAND" />
       </cursor>

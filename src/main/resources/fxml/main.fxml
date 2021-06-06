@@ -27,7 +27,7 @@
            <items>
                <MenuItem mnemonicParsing="false" text="Basic" onAction="#showBasic"/>
                <MenuItem mnemonicParsing="false" text="Development" />
-               <MenuItem mnemonicParsing="false" text="Leader" />
+               <MenuItem mnemonicParsing="false" text="Leader" onAction="#showLeader"/>
            </items>
        </MenuButton>
        <MenuButton fx:id="activateLeaderButton" layoutX="33.0" layoutY="374.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="214.0" text="Activate leader">

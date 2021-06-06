@@ -465,4 +465,11 @@ public class PersonalBoardController implements Initializable {
         return imgs;
     }
 
+    public List<Image> getLeaderImgs(){
+        List<Image> imgs = new ArrayList<>();
+        imgs.add(leaderCard0.getImage());
+        imgs.add(leaderCard1.getImage());
+        return imgs;
+    }
+
 }

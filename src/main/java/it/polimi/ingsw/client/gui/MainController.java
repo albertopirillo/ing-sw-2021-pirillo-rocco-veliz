@@ -2,7 +2,9 @@ package it.polimi.ingsw.client.gui;
 
 import it.polimi.ingsw.client.ClientGUI;
 import it.polimi.ingsw.client.model.ClientModel;
+import it.polimi.ingsw.model.ExtraProductionAbility;
 import it.polimi.ingsw.model.LeaderAction;
+import it.polimi.ingsw.model.LeaderCard;
 import it.polimi.ingsw.network.Processable;
 import it.polimi.ingsw.network.requests.EndTurnRequest;
 import it.polimi.ingsw.network.requests.QuitGameRequest;
@@ -50,6 +52,10 @@ public class MainController implements Initializable {
      */
     private final Popup basicPopUp = new Popup();
     /**
+     * The popup used to perform the leader cards production
+     */
+    private final Popup leaderPopUp = new Popup();
+    /**
      * A map to get get the right PersonalBoardController from a nickname
      */
     private final Map<String, PersonalBoardController> personalBoardControllerMap = new HashMap<>();
@@ -73,6 +79,10 @@ public class MainController implements Initializable {
      * Reference to the actual basicProductionController
      */
     private BasicProductionController basicProductionController;
+    /**
+     * * Reference to the actual leaderProductionController
+     */
+    private LeaderProductionController leaderProductionController;
     /**
      * The UserInterface this controller is associated with
      */
@@ -192,6 +202,14 @@ public class MainController implements Initializable {
     }
 
     /**
+     * Gets the LeaderProductionController
+     * @return  the current MarketController
+     */
+    public LeaderProductionController getLeaderProductionController() {
+        return leaderProductionController;
+    }
+
+    /**
      * Gets the TrayController
      * @return  the current TrayController
      */
@@ -243,6 +261,7 @@ public class MainController implements Initializable {
         initMarketPopup();
         initSoloPopup();
         initBasicPopup();
+        initLeaderPopup();
     }
 
     /**
@@ -321,6 +340,19 @@ public class MainController implements Initializable {
         this.basicPopUp.setOnAutoHide(event -> prodButton.setText("Use production"));
     }
 
+    private void initLeaderPopup() throws IOException {
+        FXMLLoader loader = Util.loadFXML("leader_production");
+        Parent leader = loader.load();
+        this.leaderProductionController = loader.getController();
+        this.leaderProductionController.setMainController(this);
+        this.leaderPopUp.getContent().add(leader);
+        this.leaderPopUp.setX(900);
+        this.leaderPopUp.setY(120);
+        this.leaderPopUp.setAutoHide(true);
+        this.leaderPopUp.setOnAutoHide(event -> prodButton.setText("Use production"));
+        this.leaderProductionController.initializeCards();
+    }
+
     public void switchSoloPopup() {
         if (!this.soloPopUp.isShowing()) {
             this.soloPopUp.show(stage);
@@ -382,6 +414,37 @@ public class MainController implements Initializable {
     }
 
     /**
+     * Shows and hides the leaderProduction popup, changing also the text of the button
+     * @param event the event triggered when the button is pressed
+     */
+    public void showLeader(ActionEvent event) {
+        if (isProductionDone()){
+            Stage stage = (Stage)((MenuItem)event.getTarget()).getParentPopup().getOwnerWindow();
+            this.stage = stage;
+
+            List<LeaderCard> playerCards = getClientModel().getPersonalBoardModel().getLeaderMap().get(getNickname());
+            boolean rightAbility1 = playerCards.get(0).getSpecialAbility() instanceof ExtraProductionAbility;
+            boolean rightAbility2 = playerCards.get(1).getSpecialAbility() instanceof ExtraProductionAbility;
+
+            if (rightAbility1 || rightAbility2) {
+                if (!this.leaderPopUp.isShowing()) {
+                    this.leaderProductionController.closeResourcePanel();
+                    prodButton.setText("Back");
+                    this.leaderPopUp.show(stage);
+                }
+                else {
+                    prodButton.setText("Use production");
+                    this.leaderPopUp.hide();
+                }
+            } else {
+                displayError("You don't have leader cards with an extra production ability");
+            }
+        } else {
+            displayError("You have to perform a basic production first");
+        }
+    }
+
+    /**
      * Hide the tray popup and also change the text of the button
      */
     public void closeTray(){
@@ -401,6 +464,14 @@ public class MainController implements Initializable {
      * Hide the basic production popup and also change the text of the button
      */
     public void closeBasic(){
+        prodButton.setText("Use production");
+        this.basicPopUp.hide();
+    }
+
+    /**
+     * Hide the leader production popup and also change the text of the button
+     */
+    public void closeLeader(){
         prodButton.setText("Use production");
         this.basicPopUp.hide();
     }

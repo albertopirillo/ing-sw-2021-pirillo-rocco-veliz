@@ -248,6 +248,7 @@ public class ClientGUI implements UserInterface {
                 currentController.setDepot(depotMap.get(playerNick));
                 currentController.setStrongbox(strongboxMap.get(playerNick));
                 this.mainController.getMarketController().loadStorages();
+                this.mainController.getLeaderProductionController().loadStorages();
             }
         });
     }

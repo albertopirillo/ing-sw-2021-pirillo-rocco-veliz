@@ -30,7 +30,7 @@ public class LeaderProductionController implements Initializable {
     @FXML
     private Label d_stone, d_servant, d_shield, d_coin;
     @FXML
-    private Pane buyPanel, depot;
+    private Pane resourcePanel, depot;
     @FXML
     private Spinner<Integer> stone, servant, shield, coin;
     @FXML
@@ -77,7 +77,7 @@ public class LeaderProductionController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.leaderCards.add(imgCard1);
         this.leaderCards.add(imgCard2);
-        this.buyPanel.setVisible(false);
+        this.resourcePanel.setVisible(false);
         this.stone.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 0));
         this.servant.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 0));
         this.shield.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 0));
@@ -100,7 +100,7 @@ public class LeaderProductionController implements Initializable {
         this.d_servant.setText("x0");
         this.d_shield.setText("x0");
         this.d_coin.setText("x0");
-        this.buyPanel.setVisible(false);
+        this.resourcePanel.setVisible(false);
         this.depot.setVisible(true);
         if(selectedCard != null) this.selectedCard.getStyleClass().remove("selected-card");
     }
@@ -138,7 +138,7 @@ public class LeaderProductionController implements Initializable {
             if (this.selectedCard != null) this.selectedCard.getStyleClass().remove("selected-card");
             this.selectedCard = ((ImageView) mouseEvent.getSource());
             selectedCard.getStyleClass().add("selected-card");
-            this.buyPanel.setVisible(true);
+            this.resourcePanel.setVisible(true);
             this.depot.setVisible(true);
         this.choice = AbilityChoice.FIRST;
     }
@@ -147,7 +147,7 @@ public class LeaderProductionController implements Initializable {
         if (this.selectedCard != null) this.selectedCard.getStyleClass().remove("selected-card");
         this.selectedCard = ((ImageView) mouseEvent.getSource());
         selectedCard.getStyleClass().add("selected-card");
-        this.buyPanel.setVisible(true);
+        this.resourcePanel.setVisible(true);
         this.depot.setVisible(true);
         this.choice = AbilityChoice.SECOND;
     }
@@ -200,11 +200,6 @@ public class LeaderProductionController implements Initializable {
     public void onClickServant3(ActionEvent actionEvent) { this.res = ResourceType.SERVANT; }
 
     public void buildRequest(ActionEvent actionEvent){
-        if(this.depot.isVisible()){
-            this.depot.setVisible(false);
-        }
-        else {
-            this.depot.setVisible(true);
             Resource depot = new Resource(0, 0, 0, 0);
             Resource strongbox = new Resource(0, 0, 0, 0);
             try {
@@ -219,10 +214,8 @@ public class LeaderProductionController implements Initializable {
             } catch (NegativeResAmountException e) {
                 e.printStackTrace();
             }
-
             Request request = new ExtraProductionRequest(choice, depot, strongbox, this.res);
             this.mainController.sendMessage(request);
             this.mainController.closeLeader();
-        }
     }
 }

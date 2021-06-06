@@ -346,8 +346,8 @@ public class MainController implements Initializable {
         this.leaderProductionController = loader.getController();
         this.leaderProductionController.setMainController(this);
         this.leaderPopUp.getContent().add(leader);
-        this.leaderPopUp.setX(900);
-        this.leaderPopUp.setY(120);
+        this.leaderPopUp.setX(600);
+        this.leaderPopUp.setY(100);
         this.leaderPopUp.setAutoHide(true);
         this.leaderPopUp.setOnAutoHide(event -> prodButton.setText("Use production"));
         this.leaderProductionController.initializeCards();
@@ -473,7 +473,7 @@ public class MainController implements Initializable {
      */
     public void closeLeader(){
         prodButton.setText("Use production");
-        this.basicPopUp.hide();
+        this.leaderPopUp.hide();
     }
 
     /**

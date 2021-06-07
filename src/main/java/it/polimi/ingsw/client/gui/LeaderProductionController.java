@@ -30,7 +30,7 @@ public class LeaderProductionController implements Initializable {
     @FXML
     private Label d_stone, d_servant, d_shield, d_coin;
     @FXML
-    private Pane resourcePanel, depot;
+    private Pane resourcePanel, depot, imgPane1, imgPane2;
     @FXML
     private Spinner<Integer> stone, servant, shield, coin;
     @FXML
@@ -55,7 +55,11 @@ public class LeaderProductionController implements Initializable {
     /**
      * The list of player's leader cards
      */
-    private final List<ImageView> leaderCards = new ArrayList<>();
+    private final List<ImageView> imgsLeaderCards = new ArrayList<>();
+    /**
+     * The list of pane to disable leader cards
+     */
+    private final List<Pane> panesLeaderCards = new ArrayList<>();
 
     /**
      * The corresponding MainController
@@ -75,8 +79,10 @@ public class LeaderProductionController implements Initializable {
      * <p>Called automatically when an entity is injected from FXML</p>
      */
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.leaderCards.add(imgCard1);
-        this.leaderCards.add(imgCard2);
+        this.imgsLeaderCards.add(imgCard1);
+        this.imgsLeaderCards.add(imgCard2);
+        this.panesLeaderCards.add(imgPane1);
+        this.panesLeaderCards.add(imgPane2);
         this.resourcePanel.setVisible(false);
         this.stone.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 0));
         this.servant.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 0));
@@ -84,8 +90,41 @@ public class LeaderProductionController implements Initializable {
         this.coin.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 0));
     }
 
-    public void initializeCards(){
+    /*public void initializeCards(){
         updateLeaderCards();
+    }*/
+
+    /**
+     * Checks if the player has at least one leader card with a production power (based on card id)
+     * @return true if the player has leaders with production power
+     */
+    public boolean hasProductionCard(){
+        List<LeaderCard> playerCards = this.mainController.getClientModel().getPersonalBoardModel().getLeaderMap().get(this.mainController.getNickname());
+        List<Integer> productionID = new ArrayList<>();
+        productionID.add(13);
+        productionID.add(14);
+        productionID.add(15);
+        productionID.add(16);
+
+        for ( Integer id: productionID ){
+            for (LeaderCard playerCard : playerCards) {
+                if (id == playerCard.getId()) return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isProductionCard(LeaderCard card){
+        List<Integer> productionID = new ArrayList<>();
+        productionID.add(13);
+        productionID.add(14);
+        productionID.add(15);
+        productionID.add(16);
+
+        for ( Integer id: productionID ){
+                if (id == card.getId()) return true;
+        }
+        return false;
     }
 
     /**
@@ -107,11 +146,17 @@ public class LeaderProductionController implements Initializable {
 
     public void updateLeaderCards() {
         List<LeaderCard> playerLeaderCards = this.mainController.getClientModel().getPersonalBoardModel().getLeaderMap().get(this.mainController.getNickname());
-        for(int i=0; i<leaderCards.size(); i++){
-            if(playerLeaderCards.get(i)!=null)
-                leaderCards.get(i).setImage(Util.getLeaderImg(playerLeaderCards.get(i).getImg()));
-            else
-                leaderCards.get(i).setImage(Util.getGenericImg("emptyCard"));
+
+        for(int i=0; i<imgsLeaderCards.size(); i++){
+            if( i < playerLeaderCards.size() && playerLeaderCards.get(i)!=null) {
+                imgsLeaderCards.get(i).setImage(Util.getLeaderImg(playerLeaderCards.get(i).getImg()));
+                panesLeaderCards.get(i).setVisible(!isProductionCard(playerLeaderCards.get(i)));
+
+            } else {
+                imgsLeaderCards.get(i).setImage(Util.getGenericImg("emptyCard"));
+                panesLeaderCards.get(i).setVisible(true);
+            }
+
         }
     }
 

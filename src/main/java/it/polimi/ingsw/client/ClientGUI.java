@@ -269,6 +269,8 @@ public class ClientGUI implements UserInterface {
                 PersonalBoardController currentController = controllerMap.get(entry.getKey());
                 currentController.updateLeaderCards(entry.getValue());
             }
+
+            this.mainController.getLeaderProductionController().updateLeaderCards();
         });
     }
 

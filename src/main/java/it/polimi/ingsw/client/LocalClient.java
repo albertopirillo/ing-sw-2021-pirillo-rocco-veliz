@@ -40,8 +40,8 @@ public class LocalClient extends Client {
 
     @Override
     public synchronized void sendMessage(Processable message) {
-        System.out.println("\n[CONNECTION] Received request " + message.getClass().getSimpleName());
-        message.process(connection.getServer(), connection);
+        //System.out.println("\n[CONNECTION] Received request " + message.getClass().getSimpleName());
+        new Thread(() -> message.process(connection.getServer(), connection)).start();
     }
 
     @Override

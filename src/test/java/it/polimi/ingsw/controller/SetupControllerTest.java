@@ -48,6 +48,13 @@ class SetupControllerTest {
         assertEquals(p.getPlayerFaith(), 1);
         assertEquals(p.getAllResources(),new Resource(1,0,0,0));
         assertEquals(p.getPersonalBoard().getDepot().getLayer(1).getResource(), ResourceType.STONE);
+
+        p = game.getActivePlayer();
+        map.put(ResourceType.STONE,2);
+        controller.placeInitialResource(map,3, p.getNickname());
+        assertEquals(p.getPlayerFaith(), 1);
+        assertEquals(p.getAllResources(),new Resource(2,0,0,0));
+        assertEquals(p.getPersonalBoard().getDepot().getLayer(2).getResource(), ResourceType.STONE);
     }
 
     @Test

@@ -11,6 +11,12 @@ public abstract class Client implements Runnable{
     private UserInterface userInterface;
     private static boolean connectionReady;
 
+    @Override
+    public abstract void run();
+    public abstract void sendMessage(Processable message);
+    protected abstract ServerUpdate receiveMessage() throws IOException;
+    protected abstract void startConnection();
+
     public static boolean isConnectionReady() {
         return connectionReady;
     }
@@ -44,10 +50,4 @@ public abstract class Client implements Runnable{
         }
         System.out.println("[CLIENT] GUI is ready");
     }
-
-    @Override
-    public abstract void run();
-    public abstract void sendMessage(Processable message);
-    protected abstract ServerUpdate receiveMessage() throws IOException;
-    protected abstract void startConnection();
 }

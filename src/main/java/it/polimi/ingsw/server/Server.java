@@ -25,12 +25,12 @@ public abstract class Server implements Runnable {
     private int playerAmount = 0;
     private boolean logEnabled;
 
+    @Override
+    public abstract void run();
+    public abstract void login(String nickname, Connection connection);
+
     protected int getPlayerAmount() {
         return playerAmount;
-    }
-
-    protected void setPlayerAmount(int playerAmount) {
-        this.playerAmount = playerAmount;
     }
 
     protected Map<String, Connection> getLobbyPlayers() {
@@ -165,10 +165,6 @@ public abstract class Server implements Runnable {
         ServerUpdate msg = new InitialResourcesUpdate(activePlayer, numPlayer);
         lobbyPlayers.get(activePlayer).sendMessage(msg);
     }
-
-    @Override
-    public abstract void run();
-    public abstract void login(String nickname, Connection connection);
 
     protected synchronized void registerConnection(Connection connection) {
         connections.add(connection);

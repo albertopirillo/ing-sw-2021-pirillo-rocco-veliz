@@ -29,7 +29,7 @@ public class TempMarblesController implements Initializable {
     @FXML
     private Spinner<Integer> n_res1, n_res2;
 
-    private List<ImageView> white_marbles = new ArrayList<>();
+    private final List<ImageView> white_marbles = new ArrayList<>();
     private ImageView source;
     int numMarbles;
 

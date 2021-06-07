@@ -15,16 +15,16 @@ public abstract class Connection implements Runnable {
         this.active = true;
     }
 
+    @Override
+    public abstract void run();
+    public abstract void sendMessage(ServerUpdate message);
+    public abstract void close();
+
     public Server getServer() {return server;}
     public void setRemoteView(RemoteView remoteView){ this.remoteView = remoteView; }
     public RemoteView getRemoteView(){ return this.remoteView; }
     protected synchronized boolean isActive(){
         return active;
     }
-    protected synchronized void setActive(boolean active) {this.active = active;}
-
-    @Override
-    public abstract void run();
-    public abstract void sendMessage(ServerUpdate message);
-    public abstract void close();
+    protected synchronized void setInactive() {this.active = false;}
 }

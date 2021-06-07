@@ -58,7 +58,7 @@ public class SocketConnection extends Connection {
             } catch (IOException e){
                 System.out.println(e.getMessage());
             }
-            setActive(false);
+            setInactive();
         }
 
     }

@@ -184,6 +184,14 @@ public class MainController implements Initializable {
     }
 
     /**
+     * Helper to get the secondProductionDone flag of the Client
+     * @return true if a leader/dev production was already activated this turn
+     */
+    public boolean isSecondProductionDone() {
+        return this.clientGUI.isSecondProductionDone();
+    }
+
+    /**
      * Helper to set the mainActionDone flag of the Client
      * @param mainActionDone the value to set the flag at
      */
@@ -198,6 +206,12 @@ public class MainController implements Initializable {
     public void setProductionDone(Boolean productionDone) {
         this.clientGUI.setProductionDone(productionDone);
     }
+
+    /**
+     * Helper to set the secondProductionDone flag of the Client
+     * @param secondProductionDone the value to set the flag at
+     */
+    public void setSecondProductionDone(Boolean secondProductionDone) { this.clientGUI.setSecondProductionDone(secondProductionDone); }
 
     /**
      * Gets the MarketController
@@ -480,9 +494,11 @@ public class MainController implements Initializable {
      */
     public void showDev(ActionEvent event) {
         if (isProductionDone()){
-            Stage stage = (Stage)((MenuItem)event.getTarget()).getParentPopup().getOwnerWindow();
-            this.stage = stage;
-            if (!this.devPopUp.isShowing()) {
+
+            if(!isSecondProductionDone()){
+                Stage stage = (Stage)((MenuItem)event.getTarget()).getParentPopup().getOwnerWindow();
+                this.stage = stage;
+                if (!this.devPopUp.isShowing()) {
                     this.devProductionController.loadStorages();
                     this.devProductionController.closeResourcePanel();
                     prodButton.setText("Back");
@@ -492,6 +508,10 @@ public class MainController implements Initializable {
                     prodButton.setText("Use production");
                     this.devPopUp.hide();
                 }
+            } else {
+                displayError("You have already performed a development production in this turn");
+            }
+
         } else {
             displayError("You have to perform a basic production first");
         }
@@ -597,6 +617,7 @@ public class MainController implements Initializable {
         sendMessage(request);
         this.setMainActionDone(false);
         this.setProductionDone(false);
+        this.setSecondProductionDone(false);
     }
 
     public void discardLeaderRequest01(){

@@ -332,6 +332,7 @@ public class PlayerController {
             controller.resetException();
             if(!testing) {
                 this.mainActionDone = true;
+                controller.getGame().setSecondProductionDone();
                 controller.getGame().setMainActionDone();
             }
         } catch (CostNotMatchingException | NotEnoughResException | NegativeResAmountException | DevSlotEmptyException | NotEnoughSpaceException | CannotContainFaithException e) {

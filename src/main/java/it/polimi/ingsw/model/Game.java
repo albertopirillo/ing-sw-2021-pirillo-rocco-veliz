@@ -288,6 +288,13 @@ public abstract class Game {
             observer.setProductionDone(this);
     }
     /**
+     * Notifies the observers that the player already activated a leader o development production this turn
+     */
+    public void setSecondProductionDone(){
+        for(ModelObserver observer : observers)
+            observer.setSecondProductionDone(this);
+    }
+    /**
      *  Notifies the observers that the player already performed one of its main actions this turn
      */
     public void setMainActionDone(){

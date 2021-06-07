@@ -169,6 +169,13 @@ public class RemoteView implements ModelObserver {
     }
 
     @Override
+    public void setSecondProductionDone(Game game){
+        String nickname = game.getActivePlayer().getNickname();
+        ServerUpdate msg = new SecondProductionDoneUpdate(nickname);
+        connection.sendMessage(msg);
+    }
+
+    @Override
     public void setMainActionDone(Game game) {
         String nickname = game.getActivePlayer().getNickname();
         ServerUpdate msg = new MainActionDoneUpdate(nickname);

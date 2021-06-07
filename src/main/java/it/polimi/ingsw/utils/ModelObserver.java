@@ -24,6 +24,7 @@ public interface ModelObserver {
     String getPlayer();
     void showTempMarbles(Game game, int numWhiteMarbles);
     void setProductionDone(Game game);
+    void setSecondProductionDone(Game game);
     void setMainActionDone(Game game);
     void gameStateStart(Game game);
 }

@@ -426,13 +426,23 @@ public class PersonalBoardController implements Initializable {
         }
     }
 
-    public void updateLeaderCards(List<LeaderCard> playerCards) {
-        if (playerCards.size() > 0){
-            String img0 = playerCards.get(0).getImg();
-            leaderCard0.setImage(Util.getLeaderImg(img0));
-            if (playerCards.size() > 1){
-                String img1 = playerCards.get(1).getImg();
-                leaderCard1.setImage(Util.getLeaderImg(img1));
+    public void updateLeaderCards(String cardOwner, List<LeaderCard> playerCards) {
+        if (playerCards.size() > 0) {
+            if(mainController.getNickname().equals(cardOwner) || playerCards.get(0).isActive()) {
+                String img0 = playerCards.get(0).getImg();
+                leaderCard0.setImage(Util.getLeaderImg(img0));
+            }
+            else {
+                leaderCard0.setImage(Util.getLeaderImg("back.png"));
+            }
+            if (playerCards.size() > 1) {
+                if(mainController.getNickname().equals(cardOwner) || playerCards.get(1).isActive()) {
+                    String img1 = playerCards.get(1).getImg();
+                    leaderCard1.setImage(Util.getLeaderImg(img1));
+                }
+                else {
+                    leaderCard1.setImage(Util.getLeaderImg("back.png"));
+                }
             } else {
                 leaderCard1.setImage(null);
             }

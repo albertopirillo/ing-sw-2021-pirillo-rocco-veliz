@@ -268,7 +268,7 @@ public class ClientGUI implements UserInterface {
             Map<String, PersonalBoardController> controllerMap = mainController.getPersonalBoardControllerMap();
             for(Map.Entry<String, List<LeaderCard>> entry: map.entrySet()){
                 PersonalBoardController currentController = controllerMap.get(entry.getKey());
-                currentController.updateLeaderCards(entry.getValue());
+                currentController.updateLeaderCards(entry.getKey(), entry.getValue());
             }
 
             this.mainController.getLeaderProductionController().updateLeaderCards();
@@ -356,9 +356,7 @@ public class ClientGUI implements UserInterface {
     @Override
     public void updateTempMarbles(TempMarblesUpdate update) {
         clientModel.getMarketModel().saveTempMarbles(update);
-        Platform.runLater(() -> {
-            mainController.getTrayController().updateTempMarbles();
-        });
+        Platform.runLater(() -> mainController.getTrayController().updateTempMarbles());
     }
 
     @Override

@@ -62,10 +62,10 @@ public class ProductionStrategy {
      * @throws CostNotMatchingException  the player hasn't provide the correct amount of resources
      */
     public void extraProduction(Player player, AbilityChoice choice, Resource fromDepot, Resource fromStrongbox, ResourceType res) throws NegativeResAmountException, CannotContainFaithException, NoLeaderAbilitiesException, InvalidAbilityChoiceException, NotEnoughResException, CostNotMatchingException, NotEnoughSpaceException {
-      if (this.size == 0) throw new NoLeaderAbilitiesException();
-        if ((this.size == 1 && choice == AbilityChoice.SECOND) || (choice == AbilityChoice.BOTH))
+        if (this.size == 0) throw new NoLeaderAbilitiesException();
+        if ((this.size == 1 && choice == AbilityChoice.SECOND) || (choice == AbilityChoice.BOTH)) {
             throw new InvalidAbilityChoiceException();
-
+        }
         Depot depot = player.getPersonalBoard().getDepot();
         Strongbox strongbox = player.getPersonalBoard().getStrongbox();
 
@@ -84,5 +84,4 @@ public class ProductionStrategy {
         depot.retrieveRes(fromDepot);
         strongbox.retrieveRes(fromStrongbox);
     }
-
 }

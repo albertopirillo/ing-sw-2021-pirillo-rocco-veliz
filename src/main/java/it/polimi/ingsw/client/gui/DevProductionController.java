@@ -64,7 +64,7 @@ public class DevProductionController implements Initializable {
     /**
      * The list of slots to activate
      */
-    private List<Integer> cards = new ArrayList<>();
+    private List<Integer> slots = new ArrayList<>();
 
     /**
      * The corresponding MainController
@@ -240,7 +240,7 @@ public class DevProductionController implements Initializable {
             e.printStackTrace();
         }
 
-        Request request = new DevProductionRequest(this.cards, depot, strongbox);
+        Request request = new DevProductionRequest(this.slots, depot, strongbox);
         this.mainController.sendMessage(request);
         this.mainController.closeDev();
     }

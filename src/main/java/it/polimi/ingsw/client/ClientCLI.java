@@ -241,7 +241,7 @@ public class ClientCLI implements UserInterface {
                 list.add(i);
             }
         }
-        StringBuilder sb = new StringBuilder("Which leader card production do you want to use [");
+        StringBuilder sb = new StringBuilder("Which development card production do you want to use [");
         String sep = "";
         for(Integer element: list){
             sb.append(sep).append(element);

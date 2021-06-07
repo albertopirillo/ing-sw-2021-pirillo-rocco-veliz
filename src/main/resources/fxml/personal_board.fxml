@@ -11,17 +11,9 @@
             <Image url="@../png/personal_board/personal_board.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="leaderCard1" fitHeight="390.0" fitWidth="252.0" layoutY="414.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../png/leader_cards/test_card.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="leaderCard0" fitHeight="396.0" fitWidth="252.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../png/leader_cards/test_card.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="leaderLabel" layoutX="75.0" layoutY="380.0" scaleX="2" scaleY="1.5" styleClass="customInitLeaderLabel" alignment="CENTER" text="Leader Cards" textAlignment="CENTER">
+      <ImageView fx:id="leaderCard1" fitHeight="390.0" fitWidth="252.0" layoutY="414.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="leaderCard0" fitHeight="396.0" fitWidth="252.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="leaderLabel" alignment="CENTER" layoutX="75.0" layoutY="380.0" scaleX="2" scaleY="1.5" styleClass="customInitLeaderLabel" text="Leader Cards" textAlignment="CENTER">
          <font>
             <Font size="23.0" />
          </font>

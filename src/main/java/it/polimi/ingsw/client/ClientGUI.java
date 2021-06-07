@@ -375,7 +375,11 @@ public class ClientGUI implements UserInterface {
 
     @Override
     public void updateGameOver(GameOverUpdate update){
-
+        EndGameController endGameController = mainController.getEndGameController();
+        Platform.runLater(() -> {
+            mainController.showEndGamePopup();
+            endGameController.setData(update, nickname);
+        });
     }
 
     @Override

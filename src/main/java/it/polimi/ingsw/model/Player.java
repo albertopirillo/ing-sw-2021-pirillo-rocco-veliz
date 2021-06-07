@@ -295,7 +295,9 @@ public class Player {
         if (choice == AbilityChoice.STANDARD) BasicStrategies.buyDevCard(this, level, color, numSlot, card.getCost(), fromDepot, fromStrongbox);
         else this.devStrategy.buyDevCard(this, level, color, numSlot, choice, fromDepot, fromStrongbox);
         //If the player has bought his seventh DevCard, the game is over
-        if(this.getPersonalBoard().getAllCards().size() == 7) this.game.lastTurn(true);
+        if(this.getPersonalBoard().getAllCards().size() == 7) {
+            this.game.lastTurn(true);
+        }
     }
 
     /**

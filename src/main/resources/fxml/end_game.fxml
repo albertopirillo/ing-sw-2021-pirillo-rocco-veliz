@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="700.0" prefWidth="810.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 20, 0, 0, 0)" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.EndGameController">
+   <children>
+      <Label fx:id="lblResult" layoutX="325.0" layoutY="96.0" text="You won!!!" textAlignment="CENTER">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblSummary" layoutX="316.0" layoutY="161.0" text="your final score is:" textAlignment="CENTER">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblScoreSingle" layoutX="369.0" layoutY="250.0" text="51" textAlignment="CENTER">
+         <font>
+            <Font size="70.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnExit" layoutX="338.0" layoutY="545.0" mnemonicParsing="false" onAction="#onClickExit" prefHeight="44.0" prefWidth="135.0" text="Exit" />
+      <Label fx:id="lblPlayer1" layoutX="320.0" layoutY="260.0" prefHeight="44.0" prefWidth="113.0" text="Player 1" />
+      <Label fx:id="lblPlayer2" layoutX="320.0" layoutY="300.0" prefHeight="44.0" prefWidth="113.0" text="Label" />
+      <Label fx:id="lblPlayer3" layoutX="320.0" layoutY="340.0" prefHeight="44.0" prefWidth="113.0" text="Label" />
+      <Label fx:id="lblPlayer4" layoutX="320.0" layoutY="380.0" prefHeight="44.0" prefWidth="113.0" text="Label" />
+      <Label fx:id="lblScore1" layoutX="440.0" layoutY="260.0" prefHeight="44.0" prefWidth="113.0" text="Score 1" />
+      <Label fx:id="lblScore2" layoutX="440.0" layoutY="300.0" prefHeight="44.0" prefWidth="113.0" text="Label" />
+      <Label fx:id="lblScore3" layoutX="440.0" layoutY="340.0" prefHeight="44.0" prefWidth="113.0" text="Label" />
+      <Label fx:id="lblScore4" layoutX="440.0" layoutY="380.0" prefHeight="44.0" prefWidth="113.0" text="Label" />
+   </children>
+</AnchorPane>

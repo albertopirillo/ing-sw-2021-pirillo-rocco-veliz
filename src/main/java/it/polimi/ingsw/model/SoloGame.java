@@ -69,7 +69,10 @@ public class SoloGame extends Game {
 
     @Override
     public void checkEndGame() throws NegativeResAmountException {
-        if( getActivePlayer().getPersonalBoard().getFaithTrack().getBlackCrossPosition() == 24) this.lastTurn(false);
+        boolean isOver = (getActivePlayer().getPersonalBoard().getFaithTrack().getBlackCrossPosition() == 24);
+        if(isOver) {
+            this.lastTurn(false);
+        }
     }
 
     /**
@@ -105,12 +108,15 @@ public class SoloGame extends Game {
     @Override
     public void lastTurn(boolean win) throws NegativeResAmountException {
         //In solo mode, the game ends immediately
-        if (win) {
-            Map<Player, Integer> map = this.computeFinalScore();
-            int finalScore = map.get(this.getActivePlayer());
-            //TODO: game is over, send score to the View
-        } else {
-            //TODO: game is over, tell the View that you lost
+        List<String> ranking = new ArrayList<>();
+        String nickname = this.getActivePlayer().getNickname();
+        Map<Player, Integer> map = this.computeFinalScore();
+        int finalScore = map.get(this.getActivePlayer());
+        Map<String, Integer> scores = new HashMap<>();
+        ranking.add(nickname);
+        scores.put(nickname, finalScore);
+        for(ModelObserver observer : getObservers()) {
+            observer.notifyGameOver(this, win, ranking, scores);
         }
     }
 

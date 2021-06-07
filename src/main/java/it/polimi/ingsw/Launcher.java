@@ -14,11 +14,13 @@ public class Launcher {
         System.out.println("1: Server");
         System.out.println("2: Client CLI");
         System.out.println("3: Client GUI");
-        System.out.println("********************************\n");
+        System.out.println("4: Local Solo Game");
+        System.out.println("********************************");
         System.out.print("Game mode: ");
         Scanner stdin = new Scanner(System.in);
         try {
             int selection = Integer.parseInt(stdin.nextLine());
+            System.out.println();
             if (selection == 1) {
                 ServerMain.main(args);
             } else if (selection == 2 || selection == 3) {
@@ -28,6 +30,8 @@ public class Launcher {
                 if (selection == 2) newArgs[length] = "-cli";
                 else newArgs[length] = "-gui";
                 ClientMain.main(newArgs);
+            } else if (selection == 4) {
+                LocalGameLauncher.main(args);
             } else {
                 System.out.println("Invalid selection");
             }

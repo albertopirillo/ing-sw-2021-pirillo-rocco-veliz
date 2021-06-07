@@ -87,6 +87,7 @@ public class PlayerController {
             Player activePlayer = controller.getGame().getActivePlayer();
             activePlayer.extraProduction(choice, fromDepot, fromStrongbox, res);
             controller.getGame().updateStorages();
+            controller.getGame().updateFaithTrack();
             controller.resetException();
         } catch (CostNotMatchingException | InvalidAbilityChoiceException | NotEnoughSpaceException | NoLeaderAbilitiesException | CannotContainFaithException | NotEnoughResException | NegativeResAmountException e) {
             controller.setException(e);
@@ -326,7 +327,7 @@ public class PlayerController {
             activePlayer.activateProduction(devCards);
             depot.retrieveRes(fromDepot);
             strongbox.retrieveRes(fromStrongbox);
-            //controller.getGame().updateFaithTrack();
+            controller.getGame().updateFaithTrack();
             controller.getGame().updateStorages();
             controller.resetException();
             if(!testing) {

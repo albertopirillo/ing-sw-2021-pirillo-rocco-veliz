@@ -16,14 +16,22 @@ public class RemoteView implements ModelObserver {
     private RequestController requestController;
     private final Connection connection;
     private final String player;
+    private boolean enableLog;
 
     public RemoteView(Connection connection, String player){
         this.connection = connection;
         this.player = player;
+        this.enableLog = false;
+    }
+
+    public void enableLogging(boolean enable) {
+        this.enableLog = enable;
     }
 
     public void processRequest(Request request){
-        System.out.println("[REMOTE VIEW] from player " + player);
+        if (enableLog) {
+            System.out.println("[REMOTE VIEW] from player " + player);
+        }
         this.requestController.processRequest(request);
     }
 
@@ -242,7 +250,7 @@ public class RemoteView implements ModelObserver {
         Market market = game.getMarket();
         List<DevelopmentCard> clonedList = new ArrayList<>();
         for(DevelopmentCard card: market.getAvailableCards()) {
-            if (card == null) clonedList.add(null);
+            if(card == null) clonedList.add(null);
             else clonedList.add(card.clone());
         }
          return new MarketUpdate(nickname, clonedList);

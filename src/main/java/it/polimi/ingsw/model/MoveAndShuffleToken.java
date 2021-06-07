@@ -15,7 +15,7 @@ public class MoveAndShuffleToken extends SoloActionToken {
 
     @Override
     public void reveal() {
-        System.out.println("[SOLO_ACTION_TOKEN] Move black cross +1 and shuffle");
+        //System.out.println("[SOLO_ACTION_TOKEN] Move black cross +1 and shuffle");
         SoloGame game = this.getGame();
         game.moveBlackCross(1);
         game.shuffleSoloTokens();

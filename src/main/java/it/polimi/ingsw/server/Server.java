@@ -8,58 +8,62 @@ import it.polimi.ingsw.model.MultiGame;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.SoloGame;
 import it.polimi.ingsw.network.RemoteView;
-import it.polimi.ingsw.network.messages.ErrorMessage;
-import it.polimi.ingsw.network.messages.LoginMessage;
-import it.polimi.ingsw.network.messages.NicknameErrorMessage;
 import it.polimi.ingsw.network.updates.InitialResourcesUpdate;
 import it.polimi.ingsw.network.updates.ServerUpdate;
 
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Server implements Runnable {
+public abstract class Server implements Runnable {
 
-    private final int port;
-    private final ServerSocket serverSocket;
     private MasterController masterController;
     private static final List<Connection> connections = new ArrayList<>();
     private final Map<String,Connection> lobbyPlayers = new HashMap<>();
     private final List<Map<String,Connection> > games = new ArrayList<>();
-    private String firstPlayer;
-    private int gameSize = 0;
+    private int playerAmount = 0;
+    private boolean logEnabled;
 
-    public Server() throws IOException {
-        this.port = 8080;
-        this.serverSocket = new ServerSocket(8080);
+    @Override
+    public abstract void run();
+    public abstract void login(String nickname, Connection connection);
+
+    protected int getPlayerAmount() {
+        return playerAmount;
     }
 
-    public Server(int port) throws IOException {
-        this.port = port;
-        this.serverSocket = new ServerSocket(port);
+    protected Map<String, Connection> getLobbyPlayers() {
+        return lobbyPlayers;
+    }
+
+    public void enableLogging(boolean enable) {
+        this.logEnabled = enable;
     }
 
     public synchronized void addToLobby(String nickname, Connection connection){
         lobbyPlayers.put(nickname, connection);
-        if(gameSize == lobbyPlayers.size()){
-            setupGame(gameSize, nickname);
+        if(playerAmount == lobbyPlayers.size()){
+            setupGame(playerAmount, nickname);
+        }
+    }
+
+    private void printLog(String text) {
+        if (logEnabled) {
+            System.out.println(text);
         }
     }
 
     public synchronized void setGameSize(int maxPlayers){
-        this.gameSize = maxPlayers;
-        System.out.println("[SERVER] Number of players: " + maxPlayers);
+        this.playerAmount = maxPlayers;
+        printLog("[SERVER] Number of players: " + maxPlayers);
         if(maxPlayers == 1){
             String nickname = new ArrayList<>(lobbyPlayers.keySet()).get(0);
             setupGame(maxPlayers, nickname);
         }
     }
 
-    private boolean checkUsernameExist(String nickname){
+    protected boolean checkUsernameExist(String nickname){
         for (Map<String, Connection> map : games) {
             for (String nick : map.keySet()) {
                 if ((nick).equalsIgnoreCase(nickname))
@@ -73,31 +77,10 @@ public class Server implements Runnable {
         return false;
     }
 
-    public void login(String nickname, Connection connection){
-        if(checkUsernameExist(nickname)){
-            ServerUpdate msg = new NicknameErrorMessage(nickname, nickname);
-            connection.sendMessage(msg);
-            return;
-        }
-        if(!lobbyPlayers.isEmpty() && gameSize==0){
-            ServerUpdate msg = new ErrorMessage(nickname, "A game is being created. Please wait for the host");
-            connection.sendMessage(msg);
-            return;
-        }
-        System.out.println("[SERVER] New player " + nickname + " added");
-        if(lobbyPlayers.isEmpty()){
-            addToLobby(nickname, connection);
-            ServerUpdate msg = new LoginMessage(nickname, nickname);
-            connection.sendMessage(msg);
-        } else {
-            addToLobby(nickname, connection);
-        }
-    }
-
     public synchronized void setupGame(int gameSize, String nickname){
-        System.out.println("[SERVER] LOADING GAME...");
+        printLog("[SERVER] LOADING GAME...");
         for (String n : lobbyPlayers.keySet()){
-            System.out.println("[SERVER] Player: " + n);
+            printLog("[SERVER] Player: " + n);
         }
         games.add(new HashMap<>(lobbyPlayers));
         if(gameSize == 1){
@@ -106,7 +89,7 @@ public class Server implements Runnable {
             setupMultiGame();
         }
         lobbyPlayers.clear();
-        this.gameSize = 0;
+        this.playerAmount = 0;
 
     }
 
@@ -119,10 +102,11 @@ public class Server implements Runnable {
             Connection connection = lobbyPlayers.get(keys.get(0));
             RemoteView remoteView = new RemoteView(connection, keys.get(0));
             connection.setRemoteView(remoteView);
+            if(logEnabled) remoteView.enableLogging(true);
             game.addObserver(remoteView);
             remoteView.addController(masterController.getRequestController());
-            masterController.getSetupController().setupGame(keys, gameSize);
-            System.out.println("[SERVER] Starting solo game for player " + nickname);
+            masterController.getSetupController().setupGame(keys, playerAmount);
+            printLog("[SERVER] Starting solo game for player " + nickname);
             sendInitialResources(0, nickname);
         } catch (FullCardDeckException e) {
             e.printStackTrace();
@@ -137,18 +121,19 @@ public class Server implements Runnable {
             List<String> keys = new ArrayList<>(lobbyPlayers.keySet());
             List<RemoteView> remoteViews = new ArrayList<>();
             List<Connection> connections = new ArrayList<>();
-            for(int i=0; i<gameSize; i++){
+            for(int i = 0; i< playerAmount; i++){
                 connections.add(lobbyPlayers.get(keys.get(i)));
                 RemoteView remoteView = new RemoteView(connections.get(i), keys.get(i));
+                if(logEnabled) remoteView.enableLogging(true);
                 connections.get(i).setRemoteView(remoteView);
                 remoteViews.add(remoteView);
                 game.addObserver(remoteView);
                 remoteView.addController(masterController.getRequestController());
             }
-            masterController.getSetupController().setupGame(keys, gameSize);
-            System.out.println("[SERVER] Have fun :)");
+            masterController.getSetupController().setupGame(keys, playerAmount);
+            printLog("[SERVER] Have fun :)");
             game = masterController.getGame();
-            System.out.println("[SERVER] The first player is : "+game.getActivePlayer().getNickname());
+            printLog("[SERVER] The first player is : "+game.getActivePlayer().getNickname());
             try {
                 game.nextTurn();
             } catch (NegativeResAmountException e) {
@@ -181,38 +166,14 @@ public class Server implements Runnable {
         lobbyPlayers.get(activePlayer).sendMessage(msg);
     }
 
-    @Override
-    public void run() {
-        System.out.println("[SERVER] Server is listening on port: " + port);
-        while(!Thread.currentThread().isInterrupted()){
-            try {
-                Socket socket = serverSocket.accept();
-                System.out.println("[SERVER] New client connected");
-                newConnection(socket);
-            } catch (IOException e) {
-                System.out.println("Connection Error");
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private void newConnection(Socket socket) {
-        Connection connection = new Connection(socket, this);
-        registerConnection(connection);
-        new Thread(connection).start();
-    }
-
-    private synchronized void registerConnection(Connection connection) {
+    protected synchronized void registerConnection(Connection connection) {
         connections.add(connection);
     }
 
-    private synchronized void deregisterConnection(Connection connection) {
+    protected synchronized void deregisterConnection(Connection connection) {
         connections.remove(connection);
     }
 
-    public void closeClientConnection(Connection connection) {
-        deregisterConnection(connection);
-    }
     //TODO: testing only
     public void setMasterController(MasterController masterController) {
         this.masterController = masterController;

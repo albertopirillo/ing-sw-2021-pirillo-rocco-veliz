@@ -13,7 +13,7 @@ public class InsertMarbleTest {
 
     @Test
     public void tempMarblesTest() throws FullCardDeckException, TooManyLeaderAbilitiesException, InvalidKeyException {
-        Client client = new Client();
+        Client client = new SocketClient();
         UserInterface cli = new ClientCLI(client);
         Game game = new MultiGame(true);
         MasterController controller = new MasterController(game);

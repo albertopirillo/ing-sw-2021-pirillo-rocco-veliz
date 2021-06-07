@@ -18,7 +18,7 @@ public class ClientCLITest {
 
     @Test
     public void storageTest() {
-        Client client = new Client();
+        Client client = new SocketClient();
         UserInterface cli = new ClientCLI(client);
         cli.setNickname("a");
 
@@ -45,7 +45,7 @@ public class ClientCLITest {
 
     @Test
     public void errorTest() {
-        Client client = new Client();
+        Client client = new SocketClient();
         UserInterface cli = new ClientCLI(client);
         ClientError clientError = new ClientError();
 
@@ -60,7 +60,7 @@ public class ClientCLITest {
 
     @Test
     public void devSlotTest() {
-        Client client = new Client();
+        Client client = new SocketClient();
         UserInterface cli = new ClientCLI(client);
         cli.setNickname("a");
         ProductionPower prodPower = new ProductionPower(new Resource(0,1,2,3),

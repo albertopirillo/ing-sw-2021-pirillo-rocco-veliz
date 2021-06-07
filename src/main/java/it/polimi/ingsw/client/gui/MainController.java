@@ -455,6 +455,7 @@ public class MainController implements Initializable {
             if ( this.leaderProductionController.hasProductionCard() ) {
 
                 this.leaderProductionController.updateLeaderCards();
+                this.leaderProductionController.loadStorages();
 
                 if (!this.leaderPopUp.isShowing()) {
                     this.leaderProductionController.closeResourcePanel();
@@ -482,6 +483,7 @@ public class MainController implements Initializable {
             Stage stage = (Stage)((MenuItem)event.getTarget()).getParentPopup().getOwnerWindow();
             this.stage = stage;
             if (!this.devPopUp.isShowing()) {
+                    this.devProductionController.loadStorages();
                     this.devProductionController.closeResourcePanel();
                     prodButton.setText("Back");
                     this.devPopUp.show(stage);

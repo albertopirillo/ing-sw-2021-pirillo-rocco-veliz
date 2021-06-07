@@ -18,6 +18,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * <p>JavaFX controller for the file temp_marbles.fxml</p>
+ * <p>Handles the marble's selection when the Player has two Change Leader Abilities activated</p>
+ */
 public class TempMarblesController implements Initializable {
 
     @FXML
@@ -29,8 +33,18 @@ public class TempMarblesController implements Initializable {
     @FXML
     private Spinner<Integer> n_res1, n_res2;
 
+    /**
+     * List of the the white marbles images, the max is four
+     */
     private final List<ImageView> white_marbles = new ArrayList<>();
+
+    /**
+     * The location where the current drag started
+     */
     private ImageView source;
+    /**
+     * The amount of white marbles that the player must change
+     */
     int numMarbles;
 
     /**
@@ -46,6 +60,10 @@ public class TempMarblesController implements Initializable {
         this.mainController = mainController;
     }
 
+    /**
+     * <p>Initializes @FXML fields, the white marbles are organizing in a list <br>
+     * Called automatically when an entity is injected from FXML</p>
+     */
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.white_marbles.add(white_1);
         this.white_marbles.add(white_2);
@@ -55,6 +73,11 @@ public class TempMarblesController implements Initializable {
         this.n_res2.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0,0));
     }
 
+    /**
+     * Called when the Player has two Change Leader Ability activated and take one or more white marble from the Market<br>
+     * Set two images to the corresponding Leader Ability's resource type image<br>
+     * And set the correct amount of white marble images
+     */
     public void updateTemMarbles(){
         List<ResourceType> res = this.mainController.getClientModel().getMarketModel().getTempMarbles();
         this.numMarbles = this.mainController.getClientModel().getMarketModel().getNumWhiteMarbles();
@@ -77,7 +100,10 @@ public class TempMarblesController implements Initializable {
         res_1.setImage(Util.resToImage(res.get(0)));
         res_2.setImage(Util.resToImage(res.get(1)));
     }
-
+    /**
+     * <p>Called when the player changed the white marbles</p>
+     * <p>When the button is pressed, the Player send the correct ChangeMarbesRequest</p>
+     */
     public void change(ActionEvent actionEvent) {
         Request request = new ChangeMarblesRequest(n_res1.getValue(), n_res2.getValue());
         this.mainController.sendMessage(request);

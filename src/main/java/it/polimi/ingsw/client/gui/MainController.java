@@ -54,6 +54,10 @@ public class MainController implements Initializable {
      */
     private final Popup leaderPopUp = new Popup();
     /**
+     * The popup used to perform the dev cards production
+     */
+    private final Popup devPopUp = new Popup();
+    /**
      * A map to get get the right PersonalBoardController from a nickname
      */
     private final Map<String, PersonalBoardController> personalBoardControllerMap = new HashMap<>();
@@ -81,6 +85,10 @@ public class MainController implements Initializable {
      * * Reference to the actual leaderProductionController
      */
     private LeaderProductionController leaderProductionController;
+    /**
+     * * Reference to the actual leaderProductionController
+     */
+    private DevProductionController devProductionController;
     /**
      * The UserInterface this controller is associated with
      */
@@ -201,11 +209,20 @@ public class MainController implements Initializable {
 
     /**
      * Gets the LeaderProductionController
-     * @return  the current MarketController
+     * @return  the current LeaderProductionController
      */
     public LeaderProductionController getLeaderProductionController() {
         return leaderProductionController;
     }
+
+    /**
+     * Gets the DevProductionController
+     * @return  the current DevProductionController
+     */
+    public DevProductionController getDevProductionController() {
+        return devProductionController;
+    }
+
 
     /**
      * Gets the TrayController
@@ -260,6 +277,7 @@ public class MainController implements Initializable {
         initSoloPopup();
         initBasicPopup();
         initLeaderPopup();
+        initDevPopup();
     }
 
     /**
@@ -350,6 +368,20 @@ public class MainController implements Initializable {
         this.leaderPopUp.setOnAutoHide(event -> prodButton.setText("Use production"));
         this.leaderProductionController.updateLeaderCards();
     }
+
+    private void initDevPopup() throws IOException {
+        FXMLLoader loader = Util.loadFXML("dev_production");
+        Parent dev = loader.load();
+        this.devProductionController = loader.getController();
+        this.devProductionController.setMainController(this);
+        this.devPopUp.getContent().add(dev);
+        this.devPopUp.setX(600);
+        this.devPopUp.setY(100);
+        this.devPopUp.setAutoHide(true);
+        this.devPopUp.setOnAutoHide(event -> prodButton.setText("Use production"));
+        this.devProductionController.loadSlots();
+    }
+
 
     public void switchSoloPopup() {
         if (!this.soloPopUp.isShowing()) {
@@ -442,6 +474,28 @@ public class MainController implements Initializable {
     }
 
     /**
+     * Shows and hides the devProduction popup, changing also the text of the button
+     * @param event the event triggered when the button is pressed
+     */
+    public void showDev(ActionEvent event) {
+        if (isProductionDone()){
+            Stage stage = (Stage)((MenuItem)event.getTarget()).getParentPopup().getOwnerWindow();
+            this.stage = stage;
+            if (!this.devPopUp.isShowing()) {
+                    this.devProductionController.closeResourcePanel();
+                    prodButton.setText("Back");
+                    this.devPopUp.show(stage);
+                }
+                else {
+                    prodButton.setText("Use production");
+                    this.devPopUp.hide();
+                }
+        } else {
+            displayError("You have to perform a basic production first");
+        }
+    }
+
+    /**
      * Hide the tray popup and also change the text of the button
      */
     public void closeTray(){
@@ -471,6 +525,14 @@ public class MainController implements Initializable {
     public void closeLeader(){
         prodButton.setText("Use production");
         this.leaderPopUp.hide();
+    }
+
+    /**
+     * Hide the dev production popup and also change the text of the button
+     */
+    public void closeDev(){
+        prodButton.setText("Use production");
+        this.devPopUp.hide();
     }
 
     /**

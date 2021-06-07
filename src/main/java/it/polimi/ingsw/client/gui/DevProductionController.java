@@ -1,14 +1,20 @@
 package it.polimi.ingsw.client.gui;
 
+import it.polimi.ingsw.exceptions.DevSlotEmptyException;
 import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
-import it.polimi.ingsw.model.*;
-import it.polimi.ingsw.network.requests.ExtraProductionRequest;
+import it.polimi.ingsw.model.DevelopmentSlot;
+import it.polimi.ingsw.model.Resource;
+import it.polimi.ingsw.model.ResourceType;
+import it.polimi.ingsw.network.requests.DevProductionRequest;
 import it.polimi.ingsw.network.requests.Request;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
@@ -19,10 +25,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class LeaderProductionController implements Initializable {
+public class DevProductionController implements Initializable {
 
     @FXML
-    private ImageView imgCard1, imgCard2;
+    private ImageView imgCard1, imgCard2, imgCard3;
     @FXML
     private ImageView r_stone, r_servant, r_shield, r_coin;
     @FXML
@@ -30,20 +36,13 @@ public class LeaderProductionController implements Initializable {
     @FXML
     private Label d_stone, d_servant, d_shield, d_coin;
     @FXML
-    private Pane resourcePanel, depot, imgPane1, imgPane2;
+    private Pane resourcePanel, depot, imgPane1, imgPane2, imgPane3;
     @FXML
     private Spinner<Integer> stone, servant, shield, coin;
     @FXML
     private Button confirmButton;
     @FXML
-    Label labelLeaderCards;
-    @FXML
-    private RadioButton rdOUT_1, rdOUT_2, rdOUT_3, rdOUT_4;
-    @FXML
-    private ToggleGroup toggleGroupOUT;
-
-    private AbilityChoice choice;
-    private ResourceType res;
+    Label labelDevCards;
 
     /**
      * The ImageView that contains the select image card
@@ -53,13 +52,19 @@ public class LeaderProductionController implements Initializable {
     private ImageView source;
 
     /**
-     * The list of player's leader cards
+     * The list of player's dev cards
      */
-    private final List<ImageView> imgsLeaderCards = new ArrayList<>();
+    private final List<ImageView> imgsDevCards = new ArrayList<>();
+
     /**
-     * The list of pane to disable leader cards
+     * The list of pane to disable dev cards
      */
-    private final List<Pane> panesLeaderCards = new ArrayList<>();
+    private final List<Pane> panesDevCards = new ArrayList<>();
+
+    /**
+     * The list of slots to activate
+     */
+    private List<Integer> cards = new ArrayList<>();
 
     /**
      * The corresponding MainController
@@ -79,10 +84,12 @@ public class LeaderProductionController implements Initializable {
      * <p>Called automatically when an entity is injected from FXML</p>
      */
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.imgsLeaderCards.add(imgCard1);
-        this.imgsLeaderCards.add(imgCard2);
-        this.panesLeaderCards.add(imgPane1);
-        this.panesLeaderCards.add(imgPane2);
+        this.imgsDevCards.add(imgCard1);
+        this.imgsDevCards.add(imgCard2);
+        this.imgsDevCards.add(imgCard3);
+        this.panesDevCards.add(imgPane1);
+        this.panesDevCards.add(imgPane2);
+        this.panesDevCards.add(imgPane3);
         this.resourcePanel.setVisible(false);
         this.stone.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 0));
         this.servant.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 0));
@@ -90,38 +97,6 @@ public class LeaderProductionController implements Initializable {
         this.coin.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 0));
     }
 
-    /**
-     * Checks if the player has at least one leader card with a production power (based on card id)
-     * @return true if the player has leaders with production power
-     */
-    public boolean hasProductionCard(){
-        List<LeaderCard> playerCards = this.mainController.getClientModel().getPersonalBoardModel().getLeaderMap().get(this.mainController.getNickname());
-        List<Integer> productionID = new ArrayList<>();
-        productionID.add(13);
-        productionID.add(14);
-        productionID.add(15);
-        productionID.add(16);
-
-        for ( Integer id: productionID ){
-            for (LeaderCard playerCard : playerCards) {
-                if (id == playerCard.getId()) return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean isProductionCard(LeaderCard card){
-        List<Integer> productionID = new ArrayList<>();
-        productionID.add(13);
-        productionID.add(14);
-        productionID.add(15);
-        productionID.add(16);
-
-        for ( Integer id: productionID ){
-                if (id == card.getId()) return true;
-        }
-        return false;
-    }
 
     /**
      * Reset the Buy Panel to the default
@@ -140,19 +115,20 @@ public class LeaderProductionController implements Initializable {
         if(selectedCard != null) this.selectedCard.getStyleClass().remove("selected-card");
     }
 
-    public void updateLeaderCards() {
-        List<LeaderCard> playerLeaderCards = this.mainController.getClientModel().getPersonalBoardModel().getLeaderMap().get(this.mainController.getNickname());
-
-        for(int i=0; i<imgsLeaderCards.size(); i++){
-            if( i < playerLeaderCards.size() && playerLeaderCards.get(i)!=null) {
-                imgsLeaderCards.get(i).setImage(Util.getLeaderImg(playerLeaderCards.get(i).getImg()));
-                panesLeaderCards.get(i).setVisible(!isProductionCard(playerLeaderCards.get(i)));
-
-            } else {
-                imgsLeaderCards.get(i).setImage(Util.getGenericImg("emptyCard"));
-                panesLeaderCards.get(i).setVisible(true);
+    public void loadSlots(){
+        List<DevelopmentSlot> slots = this.mainController.getClientModel().getPersonalBoardModel().getDevSlotMap().get(this.mainController.getNickname());
+        int i = 0;
+        for (DevelopmentSlot slot : slots){
+            try {
+                imgsDevCards.get(i).setImage(Util.getDevCardImg(slot.getTopCard().getImg()));
+                panesDevCards.get(i).setVisible(false);
+            } catch (DevSlotEmptyException e) {
+                imgsDevCards.get(i).setImage(Util.getGenericImg("emptyCard"));
+                panesDevCards.get(i).setVisible(true);
             }
-
+            finally {
+                i++;
+            }
         }
     }
 
@@ -176,12 +152,13 @@ public class LeaderProductionController implements Initializable {
     }
 
     public void useCard1(MouseEvent mouseEvent) {
-            if (this.selectedCard != null) this.selectedCard.getStyleClass().remove("selected-card");
-            this.selectedCard = ((ImageView) mouseEvent.getSource());
-            selectedCard.getStyleClass().add("selected-card");
-            this.resourcePanel.setVisible(true);
-            this.depot.setVisible(true);
-        this.choice = AbilityChoice.FIRST;
+        if (this.selectedCard != null) this.selectedCard.getStyleClass().remove("selected-card");
+        this.selectedCard = ((ImageView) mouseEvent.getSource());
+        selectedCard.getStyleClass().add("selected-card");
+        this.resourcePanel.setVisible(true);
+        this.depot.setVisible(true);
+
+        //TODO set right slot
     }
 
     public void useCard2(MouseEvent mouseEvent) {
@@ -190,8 +167,20 @@ public class LeaderProductionController implements Initializable {
         selectedCard.getStyleClass().add("selected-card");
         this.resourcePanel.setVisible(true);
         this.depot.setVisible(true);
-        this.choice = AbilityChoice.SECOND;
+
+        //TODO set right slot
     }
+
+    public void useCard3(MouseEvent mouseEvent) {
+        if (this.selectedCard != null) this.selectedCard.getStyleClass().remove("selected-card");
+        this.selectedCard = ((ImageView) mouseEvent.getSource());
+        selectedCard.getStyleClass().add("selected-card");
+        this.resourcePanel.setVisible(true);
+        this.depot.setVisible(true);
+
+        //TODO Set right slot
+    }
+
 
     public void dragDetection(MouseEvent mouseEvent) {
         this.source = (ImageView) mouseEvent.getSource();
@@ -235,28 +224,24 @@ public class LeaderProductionController implements Initializable {
         d.setText("x" + newValue);
     }
 
-    public void onClickStone3(ActionEvent actionEvent) { this.res = ResourceType.STONE; }
-    public void onClickCoin3(ActionEvent actionEvent) { this.res = ResourceType.COIN; }
-    public void onClickShield3(ActionEvent actionEvent) { this.res = ResourceType.SHIELD; }
-    public void onClickServant3(ActionEvent actionEvent) { this.res = ResourceType.SERVANT; }
-
     public void buildRequest(ActionEvent actionEvent){
-            Resource depot = new Resource(0, 0, 0, 0);
-            Resource strongbox = new Resource(0, 0, 0, 0);
-            try {
-                depot.modifyValue(ResourceType.STONE, Integer.parseInt(d_stone.getText().substring(1)));
-                depot.modifyValue(ResourceType.SERVANT, Integer.parseInt(d_servant.getText().substring(1)));
-                depot.modifyValue(ResourceType.SHIELD, Integer.parseInt(d_shield.getText().substring(1)));
-                depot.modifyValue(ResourceType.COIN, Integer.parseInt(d_coin.getText().substring(1)));
-                strongbox.modifyValue(ResourceType.STONE, stone.getValue());
-                strongbox.modifyValue(ResourceType.SERVANT, servant.getValue());
-                strongbox.modifyValue(ResourceType.SHIELD, shield.getValue());
-                strongbox.modifyValue(ResourceType.COIN, coin.getValue());
-            } catch (NegativeResAmountException e) {
-                e.printStackTrace();
-            }
-            Request request = new ExtraProductionRequest(this.choice, depot, strongbox, this.res);
-            this.mainController.sendMessage(request);
-            this.mainController.closeLeader();
+        Resource depot = new Resource(0, 0, 0, 0);
+        Resource strongbox = new Resource(0, 0, 0, 0);
+        try {
+            depot.modifyValue(ResourceType.STONE, Integer.parseInt(d_stone.getText().substring(1)));
+            depot.modifyValue(ResourceType.SERVANT, Integer.parseInt(d_servant.getText().substring(1)));
+            depot.modifyValue(ResourceType.SHIELD, Integer.parseInt(d_shield.getText().substring(1)));
+            depot.modifyValue(ResourceType.COIN, Integer.parseInt(d_coin.getText().substring(1)));
+            strongbox.modifyValue(ResourceType.STONE, stone.getValue());
+            strongbox.modifyValue(ResourceType.SERVANT, servant.getValue());
+            strongbox.modifyValue(ResourceType.SHIELD, shield.getValue());
+            strongbox.modifyValue(ResourceType.COIN, coin.getValue());
+        } catch (NegativeResAmountException e) {
+            e.printStackTrace();
+        }
+
+        Request request = new DevProductionRequest(this.cards, depot, strongbox);
+        this.mainController.sendMessage(request);
+        this.mainController.closeDev();
     }
 }

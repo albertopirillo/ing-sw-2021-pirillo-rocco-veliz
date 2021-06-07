@@ -26,7 +26,7 @@
        <MenuButton fx:id="prodButton" layoutX="33.0" layoutY="271.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="214.0" text="Use production">
            <items>
                <MenuItem mnemonicParsing="false" text="Basic" onAction="#showBasic"/>
-               <MenuItem mnemonicParsing="false" text="Development" />
+               <MenuItem mnemonicParsing="false" text="Development" onAction="#showDev"/>
                <MenuItem mnemonicParsing="false" text="Leader" onAction="#showLeader"/>
            </items>
        </MenuButton>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="700.0" prefWidth="810.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 20, 0, 0, 0)" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.DevProductionController">
+   <!--BACKGROUND-->
+   <ImageView fitHeight="700.0" fitWidth="810.0" pickOnBounds="true">
+      <Image url="@../png/generic/backBasic.png" />
+   </ImageView>
+   <!-- PRODUCTION PANEL -->
+   <Pane fx:id="resourcePanel" prefHeight="700.0" prefWidth="810.0">
+      <Label layoutX="185.0" layoutY="36.0" scaleX="4.0" scaleY="4.0" styleClass="customInitLeaderLabel" stylesheets="@../css/customMenuLabel.css" text="Depot' resources" />
+      <ImageView fitHeight="97.0" fitWidth="328.0" layoutX="48.0" layoutY="85.0" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true">
+         <Image url="@../png/res/resource_supply.png" />
+      </ImageView>
+      <ImageView fx:id="r_stone" fitHeight="51.0" fitWidth="56.0" layoutX="71.0" layoutY="97.0" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="r_servant" fitHeight="51.0" fitWidth="56.0" layoutX="148.0" layoutY="97.0" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="r_shield" fitHeight="51.0" fitWidth="56.0" layoutX="224.0" layoutY="97.0" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="r_coin" fitHeight="51.0" fitWidth="56.0" layoutX="297.0" layoutY="96.0" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="d_stone" layoutX="67.0" layoutY="154.0" text="x0" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <Label fx:id="d_servant" layoutX="149.0" layoutY="154.0" text="x0" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <Label fx:id="d_shield" layoutX="231.0" layoutY="154.0" text="x0" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <Label fx:id="d_coin" layoutX="312.0" layoutY="154.0" text="x0" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <Label layoutX="174.0" layoutY="439.0" scaleX="4.0" scaleY="4.0" styleClass="customInitLeaderLabel" stylesheets="@../css/customMenuLabel.css" text="Strongbox resources" />
+      <ImageView fitHeight="97.0" fitWidth="328.0" layoutX="48.0" layoutY="492.0" pickOnBounds="true" preserveRatio="true">
+         <Image url="@../png/res/resource_supply.png" />
+      </ImageView>
+      <ImageView fitHeight="51.0" fitWidth="56.0" layoutX="70.0" layoutY="505.0" pickOnBounds="true" preserveRatio="true">
+         <Image url="@../png/res/stone.png" />
+      </ImageView>
+      <ImageView fitHeight="51.0" fitWidth="56.0" layoutX="152.0" layoutY="505.0" pickOnBounds="true" preserveRatio="true">
+         <Image url="@../png/res/servant.png" />
+      </ImageView>
+      <ImageView fitHeight="51.0" fitWidth="56.0" layoutX="225.0" layoutY="505.0" pickOnBounds="true" preserveRatio="true">
+         <Image url="@../png/res/shield.png" />
+      </ImageView>
+      <ImageView fitHeight="51.0" fitWidth="56.0" layoutX="303.0" layoutY="505.0" pickOnBounds="true" preserveRatio="true">
+         <Image url="@../png/res/coin.png" />
+      </ImageView>
+      <Spinner fx:id="stone" layoutX="64.0" layoutY="583.0" prefHeight="26.0" prefWidth="54.0" />
+      <Spinner fx:id="servant" layoutX="147.0" layoutY="583.0" prefHeight="26.0" prefWidth="54.0" />
+      <Spinner fx:id="shield" layoutX="226.0" layoutY="583.0" prefHeight="26.0" prefWidth="54.0" />
+      <Spinner fx:id="coin" layoutX="310.0" layoutY="583.0" prefHeight="26.0" prefWidth="54.0" />
+      <!--CONFIRM-->
+      <Button fx:id="confirmButton" layoutX="158.0" layoutY="633.0" mnemonicParsing="false" onAction="#buildRequest" prefHeight="50.0" prefWidth="119.0" styleClass="customButton" stylesheets="@../css/customMenuLabel.css" text="Confirm" textAlignment="CENTER" />
+      <!--DEPOT PANE-->
+      <Pane fx:id="depot" layoutX="117.0" layoutY="207.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: transparent;">
+         <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" styleClass="imgShadow">
+            <Image url="@../png/personal_board/depot.png" />
+         </ImageView>
+         <ImageView fx:id="depot1_1" fitHeight="51.0" fitWidth="56.0" layoutX="73.0" layoutY="2.0" onDragDetected="#dragDetection" pickOnBounds="true" preserveRatio="true" />
+         <ImageView fx:id="depot2_1" fitHeight="51.0" fitWidth="56.0" layoutX="37.0" layoutY="67.0" onDragDetected="#dragDetection" pickOnBounds="true" preserveRatio="true" />
+         <ImageView fx:id="depot2_2" fitHeight="51.0" fitWidth="56.0" layoutX="105.0" layoutY="67.0" onDragDetected="#dragDetection" pickOnBounds="true" preserveRatio="true" />
+         <ImageView fx:id="depot3_1" fitHeight="51.0" fitWidth="56.0" layoutX="18.0" layoutY="135.0" onDragDetected="#dragDetection" pickOnBounds="true" preserveRatio="true" />
+         <ImageView fx:id="depot3_2" fitHeight="51.0" fitWidth="56.0" layoutX="74.0" layoutY="135.0" onDragDetected="#dragDetection" pickOnBounds="true" preserveRatio="true" />
+         <ImageView fx:id="depot3_3" fitHeight="51.0" fitWidth="56.0" layoutX="134.0" layoutY="135.0" onDragDetected="#dragDetection" pickOnBounds="true" preserveRatio="true" />
+      </Pane>
+   </Pane>
+
+   <Label fx:id="labelDevCards" layoutX="570.0" layoutY="36.0" scaleX="4.0" scaleY="4.0" styleClass="customInitLeaderLabel" stylesheets="@../css/customMenuLabel.css" text="Development Cards" textAlignment="CENTER" />
+   <ImageView fx:id="imgCard1" fitHeight="195.0" fitWidth="130.0" layoutX="535.0" layoutY="80.0" onMouseClicked="#useCard1" pickOnBounds="true" preserveRatio="true" styleClass="selection">
+      <cursor>
+         <Cursor fx:constant="HAND" />
+      </cursor>
+      <image>
+         <Image url="@../png/leader_cards/leaderFront01.png" />
+      </image>
+   </ImageView>
+   <Pane fx:id="imgPane1" layoutX="535.0" layoutY="80.0" prefHeight="195.0" prefWidth="130.0"/>
+   <ImageView fx:id="imgCard2" fitHeight="195.0" fitWidth="130.0" layoutX="535.0" layoutY="285.0" onMouseClicked="#useCard2" pickOnBounds="true" preserveRatio="true" styleClass="selection">
+      <cursor>
+         <Cursor fx:constant="HAND" />
+      </cursor>
+      <image>
+         <Image url="@../png/leader_cards/leaderFront01.png" />
+      </image>
+   </ImageView>
+   <Pane fx:id="imgPane2" layoutX="535.0" layoutY="285.0" prefHeight="195.0" prefWidth="130.0"/>
+   <ImageView fx:id="imgCard3" fitHeight="195.0" fitWidth="130.0" layoutX="535.0" layoutY="490.0" onMouseClicked="#useCard3" pickOnBounds="true" preserveRatio="true" styleClass="selection">
+      <cursor>
+         <Cursor fx:constant="HAND" />
+      </cursor>
+      <image>
+         <Image url="@../png/leader_cards/leaderFront01.png" />
+      </image>
+   </ImageView>
+   <Pane fx:id="imgPane3" layoutX="535.0" layoutY="490.0" prefHeight="195.0" prefWidth="130.0"/>
+</AnchorPane>

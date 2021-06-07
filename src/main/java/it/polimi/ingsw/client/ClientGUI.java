@@ -249,6 +249,7 @@ public class ClientGUI implements UserInterface {
                 currentController.setStrongbox(strongboxMap.get(playerNick));
                 this.mainController.getMarketController().loadStorages();
                 this.mainController.getLeaderProductionController().loadStorages();
+                this.mainController.getDevProductionController().loadStorages();
             }
         });
     }
@@ -285,6 +286,7 @@ public class ClientGUI implements UserInterface {
                 PersonalBoardController currentController = controllerMap.get(playerNick);
                 currentController.updateDevSlots(devSlotsMap.get(playerNick));
                 this.mainController.getMarketController().loadSlots();
+                this.mainController.getDevProductionController().loadSlots();
             }
         });
 

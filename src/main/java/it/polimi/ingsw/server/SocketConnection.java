@@ -30,6 +30,7 @@ public class SocketConnection extends Connection {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println("[SERVER] Client connection established.");
     }
 
     @Override

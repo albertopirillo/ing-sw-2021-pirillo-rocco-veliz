@@ -13,7 +13,6 @@ public abstract class Connection implements Runnable {
     public Connection(Server server){
         this.server = server;
         this.active = true;
-        System.out.println("[SERVER] Client connection established.");
     }
 
     public Server getServer() {return server;}

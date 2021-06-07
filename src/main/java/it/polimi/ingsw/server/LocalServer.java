@@ -12,6 +12,17 @@ public class LocalServer extends Server {
     }
 
     @Override
+    public void login(String nickname, Connection connection) {
+        /* Local game, no need to check:
+         * - If the username already exists
+         * - If the a game is already being created
+         * - If the lobby is empty
+         */
+        addToLobby(nickname, connection);
+        setGameSize(1);
+    }
+
+    @Override
     public void run() {
         newConnection();
     }

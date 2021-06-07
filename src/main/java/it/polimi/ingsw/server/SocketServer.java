@@ -1,5 +1,10 @@
 package it.polimi.ingsw.server;
 
+import it.polimi.ingsw.network.messages.ErrorMessage;
+import it.polimi.ingsw.network.messages.LoginMessage;
+import it.polimi.ingsw.network.messages.NicknameErrorMessage;
+import it.polimi.ingsw.network.updates.ServerUpdate;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -19,6 +24,28 @@ public class SocketServer extends Server{
         this.port = port;
         this.serverSocket = new ServerSocket(port);
         this.enableLogging(true);
+    }
+
+    @Override
+    public void login(String nickname, Connection connection) {
+        if(checkUsernameExist(nickname)){
+            ServerUpdate msg = new NicknameErrorMessage(nickname, nickname);
+            connection.sendMessage(msg);
+            return;
+        }
+        if(!getLobbyPlayers().isEmpty() && getPlayerAmount()==0){
+            ServerUpdate msg = new ErrorMessage(nickname, "A game is being created. Please wait for the host");
+            connection.sendMessage(msg);
+            return;
+        }
+        System.out.println("[SERVER] New player " + nickname + " added");
+        if(getLobbyPlayers().isEmpty()){
+            addToLobby(nickname, connection);
+            ServerUpdate msg = new LoginMessage(nickname, nickname);
+            connection.sendMessage(msg);
+        } else {
+            addToLobby(nickname, connection);
+        }
     }
 
     @Override

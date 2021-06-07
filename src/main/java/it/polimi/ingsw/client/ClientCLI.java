@@ -20,6 +20,7 @@ public class ClientCLI implements UserInterface {
     private final Scanner stdin;
     private final ClientModel clientModel;
     private boolean productionDone;
+    private boolean secondProductionDone;
     private boolean mainActionDone;
 
     public ClientCLI(Client client){
@@ -27,6 +28,7 @@ public class ClientCLI implements UserInterface {
         this.stdin = new Scanner(System.in);
         this.clientModel = new ClientModel();
         this.productionDone = false;
+        this.secondProductionDone = false;
         this.mainActionDone = false;
     }
 
@@ -370,6 +372,7 @@ public class ClientCLI implements UserInterface {
                 if (mainActionDone) {
                     request = new EndTurnRequest();
                     this.productionDone = false;
+                    this.secondProductionDone = false;
                     this.mainActionDone = false;
                 }
                 else errorPrint("\nYou have to perform an action before ending the turn");
@@ -543,7 +546,7 @@ public class ClientCLI implements UserInterface {
     private Request devProductionMenu(){
         Request request;
 
-        if (this.productionDone) {
+        if (this.productionDone && !this.secondProductionDone) {
             List<Integer> cards = new ArrayList<>();
             Resource depotResource = new Resource(0, 0, 0, 0);
             Resource strongboxResource = new Resource(0, 0, 0, 0);
@@ -586,6 +589,8 @@ public class ClientCLI implements UserInterface {
 
         } else {
             errorPrint("You have to perform a basic production to use a development production");
+            errorPrint("OR");
+            errorPrint("You have already performed a development production this turn");
             request = null;
         }
 
@@ -874,6 +879,13 @@ public class ClientCLI implements UserInterface {
     public void updateActionDone(MainActionDoneUpdate update){
         if(update.getActivePlayer().equals(this.nickname)){
             this.mainActionDone = true;
+        }
+    }
+
+    @Override
+    public void updateSecondProductionDone(SecondProductionDoneUpdate update){
+        if(update.getActivePlayer().equals(this.nickname)){
+            this.secondProductionDone = true;
         }
     }
 

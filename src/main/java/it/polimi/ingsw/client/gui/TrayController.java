@@ -4,6 +4,7 @@ import it.polimi.ingsw.model.MarblesColor;
 import it.polimi.ingsw.network.requests.InsertMarbleRequest;
 import it.polimi.ingsw.network.requests.Request;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -41,7 +42,7 @@ public class TrayController implements Initializable {
 
     private TempMarblesController tempMarblesController;
 
-    private Stage tempMarbles = new Stage();
+    private final Stage tempMarbles = new Stage();
 
     /**
      * Sets the MainController
@@ -78,7 +79,7 @@ public class TrayController implements Initializable {
             this.tempMarbles.initModality(Modality.APPLICATION_MODAL);
             this.tempMarbles.initStyle(StageStyle.UNDECORATED);
             this.tempMarblesController = loader.getController();
-            this.tempMarbles.setOnCloseRequest(event -> event.consume());
+            this.tempMarbles.setOnCloseRequest(Event::consume);
         } catch (IOException e) {
             e.printStackTrace();
         }

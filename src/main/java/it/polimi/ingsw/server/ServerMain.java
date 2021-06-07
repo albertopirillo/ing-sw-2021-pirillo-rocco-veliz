@@ -14,7 +14,7 @@ public class ServerMain {
                 port = 8080;
             }
         }
-        Server server = new Server(port);
+        Server server = new SocketServer(port);
         server.run();
     }
 }

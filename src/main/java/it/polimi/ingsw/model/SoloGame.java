@@ -92,8 +92,8 @@ public class SoloGame extends Game {
      */
     public void updateLastActionToken(SoloActionToken lastToken) {
         for(ModelObserver observer : getObservers()) {
-            observer.showLastActionToken(this, lastToken);
             observer.showFaithTrack(this);
+            observer.showLastActionToken(this, lastToken);
         }
     }
 

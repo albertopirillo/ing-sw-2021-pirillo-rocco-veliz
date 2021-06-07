@@ -132,6 +132,12 @@ public class DevProductionController implements Initializable {
         depot3_1.setImage(imgs.get(3));
         depot3_2.setImage(imgs.get(4));
         depot3_3.setImage(imgs.get(5));
+        //Reset default value to 0
+        this.stone.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 0));
+        this.servant.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 0));
+        this.shield.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 0));
+        this.coin.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 0));
+        //Set max value to corresponding amount in strongbox
         Resource strongbox = this.mainController.getClientModel().getStoragesModel().getStrongboxMap().get(this.mainController.getNickname());
         try {
             ((SpinnerValueFactory.IntegerSpinnerValueFactory)this.stone.getValueFactory()).setMax(strongbox.getValue(ResourceType.STONE));

@@ -23,6 +23,7 @@ public class ClientGUI implements UserInterface {
     private final ClientModel clientModel;
     private boolean mainActionDone;
     private boolean productionDone;
+    private boolean secondProductionDone;
     private final boolean testing = false;
 
     public ClientGUI(Client client, MainController controller) {
@@ -31,6 +32,7 @@ public class ClientGUI implements UserInterface {
         this.mainController = controller;
         this.mainActionDone = false;
         this.productionDone = false;
+        this.secondProductionDone = false;
     }
 
     public boolean isMainActionDone() {
@@ -40,6 +42,12 @@ public class ClientGUI implements UserInterface {
     public boolean isProductionDone() {
         return this.productionDone;
     }
+
+    public boolean isSecondProductionDone() {
+        return this.secondProductionDone;
+    }
+
+    public void setSecondProductionDone(boolean secondProductionDone) { this.secondProductionDone = secondProductionDone; }
 
     public void setMainActionDone(Boolean mainActionDone) {
         this.mainActionDone = mainActionDone;
@@ -363,6 +371,13 @@ public class ClientGUI implements UserInterface {
     public void updateProductionDone(ProductionDoneUpdate update){
         if(update.getActivePlayer().equals(this.nickname)){
             this.productionDone = true;
+        }
+    }
+
+    @Override
+    public void updateSecondProductionDone(SecondProductionDoneUpdate update){
+        if(update.getActivePlayer().equals(this.nickname)){
+            this.secondProductionDone = true;
         }
     }
 

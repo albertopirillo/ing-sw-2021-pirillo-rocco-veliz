@@ -31,7 +31,7 @@ public class DiscardDevCardsToken extends SoloActionToken {
      */
     @Override
     public void reveal() throws NegativeResAmountException {
-        System.out.println("[SOLO_ACTION_TOKEN] Discard cards: " + this.color.toString());
+        //System.out.println("[SOLO_ACTION_TOKEN] Discard cards: " + this.color.toString());
         SoloGame game = this.getGame();
         Market market = game.getMarket();
         List<DevelopmentCard> discardedCards = new ArrayList<>();

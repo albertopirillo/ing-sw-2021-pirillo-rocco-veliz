@@ -29,7 +29,7 @@ public class ClientMain {
         System.out.println("Server IP: " + serverIP);
         System.out.println("Using port: " + port);
         System.out.println("Starting " + (gui ? "GUI..." : "CLI..."));
-        Client client = new Client(gui, port, serverIP);
+        Client client = new SocketClient(gui, port, serverIP);
         client.run();
     }
 }

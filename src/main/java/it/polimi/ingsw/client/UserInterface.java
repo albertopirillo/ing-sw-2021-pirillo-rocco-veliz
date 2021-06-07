@@ -41,6 +41,7 @@ public interface UserInterface {
     void startMainGame(EndOfInitialUpdate update);
     void changeNickname();
     void updateProductionDone(ProductionDoneUpdate update);
+    void updateSecondProductionDone(SecondProductionDoneUpdate update);
     void updateActionDone(MainActionDoneUpdate update);
     ClientModel getClientModel();
 

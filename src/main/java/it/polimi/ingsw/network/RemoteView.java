@@ -242,7 +242,8 @@ public class RemoteView implements ModelObserver {
         Market market = game.getMarket();
         List<DevelopmentCard> clonedList = new ArrayList<>();
         for(DevelopmentCard card: market.getAvailableCards()) {
-            clonedList.add(card.clone());
+            if (card == null) clonedList.add(null);
+            else clonedList.add(card.clone());
         }
          return new MarketUpdate(nickname, clonedList);
     }

@@ -9,11 +9,11 @@ import java.util.Scanner;
 public class LocalGameLauncher {
     public static void main(String[] args) {
         boolean gui;
-        System.out.println("\n********************************");
+        System.out.println("\n************************************");
         System.out.println("Please select the desired interface:");
         System.out.println("1: CLI");
         System.out.println("2: GUI");
-        System.out.println("********************************");
+        System.out.println("************************************");
         System.out.print("Interface: ");
         Scanner stdin = new Scanner(System.in);
         try {

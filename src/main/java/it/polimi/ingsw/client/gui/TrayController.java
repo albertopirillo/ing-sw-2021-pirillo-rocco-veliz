@@ -103,8 +103,8 @@ public class TrayController implements Initializable {
         if (!mainController.isMainActionDone()) {
             Dragboard db = this.remaining.startDragAndDrop(TransferMode.ANY);
             ClipboardContent cb = new ClipboardContent();
-            //cb.putImage(this.remaining.getImage());
-            cb.putString("");
+            cb.putImage(this.remaining.getImage());
+            //cb.putString("");
             //db.setDragView(this.remaining.getImage());
             db.setContent(cb);
             event.consume();

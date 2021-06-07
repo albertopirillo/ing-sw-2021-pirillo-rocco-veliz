@@ -21,9 +21,7 @@ import javafx.scene.input.*;
 import javafx.scene.layout.Pane;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class DevProductionController implements Initializable {
 
@@ -44,12 +42,12 @@ public class DevProductionController implements Initializable {
     @FXML
     Label labelDevCards;
 
-    /**
-     * The ImageView that contains the select image card
-     */
-    private ImageView selectedCard;
-
     private ImageView source;
+
+    /**
+     * The set of selected card indexes (0-based) to be transferred to the server.
+     */
+    Set<Integer> selectedIndexes = new HashSet<Integer>();
 
     /**
      * The list of player's dev cards
@@ -60,11 +58,6 @@ public class DevProductionController implements Initializable {
      * The list of pane to disable dev cards
      */
     private final List<Pane> panesDevCards = new ArrayList<>();
-
-    /**
-     * The list of slots to activate
-     */
-    private List<Integer> slots = new ArrayList<>();
 
     /**
      * The corresponding MainController
@@ -112,7 +105,6 @@ public class DevProductionController implements Initializable {
         this.d_coin.setText("x0");
         this.resourcePanel.setVisible(false);
         this.depot.setVisible(true);
-        if(selectedCard != null) this.selectedCard.getStyleClass().remove("selected-card");
     }
 
     public void loadSlots(){
@@ -151,38 +143,34 @@ public class DevProductionController implements Initializable {
         }
     }
 
-    public void useCard1(MouseEvent mouseEvent) {
-        if (this.selectedCard != null) this.selectedCard.getStyleClass().remove("selected-card");
-        this.selectedCard = ((ImageView) mouseEvent.getSource());
-        selectedCard.getStyleClass().add("selected-card");
-        this.resourcePanel.setVisible(true);
-        this.depot.setVisible(true);
+    private void useCard(ImageView imgCard, Integer index){
+        if(selectedIndexes.contains(index)){
+            imgCard.getStyleClass().remove("selected-card");
+            selectedIndexes.remove(index);
+        } else {
+            imgCard.getStyleClass().add("selected-card");
+            selectedIndexes.add(index);
+        }
 
-        //TODO set right slot
+        if(!resourcePanel.isVisible()){
+            resourcePanel.setVisible(true);
+            depot.setVisible(true);
+        }
+    }
+
+    public void useCard1(MouseEvent mouseEvent) {
+        useCard(imgCard1, 0);
     }
 
     public void useCard2(MouseEvent mouseEvent) {
-        if (this.selectedCard != null) this.selectedCard.getStyleClass().remove("selected-card");
-        this.selectedCard = ((ImageView) mouseEvent.getSource());
-        selectedCard.getStyleClass().add("selected-card");
-        this.resourcePanel.setVisible(true);
-        this.depot.setVisible(true);
-
-        //TODO set right slot
+        useCard(imgCard2, 1);
     }
 
     public void useCard3(MouseEvent mouseEvent) {
-        if (this.selectedCard != null) this.selectedCard.getStyleClass().remove("selected-card");
-        this.selectedCard = ((ImageView) mouseEvent.getSource());
-        selectedCard.getStyleClass().add("selected-card");
-        this.resourcePanel.setVisible(true);
-        this.depot.setVisible(true);
-
-        //TODO Set right slot
+        useCard(imgCard3, 2);
     }
 
-
-    public void dragDetection(MouseEvent mouseEvent) {
+   public void dragDetection(MouseEvent mouseEvent) {
         this.source = (ImageView) mouseEvent.getSource();
         Dragboard db = this.source.startDragAndDrop(TransferMode.ANY);
         ClipboardContent cb = new ClipboardContent();
@@ -240,7 +228,7 @@ public class DevProductionController implements Initializable {
             e.printStackTrace();
         }
 
-        Request request = new DevProductionRequest(this.slots, depot, strongbox);
+        Request request = new DevProductionRequest(new ArrayList<Integer>(selectedIndexes), depot, strongbox);
         this.mainController.sendMessage(request);
         this.mainController.closeDev();
     }

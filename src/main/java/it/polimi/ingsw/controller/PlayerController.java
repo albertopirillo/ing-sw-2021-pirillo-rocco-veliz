@@ -317,7 +317,6 @@ public class PlayerController {
         Strongbox strongbox = personalBoard.getStrongbox();
         DevelopmentCard card;
         try {
-            if (this.mainActionDone) throw new MainActionException();
             for (Integer i : numSlots){
                 card = personalBoard.getSlot(i).getTopCard();
                 devCards.add(card);
@@ -334,7 +333,7 @@ public class PlayerController {
                 this.mainActionDone = true;
                 controller.getGame().setMainActionDone();
             }
-        } catch (CostNotMatchingException | NotEnoughResException | NegativeResAmountException | DevSlotEmptyException | NotEnoughSpaceException | CannotContainFaithException | MainActionException e) {
+        } catch (CostNotMatchingException | NotEnoughResException | NegativeResAmountException | DevSlotEmptyException | NotEnoughSpaceException | CannotContainFaithException e) {
             controller.setException(e);
             controller.getGame().updateClientError(controller.getClientError());
         } finally {

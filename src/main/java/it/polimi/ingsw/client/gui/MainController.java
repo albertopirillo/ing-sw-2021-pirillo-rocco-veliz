@@ -2,9 +2,7 @@ package it.polimi.ingsw.client.gui;
 
 import it.polimi.ingsw.client.ClientGUI;
 import it.polimi.ingsw.client.model.ClientModel;
-import it.polimi.ingsw.model.ExtraProductionAbility;
 import it.polimi.ingsw.model.LeaderAction;
-import it.polimi.ingsw.model.LeaderCard;
 import it.polimi.ingsw.network.Processable;
 import it.polimi.ingsw.network.requests.EndTurnRequest;
 import it.polimi.ingsw.network.requests.QuitGameRequest;
@@ -350,7 +348,7 @@ public class MainController implements Initializable {
         this.leaderPopUp.setY(100);
         this.leaderPopUp.setAutoHide(true);
         this.leaderPopUp.setOnAutoHide(event -> prodButton.setText("Use production"));
-        this.leaderProductionController.initializeCards();
+        this.leaderProductionController.updateLeaderCards();
     }
 
     public void switchSoloPopup() {
@@ -422,11 +420,10 @@ public class MainController implements Initializable {
             Stage stage = (Stage)((MenuItem)event.getTarget()).getParentPopup().getOwnerWindow();
             this.stage = stage;
 
-            List<LeaderCard> playerCards = getClientModel().getPersonalBoardModel().getLeaderMap().get(getNickname());
-            boolean rightAbility1 = playerCards.get(0).getSpecialAbility() instanceof ExtraProductionAbility;
-            boolean rightAbility2 = playerCards.get(1).getSpecialAbility() instanceof ExtraProductionAbility;
+            if ( this.leaderProductionController.hasProductionCard() ) {
 
-            if (rightAbility1 || rightAbility2) {
+                this.leaderProductionController.updateLeaderCards();
+
                 if (!this.leaderPopUp.isShowing()) {
                     this.leaderProductionController.closeResourcePanel();
                     prodButton.setText("Back");

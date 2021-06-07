@@ -17,21 +17,9 @@
    <ImageView fitHeight="700.0" fitWidth="1000.0" pickOnBounds="true">
       <Image url="@../png/generic/backBasic.png" />
    </ImageView>
-   <!--PRODUCTION ELEMENTS-->
-   <Label fx:id="labelLeaderCards" layoutX="710.0" layoutY="35.0" scaleX="5.0" scaleY="5.0" styleClass="customInitLeaderLabel" stylesheets="@../css/customMenuLabel.css" text="LeaderCards" textAlignment="CENTER"/>
-   <ImageView fx:id="imgCard1" fitHeight="195.0" fitWidth="130.0" layoutX="800.0" layoutY="150.0" onMouseClicked="#useCard1" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.5" styleClass="selection">
-      <cursor>
-         <Cursor fx:constant="HAND" />
-      </cursor>
-   </ImageView>
-   <ImageView fx:id="imgCard2" fitHeight="195.0" fitWidth="130.0" layoutX="560.0" layoutY="150.0" onMouseClicked="#useCard2" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.5" styleClass="selection">
-      <cursor>
-         <Cursor fx:constant="HAND" />
-      </cursor>
-   </ImageView>
    <!-- PRODUCTION PANEL -->
    <Pane fx:id="resourcePanel" prefHeight="700.0" prefWidth="1000.0">
-      <Label layoutX="189.0" layoutY="43.0" scaleX="4.5" scaleY="4.5" styleClass="customInitLeaderLabel" stylesheets="@../css/customMenuLabel.css" text="Depot' resources"/>
+      <Label layoutX="189.0" layoutY="43.0" scaleX="4.5" scaleY="4.5" styleClass="customInitLeaderLabel" stylesheets="@../css/customMenuLabel.css" text="Depot' resources" />
       <ImageView fitHeight="97.0" fitWidth="328.0" layoutX="58.0" layoutY="105.0" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true">
          <Image url="@../png/res/resource_supply.png" />
       </ImageView>
@@ -59,7 +47,7 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <Label layoutX="184.0" layoutY="479.0" scaleX="4.5" scaleY="4.5" styleClass="customInitLeaderLabel" stylesheets="@../css/customMenuLabel.css" text="Strongbox resources"/>
+      <Label layoutX="184.0" layoutY="479.0" scaleX="4.5" scaleY="4.5" styleClass="customInitLeaderLabel" stylesheets="@../css/customMenuLabel.css" text="Strongbox resources" />
       <ImageView fitHeight="97.0" fitWidth="328.0" layoutX="63.0" layoutY="542.0" pickOnBounds="true" preserveRatio="true">
          <Image url="@../png/res/resource_supply.png" />
       </ImageView>
@@ -115,4 +103,19 @@
          <ImageView fx:id="depot3_3" fitHeight="51.0" fitWidth="56.0" layoutX="134.0" layoutY="135.0" onDragDetected="#dragDetection" pickOnBounds="true" preserveRatio="true" />
       </Pane>
    </Pane>
+   <!--PRODUCTION ELEMENTS-->
+   <Label fx:id="labelLeaderCards" layoutX="710.0" layoutY="35.0" scaleX="5.0" scaleY="5.0" styleClass="customInitLeaderLabel" stylesheets="@../css/customMenuLabel.css" text="LeaderCards" textAlignment="CENTER" />
+   <ImageView fx:id="imgCard1" fitHeight="195.0" fitWidth="130.0" layoutX="800.0" layoutY="150.0" onMouseClicked="#useCard1" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.5" styleClass="selection">
+      <cursor>
+         <Cursor fx:constant="HAND" />
+      </cursor>
+   </ImageView>
+   <!-- LEADERCARDS PANE DISABLERS -->
+   <Pane fx:id="imgPane1" layoutX="800.0" layoutY="150.0" prefHeight="195.0" prefWidth="130.0" scaleX="1.5" scaleY="1.5" />
+   <ImageView fx:id="imgCard2" fitHeight="195.0" fitWidth="130.0" layoutX="560.0" layoutY="150.0" onMouseClicked="#useCard2" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.5" styleClass="selection">
+      <cursor>
+         <Cursor fx:constant="HAND" />
+      </cursor>
+   </ImageView>
+   <Pane fx:id="imgPane2" layoutX="560.0" layoutY="150.0" prefHeight="195.0" prefWidth="130.0" scaleX="1.5" scaleY="1.5" />
 </AnchorPane>

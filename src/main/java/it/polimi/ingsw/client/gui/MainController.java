@@ -430,6 +430,7 @@ public class MainController implements Initializable {
         Stage stage = Util.getStageFromEvent(event);
         if (!this.marketPopup.isShowing()) {
             this.marketController.closeBuyPanel();
+            this.marketController.loadStorages();
             marketButton.setText("Back");
             this.marketPopup.show(stage);
         }

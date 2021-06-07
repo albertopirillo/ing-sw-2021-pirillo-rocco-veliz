@@ -12,11 +12,13 @@ public class SocketServer extends Server{
     public SocketServer() throws IOException {
         this.port = 8080;
         this.serverSocket = new ServerSocket(8080);
+        this.enableLogging(true);
     }
 
     public SocketServer(int port) throws IOException {
         this.port = port;
         this.serverSocket = new ServerSocket(port);
+        this.enableLogging(true);
     }
 
     @Override

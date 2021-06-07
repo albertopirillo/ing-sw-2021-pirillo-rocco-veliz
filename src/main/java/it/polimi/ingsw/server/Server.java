@@ -26,6 +26,11 @@ public abstract class Server implements Runnable {
     private final Map<String,Connection> lobbyPlayers = new HashMap<>();
     private final List<Map<String,Connection> > games = new ArrayList<>();
     private int gameSize = 0;
+    private boolean enableLog;
+
+    public void enableLogging(boolean enable) {
+        this.enableLog = enable;
+    }
 
     public synchronized void addToLobby(String nickname, Connection connection){
         lobbyPlayers.put(nickname, connection);
@@ -103,6 +108,7 @@ public abstract class Server implements Runnable {
             Connection connection = lobbyPlayers.get(keys.get(0));
             RemoteView remoteView = new RemoteView(connection, keys.get(0));
             connection.setRemoteView(remoteView);
+            if(enableLog) remoteView.enableLogging(true);
             game.addObserver(remoteView);
             remoteView.addController(masterController.getRequestController());
             masterController.getSetupController().setupGame(keys, gameSize);
@@ -124,6 +130,7 @@ public abstract class Server implements Runnable {
             for(int i=0; i<gameSize; i++){
                 connections.add(lobbyPlayers.get(keys.get(i)));
                 RemoteView remoteView = new RemoteView(connections.get(i), keys.get(i));
+                if(enableLog) remoteView.enableLogging(true);
                 connections.get(i).setRemoteView(remoteView);
                 remoteViews.add(remoteView);
                 game.addObserver(remoteView);

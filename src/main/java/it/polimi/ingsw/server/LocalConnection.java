@@ -19,7 +19,7 @@ public class LocalConnection extends Connection{
 
     @Override
     public void sendMessage(ServerUpdate message) {
-        System.out.println("[CLIENT] Receiving message " + message.getClass().getSimpleName());
+        //System.out.println("[CLIENT] Receiving message " + message.getClass().getSimpleName());
         client.getUserInterface().readUpdate(message);
     }
 

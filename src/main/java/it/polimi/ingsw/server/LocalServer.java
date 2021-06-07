@@ -8,6 +8,7 @@ public class LocalServer extends Server {
 
     public LocalServer(LocalClient client) {
         this.client = client;
+        this.enableLogging(false);
     }
 
     @Override

@@ -65,6 +65,8 @@ public class SoloGame extends Game {
         this.soloTokens.add(currentToken);
         this.updateLastActionToken(currentToken);
         checkEndGame();
+        //TODO Remove it's just for testing the popup
+        lastTurn(true);
     }
 
     @Override

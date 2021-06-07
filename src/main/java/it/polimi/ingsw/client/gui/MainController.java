@@ -379,8 +379,9 @@ public class MainController implements Initializable {
         FXMLLoader loader = Util.loadFXML("end_game");
         Parent endGame = loader.load();
         this.endGameController = loader.getController();
-        this.endGameController.setMainController(this);
         this.soloPopUp.getContent().add(endGame);
+        this.endGameController.setMainController(this);
+        this.basicPopUp.setAutoHide(true);
     }
 
     private void initBasicPopup() throws IOException {

@@ -46,6 +46,10 @@ public class MainController implements Initializable {
      */
     private final Popup soloPopUp = new Popup();
     /**
+     * The popup used to show the end game final results
+     */
+    private final Popup endGamePopUp = new Popup();
+    /**
      * The popup used to perform the basic production
      */
     private final Popup basicPopUp = new Popup();
@@ -69,6 +73,10 @@ public class MainController implements Initializable {
      * Reference to the actual SoloController
      */
     private SoloController soloController;
+    /**
+     * Reference to the actual EndGameController
+     */
+    private EndGameController endGameController;
     /**
      * Reference to the actual TrayController
      */
@@ -263,6 +271,14 @@ public class MainController implements Initializable {
     }
 
     /**
+     * Gets the EndGameController
+     * @return the current SoloController
+     */
+    public EndGameController getEndGameController() {
+        return endGameController;
+    }
+
+    /**
      * Sets the SetupController
      * @param setupController the SetupController to set
      */
@@ -292,6 +308,7 @@ public class MainController implements Initializable {
         initBasicPopup();
         initLeaderPopup();
         initDevPopup();
+        initEndGamePopup();
     }
 
     /**
@@ -358,6 +375,15 @@ public class MainController implements Initializable {
         this.soloPopUp.setOnAutoHide(event -> this.soloController.hideCards());
     }
 
+    private void initEndGamePopup() throws IOException {
+        FXMLLoader loader = Util.loadFXML("end_game");
+        Parent endGame = loader.load();
+        this.endGameController = loader.getController();
+        this.endGamePopUp.getContent().add(endGame);
+        this.endGameController.setMainController(this);
+        this.endGamePopUp.setAutoHide(true);
+    }
+
     private void initBasicPopup() throws IOException {
         FXMLLoader loader = Util.loadFXML("basic_production");
         Parent basic = loader.load();
@@ -396,7 +422,6 @@ public class MainController implements Initializable {
         this.devProductionController.loadSlots();
     }
 
-
     public void switchSoloPopup() {
         if (!this.soloPopUp.isShowing()) {
             this.soloPopUp.show(stage);
@@ -404,6 +429,20 @@ public class MainController implements Initializable {
         else {
             this.soloPopUp.hide();
         }
+    }
+
+    public void showEndGamePopup(){
+        endGamePopUp.show(stage);
+    }
+
+    public void closeEndGamePopup(){
+        endGamePopUp.hide();
+        trayButton.setDisable(true);
+        marketButton.setDisable(true);
+        endTurnButton.setDisable(true);
+        activateLeaderButton.setDisable(true);
+        prodButton.setDisable(true);
+        discardLeaderButton.setDisable(true);
     }
 
     /**
@@ -613,7 +652,7 @@ public class MainController implements Initializable {
     /**
      * Sends a EndTurnRequest to the Server
      */
-    public void endTurn() {
+    public void endTurn(ActionEvent event) {
         Request request = new EndTurnRequest();
         sendMessage(request);
         this.setMainActionDone(false);

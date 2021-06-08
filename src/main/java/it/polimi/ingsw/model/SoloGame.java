@@ -65,15 +65,18 @@ public class SoloGame extends Game {
         this.soloTokens.add(currentToken);
         this.updateLastActionToken(currentToken);
         checkEndGame();
-        //TODO Remove it's just for testing the popup
-        lastTurn(true);
+        //set to true to test end game scenario
+        boolean isOver = false;
+        if(isOver){
+            lastTurn(false);
+        }
     }
 
     @Override
     public void checkEndGame() throws NegativeResAmountException {
         boolean isOver = (getActivePlayer().getPersonalBoard().getFaithTrack().getBlackCrossPosition() == 24);
         if(isOver) {
-            this.lastTurn(false);
+            lastTurn(false);
         }
     }
 

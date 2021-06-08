@@ -19,9 +19,5 @@
    <Label fx:id="lblPlayer2" alignment="CENTER" layoutX="273.0" layoutY="360.0" prefHeight="20.0" prefWidth="45.0" scaleX="5.0" scaleY="5.0" styleClass="customInitLeaderLabel" stylesheets="@../css/customMenuLabel.css" text="Player 2" />
    <Label fx:id="lblPlayer3" alignment="CENTER" layoutX="273.0" layoutY="420.0" prefHeight="20.0" prefWidth="45.0" scaleX="5.0" scaleY="5.0" styleClass="customInitLeaderLabel" stylesheets="@../css/customMenuLabel.css" text="Player 3" />
    <Label fx:id="lblPlayer4" alignment="CENTER" layoutX="273.0" layoutY="480.0" prefHeight="20.0" prefWidth="45.0" scaleX="5.0" scaleY="5.0" styleClass="customInitLeaderLabel" stylesheets="@../css/customMenuLabel.css" text="Player 4" />
-   <Label fx:id="lblScore1" alignment="CENTER" layoutX="500.0" layoutY="300.0" prefHeight="20.0" prefWidth="45.0" scaleX="5.0" scaleY="5.0" styleClass="customInitLeaderLabel" stylesheets="@../css/customMenuLabel.css" text="Score 1" />
-   <Label fx:id="lblScore2" alignment="CENTER" layoutX="500.0" layoutY="360.0" prefHeight="20.0" prefWidth="45.0" scaleX="5.0" scaleY="5.0" styleClass="customInitLeaderLabel" stylesheets="@../css/customMenuLabel.css" text="Score 2" />
-   <Label fx:id="lblScore3" alignment="CENTER" layoutX="500.0" layoutY="420.0" prefHeight="20.0" prefWidth="45.0" scaleX="5.0" scaleY="5.0" styleClass="customInitLeaderLabel" stylesheets="@../css/customMenuLabel.css" text="Score 3" />
-   <Label fx:id="lblScore4" alignment="CENTER" contentDisplay="CENTER" layoutX="500.0" layoutY="480.0" prefHeight="20.0" prefWidth="45.0" scaleX="5.0" scaleY="5.0" styleClass="customInitLeaderLabel" stylesheets="@../css/customMenuLabel.css" text="Score 4" textAlignment="CENTER" />
    <Label fx:id="lblScoreSingle" layoutX="413.0" layoutY="362.0" scaleX="13.0" scaleY="13.0" styleClass="customInitLeaderLabel" stylesheets="@../css/customMenuLabel.css" text="51" textAlignment="CENTER"/>
 </AnchorPane>

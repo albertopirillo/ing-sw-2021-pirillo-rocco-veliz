@@ -379,9 +379,9 @@ public class MainController implements Initializable {
         FXMLLoader loader = Util.loadFXML("end_game");
         Parent endGame = loader.load();
         this.endGameController = loader.getController();
-        this.soloPopUp.getContent().add(endGame);
+        this.endGamePopUp.getContent().add(endGame);
         this.endGameController.setMainController(this);
-        this.basicPopUp.setAutoHide(true);
+        this.endGamePopUp.setAutoHide(true);
     }
 
     private void initBasicPopup() throws IOException {
@@ -432,17 +432,17 @@ public class MainController implements Initializable {
     }
 
     public void showEndGamePopup(){
-        this.endGamePopUp.show(stage);
+        endGamePopUp.show(stage);
     }
 
     public void closeEndGamePopup(){
+        endGamePopUp.hide();
         trayButton.setDisable(true);
         marketButton.setDisable(true);
         endTurnButton.setDisable(true);
         activateLeaderButton.setDisable(true);
         prodButton.setDisable(true);
         discardLeaderButton.setDisable(true);
-        this.endGamePopUp.hide();
     }
 
     /**
@@ -652,7 +652,7 @@ public class MainController implements Initializable {
     /**
      * Sends a EndTurnRequest to the Server
      */
-    public void endTurn() {
+    public void endTurn(ActionEvent event) {
         Request request = new EndTurnRequest();
         sendMessage(request);
         this.setMainActionDone(false);

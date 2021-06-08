@@ -15,8 +15,6 @@ public class EndGameController implements Initializable {
     private Label lblResult, lblSummary, lblScoreSingle;
     @FXML
     private Label lblPlayer1, lblPlayer2, lblPlayer3, lblPlayer4;
-    @FXML
-    private Label lblScore1, lblScore2, lblScore3, lblScore4;
 
     private MainController mainController;
 
@@ -33,10 +31,6 @@ public class EndGameController implements Initializable {
         lblPlayer2.setText("");
         lblPlayer3.setText("");
         lblPlayer4.setText("");
-        lblScore1.setText("");
-        lblScore2.setText("");
-        lblScore3.setText("");
-        lblScore4.setText("");
     }
 
     public void setData(GameOverUpdate gameOverUpdate, String nickname){

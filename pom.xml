@@ -55,14 +55,14 @@
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-controls</artifactId>
-      <version>17-ea+9</version>
+      <version>16</version>
     </dependency>
 
     <!-- Scene Builder for JavaFX -->
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-fxml</artifactId>
-      <version>17-ea+9</version>
+      <version>16</version>
     </dependency>
 
   </dependencies>

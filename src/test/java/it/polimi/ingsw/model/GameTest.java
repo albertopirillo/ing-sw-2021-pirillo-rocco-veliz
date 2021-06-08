@@ -1,6 +1,9 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.client.LocalClient;
 import it.polimi.ingsw.exceptions.*;
+import it.polimi.ingsw.network.RemoteView;
+import it.polimi.ingsw.server.LocalConnection;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -101,6 +104,20 @@ class GameTest {
 
         Map<Player, Integer> finalScores = game.computeFinalScore();
         assertEquals(17, finalScores.get(player));
+    }
+
+    @Test
+    public void quitGameTest() throws FullCardDeckException {
+        Game game = new MultiGame(true);
+        game.addObserver(new RemoteView(new LocalConnection(null, new LocalClient(false)), "a"));
+        game.addObserver(new RemoteView(new LocalConnection(null, new LocalClient(false)), "b"));
+        game.addObserver(new RemoteView(new LocalConnection(null, new LocalClient(false)), "c"));
+        game.addObserver(new RemoteView(new LocalConnection(null, new LocalClient(false)), "d"));
+        assertEquals(4, game.getObservers().size());
+
+        game.quitGame();
+        assertEquals(3, game.getPlayersList().size());
+        assertEquals(3, game.getObservers().size());
     }
 }
 

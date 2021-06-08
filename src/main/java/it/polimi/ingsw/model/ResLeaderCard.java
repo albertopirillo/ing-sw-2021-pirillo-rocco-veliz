@@ -8,12 +8,6 @@ public class ResLeaderCard extends LeaderCard implements Serializable {
 
     private final Resource cost;
 
-    //json initialization
-    public ResLeaderCard(int id, String img, int victoryPoints, LeaderAbility specialAbility, Resource cost) {
-        super(id, img, victoryPoints, specialAbility);
-        this.cost = cost;
-    }
-
     public ResLeaderCard(int victoryPoints, LeaderAbility specialAbility, Resource cost) {
         super(victoryPoints, specialAbility);
         this.cost = cost;

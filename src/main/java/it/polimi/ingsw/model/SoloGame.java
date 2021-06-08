@@ -65,11 +65,8 @@ public class SoloGame extends Game {
         this.soloTokens.add(currentToken);
         this.updateLastActionToken(currentToken);
         checkEndGame();
-        //set "isOver = true" in the Evaluate Expression panel to test the end game scenario
-        boolean isOver = false;
-        if(isOver){
-            lastTurn(false);
-        }
+        //to test the end game scenario
+        //lastTurn(false);
     }
 
     @Override

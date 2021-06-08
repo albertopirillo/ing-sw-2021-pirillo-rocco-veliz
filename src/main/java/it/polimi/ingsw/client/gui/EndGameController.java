@@ -35,17 +35,19 @@ public class EndGameController implements Initializable {
 
     public void setData(GameOverUpdate gameOverUpdate, String nickname){
         int numPlayers = gameOverUpdate.getScores().keySet().size();
-        if(gameOverUpdate.isWin()){
-            lblResult.setText("You won the game!");
-            if(numPlayers == 1){
-                lblSummary.setText("Your final score is");
-                lblScoreSingle.setText(gameOverUpdate.getScores().get(nickname).toString());
+
+        if (numPlayers == 1){
+            if(gameOverUpdate.isWin()){
+                lblResult.setText("YOU WON!");
+                    lblSummary.setText("Your final score is");
+                    lblScoreSingle.setText(gameOverUpdate.getScores().get(nickname).toString());
+            } else {
+                lblResult.setText("YOU LOST!");
             }
-        } else {
-            lblResult.setText("You lost.");
         }
 
         if(numPlayers > 1){
+            lblResult.setText("Game Over");
             lblSummary.setText("The final scores are the following:");
             for(int i = 0; i < numPlayers; i++){
                 String playerName = gameOverUpdate.getRanking().get(i);

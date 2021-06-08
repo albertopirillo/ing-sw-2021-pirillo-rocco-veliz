@@ -5,19 +5,18 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="700.0" prefWidth="810.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 20, 0, 0, 0)" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.EndGameController">
    <!--BACKGROUND-->
    <ImageView fitHeight="700.0" fitWidth="810.0" pickOnBounds="true">
       <Image url="@../png/generic/backBasic.png" />
    </ImageView>
-   <Label fx:id="lblResult" layoutX="408.0" layoutY="91.0" scaleX="6.5" scaleY="6.5" styleClass="customInitLeaderLabel" stylesheets="@../css/customMenuLabel.css" text="YOU WON!" textAlignment="CENTER"/>
-   <Label fx:id="lblSummary" layoutX="387.0" layoutY="199.0" scaleX="5.5" scaleY="5.5" styleClass="customInitLeaderLabel" stylesheets="@../css/customMenuLabel.css" text="your final score is:" textAlignment="CENTER"/>
+   <Label fx:id="lblResult" layoutX="408.0" layoutY="91.0" scaleX="6.5" scaleY="6.5" styleClass="customInitLeaderLabel" stylesheets="@../css/customMenuLabel.css" text="YOU WON!" textAlignment="CENTER" />
+   <Label fx:id="lblSummary" layoutX="387.0" layoutY="199.0" scaleX="5.5" scaleY="5.5" styleClass="customInitLeaderLabel" stylesheets="@../css/customMenuLabel.css" text="your final score is:" textAlignment="CENTER" />
    <Button fx:id="btnExit" layoutX="350.0" layoutY="588.0" mnemonicParsing="false" onAction="#onClickExit" prefHeight="44.0" prefWidth="135.0" styleClass="customButton" stylesheets="@../css/customMenuLabel.css" text="Exit" />
-   <Label fx:id="lblPlayer1" alignment="CENTER" layoutX="273.0" layoutY="300.0" prefHeight="20.0" prefWidth="45.0" scaleX="5.0" scaleY="5.0" styleClass="customInitLeaderLabel" stylesheets="@../css/customMenuLabel.css" text="Player 1" />
-   <Label fx:id="lblPlayer2" alignment="CENTER" layoutX="273.0" layoutY="360.0" prefHeight="20.0" prefWidth="45.0" scaleX="5.0" scaleY="5.0" styleClass="customInitLeaderLabel" stylesheets="@../css/customMenuLabel.css" text="Player 2" />
-   <Label fx:id="lblPlayer3" alignment="CENTER" layoutX="273.0" layoutY="420.0" prefHeight="20.0" prefWidth="45.0" scaleX="5.0" scaleY="5.0" styleClass="customInitLeaderLabel" stylesheets="@../css/customMenuLabel.css" text="Player 3" />
-   <Label fx:id="lblPlayer4" alignment="CENTER" layoutX="273.0" layoutY="480.0" prefHeight="20.0" prefWidth="45.0" scaleX="5.0" scaleY="5.0" styleClass="customInitLeaderLabel" stylesheets="@../css/customMenuLabel.css" text="Player 4" />
-   <Label fx:id="lblScoreSingle" layoutX="413.0" layoutY="362.0" scaleX="13.0" scaleY="13.0" styleClass="customInitLeaderLabel" stylesheets="@../css/customMenuLabel.css" text="51" textAlignment="CENTER"/>
+   <Label fx:id="lblScoreSingle" layoutX="413.0" layoutY="362.0" scaleX="13.0" scaleY="13.0" styleClass="customInitLeaderLabel" stylesheets="@../css/customMenuLabel.css" text="51" textAlignment="CENTER" />
+   <Label fx:id="lblPlayer1" alignment="CENTER" layoutX="395.0" layoutY="306.0" prefHeight="20.0" prefWidth="45.0" scaleX="5.0" scaleY="5.0" styleClass="customInitLeaderLabel" stylesheets="@../css/customMenuLabel.css" text="Player 1" />
+   <Label fx:id="lblPlayer2" alignment="CENTER" layoutX="395.0" layoutY="366.0" prefHeight="20.0" prefWidth="45.0" scaleX="5.0" scaleY="5.0" styleClass="customInitLeaderLabel" stylesheets="@../css/customMenuLabel.css" text="Player 2" />
+   <Label fx:id="lblPlayer3" alignment="CENTER" layoutX="395.0" layoutY="426.0" prefHeight="20.0" prefWidth="45.0" scaleX="5.0" scaleY="5.0" styleClass="customInitLeaderLabel" stylesheets="@../css/customMenuLabel.css" text="Player 3" />
+   <Label fx:id="lblPlayer4" alignment="CENTER" layoutX="395.0" layoutY="486.0" prefHeight="20.0" prefWidth="45.0" scaleX="5.0" scaleY="5.0" styleClass="customInitLeaderLabel" stylesheets="@../css/customMenuLabel.css" text="Player 4" />
 </AnchorPane>

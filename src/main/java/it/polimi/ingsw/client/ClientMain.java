@@ -1,6 +1,11 @@
 package it.polimi.ingsw.client;
 
-
+/**
+ * <p>Creates a new generic Client</p>
+ * <p>Processes program arguments</p>
+ * <p>"-gui" or "-cli" can be used to set the user interface</p>
+ * <p>"-server_ip:port" can be used to identify the server to connect to</p>
+ */
 public class ClientMain {
     public static void main(String[] args) {
         int port = 8080;

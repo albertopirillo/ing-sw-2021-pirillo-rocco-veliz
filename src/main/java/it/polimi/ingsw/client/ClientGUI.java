@@ -15,6 +15,11 @@ import javafx.application.Platform;
 
 import java.util.*;
 
+/**
+ * <p>Graphical user interface implementation</p>
+ * <p>Shows the player everything related to the game using images</p>
+ * <p>Uses JavaFX to handle the GUI</p>
+ */
 public class ClientGUI implements UserInterface {
 
     private String nickname;
@@ -26,6 +31,11 @@ public class ClientGUI implements UserInterface {
     private boolean secondProductionDone;
     private final boolean testing = false;
 
+    /**
+     * Constructs a new ClientGUI, initializing all references
+     * @param client the Client associated to this GUI
+     * @param controller the controller of the main scene of JavaFX
+     */
     public ClientGUI(Client client, MainController controller) {
         this.client = client;
         this.clientModel = new ClientModel();
@@ -35,24 +45,48 @@ public class ClientGUI implements UserInterface {
         this.secondProductionDone = false;
     }
 
+    /**
+     * Whether a main action was performed or not during this turn
+     * @return true if it was performed, false otherwise
+     */
     public boolean isMainActionDone() {
         return this.mainActionDone;
     }
 
+    /**
+     * Whether a production was performed or not during this turn
+     * @return true if it was performed, false otherwise
+     */
     public boolean isProductionDone() {
         return this.productionDone;
     }
 
+    /**
+     * Whether extra or dev production can be performed during this turn
+     * @return true if they can be performed, false otherwise
+     */
     public boolean isSecondProductionDone() {
         return this.secondProductionDone;
     }
 
+    /**
+     * Sets the secondProductionDone flag
+     * @param secondProductionDone the value to set
+     */
     public void setSecondProductionDone(boolean secondProductionDone) { this.secondProductionDone = secondProductionDone; }
 
+    /**
+     * Sets the mainActionDone flag
+     * @param mainActionDone the value to set
+     */
     public void setMainActionDone(Boolean mainActionDone) {
         this.mainActionDone = mainActionDone;
     }
 
+    /**
+     * Sets the productionDone flag
+     * @param productionDone the value to set
+     */
     public void setProductionDone(Boolean productionDone) {
         this.productionDone = productionDone;
     }

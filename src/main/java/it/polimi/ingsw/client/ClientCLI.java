@@ -13,6 +13,11 @@ import it.polimi.ingsw.utils.ANSIColor;
 
 import java.util.*;
 
+/**
+ * <p>Command line interface implementation</p>
+ * <p>Shows the player everything related to the game using text</p>
+ * <p>Uses System.in to get input and System.out to show output</p>
+ */
 public class ClientCLI implements UserInterface {
 
     private String nickname;
@@ -23,6 +28,10 @@ public class ClientCLI implements UserInterface {
     private boolean secondProductionDone;
     private boolean mainActionDone;
 
+    /**
+     * Constructs a new ClientCLI, initializing all the references
+     * @param client the client associated to this CLI
+     */
     public ClientCLI(Client client){
         this.client = client;
         this.stdin = new Scanner(System.in);
@@ -189,7 +198,7 @@ public class ClientCLI implements UserInterface {
         return getIntegerSelection(options);
     }
 
-    public int getInitialResources(){
+    private int getInitialResources(){
         return getResourceMenu();
     }
 
@@ -210,7 +219,7 @@ public class ClientCLI implements UserInterface {
         getClient().sendMessage(request);
     }
 
-    public int getInitialLeaderCards(int exclude){
+    private int getInitialLeaderCards(int exclude){
         List<Integer> list = new ArrayList<>();
         for(int i = 0; i < 4; i++){
             if(i != exclude){
@@ -236,7 +245,7 @@ public class ClientCLI implements UserInterface {
         return selection;
     }
 
-    public int getDevCardsSlot (List<Integer> exclude){
+    private int getDevCardsSlot (List<Integer> exclude){
         List<Integer> list = new ArrayList<>();
         for(int i = 1; i < 4; i++){
             if(!exclude.contains(i-1)){
@@ -262,7 +271,7 @@ public class ClientCLI implements UserInterface {
         return selection;
     }
 
-    public ResourceType parseToResourceType(int choice){
+    private ResourceType parseToResourceType(int choice){
         switch (choice){
             case 1: return ResourceType.STONE;
             case 2: return ResourceType.COIN;
@@ -283,16 +292,16 @@ public class ClientCLI implements UserInterface {
         };
     }
 
-    public int getPosition(int min, int max){
+    private int getPosition(){
         int position;
         do {
-            System.out.print("\nChoose num of position : [MIN : "+ min + " MAX: " + max + "] ");
+            System.out.print("\nChoose num of position : [MIN : "+ 0 + " MAX: " + 6 + "] ");
             System.out.println("(Press q to abort)");
             String input = stdin.nextLine();
             if (input.equals("q")) return - 1;
             else position = Integer.parseInt(input);
             System.out.println(position);
-        }while (position < min || position >max);
+        }while (position < 0 || position > 6);
         return position;
     }
 
@@ -347,7 +356,7 @@ public class ClientCLI implements UserInterface {
             case 7:
                 if (!mainActionDone) {
                     updateMarketTray(clientModel.getMarketModel().buildMarketTrayUpdate());
-                    int position = getPosition(0, 6);
+                    int position = getPosition();
                     if (position != -1) {
                         request = new InsertMarbleRequest(position);
                     }
@@ -388,7 +397,7 @@ public class ClientCLI implements UserInterface {
         }
     }
 
-    public void errorPrint(String str) {
+    private void errorPrint(String str) {
         System.out.println(ANSIColor.RED + str + ANSIColor.RESET);
     }
 
@@ -680,7 +689,7 @@ public class ClientCLI implements UserInterface {
         return new PlaceResourceRequest(toDiscard, toPlace, false);
     }
 
-    public ResourceType strToResType(String input){
+    private ResourceType strToResType(String input){
         return switch (input) {
             case "stone" -> ResourceType.STONE;
             case "coin" -> ResourceType.COIN;
@@ -716,7 +725,7 @@ public class ClientCLI implements UserInterface {
      * @return  playerList if the owner of the client is the active player,
      * otherwise a list with the active player only
      */
-    public Set<String> selectPlayerList(Set<String> playerList, String activePlayer) {
+    private Set<String> selectPlayerList(Set<String> playerList, String activePlayer) {
         if (this.getNickname().equals(activePlayer)) {
             return playerList;
         }
@@ -939,5 +948,4 @@ public class ClientCLI implements UserInterface {
             }
         }
     }
-
 }

@@ -404,7 +404,6 @@ public class ClientCLI implements UserInterface {
         String[] levelOptions = {"1: Level 1", "2: Level 2", "3: Level 3"};
         String[] colorOptions = {"1: GREEN", "2: BLUE", "3: YELLOW", "4: PURPLE"};
         String[] slotOptions = {"1: Slot 1", "2: Slot 2", "3: Slot 3"};
-        String[] options = {"STONE", "COIN", "SHIELD", "SERVANT"};
         while(true) {
             try {
                 System.out.println("Choose what ability you want to use");
@@ -415,23 +414,39 @@ public class ClientCLI implements UserInterface {
                 int color = getIntegerSelection(colorOptions);
                 System.out.println("Choose the slot's number");
                 int slot = getIntegerSelection(slotOptions);
+                DevelopmentCard card = getDevCard(level, color);
+                if (card == null) throw new Exception();
+                Resource options = card.getCost();
+                System.out.println("Card cost : "+options);
                 System.out.println("\nSelect where are you taking the resource from");
-                for (String option : options) {
-                    System.out.println(option);
-                    System.out.println("How many resources to take from Depot");
-                    int amountDepot = Integer.parseInt(stdin.nextLine());
-                    if (amountDepot < 0 || amountDepot > 3) throw new Exception();
-                    System.out.println("How many resources to take from Strongbox");
-                    int amountStrongbox = Integer.parseInt(stdin.nextLine());
-                    if (amountStrongbox < 0) throw new Exception();
-                    depotResource.modifyValue(strToResType(option.toLowerCase()),amountDepot);
-                    strongboxResource.modifyValue(strToResType(option.toLowerCase()),amountStrongbox);
+                for (ResourceType res : options.keySet()) {
+                    if(options.getValue(res)>0){
+                        System.out.println(res);
+                        System.out.println("How many resources to take from Depot");
+                        int amountDepot = Integer.parseInt(stdin.nextLine());
+                        if (amountDepot < 0 || amountDepot > 3) throw new Exception();
+                        System.out.println("How many resources to take from Strongbox");
+                        int amountStrongbox = Integer.parseInt(stdin.nextLine());
+                        if (amountStrongbox < 0) throw new Exception();
+                        depotResource.modifyValue(res,amountDepot);
+                        strongboxResource.modifyValue(res,amountStrongbox);
+                    }
                 }
                 return new BuyDevCardRequest(level,CardColor.parseColorCard(color), parseToAbility(ability),depotResource, strongboxResource, slot-1);
             } catch (Exception e){
                 errorPrint("Invalid input, retry");
             }
         }
+    }
+
+    private DevelopmentCard getDevCard(int level, int color){
+        List<DevelopmentCard> cards = clientModel.getMarketModel().getDevCardList();
+        return switch (level) {
+            case 1 -> cards.get(7 + color);
+            case 2 -> cards.get(3 + color);
+            case 3 -> cards.get(-1 + color);
+            default -> null;
+        };
     }
 
     private Request productionMenu(){

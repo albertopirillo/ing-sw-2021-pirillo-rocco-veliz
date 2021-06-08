@@ -3,7 +3,6 @@ package it.polimi.ingsw.client.gui;
 import it.polimi.ingsw.model.MarblesColor;
 import it.polimi.ingsw.network.requests.InsertMarbleRequest;
 import it.polimi.ingsw.network.requests.Request;
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +21,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * <p>JavaFX controller for the file market_tray.fxml</p>
+ * <p>Handles action of take resources from the marker</p>
+ */
 public class TrayController implements Initializable {
 
     @FXML
@@ -55,7 +58,8 @@ public class TrayController implements Initializable {
 
     /**
      * Initializes @FXML fields, organizing the corresponding images of Market Matrix in one list<br>
-     * <p>Called automatically when an entity is injected from FXML</p>
+     * Called automatically when an entity is injected from FXML<br>
+     * Initialized the TempMarblesController to handle correctly the take of white marbles with two Leader Ability Change activated
      */
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.marketTray.add(tray_1);
@@ -103,8 +107,8 @@ public class TrayController implements Initializable {
         if (!mainController.isMainActionDone()) {
             Dragboard db = this.remaining.startDragAndDrop(TransferMode.ANY);
             ClipboardContent cb = new ClipboardContent();
-            //cb.putImage(this.remaining.getImage());
-            cb.putString("");
+            cb.putImage(this.remaining.getImage());
+            //cb.putString("");
             //db.setDragView(this.remaining.getImage());
             db.setContent(cb);
             event.consume();
@@ -139,15 +143,17 @@ public class TrayController implements Initializable {
         ((ImageView)event.getSource()).setImage(null);
     }
 
-    public void change(ActionEvent actionEvent) {
-        System.out.println("ok");
-    }
-
+    /**
+     * Set the correct images to the Temp Marbles Popup
+     */
     public void updateTempMarbles() {
         this.tempMarblesController.updateTemMarbles();
         switchTempStage();
     }
 
+    /**
+     * Switch to te Temp Marbles popup
+      */
     public void switchTempStage() {
         if (!this.tempMarbles.isShowing()) {
             this.tempMarbles.show();

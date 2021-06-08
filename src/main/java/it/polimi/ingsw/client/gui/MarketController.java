@@ -21,6 +21,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * <p>JavaFX controller for the file market.fxml</p>
+ * <p>Handles the Development Cards' buy</p>
+ */
 public class MarketController implements Initializable {
 
     @FXML
@@ -48,11 +52,17 @@ public class MarketController implements Initializable {
      * The ImageView that contains the select image card
      */
     private ImageView selectedCard;
-
+    /**
+     * The ImageView that contains the select slot image
+     */
     private ImageView slot;
-
+    /**
+     * The location where the current drag started
+     */
     private ImageView source;
-
+    /**
+     * The List of the three player's slot imges
+     */
     private final List<ImageView> slotList = new ArrayList<>();
 
     /**
@@ -121,6 +131,9 @@ public class MarketController implements Initializable {
         if(slot != null) this.slot.getStyleClass().remove("selected-card");
     }
 
+    /**
+     * Set the correct amount of resources that the player has
+     */
     public void loadStorages() {
         List<Image> imgs = this.mainController.getPersonalBoardController().getDepotImgs();
         depot1_1.setImage(imgs.get(0));
@@ -146,6 +159,9 @@ public class MarketController implements Initializable {
         }
     }
 
+    /**
+     * Set the slot's card's images correctly
+     */
     public void loadSlots(){
         List<DevelopmentSlot> slots = this.mainController.getClientModel().getPersonalBoardModel().getDevSlotMap().get(this.mainController.getNickname());
         int i = 0;
@@ -161,6 +177,9 @@ public class MarketController implements Initializable {
         }
     }
 
+    /**
+     * Update the image of the current availables Development Card
+     */
     public void updateMarket() {
         List<DevelopmentCard> cards = this.mainController.getClientModel().getMarketModel().getDevCardList();
         for(int i=0; i<devCards.size(); i++){
@@ -171,6 +190,10 @@ public class MarketController implements Initializable {
         }
     }
 
+    /**
+     * When the player click on the Card, the card become selected and the BuyPanel is open
+     * @param mouseEvent
+     */
     public void buyCard(MouseEvent mouseEvent) {
         if(mainController.isMainActionDone()) {
             String errorMsg = "You already performed an action this turn";
@@ -225,12 +248,22 @@ public class MarketController implements Initializable {
         this.source.setImage(null);
     }
 
+    /**
+     * Parse the Image dropped to the corresponding resource type
+     * @param id ImageView identifier
+     * @param res The ResourceType corresponding to the source image
+     * @param d The identifier of the label that rappresent a count of resource
+     */
     private void addRes(ImageView id, ResourceType res, Label d){
         if(id.getImage()==null) id.setImage(Util.resToImage(res));
         int newValue = Integer.parseInt(d.getText().substring(1)) + 1;
         d.setText("x" + newValue);
     }
 
+    /**
+     * Select the slot number by clicking on the actual top slot card
+     * @param mouseEvent player click on one slot-Card
+     */
     public void selectSlot(MouseEvent mouseEvent) {
         if(slot!=null) this.slot.getStyleClass().remove("selected-card");
         this.slot = (ImageView) mouseEvent.getSource();
@@ -239,6 +272,12 @@ public class MarketController implements Initializable {
         this.buyButton.setDisable(false);
     }
 
+    /**
+     * When is clicked and the depot is visible, the depot is set not visible and the player can choice the slot number<br>
+     * When the player choice the slot number and clicked on BuilRequest, the Reqyuest is send to Server and <br>
+     * the Market Popup is closed
+     * @param actionEvent player's mouse click
+     */
     public void buildRequest(ActionEvent actionEvent){
         if(this.depot.isVisible()){
             this.depot.setVisible(false);

@@ -561,8 +561,10 @@ public class MainController implements Initializable {
      * Hide the tray popup and also change the text of the button
      */
     public void closeTray(){
-        trayButton.setText("Market Tray");
-        this.trayPopup.hide();
+        if (this.trayPopup.isShowing()) {
+            trayButton.setText("Market Tray");
+            this.trayPopup.hide();
+        }
     }
 
     /**

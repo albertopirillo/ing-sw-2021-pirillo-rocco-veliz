@@ -272,6 +272,7 @@ public class ClientGUI implements UserInterface {
         clientModel.getStoragesModel().saveTempRes(update);
         printLog("Updating TempResource...");
         Platform.runLater(() -> {
+            this.mainController.closeTray();
             PersonalBoardController personalBoardController = mainController.getPersonalBoardController(update.getActivePlayer());
             personalBoardController.updateTempResources(update.getResource());
         });
@@ -398,7 +399,10 @@ public class ClientGUI implements UserInterface {
     @Override
     public void updateTempMarbles(TempMarblesUpdate update) {
         clientModel.getMarketModel().saveTempMarbles(update);
-        Platform.runLater(() -> mainController.getTrayController().updateTempMarbles());
+        Platform.runLater(() ->{
+            //this.mainController.closeTray();
+          mainController.getTrayController().updateTempMarbles();
+        });
     }
 
     @Override

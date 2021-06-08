@@ -65,7 +65,7 @@ public class SoloGame extends Game {
         this.soloTokens.add(currentToken);
         this.updateLastActionToken(currentToken);
         checkEndGame();
-        //set to true to test end game scenario
+        //set "isOver = true" in the Evaluate Expression panel to test the end game scenario
         boolean isOver = false;
         if(isOver){
             lastTurn(false);
@@ -74,8 +74,7 @@ public class SoloGame extends Game {
 
     @Override
     public void checkEndGame() throws NegativeResAmountException {
-        boolean isOver = (getActivePlayer().getPersonalBoard().getFaithTrack().getBlackCrossPosition() == 24);
-        if(isOver) {
+        if(getActivePlayer().getPersonalBoard().getFaithTrack().getBlackCrossPosition() == 24){
             lastTurn(false);
         }
     }

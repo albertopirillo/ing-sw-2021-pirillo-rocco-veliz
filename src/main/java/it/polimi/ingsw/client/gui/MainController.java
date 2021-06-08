@@ -381,7 +381,6 @@ public class MainController implements Initializable {
         this.endGameController = loader.getController();
         this.endGamePopUp.getContent().add(endGame);
         this.endGameController.setMainController(this);
-        this.endGamePopUp.setAutoHide(true);
     }
 
     private void initBasicPopup() throws IOException {
@@ -433,16 +432,11 @@ public class MainController implements Initializable {
 
     public void showEndGamePopup(){
         endGamePopUp.show(stage);
+        disableGUI(true);
     }
 
     public void closeEndGamePopup(){
         endGamePopUp.hide();
-        trayButton.setDisable(true);
-        marketButton.setDisable(true);
-        endTurnButton.setDisable(true);
-        activateLeaderButton.setDisable(true);
-        prodButton.setDisable(true);
-        discardLeaderButton.setDisable(true);
     }
 
     /**

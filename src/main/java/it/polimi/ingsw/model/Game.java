@@ -184,6 +184,7 @@ public abstract class Game {
             for(int i = 0; i < observers.size(); i++){
                 if(observers.get(i).getPlayer().equals(getActivePlayer().getNickname())){
                     setActivePlayer(getPlayersList().get((i + 1) % getPlayerAmount()));
+                    playerAmount--;
                     observers.get(i).quitGame();
                     observers.remove(i);
                     playersList.remove(i);

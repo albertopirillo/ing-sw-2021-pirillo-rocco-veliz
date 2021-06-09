@@ -20,6 +20,7 @@ import java.util.*;
 public class SoloGame extends Game {
 
     private List<SoloActionToken> soloTokens;
+    //private int turnCount;
 
     /**
      * Constructs a new object and initializes the action tokens and the market
@@ -64,6 +65,8 @@ public class SoloGame extends Game {
         currentToken.reveal();
         this.soloTokens.add(currentToken);
         this.updateLastActionToken(currentToken);
+        //if(turnCount == 5) lastTurn(true);
+        //else turnCount++;
         checkEndGame();
         //to test the end game scenario
         //lastTurn(false);

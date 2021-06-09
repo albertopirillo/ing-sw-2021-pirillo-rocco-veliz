@@ -34,7 +34,6 @@ class SoloGameTest {
         SoloActionToken firstToken = game.getSoloTokens().get(0);
         SoloActionToken secondToken = game.getSoloTokens().get(1);
         game.nextTurn();
-        assertEquals(2, game.getBlackCrossPosition());
         assertEquals(firstToken, game.getSoloTokens().get(5));
         assertEquals(secondToken, game.getSoloTokens().get(0));
     }

@@ -33,17 +33,19 @@
 
 .tab-pane {
     -fx-tab-min-width:150px;
+    -fx-focus-color: black;
 }
 
 /*Set the background image of the tabs*/
-/*.tab {
-    -fx-background-image: url("/png/generic/backBasic.png");
-}*/
+.tab {
+    -fx-background-color: #ccc2a6;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
 
 /*Sets the background image of the white area below the tabs*/
-/*.tab-pane .tab-header-area .tab-header-background {
-    -fx-background-image: url("/png/generic/backBasic.png");
-}*/
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: transparent;
+}
 
 .imgShadow{
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);

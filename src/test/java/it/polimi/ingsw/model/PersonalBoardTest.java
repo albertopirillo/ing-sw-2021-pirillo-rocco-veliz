@@ -78,6 +78,6 @@ class PersonalBoardTest {
 
     @Test
     public void updateFaithTrack() {
-        //TODO: implement here
+        //Tested in FaithTrackTest
     }
 }

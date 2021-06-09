@@ -19,6 +19,11 @@
 .button:pressed {
     -fx-background-color:linear-gradient(to bottom, #a1926a 5%, #ccc2a6 100%);
 }
+
+
+
+
+/* CUSTOM MAIN TAB PANE */
 .tab .tab-label {
     -fx-alignment: CENTER;
     -fx-text-fill: black;
@@ -33,7 +38,6 @@
 
 .tab-pane {
     -fx-tab-min-width:150px;
-    -fx-focus-color: black;
 }
 
 /*Set the background image of the tabs*/
@@ -47,9 +51,29 @@
     -fx-background-color: transparent;
 }
 
+.tab:selected {
+    -fx-pref-height: 33px;
+}
+
+.tab:selected .focus-indicator{
+    -fx-focus-color: transparent;
+}
+
+.tab-pane:top *.tab-header-area {
+    -fx-padding: 0em 0em 0.0em 21em;
+}
+
+
+
+
+/* CUSTOM UNIVERSAL IMGSHADOW */
 .imgShadow{
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
 }
+
+
+
+
 /* CUSTOM UNIVERSAL MENUBUTTON */
 .menu-button{
     -fx-font-family: "Brush Script MT";

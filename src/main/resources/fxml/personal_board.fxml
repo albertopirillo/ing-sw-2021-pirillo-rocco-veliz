@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.text.Font?>
+
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="794.0" prefWidth="1364.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.PersonalBoardController">
    <children>
       <ImageView fitHeight="795.0" fitWidth="1119.0" layoutX="252.0" pickOnBounds="true" preserveRatio="true">
@@ -11,13 +14,8 @@
             <Image url="@../png/personal_board/personal_board.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="leaderCard1" fitHeight="390.0" fitWidth="252.0" layoutY="414.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="leaderCard0" fitHeight="396.0" fitWidth="252.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="leaderLabel" alignment="CENTER" layoutX="75.0" layoutY="380.0" scaleX="2" scaleY="1.5" styleClass="customInitLeaderLabel" text="Leader Cards" textAlignment="CENTER">
-         <font>
-            <Font size="23.0" />
-         </font>
-      </Label>
+      <ImageView fx:id="leaderCard1" fitHeight="395.0" fitWidth="252.0" layoutX="-1.0" layoutY="401.0" pickOnBounds="true" preserveRatio="true" styleClass="resourceDropShadow" />
+      <ImageView fx:id="leaderCard0" fitHeight="395.0" fitWidth="252.0" layoutX="-1.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" styleClass="resourceDropShadow" />
       <ImageView fitHeight="51.0" fitWidth="56.0" layoutX="291.0" layoutY="590.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../png/res/stone.png" />

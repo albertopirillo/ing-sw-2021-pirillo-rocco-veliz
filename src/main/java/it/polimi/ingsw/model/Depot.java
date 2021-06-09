@@ -234,7 +234,7 @@ public abstract class Depot implements Cloneable {
         for(Integer layerNum: this.mapping.keySet()) {
             mapClone.put(layerNum, this.mapping.get(layerNum).clone());
         }
-        //Empty the depot
+        //Clear the depot
         for(Layer layer: this.mapping.values()) {
             layer.resetLayer();
         }
@@ -243,7 +243,7 @@ public abstract class Depot implements Cloneable {
             for (DepotSetting setting : settings) {
                 this.modifyLayer(setting.getLayerNumber(), setting.getResType(), setting.getAmount());
             }
-        } catch (Exception | InvalidResourceException | LayerNotEmptyException | NotEnoughSpaceException | InvalidLayerNumberException | CannotContainFaithException | AlreadyInAnotherLayerException e) {
+        } catch (InvalidResourceException | LayerNotEmptyException | NotEnoughSpaceException | InvalidLayerNumberException | CannotContainFaithException | AlreadyInAnotherLayerException | NegativeResAmountException e) {
             //Restore the old depot
             this.mapping = mapClone;
             throw new WrongDepotInstructionsException();

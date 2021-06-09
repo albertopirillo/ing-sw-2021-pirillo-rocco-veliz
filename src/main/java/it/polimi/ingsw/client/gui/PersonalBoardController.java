@@ -197,13 +197,13 @@ public class PersonalBoardController implements Initializable {
      */
     public void setLayer(int layerNumber, ResourceType res, int amount) {
         List<ImageView> layer = this.layerMapping.get(layerNumber);
-        if(res == null) {
+        if(res == null || amount == 0) {
             for(ImageView slot: layer) {
                 slot.setImage(null);
                 tempDepot.setSlot(slot.getId(), null);
             }
         }
-        else if (amount != 0) {
+        else {
             int i = 0;
             for (ImageView slot : layer) {
                 if (i < amount) {

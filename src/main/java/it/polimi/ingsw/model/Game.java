@@ -119,15 +119,15 @@ public abstract class Game {
      * @return the additional victory points from the FaithTrack
      */
     public int finalPositionVP(int finalPosition) {
-        if (finalPosition < 3) return 0;
-        else if (finalPosition < 6) return 1;
-        else if (finalPosition < 9) return 2;
-        else if (finalPosition < 12) return 4;
-        else if (finalPosition < 15) return 6;
-        else if (finalPosition < 18) return 9;
-        else if (finalPosition < 21) return 12;
-        else if (finalPosition < 24) return 16;
-        else return 20;
+        if (finalPosition < 3) { return 0; }
+        else if (finalPosition < 6) { return 1; }
+        else if (finalPosition < 9) { return 2; }
+        else if (finalPosition < 12) { return 4; }
+        else if (finalPosition < 15) { return 6; }
+        else if (finalPosition < 18) { return 9; }
+        else if (finalPosition < 21) { return 12; }
+        else if (finalPosition < 24) { return 16; }
+        else { return 20; }
     }
 
     /**

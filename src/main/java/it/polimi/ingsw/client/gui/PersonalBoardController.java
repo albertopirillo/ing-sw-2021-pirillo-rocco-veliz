@@ -426,28 +426,38 @@ public class PersonalBoardController implements Initializable {
         }
     }
 
+    //TODO: mark activated leader cards somehow
     public void updateLeaderCards(String cardOwner, List<LeaderCard> playerCards) {
         if (playerCards.size() > 0) {
-            if(mainController.getNickname().equals(cardOwner) || playerCards.get(0).isActive()) {
-                String img0 = playerCards.get(0).getImg();
-                leaderCard0.setImage(Util.getLeaderImg(img0));
-            }
-            else {
-                leaderCard0.setImage(Util.getLeaderImg("back.png"));
-            }
+            LeaderCard firstCard = playerCards.get(0);
+            setCardImage(cardOwner, firstCard, leaderCard0);
+            activateIfExtra(firstCard, depot4_1, depot4_2);
             if (playerCards.size() > 1) {
-                if(mainController.getNickname().equals(cardOwner) || playerCards.get(1).isActive()) {
-                    String img1 = playerCards.get(1).getImg();
-                    leaderCard1.setImage(Util.getLeaderImg(img1));
-                }
-                else {
-                    leaderCard1.setImage(Util.getLeaderImg("back.png"));
-                }
+                LeaderCard secondCard = playerCards.get(1);
+                setCardImage(cardOwner, secondCard, leaderCard1);
+                activateIfExtra(secondCard, depot5_1, depot5_2);
             } else {
                 leaderCard1.setImage(null);
             }
         } else {
             leaderCard0.setImage(null);
+        }
+    }
+
+    private void setCardImage(String cardOwner, LeaderCard card, ImageView image) {
+        if(mainController.getNickname().equals(cardOwner) || card.isActive()) {
+            String img1 = card.getImg();
+            image.setImage(Util.getLeaderImg(img1));
+        }
+        else {
+            image.setImage(Util.getLeaderImg("back.png"));
+        }
+    }
+
+    private void activateIfExtra(LeaderCard card, ImageView extraSlot1, ImageView extraSlot2) {
+        if(card.isActive() && (card.getId() >= 5 || card.getId() <= 8)) {
+            extraSlot1.setDisable(false);
+            extraSlot2.setDisable(false);
         }
     }
 

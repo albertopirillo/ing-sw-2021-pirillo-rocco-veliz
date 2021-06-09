@@ -151,11 +151,12 @@ public class SoloGame extends Game {
 
     private void initSoloTokens(boolean testing) {
         this.soloTokens = new LinkedList<>();
+        this.soloTokens.add(new DiscardDevCardsToken(this, CardColor.GREEN));
         this.soloTokens.add(new MoveBlackCrossToken(this));
+        this.soloTokens.add(new DiscardDevCardsToken(this, CardColor.YELLOW));
+        this.soloTokens.add(new DiscardDevCardsToken(this, CardColor.PURPLE));
         this.soloTokens.add(new MoveAndShuffleToken(this));
-        for(CardColor color: CardColor.values()){
-            this.soloTokens.add(new DiscardDevCardsToken(this, color));
-        }
+        this.soloTokens.add(new DiscardDevCardsToken(this, CardColor.BLUE));
         if (!testing) {
             shuffleSoloTokens();
         }
@@ -165,7 +166,7 @@ public class SoloGame extends Game {
      * Shuffles the current action token queue
      */
     public void shuffleSoloTokens() {
-        Collections.shuffle(this.soloTokens);
+        Collections.shuffle(this.soloTokens, new Random());
     }
     /**
      * <p>Gets the solo tokens queue</p>

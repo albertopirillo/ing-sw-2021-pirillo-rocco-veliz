@@ -360,7 +360,7 @@ public class Player {
                 LeaderAbility ability = leader.getSpecialAbility();
                 ability.activate(this);
                 this.activeLeaderAbilities.add(ability);
-                this.victoryPoints = this.victoryPoints + leader.getVictoryPoints();
+                this.addVictoryPoints(leader.getVictoryPoints());
             } else {
                 throw new CostNotMatchingException("LeaderCard requirements not satisfied");
             }

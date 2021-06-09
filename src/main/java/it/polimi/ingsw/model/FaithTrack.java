@@ -100,7 +100,7 @@ public class FaithTrack implements Serializable, Cloneable {
     private void blackVaticanReport(VaticanReportSection section, List<Player> players){
         Player soloPlayer = players.get(0);
         PopeFavorCard popeFavor = soloPlayer.getPersonalBoard().getFaithTrack().getPopeFavorBySection(section);
-        if (soloPlayer.getPersonalBoard().getFaithTrack().inProximityOfVaticanReport(soloPlayer, section)){
+        if (soloPlayer.getPersonalBoard().getFaithTrack().inProximityOfVaticanReport(soloPlayer, section) && !popeFavor.isReported()){
             //if pl IS report section assign points and flip card
             popeFavor.setReportedAndFlip(true);
             switch (section) {

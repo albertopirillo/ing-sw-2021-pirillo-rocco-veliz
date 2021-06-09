@@ -14,8 +14,8 @@
             <Image url="@../png/personal_board/personal_board.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="leaderCard1" styleClass="resourceDropShadow" fitHeight="395.0" fitWidth="252.0" layoutY="400.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="leaderCard0" styleClass="resourceDropShadow" fitHeight="395.0" fitWidth="252.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="leaderCard1" fitHeight="395.0" fitWidth="252.0" layoutX="-1.0" layoutY="401.0" pickOnBounds="true" preserveRatio="true" styleClass="resourceDropShadow" />
+      <ImageView fx:id="leaderCard0" fitHeight="395.0" fitWidth="252.0" layoutX="-1.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" styleClass="resourceDropShadow" />
       <ImageView fitHeight="51.0" fitWidth="56.0" layoutX="291.0" layoutY="590.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../png/res/stone.png" />

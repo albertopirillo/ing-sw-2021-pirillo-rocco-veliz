@@ -110,6 +110,11 @@ public class LeaderProductionController implements Initializable {
         return false;
     }
 
+    /**
+     * Checks if the player has at least one leader card with production ability
+     * @param card the card to be checked
+     * @return true if it's one of the four production leader cards
+     */
     private boolean isProductionCard(LeaderCard card){
         List<Integer> productionID = new ArrayList<>();
         productionID.add(13);
@@ -140,6 +145,9 @@ public class LeaderProductionController implements Initializable {
         if(selectedCard != null) this.selectedCard.getStyleClass().remove("selected-card");
     }
 
+    /**
+     * Updates the leader cards in the popup based on the last update from the server
+     */
     public void updateLeaderCards() {
         List<LeaderCard> playerLeaderCards = this.mainController.getClientModel().getPersonalBoardModel().getLeaderMap().get(this.mainController.getNickname());
 
@@ -156,6 +164,9 @@ public class LeaderProductionController implements Initializable {
         }
     }
 
+    /**
+     * Updates the player depot and strongbox based on the last update from the server
+     */
     public void loadStorages() {
         List<Image> imgs = this.mainController.getPersonalBoardController().getDepotImgs();
         depot1_1.setImage(imgs.get(0));

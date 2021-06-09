@@ -15,12 +15,23 @@ public class EndGameController implements Initializable {
     @FXML
     private Label lblPlayer1, lblPlayer2, lblPlayer3, lblPlayer4;
 
+    /**
+     * The corresponding MainController
+     */
     private MainController mainController;
 
+    /**
+     * Sets the MainController
+     * @param mainController  the MainController to associate with this controller
+     */
     public void setMainController(MainController mainController) {
         this.mainController = mainController;
     }
 
+    /**
+     * Initializes @FXML fields setting the lables to an empty string<br>
+     * <p>Called automatically when an entity is injected from FXML</p>
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         lblResult.setText("");
@@ -32,6 +43,11 @@ public class EndGameController implements Initializable {
         lblPlayer4.setText("");
     }
 
+    /**
+     * Sets the corresponding text to the popup labels
+     * @param gameOverUpdate The update containing the rankings and the final scores
+     * @param nickname The player's nickname
+     */
     public void setData(GameOverUpdate gameOverUpdate, String nickname){
         int numPlayers = gameOverUpdate.getScores().keySet().size();
 

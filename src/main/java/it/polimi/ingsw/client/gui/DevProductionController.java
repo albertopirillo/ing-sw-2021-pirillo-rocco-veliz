@@ -73,7 +73,7 @@ public class DevProductionController implements Initializable {
     }
 
     /**
-     * Initializes @FXML fields, organizing the corresponding images of leader cards in one list<br>
+     * Initializes @FXML fields, organizing the corresponding images of development cards in one list<br>
      * <p>Called automatically when an entity is injected from FXML</p>
      */
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -107,6 +107,9 @@ public class DevProductionController implements Initializable {
         this.depot.setVisible(true);
     }
 
+    /**
+     * Updates the three devCard slots status from local model
+     */
     public void loadSlots(){
         List<DevelopmentSlot> slots = this.mainController.getClientModel().getPersonalBoardModel().getDevSlotMap().get(this.mainController.getNickname());
         int i = 0;
@@ -124,6 +127,9 @@ public class DevProductionController implements Initializable {
         }
     }
 
+    /**
+     * Updates the player depot and strongbox from local model
+     */
     public void loadStorages() {
         List<Image> imgs = this.mainController.getPersonalBoardController().getDepotImgs();
         depot1_1.setImage(imgs.get(0));

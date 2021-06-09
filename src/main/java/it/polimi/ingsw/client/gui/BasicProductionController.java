@@ -64,6 +64,10 @@ public class BasicProductionController implements Initializable {
     public void onClickShield3(ActionEvent actionEvent) { this.output = ResourceType.SHIELD; }
     public void onClickServant3(ActionEvent actionEvent) { this.output = ResourceType.SERVANT; }
 
+
+    /**
+     * Builds the request for the basic production
+     */
     public void onBtnConfirm(){
         if(mainController.isMainActionDone()) {
             String errorMsg = "You already performed an action this turn";

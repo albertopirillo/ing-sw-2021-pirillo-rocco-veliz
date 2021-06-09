@@ -196,7 +196,7 @@ public abstract class Depot implements Cloneable {
      * @param resource  the amount of resources to be discarded
      * @throws CannotContainFaithException  if faith is trying to be discarded
      */
-    public void discardRes(Player player, Resource resource) throws CannotContainFaithException {
+    public void discardRes(Player player, Resource resource) throws CannotContainFaithException, NegativeResAmountException {
         if (resource.keySet().contains(ResourceType.FAITH))
             throw new CannotContainFaithException("You cannot discard faith points");
 
@@ -232,7 +232,7 @@ public abstract class Depot implements Cloneable {
         //Clone the current depot
         Map<Integer, Layer> mapClone = new HashMap<>();
         for(Integer layerNum: this.mapping.keySet()) {
-            mapClone.put(layerNum, (Layer) this.mapping.get(layerNum).clone());
+            mapClone.put(layerNum, this.mapping.get(layerNum).clone());
         }
         //Empty the depot
         for(Layer layer: this.mapping.values()) {

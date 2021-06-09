@@ -14,7 +14,9 @@ public class ResLeaderCard extends LeaderCard implements Serializable {
     }
 
     public boolean canBeActivated(Player player) throws NegativeResAmountException {
-        return player.getAllResources().compare(this.cost);
+        Resource playerRes = player.getAllResources();
+        Resource tempStrongbox = player.getPersonalBoard().getStrongbox().queryAllTempRes();
+        return (playerRes.sum(tempStrongbox)).compare(this.cost);
     }
 
     public String toString(){

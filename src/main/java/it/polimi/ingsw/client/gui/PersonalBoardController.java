@@ -371,7 +371,7 @@ public class PersonalBoardController implements Initializable {
         return toDiscard;
     }
 
-    private void resetResSupply() {
+    public void resetResSupply() {
         for(ImageView imageView: this.tempResAsImage) {
             imageView.setImage(null);
             imageView.setDisable(true);

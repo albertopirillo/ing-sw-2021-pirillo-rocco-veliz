@@ -1,7 +1,6 @@
 package it.polimi.ingsw.client.gui;
 
 import it.polimi.ingsw.network.updates.GameOverUpdate;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -72,7 +71,7 @@ public class EndGameController implements Initializable {
         }
     }
 
-    public void onClickExit(ActionEvent actionEvent) {
+    public void onClickExit() {
         mainController.closeEndGamePopup();
     }
 }

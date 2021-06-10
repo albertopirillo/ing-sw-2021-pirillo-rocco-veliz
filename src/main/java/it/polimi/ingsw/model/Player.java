@@ -103,9 +103,12 @@ public class Player {
      * @param amount the amount of points to add
      */
     public void addPlayerFaith(int amount) throws NegativeResAmountException {
-        this.getPersonalBoard().getFaithTrack().addPlayerFaith(amount);
-        this.getPersonalBoard().updateFaithTrack(this.game.getPlayersList());
-        if(this.getPersonalBoard().getFaithTrack().getPlayerFaith() >= 24) game.lastTurn(true);
+        for (int i=0; i<amount; i++){
+            this.getPersonalBoard().getFaithTrack().addPlayerFaith(1);
+            this.getPersonalBoard().updateFaithTrack(this.game.getPlayersList());
+        }
+        //this.getPersonalBoard().getFaithTrack().addPlayerFaith(amount);
+        //this.getPersonalBoard().updateFaithTrack(this.game.getPlayersList());
     }
 
     /**

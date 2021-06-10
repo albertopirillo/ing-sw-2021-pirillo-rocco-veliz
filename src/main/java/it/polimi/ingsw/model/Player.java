@@ -102,9 +102,10 @@ public class Player {
      * Adds faith points to the player
      * @param amount the amount of points to add
      */
-    public void addPlayerFaith(int amount) {
+    public void addPlayerFaith(int amount) throws NegativeResAmountException {
         this.getPersonalBoard().getFaithTrack().addPlayerFaith(amount);
         this.getPersonalBoard().updateFaithTrack(this.game.getPlayersList());
+        if(this.getPersonalBoard().getFaithTrack().getPlayerFaith() >= 24) game.lastTurn(true);
     }
 
     /**
@@ -359,7 +360,7 @@ public class Player {
                 LeaderAbility ability = leader.getSpecialAbility();
                 ability.activate(this);
                 this.activeLeaderAbilities.add(ability);
-                this.victoryPoints = this.victoryPoints + leader.getVictoryPoints();
+                this.addVictoryPoints(leader.getVictoryPoints());
             } else {
                 throw new CostNotMatchingException("LeaderCard requirements not satisfied");
             }
@@ -370,7 +371,7 @@ public class Player {
      * Discards resources, giving 1 faith points to the other players for every resource
      * @param resource the resources to be discarded
      */
-    public void discardRes(Resource resource) throws CannotContainFaithException {
+    public void discardRes(Resource resource) throws CannotContainFaithException, NegativeResAmountException {
         this.personalBoard.getDepot().discardRes(this, resource);
     }
 

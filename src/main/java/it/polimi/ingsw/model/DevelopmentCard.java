@@ -62,6 +62,7 @@ public class DevelopmentCard extends Card implements Cloneable {
         return "\tCost: " + cost.toString() +
                 "\n\tColor: " + type +
                 "\n\tLevel: " + level +
+                "\n\tVictory points: " + getVictoryPoints() +
                 "\n\tProduction power: " + prodPower;
     }
 

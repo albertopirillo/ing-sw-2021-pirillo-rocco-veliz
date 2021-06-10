@@ -96,7 +96,12 @@ public class Strongbox {
     public void addTempResources(Resource resource) throws NegativeResAmountException {
         Map<ResourceType, Integer> copy = resource.getMap();
         for (ResourceType key: copy.keySet()) {
-            this.tempResource.modifyValue(key, copy.get(key));
+            if (key == ResourceType.FAITH) {
+                player.addPlayerFaith(copy.get(key));
+            }
+            else {
+                this.tempResource.modifyValue(key, copy.get(key));
+            }
         }
     }
 

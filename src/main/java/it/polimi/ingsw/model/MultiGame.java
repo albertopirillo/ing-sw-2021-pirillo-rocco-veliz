@@ -19,6 +19,7 @@ import java.util.*;
 public class MultiGame extends Game {
 
     private boolean lastTurn;
+    //private int turnCount;
 
     /**
      * Constructs a new object, setting the corresponding Market
@@ -65,7 +66,9 @@ public class MultiGame extends Game {
 
     //Selects the new active Player
     @Override
-    public synchronized void  nextTurn() throws NegativeResAmountException {
+    public synchronized void nextTurn() throws NegativeResAmountException {
+        //if (turnCount == 3) this.lastTurn = true;
+        //else turnCount++;
         int index = this.getPlayersList().indexOf(this.getActivePlayer());
         this.setActivePlayer(this.getPlayersList().get((index + 1) % getPlayerAmount()));
         checkEndGame();

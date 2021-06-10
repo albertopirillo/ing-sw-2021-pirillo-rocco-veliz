@@ -57,7 +57,7 @@ class GameTest {
         strongbox4.addResources(new Resource(5,10,4,3));
 
         Map<Player, Integer> finalScores = game.computeFinalScore();
-        assertEquals(27, finalScores.get(player1));
+        assertEquals(32, finalScores.get(player1));
         assertEquals(0, finalScores.get(player2));
         assertEquals(3, finalScores.get(player3));
         assertEquals(6, finalScores.get(player4));
@@ -103,7 +103,7 @@ class GameTest {
         player.useLeader(4, LeaderAction.USE_ABILITY); //Gives 5 points
 
         Map<Player, Integer> finalScores = game.computeFinalScore();
-        assertEquals(17, finalScores.get(player));
+        assertEquals(19, finalScores.get(player));
     }
 
     @Test

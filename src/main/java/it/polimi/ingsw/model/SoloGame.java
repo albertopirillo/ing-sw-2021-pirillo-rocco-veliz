@@ -192,6 +192,12 @@ public class SoloGame extends Game {
      */
     public void moveBlackCross(int amount) {
         Player player = getPlayersList().get(0);
-        player.getPersonalBoard().getFaithTrack().moveBlackCross(amount);
+        for (int i=0; i<amount; i++){
+            player.getPersonalBoard().getFaithTrack().moveBlackCross(1);
+            Boolean justForUpdate = player.getPersonalBoard().getFaithTrack().checkBlackCross(getPlayersList());
+
+        }
+        //player.getPersonalBoard().getFaithTrack().moveBlackCross(amount);
+        //Boolean justForUpdate = player.getPersonalBoard().getFaithTrack().checkBlackCross(getPlayersList());
     }
 }

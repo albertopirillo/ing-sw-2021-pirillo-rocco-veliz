@@ -8,114 +8,110 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="794.0" prefWidth="1364.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.PersonalBoardController">
-   <children>
-      <ImageView fitHeight="795.0" fitWidth="1119.0" layoutX="252.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../png/personal_board/personal_board.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="leaderCard1" fitHeight="395.0" fitWidth="252.0" layoutX="-1.0" layoutY="401.0" pickOnBounds="true" preserveRatio="true" styleClass="resourceDropShadow" />
-      <ImageView fx:id="leaderCard0" fitHeight="395.0" fitWidth="252.0" layoutX="-1.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" styleClass="resourceDropShadow" />
-      <ImageView fitHeight="51.0" fitWidth="56.0" layoutX="291.0" layoutY="590.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../png/res/stone.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="51.0" fitWidth="56.0" layoutX="291.0" layoutY="659.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../png/res/shield.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="depot3_1" fitHeight="51.0" fitWidth="56.0" layoutX="318.0" layoutY="480.0" onDragDetected="#dragDetection" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="depot3_2" fitHeight="51.0" fitWidth="56.0" layoutX="366.0" layoutY="480.0" onDragDetected="#dragDetection" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="depot3_3" fitHeight="51.0" fitWidth="56.0" layoutX="414.0" layoutY="480.0" onDragDetected="#dragDetection" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="depot2_2" fitHeight="51.0" fitWidth="56.0" layoutX="397.0" layoutY="407.0" onDragDetected="#dragDetection" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="depot2_1" fitHeight="51.0" fitWidth="56.0" layoutX="343.0" layoutY="407.0" onDragDetected="#dragDetection" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="depot1_1" fitHeight="51.0" fitWidth="56.0" layoutX="371.0" layoutY="335.0" onDragDetected="#dragDetection" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="depot5_2" fitHeight="51.0" fitWidth="56.0" layoutX="149.0" layoutY="721.0" onDragDetected="#dragDetection" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="depot5_1" fitHeight="51.0" fitWidth="56.0" layoutX="54.0" layoutY="721.0" onDragDetected="#dragDetection" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="depot4_1" fitHeight="51.0" fitWidth="56.0" layoutX="54.0" layoutY="307.0" onDragDetected="#dragDetection" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="depot4_2" fitHeight="51.0" fitWidth="56.0" layoutX="149.0" layoutY="307.0" onDragDetected="#dragDetection" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fitHeight="51.0" fitWidth="56.0" layoutX="379.0" layoutY="659.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../png/res/coin.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="51.0" fitWidth="56.0" layoutX="379.0" layoutY="590.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../png/res/servant.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="sb_stone" layoutX="341.0" layoutY="589.0" text="x0" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="36.0" />
-         </font>
-      </Label>
-      <Label fx:id="sb_servant" layoutX="434.0" layoutY="589.0" text="x0" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="36.0" />
-         </font>
-      </Label>
-      <Label fx:id="sb_shield" layoutX="339.0" layoutY="658.0" text="x0" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="36.0" />
-         </font>
-      </Label>
-      <Label fx:id="sb_coin" layoutX="434.0" layoutY="657.0" text="x0" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="36.0" />
-         </font>
-      </Label>
-      <Button fx:id="reorderButton" layoutX="277.0" layoutY="721.0" mnemonicParsing="false" onAction="#reorder" prefHeight="30.0" prefWidth="214.0" text="Reorder Depot" textAlignment="CENTER">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Button>
-      <ImageView id="cell0" fx:id="cell0" fitHeight="48.0" fitWidth="48.0" layoutX="296.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView id="cell1" fx:id="cell1" fitHeight="48.0" fitWidth="48.0" layoutX="351.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView id="cell2" fx:id="cell2" fitHeight="48.0" fitWidth="48.0" layoutX="406.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView id="cell3" fx:id="cell3" fitHeight="48.0" fitWidth="48.0" layoutX="406.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView id="cell4" fx:id="cell4" fitHeight="48.0" fitWidth="48.0" layoutX="406.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView id="cell5" fx:id="cell5" fitHeight="48.0" fitWidth="48.0" layoutX="460.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView id="cell6" fx:id="cell6" fitHeight="48.0" fitWidth="48.0" layoutX="514.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView id="cell7" fx:id="cell7" fitHeight="48.0" fitWidth="48.0" layoutX="569.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView id="cell8" fx:id="cell8" fitHeight="48.0" fitWidth="48.0" layoutX="622.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView id="cell9" fx:id="cell9" fitHeight="48.0" fitWidth="48.0" layoutX="677.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView id="cell10" fx:id="cell10" fitHeight="48.0" fitWidth="48.0" layoutX="678.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView id="cell11" fx:id="cell11" fitHeight="48.0" fitWidth="48.0" layoutX="678.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView id="cell12" fx:id="cell12" fitHeight="48.0" fitWidth="48.0" layoutX="733.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView id="cell13" fx:id="cell13" fitHeight="48.0" fitWidth="48.0" layoutX="787.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView id="cell14" fx:id="cell14" fitHeight="48.0" fitWidth="48.0" layoutX="841.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView id="cell15" fx:id="cell15" fitHeight="48.0" fitWidth="48.0" layoutX="896.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView id="cell16" fx:id="cell16" fitHeight="48.0" fitWidth="48.0" layoutX="949.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView id="cell17" fx:id="cell17" fitHeight="48.0" fitWidth="48.0" layoutX="949.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView id="cell18" fx:id="cell18" fitHeight="48.0" fitWidth="48.0" layoutX="949.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView id="cell19" fx:id="cell19" fitHeight="48.0" fitWidth="48.0" layoutX="1004.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView id="cell20" fx:id="cell20" fitHeight="48.0" fitWidth="48.0" layoutX="1059.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView id="cell21" fx:id="cell21" fitHeight="48.0" fitWidth="48.0" layoutX="1113.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView id="cell22" fx:id="cell22" fitHeight="48.0" fitWidth="48.0" layoutX="1168.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView id="cell23" fx:id="cell23" fitHeight="48.0" fitWidth="48.0" layoutX="1222.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView id="cell24" fx:id="cell24" fitHeight="48.0" fitWidth="48.0" layoutX="1276.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView id="popeFavor01" fx:id="popeFavor01" fitHeight="83.0" fitWidth="83.0" layoutX="523.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView id="popeFavor02" fx:id="popeFavor02" fitHeight="83.0" fitWidth="83.0" layoutX="796.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView id="popeFavor03" fx:id="popeFavor03" fitHeight="83.0" fitWidth="83.0" layoutX="1123.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="slot1_1" fitHeight="293.0" fitWidth="187.0" layoutX="686.0" layoutY="463.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="slot1_2" fitHeight="293.0" fitWidth="187.0" layoutX="686.0" layoutY="411.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="slot1_3" fitHeight="293.0" fitWidth="187.0" layoutX="686.0" layoutY="359.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="slot2_1" fitHeight="293.0" fitWidth="187.0" layoutX="900.0" layoutY="463.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="slot2_2" fitHeight="293.0" fitWidth="187.0" layoutX="900.0" layoutY="411.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="slot2_3" fitHeight="293.0" fitWidth="187.0" layoutX="900.0" layoutY="359.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="slot3_1" fitHeight="293.0" fitWidth="187.0" layoutX="1119.0" layoutY="463.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="slot3_2" fitHeight="293.0" fitWidth="187.0" layoutX="1119.0" layoutY="411.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="slot3_3" fitHeight="293.0" fitWidth="187.0" layoutX="1119.0" layoutY="359.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="resSupply" fitHeight="97.0" fitWidth="328.0" layoutX="499.0" layoutY="712.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../png/res/resource_supply.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="tempRes1" fitHeight="51.0" fitWidth="56.0" layoutX="521.0" layoutY="726.0" onDragDetected="#dragDetection" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="tempRes2" fitHeight="51.0" fitWidth="56.0" layoutX="599.0" layoutY="726.0" onDragDetected="#dragDetection" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="tempRes3" fitHeight="51.0" fitWidth="56.0" layoutX="675.0" layoutY="726.0" onDragDetected="#dragDetection" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="tempRes4" fitHeight="51.0" fitWidth="56.0" layoutX="752.0" layoutY="726.0" onDragDetected="#dragDetection" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
-   </children>
+   <ImageView fitHeight="795.0" fitWidth="1119.0" layoutX="252.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../png/personal_board/personal_board.png" />
+   </ImageView>
+   <ImageView fx:id="leaderCard1" fitHeight="395.0" fitWidth="252.0" layoutY="403.0" pickOnBounds="true" preserveRatio="true" styleClass="resourceDropShadow">
+      <Image url="@../png/leader_cards/test_card.png" />
+   </ImageView>
+   <ImageView fx:id="leaderCard0" fitHeight="395.0" fitWidth="252.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" styleClass="resourceDropShadow">
+      <Image url="@../png/leader_cards/test_card.png" />
+   </ImageView>
+   <ImageView fitHeight="51.0" fitWidth="56.0" layoutX="291.0" layoutY="590.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../png/res/stone.png" />
+   </ImageView>
+   <ImageView fitHeight="51.0" fitWidth="56.0" layoutX="291.0" layoutY="659.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../png/res/shield.png" />
+   </ImageView>
+   <ImageView fx:id="depot3_1" fitHeight="51.0" fitWidth="56.0" layoutX="318.0" layoutY="480.0" onDragDetected="#dragDetection" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="depot3_2" fitHeight="51.0" fitWidth="56.0" layoutX="366.0" layoutY="480.0" onDragDetected="#dragDetection" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="depot3_3" fitHeight="51.0" fitWidth="56.0" layoutX="414.0" layoutY="480.0" onDragDetected="#dragDetection" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="depot2_2" fitHeight="51.0" fitWidth="56.0" layoutX="397.0" layoutY="407.0" onDragDetected="#dragDetection" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="depot2_1" fitHeight="51.0" fitWidth="56.0" layoutX="343.0" layoutY="407.0" onDragDetected="#dragDetection" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="depot1_1" fitHeight="51.0" fitWidth="56.0" layoutX="371.0" layoutY="335.0" onDragDetected="#dragDetection" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="depot5_2" fitHeight="51.0" fitWidth="56.0" layoutX="146.0" layoutY="706.0" onDragDetected="#dragDetection" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="depot5_1" fitHeight="51.0" fitWidth="56.0" layoutX="52.0" layoutY="704.0" onDragDetected="#dragDetection" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="depot4_1" fitHeight="51.0" fitWidth="56.0" layoutX="54.0" layoutY="307.0" onDragDetected="#dragDetection" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="depot4_2" fitHeight="51.0" fitWidth="56.0" layoutX="149.0" layoutY="307.0" onDragDetected="#dragDetection" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fitHeight="51.0" fitWidth="56.0" layoutX="379.0" layoutY="659.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../png/res/coin.png" />
+   </ImageView>
+   <ImageView fitHeight="51.0" fitWidth="56.0" layoutX="379.0" layoutY="590.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../png/res/servant.png" />
+   </ImageView>
+   <Label fx:id="sb_stone" layoutX="341.0" layoutY="589.0" text="x0" textFill="WHITE">
+      <font>
+         <Font name="System Bold" size="36.0" />
+      </font>
+   </Label>
+   <Label fx:id="sb_servant" layoutX="434.0" layoutY="589.0" text="x0" textFill="WHITE">
+      <font>
+         <Font name="System Bold" size="36.0" />
+      </font>
+   </Label>
+   <Label fx:id="sb_shield" layoutX="339.0" layoutY="658.0" text="x0" textFill="WHITE">
+      <font>
+         <Font name="System Bold" size="36.0" />
+      </font>
+   </Label>
+   <Label fx:id="sb_coin" layoutX="434.0" layoutY="657.0" text="x0" textFill="WHITE">
+      <font>
+         <Font name="System Bold" size="36.0" />
+      </font>
+   </Label>
+   <Button fx:id="reorderButton" layoutX="277.0" layoutY="721.0" mnemonicParsing="false" onAction="#reorder" prefHeight="30.0" prefWidth="214.0" text="Reorder Depot" textAlignment="CENTER">
+      <font>
+         <Font size="20.0" />
+      </font>
+   </Button>
+   <ImageView id="cell0" fx:id="cell0" fitHeight="48.0" fitWidth="48.0" layoutX="296.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView id="cell1" fx:id="cell1" fitHeight="48.0" fitWidth="48.0" layoutX="351.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView id="cell2" fx:id="cell2" fitHeight="48.0" fitWidth="48.0" layoutX="406.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView id="cell3" fx:id="cell3" fitHeight="48.0" fitWidth="48.0" layoutX="406.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView id="cell4" fx:id="cell4" fitHeight="48.0" fitWidth="48.0" layoutX="406.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView id="cell5" fx:id="cell5" fitHeight="48.0" fitWidth="48.0" layoutX="460.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView id="cell6" fx:id="cell6" fitHeight="48.0" fitWidth="48.0" layoutX="514.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView id="cell7" fx:id="cell7" fitHeight="48.0" fitWidth="48.0" layoutX="569.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView id="cell8" fx:id="cell8" fitHeight="48.0" fitWidth="48.0" layoutX="622.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView id="cell9" fx:id="cell9" fitHeight="48.0" fitWidth="48.0" layoutX="677.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView id="cell10" fx:id="cell10" fitHeight="48.0" fitWidth="48.0" layoutX="678.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView id="cell11" fx:id="cell11" fitHeight="48.0" fitWidth="48.0" layoutX="678.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView id="cell12" fx:id="cell12" fitHeight="48.0" fitWidth="48.0" layoutX="733.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView id="cell13" fx:id="cell13" fitHeight="48.0" fitWidth="48.0" layoutX="787.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView id="cell14" fx:id="cell14" fitHeight="48.0" fitWidth="48.0" layoutX="841.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView id="cell15" fx:id="cell15" fitHeight="48.0" fitWidth="48.0" layoutX="896.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView id="cell16" fx:id="cell16" fitHeight="48.0" fitWidth="48.0" layoutX="949.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView id="cell17" fx:id="cell17" fitHeight="48.0" fitWidth="48.0" layoutX="949.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView id="cell18" fx:id="cell18" fitHeight="48.0" fitWidth="48.0" layoutX="949.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView id="cell19" fx:id="cell19" fitHeight="48.0" fitWidth="48.0" layoutX="1004.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView id="cell20" fx:id="cell20" fitHeight="48.0" fitWidth="48.0" layoutX="1059.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView id="cell21" fx:id="cell21" fitHeight="48.0" fitWidth="48.0" layoutX="1113.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView id="cell22" fx:id="cell22" fitHeight="48.0" fitWidth="48.0" layoutX="1168.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView id="cell23" fx:id="cell23" fitHeight="48.0" fitWidth="48.0" layoutX="1222.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView id="cell24" fx:id="cell24" fitHeight="48.0" fitWidth="48.0" layoutX="1276.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView id="popeFavor01" fx:id="popeFavor01" fitHeight="83.0" fitWidth="83.0" layoutX="523.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView id="popeFavor02" fx:id="popeFavor02" fitHeight="83.0" fitWidth="83.0" layoutX="796.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView id="popeFavor03" fx:id="popeFavor03" fitHeight="83.0" fitWidth="83.0" layoutX="1123.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="slot1_1" fitHeight="293.0" fitWidth="187.0" layoutX="686.0" layoutY="463.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="slot1_2" fitHeight="293.0" fitWidth="187.0" layoutX="686.0" layoutY="411.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="slot1_3" fitHeight="293.0" fitWidth="187.0" layoutX="686.0" layoutY="359.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="slot2_1" fitHeight="293.0" fitWidth="187.0" layoutX="900.0" layoutY="463.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="slot2_2" fitHeight="293.0" fitWidth="187.0" layoutX="900.0" layoutY="411.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="slot2_3" fitHeight="293.0" fitWidth="187.0" layoutX="900.0" layoutY="359.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="slot3_1" fitHeight="293.0" fitWidth="187.0" layoutX="1119.0" layoutY="463.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="slot3_2" fitHeight="293.0" fitWidth="187.0" layoutX="1119.0" layoutY="411.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="slot3_3" fitHeight="293.0" fitWidth="187.0" layoutX="1119.0" layoutY="359.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="resSupply" fitHeight="97.0" fitWidth="328.0" layoutX="499.0" layoutY="712.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../png/res/resource_supply.png" />
+   </ImageView>
+   <ImageView fx:id="tempRes1" fitHeight="51.0" fitWidth="56.0" layoutX="521.0" layoutY="726.0" onDragDetected="#dragDetection" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="tempRes2" fitHeight="51.0" fitWidth="56.0" layoutX="599.0" layoutY="726.0" onDragDetected="#dragDetection" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="tempRes3" fitHeight="51.0" fitWidth="56.0" layoutX="675.0" layoutY="726.0" onDragDetected="#dragDetection" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="tempRes4" fitHeight="51.0" fitWidth="56.0" layoutX="752.0" layoutY="726.0" onDragDetected="#dragDetection" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="leaderCardActive0" fitHeight="150.0" fitWidth="200.0" layoutX="126.0" layoutY="-17.0" pickOnBounds="true" preserveRatio="true" scaleX="0.75" scaleY="0.75">
+      <Image url="@../png/leader_cards/active.png" />
+   </ImageView>
+   <ImageView fx:id="leaderCardActive1" fitHeight="150.0" fitWidth="200.0" layoutX="126.0" layoutY="377.0" pickOnBounds="true" preserveRatio="true" scaleX="0.75" scaleY="0.75">
+      <Image url="@../png/leader_cards/active.png" />
+   </ImageView>
 </AnchorPane>

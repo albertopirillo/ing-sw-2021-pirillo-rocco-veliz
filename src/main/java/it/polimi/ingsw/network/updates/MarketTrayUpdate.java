@@ -29,12 +29,15 @@ public class MarketTrayUpdate extends ServerUpdate {
     @Override
     public String toString() {
         StringBuilder matrix = new StringBuilder();
+        int index = 6;
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 4; j++) {
                 matrix.append(marketTray[i][j]).append(" \t");
             }
-            matrix.append("\n");
+            matrix.append("(").append(index).append(")").append("\n");
+            index--;
         }
+        matrix.append(" (0)\t (1)\t (2)\t (3)\n");
         matrix.append("Remaining marble = ").append(remainingMarble);
         return matrix.toString();
     }

@@ -40,7 +40,7 @@ public class PersonalBoardController implements Initializable {
     @FXML
     private ImageView slot1_1, slot1_2, slot1_3, slot2_1, slot2_2, slot2_3, slot3_1, slot3_2, slot3_3;
     @FXML
-    private ImageView leaderCard0, leaderCard1;
+    private ImageView leaderCard0, leaderCard1, leaderCardActive0, leaderCardActive1;
 
     /**
      * The lists containing the relative cells of the faithtrack and the pope favor tiles
@@ -153,6 +153,8 @@ public class PersonalBoardController implements Initializable {
         tempRes2.setDisable(true);
         tempRes3.setDisable(true);
         tempRes4.setDisable(true);
+        leaderCardActive0.setVisible(false);
+        leaderCardActive1.setVisible(false);
         initFaithTrack();
         initDevSlots();
     }
@@ -426,15 +428,15 @@ public class PersonalBoardController implements Initializable {
         }
     }
 
-    //TODO: mark activated leader cards somehow
+
     public void updateLeaderCards(String cardOwner, List<LeaderCard> playerCards) {
         if (playerCards.size() > 0) {
             LeaderCard firstCard = playerCards.get(0);
-            setCardImage(cardOwner, firstCard, leaderCard0);
+            setCardImage(cardOwner, firstCard, leaderCard0, leaderCardActive0);
             activateIfExtra(firstCard, depot4_1, depot4_2);
             if (playerCards.size() > 1) {
                 LeaderCard secondCard = playerCards.get(1);
-                setCardImage(cardOwner, secondCard, leaderCard1);
+                setCardImage(cardOwner, secondCard, leaderCard1, leaderCardActive1);
                 activateIfExtra(secondCard, depot5_1, depot5_2);
             } else {
                 leaderCard1.setImage(null);
@@ -444,10 +446,11 @@ public class PersonalBoardController implements Initializable {
         }
     }
 
-    private void setCardImage(String cardOwner, LeaderCard card, ImageView image) {
+    private void setCardImage(String cardOwner, LeaderCard card, ImageView image, ImageView active) {
         if(mainController.getNickname().equals(cardOwner) || card.isActive()) {
             String img1 = card.getImg();
             image.setImage(Util.getLeaderImg(img1));
+            active.setVisible(card.isActive());
         }
         else {
             image.setImage(Util.getLeaderImg("back.png"));

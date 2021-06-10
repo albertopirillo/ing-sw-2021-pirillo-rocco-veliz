@@ -387,7 +387,12 @@ public class ClientCLI implements UserInterface {
                 else errorPrint("\nYou have to perform an action before ending the turn");
                 break;
             case 13:
-                request = new QuitGameRequest();
+                System.out.println("Are you sure you want to quit?");
+                System.out.println("All data will be lost.");
+                System.out.print("Quit? (Y/n) ");
+                if (stdin.nextLine().equalsIgnoreCase("y")) {
+                    request = new QuitGameRequest();
+                }
                 break;
         }
         if(request != null){

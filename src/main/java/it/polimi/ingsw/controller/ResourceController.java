@@ -79,7 +79,7 @@ public class ResourceController {
         }
         else {
             //Instructions and checks for CLI
-            if (!settingRes.equals(wontBeDiscarded) || !depot.canInsertInLayer(settings))
+            if (!settingRes.equals(wontBeDiscarded) || !depot.canInsertInDepot(settings))
                 throw new WrongDepotInstructionsException("You provided incorrect instructions to place those resources");
             //Place those resources in the depot
             for(DepotSetting setting: settings) {

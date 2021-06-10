@@ -293,7 +293,7 @@ public class PlayerController {
             activePlayer.getPersonalBoard().getDepot().setFromDepotSetting(settings);
             controller.getGame().updateStorages();
             controller.resetException();
-        } catch (WrongDepotInstructionsException | CloneNotSupportedException e) {
+        } catch (WrongDepotInstructionsException e) {
             controller.setException(e);
             controller.getGame().updateClientError(controller.getClientError());
             controller.getGame().updateStorages();

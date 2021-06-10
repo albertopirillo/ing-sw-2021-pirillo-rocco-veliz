@@ -88,22 +88,6 @@ public abstract class Depot implements Cloneable {
     }
 
     /**
-     * Check if a List of DepotSetting can be inserted in the Depot
-     * @param settings the list of the DepotSetting to check
-     * @return  true if no exceptions will be thrown, false otherwise
-     * @throws InvalidLayerNumberException if layerNumber isn't between 1 and 5
-     */
-    public boolean canInsertInLayer(List<DepotSetting> settings) throws InvalidLayerNumberException {
-        for(DepotSetting setting: settings) {
-            if (setting.getAmount() != 0) {
-                Layer layer = this.getLayer(setting.getLayerNumber());
-                    if (!layer.canInsert(setting.getResType(), setting.getAmount())) return false;
-                }
-            }
-        return true;
-    }
-
-    /**
      * Moves resources from a depot layer to another
      * @param fromLayerNumber   the layer to take the resources from
      * @param toLayerNumber   the layer to put the resources in
@@ -227,7 +211,7 @@ public abstract class Depot implements Cloneable {
      * @param settings  the list of settings to rebase the Depot from
      * @throws WrongDepotInstructionsException if incorrect or no instructions at all where provided
      */
-    public void setFromDepotSetting(List<DepotSetting> settings) throws WrongDepotInstructionsException, CloneNotSupportedException {
+    public void setFromDepotSetting(List<DepotSetting> settings) throws WrongDepotInstructionsException {
         if (settings == null) throw new WrongDepotInstructionsException();
         //Clone the current depot
         Map<Integer, Layer> mapClone = new HashMap<>();
@@ -247,6 +231,31 @@ public abstract class Depot implements Cloneable {
             //Restore the old depot
             this.mapping = mapClone;
             throw new WrongDepotInstructionsException();
+        }
+    }
+
+    /**
+     * Check if a List of DepotSetting can be inserted in the Depot
+     * @param settings the list of the DepotSetting to check
+     * @return  true if no exceptions would be thrown, false otherwise
+     */
+    public boolean canInsertInDepot(List<DepotSetting> settings) {
+        //Clone the current depot
+        Map<Integer, Layer> mapClone = new HashMap<>();
+        for(Integer layerNum: this.mapping.keySet()) {
+            mapClone.put(layerNum, this.mapping.get(layerNum).clone());
+        }
+        try {
+            //Try to store the new resources
+            for (DepotSetting setting : settings) {
+                this.modifyLayer(setting.getLayerNumber(), setting.getResType(), setting.getAmount());
+            }
+            return true;
+        } catch (InvalidResourceException | LayerNotEmptyException | NotEnoughSpaceException | InvalidLayerNumberException | CannotContainFaithException | AlreadyInAnotherLayerException | NegativeResAmountException e) {
+            return false;
+        } finally {
+            //Restore the old depot
+            this.mapping = mapClone;
         }
     }
 }

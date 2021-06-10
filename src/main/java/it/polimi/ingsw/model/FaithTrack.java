@@ -45,6 +45,9 @@ public class FaithTrack implements Serializable, Cloneable {
      */
     public void addPlayerFaith(int amount) {
         this.playerFaith += amount;
+        if (this.playerFaith > 24){
+            this.playerFaith = 24;
+        }
     }
 
     //check if vaticanReport condition applies
@@ -69,7 +72,7 @@ public class FaithTrack implements Serializable, Cloneable {
      * @param players the list of players (in solo game contains only the soloPlayer)
      * @return true if vatican report has been activated
      */
-    private boolean checkBlackCross(List<Player> players){
+    public boolean checkBlackCross(List<Player> players){
         if (blackCrossPosition > 4){
             switch (blackCrossPosition) {
                 case 8 -> {
@@ -110,7 +113,9 @@ public class FaithTrack implements Serializable, Cloneable {
             }
         } else {
             //if pl is NOT in report section, deactivate his card
-            popeFavor.setReportedAndFlip(false); }
+            popeFavor.setReportedAndFlip(false);
+        }
+        soloPlayer.getGame().updateFaithTrack();
     }
 
 

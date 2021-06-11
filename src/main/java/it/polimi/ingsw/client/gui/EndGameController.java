@@ -34,7 +34,7 @@ public class EndGameController implements Initializable {
     }
 
     /**
-     * Initializes @FXML fields setting the lables to an empty string<br>
+     * Initializes @FXML fields setting the labels to an empty string<br>
      * <p>Called automatically when an entity is injected from FXML</p>
      */
     @Override

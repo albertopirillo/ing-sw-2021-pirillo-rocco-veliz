@@ -146,7 +146,7 @@ public class LeaderCardSelectionController implements Initializable {
             ChooseLeaderRequest request = new ChooseLeaderRequest(selectedCards.get(0), selectedCards.get(1));
             request.setPlayer(nickname);
             mainController.sendMessage(request);
-            othersAreChosing();
+            othersAreChoosing();
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning");
@@ -179,7 +179,7 @@ public class LeaderCardSelectionController implements Initializable {
         imageViews.get(index).getStyleClass().add("imgShadow");
     }
 
-    private void othersAreChosing(){
+    private void othersAreChoosing(){
         topLabel.setText("The other players are choosing their cards");
         topLabel.setLayoutY(330);
         topLabel.setLayoutX(510);

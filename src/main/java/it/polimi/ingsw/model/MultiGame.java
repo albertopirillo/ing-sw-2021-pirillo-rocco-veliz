@@ -79,7 +79,7 @@ public class MultiGame extends Game {
         //Every player until the first one have to play their last turn
         if (lastTurn && this.getActivePlayer().getInkwell()) {
             Map<Player, Integer> finalScores = computeFinalScore();
-            List<Player> playerRanks = computeRanks(finalScores);
+            List<Player> playerRanks = computeRanks(new HashMap<>(finalScores));
             Map<String, Integer> scores = new HashMap<>();
             List<String> ranking = new ArrayList<>();
             for(Map.Entry<Player, Integer> entry: finalScores.entrySet()){

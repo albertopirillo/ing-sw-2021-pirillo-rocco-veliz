@@ -12,6 +12,10 @@ import java.io.ObjectOutputStream;
 import java.net.ConnectException;
 import java.net.Socket;
 
+/**
+ * <p>Implementation of the Client that uses TCP to connect to a remote Server</p>
+ * <p>IP and port of the Socket can be specified as program arguments</p>
+ */
 public class SocketClient extends Client {
     private final String serverIP;
     private final int port;
@@ -21,7 +25,7 @@ public class SocketClient extends Client {
     /**
      * <p>Constructor used in testing</p>
      * <p>Puts everything at its default value</p>
-     * <p>localhost:8080, CLI</p>
+     * <p>localhost:8080 and CLI</p>
      */
     public SocketClient() {
         this.port = 8080;
@@ -30,9 +34,10 @@ public class SocketClient extends Client {
     }
 
     /**
-     * Creates a new Client instance
-     * @param port  the port used to communicate with the server
-     * @param gui   true if gui should be started, false if using cli
+     * Creates a new instance of a Client
+     *
+     * @param port the port used to communicate with the server
+     * @param gui  true if gui should be started, false if using cli
      */
     public SocketClient(boolean gui, int port, String serverIP) {
         this.port = port;
@@ -41,8 +46,7 @@ public class SocketClient extends Client {
             JavaFXMain.startGUI();
             waitForGUI();
             this.setUserInterface(new ClientGUI(this, JavaFXMain.getMainController()));
-        }
-        else {
+        } else {
             this.setUserInterface(new ClientCLI(this));
         }
     }
@@ -78,7 +82,7 @@ public class SocketClient extends Client {
             socketOut = new ObjectOutputStream(socket.getOutputStream());
             socketIn = new ObjectInputStream(socket.getInputStream());
             synchronized (JavaFXMain.lock) {
-                //GUI can be show now, notify JavaFXMain
+                //GUI can be now shown: notify JavaFXMain
                 setConnectionReady(true);
                 JavaFXMain.lock.notifyAll();
             }

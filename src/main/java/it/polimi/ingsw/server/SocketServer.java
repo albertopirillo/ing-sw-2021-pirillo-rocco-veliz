@@ -9,17 +9,19 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+/**
+ * <p>Server implementation that uses TCP to communicate with the Client</p>
+ * <p>Port can be specified as a program argument</p>
+ */
 public class SocketServer extends Server{
 
     private final int port;
     private final ServerSocket serverSocket;
 
-    public SocketServer() throws IOException {
-        this.port = 8080;
-        this.serverSocket = new ServerSocket(8080);
-        this.enableLogging(true);
-    }
-
+    /**
+     * Creates a new instance of a Server
+     * @param port the port of the Socket
+     */
     public SocketServer(int port) throws IOException {
         this.port = port;
         this.serverSocket = new ServerSocket(port);

@@ -6,10 +6,19 @@ import it.polimi.ingsw.network.messages.LoginMessage;
 import it.polimi.ingsw.network.updates.ServerUpdate;
 import it.polimi.ingsw.server.LocalConnection;
 
+/**
+ * <p>Implementation of the Client that doesnt use TCP to play locally</p>
+ * <p>Used only in local game to play without the need of connecting to a remote server</p>
+ * <p>Sends and receives messages using a reference to a Connection object</p>
+ */
 public class LocalClient extends Client {
 
     private LocalConnection connection;
 
+    /**
+     * Creates a new Distance of a Client
+     * @param gui true if gui should be started, false if using cli
+     */
     public LocalClient(boolean gui) {
         if (gui) {
             JavaFXMain.startGUI();
@@ -21,9 +30,18 @@ public class LocalClient extends Client {
         }
     }
 
+    /**
+     * Gets the associated connection object
+     * @return the connection object
+     */
     public LocalConnection getConnection() {
         return connection;
     }
+
+    /**
+     * Sets the associated connection object
+     * @param connection the connection object to set
+     */
     public void setConnection(LocalConnection connection) {
         this.connection = connection;
     }

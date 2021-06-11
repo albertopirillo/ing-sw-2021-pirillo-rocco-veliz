@@ -16,31 +16,61 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * <p>Generic abstract implementation of a Server</p>
+ * <p>Handles all the lobbies for all the games</p>
+ * <p>Sets up games, creating controllers and observers</p>
+ */
 public abstract class Server implements Runnable {
 
-    private MasterController masterController;
     private static final List<Connection> connections = new ArrayList<>();
     private final Map<String,Connection> lobbyPlayers = new HashMap<>();
     private final List<Map<String,Connection> > games = new ArrayList<>();
     private int playerAmount = 0;
     private boolean logEnabled;
 
+    /**
+     * Established a new connection between the Server and the Client
+     */
     @Override
     public abstract void run();
+
+    /**
+     * Logs a player in, checking its username
+     * @param nickname the nickname of the player
+     * @param connection the connection between the Server and the Client
+     */
     public abstract void login(String nickname, Connection connection);
 
+    /**
+     * Gets the player amount of the game that is being created
+     * @return the player amount
+     */
     protected int getPlayerAmount() {
         return playerAmount;
     }
 
+    /**
+     * Gets the mapping between nicknames and connections
+     * @return a map with nicknames as keys and connections as values
+     */
     protected Map<String, Connection> getLobbyPlayers() {
         return lobbyPlayers;
     }
 
+    /**
+     * Whether the log should log its operations or not
+     * @param enable true to enable logging, false otherwise
+     */
     public void enableLogging(boolean enable) {
         this.logEnabled = enable;
     }
 
+    /**
+     * Adds a player to the lobby list
+     * @param nickname the nickname of the player
+     * @param connection the connection associated with the player
+     */
     public synchronized void addToLobby(String nickname, Connection connection){
         lobbyPlayers.put(nickname, connection);
         if(playerAmount == lobbyPlayers.size()){
@@ -54,6 +84,10 @@ public abstract class Server implements Runnable {
         }
     }
 
+    /**
+     * Sets the number of players of the game that is being created
+     * @param maxPlayers the game size
+     */
     public synchronized void setGameSize(int maxPlayers){
         this.playerAmount = maxPlayers;
         printLog("[SERVER] Number of players: " + maxPlayers);
@@ -63,7 +97,12 @@ public abstract class Server implements Runnable {
         }
     }
 
-    protected boolean checkUsernameExist(String nickname){
+    /**
+     * Checks if the new inserted nickname is unique
+     * @param nickname the nickname to check
+     * @return true if the username was already present, false otherwise
+     */
+    public boolean checkUsernameExist(String nickname){
         for (Map<String, Connection> map : games) {
             for (String nick : map.keySet()) {
                 if ((nick).equalsIgnoreCase(nickname))
@@ -77,7 +116,7 @@ public abstract class Server implements Runnable {
         return false;
     }
 
-    public synchronized void setupGame(int gameSize, String nickname){
+    private synchronized void setupGame(int gameSize, String nickname){
         printLog("[SERVER] LOADING GAME...");
         for (String n : lobbyPlayers.keySet()){
             printLog("[SERVER] Player: " + n);
@@ -93,7 +132,7 @@ public abstract class Server implements Runnable {
 
     }
 
-    public void setupSoloGame(String nickname){
+    private void setupSoloGame(String nickname){
         Player player = new Player(nickname);
         try {
             Game game = new SoloGame(player);
@@ -113,20 +152,18 @@ public abstract class Server implements Runnable {
         }
     }
 
-    public void setupMultiGame(){
+    private void setupMultiGame(){
         try {
             //Create Game
             Game game = new MultiGame();
             MasterController masterController = new MasterController(game);
             List<String> keys = new ArrayList<>(lobbyPlayers.keySet());
-            List<RemoteView> remoteViews = new ArrayList<>();
             List<Connection> connections = new ArrayList<>();
             for(int i = 0; i< playerAmount; i++){
                 connections.add(lobbyPlayers.get(keys.get(i)));
                 RemoteView remoteView = new RemoteView(connections.get(i), keys.get(i));
                 if(logEnabled) remoteView.enableLogging(true);
                 connections.get(i).setRemoteView(remoteView);
-                remoteViews.add(remoteView);
                 game.addObserver(remoteView);
                 remoteView.addController(masterController.getRequestController());
             }
@@ -140,46 +177,21 @@ public abstract class Server implements Runnable {
                 e.printStackTrace();
             }
             sendInitialResources(1, game.getActivePlayer().getNickname());
-        /*
-        //Moves to next player without checking turn's ending conditions
-        int index = game.getPlayersList().indexOf(game.getActivePlayer());
-        game.setActivePlayer(game.getPlayersList().get((index + 1) % game.getPlayerAmount()));
-
-        //Nothing needs to be done if in Solo Mode
-        for (int i = 1; i < gameSize; i++) {
-            String activePlayer = game.getActivePlayer().getNickname();
-            sendInitialResources(i, activePlayer);
-            //Moves to next player without checking turn's ending conditions
-            index = game.getPlayersList().indexOf(game.getActivePlayer());
-            game.setActivePlayer(game.getPlayersList().get((index + 1) % game.getPlayerAmount()));
-        }
-        */
-            //activeGames.put(activeGames.size(), connections
-            //masterController.getSetupController().startGame();
         } catch (FullCardDeckException e) {
             e.printStackTrace();
         }
     }
 
-    public void sendInitialResources(int numPlayer, String activePlayer){
+    private void sendInitialResources(int numPlayer, String activePlayer){
         ServerUpdate msg = new InitialResourcesUpdate(activePlayer, numPlayer);
         lobbyPlayers.get(activePlayer).sendMessage(msg);
     }
 
+    /**
+     * Adds a connection to the internal list
+     * @param connection the connection to add
+     */
     protected synchronized void registerConnection(Connection connection) {
         connections.add(connection);
-    }
-
-    protected synchronized void deregisterConnection(Connection connection) {
-        connections.remove(connection);
-    }
-
-    //TODO: testing only
-    public void setMasterController(MasterController masterController) {
-        this.masterController = masterController;
-    }
-
-    public MasterController getMasterController() {
-        return masterController;
     }
 }

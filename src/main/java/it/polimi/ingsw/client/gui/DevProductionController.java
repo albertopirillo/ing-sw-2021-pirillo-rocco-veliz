@@ -107,8 +107,8 @@ public class DevProductionController implements Initializable {
         this.depot.setVisible(true);
         this.selectedIndexes.clear();
         this.imgCard1.getStyleClass().remove("selected-card");
-        this.imgCard1.getStyleClass().remove("selected-card");
-        this.imgCard1.getStyleClass().remove("selected-card");
+        this.imgCard2.getStyleClass().remove("selected-card");
+        this.imgCard3.getStyleClass().remove("selected-card");
     }
 
     /**

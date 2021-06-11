@@ -518,7 +518,7 @@ public class MainController implements Initializable {
                 displayError("You don't have leader cards with an extra production ability");
             }
         } else {
-            displayError("You have to perform a basic production or dev production first");
+            displayError("You have to perform a basic production first");
         }
     }
 
@@ -527,7 +527,7 @@ public class MainController implements Initializable {
      * @param event the event triggered when the button is pressed
      */
     public void showDev(ActionEvent event) {
-        if (true/*isProductionDone()*/){
+        if (isProductionDone()){
 
             if(!isSecondProductionDone()){
                 Stage stage = (Stage)((MenuItem)event.getTarget()).getParentPopup().getOwnerWindow();

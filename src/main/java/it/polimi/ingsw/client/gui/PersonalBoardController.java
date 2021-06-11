@@ -54,6 +54,7 @@ public class PersonalBoardController implements Initializable {
     private final List<ImageView> popeFavorTiles = new ArrayList<>();
 
     private int playerFaith, blackCrossPosition;
+    private boolean secondDiscardAction;
     /**
      * The location where the current drag started
      */
@@ -173,6 +174,7 @@ public class PersonalBoardController implements Initializable {
         leaderCardActive0.setVisible(false);
         leaderCardActive1.setVisible(false);
         tempDepot.setPersonalBoardController(this);
+        secondDiscardAction = false;
         initFaithTrack();
         initDevSlots();
     }
@@ -494,6 +496,24 @@ public class PersonalBoardController implements Initializable {
             depot4_2.setId("depot5_2");
             this.swapped = true;
         }
+    }
+
+    public void discardedTopLeader(){
+        if (secondDiscardAction){
+            leaderCardActive0.setVisible(false);
+        } else {
+            leaderCardActive1.setVisible(false);
+            secondDiscardAction = true;
+            depot5_1.setX(55);
+            depot5_1.setY(319);
+            depot5_2.setX(150);
+            depot5_2.setY(319);
+        }
+
+    }
+
+    public void discardedBottonLeader(){
+        leaderCardActive1.setVisible(false);
     }
 
     public void updateDevSlots(List<DevelopmentSlot> developmentSlots) {

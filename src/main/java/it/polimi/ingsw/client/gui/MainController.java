@@ -657,11 +657,14 @@ public class MainController implements Initializable {
     }
 
     public void discardLeaderRequest01(){
+        getPersonalBoardController(getNickname()).discardedTopLeader();
+
         Request request = new UseLeaderRequest(0, LeaderAction.DISCARD);
         sendMessage(request);
     }
 
     public void discardLeaderRequest02(){
+        getPersonalBoardController(getNickname()).discardedBottonLeader();
         Request request = new UseLeaderRequest(1, LeaderAction.DISCARD);
         sendMessage(request);
     }

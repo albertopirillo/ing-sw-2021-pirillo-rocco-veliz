@@ -102,6 +102,18 @@ public class PersonalBoardController implements Initializable {
      * Reference to the Model in the client
      */
     private StorageModel storageModel;
+    /**
+     * Whether leaderCard 1 was activated before than leaderCard 0
+     */
+    private boolean swapped = false;
+
+    /**
+     * Gets the swapped flag
+     * @return true if cards were swapped, false otherwise
+     */
+    public boolean isSwapped() {
+        return swapped;
+    }
 
     /**
      * Gets the ReorderButton
@@ -160,6 +172,7 @@ public class PersonalBoardController implements Initializable {
         tempRes4.setDisable(true);
         leaderCardActive0.setVisible(false);
         leaderCardActive1.setVisible(false);
+        tempDepot.setPersonalBoardController(this);
         initFaithTrack();
         initDevSlots();
     }
@@ -203,6 +216,10 @@ public class PersonalBoardController implements Initializable {
      * @param amount    the amount of resources to be stored in the layer
      */
     public void setLayer(int layerNumber, ResourceType res, int amount) {
+        if (isSwapped()) {
+            if (layerNumber == 5) layerNumber = 4;
+            else if (layerNumber == 4) layerNumber = 5;
+        }
         List<ImageView> layer = this.layerMapping.get(layerNumber);
         if(res == null || amount == 0) {
             for(ImageView slot: layer) {
@@ -230,10 +247,9 @@ public class PersonalBoardController implements Initializable {
      * @param settings  a list of DepotSetting with instructions to update the Depot
      */
     public void setDepot(List<DepotSetting> settings) {
-        //System.out.println("Received settings of " + settings.size() + " elements");
-        //for(DepotSetting setting: settings) {
-        //    System.out.println(setting);
-        //}
+        /*for(DepotSetting setting: settings) {
+            System.out.println(setting);
+        }*/
         for(DepotSetting setting: settings) {
             setLayer(setting.getLayerNumber(), setting.getResType(), setting.getAmount());
         }
@@ -443,6 +459,7 @@ public class PersonalBoardController implements Initializable {
                 LeaderCard secondCard = playerCards.get(1);
                 setCardImage(cardOwner, secondCard, leaderCard1, leaderCardActive1);
                 activateIfExtra(secondCard, depot5_1, depot5_2);
+                swapLeaderCardIDs(firstCard, secondCard);
             } else {
                 leaderCard1.setImage(null);
             }
@@ -469,6 +486,16 @@ public class PersonalBoardController implements Initializable {
         }
     }
 
+    private void swapLeaderCardIDs(LeaderCard firstCard, LeaderCard secondCard) {
+        if (!swapped && !firstCard.isActive() && secondCard.isActive()) {
+            depot5_1.setId("depot4_1");
+            depot5_2.setId("depot4_2");
+            depot4_1.setId("depot5_1");
+            depot4_2.setId("depot5_2");
+            this.swapped = true;
+        }
+    }
+
     public void updateDevSlots(List<DevelopmentSlot> developmentSlots) {
         int i = 1;
         for(DevelopmentSlot devSlot: developmentSlots) {
@@ -482,22 +509,14 @@ public class PersonalBoardController implements Initializable {
         }
     }
 
-    public List<Image> getDepotImgs(){
-        List<Image> imgs = new ArrayList<>();
-        imgs.add(depot1_1.getImage());
-        imgs.add(depot2_1.getImage());
-        imgs.add(depot2_2.getImage());
-        imgs.add(depot3_1.getImage());
-        imgs.add(depot3_2.getImage());
-        imgs.add(depot3_3.getImage());
-        return imgs;
+    public List<Image> getDepotImages(){
+        List<Image> images = new ArrayList<>();
+        images.add(depot1_1.getImage());
+        images.add(depot2_1.getImage());
+        images.add(depot2_2.getImage());
+        images.add(depot3_1.getImage());
+        images.add(depot3_2.getImage());
+        images.add(depot3_3.getImage());
+        return images;
     }
-
-    public List<Image> getLeaderImgs(){
-        List<Image> imgs = new ArrayList<>();
-        imgs.add(leaderCard0.getImage());
-        imgs.add(leaderCard1.getImage());
-        return imgs;
-    }
-
 }

@@ -2,7 +2,10 @@ package it.polimi.ingsw.client.gui;
 
 import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
-import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.model.AbilityChoice;
+import it.polimi.ingsw.model.LeaderCard;
+import it.polimi.ingsw.model.Resource;
+import it.polimi.ingsw.model.ResourceType;
 import it.polimi.ingsw.network.requests.ExtraProductionRequest;
 import it.polimi.ingsw.network.requests.Request;
 import javafx.event.ActionEvent;
@@ -173,7 +176,7 @@ public class LeaderProductionController implements Initializable {
      * Updates the player depot and strongbox based on the last update from the server
      */
     public void loadStorages() {
-        List<Image> imgs = this.mainController.getPersonalBoardController().getDepotImgs();
+        List<Image> imgs = this.mainController.getPersonalBoardController().getDepotImages();
         depot1_1.setImage(imgs.get(0));
         depot2_1.setImage(imgs.get(1));
         depot2_2.setImage(imgs.get(2));

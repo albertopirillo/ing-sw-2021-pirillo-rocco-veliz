@@ -52,7 +52,7 @@ public class DevProductionController implements Initializable {
     /**
      * The set of selected card indexes (0-based) to be transferred to the server.
      */
-    Set<Integer> selectedIndexes = new HashSet<Integer>();
+    Set<Integer> selectedIndexes = new HashSet<>();
 
     /**
      * The list of player's dev cards
@@ -140,7 +140,7 @@ public class DevProductionController implements Initializable {
      * Updates the player depot and strongbox from local model
      */
     public void loadStorages() {
-        List<Image> imgs = this.mainController.getPersonalBoardController().getDepotImgs();
+        List<Image> imgs = this.mainController.getPersonalBoardController().getDepotImages();
         depot1_1.setImage(imgs.get(0));
         depot2_1.setImage(imgs.get(1));
         depot2_2.setImage(imgs.get(2));
@@ -252,7 +252,7 @@ public class DevProductionController implements Initializable {
         System.out.println(depot);
         System.out.println(strongbox);
         System.out.println(selectedIndexes);
-        Request request = new DevProductionRequest(new ArrayList<Integer>(selectedIndexes), depot, strongbox);
+        Request request = new DevProductionRequest(new ArrayList<>(selectedIndexes), depot, strongbox);
         this.mainController.sendMessage(request);
         this.mainController.closeDev();
     }

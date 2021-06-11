@@ -135,7 +135,7 @@ public class MarketController implements Initializable {
      * Set the correct amount of resources that the player has
      */
     public void loadStorages() {
-        List<Image> imgs = this.mainController.getPersonalBoardController().getDepotImgs();
+        List<Image> imgs = this.mainController.getPersonalBoardController().getDepotImages();
         depot1_1.setImage(imgs.get(0));
         depot2_1.setImage(imgs.get(1));
         depot2_2.setImage(imgs.get(2));
@@ -192,7 +192,6 @@ public class MarketController implements Initializable {
 
     /**
      * When the player click on the Card, the card become selected and the BuyPanel is open
-     * @param mouseEvent
      */
     public void buyCard(MouseEvent mouseEvent) {
         if(mainController.isMainActionDone()) {

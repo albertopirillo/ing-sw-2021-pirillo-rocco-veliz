@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
-
+<?import javafx.scene.text.*?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="794.0" prefWidth="1364.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.PersonalBoardController">
    <ImageView fitHeight="795.0" fitWidth="1119.0" layoutX="252.0" pickOnBounds="true" preserveRatio="true">
-      <Image url="@../png/personal_board/personal_board.png" />
+      <Image url="@../png/personal_board/personal_board.png"/>
    </ImageView>
    <ImageView fx:id="leaderCard1" fitHeight="395.0" fitWidth="252.0" layoutY="403.0" pickOnBounds="true" preserveRatio="true" styleClass="resourceDropShadow">
       <Image url="@../png/leader_cards/test_card.png" />
@@ -29,10 +26,10 @@
    <ImageView fx:id="depot2_2" fitHeight="51.0" fitWidth="56.0" layoutX="397.0" layoutY="407.0" onDragDetected="#dragDetection" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
    <ImageView fx:id="depot2_1" fitHeight="51.0" fitWidth="56.0" layoutX="343.0" layoutY="407.0" onDragDetected="#dragDetection" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
    <ImageView fx:id="depot1_1" fitHeight="51.0" fitWidth="56.0" layoutX="371.0" layoutY="335.0" onDragDetected="#dragDetection" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
-   <ImageView fx:id="depot5_2" fitHeight="51.0" fitWidth="56.0" layoutX="146.0" layoutY="706.0" onDragDetected="#dragDetection" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
-   <ImageView fx:id="depot5_1" fitHeight="51.0" fitWidth="56.0" layoutX="52.0" layoutY="704.0" onDragDetected="#dragDetection" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
-   <ImageView fx:id="depot4_1" fitHeight="51.0" fitWidth="56.0" layoutX="54.0" layoutY="307.0" onDragDetected="#dragDetection" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
-   <ImageView fx:id="depot4_2" fitHeight="51.0" fitWidth="56.0" layoutX="149.0" layoutY="307.0" onDragDetected="#dragDetection" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="depot5_2" fitHeight="51.0" fitWidth="56.0" layoutX="150.0" layoutY="714.0" onDragDetected="#dragDetection" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="depot5_1" fitHeight="51.0" fitWidth="56.0" layoutX="56.0" layoutY="712.0" onDragDetected="#dragDetection" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="depot4_1" fitHeight="51.0" fitWidth="56.0" layoutX="55.0" layoutY="319.0" onDragDetected="#dragDetection" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="depot4_2" fitHeight="51.0" fitWidth="56.0" layoutX="150.0" layoutY="319.0" onDragDetected="#dragDetection" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
    <ImageView fitHeight="51.0" fitWidth="56.0" layoutX="379.0" layoutY="659.0" pickOnBounds="true" preserveRatio="true">
       <Image url="@../png/res/coin.png" />
    </ImageView>

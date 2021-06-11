@@ -17,6 +17,10 @@ public class TempDepot {
      * A map that contains all the needed references to handle this Depot
      */
     private final Map<Integer, List<ResourceType>> layers = new HashMap<>();
+    /**
+     * The corresponding PersonalBoardController
+     */
+    private PersonalBoardController personalBoardController;
 
     /**
      * Constructs a new Depot, initializing its structure according to the size of its slots
@@ -45,13 +49,38 @@ public class TempDepot {
     }
 
     /**
+     * Sets the corresponding PersonalBoardController
+     * @param controller the PersonalBoardController to set
+     */
+    public void setPersonalBoardController(PersonalBoardController controller) {
+        this.personalBoardController = controller;
+    }
+
+    /**
      * Gets the given slot
-     * @param layer layer the layer of the slot to set
+     * @param layer the layer of the slot to set
      * @param slot the number of the slot to set
      * @return the type of resource contained in that slot
      */
     public ResourceType getSlot(int layer, int slot) {
+        if (personalBoardController.isSwapped()) {
+            if (layer == 5) layer = 4;
+            else if (layer == 4) layer = 5;
+        }
         return this.layers.get(layer).get(slot - 1);
+    }
+
+    /**
+     * Gets the given layer
+     * @param layer the number of the layer to get
+     * @return a list with all the resources stored in that layer
+     */
+    public List<ResourceType> getLayer(int layer) {
+        if (personalBoardController.isSwapped()) {
+            if (layer == 5) layer = 4;
+            else if (layer == 4) layer = 5;
+        }
+        return this.layers.get(layer);
     }
 
     /**
@@ -72,6 +101,10 @@ public class TempDepot {
      * @param resType the type of resource to be inserted
      */
     public void setSlot(int layer, int slot, ResourceType resType) {
+        if (personalBoardController.isSwapped()) {
+            if (layer == 5) layer = 4;
+            else if (layer == 4) layer = 5;
+        }
         this.layers.get(layer).set(slot - 1, resType);
         //System.out.println("LAYER: " + layer + " SLOT: " + slot + " RES: " + resType);
     }
@@ -95,7 +128,7 @@ public class TempDepot {
     public List<DepotSetting> convertToDepotSetting() {
         List<DepotSetting> settings = new ArrayList<>();
         for(Integer layerNumber: this.layers.keySet()) {
-            List<ResourceType> currentLayer = this.layers.get(layerNumber);
+            List<ResourceType> currentLayer = this.getLayer(layerNumber);
             //Get the the resourceType stored in this layer
             ResourceType layerRes = null;
             for(ResourceType resType: currentLayer) {

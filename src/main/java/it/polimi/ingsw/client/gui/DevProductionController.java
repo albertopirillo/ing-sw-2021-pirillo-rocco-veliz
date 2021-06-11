@@ -105,6 +105,10 @@ public class DevProductionController implements Initializable {
         this.d_coin.setText("x0");
         this.resourcePanel.setVisible(false);
         this.depot.setVisible(true);
+        this.selectedIndexes.clear();
+        this.imgCard1.getStyleClass().remove("selected-card");
+        this.imgCard1.getStyleClass().remove("selected-card");
+        this.imgCard1.getStyleClass().remove("selected-card");
     }
 
     /**
@@ -156,6 +160,7 @@ public class DevProductionController implements Initializable {
     }
 
     private void useCard(ImageView imgCard, Integer index){
+        System.out.println(selectedIndexes);
         if(selectedIndexes.contains(index)){
             imgCard.getStyleClass().remove("selected-card");
             selectedIndexes.remove(index);
@@ -239,7 +244,9 @@ public class DevProductionController implements Initializable {
         } catch (NegativeResAmountException e) {
             e.printStackTrace();
         }
-
+        System.out.println(depot);
+        System.out.println(strongbox);
+        System.out.println(selectedIndexes);
         Request request = new DevProductionRequest(new ArrayList<Integer>(selectedIndexes), depot, strongbox);
         this.mainController.sendMessage(request);
         this.mainController.closeDev();

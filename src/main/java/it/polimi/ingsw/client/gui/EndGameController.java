@@ -8,6 +8,11 @@ import javafx.scene.control.Label;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * <p>JavaFX Controller for the file end_game.fxml</p>
+ * <p>This class initializes the popup</p>
+ * <p>Used to show the final scores</p>
+ */
 public class EndGameController implements Initializable {
 
     @FXML

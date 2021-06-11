@@ -20,6 +20,7 @@ import java.util.*;
 public class SoloGame extends Game {
 
     private List<SoloActionToken> soloTokens;
+    private boolean lastTurn;
     //private int turnCount;
 
     /**
@@ -36,6 +37,7 @@ public class SoloGame extends Game {
         playerList.add(player);
         this.setPlayersList(playerList);
         initSoloTokens(false);
+        this.lastTurn = false;
         startGame();
     }
 
@@ -68,8 +70,6 @@ public class SoloGame extends Game {
         //if(turnCount == 5) lastTurn(true);
         //else turnCount++;
         checkEndGame();
-        //to test the end game scenario
-        //lastTurn(false);
     }
 
     @Override
@@ -85,8 +85,8 @@ public class SoloGame extends Game {
      */
     public void updateDiscardedCards(List<DevelopmentCard> cardList){
         for(ModelObserver observer : getObservers()) {
-            observer.showDiscardedCards(this, cardList);
-            observer.showMarket(this);
+            observer.showDiscardedCards(cardList);
+            observer.showMarket(this.getMarket().getAvailableCards());
         }
     }
 
@@ -96,8 +96,8 @@ public class SoloGame extends Game {
      */
     public void updateLastActionToken(SoloActionToken lastToken) {
         for(ModelObserver observer : getObservers()) {
-            observer.showFaithTrack(this);
-            observer.showLastActionToken(this, lastToken);
+            observer.showFaithTrack(this.getPlayersList());
+            observer.showLastActionToken(lastToken);
         }
     }
 
@@ -112,6 +112,7 @@ public class SoloGame extends Game {
     @Override
     public void lastTurn(boolean win) throws NegativeResAmountException {
         //In solo mode, the game ends immediately
+        this.lastTurn = true;
         List<String> ranking = new ArrayList<>();
         String nickname = this.getActivePlayer().getNickname();
         Map<Player, Integer> map = this.computeFinalScore();
@@ -179,6 +180,12 @@ public class SoloGame extends Game {
     protected ArrayList<SoloActionToken> getSoloTokens() {
         return new ArrayList<>(this.soloTokens);
     }
+
+    @Override
+    public boolean getLastTurn(){
+        return this.lastTurn;
+    }
+
     /**
      * Gets the position of the black cross, aka Lorenzo's marker
      * @return an int representing the position

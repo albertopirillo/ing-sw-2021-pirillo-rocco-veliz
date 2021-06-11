@@ -474,7 +474,7 @@ public class ClientCLI implements UserInterface {
 
         switch (selection) {
             case "b":
-                if (!mainActionDone) {
+                if (!this.productionDone) {
                     request = basicProductionMenu();
                 }
                 else errorPrint("\nYou already performed an action this turn");
@@ -529,7 +529,7 @@ public class ClientCLI implements UserInterface {
     private Request extraProductionMenu() {
         Request request;
 
-        if (this.productionDone){
+        if (this.productionDone || this.secondProductionDone){
 
             Resource depotResource = new Resource(0, 0, 0, 0);
             Resource strongboxResource = new Resource(0, 0, 0, 0);
@@ -564,7 +564,7 @@ public class ClientCLI implements UserInterface {
             }
 
         } else {
-            errorPrint("You have to use a basic production before using a leader production");
+            errorPrint("You have to use a basic or development production before using a leader production");
             request = null;
         }
 
@@ -575,7 +575,7 @@ public class ClientCLI implements UserInterface {
     private Request devProductionMenu(){
         Request request;
 
-        if (this.productionDone && !this.secondProductionDone) {
+        if (!this.secondProductionDone) {
             List<Integer> cards = new ArrayList<>();
             Resource depotResource = new Resource(0, 0, 0, 0);
             Resource strongboxResource = new Resource(0, 0, 0, 0);
@@ -617,8 +617,6 @@ public class ClientCLI implements UserInterface {
             request = new DevProductionRequest(cards, depotResource, strongboxResource);
 
         } else {
-            errorPrint("You have to perform a basic production to use a development production");
-            errorPrint("OR");
             errorPrint("You have already performed a development production this turn");
             request = null;
         }

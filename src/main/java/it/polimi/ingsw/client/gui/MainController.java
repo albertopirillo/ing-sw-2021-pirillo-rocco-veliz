@@ -478,16 +478,20 @@ public class MainController implements Initializable {
      * @param event the event triggered when the button is pressed
      */
     public void showBasic(ActionEvent event) {
-        Stage stage = (Stage)((MenuItem)event.getTarget()).getParentPopup().getOwnerWindow();
+        if (!isProductionDone()){
+            Stage stage = (Stage)((MenuItem)event.getTarget()).getParentPopup().getOwnerWindow();
 
-        this.stage = stage;
-        if (!this.basicPopUp.isShowing()) {
-            prodButton.setText("Back");
-            this.basicPopUp.show(stage);
-        }
-        else {
-            prodButton.setText("Use production");
-            this.basicPopUp.hide();
+            this.stage = stage;
+            if (!this.basicPopUp.isShowing()) {
+                prodButton.setText("Back");
+                this.basicPopUp.show(stage);
+            }
+            else {
+                prodButton.setText("Use production");
+                this.basicPopUp.hide();
+            }
+        } else {
+            displayError("You have already performed a basic production in this turn");
         }
     }
 
@@ -496,7 +500,7 @@ public class MainController implements Initializable {
      * @param event the event triggered when the button is pressed
      */
     public void showLeader(ActionEvent event) {
-        if (isProductionDone()){
+        if (isProductionDone() || isSecondProductionDone()){
             Stage stage = (Stage)((MenuItem)event.getTarget()).getParentPopup().getOwnerWindow();
             this.stage = stage;
 
@@ -518,7 +522,7 @@ public class MainController implements Initializable {
                 displayError("You don't have leader cards with an extra production ability");
             }
         } else {
-            displayError("You have to perform a basic production first");
+            displayError("You have to perform a basic or development production first");
         }
     }
 
@@ -527,7 +531,6 @@ public class MainController implements Initializable {
      * @param event the event triggered when the button is pressed
      */
     public void showDev(ActionEvent event) {
-        if (isProductionDone()){
 
             if(!isSecondProductionDone()){
                 Stage stage = (Stage)((MenuItem)event.getTarget()).getParentPopup().getOwnerWindow();
@@ -546,9 +549,6 @@ public class MainController implements Initializable {
                 displayError("You have already performed a development production in this turn");
             }
 
-        } else {
-            displayError("You have to perform a basic production first");
-        }
     }
 
     /**

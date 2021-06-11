@@ -46,56 +46,6 @@ public class PlayerController {
         this.testing = testing;
     }
 
-    /**
-     * Performs a basic production and places its output in the strongbox
-     * @param input1 the first resource type paid
-     * @param input2 the second resource type paid
-     * @param output the wanted output resource type
-     * @param fromDepot the amount of resources the player is paying from the depot
-     * @param fromStrongbox the amount of resources the player is paying from the strongbox
-     */
-    public void basicProduction(ResourceType input1, ResourceType input2, ResourceType output, Resource fromDepot, Resource fromStrongbox) {
-        try {
-            if (this.mainActionDone) throw new MainActionException();
-            Player activePlayer = controller.getGame().getActivePlayer();
-            activePlayer.basicProduction(input1, input2, output, fromDepot, fromStrongbox);
-            controller.getGame().updateStorages();
-            controller.resetException();
-            if (!testing) {
-                this.mainActionDone = true;
-                controller.getGame().setProductionDone();
-                controller.getGame().setMainActionDone();
-            }
-        } catch (MainActionException | CostNotMatchingException | NotEnoughSpaceException | CannotContainFaithException | NotEnoughResException | NegativeResAmountException e) {
-            controller.setException(e);
-            controller.getGame().updateClientError(controller.getClientError());
-        } finally {
-            controller.getGame().notifyEndOfUpdates();
-        }
-    }
-
-    /**
-     * <p>Performs an extra production (from a leader card ability)</p>
-     * <p>Places its output into the strongbox</p>
-     * @param choice – specifies which leader ability should be used
-     * @param fromDepot – the amount of resources the player is paying from the depot
-     * @param fromStrongbox – the amount of resources the player is paying from the strongbox
-     * @param res – the resource type the player wants to receive
-     */
-    public void extraProduction(AbilityChoice choice, Resource fromDepot, Resource fromStrongbox, ResourceType res) {
-        try {
-            Player activePlayer = controller.getGame().getActivePlayer();
-            activePlayer.extraProduction(choice, fromDepot, fromStrongbox, res);
-            controller.getGame().updateStorages();
-            controller.getGame().updateFaithTrack();
-            controller.resetException();
-        } catch (CostNotMatchingException | InvalidAbilityChoiceException | NotEnoughSpaceException | NoLeaderAbilitiesException | CannotContainFaithException | NotEnoughResException | NegativeResAmountException e) {
-            controller.setException(e);
-            controller.getGame().updateClientError(controller.getClientError());
-        } finally {
-            controller.getGame().notifyEndOfUpdates();
-        }
-    }
 
     /**
      * <p>Takes resources from the Market tray</p>
@@ -301,6 +251,58 @@ public class PlayerController {
             controller.getGame().notifyEndOfUpdates();
         }
     }
+
+    /**
+     * Performs a basic production and places its output in the strongbox
+     * @param input1 the first resource type paid
+     * @param input2 the second resource type paid
+     * @param output the wanted output resource type
+     * @param fromDepot the amount of resources the player is paying from the depot
+     * @param fromStrongbox the amount of resources the player is paying from the strongbox
+     */
+    public void basicProduction(ResourceType input1, ResourceType input2, ResourceType output, Resource fromDepot, Resource fromStrongbox) {
+        try {
+            if (this.mainActionDone) throw new MainActionException();
+            Player activePlayer = controller.getGame().getActivePlayer();
+            activePlayer.basicProduction(input1, input2, output, fromDepot, fromStrongbox);
+            controller.getGame().updateStorages();
+            controller.resetException();
+            if (!testing) {
+                this.mainActionDone = true;
+                controller.getGame().setProductionDone();
+                controller.getGame().setMainActionDone();
+            }
+        } catch (MainActionException | CostNotMatchingException | NotEnoughSpaceException | CannotContainFaithException | NotEnoughResException | NegativeResAmountException e) {
+            controller.setException(e);
+            controller.getGame().updateClientError(controller.getClientError());
+        } finally {
+            controller.getGame().notifyEndOfUpdates();
+        }
+    }
+
+    /**
+     * <p>Performs an extra production (from a leader card ability)</p>
+     * <p>Places its output into the strongbox</p>
+     * @param choice – specifies which leader ability should be used
+     * @param fromDepot – the amount of resources the player is paying from the depot
+     * @param fromStrongbox – the amount of resources the player is paying from the strongbox
+     * @param res – the resource type the player wants to receive
+     */
+    public void extraProduction(AbilityChoice choice, Resource fromDepot, Resource fromStrongbox, ResourceType res) {
+        try {
+            Player activePlayer = controller.getGame().getActivePlayer();
+            activePlayer.extraProduction(choice, fromDepot, fromStrongbox, res);
+            controller.getGame().updateStorages();
+            controller.getGame().updateFaithTrack();
+            controller.resetException();
+        } catch (CostNotMatchingException | InvalidAbilityChoiceException | NotEnoughSpaceException | NoLeaderAbilitiesException | CannotContainFaithException | NotEnoughResException | NegativeResAmountException e) {
+            controller.setException(e);
+            controller.getGame().updateClientError(controller.getClientError());
+        } finally {
+            controller.getGame().notifyEndOfUpdates();
+        }
+    }
+
 
     /**
      * <p>Actives the production power of the specified dev cards</p>

@@ -2,6 +2,11 @@ package it.polimi.ingsw.server;
 
 import java.io.IOException;
 
+/**
+ * <p>Creates a new generic Server</p>
+ * <p>Processes program arguments</p>
+ * <p>"-port" can be used to set the port to use</p>
+ */
 public class ServerMain {
 
     public static void main(String[] args) throws IOException {

@@ -10,7 +10,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 /**
- * <p>Server implementation that uses TCP to communicate with the Client</p>
+ * <p>Implementation of the Server that uses TCP to communicate with the Client</p>
  * <p>Port can be specified as a program argument</p>
  */
 public class SocketServer extends Server{

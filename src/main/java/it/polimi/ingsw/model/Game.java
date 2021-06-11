@@ -200,7 +200,7 @@ public abstract class Game {
      */
     public void notifyEndOfUpdates() {
         for(ModelObserver observer : observers)
-            observer.gameStateChange(this);
+            observer.gameStateChange();
     }
     /**
      * Notifies the observers that player has to choose its initial resources
@@ -208,70 +208,70 @@ public abstract class Game {
      */
     public void updateInitResources(int numPlayer){
         for(ModelObserver observer : observers)
-            observer.notifyInitResources(this, numPlayer);
+            observer.notifyInitResources(numPlayer);
     }
     /**
      * Notifies the observers that player has to choose its initial leader cards
      */
     public void updateInitLeaderCards(){
         for(ModelObserver observer : observers)
-            observer.showInitLeaderCards(this);
+            observer.showInitLeaderCards(this.activePlayer.getLeaderCards());
     }
     /**
      * Notifies the observers that the FaithTrack was updated
      */
     public void updateFaithTrack(){
         for(ModelObserver observer : observers)
-            observer.showFaithTrack(this);
+            observer.showFaithTrack(this.getPlayersList());
     }
     /**
      * Notifies the observers that the leader cards of a player were updated
      */
     public void updateLeaderCards(){
         for(ModelObserver observer : observers)
-            observer.showLeaderCards(this);
+            observer.showLeaderCards(this.getPlayersList());
     }
     /**
      * Notifies the observers that the Server found an error in the client's Request
      */
     public void updateClientError(ClientError clientError){
         for(ModelObserver observer : observers)
-            observer.showClientError(this, clientError);
+            observer.showClientError(clientError);
     }
     /**
      * Notifies the observers that the Market Tray was updated
      */
     public void updateMarketTray(){
         for(ModelObserver observer : observers)
-            observer.showMarketTray(this);
+            observer.showMarketTray(this.getMarket().getMarketTray());
     }
     /**
      * Notifies the observers that the development slots of a player were updated
      */
     public void updateDevSlots() {
         for(ModelObserver observer : observers)
-            observer.showDevSlots(this);
+            observer.showDevSlots(this.getPlayersList());
     }
     /**
      * Notifies the observers that the Depot or the Strongbox of a player was updated
      */
     public void updateStorages() {
         for(ModelObserver observer : observers)
-            observer.showStorages(this);
+            observer.showStorages(this.getPlayersList());
     }
     /**
      * Notifies the observers that the Market Cards was updated
      */
     public void updateMarket(){
         for(ModelObserver observer : observers)
-            observer.showMarket(this);
+            observer.showMarket(this.getMarket().getAvailableCards());
     }
     /**
      * Notifies the observers that there are resources from the Market that needs to be placed
      */
     public void updateTempRes() {
         for(ModelObserver observer : observers)
-            observer.showTempRes(this);
+            observer.showTempRes();
     }
     /**
      * Notifies the observer that there are white marbles whose color needs to be changed
@@ -279,28 +279,28 @@ public abstract class Game {
      */
     public void updateTempMarbles(int numWhiteMarbles){
         for(ModelObserver observer : observers)
-            observer.showTempMarbles(this, numWhiteMarbles);
+            observer.showTempMarbles(this.getActivePlayer().getResTypesAbility(), numWhiteMarbles);
     }
     /**
      * Notifies the observers that the player already activated a production this turn
      */
     public void setProductionDone(){
         for(ModelObserver observer : observers)
-            observer.setProductionDone(this);
+            observer.setProductionDone();
     }
     /**
      * Notifies the observers that the player already activated a leader o development production this turn
      */
     public void setSecondProductionDone(){
         for(ModelObserver observer : observers)
-            observer.setSecondProductionDone(this);
+            observer.setSecondProductionDone();
     }
     /**
      *  Notifies the observers that the player already performed one of its main actions this turn
      */
     public void setMainActionDone(){
         for(ModelObserver observer : observers)
-            observer.setMainActionDone(this);
+            observer.setMainActionDone();
     }
     /**
      * Notifies the observers that the ServerUpdates are over and the game can start normally

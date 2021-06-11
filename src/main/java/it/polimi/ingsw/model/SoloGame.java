@@ -85,8 +85,8 @@ public class SoloGame extends Game {
      */
     public void updateDiscardedCards(List<DevelopmentCard> cardList){
         for(ModelObserver observer : getObservers()) {
-            observer.showDiscardedCards(this, cardList);
-            observer.showMarket(this);
+            observer.showDiscardedCards(cardList);
+            observer.showMarket(this.getMarket().getAvailableCards());
         }
     }
 
@@ -96,8 +96,8 @@ public class SoloGame extends Game {
      */
     public void updateLastActionToken(SoloActionToken lastToken) {
         for(ModelObserver observer : getObservers()) {
-            observer.showFaithTrack(this);
-            observer.showLastActionToken(this, lastToken);
+            observer.showFaithTrack(this.getPlayersList());
+            observer.showLastActionToken(lastToken);
         }
     }
 

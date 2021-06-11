@@ -130,6 +130,8 @@ public abstract class Game {
         else { return 20; }
     }
 
+    public abstract boolean getLastTurn();
+
     /**
      * Sets the first player of the game, assigning the inkwell to him
      * @return  a String representing the nickname of the first player

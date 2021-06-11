@@ -186,7 +186,10 @@ public class PlayerController {
             controller.setException(e);
             controller.getGame().updateClientError(controller.getClientError());
         } finally {
-            controller.getGame().notifyEndOfUpdates();
+            if (!(controller.getGame().getLastTurn() && controller.getGame().getActivePlayer().getInkwell())) {
+                controller.getGame().notifyEndOfUpdates();
+            }
+
         }
     }
 

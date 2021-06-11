@@ -67,7 +67,7 @@ public class MultiGame extends Game {
     //Selects the new active Player
     @Override
     public synchronized void nextTurn() throws NegativeResAmountException {
-        //if (turnCount == 3) this.lastTurn = true;
+        //if (turnCount == 6) this.lastTurn = true;
         //else turnCount++;
         int index = this.getPlayersList().indexOf(this.getActivePlayer());
         this.setActivePlayer(this.getPlayersList().get((index + 1) % getPlayerAmount()));
@@ -181,5 +181,10 @@ public class MultiGame extends Game {
         firstPlayer.setInkwell(true);
         this.setActivePlayer(firstPlayer);
         return getActivePlayer().getNickname();
+    }
+
+    @Override
+    public boolean getLastTurn(){
+        return this.lastTurn;
     }
 }

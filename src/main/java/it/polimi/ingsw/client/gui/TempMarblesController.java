@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 /**
- * <p>JavaFX controller for the file temp_marbles.fxml</p>
+ * <p>JavaFX controller for the scene "temp_marbles"</p>
  * <p>Handles the marble's selection when the Player has two Change Leader Abilities activated</p>
  */
 public class TempMarblesController implements Initializable {

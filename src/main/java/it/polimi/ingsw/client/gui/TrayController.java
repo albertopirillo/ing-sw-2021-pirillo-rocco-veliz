@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 /**
- * <p>JavaFX controller for the file market_tray.fxml</p>
+ * <p>JavaFX controller for the scene "market_tray"</p>
  * <p>Handles action of take resources from the marker</p>
  */
 public class TrayController implements Initializable {

@@ -20,9 +20,9 @@ import java.net.URL;
 import java.util.*;
 
 /**
- * <p>JavaFX Controller for the file personal_board.fxml</p>
+ * <p>JavaFX Controller for the scene "personalBoard"</p>
  * <p>This class initializes the player's board</p>
- * <p>Manages the GUI elements of faithtrack, development cards, leader cards and storages (depot and strongbox)</p>
+ * <p>Manages the GUI elements of faithtrack, development cards, leader cards and storages</p>
  */
 public class PersonalBoardController implements Initializable {
 

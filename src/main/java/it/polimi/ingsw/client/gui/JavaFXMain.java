@@ -15,6 +15,11 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * <p>Main class of JavaFX</p>
+ * <p>Initializes the GUI with the method start()</p>
+ * <p>Loads up the main scene and links the controllers</p>
+ */
 public class JavaFXMain extends Application {
 
     /**

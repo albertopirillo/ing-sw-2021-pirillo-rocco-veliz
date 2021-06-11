@@ -11,7 +11,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * <p>JavaFX controller for the file setup.fxml</p>
+ * <p>JavaFX controller for the scene "setup"</p>
  * <p>Handles nickname and player amount selection</p>
  */
 public class SetupController implements Initializable {

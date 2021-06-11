@@ -11,6 +11,10 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * <p>JavaFX controller for the scene "solo_game"</p>
+ * <p>Handles what is present in solo game only, like tokens and discarded cards</p>
+ */
 public class SoloController implements Initializable {
 
     private MainController mainController;

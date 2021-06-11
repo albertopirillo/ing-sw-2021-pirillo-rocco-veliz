@@ -27,7 +27,7 @@ import java.net.URL;
 import java.util.*;
 
 /**
- * <p>Main JavaFX Controller for the file main.fxml</p>
+ * <p>Main JavaFX Controller for the scene "main"</p>
  * <p>This class initializes the player tabs</p>
  * <p>Used as a gateway to all JavaFX controllers</p>
  */

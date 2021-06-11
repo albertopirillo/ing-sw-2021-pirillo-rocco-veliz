@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+@Deprecated
 public class Testing extends Application {
 
     public static void main(String[] args) {

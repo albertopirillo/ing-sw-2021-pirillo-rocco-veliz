@@ -23,6 +23,11 @@ import javafx.scene.layout.Pane;
 import java.net.URL;
 import java.util.*;
 
+/**
+ * <p>JavaFX Controller for the file dev_production.fxml</p>
+ * <p>This class initializes the production popup</p>
+ * <p>Used to build the DevProductionRequest</p>
+ */
 public class DevProductionController implements Initializable {
 
     @FXML

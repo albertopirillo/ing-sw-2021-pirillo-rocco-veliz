@@ -19,6 +19,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * <p>JavaFX Controller for the file leader_production.fxml</p>
+ * <p>This class initializes the production popup</p>
+ * <p>Used to build the ExtraProductionRequest</p>
+ */
 public class LeaderProductionController implements Initializable {
 
     @FXML

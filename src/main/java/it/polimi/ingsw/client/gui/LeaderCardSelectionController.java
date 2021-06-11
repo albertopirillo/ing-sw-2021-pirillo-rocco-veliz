@@ -16,6 +16,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * <p>JavaFX Controller for the file leader_card_selection.fxml</p>
+ * <p>Used to build the ChooseLeaderRequest</p>
+ */
 public class LeaderCardSelectionController implements Initializable {
     @FXML
     private Button btnContinue;

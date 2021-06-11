@@ -13,6 +13,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+/**
+ * <p>JavaFX Controller for the file resource_selection.fxml</p>
+ * <p>Used to build the InitialResRequest</p>
+ */
 public class ResourceSelectionController implements Initializable {
 
     @FXML

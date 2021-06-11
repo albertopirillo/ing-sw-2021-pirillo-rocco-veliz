@@ -17,6 +17,11 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
+/**
+ * <p>JavaFX Controller for the file basic_production.fxml</p>
+ * <p>This class initializes the production popup</p>
+ * <p>Used to build the BasicProductionRequest</p>
+ */
 public class BasicProductionController implements Initializable {
 
     private MainController mainController;

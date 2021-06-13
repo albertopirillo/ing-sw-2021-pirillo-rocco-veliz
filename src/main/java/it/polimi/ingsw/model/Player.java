@@ -350,7 +350,7 @@ public class Player {
             throw new NoLeaderAbilitiesException("The selected leader card does not exist");
         }
         LeaderCard leader = this.leaderCards.get(index);
-        if (leader.isActive()) throw new LeaderAbilityAlreadyActive();
+        if (leader.isActive()) throw new LeaderAbilityAlreadyActive("You cannot discard an active leader card");
 
         if (choice == LeaderAction.DISCARD) {
             this.addPlayerFaith(1);

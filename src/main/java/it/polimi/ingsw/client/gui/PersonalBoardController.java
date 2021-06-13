@@ -499,21 +499,44 @@ public class PersonalBoardController implements Initializable {
     }
 
     public void discardedTopLeader(){
-        if (secondDiscardAction){
-            leaderCardActive0.setVisible(false);
-        } else {
-            leaderCardActive1.setVisible(false);
-            secondDiscardAction = true;
-            depot5_1.setX(55);
-            depot5_1.setY(319);
-            depot5_2.setX(150);
-            depot5_2.setY(319);
+        Map<String, List<LeaderCard>> leadermap = mainController.getClientModel().getPersonalBoardModel().getLeaderMap();
+        List<LeaderCard> leaderCards = leadermap.get(mainController.getNickname());
+        if (leaderCards.size() > 0){
+            LeaderCard topLeader = leadermap.get(mainController.getNickname()).get(0);
+            if (topLeader.isActive()){
+                mainController.displayError("You cannot discard an active leader card");
+            } else {
+                if (secondDiscardAction){
+                    leaderCardActive0.setVisible(false);
+                } else {
+                    leaderCardActive1.setVisible(false);
+                    secondDiscardAction = true;
+                    depot4_1.setLayoutX(-100);
+                    depot4_1.setLayoutY(-100);
+                    depot4_2.setLayoutX(-100);
+                    depot4_2.setLayoutY(-100);
+                    depot5_1.setLayoutX(55);
+                    depot5_1.setLayoutY(319);
+                    depot5_2.setLayoutX(150);
+                    depot5_2.setLayoutY(319);
+                }
+            }
         }
-
     }
 
     public void discardedBottonLeader(){
-        leaderCardActive1.setVisible(false);
+        Map<String, List<LeaderCard>> leadermap = mainController.getClientModel().getPersonalBoardModel().getLeaderMap();
+        List<LeaderCard> leaderCards = leadermap.get(mainController.getNickname());
+        if (leaderCards.size() > 1){
+            LeaderCard bottomLeader = leaderCards.get(1);
+            if (bottomLeader.isActive()){
+                mainController.displayError("You cannot discard an active leader card");
+            } else {
+                leaderCardActive1.setVisible(false);
+            }
+
+        }
+
     }
 
     public void updateDevSlots(List<DevelopmentSlot> developmentSlots) {

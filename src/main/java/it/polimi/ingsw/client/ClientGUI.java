@@ -212,14 +212,19 @@ public class ClientGUI implements UserInterface {
             mainController.sendMessage(request);
         }
         else {
-            Platform.runLater(() -> {
-                //Set and initialize the LeaderCardSelectionController
-                LeaderCardSelectionController leaderCardSelectionController = (LeaderCardSelectionController) JavaFXMain.changeScene("leader_card_selection");
-                leaderCardSelectionController.setNickname(nickname);
-                leaderCardSelectionController.setInitialLeaderCards(cards);
-                printLog("LeaderCardSelectionController ready");
-                leaderCardSelectionController.setMainController(mainController);
-            });
+            LeaderCardSelectionController controller = (LeaderCardSelectionController) JavaFXMain.changeScene("leader_card_selection");
+            if (controller != null) {
+                Platform.runLater(() -> {
+                    //Set and initialize the LeaderCardSelectionController
+                    controller.setNickname(nickname);
+                    controller.setInitialLeaderCards(cards);
+                    printLog("LeaderCardSelectionController ready");
+                    controller.setMainController(mainController);
+                });
+            }
+            else {
+                System.out.println("LeaderCardSelection Controller not found");
+            }
         }
     }
 
@@ -246,13 +251,18 @@ public class ClientGUI implements UserInterface {
         }
         else {
             if (numPlayer > 0) {
-                Platform.runLater(() -> {
-                    ResourceSelectionController resourceSelectionController = (ResourceSelectionController) JavaFXMain.changeScene("resource_selection");
-                    resourceSelectionController.setNickname(nickname);
-                    resourceSelectionController.setNumPlayer(numPlayer);
-                    printLog("ResourceSelectionController ready");
-                    resourceSelectionController.setMainController(mainController);
-                });
+                ResourceSelectionController controller = (ResourceSelectionController) JavaFXMain.changeScene("resource_selection");
+                if (controller != null) {
+                    Platform.runLater(() -> {
+                        controller.setNickname(nickname);
+                        controller.setNumPlayer(numPlayer);
+                        printLog("ResourceSelectionController ready");
+                        controller.setMainController(mainController);
+                    });
+                }
+                else {
+                    System.out.println("ResourceSelectionController not found");
+                }
             } else {
                 InitialResRequest request = new InitialResRequest(res);
                 request.setNumPlayer(numPlayer);

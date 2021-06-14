@@ -126,7 +126,7 @@
               </filters>
               <shadedArtifactAttached>true</shadedArtifactAttached>
               <shadedClassifierName>project-classifier</shadedClassifierName>
-              <outputFile>shade\server.jar</outputFile>
+              <outputFile>deliverables\jars\server.jar</outputFile>
               <transformers>
                 <transformer implementation=
                                      "org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
@@ -155,7 +155,7 @@
               </filters>
               <shadedArtifactAttached>true</shadedArtifactAttached>
               <shadedClassifierName>project-classifier</shadedClassifierName>
-              <outputFile>shade\client.jar</outputFile>
+              <outputFile>deliverables\jars\client.jar</outputFile>
               <transformers>
                 <transformer implementation=
                                      "org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
@@ -184,7 +184,7 @@
               </filters>
               <shadedArtifactAttached>true</shadedArtifactAttached>
               <shadedClassifierName>project-classifier</shadedClassifierName>
-              <outputFile>shade\local_game.jar</outputFile>
+              <outputFile>deliverables\jars\local_game.jar</outputFile>
               <transformers>
                 <transformer implementation=
                                      "org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">

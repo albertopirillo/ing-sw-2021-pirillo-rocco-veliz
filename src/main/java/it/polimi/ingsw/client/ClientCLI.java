@@ -686,7 +686,7 @@ public class ClientCLI implements UserInterface {
                     }
                 }
             }
-        }   catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("Invalid input, retry");
         }
         return new PlaceResourceRequest(toDiscard, toPlace, false);

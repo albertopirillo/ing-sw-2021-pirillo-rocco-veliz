@@ -46,7 +46,7 @@ public class ResourceController {
      * @param fullDepot whether the request is coming from a CLI or a GUI
      * @throws WrongDepotInstructionsException if incorrect instructions were provided
      */
-    public void handleResource(Resource toDiscard, List<DepotSetting> settings, boolean fullDepot) throws InvalidKeyException, NegativeResAmountException, WrongDepotInstructionsException, InvalidResourceException, LayerNotEmptyException, NotEnoughSpaceException, InvalidLayerNumberException, CannotContainFaithException, AlreadyInAnotherLayerException, CloneNotSupportedException {
+    public void handleResource(Resource toDiscard, List<DepotSetting> settings, boolean fullDepot) throws InvalidKeyException, NegativeResAmountException, WrongDepotInstructionsException, InvalidResourceException, LayerNotEmptyException, NotEnoughSpaceException, InvalidLayerNumberException, CannotContainFaithException, AlreadyInAnotherLayerException {
         if(this.tempRes.isEmpty()) throw new WrongDepotInstructionsException("There are no resources to be placed now");
         if(settings == null) throw new WrongDepotInstructionsException("You provided incorrect instructions to place those resources");
         Player player = this.controller.getGame().getActivePlayer();

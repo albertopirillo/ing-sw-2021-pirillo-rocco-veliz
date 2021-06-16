@@ -102,7 +102,7 @@ public class Player {
      * Adds faith points to the player
      * @param amount the amount of points to add
      */
-    public void addPlayerFaith(int amount) throws NegativeResAmountException {
+    public void addPlayerFaith(int amount) {
         for (int i=0; i<amount; i++){
             this.getPersonalBoard().getFaithTrack().addPlayerFaith(1);
             this.getPersonalBoard().updateFaithTrack(this.game.getPlayersList());
@@ -374,7 +374,7 @@ public class Player {
      * Discards resources, giving 1 faith points to the other players for every resource
      * @param resource the resources to be discarded
      */
-    public void discardRes(Resource resource) throws CannotContainFaithException, NegativeResAmountException {
+    public void discardRes(Resource resource) throws CannotContainFaithException {
         this.personalBoard.getDepot().discardRes(this, resource);
     }
 

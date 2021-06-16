@@ -91,10 +91,15 @@ public class JavaFXMain extends Application {
 
             //Set and initialize the SetupController
             SetupController setupController = (SetupController) changeScene("setup");
-            System.out.println("[JavaFX] SetupController ready");
-            mainController.setStage(myStage);
-            mainController.setSetupController(setupController);
-            setupController.setMainController(mainController);
+            if (setupController != null) {
+                setupController.setMainController(mainController);
+                System.out.println("[JavaFX] SetupController ready");
+                mainController.setStage(myStage);
+                mainController.setSetupController(setupController);
+            }
+            else {
+                System.out.println("SetupController not found");
+            }
 
             //Notifies Client's constructor
             lock.notifyAll();

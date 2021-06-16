@@ -154,7 +154,7 @@ public class PlayerController {
             controller.getGame().updateFaithTrack();
             controller.getGame().updateStorages();
             controller.getGame().notifyEndOfUpdates();
-        } catch (NotEnoughSpaceException | CannotContainFaithException | NegativeResAmountException | InvalidKeyException | InvalidResourceException | WrongDepotInstructionsException | LayerNotEmptyException | InvalidLayerNumberException | AlreadyInAnotherLayerException | CloneNotSupportedException e) {
+        } catch (NotEnoughSpaceException | CannotContainFaithException | NegativeResAmountException | InvalidKeyException | InvalidResourceException | WrongDepotInstructionsException | LayerNotEmptyException | InvalidLayerNumberException | AlreadyInAnotherLayerException e) {
             controller.setException(e);
             controller.getGame().updateClientError(controller.getClientError());
             controller.getGame().updateTempRes();

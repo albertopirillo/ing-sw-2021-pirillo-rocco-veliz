@@ -1,55 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-
-<AnchorPane prefHeight="825.0" prefWidth="1618.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.MainController">
-   <children>
-       <ImageView fitHeight="825.0" fitWidth="1630.0" pickOnBounds="true">
-           <Image url="@../png/generic/background_wall.png"/>
-       </ImageView>
-      <TabPane fx:id="tabPane" layoutX="269.0" layoutY="3.0" prefHeight="822.0" prefWidth="1360.0" tabClosingPolicy="UNAVAILABLE" />
-      <Button fx:id="trayButton" layoutX="31.0" layoutY="65.0" mnemonicParsing="false" onAction="#showTray" prefHeight="30.0" prefWidth="214.0" text="Market Tray" textAlignment="CENTER">
-         <font>
-            <Font size="20.0" />
-         </font></Button>
-      <Button fx:id="marketButton" layoutX="33.0" layoutY="168.0" mnemonicParsing="false" onAction="#showMarket" prefHeight="30.0" prefWidth="214.0" text="Market Cards" textAlignment="CENTER">
-         <font>
-            <Font size="20.0" />
-         </font></Button>
-       <MenuButton fx:id="prodButton" layoutX="33.0" layoutY="271.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="214.0" text="Use production">
-           <items>
-               <MenuItem mnemonicParsing="false" text="Basic" onAction="#showBasic"/>
-               <MenuItem mnemonicParsing="false" text="Development" onAction="#showDev"/>
-               <MenuItem mnemonicParsing="false" text="Leader" onAction="#showLeader"/>
-           </items>
-       </MenuButton>
-       <MenuButton fx:id="activateLeaderButton" layoutX="33.0" layoutY="374.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="214.0" text="Activate leader">
-           <items>
-               <MenuItem onAction="#useLeaderRequest01" mnemonicParsing="false" text="Top leader" />
-               <MenuItem onAction="#useLeaderRequest02" mnemonicParsing="false" text="Bottom leader" />
-           </items>
-       </MenuButton>
-       <MenuButton fx:id="discardLeaderButton" layoutX="33.0" layoutY="477.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="214.0" text="Discard leader">
-           <items>
-               <MenuItem onAction="#discardLeaderRequest01" mnemonicParsing="false" text="Top leader" />
-               <MenuItem onAction="#discardLeaderRequest02" mnemonicParsing="false" text="Bottom leader" />
-           </items>
-       </MenuButton>
-       <Button fx:id="endTurnButton" layoutX="31.0" layoutY="580.0" mnemonicParsing="false" onAction="#endTurn" prefHeight="30.0" prefWidth="214.0" text="End turn" textAlignment="CENTER">
-           <font>
-               <Font size="24.0" />
-           </font>
-       </Button>
-      <Button fx:id="quitButton" layoutX="31.0" layoutY="683.0" mnemonicParsing="false" onAction="#quitGame" prefHeight="30.0" prefWidth="214.0" text="Quit game">
-         <font>
-            <Font size="24.0" />
-         </font></Button>
-   </children>
+<AnchorPane prefHeight="825.0" prefWidth="1618.0" xmlns="http://javafx.com/javafx/16"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.MainController">
+    <ImageView fitHeight="825.0" fitWidth="1630.0" pickOnBounds="true">
+        <Image url="@../png/generic/background_wall.png"/>
+    </ImageView>
+    <TabPane fx:id="tabPane" layoutX="269.0" layoutY="3.0" prefHeight="822.0" prefWidth="1360.0"
+             tabClosingPolicy="UNAVAILABLE"/>
+    <Button fx:id="trayButton" layoutX="31.0" layoutY="65.0" mnemonicParsing="false" onAction="#showTray"
+            prefHeight="30.0" prefWidth="214.0" text="Market Tray" textAlignment="CENTER">
+        <font>
+          <Font size="20.0"/>
+        </font>
+    </Button>
+    <Button fx:id="marketButton" layoutX="33.0" layoutY="168.0" mnemonicParsing="false" onAction="#showMarket"
+            prefHeight="30.0" prefWidth="214.0" text="Market Cards" textAlignment="CENTER">
+        <font>
+          <Font size="20.0"/>
+        </font>
+    </Button>
+    <MenuButton fx:id="prodButton" layoutX="33.0" layoutY="271.0" mnemonicParsing="false" prefHeight="30.0"
+                prefWidth="214.0" text="Use production">
+        <items>
+            <MenuItem mnemonicParsing="false" text="Basic" onAction="#showBasic"/>
+            <MenuItem mnemonicParsing="false" text="Development" onAction="#showDev"/>
+            <MenuItem mnemonicParsing="false" text="Leader" onAction="#showLeader"/>
+        </items>
+    </MenuButton>
+    <MenuButton fx:id="activateLeaderButton" layoutX="33.0" layoutY="374.0" mnemonicParsing="false" prefHeight="30.0"
+                prefWidth="214.0" text="Activate leader">
+        <items>
+            <MenuItem onAction="#useLeaderRequest01" mnemonicParsing="false" text="Top leader"/>
+            <MenuItem onAction="#useLeaderRequest02" mnemonicParsing="false" text="Bottom leader"/>
+        </items>
+    </MenuButton>
+    <MenuButton fx:id="discardLeaderButton" layoutX="33.0" layoutY="477.0" mnemonicParsing="false" prefHeight="30.0"
+                prefWidth="214.0" text="Discard leader">
+        <items>
+            <MenuItem onAction="#discardLeaderRequest01" mnemonicParsing="false" text="Top leader"/>
+            <MenuItem onAction="#discardLeaderRequest02" mnemonicParsing="false" text="Bottom leader"/>
+        </items>
+    </MenuButton>
+    <Button fx:id="endTurnButton" layoutX="31.0" layoutY="580.0" mnemonicParsing="false" onAction="#endTurn"
+            prefHeight="30.0" prefWidth="214.0" text="End turn" textAlignment="CENTER">
+        <font>
+            <Font size="24.0"/>
+        </font>
+    </Button>
+    <Button fx:id="quitButton" layoutX="31.0" layoutY="683.0" mnemonicParsing="false" onAction="#quitGame"
+            prefHeight="30.0" prefWidth="214.0" text="Quit game">
+        <font>
+          <Font size="24.0"/>
+        </font>
+    </Button>
 </AnchorPane>

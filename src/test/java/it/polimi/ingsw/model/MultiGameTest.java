@@ -16,11 +16,6 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 public class MultiGameTest {
 
     @Test
-    public void gameTest() {
-        //TODO: implement here
-    }
-
-    @Test
     public void computeRanksTest() throws FullCardDeckException {
         MultiGame game = new MultiGame(true);
         Map<Player, Integer> map = new HashMap<>();
@@ -38,11 +33,6 @@ public class MultiGameTest {
         assertEquals(player1, sortedPlayer.get(1));
         assertEquals(player2, sortedPlayer.get(2));
         assertEquals(player4, sortedPlayer.get(3));
-    }
-
-    @Test
-    public void giveLeaderCardsTest() {
-        //TODO: implement here
     }
 
     @RepeatedTest(5)
@@ -66,16 +56,6 @@ public class MultiGameTest {
         }
         assertEquals(1, true_amount);
         assertEquals(playerAmount - 1, false_amount);
-    }
-
-    @Test
-    public void giveResourcesTest() {
-        //TODO: implement here
-    }
-
-    @Test
-    public void checkEndGameTest() {
-        //TODO: implement here
     }
 
     @RepeatedTest(5)

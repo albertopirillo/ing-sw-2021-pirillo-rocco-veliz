@@ -52,7 +52,7 @@ public class DevProductionController implements Initializable {
     /**
      * The set of selected card indexes (0-based) to be transferred to the server.
      */
-    Set<Integer> selectedIndexes = new HashSet<>();
+    final Set<Integer> selectedIndexes = new HashSet<>();
 
     /**
      * The list of player's dev cards

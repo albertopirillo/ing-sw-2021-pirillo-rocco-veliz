@@ -1,40 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.AnchorPane?>
-
-<AnchorPane fx:id="trayRoot" prefHeight="655.0" prefWidth="504.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 20, 0, 0, 0)" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.TrayController">
-   <children>
-      <ImageView fitHeight="328.0" fitWidth="366.0" layoutX="70.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../png/market/tray_background.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="653.0" fitWidth="527.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.84417724609375">
-         <image>
-            <Image url="@../png/market/market_tray.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="tray_1" fitHeight="56.0" fitWidth="55.0" layoutX="150.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="tray_2" fitHeight="56.0" fitWidth="55.0" layoutX="206.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="tray_3" fitHeight="56.0" fitWidth="55.0" layoutX="262.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="tray_4" fitHeight="56.0" fitWidth="55.0" layoutX="318.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="tray_5" fitHeight="56.0" fitWidth="55.0" layoutX="150.0" layoutY="206.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="tray_6" fitHeight="56.0" fitWidth="55.0" layoutX="206.0" layoutY="206.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="tray_7" fitHeight="56.0" fitWidth="55.0" layoutX="262.0" layoutY="206.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="tray_8" fitHeight="56.0" fitWidth="55.0" layoutX="318.0" layoutY="206.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="tray_9" fitHeight="56.0" fitWidth="55.0" layoutX="150.0" layoutY="262.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="tray_10" fitHeight="56.0" fitWidth="55.0" layoutX="206.0" layoutY="262.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="tray_11" fitHeight="56.0" fitWidth="55.0" layoutX="262.0" layoutY="262.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="tray_12" fitHeight="56.0" fitWidth="55.0" layoutX="318.0" layoutY="262.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="tray_white" fitHeight="56.0" fitWidth="55.0" layoutX="359.0" layoutY="93.0" onDragDetected="#dragDetection" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="id6" fitHeight="56.0" fitWidth="55.0" layoutX="373.0" layoutY="150.0" onDragDropped="#dragDrop" onDragExited="#dragExit" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="id5" fitHeight="56.0" fitWidth="55.0" layoutX="373.0" layoutY="206.0" onDragDropped="#dragDrop" onDragExited="#dragExit" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="id4" fitHeight="56.0" fitWidth="55.0" layoutX="373.0" layoutY="262.0" onDragDropped="#dragDrop" onDragExited="#dragExit" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="id3" fitHeight="56.0" fitWidth="55.0" layoutX="318.0" layoutY="318.0" onDragDropped="#dragDrop" onDragExited="#dragExit" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="id2" fitHeight="56.0" fitWidth="55.0" layoutX="262.0" layoutY="318.0" onDragDropped="#dragDrop" onDragExited="#dragExit" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="id1" fitHeight="56.0" fitWidth="55.0" layoutX="206.0" layoutY="318.0" onDragDropped="#dragDrop" onDragExited="#dragExit" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="id0" fitHeight="56.0" fitWidth="55.0" layoutX="150.0" layoutY="318.0" onDragDropped="#dragDrop" onDragExited="#dragExit" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
-   </children>
+<AnchorPane prefHeight="655.0" prefWidth="504.0"
+            style="-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 20, 0, 0, 0)"
+            xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="it.polimi.ingsw.client.gui.TrayController">
+    <ImageView fitHeight="328.0" fitWidth="366.0" layoutX="70.0" layoutY="71.0" pickOnBounds="true"
+               preserveRatio="true">
+        <Image url="@../png/market/tray_background.png"/>
+    </ImageView>
+    <ImageView fitHeight="653.0" fitWidth="527.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true"
+               AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.84417724609375">
+        <Image url="@../png/market/market_tray.png"/>
+    </ImageView>
+    <ImageView fx:id="tray_1" fitHeight="56.0" fitWidth="55.0" layoutX="150.0" layoutY="150.0" pickOnBounds="true"
+               preserveRatio="true"/>
+    <ImageView fx:id="tray_2" fitHeight="56.0" fitWidth="55.0" layoutX="206.0" layoutY="150.0" pickOnBounds="true"
+               preserveRatio="true"/>
+    <ImageView fx:id="tray_3" fitHeight="56.0" fitWidth="55.0" layoutX="262.0" layoutY="150.0" pickOnBounds="true"
+               preserveRatio="true"/>
+    <ImageView fx:id="tray_4" fitHeight="56.0" fitWidth="55.0" layoutX="318.0" layoutY="150.0" pickOnBounds="true"
+               preserveRatio="true"/>
+    <ImageView fx:id="tray_5" fitHeight="56.0" fitWidth="55.0" layoutX="150.0" layoutY="206.0" pickOnBounds="true"
+               preserveRatio="true"/>
+    <ImageView fx:id="tray_6" fitHeight="56.0" fitWidth="55.0" layoutX="206.0" layoutY="206.0" pickOnBounds="true"
+               preserveRatio="true"/>
+    <ImageView fx:id="tray_7" fitHeight="56.0" fitWidth="55.0" layoutX="262.0" layoutY="206.0" pickOnBounds="true"
+               preserveRatio="true"/>
+    <ImageView fx:id="tray_8" fitHeight="56.0" fitWidth="55.0" layoutX="318.0" layoutY="206.0" pickOnBounds="true"
+               preserveRatio="true"/>
+    <ImageView fx:id="tray_9" fitHeight="56.0" fitWidth="55.0" layoutX="150.0" layoutY="262.0" pickOnBounds="true"
+               preserveRatio="true"/>
+    <ImageView fx:id="tray_10" fitHeight="56.0" fitWidth="55.0" layoutX="206.0" layoutY="262.0" pickOnBounds="true"
+               preserveRatio="true"/>
+    <ImageView fx:id="tray_11" fitHeight="56.0" fitWidth="55.0" layoutX="262.0" layoutY="262.0" pickOnBounds="true"
+               preserveRatio="true"/>
+    <ImageView fx:id="tray_12" fitHeight="56.0" fitWidth="55.0" layoutX="318.0" layoutY="262.0" pickOnBounds="true"
+               preserveRatio="true"/>
+    <ImageView fx:id="tray_white" fitHeight="56.0" fitWidth="55.0" layoutX="359.0" layoutY="93.0"
+               onDragDetected="#dragDetection" pickOnBounds="true" preserveRatio="true"/>
+    <ImageView fx:id="id6" fitHeight="56.0" fitWidth="55.0" layoutX="373.0" layoutY="150.0" onDragDropped="#dragDrop"
+               onDragExited="#dragExit" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true"/>
+    <ImageView fx:id="id5" fitHeight="56.0" fitWidth="55.0" layoutX="373.0" layoutY="206.0" onDragDropped="#dragDrop"
+               onDragExited="#dragExit" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true"/>
+    <ImageView fx:id="id4" fitHeight="56.0" fitWidth="55.0" layoutX="373.0" layoutY="262.0" onDragDropped="#dragDrop"
+               onDragExited="#dragExit" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true"/>
+    <ImageView fx:id="id3" fitHeight="56.0" fitWidth="55.0" layoutX="318.0" layoutY="318.0" onDragDropped="#dragDrop"
+               onDragExited="#dragExit" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true"/>
+    <ImageView fx:id="id2" fitHeight="56.0" fitWidth="55.0" layoutX="262.0" layoutY="318.0" onDragDropped="#dragDrop"
+               onDragExited="#dragExit" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true"/>
+    <ImageView fx:id="id1" fitHeight="56.0" fitWidth="55.0" layoutX="206.0" layoutY="318.0" onDragDropped="#dragDrop"
+               onDragExited="#dragExit" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true"/>
+    <ImageView fx:id="id0" fitHeight="56.0" fitWidth="55.0" layoutX="150.0" layoutY="318.0" onDragDropped="#dragDrop"
+               onDragExited="#dragExit" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true"/>
 </AnchorPane>

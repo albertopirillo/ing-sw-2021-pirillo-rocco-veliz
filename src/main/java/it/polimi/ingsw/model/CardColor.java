@@ -9,43 +9,32 @@ public enum CardColor {
     PURPLE;
 
     public static CardColor parseColorCard(int num){
-        switch(num){
-            case 1:
-                return CardColor.GREEN;
-            case 2:
-                return CardColor.BLUE;
-            case 3:
-                return CardColor.YELLOW;
-            case 4:
-                return CardColor.PURPLE;
-        }
-        return null;
+        return switch (num) {
+            case 1 -> CardColor.GREEN;
+            case 2 -> CardColor.BLUE;
+            case 3 -> CardColor.YELLOW;
+            case 4 -> CardColor.PURPLE;
+            default -> null;
+        };
     }
 
     public int getNumberColumn(){
-        switch(this){
-            case GREEN:
-                return 0;
-            case BLUE:
-                return 1;
-            case YELLOW:
-                return 2;
-            case PURPLE:
-                return 3;
-            default:
-                throw new IllegalArgumentException();
-        }
+        return switch (this) {
+            case GREEN -> 0;
+            case BLUE -> 1;
+            case YELLOW -> 2;
+            case PURPLE -> 3;
+        };
     }
 
     @Override
     public String toString() {
-        String color = null;
-        switch (this) {
-            case GREEN: color = ANSIColor.GREEN + "GREEN";break;
-            case BLUE: color = ANSIColor.BLUE + "BLUE"; break;
-            case YELLOW: color = ANSIColor.BRIGHT_YELLOW + "YELLOW";break;
-            case PURPLE:color = ANSIColor.MAGENTA + "PURPLE";break;
-        }
+        String color = switch (this) {
+            case GREEN -> ANSIColor.GREEN + "GREEN";
+            case BLUE -> ANSIColor.BLUE + "BLUE";
+            case YELLOW -> ANSIColor.BRIGHT_YELLOW + "YELLOW";
+            case PURPLE -> ANSIColor.MAGENTA + "PURPLE";
+        };
         return color.concat(ANSIColor.RESET);
     }
 }

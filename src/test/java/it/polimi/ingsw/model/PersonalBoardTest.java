@@ -11,11 +11,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class PersonalBoardTest {
 
     @Test
-    public void setDevSlots() {
-        //TODO: implement here
-    }
-
-    @Test
     public void getAllCards() throws InvalidNumSlotException, DevSlotEmptyException {
         //stub devCards
         Resource res1 = new Resource(1,2,3,4);

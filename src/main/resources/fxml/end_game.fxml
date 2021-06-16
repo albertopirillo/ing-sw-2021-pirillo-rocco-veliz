@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-
 <AnchorPane prefHeight="700.0" prefWidth="810.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 20, 0, 0, 0)" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.EndGameController">
    <!--BACKGROUND-->
    <ImageView fitHeight="700.0" fitWidth="810.0" pickOnBounds="true">
@@ -13,7 +11,7 @@
    </ImageView>
    <Label fx:id="lblResult" layoutX="408.0" layoutY="91.0" scaleX="6.5" scaleY="6.5" styleClass="customInitLeaderLabel" stylesheets="@../css/customMenuLabel.css" text="YOU WON!" textAlignment="CENTER" />
    <Label fx:id="lblSummary" layoutX="387.0" layoutY="199.0" scaleX="5.5" scaleY="5.5" styleClass="customInitLeaderLabel" stylesheets="@../css/customMenuLabel.css" text="your final score is:" textAlignment="CENTER" />
-   <Button fx:id="btnExit" layoutX="350.0" layoutY="588.0" mnemonicParsing="false" onAction="#onClickExit" prefHeight="44.0" prefWidth="135.0" styleClass="customButton" stylesheets="@../css/customMenuLabel.css" text="Exit" />
+   <Button layoutX="350.0" layoutY="588.0" mnemonicParsing="false" onAction="#onClickExit" prefHeight="44.0" prefWidth="135.0" styleClass="customButton" stylesheets="@../css/customMenuLabel.css" text="Exit" />
    <Label fx:id="lblScoreSingle" layoutX="413.0" layoutY="362.0" scaleX="13.0" scaleY="13.0" styleClass="customInitLeaderLabel" stylesheets="@../css/customMenuLabel.css" text="51" textAlignment="CENTER" />
    <Label fx:id="lblPlayer1" alignment="CENTER" layoutX="347.0" layoutY="306.0" prefHeight="20.0" prefWidth="150.0" scaleX="5.0" scaleY="5.0" styleClass="customInitLeaderLabel" stylesheets="@../css/customMenuLabel.css" text="Player 1" textAlignment="CENTER" />
    <Label fx:id="lblPlayer2" alignment="CENTER" layoutX="347.0" layoutY="366.0" prefHeight="20.0" prefWidth="150.0" scaleX="5.0" scaleY="5.0" styleClass="customInitLeaderLabel" stylesheets="@../css/customMenuLabel.css" text="Player 2" textAlignment="CENTER" />

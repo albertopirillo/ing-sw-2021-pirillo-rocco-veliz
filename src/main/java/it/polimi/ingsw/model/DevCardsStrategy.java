@@ -78,16 +78,12 @@ public class DevCardsStrategy {
         Map<ResourceType, Integer> discount = new HashMap<>();
         //Modify card's cost according to discounts
         switch (choice) {
-            case FIRST:
-                discount.put(this.discounts[0].getResource(), this.discounts[0].getAmount());
-                break;
-            case SECOND:
-                discount.put(this.discounts[1].getResource(), this.discounts[1].getAmount());
-                break;
-            case BOTH:
+            case FIRST -> discount.put(this.discounts[0].getResource(), this.discounts[0].getAmount());
+            case SECOND -> discount.put(this.discounts[1].getResource(), this.discounts[1].getAmount());
+            case BOTH -> {
                 discount.put(this.discounts[0].getResource(), this.discounts[0].getAmount());
                 discount.put(this.discounts[1].getResource(), this.discounts[1].getAmount());
-                break;
+            }
         }
         for (ResourceType key: cost.keySet()) {
             if (discount.containsKey(key)){

@@ -180,7 +180,7 @@ public abstract class Depot implements Cloneable {
      * @param resource  the amount of resources to be discarded
      * @throws CannotContainFaithException  if faith is trying to be discarded
      */
-    public void discardRes(Player player, Resource resource) throws CannotContainFaithException, NegativeResAmountException {
+    public void discardRes(Player player, Resource resource) throws CannotContainFaithException {
         if (resource.keySet().contains(ResourceType.FAITH))
             throw new CannotContainFaithException("You cannot discard faith points");
 

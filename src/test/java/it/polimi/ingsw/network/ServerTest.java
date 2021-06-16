@@ -27,24 +27,4 @@ class ServerTest {
         assertEquals(check, output);
         assertEquals(0, game.getActivePlayer().getPlayerFaith());*/
     }
-
-    @Test
-    public void handleInputTest() {
-        //TODO: implement here
-    }
-
-    @Test
-    public void handleMessageTest() {
-        //TODO: implement here
-    }
-
-    @Test
-    public void runTest() {
-        //TODO: implement here
-    }
-
-    @Test
-    public void closeClientConnectionTEst() {
-        //TODO: implement here
-    }
 }

@@ -37,9 +37,4 @@ class SoloGameTest {
         assertEquals(firstToken, game.getSoloTokens().get(5));
         assertEquals(secondToken, game.getSoloTokens().get(0));
     }
-
-    @Test
-    public void lastTurnTest() {
-        //TODO: implement here
-    }
 }

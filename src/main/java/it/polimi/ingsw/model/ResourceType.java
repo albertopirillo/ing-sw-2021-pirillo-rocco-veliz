@@ -15,15 +15,14 @@ public enum ResourceType {
 
     @Override
     public String toString() {
-        String color = null;
-        switch (this) {
-            case STONE: color = ANSIColor.GREY + "STONE";break;
-            case COIN: color = ANSIColor.BRIGHT_YELLOW + "COIN"; break;
-            case SHIELD: color = ANSIColor.BLUE + "SHIELD";break;
-            case SERVANT:color = ANSIColor.MAGENTA + "SERVANT";break;
-            case FAITH: color = ANSIColor.BRIGHT_RED + "FAITH";break;
-            case ALL: color = ANSIColor.GREEN + "ALL";break;
-        }
+        String color = switch (this) {
+            case STONE -> ANSIColor.GREY + "STONE";
+            case COIN -> ANSIColor.BRIGHT_YELLOW + "COIN";
+            case SHIELD -> ANSIColor.BLUE + "SHIELD";
+            case SERVANT -> ANSIColor.MAGENTA + "SERVANT";
+            case FAITH -> ANSIColor.BRIGHT_RED + "FAITH";
+            case ALL -> ANSIColor.GREEN + "ALL";
+        };
         return color.concat(ANSIColor.RESET);
     }
 }

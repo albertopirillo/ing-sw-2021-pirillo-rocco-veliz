@@ -2,11 +2,10 @@ package it.polimi.ingsw;
 
 import it.polimi.ingsw.client.ClientMain;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class ClientLauncher {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         Scanner stdin = new Scanner(System.in);
         String[] newArgs;
         System.out.println("\n*****************************************");
@@ -23,7 +22,7 @@ public class ClientLauncher {
             } catch (NumberFormatException e) {
                 port = 8080;
             }
-            newArgs[0] = "-" + serverIP + ":" + port;
+            newArgs[0] = "--" + serverIP + ":" + port;
             System.out.println("Please select the game mode:");
             System.out.println("1: Client CLI");
             System.out.println("2: Client GUI");
@@ -33,10 +32,10 @@ public class ClientLauncher {
                 System.out.println("Starting Client...");
                 System.out.println("*****************************************\n");
                 if (selection == 1) {
-                    newArgs[1] = "-cli";
+                    newArgs[1] = "--cli";
                     ClientMain.main(newArgs);
                 } else if (selection == 2) {
-                    newArgs[1] = "-gui";
+                    newArgs[1] = "--gui";
                     ClientMain.main(newArgs);
                 } else {
                     System.out.println("Invalid selection");

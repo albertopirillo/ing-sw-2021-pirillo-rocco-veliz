@@ -34,10 +34,10 @@ public class LocalGameLauncher {
         }
         else {
             for (String command : args) {
-                if (command.startsWith("-")) {
-                    if (command.equals("-gui")) {
+                if (command.startsWith("--")) {
+                    if (command.equals("--gui")) {
                         gui = true;
-                    } else if (command.equals("-cli")) {
+                    } else if (command.equals("--cli")) {
                         gui = false;
                     }
                 }

@@ -27,8 +27,8 @@ public class Launcher {
                 int length = args.length;
                 String[] newArgs = new String[length + 1];
                 System.arraycopy(args, 0, newArgs, 0, length);
-                if (selection == 2) newArgs[length] = "-cli";
-                else newArgs[length] = "-gui";
+                if (selection == 2) newArgs[length] = "--cli";
+                else newArgs[length] = "--gui";
                 ClientMain.main(newArgs);
             } else if (selection == 4) {
                 LocalGameLauncher.main(args);

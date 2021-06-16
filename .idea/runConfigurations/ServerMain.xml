@@ -2,7 +2,7 @@
   <configuration default="false" name="ServerMain" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.ServerLauncher" />
     <module name="ing-sw-2021-pirillo-rocco-veliz" />
-    <option name="PROGRAM_PARAMETERS" value="-8080" />
+    <option name="PROGRAM_PARAMETERS" value="--8080" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="it.polimi.ingsw.client.*" />

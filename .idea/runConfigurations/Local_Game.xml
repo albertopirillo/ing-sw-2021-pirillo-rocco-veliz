@@ -3,7 +3,7 @@
     <option name="ALTERNATIVE_JRE_PATH" value="15" />
     <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.LocalGameLauncher" />
     <module name="ing-sw-2021-pirillo-rocco-veliz" />
-    <option name="PROGRAM_PARAMETERS" value="-gui" />
+    <option name="PROGRAM_PARAMETERS" value="--gui" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>

@@ -2,7 +2,7 @@
   <configuration default="false" name="ClientMain1" type="Application" factoryName="Application" singleton="false">
     <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.ClientLauncher" />
     <module name="ing-sw-2021-pirillo-rocco-veliz" />
-    <option name="PROGRAM_PARAMETERS" value="-cli" />
+    <option name="PROGRAM_PARAMETERS" value="--cli" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="it.polimi.ingsw.client.*" />

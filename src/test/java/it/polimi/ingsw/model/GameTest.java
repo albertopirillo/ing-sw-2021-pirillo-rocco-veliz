@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.client.LocalClient;
+import it.polimi.ingsw.controller.MasterController;
 import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.network.RemoteView;
 import it.polimi.ingsw.server.LocalConnection;
@@ -109,10 +110,22 @@ class GameTest {
     @Test
     public void quitGameTest() throws FullCardDeckException {
         Game game = new MultiGame(true);
-        game.addObserver(new RemoteView(new LocalConnection(null, new LocalClient(false)), "a"));
-        game.addObserver(new RemoteView(new LocalConnection(null, new LocalClient(false)), "b"));
-        game.addObserver(new RemoteView(new LocalConnection(null, new LocalClient(false)), "c"));
-        game.addObserver(new RemoteView(new LocalConnection(null, new LocalClient(false)), "d"));
+        //stub
+        MasterController masterController = new MasterController(game);
+        RemoteView remoteView1 = new RemoteView(new LocalConnection(null, new LocalClient(false)), "a");
+        RemoteView remoteView2 = new RemoteView(new LocalConnection(null, new LocalClient(false)), "b");
+        RemoteView remoteView3 = new RemoteView(new LocalConnection(null, new LocalClient(false)), "c");
+        RemoteView remoteView4 = new RemoteView(new LocalConnection(null, new LocalClient(false)), "d");
+        remoteView1.addController(masterController.getRequestController());
+        remoteView2.addController(masterController.getRequestController());
+        remoteView3.addController(masterController.getRequestController());
+        remoteView4.addController(masterController.getRequestController());
+
+
+        game.addObserver(remoteView1);
+        game.addObserver(remoteView2);
+        game.addObserver(remoteView3);
+        game.addObserver(remoteView4);
         assertEquals(4, game.getObservers().size());
 
         game.quitGame();

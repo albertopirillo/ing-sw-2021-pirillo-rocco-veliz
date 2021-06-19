@@ -8,6 +8,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * <p>The most generic concept of Depot</p>
+ * <p>Head of the Decorator pattern</p>
+ * <p>Implements all methods</p>
+ */
 public abstract class Depot implements Cloneable {
 
     /**

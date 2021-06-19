@@ -436,7 +436,7 @@ public class PersonalBoardController implements Initializable {
 
         int tempBlackCrossPosition = faithTrack.getBlackCrossPosition();
         if (tempBlackCrossPosition > -1){
-            if (tempBlackCrossPosition == this.playerFaith){
+            if (tempBlackCrossPosition == faithTrack.getPlayerFaith()){
                 if (this.blackCrossPosition > -1){
                     faithTrackCells.get(this.blackCrossPosition).setImage(null);
                 }
@@ -447,6 +447,7 @@ public class PersonalBoardController implements Initializable {
                 faithTrackCells.get(this.blackCrossPosition).setImage(null);
                 this.blackCrossPosition = tempBlackCrossPosition;
                 this.faithTrackCells.get(this.blackCrossPosition).setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/png/solo_game/black_cross.png"))));
+                this.faithTrackCells.get(faithTrack.getPlayerFaith()).setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/png/faithtrack/faith.png"))));
             }
         }
     }

@@ -35,7 +35,7 @@ The game can be played using either a CLI or a GUI.
 ZIP available [here](deliverables/javadoc.zip)
 
 
-## Execution instructions
+### Execution instructions
 All the required files are available [here](deliverables/jars)
 
 - It is possible to pass program arguments to every JAR (see below)
@@ -43,22 +43,22 @@ All the required files are available [here](deliverables/jars)
 - If no program arguments were given, the JAR will automatically ask all the needed parameters
 
 
-## Description of the JARs:
+### Description of the JARs:
 
 To run the JARs, Java RE 15.0.2 is required
 
-### **server.jar**
+#### **server.jar**
 - Runs the server of the game, waiting for clients to connect
 - The port of the server can be specified with "--port"
 - Example: `java -jar server.jar --8080`
 
-### **client.jar**
+#### **client.jar**
 - Runs a client of the game, checking if a server is reachable
 - Server's IP and port can be specified with "--ip:port"
 - The usage of the CLI or the GUI can be forced with "--cli" and "--gui"
 - Example: `java -jar client.jar --gui --127.0.0.1:8080`
 
-### **local_game.jar**
+#### **local_game.jar**
 - Runs a client in Local Game mode, which doesn't need to connect to a server
 - The usage of the CLI or the GUI can be forced with "--cli" and "--gui"
 - Example: `java -jar local_game.jar --gui`
@@ -72,7 +72,7 @@ To run the JARs, Java RE 15.0.2 is required
 - [Client and Server](deliverables/UML%20pdf/client%20and%20server.pdf)
 
 
-## Test coverage
+### Test coverage
 
 [comment]: <> (ZIP available [here]&#40;deliverables/coverage.zip&#41;)
 

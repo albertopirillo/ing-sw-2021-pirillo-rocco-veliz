@@ -136,12 +136,11 @@ public class MultiGame extends Game {
 
         Reader reader = new InputStreamReader(Objects.requireNonNull(getClass().getResourceAsStream("/json/LeaderCardsConfig.json")));
         List<LeaderCard> leaderCards = gson.fromJson(reader, listType);
-
+        Set<Integer> chosenIds = new HashSet<>();
         //select 4 leadersCards. We must make sure to select four different cards
         List<LeaderCard> finalDeckLeaderCards = new ArrayList<>(leaderCards);
         for (Player player : this.getPlayersList()) {
             List<LeaderCard> chosenCards = new ArrayList<>();
-            Set<Integer> chosenIds = new HashSet<>();
             Set<Integer> selectedIndexes = new HashSet<>();
             if(finalDeckLeaderCards.size() > 4){
                 while(selectedIndexes.size() < 4){

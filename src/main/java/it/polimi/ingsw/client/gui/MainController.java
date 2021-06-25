@@ -648,7 +648,7 @@ public class MainController implements Initializable {
     /**
      * Sends a EndTurnRequest to the Server
      */
-    public void endTurn(ActionEvent event) {
+    public void endTurn() {
         Request request = new EndTurnRequest();
         sendMessage(request);
         this.setMainActionDone(false);
@@ -664,7 +664,7 @@ public class MainController implements Initializable {
     }
 
     public void discardLeaderRequest02(){
-        getPersonalBoardController(getNickname()).discardedBottonLeader();
+        getPersonalBoardController(getNickname()).discardedBottomLeader();
         Request request = new UseLeaderRequest(1, LeaderAction.DISCARD);
         sendMessage(request);
     }

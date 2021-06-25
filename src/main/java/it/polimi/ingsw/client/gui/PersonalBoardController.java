@@ -523,7 +523,7 @@ public class PersonalBoardController implements Initializable {
         }
     }
 
-    public void discardedBottonLeader(){
+    public void discardedBottomLeader(){
         Map<String, List<LeaderCard>> leaderMap = mainController.getClientModel().getPersonalBoardModel().getLeaderMap();
         List<LeaderCard> leaderCards = leaderMap.get(mainController.getNickname());
         if (leaderCards.size() > 1){

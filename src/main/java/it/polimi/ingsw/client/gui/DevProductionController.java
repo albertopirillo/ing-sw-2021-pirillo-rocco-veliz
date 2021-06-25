@@ -8,10 +8,8 @@ import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.ResourceType;
 import it.polimi.ingsw.network.requests.DevProductionRequest;
 import it.polimi.ingsw.network.requests.Request;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
@@ -42,8 +40,6 @@ public class DevProductionController implements Initializable {
     private Pane resourcePanel, depot, imgPane1, imgPane2, imgPane3;
     @FXML
     private Spinner<Integer> stone, servant, shield, coin;
-    @FXML
-    private Button confirmButton;
     @FXML
     Label labelDevCards;
 
@@ -180,15 +176,15 @@ public class DevProductionController implements Initializable {
         }
     }
 
-    public void useCard1(MouseEvent mouseEvent) {
+    public void useCard1() {
         useCard(imgCard1, 0);
     }
 
-    public void useCard2(MouseEvent mouseEvent) {
+    public void useCard2() {
         useCard(imgCard2, 1);
     }
 
-    public void useCard3(MouseEvent mouseEvent) {
+    public void useCard3() {
         useCard(imgCard3, 2);
     }
 
@@ -207,7 +203,7 @@ public class DevProductionController implements Initializable {
         }
     }
 
-    public void dragDrop(DragEvent dragEvent) {
+    public void dragDrop() {
         String sourceId = this.source.getId();
         switch (this.mainController.getPersonalBoardController().getGenericSlot(sourceId)){
             case STONE:
@@ -234,7 +230,7 @@ public class DevProductionController implements Initializable {
         d.setText("x" + newValue);
     }
 
-    public void buildRequest(ActionEvent actionEvent){
+    public void buildRequest(){
         Resource depot = new Resource(0, 0, 0, 0);
         Resource strongbox = new Resource(0, 0, 0, 0);
         try {

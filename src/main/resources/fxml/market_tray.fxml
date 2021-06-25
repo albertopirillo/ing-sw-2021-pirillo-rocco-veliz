@@ -42,16 +42,16 @@
                onDragDetected="#dragDetection" pickOnBounds="true" preserveRatio="true"/>
     <ImageView fx:id="id6" fitHeight="56.0" fitWidth="55.0" layoutX="373.0" layoutY="150.0" onDragDropped="#dragDrop"
                onDragExited="#dragExit" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true"/>
-    <ImageView fitHeight="56.0" fitWidth="55.0" layoutX="373.0" layoutY="206.0" onDragDropped="#dragDrop"
+    <ImageView fx:id="id5" fitHeight="56.0" fitWidth="55.0" layoutX="373.0" layoutY="206.0" onDragDropped="#dragDrop"
                onDragExited="#dragExit" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true"/>
-    <ImageView fitHeight="56.0" fitWidth="55.0" layoutX="373.0" layoutY="262.0" onDragDropped="#dragDrop"
+    <ImageView fx:id="id4" fitHeight="56.0" fitWidth="55.0" layoutX="373.0" layoutY="262.0" onDragDropped="#dragDrop"
                onDragExited="#dragExit" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true"/>
-    <ImageView fitHeight="56.0" fitWidth="55.0" layoutX="318.0" layoutY="318.0" onDragDropped="#dragDrop"
+    <ImageView fx:id="id3" fitHeight="56.0" fitWidth="55.0" layoutX="318.0" layoutY="318.0" onDragDropped="#dragDrop"
                onDragExited="#dragExit" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true"/>
-    <ImageView fitHeight="56.0" fitWidth="55.0" layoutX="262.0" layoutY="318.0" onDragDropped="#dragDrop"
+    <ImageView fx:id="id2" fitHeight="56.0" fitWidth="55.0" layoutX="262.0" layoutY="318.0" onDragDropped="#dragDrop"
                onDragExited="#dragExit" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true"/>
-    <ImageView fitHeight="56.0" fitWidth="55.0" layoutX="206.0" layoutY="318.0" onDragDropped="#dragDrop"
+    <ImageView fx:id="id1" fitHeight="56.0" fitWidth="55.0" layoutX="206.0" layoutY="318.0" onDragDropped="#dragDrop"
                onDragExited="#dragExit" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true"/>
-    <ImageView fitHeight="56.0" fitWidth="55.0" layoutX="150.0" layoutY="318.0" onDragDropped="#dragDrop"
+    <ImageView fx:id="id0" fitHeight="56.0" fitWidth="55.0" layoutX="150.0" layoutY="318.0" onDragDropped="#dragDrop"
                onDragExited="#dragExit" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true"/>
 </AnchorPane>

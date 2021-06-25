@@ -2,7 +2,6 @@ package it.polimi.ingsw.client.gui;
 
 import it.polimi.ingsw.model.ResourceType;
 import it.polimi.ingsw.network.requests.InitialResRequest;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -141,22 +140,22 @@ public class ResourceSelectionController implements Initializable {
         this.mainController = mainController;
     }
 
-    public void onClickStone(ActionEvent actionEvent) {
+    public void onClickStone() {
         initResources();
         res.put(ResourceType.STONE, 1);
         resourceCounter = 1;
     }
-    public void onClickCoin(ActionEvent actionEvent) {
+    public void onClickCoin() {
         initResources();
         res.put(ResourceType.COIN, 1);
         resourceCounter = 1;
     }
-    public void onClickShield(ActionEvent actionEvent) {
+    public void onClickShield() {
         initResources();
         res.put(ResourceType.SHIELD, 1);
         resourceCounter = 1;
     }
-    public void onClickServant(ActionEvent actionEvent) {
+    public void onClickServant() {
         initResources();
         res.put(ResourceType.SERVANT, 1);
         resourceCounter = 1;
@@ -209,33 +208,32 @@ public class ResourceSelectionController implements Initializable {
 
 
 
-    public void onClickStone1(ActionEvent actionEvent) {
+    public void onClickStone1() {
         onClickChk1(chkStone1, chkStone2, ResourceType.STONE);
     }
-    public void onClickCoin1(ActionEvent actionEvent) {
+    public void onClickCoin1() {
         onClickChk1(chkCoin1, chkCoin2, ResourceType.COIN);
     }
-    public void onClickShield1(ActionEvent actionEvent) {
+    public void onClickShield1() {
         onClickChk1(chkShield1, chkShield2, ResourceType.SHIELD);
     }
-    public void onClickServant1(ActionEvent actionEvent) { onClickChk1(chkServant1, chkServant2, ResourceType.SERVANT); }
-    public void onClickStone2(ActionEvent actionEvent) {
+    public void onClickServant1() { onClickChk1(chkServant1, chkServant2, ResourceType.SERVANT); }
+    public void onClickStone2() {
         onClickChk2(chkStone1, chkStone2, ResourceType.STONE);
     }
-    public void onClickCoin2(ActionEvent actionEvent) {
+    public void onClickCoin2() {
         onClickChk2(chkCoin1, chkCoin2, ResourceType.COIN);
     }
-    public void onClickShield2(ActionEvent actionEvent) {
+    public void onClickShield2() {
         onClickChk2(chkShield1, chkShield2, ResourceType.SHIELD);
     }
-    public void onClickServant2(ActionEvent actionEvent) { onClickChk2(chkServant1, chkServant2, ResourceType.SERVANT); }
+    public void onClickServant2() { onClickChk2(chkServant1, chkServant2, ResourceType.SERVANT); }
 
 
     /**
      * Click event handler for btnContinue.
-     * @param actionEvent the action event
      */
-    public void onClickContinue(ActionEvent actionEvent) {
+    public void onClickContinue() {
         if(resourceCounter == selectionAmount){
             InitialResRequest request = new InitialResRequest(res);
             request.setNumPlayer(numPlayer);

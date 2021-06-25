@@ -172,7 +172,7 @@ class DevLeaderCardTest {
         PersonalBoard p = player.getPersonalBoard();
         //player has not devCards
         assertFalse(leaderCard.canBeActivated(player));
-        //add corretly devCards
+        //add correctly devCards
         p.addDevCard(dev1, 0);
         p.addDevCard(dev2,0);
         p.addDevCard(dev3,2);

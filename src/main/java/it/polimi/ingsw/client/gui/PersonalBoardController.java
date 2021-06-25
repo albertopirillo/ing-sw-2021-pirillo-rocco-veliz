@@ -1,6 +1,5 @@
 package it.polimi.ingsw.client.gui;
 
-import it.polimi.ingsw.client.model.StorageModel;
 import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import it.polimi.ingsw.model.*;
@@ -100,10 +99,6 @@ public class PersonalBoardController implements Initializable {
      */
     private final List<ResourceType> tempResAsList = new ArrayList<>();
     /**
-     * Reference to the Model in the client
-     */
-    private StorageModel storageModel;
-    /**
      * Whether leaderCard 1 was activated before than leaderCard 0
      */
     private boolean swapped = false;
@@ -130,14 +125,6 @@ public class PersonalBoardController implements Initializable {
      */
     public void setMainController(MainController mainController) {
         this.mainController = mainController;
-    }
-
-    /**
-     * Sets the StorageModel
-     * @param storageModel the reference to the StorageModel in the Client
-     */
-    public void setStorageModel(StorageModel storageModel) {
-        this.storageModel = storageModel;
     }
 
     /**

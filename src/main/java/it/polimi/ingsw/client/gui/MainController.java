@@ -86,10 +86,6 @@ public class MainController implements Initializable {
      */
     private SetupController setupController;
     /**
-     * Reference to the actual basicProductionController
-     */
-    private BasicProductionController basicProductionController;
-    /**
      * * Reference to the actual leaderProductionController
      */
     private LeaderProductionController leaderProductionController;
@@ -325,7 +321,6 @@ public class MainController implements Initializable {
             Parent node = loader.load();
             PersonalBoardController personalBoardController = loader.getController();
             personalBoardController.setMainController(this);
-            personalBoardController.setStorageModel(getClientModel().getStoragesModel());
             buttonsList.add(personalBoardController.getReorderButton());
             this.personalBoardControllerMap.put(nickname, personalBoardController);
 
@@ -386,8 +381,8 @@ public class MainController implements Initializable {
     private void initBasicPopup() throws IOException {
         FXMLLoader loader = Util.loadFXML("basic_production");
         Parent basic = loader.load();
-        this.basicProductionController = loader.getController();
-        this.basicProductionController.setMainController(this);
+        BasicProductionController basicProductionController = loader.getController();
+        basicProductionController.setMainController(this);
         this.basicPopUp.getContent().add(basic);
         this.basicPopUp.setX(900);
         this.basicPopUp.setY(120);

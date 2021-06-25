@@ -292,7 +292,4 @@ class MarketTest {
         assertThrows(DeckEmptyException.class, () -> market.getCard(3, CardColor.GREEN));
     }
 
-    @Test
-    void endgame() {
-    }
 }

@@ -69,20 +69,20 @@ public class EndGameController implements Initializable {
         if(numPlayers > 1){
             lblResult.setText("Game Over");
             lblSummary.setText("The final scores are the following:");
-            for(int i = 0; i < numPlayers; i++){
+            for(int i = 1; i < numPlayers; i++){
                 String playerName = gameOverUpdate.getRanking().get(i);
                 String text = i + ": " + playerName + " - " + gameOverUpdate.getScores().get(playerName);
                 switch(i){
-                    case 0:
+                    case 1:
                         lblPlayer1.setText(text);
                         break;
-                    case 1:
+                    case 2:
                         lblPlayer2.setText(text);
                         break;
-                    case 2:
+                    case 3:
                         lblPlayer3.setText(text);
                         break;
-                    case 3:
+                    case 4:
                         lblPlayer4.setText(text);
                         break;
                     default:

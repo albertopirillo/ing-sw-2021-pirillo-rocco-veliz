@@ -1,7 +1,6 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.FullCardDeckException;
-import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -13,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class FaithTrackTest {
 
     @Test
-    public void trackTest() throws FullCardDeckException, NegativeResAmountException {
+    public void trackTest() throws FullCardDeckException {
         Game game = new MultiGame(true);
         List<Player> players = new ArrayList<>();
         for(int i=0; i<3; i++){

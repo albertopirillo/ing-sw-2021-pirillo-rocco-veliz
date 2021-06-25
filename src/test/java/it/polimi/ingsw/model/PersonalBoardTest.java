@@ -25,7 +25,7 @@ class PersonalBoardTest {
         List<DevelopmentCard> allCards = p.getAllCards();
         assertNotNull(allCards);
         assertEquals(0, allCards.size());
-        //added devcard corretly.. slot 1 is empty
+        //added devCard correctly.. slot 1 is empty
         assertEquals(0, p.getAllCards().size());
         p.addDevCard(dev1, 0);
         p.addDevCard(dev2,0);
@@ -71,8 +71,4 @@ class PersonalBoardTest {
         assertEquals(4, p.getAllCards().size());
     }
 
-    @Test
-    public void updateFaithTrack() {
-        //Tested in FaithTrackTest
-    }
 }

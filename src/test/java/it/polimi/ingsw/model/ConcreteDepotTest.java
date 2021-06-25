@@ -316,7 +316,7 @@ public class ConcreteDepotTest {
     }
 
     @Test
-    public void setFromSettingsOKTest() throws InvalidLayerNumberException, InvalidResourceException, LayerNotEmptyException, NotEnoughSpaceException, CannotContainFaithException, AlreadyInAnotherLayerException, NegativeResAmountException, WrongDepotInstructionsException, CloneNotSupportedException {
+    public void setFromSettingsOKTest() throws InvalidLayerNumberException, InvalidResourceException, LayerNotEmptyException, NotEnoughSpaceException, CannotContainFaithException, AlreadyInAnotherLayerException, NegativeResAmountException, WrongDepotInstructionsException {
         Depot depot = new ConcreteDepot();
         ExtraSlotAbility extraSlot = new ExtraSlotAbility(ResourceType.SERVANT);
         depot = new ConcreteDepotDecorator(depot, extraSlot);

@@ -2,7 +2,6 @@ package it.polimi.ingsw.client.gui;
 
 import it.polimi.ingsw.model.LeaderCard;
 import it.polimi.ingsw.network.requests.ChooseLeaderRequest;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -116,32 +115,27 @@ public class LeaderCardSelectionController implements Initializable {
         }
     }
 
-    public void onClickChkCard1(ActionEvent actionEvent) {
+    public void onClickChkCard1() {
         checkAndSet(0);
     }
 
-    public void onClickChkCard2(ActionEvent actionEvent) {
+    public void onClickChkCard2() {
         checkAndSet(1);
     }
 
-    public void onClickChkCard3(ActionEvent actionEvent) {
+    public void onClickChkCard3() {
         checkAndSet(2);
     }
 
-    public void onClickChkCard4(ActionEvent actionEvent) {
+    public void onClickChkCard4() {
         checkAndSet(3);
-    }
-
-    public List<Integer> getSelectedCards() {
-        return selectedCards;
     }
 
     /**
      * Event handler for btnContinue.
      *
-     * @param actionEvent the actionEvent.
      */
-    public void onClickContinue(ActionEvent actionEvent) {
+    public void onClickContinue() {
         if (countSelected() == 2) {
             ChooseLeaderRequest request = new ChooseLeaderRequest(selectedCards.get(0), selectedCards.get(1));
             request.setPlayer(nickname);

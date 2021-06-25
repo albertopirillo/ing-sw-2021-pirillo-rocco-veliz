@@ -8,7 +8,6 @@ import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.ResourceType;
 import it.polimi.ingsw.network.requests.ExtraProductionRequest;
 import it.polimi.ingsw.network.requests.Request;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -42,11 +41,7 @@ public class LeaderProductionController implements Initializable {
     @FXML
     private Spinner<Integer> stone, servant, shield, coin;
     @FXML
-    private Button confirmButton;
-    @FXML
     Label labelLeaderCards;
-    @FXML
-    private RadioButton rdOUT_1, rdOUT_2, rdOUT_3, rdOUT_4;
     @FXML
     private ToggleGroup toggleGroupOUT;
 
@@ -233,7 +228,7 @@ public class LeaderProductionController implements Initializable {
         }
     }
 
-    public void dragDrop(DragEvent dragEvent) {
+    public void dragDrop() {
         String sourceId = this.source.getId();
         switch (this.mainController.getPersonalBoardController().getGenericSlot(sourceId)){
             case STONE:
@@ -260,12 +255,12 @@ public class LeaderProductionController implements Initializable {
         d.setText("x" + newValue);
     }
 
-    public void onClickStone3(ActionEvent actionEvent) { this.res = ResourceType.STONE; }
-    public void onClickCoin3(ActionEvent actionEvent) { this.res = ResourceType.COIN; }
-    public void onClickShield3(ActionEvent actionEvent) { this.res = ResourceType.SHIELD; }
-    public void onClickServant3(ActionEvent actionEvent) { this.res = ResourceType.SERVANT; }
+    public void onClickStone3() { this.res = ResourceType.STONE; }
+    public void onClickCoin3() { this.res = ResourceType.COIN; }
+    public void onClickShield3() { this.res = ResourceType.SHIELD; }
+    public void onClickServant3() { this.res = ResourceType.SERVANT; }
 
-    public void buildRequest(ActionEvent actionEvent){
+    public void buildRequest(){
             Resource depot = new Resource(0, 0, 0, 0);
             Resource strongbox = new Resource(0, 0, 0, 0);
             try {

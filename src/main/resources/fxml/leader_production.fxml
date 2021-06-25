@@ -71,7 +71,7 @@
       <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="595.0" layoutY="485.0" pickOnBounds="true" preserveRatio="true">
          <Image url="@../png/res/stone.png" />
       </ImageView>
-      <RadioButton fx:id="rdOUT_1" layoutX="609.0" layoutY="554.0" mnemonicParsing="false" onAction="#onClickStone3" scaleX="0.7" scaleY="0.7" stylesheets="@../css/setup.css">
+      <RadioButton id="rdOUT_1" layoutX="609.0" layoutY="554.0" mnemonicParsing="false" onAction="#onClickStone3" scaleX="0.7" scaleY="0.7" stylesheets="@../css/setup.css">
          <toggleGroup>
             <ToggleGroup fx:id="toggleGroupOUT" />
          </toggleGroup>
@@ -79,17 +79,17 @@
       <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="868.0" layoutY="485.0" pickOnBounds="true" preserveRatio="true">
          <Image url="@../png/res/servant.png" />
       </ImageView>
-      <RadioButton fx:id="rdOUT_2" layoutX="700.0" layoutY="554.0" mnemonicParsing="false" onAction="#onClickShield3" scaleX="0.7" scaleY="0.7" stylesheets="@../css/setup.css" toggleGroup="$toggleGroupOUT" />
+      <RadioButton id="rdOUT_2" layoutX="700.0" layoutY="554.0" mnemonicParsing="false" onAction="#onClickShield3" scaleX="0.7" scaleY="0.7" stylesheets="@../css/setup.css" toggleGroup="$toggleGroupOUT" />
       <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="687.0" layoutY="485.0" pickOnBounds="true" preserveRatio="true">
          <Image url="@../png/res/shield.png" />
       </ImageView>
-      <RadioButton fx:id="rdOUT_3" layoutX="788.0" layoutY="554.0" mnemonicParsing="false" onAction="#onClickCoin3" scaleX="0.7" scaleY="0.7" stylesheets="@../css/setup.css" toggleGroup="$toggleGroupOUT" />
+      <RadioButton id="rdOUT_3" layoutX="788.0" layoutY="554.0" mnemonicParsing="false" onAction="#onClickCoin3" scaleX="0.7" scaleY="0.7" stylesheets="@../css/setup.css" toggleGroup="$toggleGroupOUT" />
       <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="776.0" layoutY="485.0" pickOnBounds="true" preserveRatio="true">
          <Image url="@../png/res/coin.png" />
       </ImageView>
-      <RadioButton fx:id="rdOUT_4" layoutX="879.0" layoutY="554.0" mnemonicParsing="false" onAction="#onClickServant3" scaleX="0.7" scaleY="0.7" stylesheets="@../css/setup.css" toggleGroup="$toggleGroupOUT" />
+      <RadioButton id="rdOUT_4" layoutX="879.0" layoutY="554.0" mnemonicParsing="false" onAction="#onClickServant3" scaleX="0.7" scaleY="0.7" stylesheets="@../css/setup.css" toggleGroup="$toggleGroupOUT" />
       <!--CONFIRM-->
-      <Button fx:id="confirmButton" layoutX="721.0" layoutY="624.0" mnemonicParsing="false" onAction="#buildRequest" prefHeight="50.0" prefWidth="119.0" scaleX="1.1" scaleY="1.1" styleClass="customButton" stylesheets="@../css/customMenuLabel.css" text="Confirm" textAlignment="CENTER" />
+      <Button id="confirmButton" layoutX="721.0" layoutY="624.0" mnemonicParsing="false" onAction="#buildRequest" prefHeight="50.0" prefWidth="119.0" scaleX="1.1" scaleY="1.1" styleClass="customButton" stylesheets="@../css/customMenuLabel.css" text="Confirm" textAlignment="CENTER" />
       <!--DEPOT PANE-->
       <Pane fx:id="depot" layoutX="122.0" layoutY="250.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: transparent;">
          <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" styleClass="imgShadow">
@@ -110,7 +110,7 @@
          <Cursor fx:constant="HAND" />
       </cursor>
    </ImageView>
-   <!-- LEADERCARDS PANE DISABLERS -->
+   <!-- LEADER CARDS PANE DISABLE -->
    <Pane fx:id="imgPane1" layoutX="800.0" layoutY="150.0" prefHeight="195.0" prefWidth="130.0" scaleX="1.5" scaleY="1.5" />
    <ImageView fx:id="imgCard2" fitHeight="195.0" fitWidth="130.0" layoutX="560.0" layoutY="150.0" onMouseClicked="#useCard2" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.5" styleClass="selection">
       <cursor>

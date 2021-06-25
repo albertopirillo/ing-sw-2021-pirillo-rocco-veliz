@@ -61,7 +61,7 @@
       <Spinner fx:id="shield" layoutX="226.0" layoutY="583.0" prefHeight="26.0" prefWidth="54.0" />
       <Spinner fx:id="coin" layoutX="310.0" layoutY="583.0" prefHeight="26.0" prefWidth="54.0" />
       <!--CONFIRM-->
-      <Button fx:id="confirmButton" layoutX="158.0" layoutY="633.0" mnemonicParsing="false" onAction="#buildRequest" prefHeight="50.0" prefWidth="119.0" styleClass="customButton" stylesheets="@../css/customMenuLabel.css" text="Confirm" textAlignment="CENTER" />
+      <Button layoutX="158.0" layoutY="633.0" mnemonicParsing="false" onAction="#buildRequest" prefHeight="50.0" prefWidth="119.0" styleClass="customButton" stylesheets="@../css/customMenuLabel.css" text="Confirm" textAlignment="CENTER" />
       <!--DEPOT PANE-->
       <Pane fx:id="depot" layoutX="117.0" layoutY="207.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: transparent;">
          <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" styleClass="imgShadow">

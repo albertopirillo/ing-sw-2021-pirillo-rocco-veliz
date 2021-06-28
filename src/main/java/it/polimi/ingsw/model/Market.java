@@ -12,11 +12,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * The Class that represents the Market
+ */
 public class Market {
 
+    /**
+     * The matrix 4x3 that contains the twelve card decks of Development Cards
+     */
     private final CardDeck[][] cards;
+    /**
+     * The market tray that contains all marbles
+     */
     private final MarketTray marketTray;
 
+    /**
+     * Initialize the Market filling the cards' matrix and the market tray
+     */
     public Market() throws FullCardDeckException {
         cards = new CardDeck[3][4];
         for(int i=0; i<3; i++){
@@ -39,7 +51,7 @@ public class Market {
         marketTray = new MarketTray(noRandom);
     }
     
-    //Initialize cards
+    //Initialize cards from json file
     private void initCards() throws FullCardDeckException {
         //ParserJSON... devCards contain all DevCards
         Reader reader = new InputStreamReader(Objects.requireNonNull(getClass().getResourceAsStream("/json/DevCardsConfig.json")));
@@ -57,32 +69,52 @@ public class Market {
         }
     }
 
-    //return the list of cards on the top, can return null for decks empty;
+    /**
+     * Returns the list of cards at the top for each card deck in the cards' matrix
+     * @return a list composed of the head element for each deck in the cards' matrix or of null element if the deck is empty
+     */
     public List<DevelopmentCard> getAvailableCards(){
         List<DevelopmentCard> availableCards = new ArrayList<>();
         for(int i=0; i<3; i++){
             for (int j=0; j<4; j++){
-                //if (this.cards[i][j].getCard() != null)
-                    availableCards.add(this.cards[i][j].getCard());
+                availableCards.add(this.cards[i][j].getCard());
             }
         }
         return availableCards;
     }
 
-    //returns the requested card, without removing it from the market
+    /**
+     * Returns, and not remove, the Development card specified by the parameter passed: level and color
+     * @param level the level of the card(or deck)
+     * @param color the color of the card(or deck)
+     * @return the Development card at the top of the deck that matches the parameters in the cards' matrix
+     * @throws DeckEmptyException if the deck that matches the parameters is empty
+     */
     public DevelopmentCard getCard(int level, CardColor color) throws DeckEmptyException {
         DevelopmentCard devCard =  cards[3-level][color.getNumberColumn()].getCard();
         if(devCard!=null) return devCard;
         throw new DeckEmptyException();
     }
 
-    //card can be bought check is handled by the player
+    /**
+     * Returns and remove the Development card specified by the parameter passed: level and color
+     * @param level the level of the card(or deck)
+     * @param color the color of the card(or deck)
+     * @return the Development card at the top of the deck that matches the parameters in the cards' matrix
+     * @throws DeckEmptyException if the deck that matches the parameters is empty
+     */
     public DevelopmentCard buyCards(int level, CardColor color) throws DeckEmptyException {
         DevelopmentCard devCard =  cards[3-level][color.getNumberColumn()].removeCard();
         if(devCard!=null) return devCard;
         throw new DeckEmptyException();
     }
 
+    /**
+     * Check if the deck that matches the parameter is empty
+     * @param level the level of the card(or deck)
+     * @param color the color of the card(or deck)
+     * @return true if the deck is empty, false otherwise
+     */
     public boolean isDeckEmpty(int level, CardColor color) {
         DevelopmentCard devCard = cards[3-level][color.getNumberColumn()].getCard();
         return devCard == null;

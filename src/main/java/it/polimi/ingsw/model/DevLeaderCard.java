@@ -3,23 +3,36 @@ package it.polimi.ingsw.model;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * One of the two types of Leader Cards
+ * Each DevLeaderCard has a LeaderDevCost object associated to the card's requirements and a Leader Ability that can be activated
+ */
 public class DevLeaderCard extends LeaderCard implements Serializable {
 
-    private final List<LeaderDevCost> requires;
+    /**
+     * The list of requirements
+     */
+    private final List<LeaderDevCost> requirements;
 
-    public DevLeaderCard(int victoryPoints, LeaderAbility specialAbility, List<LeaderDevCost> requires) {
+    /**
+     * Create a DevLeaderCard
+     * @param victoryPoints card's victory points
+     * @param specialAbility card's Leader Ability
+     * @param requirements card's requirements
+     */
+    public DevLeaderCard(int victoryPoints, LeaderAbility specialAbility, List<LeaderDevCost> requirements) {
         super(victoryPoints, specialAbility);
-        this.requires = requires;
+        this.requirements = requirements;
     }
 
     public boolean canBeActivated(Player player) {
         List<DevelopmentCard> playerCards = player.getPersonalBoard().getAllCards();
         boolean check;
-        for (LeaderDevCost require : requires){
-            if(require.getLevel()==0) {
-                check = playerCards.stream().filter(e -> e.getType() == require.getColor()).count() >= require.getAmount();
+        for (LeaderDevCost requirement : requirements){
+            if(requirement.getLevel()==0) {
+                check = playerCards.stream().filter(e -> e.getType() == requirement.getColor()).count() >= requirement.getAmount();
             }else {
-                check = playerCards.stream().filter(e -> e.getType() == require.getColor() && e.getLevel() == require.getLevel()).count() >= require.getAmount();
+                check = playerCards.stream().filter(e -> e.getType() == requirement.getColor() && e.getLevel() == requirement.getLevel()).count() >= requirement.getAmount();
             }
             if (!check) return false;
         }
@@ -30,7 +43,7 @@ public class DevLeaderCard extends LeaderCard implements Serializable {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("\tRequires: ");
-        for(LeaderDevCost leaderDevCost: requires){
+        for(LeaderDevCost leaderDevCost: requirements){
             sb.append("\n\t >\tColor: ").append(leaderDevCost.getColor());
             if (leaderDevCost.getLevel() == 0) {
                 sb.append("\n\t\tLevel: ANY");

@@ -4,14 +4,36 @@ import it.polimi.ingsw.exceptions.NegativeResAmountException;
 
 import java.io.Serializable;
 
+/**
+ * Concept of Leader Card
+ * Each leader card has a id, a path img, a Leader Ability
+ * There are two types of Leader Cards: DevLeaderCard and ResLeaderCard
+ */
 public abstract class LeaderCard extends Card implements Serializable, Cloneable {
-
+    /**
+     * Card's identifier
+     */
     private final int id;
-    private final String img ;
+    /**
+     * Card's image path
+     */
+    private final String img;
+    /**
+     * Card's Leader Ability
+     */
     private LeaderAbility specialAbility;
+    /**
+     * Whether this card was activated by the player or not
+     */
     private boolean isActive;
 
-    //json initialization
+    /**
+     * Create a Leader Card
+     * @param id card's identifier
+     * @param img card's image path
+     * @param victoryPoints card's victory points
+     * @param specialAbility card's Leader Ability
+     */
     public LeaderCard(int id, String img, int victoryPoints, LeaderAbility specialAbility) {
         super(victoryPoints);
         this.id = id;
@@ -32,6 +54,9 @@ public abstract class LeaderCard extends Card implements Serializable, Cloneable
         return this.isActive;
     }
 
+    /**
+     * Set the card as activated
+     */
     public void activate() {
         this.isActive = true;
     }
@@ -48,6 +73,11 @@ public abstract class LeaderCard extends Card implements Serializable, Cloneable
         return specialAbility;
     }
 
+    /**
+     * *Check if the Leader Activity can be activated by the player
+     * @param player player the player that want activate the leader card
+     * @return true if the player satisfy the requirements, else otherwise
+     */
     public abstract boolean canBeActivated(Player player) throws NegativeResAmountException;
 
     @Override

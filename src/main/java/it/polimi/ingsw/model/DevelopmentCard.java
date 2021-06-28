@@ -1,13 +1,41 @@
 package it.polimi.ingsw.model;
 
+/**
+ * <p>The concept of Development Card</p>
+ * <p>Each Development Card has a color(or type), a cost, a level and a Production Power</p>
+ */
 public class DevelopmentCard extends Card implements Cloneable {
 
+    /**
+     * The resources corresponding to the card's cost
+     */
     private Resource cost;
+    /**
+     * The card's color
+     */
     private final CardColor type;
+    /**
+     * The identifier of the image's path
+     * */
     private final String img;
+    /**
+     * The card level, from one to three
+     */
     private final int level;
+    /**
+     * The ProductionPower object associated to the card
+     */
     private ProductionPower prodPower;
 
+    /**
+     * Create a Development Card
+     * @param victoryPoints the victory points of the cards
+     * @param cost the resources associated to the card's cost
+     * @param type card color
+     * @param level card level
+     * @param prodPower ProductionPower object
+     * @param img image's path identifier
+     */
     public DevelopmentCard(int victoryPoints, Resource cost, CardColor type, int level, ProductionPower prodPower, String img) {
         super(victoryPoints);
         this.cost = cost;
@@ -17,25 +45,18 @@ public class DevelopmentCard extends Card implements Cloneable {
         this.img = img;
     }
 
-    //check if the card(this) can be bought
-    public boolean canBeBought(Resource playerResource){
-        return playerResource.compare(this.cost);
-    }
-
     public String getImg(){
         return this.img;
     }
-    //get level
+
     public int getLevel(){
         return this.level;
     }
 
-    //get cost
     public Resource getCost(){
         return cost;
     }
 
-    //get type
     public CardColor getType(){
         return this.type;
     }

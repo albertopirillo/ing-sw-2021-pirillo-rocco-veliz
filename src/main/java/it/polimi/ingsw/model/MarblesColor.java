@@ -2,6 +2,9 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.utils.ANSIColor;
 
+/**
+ * Enum with all colors of marbles
+ */
 public enum MarblesColor {
     WHITE,
     BLUE,
@@ -10,7 +13,10 @@ public enum MarblesColor {
     PURPLE,
     RED;
 
-    //Parsing to ResourceType from Marbles(no WHITE)
+    /**
+     * Returns the corresponding ResourceType of this(MarblesColor)
+     * @return the corresponding ResourceType of this(MarblesColor)
+     */
     public ResourceType getResourceType(){
         return switch (this) {
             case BLUE -> ResourceType.SHIELD;

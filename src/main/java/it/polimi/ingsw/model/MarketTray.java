@@ -6,14 +6,27 @@ import java.util.Collections;
 import java.util.Deque;
 import java.util.List;
 
+/**
+ * The market tray object, the market tray contains the marbles
+ */
 public class MarketTray {
 
+    /**
+     * The marbles' matrix
+     */
     private final MarblesColor[][] marketMarbles;
+    /**
+     * The single marble on the slide
+     */
     private MarblesColor remainingMarble;
 
+    /**
+     * Initialize the marbles' matrix randomly
+     */
+    @SuppressWarnings("unchecked")
     public MarketTray() {
         marketMarbles = new MarblesColor[3][4];
-        Deque<MarblesColor> marbleList = Marbles.getAllMarbleList(Marbles.getAllMarblesMap());
+        Deque<MarblesColor> marbleList = Marbles.getAllMarbleList();
         Collections.shuffle((List<MarblesColor>) marbleList);
         remainingMarble = marbleList.poll();
         for (int i = 0; i < 3; i++) {
@@ -29,7 +42,7 @@ public class MarketTray {
     //  Remaining marble = RED
     public MarketTray(boolean noRandom) {
         marketMarbles = new MarblesColor[3][4];
-        Deque<MarblesColor> marbleList = Marbles.getAllMarbleList(Marbles.getAllMarblesMap());
+        Deque<MarblesColor> marbleList = Marbles.getAllMarbleList();
         //Collections.shuffle((List<MarblesColor>) marbleList);
         remainingMarble = marbleList.poll();
         for (int i = 0; i < 3; i++) {
@@ -39,8 +52,12 @@ public class MarketTray {
         }
     }
 
-    //position  from 0 to 3 for columns and 4 to 6 for rows
-    //return Marbles Object, similar to Resource
+    /**
+     * Inserts the marble from the slide on the top right corner of the market tray in the column/row passed in the parameter
+     * @param position the column/row chosen by the player, from 0 to 3 for columns and from 4 to 6 for rows
+     * @return returns a Marble Object that contains the marbles' map corresponding at the column/row chosen
+     * @throws IllegalArgumentException if the position parameter is negative or more bigger than 6
+     */
     public Marbles insertMarble(int position) throws IllegalArgumentException, InvalidKeyException {
         Marbles res = new Marbles();
         if(position < 0 || position > 6) throw new IllegalArgumentException();
@@ -75,6 +92,11 @@ public class MarketTray {
         }
         remainingMarble = tmp;
     }
+
+    /**
+     * Returns a map from all twelve marbles
+     * @return a Marbles Object that contains a map with all twelve marbles
+     */
     //only for testing
     public Marbles getMarblesMap() throws InvalidKeyException {
         Marbles mar = new Marbles();

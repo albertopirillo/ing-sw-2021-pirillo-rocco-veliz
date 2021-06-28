@@ -85,8 +85,10 @@ public class MarketTray {
             marketMarbles[2][position] = remainingMarble;
         }else{
             tmp = marketMarbles[6-position][0];
-            for(int i=0; i<3; i++) {
+            int i=0;
+            while (i<3) {
                 marketMarbles[6-position][i] = marketMarbles[6-position][i+1];
+                i++;
             }
             marketMarbles[6-position][3] = remainingMarble;
         }

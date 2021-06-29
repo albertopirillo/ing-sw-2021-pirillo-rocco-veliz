@@ -67,9 +67,4 @@ public class MarketModel {
         String nickname = clientModel.getNickname();
         return new MarketUpdate(nickname, devCardList);
     }
-
-    public TempMarblesUpdate buildTempMarblesUpdate() {
-        String nickname = clientModel.getNickname();
-        return new TempMarblesUpdate(nickname, numWhiteMarbles, tempMarbles);
-    }
 }

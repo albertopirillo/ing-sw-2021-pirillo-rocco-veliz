@@ -31,6 +31,7 @@ public class BasicProductionController implements Initializable {
     private ResourceType input1, input2, output;
 
     @Override
+    @SuppressWarnings("unchecked")
     public void initialize(URL url, ResourceBundle resourceBundle) {
         for (ChoiceBox choiceBox : Arrays.asList(choiceBox1, choiceBox2)) {
             choiceBox.getItems().addAll("Depot", "Strongbox");

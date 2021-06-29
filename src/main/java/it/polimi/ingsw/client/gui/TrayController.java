@@ -108,9 +108,7 @@ public class TrayController implements Initializable {
         if (!mainController.isMainActionDone()) {
             Dragboard db = this.remaining.startDragAndDrop(TransferMode.ANY);
             ClipboardContent cb = new ClipboardContent();
-            //cb.putImage(this.remaining.getImage());
             cb.putString("");
-            //db.setDragView(this.remaining.getImage());
             db.setContent(cb);
             event.consume();
         }
@@ -126,7 +124,6 @@ public class TrayController implements Initializable {
      * @param event The drop event
      */
     public void dragDrop(DragEvent event) {
-        //System.out.println("DRAG DROPPED");
         ImageView destination = (ImageView) event.getSource();
         Request request = new InsertMarbleRequest(Integer.parseInt(destination.getId().substring(destination.getId().length() - 1)));
         this.mainController.sendMessage(request);
@@ -134,8 +131,6 @@ public class TrayController implements Initializable {
     }
 
     public void dragOver(DragEvent event) {
-        //System.out.println("DRAGGING OVER");
-        //if(event.getDragboard().hasImage())
         event.acceptTransferModes(TransferMode.ANY);
         ((ImageView)event.getSource()).setImage(this.remaining.getImage());
         event.consume();

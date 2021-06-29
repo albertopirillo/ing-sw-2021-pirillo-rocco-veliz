@@ -7,6 +7,9 @@ import it.polimi.ingsw.server.Server;
 
 import java.io.Serializable;
 
+/**
+ * Initials messages exchanged between server and a client to setup the game
+ */
 public abstract class Message extends ServerUpdate implements Serializable, Processable {
 
     public Message(String activePlayer) {

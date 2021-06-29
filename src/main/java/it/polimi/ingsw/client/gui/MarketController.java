@@ -61,12 +61,12 @@ public class MarketController implements Initializable {
      */
     private ImageView source;
     /**
-     * The List of the three player's slot imges
+     * The List of the three player's slot images
      */
     private final List<ImageView> slotList = new ArrayList<>();
 
     /**
-     * The list of all sixteen corresponding images of the Developement Cards
+     * The list of all sixteen corresponding images of the Development Cards
      */
     private final List<ImageView> devCards = new ArrayList<>();
 
@@ -84,9 +84,10 @@ public class MarketController implements Initializable {
     }
 
     /**
-     * Initializes @FXML fields, organizing the corresponding images of Development Caed in one list<br>
+     * Initializes @FXML fields, organizing the corresponding images of Development Card in one list<br>
      * <p>Called automatically when an entity is injected from FXML</p>
      */
+    @SuppressWarnings("unchecked")
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.devCards.add(imgCard1);
         this.devCards.add(imgCard2);
@@ -178,7 +179,7 @@ public class MarketController implements Initializable {
     }
 
     /**
-     * Update the image of the current availables Development Card
+     * Update the image of the currents available Development Card
      */
     public void updateMarket() {
         List<DevelopmentCard> cards = this.mainController.getClientModel().getMarketModel().getDevCardList();
@@ -251,7 +252,7 @@ public class MarketController implements Initializable {
      * Parse the Image dropped to the corresponding resource type
      * @param id ImageView identifier
      * @param res The ResourceType corresponding to the source image
-     * @param d The identifier of the label that rappresent a count of resource
+     * @param d The identifier of the label that represent a count of resource
      */
     private void addRes(ImageView id, ResourceType res, Label d){
         if(id.getImage()==null) id.setImage(Util.resToImage(res));
@@ -273,7 +274,7 @@ public class MarketController implements Initializable {
 
     /**
      * When is clicked and the depot is visible, the depot is set not visible and the player can choice the slot number<br>
-     * When the player choice the slot number and clicked on BuilRequest, the Reqyuest is send to Server and <br>
+     * When the player choice the slot number and clicked on BuildRequest, the Request is send to Server and <br>
      * the Market Popup is closed
      * @param actionEvent player's mouse click
      */

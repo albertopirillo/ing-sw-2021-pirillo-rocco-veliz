@@ -15,7 +15,7 @@ public class PersonalBoard {
     /**
      * The three slots of Development cards
      */
-    private DevelopmentSlot[] devSlots;
+    private final DevelopmentSlot[] devSlots;
     /**
      * The reference to the Depot
      */

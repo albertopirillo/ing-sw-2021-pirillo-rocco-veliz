@@ -166,7 +166,7 @@ public abstract class Game {
     public void notifyEndOfGame(List<String> ranking, Map<String, Integer> scores){
         String winnerName = ranking.size() > 0 ? ranking.get(0) : null;
         for(ModelObserver observer: observers){
-            observer.notifyGameOver(this, observer.getPlayer().equals(winnerName), ranking, scores);
+            observer.notifyGameOver(observer.getPlayer().equals(winnerName), ranking, scores);
         }
     }
 

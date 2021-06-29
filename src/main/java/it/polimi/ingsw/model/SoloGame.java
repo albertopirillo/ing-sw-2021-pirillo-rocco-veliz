@@ -121,7 +121,7 @@ public class SoloGame extends Game {
         ranking.add(nickname);
         scores.put(nickname, finalScore);
         for(ModelObserver observer : getObservers()) {
-            observer.notifyGameOver(this, win, ranking, scores);
+            observer.notifyGameOver(win, ranking, scores);
         }
     }
 

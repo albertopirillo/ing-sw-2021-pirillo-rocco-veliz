@@ -93,9 +93,8 @@ public class RemoteView implements ModelObserver {
     }
 
     @Override
-    public void notifyGameOver(Game game, boolean win, List<String> ranking, Map<String, Integer> scores) {
-        String nickname = game.getActivePlayer().getNickname();
-        ServerUpdate msg = new GameOverUpdate(nickname, win, ranking, scores);
+    public void notifyGameOver(boolean win, List<String> ranking, Map<String, Integer> scores) {
+        ServerUpdate msg = new GameOverUpdate(getActivePlayer(), win, ranking, scores);
         connection.sendMessage(msg);
     }
 

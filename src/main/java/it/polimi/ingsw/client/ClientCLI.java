@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.client.model.ClientModel;
+import it.polimi.ingsw.exceptions.DevSlotEmptyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.network.DepotSetting;
@@ -369,7 +370,11 @@ public class ClientCLI implements UserInterface {
                 else errorPrint("\nYou already performed an action this turn");
                 break;
             case 9:
-                request = productionMenu();
+                try{
+                    request = productionMenu();
+                } catch (DevSlotEmptyException e) {
+                    e.printStackTrace();
+                }
                 break;
             case 10:
                 request = useLeaderMenu();
@@ -463,7 +468,7 @@ public class ClientCLI implements UserInterface {
         };
     }
 
-    private Request productionMenu(){
+    private Request productionMenu() throws DevSlotEmptyException {
         Request request = null;
 
         String[] options = {"b: Use a Basic Production", "d: Use a Development Card Production", "e: Use a Leader Card Extra Production", "q: Exit this menu"};
@@ -572,7 +577,7 @@ public class ClientCLI implements UserInterface {
         return request;
     }
 
-    private Request devProductionMenu(){
+    private Request devProductionMenu() throws DevSlotEmptyException {
         Request request;
 
         if (!this.secondProductionDone) {
@@ -580,7 +585,6 @@ public class ClientCLI implements UserInterface {
             Resource depotResource = new Resource(0, 0, 0, 0);
             Resource strongboxResource = new Resource(0, 0, 0, 0);
             String[] amountOptions = {"1", "2", "3", "4: Quit this menu"};
-            String[] resourceOptions = {"STONE", "COIN", "SHIELD", "SERVANT"};
 
             System.out.println("\nHow many development card production do you want to use?");
             int amount = getIntegerSelection(amountOptions);
@@ -589,23 +593,30 @@ public class ClientCLI implements UserInterface {
                 return null;
             } else {
                 for (int i = 0; i < amount; i++) {
-
-                    System.out.println("\nWhich development's card production do you want to use");
+                    //Print Development Slots to make player choose which one to activate
+                    updateDevSlots(clientModel.getPersonalBoardModel().buildDevSlotsUpdate());
+                    //Ask player which card from which slot
                     int card = getDevCardsSlot(cards);
-
+                    //Save slot in list for Request Build
                     cards.add(card - 1);
+                    //Take corresponding card from local model
+                    DevelopmentCard productionDevCard = getProductionDevCard(card-1);
+                    //Selection of resources for that specific card
                     System.out.println("\nSelect the input resources:");
                     try {
-                        for (String option : resourceOptions) {
-                            System.out.println(option);
-                            System.out.println("\nHow many resources to take from Depot");
-                            int amountDepot = Integer.parseInt(stdin.nextLine());
-                            if (amountDepot < 0 || amountDepot > 3) throw new Exception();
-                            System.out.println("\nHow many resources to take from Strongbox");
-                            int amountStrongbox = Integer.parseInt(stdin.nextLine());
-                            if (amountStrongbox < 0) throw new Exception();
-                            depotResource.modifyValue(strToResType(option.toLowerCase()), amountDepot);
-                            strongboxResource.modifyValue(strToResType(option.toLowerCase()), amountStrongbox);
+                        Resource options = productionDevCard.getProdPower().getInput();
+                        for (ResourceType res : options.keySet()) {
+                            if(options.getValue(res)>0){
+                                System.out.println(res);
+                                System.out.println("How many resources to take from Depot");
+                                int amountDepot = Integer.parseInt(stdin.nextLine());
+                                if (amountDepot < 0 || amountDepot > 3) throw new Exception();
+                                System.out.println("How many resources to take from Strongbox");
+                                int amountStrongbox = Integer.parseInt(stdin.nextLine());
+                                if (amountStrongbox < 0) throw new Exception();
+                                depotResource.modifyValue(res,amountDepot);
+                                strongboxResource.modifyValue(res,amountStrongbox);
+                            }
                         }
                     } catch (Exception e) {
                         errorPrint("Invalid input, retry");
@@ -622,6 +633,11 @@ public class ClientCLI implements UserInterface {
         }
 
         return request;
+    }
+
+    private DevelopmentCard getProductionDevCard(int slot) throws DevSlotEmptyException {
+        List<DevelopmentSlot> devSlots = clientModel.getPersonalBoardModel().getDevSlotMap().get(this.nickname);
+        return  devSlots.get(slot).getTopCard();
     }
 
     private Request useLeaderMenu() {

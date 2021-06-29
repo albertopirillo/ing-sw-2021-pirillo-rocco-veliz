@@ -228,6 +228,10 @@ public class ClientCLI implements UserInterface {
             }
         }
         StringBuilder sb = new StringBuilder("Choose card number [");
+        return printAndSelect(list, sb);
+    }
+
+    private int printAndSelect(List<Integer> list, StringBuilder sb) {
         String sep = "";
         for(Integer element: list){
             sb.append(sep).append(element);
@@ -254,22 +258,7 @@ public class ClientCLI implements UserInterface {
             }
         }
         StringBuilder sb = new StringBuilder("Which development card production do you want to use [");
-        String sep = "";
-        for(Integer element: list){
-            sb.append(sep).append(element);
-            sep = ", ";
-        }
-        sb.append("]:");
-        int selection;
-        do {
-            System.out.println(sb);
-            try {
-                selection = Integer.parseInt(stdin.nextLine());
-            } catch(Exception e){
-                selection = -1;
-            }
-        } while (!list.contains(selection));
-        return selection;
+        return printAndSelect(list, sb);
     }
 
     private ResourceType parseToResourceType(int choice){
@@ -373,7 +362,7 @@ public class ClientCLI implements UserInterface {
                 try{
                     request = productionMenu();
                 } catch (DevSlotEmptyException e) {
-                    e.printStackTrace();
+                    errorPrint("The slot is empty or the slot number is invalid");
                 }
                 break;
             case 10:
@@ -438,22 +427,26 @@ public class ClientCLI implements UserInterface {
                 Resource options = card.getCost();
                 System.out.println("Card cost : "+options);
                 System.out.println("\nSelect where are you taking the resource from");
-                for (ResourceType res : options.keySet()) {
-                    if(options.getValue(res)>0){
-                        System.out.println(res);
-                        System.out.println("How many resources to take from Depot");
-                        int amountDepot = Integer.parseInt(stdin.nextLine());
-                        if (amountDepot < 0 || amountDepot > 3) throw new Exception();
-                        System.out.println("How many resources to take from Strongbox");
-                        int amountStrongbox = Integer.parseInt(stdin.nextLine());
-                        if (amountStrongbox < 0) throw new Exception();
-                        depotResource.modifyValue(res,amountDepot);
-                        strongboxResource.modifyValue(res,amountStrongbox);
-                    }
-                }
+                chooseResources(depotResource, strongboxResource, options);
                 return new BuyDevCardRequest(level,CardColor.parseColorCard(color), parseToAbility(ability),depotResource, strongboxResource, slot-1);
             } catch (Exception e){
                 errorPrint("Invalid input, retry");
+            }
+        }
+    }
+
+    private void chooseResources(Resource depotResource, Resource strongboxResource, Resource options) throws Exception {
+        for (ResourceType res : options.keySet()) {
+            if(options.getValue(res)>0){
+                System.out.println(res);
+                System.out.println("How many resources to take from Depot");
+                int amountDepot = Integer.parseInt(stdin.nextLine());
+                if (amountDepot < 0 || amountDepot > 3) throw new Exception();
+                System.out.println("How many resources to take from Strongbox");
+                int amountStrongbox = Integer.parseInt(stdin.nextLine());
+                if (amountStrongbox < 0) throw new Exception();
+                depotResource.modifyValue(res,amountDepot);
+                strongboxResource.modifyValue(res,amountStrongbox);
             }
         }
     }
@@ -556,19 +549,7 @@ public class ClientCLI implements UserInterface {
                     System.out.println("\nSelect the input resources:");
                     try {
                         Resource options = ((ExtraProductionAbility) productionLeaderCard.getSpecialAbility()).getProduction().getInput();
-                        for (ResourceType res : options.keySet()) {
-                            if(options.getValue(res)>0){
-                                System.out.println(res);
-                                System.out.println("How many resources to take from Depot");
-                                int amountDepot = Integer.parseInt(stdin.nextLine());
-                                if (amountDepot < 0 || amountDepot > 3) throw new Exception();
-                                System.out.println("How many resources to take from Strongbox");
-                                int amountStrongbox = Integer.parseInt(stdin.nextLine());
-                                if (amountStrongbox < 0) throw new Exception();
-                                depotResource.modifyValue(res,amountDepot);
-                                strongboxResource.modifyValue(res,amountStrongbox);
-                            }
-                        }
+                        chooseResources(depotResource, strongboxResource, options);
                     } catch (Exception e) {
                         errorPrint("Invalid input, retry");
                         return null;
@@ -634,19 +615,7 @@ public class ClientCLI implements UserInterface {
                     System.out.println("\nSelect the input resources:");
                     try {
                         Resource options = productionDevCard.getProdPower().getInput();
-                        for (ResourceType res : options.keySet()) {
-                            if(options.getValue(res)>0){
-                                System.out.println(res);
-                                System.out.println("How many resources to take from Depot");
-                                int amountDepot = Integer.parseInt(stdin.nextLine());
-                                if (amountDepot < 0 || amountDepot > 3) throw new Exception();
-                                System.out.println("How many resources to take from Strongbox");
-                                int amountStrongbox = Integer.parseInt(stdin.nextLine());
-                                if (amountStrongbox < 0) throw new Exception();
-                                depotResource.modifyValue(res,amountDepot);
-                                strongboxResource.modifyValue(res,amountStrongbox);
-                            }
-                        }
+                        chooseResources(depotResource, strongboxResource, options);
                     } catch (Exception e) {
                         errorPrint("Invalid input, retry");
                         return null;

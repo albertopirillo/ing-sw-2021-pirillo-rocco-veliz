@@ -7,9 +7,4 @@ public class InvalidNumSlotException extends Throwable {
         super("The slot number is invalid");
     }
 
-    //Custom constructor to set a custom message
-    public InvalidNumSlotException(String customMessage) {
-        super(customMessage);
-    }
-
 }

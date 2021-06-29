@@ -532,40 +532,57 @@ public class ClientCLI implements UserInterface {
     }
 
     private Request extraProductionMenu() {
-        Request request;
+        Request request = null;
 
         if (this.productionDone || this.secondProductionDone){
 
             Resource depotResource = new Resource(0, 0, 0, 0);
             Resource strongboxResource = new Resource(0, 0, 0, 0);
-            String[] abilityOptions = {"1: FIRST", "2: SECOND",/*"3: BOTH",*/ "3: Exit this menu"};
-            String[] options = {"STONE", "COIN", "SHIELD", "SERVANT"};
+            String[] abilityOptions = {"1: FIRST", "2: SECOND", "3: Exit this menu"};
 
             System.out.println("\nWhat leader card production do you want to use");
             int ability = getIntegerSelection(abilityOptions);
             if (ability == 3){
                 return null;
             } else {
-                System.out.println("\nWhere do you want to get the resources from?");
-                try{
-                    for (String option : options) {
-                        System.out.println(option);
-                        System.out.println("How many resources to take from Depot");
-                        int amountDepot = Integer.parseInt(stdin.nextLine());
-                        if (amountDepot < 0 || amountDepot > 3) throw new Exception();
-                        System.out.println("How many resources to take from Strongbox");
-                        int amountStrongbox = Integer.parseInt(stdin.nextLine());
-                        if (amountStrongbox < 0) throw new Exception();
-                        depotResource.modifyValue(strToResType(option.toLowerCase()),amountDepot);
-                        strongboxResource.modifyValue(strToResType(option.toLowerCase()),amountStrongbox);
-                    }
-                } catch (Exception e){
-                    errorPrint("Invalid input, retry");
-                }
-                System.out.println("\nWhat resource do you want to get?");
-                ResourceType res = parseToResourceType(getResourceMenu());
 
-                request = new ExtraProductionRequest(parseToAbility(ability+1), depotResource, strongboxResource, res);
+                //Take corresponding card from local model
+                LeaderCard productionLeaderCard = clientModel.getPersonalBoardModel().getLeaderMap().get(this.nickname).get(ability-1);
+
+                //Check if it's a card with production power
+                if(isProductionCard(productionLeaderCard)){
+
+                    //Selection of resources for that specific card
+                    System.out.println("\nSelect the input resources:");
+                    try {
+                        Resource options = ((ExtraProductionAbility) productionLeaderCard.getSpecialAbility()).getProduction().getInput();
+                        for (ResourceType res : options.keySet()) {
+                            if(options.getValue(res)>0){
+                                System.out.println(res);
+                                System.out.println("How many resources to take from Depot");
+                                int amountDepot = Integer.parseInt(stdin.nextLine());
+                                if (amountDepot < 0 || amountDepot > 3) throw new Exception();
+                                System.out.println("How many resources to take from Strongbox");
+                                int amountStrongbox = Integer.parseInt(stdin.nextLine());
+                                if (amountStrongbox < 0) throw new Exception();
+                                depotResource.modifyValue(res,amountDepot);
+                                strongboxResource.modifyValue(res,amountStrongbox);
+                            }
+                        }
+                    } catch (Exception e) {
+                        errorPrint("Invalid input, retry");
+                        return null;
+                    }
+
+                    System.out.println("\nWhat resource do you want to get?");
+                    ResourceType res = parseToResourceType(getResourceMenu());
+
+                    request = new ExtraProductionRequest(parseToAbility(ability+1), depotResource, strongboxResource, res);
+
+                } else {
+                    errorPrint("The card you have selected has no production ability");
+                }
+
             }
 
         } else {
@@ -573,8 +590,20 @@ public class ClientCLI implements UserInterface {
             request = null;
         }
 
-
         return request;
+    }
+
+    /**
+     * Checks if the player has selected a leader card with a production power (based on card id)
+     * @return true if the player has selected a leader with production power
+     */
+    private boolean isProductionCard(LeaderCard playerCard){
+        List<Integer> productionID = new ArrayList<>(Arrays.asList(13, 14, 15, 16));
+
+        for ( Integer id: productionID ){
+                if (id == playerCard.getId()) return true;
+        }
+        return false;
     }
 
     private Request devProductionMenu() throws DevSlotEmptyException {

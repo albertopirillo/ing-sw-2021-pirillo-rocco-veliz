@@ -9,7 +9,6 @@ public interface ANSIColor {
     String BLUE = "\u001B[34m";
     String MAGENTA = "\u001B[35m";
     String CYAN = "\u001B[36m";
-    String WHITE = "\u001B[37m";
     String GREY = "\u001B[90m";
     String BRIGHT_RED = "\u001B[91m";
     String BRIGHT_YELLOW = "\u001B[93m";

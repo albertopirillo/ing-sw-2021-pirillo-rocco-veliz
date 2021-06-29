@@ -2,12 +2,12 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.NegativeResAmountException;
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MarblesTest {
 
@@ -82,6 +82,8 @@ public class MarblesTest {
         mar1.add(MarblesColor.WHITE);
         assertFalse(mar1.containFaith());
     }
+
+    @Test
     public void containWhite() throws InvalidKeyException {
         Marbles mar = new Marbles();
         mar.add(MarblesColor.RED);

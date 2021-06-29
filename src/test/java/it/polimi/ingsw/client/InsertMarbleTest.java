@@ -3,18 +3,14 @@ package it.polimi.ingsw.client;
 import it.polimi.ingsw.controller.MasterController;
 import it.polimi.ingsw.controller.PlayerController;
 import it.polimi.ingsw.exceptions.FullCardDeckException;
-import it.polimi.ingsw.exceptions.InvalidKeyException;
 import it.polimi.ingsw.exceptions.TooManyLeaderAbilitiesException;
 import it.polimi.ingsw.model.*;
-import it.polimi.ingsw.network.updates.TempMarblesUpdate;
 import org.junit.jupiter.api.Test;
 
 public class InsertMarbleTest {
 
     @Test
-    public void tempMarblesTest() throws FullCardDeckException, TooManyLeaderAbilitiesException, InvalidKeyException {
-        Client client = new SocketClient();
-        UserInterface cli = new ClientCLI(client);
+    public void tempMarblesTest() throws FullCardDeckException, TooManyLeaderAbilitiesException {
         Game game = new MultiGame(true);
         MasterController controller = new MasterController(game);
         PlayerController playerController = controller.getPlayerController();
@@ -31,9 +27,9 @@ public class InsertMarbleTest {
 
         playerController.insertMarble(0);
         Resource output = controller.getResourceController().getTempRes().getToHandle();
-        //OUTPUT ALLx1 SERVANTx1 STONEx1
+        /* OUTPUT ALL x1 SERVANT x1 STONE x1 */
         System.out.println(output);
-        TempMarblesUpdate update = new TempMarblesUpdate(activePlayer.getNickname(), output.getValue(ResourceType.ALL), activePlayer.getResTypesAbility());
+        //TempMarblesUpdate update = new TempMarblesUpdate(activePlayer.getNickname(), output.getValue(ResourceType.ALL), activePlayer.getResTypesAbility());
         //update.update(cli);
         //Kill test to exit
 

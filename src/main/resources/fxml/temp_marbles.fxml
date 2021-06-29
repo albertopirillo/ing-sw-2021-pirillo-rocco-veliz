@@ -1,47 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-<AnchorPane fx:id="tempMablesMenu" prefHeight="840.0" prefWidth="847.0"
-            style="-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 20, 0, 0, 0)"
-            xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="it.polimi.ingsw.client.gui.TempMarblesController">
-    <ImageView fitHeight="840.0" fitWidth="849.0" opacity="0.95" pickOnBounds="true"
-               style="-fx-background-radius: 10">
-        <Image url="@../png/generic/background_wall.png"/>
+
+<AnchorPane prefHeight="840.0" prefWidth="847.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 20, 0, 0, 0)" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.TempMarblesController">
+    <ImageView fitHeight="840.0" fitWidth="849.0" opacity="0.95" pickOnBounds="true" style="-fx-background-radius: 10">
+        <Image url="@../png/generic/background_wall.png" />
     </ImageView>
-    <Label alignment="CENTER" prefHeight="47.0" prefWidth="848.0" styleClass="customInitLeaderLabel"
-           text="TempMarbles Report" textAlignment="CENTER">
+    <Label alignment="CENTER" prefHeight="47.0" prefWidth="848.0" styleClass="customInitLeaderLabel" text="TempMarbles Report" textAlignment="CENTER">
         <font>
-          <Font size="32.0"/>
+          <Font size="32.0" />
         </font>
     </Label>
-    <Label alignment="CENTER" layoutY="90.0" prefHeight="47.0" prefWidth="848.0" styleClass="customInitLeaderLabel"
-           text="Choice" textAlignment="CENTER">
+    <Label alignment="CENTER" layoutY="90.0" prefHeight="47.0" prefWidth="848.0" styleClass="customInitLeaderLabel" text="Choice" textAlignment="CENTER">
         <font>
-          <Font size="32.0"/>
+          <Font size="32.0" />
         </font>
     </Label>
-    <ImageView fitHeight="130.0" fitWidth="552.0" layoutX="141.0" layoutY="233.0" pickOnBounds="true"
-               preserveRatio="true">
-        <Image url="@../png/res/resource_supply.png"/>
+    <ImageView fitHeight="130.0" fitWidth="552.0" layoutX="141.0" layoutY="233.0" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../png/res/resource_supply.png" />
     </ImageView>
-    <ImageView fx:id="white_1" fitHeight="87.0" fitWidth="93.0" layoutX="177.0" layoutY="252.0"
-               onDragDetected="#dragDetection" pickOnBounds="true" preserveRatio="true"/>
-    <ImageView fx:id="white_2" fitHeight="87.0" fitWidth="93.0" layoutX="308.0" layoutY="252.0"
-               onDragDetected="#dragDetection" pickOnBounds="true" preserveRatio="true"/>
-    <ImageView fx:id="white_3" fitHeight="87.0" fitWidth="93.0" layoutX="431.0" layoutY="252.0"
-               onDragDetected="#dragDetection" pickOnBounds="true" preserveRatio="true"/>
-    <ImageView fx:id="white_4" fitHeight="87.0" fitWidth="93.0" layoutX="559.0" layoutY="252.0" pickOnBounds="true"
-               preserveRatio="true"/>
-    <ImageView fx:id="res_1" fitHeight="153.0" fitWidth="168.0" layoutX="204.0" layoutY="432.0"
-               onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true"/>
-    <ImageView fx:id="res_2" fitHeight="153.0" fitWidth="168.0" layoutX="456.0" layoutY="432.0"
-               onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true"/>
-    <Spinner fx:id="n_res1" disable="true" layoutX="261.0" layoutY="618.0" prefHeight="30.0" prefWidth="78.0"/>
-    <Spinner fx:id="n_res2" disable="true" layoutX="488.0" layoutY="618.0" prefHeight="30.0" prefWidth="71.0"/>
-    <Button fx:id="changeButton" disable="true" layoutX="339.0" layoutY="750.0" mnemonicParsing="false"
-            onAction="#change" prefHeight="30.0" prefWidth="155.0" text="Continue"/>
+    <ImageView fx:id="white_1" fitHeight="87.0" fitWidth="93.0" layoutX="177.0" layoutY="252.0" onDragDetected="#dragDetection" pickOnBounds="true" preserveRatio="true" />
+    <ImageView fx:id="white_2" fitHeight="87.0" fitWidth="93.0" layoutX="308.0" layoutY="252.0" onDragDetected="#dragDetection" pickOnBounds="true" preserveRatio="true" />
+    <ImageView fx:id="white_3" fitHeight="87.0" fitWidth="93.0" layoutX="431.0" layoutY="252.0" onDragDetected="#dragDetection" pickOnBounds="true" preserveRatio="true" />
+    <ImageView fx:id="white_4" fitHeight="87.0" fitWidth="93.0" layoutX="559.0" layoutY="252.0" onDragDetected="#dragDetection" pickOnBounds="true" preserveRatio="true" />
+    <ImageView fx:id="res_1" fitHeight="153.0" fitWidth="168.0" layoutX="204.0" layoutY="432.0" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
+    <ImageView fx:id="res_2" fitHeight="153.0" fitWidth="168.0" layoutX="456.0" layoutY="432.0" onDragDropped="#dragDrop" onDragOver="#dragOver" pickOnBounds="true" preserveRatio="true" />
+    <Spinner fx:id="n_res1" disable="true" layoutX="261.0" layoutY="618.0" prefHeight="30.0" prefWidth="78.0" />
+    <Spinner fx:id="n_res2" disable="true" layoutX="488.0" layoutY="618.0" prefHeight="30.0" prefWidth="71.0" />
+    <Button fx:id="changeButton" disable="true" layoutX="339.0" layoutY="750.0" mnemonicParsing="false" onAction="#change" prefHeight="30.0" prefWidth="155.0" text="Continue" />
 </AnchorPane>

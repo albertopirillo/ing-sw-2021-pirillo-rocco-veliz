@@ -37,15 +37,12 @@ class CardDeckTest {
         deck.addCard(dev4);
         deck.shuffle();
         assertEquals(deck.getNumbersOfCards(), 4);
-        DevelopmentCard devCard = deck.removeCard();
+        deck.removeCard();
         assertEquals(deck.getNumbersOfCards(), 3);
-        DevelopmentCard devCard1 = deck.removeCard();
+        deck.removeCard();
         assertEquals(deck.getNumbersOfCards(), 2);
-        DevelopmentCard devCard2 = deck.removeCard();
+        deck.removeCard();
         assertEquals(deck.getNumbersOfCards(), 1);
-        boolean bool = devCard.equals(dev2) || devCard.equals(dev3) || devCard.equals(dev4) ||
-                devCard1.equals(dev3) || devCard1.equals(dev4) || devCard2.equals(dev4) ;
-        //assertTrue(bool);
     }
 
     @Test

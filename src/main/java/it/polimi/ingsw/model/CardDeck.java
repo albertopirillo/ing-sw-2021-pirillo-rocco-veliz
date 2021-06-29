@@ -38,8 +38,6 @@ public class CardDeck {
         return getCard().getType();
     }
 
-    //Add card to deck
-
     /**
      * Inserts the card passed in the parameter to the end of the Deque
      * @param card a Development Card

@@ -151,8 +151,6 @@ public class TempDepot {
                 }
             }
         }
-        //System.out.println("DEPOT SETTINGS:");
-        //for(DepotSetting setting: settings) System.out.println(setting);
         return settings;
     }
 }

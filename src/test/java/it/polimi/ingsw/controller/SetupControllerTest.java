@@ -60,7 +60,6 @@ class SetupControllerTest {
     @Test
     void placeInitialResourceSoloGame() throws FullCardDeckException, NegativeResAmountException {
         List<String> nicknames = Collections.singletonList("Aldair");
-        int numPlayer = nicknames.size();
         Player p = new Player(nicknames.get(0));
         Game game = new SoloGame(p);
         MasterController masterController = new MasterController(game);

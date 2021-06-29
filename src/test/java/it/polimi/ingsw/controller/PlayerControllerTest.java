@@ -502,7 +502,6 @@ class PlayerControllerTest {
         //Test ok
         controller.resetException();
         activePlayer.getPersonalBoard().getStrongbox().addResources(new Resource(1,1,0,0));
-        Resource tempRes = activePlayer.getPersonalBoard().getStrongbox().queryAllRes();
         playerController.activateProduction(
                 new Resource(0,0,0,0),
                 new Resource(1,2,2,0),

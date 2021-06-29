@@ -107,8 +107,6 @@ public class Player {
             this.getPersonalBoard().getFaithTrack().addPlayerFaith(1);
             this.getPersonalBoard().updateFaithTrack(this.game.getPlayersList());
         }
-        //this.getPersonalBoard().getFaithTrack().addPlayerFaith(amount);
-        //this.getPersonalBoard().updateFaithTrack(this.game.getPlayersList());
     }
 
     /**

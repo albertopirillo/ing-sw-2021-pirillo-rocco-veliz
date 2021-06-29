@@ -737,16 +737,6 @@ public class ClientCLI implements UserInterface {
         return new PlaceResourceRequest(toDiscard, toPlace, false);
     }
 
-    private ResourceType strToResType(String input){
-        return switch (input) {
-            case "stone" -> ResourceType.STONE;
-            case "coin" -> ResourceType.COIN;
-            case "shield" -> ResourceType.SHIELD;
-            case "servant" -> ResourceType.SERVANT;
-            default -> null;
-        };
-    }
-
     private ReorderDepotRequest reorderDepotMenu() {
         int fromLayer, toLayer, amount;
         while(true) {

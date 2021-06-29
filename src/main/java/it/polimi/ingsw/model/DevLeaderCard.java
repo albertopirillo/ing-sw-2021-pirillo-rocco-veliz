@@ -10,15 +10,15 @@ import java.util.List;
 public class DevLeaderCard extends LeaderCard implements Serializable {
 
     /**
-     * The list of requirements
+     * The list of requirements required to activate the leader card
      */
     private final List<LeaderDevCost> requirements;
 
     /**
      * Create a DevLeaderCard
-     * @param victoryPoints card's victory points
-     * @param specialAbility card's Leader Ability
-     * @param requirements card's requirements
+     * @param victoryPoints card's victory points that each card has
+     * @param specialAbility card's Leader Ability that each leader card has
+     * @param requirements card's requirements required to activate the leader card
      */
     public DevLeaderCard(int victoryPoints, LeaderAbility specialAbility, List<LeaderDevCost> requirements) {
         super(victoryPoints, specialAbility);

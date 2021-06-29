@@ -55,8 +55,8 @@ public class SetupController {
     }
 
     /**
-     * Set the correct resources choicen by the player to him, the first player has no resources to choose
-     * @param res the resources choicen by the player
+     * Set the correct resources chosen by the player to him, the first player has no resources to choose
+     * @param res the resources chosen by the player
      * @param numPlayer a number used to identify the player order
      * @param nickname the nickname of player that chose the resources
      */

@@ -7,11 +7,26 @@ import it.polimi.ingsw.exceptions.NegativeResAmountException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The player's personal board object
+ */
 public class PersonalBoard {
 
+    /**
+     * The three slots of Development cards
+     */
     private DevelopmentSlot[] devSlots;
+    /**
+     * The reference to the Depot
+     */
     private Depot depot;
+    /**
+     * The reference to the strongbox
+     */
     private final Strongbox strongbox;
+    /**
+     * The reference to the faith track;
+     */
     private final FaithTrack faithTrack;
 
     public PersonalBoard(Player player) {
@@ -36,10 +51,6 @@ public class PersonalBoard {
         return devSlots;
     }
 
-    public void setDevSlots(DevelopmentSlot[] devSlots) {
-        this.devSlots = devSlots;
-    }
-
     public Depot getDepot() {
         return depot;
     }
@@ -56,6 +67,10 @@ public class PersonalBoard {
         strongbox.transferTempRes();
     }
 
+    /**
+     * Return a list of all Development cards that the player has
+     * @return a list of all Development cards that the player has, this method is called to check if one player has 7 or more cards(condition to end the game)
+     */
     public List<DevelopmentCard> getAllCards() {
         List<DevelopmentCard> cardList = new ArrayList<>();
         for (DevelopmentSlot slot : devSlots) {
@@ -64,6 +79,12 @@ public class PersonalBoard {
         return cardList;
     }
 
+    /**
+     * Add a Development Card to the player's slot passed in the parameter
+     * @param devCard the Development cards just taken from the Market
+     * @param slotNumber the number of slot, from o to two
+     * @throws InvalidNumSlotException if the card can not add to the slot
+     */
     public void addDevCard(DevelopmentCard devCard, int slotNumber) throws DevSlotEmptyException, InvalidNumSlotException {
         if(this.devSlots[slotNumber].canBeAdded(devCard))
             this.devSlots[slotNumber].addCard(devCard);

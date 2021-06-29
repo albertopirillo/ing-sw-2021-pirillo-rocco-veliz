@@ -75,7 +75,7 @@
     "id": 1,
     "img": "leaderFront01.png",
     "type": "dev",
-    "requires": [
+    "requirements": [
       {
         "color": "YELLOW",
         "level": 0,
@@ -98,7 +98,7 @@
     "id": 2,
     "img": "leaderFront02.png",
     "type": "dev",
-    "requires": [
+    "requirements": [
       {
         "color": "BLUE",
         "level": 0,
@@ -121,7 +121,7 @@
     "id": 3,
     "img": "leaderFront03.png",
     "type": "dev",
-    "requires": [
+    "requirements": [
       {
         "color": "GREEN",
         "level": 0,
@@ -144,7 +144,7 @@
     "id": 4,
     "img": "leaderFront04.png",
     "type": "dev",
-    "requires": [
+    "requirements": [
       {
         "color": "YELLOW",
         "level": 0,
@@ -167,7 +167,7 @@
     "id": 9,
     "img": "leaderFront09.png",
     "type": "dev",
-    "requires": [
+    "requirements": [
       {
         "color": "YELLOW",
         "level": 0,
@@ -189,7 +189,7 @@
     "id": 10,
     "img": "leaderFront10.png",
     "type": "dev",
-    "requires": [
+    "requirements": [
       {
         "color": "GREEN",
         "level": 0,
@@ -211,7 +211,7 @@
     "id": 11,
     "img": "leaderFront11.png",
     "type": "dev",
-    "requires": [
+    "requirements": [
       {
         "color": "BLUE",
         "level": 0,
@@ -233,7 +233,7 @@
     "id": 12,
     "img": "leaderFront12.png",
     "type": "dev",
-    "requires": [
+    "requirements": [
       {
         "color": "PURPLE",
         "level": 0,
@@ -255,7 +255,7 @@
     "id": 13,
     "img": "leaderFront13.png",
     "type": "dev",
-    "requires": [
+    "requirements": [
       {
         "color": "YELLOW",
         "level": 2,
@@ -291,7 +291,7 @@
     "id": 14,
     "img": "leaderFront14.png",
     "type": "dev",
-    "requires": [
+    "requirements": [
       {
         "color": "BLUE",
         "level": 2,
@@ -327,7 +327,7 @@
     "id": 15,
     "img": "leaderFront15.png",
     "type": "dev",
-    "requires": [
+    "requirements": [
       {
         "color": "PURPLE",
         "level": 2,
@@ -363,7 +363,7 @@
     "id": 16,
     "img": "leaderFront16.png",
     "type": "dev",
-    "requires": [
+    "requirements": [
       {
         "color": "GREEN",
         "level": 2,

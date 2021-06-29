@@ -38,7 +38,7 @@ All the required files are available [here](deliverables/jars)
 - If no program arguments were given, the JAR will automatically ask all the needed parameters
 
 
-## Description of the JARs:
+## Description of the JARs
 
 To run the JARs, Java RE 15.0.2 is required
 
@@ -57,6 +57,13 @@ To run the JARs, Java RE 15.0.2 is required
 - Runs a client in Local Game mode, which doesn't need to connect to a server
 - The usage of the CLI or the GUI can be forced with "--cli" and "--gui"
 - Example: `java -jar local_game.jar --gui`
+
+## Master_of_Renaissance.zip
+- The ZIP contains the game with the required JRE, built with [Launch4j](http://launch4j.sourceforge.net/)
+- Can be downloaded from the Release section
+- Java is not required to run, double-clicking .exe files is enough
+- The required parameters will be asked automatically
+- Works only on Windows
 
 <p>&nbsp;</p>
 
@@ -90,6 +97,7 @@ ZIP available [here](deliverables/coverage.zip)
 - [GSON](https://github.com/google/gson)
 - [JavaFX 16](https://openjfx.io/)
 
-[comment]: <> (## License & Copyright)
 
-[comment]: <> (Licensed under ...)
+## License & Copyright
+Master of Renaissance board game is copyrighted by [Cranio Creations](https://craniointernational.com/products/masters-of-renaissance/)
+Licensed under [MIT License](LICENSE) 

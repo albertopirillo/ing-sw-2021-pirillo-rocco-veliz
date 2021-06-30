@@ -63,6 +63,7 @@ public class PlayerController {
             if (!testing) {
                 this.mainActionDone = true;
                 controller.getGame().setMainActionDone();
+                controller.getGame().setMarketActionDone();
             }
             if(output.hasAllResources()){
                 controller.getGame().updateMarketTray();
@@ -131,6 +132,7 @@ public class PlayerController {
             if(!testing)  {
                 this.mainActionDone = true;
                 controller.getGame().setMainActionDone();
+                controller.getGame().setMarketActionDone();
             }
         } catch (CannotContainFaithException | NotEnoughSpaceException | NegativeResAmountException | DeckEmptyException | CostNotMatchingException | NotEnoughResException | InvalidKeyException | NoLeaderAbilitiesException | InvalidAbilityChoiceException | DevSlotEmptyException | InvalidNumSlotException | MainActionException e) {
             controller.setException(e);

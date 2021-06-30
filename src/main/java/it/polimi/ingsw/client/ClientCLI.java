@@ -27,6 +27,7 @@ public class ClientCLI implements UserInterface {
     private final ClientModel clientModel;
     private boolean productionDone;
     private boolean secondProductionDone;
+    private boolean marketActionDone;
     private boolean mainActionDone;
 
     /**
@@ -40,6 +41,7 @@ public class ClientCLI implements UserInterface {
         this.productionDone = false;
         this.secondProductionDone = false;
         this.mainActionDone = false;
+        this.marketActionDone = false;
     }
 
     @Override
@@ -376,6 +378,7 @@ public class ClientCLI implements UserInterface {
                     request = new EndTurnRequest();
                     this.productionDone = false;
                     this.secondProductionDone = false;
+                    this.marketActionDone = false;
                     this.mainActionDone = false;
                 }
                 else errorPrint("\nYou have to perform an action before ending the turn");
@@ -590,7 +593,7 @@ public class ClientCLI implements UserInterface {
     private Request devProductionMenu() throws DevSlotEmptyException {
         Request request;
 
-        if (!this.secondProductionDone) {
+        if (!this.secondProductionDone && !this.marketActionDone) {
             List<Integer> cards = new ArrayList<>();
             Resource depotResource = new Resource(0, 0, 0, 0);
             Resource strongboxResource = new Resource(0, 0, 0, 0);
@@ -626,7 +629,7 @@ public class ClientCLI implements UserInterface {
             request = new DevProductionRequest(cards, depotResource, strongboxResource);
 
         } else {
-            errorPrint("You have already performed a development production this turn");
+            errorPrint("You have already performed an action in this turn");
             request = null;
         }
 
@@ -917,6 +920,13 @@ public class ClientCLI implements UserInterface {
     public void updateSecondProductionDone(SecondProductionDoneUpdate update){
         if(update.getActivePlayer().equals(this.nickname)){
             this.secondProductionDone = true;
+        }
+    }
+
+    @Override
+    public void updateMarketActionDone(MarketActionDoneUpdate update){
+        if(update.getActivePlayer().equals(this.nickname)){
+            this.marketActionDone = true;
         }
     }
 

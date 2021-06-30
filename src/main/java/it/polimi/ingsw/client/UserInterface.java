@@ -175,6 +175,12 @@ public interface UserInterface {
      */
     void updateSecondProductionDone(SecondProductionDoneUpdate update);
     /**
+     * <p>Sets the marketActionDone flag in the Client, so that it cannot perform another market action</p>
+     * <p>Uses the data received from the server</p>
+     * @param update the update containing the data received from the server
+     */
+    void updateMarketActionDone(MarketActionDoneUpdate update);
+    /**
      * <p>Sets the actionDone flag in the Client, so that it cannot perform another main action</p>
      * <p>Uses the data received from the server</p>
      * @param update the update containing the data received from the server
@@ -185,4 +191,5 @@ public interface UserInterface {
      * @return the reference to the correspondingClientModel object
      */
     ClientModel getClientModel();
+
 }

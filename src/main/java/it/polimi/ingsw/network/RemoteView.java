@@ -176,6 +176,12 @@ public class RemoteView implements ModelObserver {
     }
 
     @Override
+    public void setMarketActionDone() {
+        ServerUpdate msg = new MarketActionDoneUpdate(getActivePlayer());
+        connection.sendMessage(msg);
+    }
+
+    @Override
     public void gameStateStart(Game game) {
         //Build a EndOfInitialUpdate and send it
         List<Player> players = game.getPlayersList();

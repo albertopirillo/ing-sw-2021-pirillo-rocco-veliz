@@ -103,6 +103,10 @@ public interface ModelObserver {
      */
     void setMainActionDone();
     /**
+     *  Send to the client the information that the player chose a market tray o market cards action as one its main move this turn
+     */
+    void setMarketActionDone();
+    /**
      * Send to the client a EndOfInitialUpdate. That means the game can start normally
      * @param game the full Game object
      */

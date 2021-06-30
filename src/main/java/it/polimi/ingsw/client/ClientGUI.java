@@ -29,6 +29,7 @@ public class ClientGUI implements UserInterface {
     private boolean mainActionDone;
     private boolean productionDone;
     private boolean secondProductionDone;
+    private boolean marketActionDone;
     private final boolean testing = false;
 
     /**
@@ -43,6 +44,7 @@ public class ClientGUI implements UserInterface {
         this.mainActionDone = false;
         this.productionDone = false;
         this.secondProductionDone = false;
+        this.marketActionDone = false;
     }
 
     /**
@@ -51,6 +53,14 @@ public class ClientGUI implements UserInterface {
      */
     public boolean isMainActionDone() {
         return this.mainActionDone;
+    }
+
+    /**
+     * Whether a market main action was performed or not during this turn
+     * @return true if it was performed, false otherwise
+     */
+    public boolean isMarketActionDone() {
+        return this.marketActionDone;
     }
 
     /**
@@ -74,6 +84,12 @@ public class ClientGUI implements UserInterface {
      * @param secondProductionDone the value to set
      */
     public void setSecondProductionDone(boolean secondProductionDone) { this.secondProductionDone = secondProductionDone; }
+
+    /**
+     * Sets the marketActionDone flag
+     * @param marketActionDone the value to set
+     */
+    public void setMarketActionDone(boolean marketActionDone) { this.marketActionDone = marketActionDone; }
 
     /**
      * Sets the mainActionDone flag
@@ -426,6 +442,13 @@ public class ClientGUI implements UserInterface {
     public void updateSecondProductionDone(SecondProductionDoneUpdate update){
         if(update.getActivePlayer().equals(this.nickname)){
             this.secondProductionDone = true;
+        }
+    }
+
+    @Override
+    public void updateMarketActionDone(MarketActionDoneUpdate update){
+        if(update.getActivePlayer().equals(this.nickname)){
+            this.marketActionDone = true;
         }
     }
 

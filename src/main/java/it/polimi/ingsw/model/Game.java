@@ -298,6 +298,13 @@ public abstract class Game {
             observer.setSecondProductionDone();
     }
     /**
+     *  Notifies the observers that the client has already performed one of its main actions this turn
+     */
+    public void setMarketActionDone(){
+        for(ModelObserver observer : observers)
+            observer.setMarketActionDone();
+    }
+    /**
      *  Notifies the observers that the player already performed one of its main actions this turn
      */
     public void setMainActionDone(){

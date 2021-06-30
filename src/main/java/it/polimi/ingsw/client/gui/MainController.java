@@ -184,6 +184,14 @@ public class MainController implements Initializable {
     }
 
     /**
+     * Helper to get the marketActionDone flag of the Client
+     * @return true if action was already performed this turn
+     */
+    public boolean isMarketActionDone() {
+        return this.clientGUI.isMarketActionDone();
+    }
+
+    /**
      * Helper to get the productionDone flag of the Client
      * @return true if a production was already activated this turn
      */
@@ -220,6 +228,12 @@ public class MainController implements Initializable {
      * @param secondProductionDone the value to set the flag at
      */
     public void setSecondProductionDone(Boolean secondProductionDone) { this.clientGUI.setSecondProductionDone(secondProductionDone); }
+
+    /**
+     * Helper to set the marketActionDone flag of the Client
+     * @param marketActionDone the value to set the flag at
+     */
+    public void setMarketActionDone(Boolean marketActionDone) { this.clientGUI.setMarketActionDone(marketActionDone); }
 
     /**
      * Gets the MarketController
@@ -532,7 +546,7 @@ public class MainController implements Initializable {
      */
     public void showDev(ActionEvent event) {
 
-            if(!isSecondProductionDone()){
+            if(!isSecondProductionDone() && !isMarketActionDone()){
                 Stage stage = (Stage)((MenuItem)event.getTarget()).getParentPopup().getOwnerWindow();
                 this.stage = stage;
                 if (!this.devPopUp.isShowing()) {
@@ -546,7 +560,7 @@ public class MainController implements Initializable {
                     this.devPopUp.hide();
                 }
             } else {
-                displayError("You have already performed a development production in this turn");
+                displayError("You have already performed an action in this turn");
             }
 
     }
@@ -654,6 +668,7 @@ public class MainController implements Initializable {
         this.setMainActionDone(false);
         this.setProductionDone(false);
         this.setSecondProductionDone(false);
+        this.setMarketActionDone(false);
     }
 
     public void discardLeaderRequest01(){

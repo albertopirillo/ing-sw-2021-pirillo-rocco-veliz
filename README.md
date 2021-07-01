@@ -31,7 +31,6 @@ The game can be played using either a CLI or a GUI.
 <p>&nbsp;</p>
 
 # Execution instructions
-All the required files are available [here](deliverables/jars)
 
 - It is possible to pass program arguments to every JAR (see below)
 
@@ -40,7 +39,9 @@ All the required files are available [here](deliverables/jars)
 
 ## Description of the JARs
 
-To run the JARs, Java RE 15.0.2 is required
+- The JARs are available both [here](deliverables/jars) and in the Release section
+  
+- To run the JARs, Java RE 15.0.2 is required
 
 ### **server.jar**
 - Runs the server of the game, waiting for clients to connect
@@ -100,4 +101,5 @@ ZIP available [here](deliverables/coverage.zip)
 
 ## License & Copyright
 Master of Renaissance board game is copyrighted by [Cranio Creations](https://craniointernational.com/products/masters-of-renaissance/)
+
 Licensed under [MIT License](LICENSE) 

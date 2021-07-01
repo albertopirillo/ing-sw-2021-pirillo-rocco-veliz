@@ -68,11 +68,6 @@ public class SetupController implements Initializable {
     public void confirmName() {
         if (nameField.getText() != null) {
             if (nameField.getText().matches("[a-zA-Z0-9]+")) {
-                try {
-                    Thread.sleep(2500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
                 synchronized (lock) {
                     nickname = nameField.getText();
                     lock.notifyAll();

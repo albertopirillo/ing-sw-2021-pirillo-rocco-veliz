@@ -117,6 +117,13 @@ public class JavaFXMain extends Application {
             }
             myStage.show();
         }
+        Platform.runLater(() -> {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     private void loadCSS(String fileName) {
